@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<kml xmlns="http://www.opengis.net/kml/2.2">
+<Document><Folder><name>crm</name>
+<Schema name="crm" id="crm">
+	<SimpleField name="Name" type="string"></SimpleField>
+	<SimpleField name="Description" type="string"></SimpleField>
+	<SimpleField name="id" type="int"></SimpleField>
+	<SimpleField name="TIPOLOGIA" type="string"></SimpleField>
+	<SimpleField name="COMUNE" type="string"></SimpleField>
+	<SimpleField name="DESCR" type="string"></SimpleField>
+</Schema>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#crm">
+		<SimpleData name="id">13</SimpleData>
+		<SimpleData name="TIPOLOGIA">CRM</SimpleData>
+		<SimpleData name="COMUNE">STORO</SimpleData>
+		<SimpleData name="DESCR">CRM STORO</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>10.55345804377952,45.830520578049921</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#crm">
+		<SimpleData name="id">9</SimpleData>
+		<SimpleData name="TIPOLOGIA">CRM</SimpleData>
+		<SimpleData name="COMUNE">PRASO</SimpleData>
+		<SimpleData name="DESCR">CRM PRASO</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>10.64179889429664,45.950085498844757</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#crm">
+		<SimpleData name="id">7</SimpleData>
+		<SimpleData name="TIPOLOGIA">CRM</SimpleData>
+		<SimpleData name="COMUNE">PIEVE DI BONO</SimpleData>
+		<SimpleData name="DESCR">CRM PIEVE DI BONO</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>10.638746101091701,45.934373737976209</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#crm">
+		<SimpleData name="id">4</SimpleData>
+		<SimpleData name="TIPOLOGIA">CRM</SimpleData>
+		<SimpleData name="COMUNE">CONDINO</SimpleData>
+		<SimpleData name="DESCR">CRM CONDINO</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>10.598352342859554,45.880672123487628</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#crm">
+		<SimpleData name="id">10</SimpleData>
+		<SimpleData name="TIPOLOGIA">CRM</SimpleData>
+		<SimpleData name="COMUNE">RONCONE</SimpleData>
+		<SimpleData name="DESCR">CRM RONCONE</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>10.668090952986143,45.979589150923545</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#crm">
+		<SimpleData name="id">6</SimpleData>
+		<SimpleData name="TIPOLOGIA">CRM</SimpleData>
+		<SimpleData name="COMUNE">FIAVÈ</SimpleData>
+		<SimpleData name="DESCR">CRM FIAVÈ</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>10.848428023480796,46.001623084664544</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#crm">
+		<SimpleData name="id">1</SimpleData>
+		<SimpleData name="TIPOLOGIA">CRM</SimpleData>
+		<SimpleData name="COMUNE">BLEGGIO SUPERIORE</SimpleData>
+		<SimpleData name="DESCR">CRM BLEGGIO SUPERIORE</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>10.823417811285328,46.021145025875953</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#crm">
+		<SimpleData name="id">3</SimpleData>
+		<SimpleData name="TIPOLOGIA">CRM</SimpleData>
+		<SimpleData name="COMUNE">COMANO TERME</SimpleData>
+		<SimpleData name="DESCR">CRM COMANO TERME</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>10.858212180193288,46.034259734401125</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#crm">
+		<SimpleData name="id">5</SimpleData>
+		<SimpleData name="TIPOLOGIA">CRM</SimpleData>
+		<SimpleData name="COMUNE">DORSINO</SimpleData>
+		<SimpleData name="DESCR">CRM DORSINO</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>10.901761388711533,46.072420388619371</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#crm">
+		<SimpleData name="id">15</SimpleData>
+		<SimpleData name="TIPOLOGIA">CRM</SimpleData>
+		<SimpleData name="COMUNE">TIONE DI TRENTO</SimpleData>
+		<SimpleData name="DESCR">CRM TIONE</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>10.732911326953509,46.036666762973304</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#crm">
+		<SimpleData name="id">11</SimpleData>
+		<SimpleData name="TIPOLOGIA">CRM</SimpleData>
+		<SimpleData name="COMUNE">SPIAZZO</SimpleData>
+		<SimpleData name="DESCR">CRM SPIAZZO</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>10.734051373737024,46.093352141787918</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#crm">
+		<SimpleData name="id">16</SimpleData>
+		<SimpleData name="TIPOLOGIA">CRM</SimpleData>
+		<SimpleData name="COMUNE">VILLA RENDENA</SimpleData>
+		<SimpleData name="DESCR">CRM VILLA RENDENA</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>10.714881231633585,46.068132740995217</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#crm">
+		<SimpleData name="id">14</SimpleData>
+		<SimpleData name="TIPOLOGIA">CRM</SimpleData>
+		<SimpleData name="COMUNE">STREMBO</SimpleData>
+		<SimpleData name="DESCR">CRM STREMBO</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>10.753557001390945,46.119456519763382</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#crm">
+		<SimpleData name="id">2</SimpleData>
+		<SimpleData name="TIPOLOGIA">CRM_CRZ</SimpleData>
+		<SimpleData name="COMUNE">CARISOLO</SimpleData>
+		<SimpleData name="DESCR">CRM CRZ CARISOLO</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>10.766713718320283,46.172100647452957</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#crm">
+		<SimpleData name="id">8</SimpleData>
+		<SimpleData name="TIPOLOGIA">CRM</SimpleData>
+		<SimpleData name="COMUNE">PINZOLO</SimpleData>
+		<SimpleData name="DESCR">CRM PINZOLO CAMPIGLIO</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>10.813687648118488,46.205557050759872</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#crm">
+		<SimpleData name="id">17</SimpleData>
+		<SimpleData name="TIPOLOGIA">CRM</SimpleData>
+		<SimpleData name="COMUNE">CASTEL CONDINO</SimpleData>
+		<SimpleData name="DESCR">CRM SEMPLIFICATO CASTELCONDINO</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>10.603065425482576,45.918680542672526</coordinates></Point>
+  </Placemark>
+</Folder></Document></kml>

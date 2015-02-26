@@ -1,0 +1,3251 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<kml xmlns="http://www.opengis.net/kml/2.2">
+<Document><Folder><name>isole_C8_utf_info_estese</name>
+<Schema name="isole_C8_utf_info_estese" id="isole_C8_utf_info_estese">
+	<SimpleField name="Name" type="string"></SimpleField>
+	<SimpleField name="Description" type="string"></SimpleField>
+	<SimpleField name="POD" type="int"></SimpleField>
+	<SimpleField name="comune" type="string"></SimpleField>
+	<SimpleField name="riferiment" type="string"></SimpleField>
+	<SimpleField name="GETTONIERA" type="string"></SimpleField>
+	<SimpleField name="RESIDUO" type="string"></SimpleField>
+	<SimpleField name="IMB_CARTA" type="string"></SimpleField>
+	<SimpleField name="IMB_PL_MET" type="string"></SimpleField>
+	<SimpleField name="ORGANICO" type="string"></SimpleField>
+	<SimpleField name="IMB_VETRO" type="string"></SimpleField>
+	<SimpleField name="INDUMENTI" type="string"></SimpleField>
+	<SimpleField name="NOTE" type="string"></SimpleField>
+</Schema>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#isole_C8_utf_info_estese">
+		<SimpleData name="POD">1796</SimpleData>
+		<SimpleData name="comune">COMANO TERME</SimpleData>
+		<SimpleData name="riferiment">COMANO TERME VERGONZO</SimpleData>
+		<SimpleData name="GETTONIERA">FALSE</SimpleData>
+		<SimpleData name="RESIDUO">TRUE</SimpleData>
+		<SimpleData name="IMB_CARTA">TRUE</SimpleData>
+		<SimpleData name="IMB_PL_MET">TRUE</SimpleData>
+		<SimpleData name="ORGANICO">TRUE</SimpleData>
+		<SimpleData name="IMB_VETRO">TRUE</SimpleData>
+		<SimpleData name="INDUMENTI">FALSE</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>10.839704848783207,46.035782124747378</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#isole_C8_utf_info_estese">
+		<SimpleData name="POD">1795</SimpleData>
+		<SimpleData name="comune">COMANO TERME</SimpleData>
+		<SimpleData name="riferiment">COMANO TERME VILLA</SimpleData>
+		<SimpleData name="GETTONIERA">FALSE</SimpleData>
+		<SimpleData name="RESIDUO">TRUE</SimpleData>
+		<SimpleData name="IMB_CARTA">TRUE</SimpleData>
+		<SimpleData name="IMB_PL_MET">TRUE</SimpleData>
+		<SimpleData name="ORGANICO">TRUE</SimpleData>
+		<SimpleData name="IMB_VETRO">TRUE</SimpleData>
+		<SimpleData name="INDUMENTI">FALSE</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>10.841334894874796,46.028887019350748</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#isole_C8_utf_info_estese">
+		<SimpleData name="POD">1804</SimpleData>
+		<SimpleData name="comune">COMANO TERME</SimpleData>
+		<SimpleData name="riferiment">COMANO TERME COMIGHELLO</SimpleData>
+		<SimpleData name="GETTONIERA">FALSE</SimpleData>
+		<SimpleData name="RESIDUO">TRUE</SimpleData>
+		<SimpleData name="IMB_CARTA">TRUE</SimpleData>
+		<SimpleData name="IMB_PL_MET">TRUE</SimpleData>
+		<SimpleData name="ORGANICO">TRUE</SimpleData>
+		<SimpleData name="IMB_VETRO">TRUE</SimpleData>
+		<SimpleData name="INDUMENTI">TRUE</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>10.85100783064903,46.030872008277868</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#isole_C8_utf_info_estese">
+		<SimpleData name="POD">1805</SimpleData>
+		<SimpleData name="comune">COMANO TERME</SimpleData>
+		<SimpleData name="riferiment">COMANO TERME CARES BIVIO OVEST</SimpleData>
+		<SimpleData name="GETTONIERA">FALSE</SimpleData>
+		<SimpleData name="RESIDUO">TRUE</SimpleData>
+		<SimpleData name="IMB_CARTA">TRUE</SimpleData>
+		<SimpleData name="IMB_PL_MET">TRUE</SimpleData>
+		<SimpleData name="ORGANICO">TRUE</SimpleData>
+		<SimpleData name="IMB_VETRO">TRUE</SimpleData>
+		<SimpleData name="INDUMENTI">FALSE</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>10.863264026761676,46.032660174125631</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#isole_C8_utf_info_estese">
+		<SimpleData name="POD">1820</SimpleData>
+		<SimpleData name="comune">COMANO TERME</SimpleData>
+		<SimpleData name="riferiment">COMANO TERME CARES CASA SOCIALE</SimpleData>
+		<SimpleData name="GETTONIERA">FALSE</SimpleData>
+		<SimpleData name="RESIDUO">TRUE</SimpleData>
+		<SimpleData name="IMB_CARTA">TRUE</SimpleData>
+		<SimpleData name="IMB_PL_MET">TRUE</SimpleData>
+		<SimpleData name="ORGANICO">TRUE</SimpleData>
+		<SimpleData name="IMB_VETRO">TRUE</SimpleData>
+		<SimpleData name="INDUMENTI">FALSE</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>10.866092154704191,46.03419321756725</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#isole_C8_utf_info_estese">
+		<SimpleData name="POD">1822</SimpleData>
+		<SimpleData name="comune">COMANO TERME</SimpleData>
+		<SimpleData name="riferiment">COMANO TERME PONTE ARCHE PONTE DUINA</SimpleData>
+		<SimpleData name="GETTONIERA">FALSE</SimpleData>
+		<SimpleData name="RESIDUO">TRUE</SimpleData>
+		<SimpleData name="IMB_CARTA">TRUE</SimpleData>
+		<SimpleData name="IMB_PL_MET">TRUE</SimpleData>
+		<SimpleData name="ORGANICO">TRUE</SimpleData>
+		<SimpleData name="IMB_VETRO">TRUE</SimpleData>
+		<SimpleData name="INDUMENTI">TRUE</SimpleData>
+		<SimpleData name="NOTE">In questa isola trovi la raccolta separata del cartone con apposito gazebo</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>10.868373106790175,46.03089047610387</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#isole_C8_utf_info_estese">
+		<SimpleData name="POD">1808</SimpleData>
+		<SimpleData name="comune">COMANO TERME</SimpleData>
+		<SimpleData name="riferiment">COMANO TERME PONTE ARCHE PESA</SimpleData>
+		<SimpleData name="GETTONIERA">FALSE</SimpleData>
+		<SimpleData name="RESIDUO">TRUE</SimpleData>
+		<SimpleData name="IMB_CARTA">TRUE</SimpleData>
+		<SimpleData name="IMB_PL_MET">TRUE</SimpleData>
+		<SimpleData name="ORGANICO">TRUE</SimpleData>
+		<SimpleData name="IMB_VETRO">TRUE</SimpleData>
+		<SimpleData name="INDUMENTI">FALSE</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>10.863533862938999,46.036613808881015</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#isole_C8_utf_info_estese">
+		<SimpleData name="POD">1818</SimpleData>
+		<SimpleData name="comune">COMANO TERME</SimpleData>
+		<SimpleData name="riferiment">COMANO TERME PONTE ARCHE VIA PRATI</SimpleData>
+		<SimpleData name="GETTONIERA">FALSE</SimpleData>
+		<SimpleData name="RESIDUO">TRUE</SimpleData>
+		<SimpleData name="IMB_CARTA">TRUE</SimpleData>
+		<SimpleData name="IMB_PL_MET">TRUE</SimpleData>
+		<SimpleData name="ORGANICO">TRUE</SimpleData>
+		<SimpleData name="IMB_VETRO">TRUE</SimpleData>
+		<SimpleData name="INDUMENTI">FALSE</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>10.870254497468755,46.033904338772757</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#isole_C8_utf_info_estese">
+		<SimpleData name="POD">1835</SimpleData>
+		<SimpleData name="comune">COMANO TERME</SimpleData>
+		<SimpleData name="riferiment">COMANO TERME PONTE ARCHE AREA CAMPER</SimpleData>
+		<SimpleData name="GETTONIERA">TRUE</SimpleData>
+		<SimpleData name="RESIDUO">TRUE</SimpleData>
+		<SimpleData name="IMB_CARTA">TRUE</SimpleData>
+		<SimpleData name="IMB_PL_MET">TRUE</SimpleData>
+		<SimpleData name="ORGANICO">TRUE</SimpleData>
+		<SimpleData name="IMB_VETRO">TRUE</SimpleData>
+		<SimpleData name="INDUMENTI">FALSE</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>10.877978847852903,46.039642754982559</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#isole_C8_utf_info_estese">
+		<SimpleData name="POD">1825</SimpleData>
+		<SimpleData name="comune">COMANO TERME</SimpleData>
+		<SimpleData name="riferiment">COMANO TERME PONTE ARCHE PARCHEGGIO</SimpleData>
+		<SimpleData name="GETTONIERA">FALSE</SimpleData>
+		<SimpleData name="RESIDUO">TRUE</SimpleData>
+		<SimpleData name="IMB_CARTA">TRUE</SimpleData>
+		<SimpleData name="IMB_PL_MET">TRUE</SimpleData>
+		<SimpleData name="ORGANICO">TRUE</SimpleData>
+		<SimpleData name="IMB_VETRO">TRUE</SimpleData>
+		<SimpleData name="INDUMENTI">TRUE</SimpleData>
+		<SimpleData name="NOTE">In questa isola trovi la raccolta separata del cartone con apposito gazebo</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>10.871442266498313,46.033727638890802</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#isole_C8_utf_info_estese">
+		<SimpleData name="POD">1828</SimpleData>
+		<SimpleData name="comune">COMANO TERME</SimpleData>
+		<SimpleData name="riferiment">COMANO TERME PONTE ARCHE STAZIONE AUTOCORRIERE</SimpleData>
+		<SimpleData name="GETTONIERA">FALSE</SimpleData>
+		<SimpleData name="RESIDUO">TRUE</SimpleData>
+		<SimpleData name="IMB_CARTA">TRUE</SimpleData>
+		<SimpleData name="IMB_PL_MET">TRUE</SimpleData>
+		<SimpleData name="ORGANICO">TRUE</SimpleData>
+		<SimpleData name="IMB_VETRO">TRUE</SimpleData>
+		<SimpleData name="INDUMENTI">FALSE</SimpleData>
+		<SimpleData name="NOTE">In questa isola trovi la raccolta separata del cartone con apposito gazebo</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>10.874083039824733,46.035678427526818</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#isole_C8_utf_info_estese">
+		<SimpleData name="POD">1810</SimpleData>
+		<SimpleData name="comune">COMANO TERME</SimpleData>
+		<SimpleData name="riferiment">COMANO TERME PONTE ARCHE PARCHEGGIO PER STENICO</SimpleData>
+		<SimpleData name="GETTONIERA">FALSE</SimpleData>
+		<SimpleData name="RESIDUO">TRUE</SimpleData>
+		<SimpleData name="IMB_CARTA">TRUE</SimpleData>
+		<SimpleData name="IMB_PL_MET">TRUE</SimpleData>
+		<SimpleData name="ORGANICO">TRUE</SimpleData>
+		<SimpleData name="IMB_VETRO">TRUE</SimpleData>
+		<SimpleData name="INDUMENTI">FALSE</SimpleData>
+		<SimpleData name="NOTE">In questa isola trovi la raccolta separata del cartone con apposito gazebo</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>10.869461731826531,46.036961955717501</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#isole_C8_utf_info_estese">
+		<SimpleData name="POD">1987</SimpleData>
+		<SimpleData name="comune">CIMEGO</SimpleData>
+		<SimpleData name="riferiment">CIMEGO BIVIO</SimpleData>
+		<SimpleData name="GETTONIERA">FALSE</SimpleData>
+		<SimpleData name="RESIDUO">TRUE</SimpleData>
+		<SimpleData name="IMB_CARTA">TRUE</SimpleData>
+		<SimpleData name="IMB_PL_MET">TRUE</SimpleData>
+		<SimpleData name="ORGANICO">TRUE</SimpleData>
+		<SimpleData name="IMB_VETRO">TRUE</SimpleData>
+		<SimpleData name="INDUMENTI">FALSE</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>10.615328191332518,45.912349445431097</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#isole_C8_utf_info_estese">
+		<SimpleData name="POD">1984</SimpleData>
+		<SimpleData name="comune">CIMEGO</SimpleData>
+		<SimpleData name="riferiment">CIMEGO QUARTINAGO</SimpleData>
+		<SimpleData name="GETTONIERA">FALSE</SimpleData>
+		<SimpleData name="RESIDUO">TRUE</SimpleData>
+		<SimpleData name="IMB_CARTA">TRUE</SimpleData>
+		<SimpleData name="IMB_PL_MET">TRUE</SimpleData>
+		<SimpleData name="ORGANICO">TRUE</SimpleData>
+		<SimpleData name="IMB_VETRO">TRUE</SimpleData>
+		<SimpleData name="INDUMENTI">FALSE</SimpleData>
+		<SimpleData name="NOTE">In questa isola trovi la raccolta separata del cartone con apposito gazebo</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>10.612636205543778,45.910095594040435</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#isole_C8_utf_info_estese">
+		<SimpleData name="POD">1985</SimpleData>
+		<SimpleData name="comune">CIMEGO</SimpleData>
+		<SimpleData name="riferiment">CIMEGO MUNICIPIO</SimpleData>
+		<SimpleData name="GETTONIERA">FALSE</SimpleData>
+		<SimpleData name="RESIDUO">TRUE</SimpleData>
+		<SimpleData name="IMB_CARTA">TRUE</SimpleData>
+		<SimpleData name="IMB_PL_MET">TRUE</SimpleData>
+		<SimpleData name="ORGANICO">TRUE</SimpleData>
+		<SimpleData name="IMB_VETRO">TRUE</SimpleData>
+		<SimpleData name="INDUMENTI">TRUE</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>10.614381362443206,45.912426399127554</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#isole_C8_utf_info_estese">
+		<SimpleData name="POD">1990</SimpleData>
+		<SimpleData name="comune">CIMEGO</SimpleData>
+		<SimpleData name="riferiment">CIMEGO ZONA ARTIGIANALE</SimpleData>
+		<SimpleData name="GETTONIERA">FALSE</SimpleData>
+		<SimpleData name="RESIDUO">TRUE</SimpleData>
+		<SimpleData name="IMB_CARTA">TRUE</SimpleData>
+		<SimpleData name="IMB_PL_MET">TRUE</SimpleData>
+		<SimpleData name="ORGANICO">TRUE</SimpleData>
+		<SimpleData name="IMB_VETRO">TRUE</SimpleData>
+		<SimpleData name="INDUMENTI">FALSE</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>10.61815032886383,45.911817673992225</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#isole_C8_utf_info_estese">
+		<SimpleData name="POD">1993</SimpleData>
+		<SimpleData name="comune">CASTEL CONDINO</SimpleData>
+		<SimpleData name="riferiment">CASTELCONDINO PIAZZALE</SimpleData>
+		<SimpleData name="GETTONIERA">FALSE</SimpleData>
+		<SimpleData name="RESIDUO">TRUE</SimpleData>
+		<SimpleData name="IMB_CARTA">TRUE</SimpleData>
+		<SimpleData name="IMB_PL_MET">TRUE</SimpleData>
+		<SimpleData name="ORGANICO">TRUE</SimpleData>
+		<SimpleData name="IMB_VETRO">TRUE</SimpleData>
+		<SimpleData name="INDUMENTI">TRUE</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>10.602077293967836,45.916991085272549</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#isole_C8_utf_info_estese">
+		<SimpleData name="POD">2208</SimpleData>
+		<SimpleData name="comune">CARISOLO</SimpleData>
+		<SimpleData name="riferiment">CARISOLO ANTICA VETRERIA</SimpleData>
+		<SimpleData name="GETTONIERA">FALSE</SimpleData>
+		<SimpleData name="RESIDUO">TRUE</SimpleData>
+		<SimpleData name="IMB_CARTA">TRUE</SimpleData>
+		<SimpleData name="IMB_PL_MET">TRUE</SimpleData>
+		<SimpleData name="ORGANICO">TRUE</SimpleData>
+		<SimpleData name="IMB_VETRO">TRUE</SimpleData>
+		<SimpleData name="INDUMENTI">FALSE</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>10.747500799089178,46.171225482021413</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#isole_C8_utf_info_estese">
+		<SimpleData name="POD">2211</SimpleData>
+		<SimpleData name="comune">CARISOLO</SimpleData>
+		<SimpleData name="riferiment">CARISOLO VIA VERDI</SimpleData>
+		<SimpleData name="GETTONIERA">FALSE</SimpleData>
+		<SimpleData name="RESIDUO">TRUE</SimpleData>
+		<SimpleData name="IMB_CARTA">TRUE</SimpleData>
+		<SimpleData name="IMB_PL_MET">TRUE</SimpleData>
+		<SimpleData name="ORGANICO">TRUE</SimpleData>
+		<SimpleData name="IMB_VETRO">TRUE</SimpleData>
+		<SimpleData name="INDUMENTI">FALSE</SimpleData>
+		<SimpleData name="NOTE">In questa isola trovi la raccolta separata del cartone con apposito gazebo</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>10.758986648213751,46.167613257144694</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#isole_C8_utf_info_estese">
+		<SimpleData name="POD">2217</SimpleData>
+		<SimpleData name="comune">CARISOLO</SimpleData>
+		<SimpleData name="riferiment">CARISOLO VIA VAL DI GENOVA</SimpleData>
+		<SimpleData name="GETTONIERA">TRUE</SimpleData>
+		<SimpleData name="RESIDUO">TRUE</SimpleData>
+		<SimpleData name="IMB_CARTA">TRUE</SimpleData>
+		<SimpleData name="IMB_PL_MET">TRUE</SimpleData>
+		<SimpleData name="ORGANICO">TRUE</SimpleData>
+		<SimpleData name="IMB_VETRO">TRUE</SimpleData>
+		<SimpleData name="INDUMENTI">FALSE</SimpleData>
+		<SimpleData name="NOTE">In questa isola trovi la raccolta separata del cartone con apposito gazebo</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>10.760379452031085,46.170214826492497</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#isole_C8_utf_info_estese">
+		<SimpleData name="POD">2214</SimpleData>
+		<SimpleData name="comune">CARISOLO</SimpleData>
+		<SimpleData name="riferiment">CARISOLO PONTE VIA SAN ROCCO</SimpleData>
+		<SimpleData name="GETTONIERA">FALSE</SimpleData>
+		<SimpleData name="RESIDUO">TRUE</SimpleData>
+		<SimpleData name="IMB_CARTA">TRUE</SimpleData>
+		<SimpleData name="IMB_PL_MET">TRUE</SimpleData>
+		<SimpleData name="ORGANICO">TRUE</SimpleData>
+		<SimpleData name="IMB_VETRO">TRUE</SimpleData>
+		<SimpleData name="INDUMENTI">FALSE</SimpleData>
+		<SimpleData name="NOTE">In questa isola trovi la raccolta separata del cartone con apposito gazebo</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>10.762753301723395,46.168097220446363</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#isole_C8_utf_info_estese">
+		<SimpleData name="POD">2209</SimpleData>
+		<SimpleData name="comune">CARISOLO</SimpleData>
+		<SimpleData name="riferiment">CARISOLO VIA DANTE</SimpleData>
+		<SimpleData name="GETTONIERA">FALSE</SimpleData>
+		<SimpleData name="RESIDUO">TRUE</SimpleData>
+		<SimpleData name="IMB_CARTA">TRUE</SimpleData>
+		<SimpleData name="IMB_PL_MET">TRUE</SimpleData>
+		<SimpleData name="ORGANICO">TRUE</SimpleData>
+		<SimpleData name="IMB_VETRO">TRUE</SimpleData>
+		<SimpleData name="INDUMENTI">FALSE</SimpleData>
+		<SimpleData name="NOTE">In questa isola trovi la raccolta separata del cartone con apposito gazebo</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>10.758919206451916,46.169273754037732</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#isole_C8_utf_info_estese">
+		<SimpleData name="POD">2146</SimpleData>
+		<SimpleData name="comune">CADERZONE TERME</SimpleData>
+		<SimpleData name="riferiment">CADERZONE VIA PORTA</SimpleData>
+		<SimpleData name="GETTONIERA">FALSE</SimpleData>
+		<SimpleData name="RESIDUO">TRUE</SimpleData>
+		<SimpleData name="IMB_CARTA">TRUE</SimpleData>
+		<SimpleData name="IMB_PL_MET">TRUE</SimpleData>
+		<SimpleData name="ORGANICO">TRUE</SimpleData>
+		<SimpleData name="IMB_VETRO">TRUE</SimpleData>
+		<SimpleData name="INDUMENTI">TRUE</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>10.759079989320874,46.132927022202388</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#isole_C8_utf_info_estese">
+		<SimpleData name="POD">2150</SimpleData>
+		<SimpleData name="comune">CADERZONE TERME</SimpleData>
+		<SimpleData name="riferiment">CADERZONE VIA BASSETT</SimpleData>
+		<SimpleData name="GETTONIERA">FALSE</SimpleData>
+		<SimpleData name="RESIDUO">TRUE</SimpleData>
+		<SimpleData name="IMB_CARTA">TRUE</SimpleData>
+		<SimpleData name="IMB_PL_MET">TRUE</SimpleData>
+		<SimpleData name="ORGANICO">TRUE</SimpleData>
+		<SimpleData name="IMB_VETRO">TRUE</SimpleData>
+		<SimpleData name="INDUMENTI">FALSE</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>10.753398073665222,46.127212895264741</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#isole_C8_utf_info_estese">
+		<SimpleData name="POD">2148</SimpleData>
+		<SimpleData name="comune">CADERZONE TERME</SimpleData>
+		<SimpleData name="riferiment">CADERZONE CIMITERO</SimpleData>
+		<SimpleData name="GETTONIERA">FALSE</SimpleData>
+		<SimpleData name="RESIDUO">TRUE</SimpleData>
+		<SimpleData name="IMB_CARTA">TRUE</SimpleData>
+		<SimpleData name="IMB_PL_MET">TRUE</SimpleData>
+		<SimpleData name="ORGANICO">TRUE</SimpleData>
+		<SimpleData name="IMB_VETRO">TRUE</SimpleData>
+		<SimpleData name="INDUMENTI">TRUE</SimpleData>
+		<SimpleData name="NOTE">In questa isola trovi la raccolta separata del cartone con apposito gazebo</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>10.756518138147504,46.128637089195031</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#isole_C8_utf_info_estese">
+		<SimpleData name="POD">1892</SimpleData>
+		<SimpleData name="comune">BRIONE</SimpleData>
+		<SimpleData name="riferiment">BRIONE TORNANTE</SimpleData>
+		<SimpleData name="GETTONIERA">FALSE</SimpleData>
+		<SimpleData name="RESIDUO">TRUE</SimpleData>
+		<SimpleData name="IMB_CARTA">TRUE</SimpleData>
+		<SimpleData name="IMB_PL_MET">TRUE</SimpleData>
+		<SimpleData name="ORGANICO">TRUE</SimpleData>
+		<SimpleData name="IMB_VETRO">TRUE</SimpleData>
+		<SimpleData name="INDUMENTI">TRUE</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>10.587617693666715,45.894419541546426</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#isole_C8_utf_info_estese">
+		<SimpleData name="POD">2077</SimpleData>
+		<SimpleData name="comune">BREGUZZO</SimpleData>
+		<SimpleData name="riferiment">BREGUZZO VIA VALLE</SimpleData>
+		<SimpleData name="GETTONIERA">FALSE</SimpleData>
+		<SimpleData name="RESIDUO">TRUE</SimpleData>
+		<SimpleData name="IMB_CARTA">TRUE</SimpleData>
+		<SimpleData name="IMB_PL_MET">TRUE</SimpleData>
+		<SimpleData name="ORGANICO">TRUE</SimpleData>
+		<SimpleData name="IMB_VETRO">TRUE</SimpleData>
+		<SimpleData name="INDUMENTI">FALSE</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>10.694370919454974,46.003919741644637</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#isole_C8_utf_info_estese">
+		<SimpleData name="POD">2278</SimpleData>
+		<SimpleData name="comune">BREGUZZO</SimpleData>
+		<SimpleData name="riferiment">BREGUZZO PARCHEGGIO CHIESA</SimpleData>
+		<SimpleData name="GETTONIERA">FALSE</SimpleData>
+		<SimpleData name="RESIDUO">TRUE</SimpleData>
+		<SimpleData name="IMB_CARTA">TRUE</SimpleData>
+		<SimpleData name="IMB_PL_MET">TRUE</SimpleData>
+		<SimpleData name="ORGANICO">TRUE</SimpleData>
+		<SimpleData name="IMB_VETRO">TRUE</SimpleData>
+		<SimpleData name="INDUMENTI">TRUE</SimpleData>
+		<SimpleData name="NOTE">In questa isola trovi la raccolta separata del cartone con apposito gazebo</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>10.699520726672301,46.009032539489795</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#isole_C8_utf_info_estese">
+		<SimpleData name="POD">1902</SimpleData>
+		<SimpleData name="comune">BONDONE</SimpleData>
+		<SimpleData name="riferiment">BONDONE SOTTO MUNICIPIO</SimpleData>
+		<SimpleData name="GETTONIERA">FALSE</SimpleData>
+		<SimpleData name="RESIDUO">TRUE</SimpleData>
+		<SimpleData name="IMB_CARTA">TRUE</SimpleData>
+		<SimpleData name="IMB_PL_MET">TRUE</SimpleData>
+		<SimpleData name="ORGANICO">TRUE</SimpleData>
+		<SimpleData name="IMB_VETRO">TRUE</SimpleData>
+		<SimpleData name="INDUMENTI">FALSE</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>10.551945087973145,45.804975111605806</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#isole_C8_utf_info_estese">
+		<SimpleData name="POD">1908</SimpleData>
+		<SimpleData name="comune">BONDONE</SimpleData>
+		<SimpleData name="riferiment">BONDONE BAITONI VIA ALDO SETTE</SimpleData>
+		<SimpleData name="GETTONIERA">FALSE</SimpleData>
+		<SimpleData name="RESIDUO">TRUE</SimpleData>
+		<SimpleData name="IMB_CARTA">TRUE</SimpleData>
+		<SimpleData name="IMB_PL_MET">TRUE</SimpleData>
+		<SimpleData name="ORGANICO">TRUE</SimpleData>
+		<SimpleData name="IMB_VETRO">TRUE</SimpleData>
+		<SimpleData name="INDUMENTI">TRUE</SimpleData>
+		<SimpleData name="NOTE">In questa isola trovi la raccolta separata del cartone con apposito gazebo</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>10.542259705305057,45.809388990856128</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#isole_C8_utf_info_estese">
+		<SimpleData name="POD">1906</SimpleData>
+		<SimpleData name="comune">BONDONE</SimpleData>
+		<SimpleData name="riferiment">BONDONE BAITONI CIMITERO</SimpleData>
+		<SimpleData name="GETTONIERA">FALSE</SimpleData>
+		<SimpleData name="RESIDUO">TRUE</SimpleData>
+		<SimpleData name="IMB_CARTA">TRUE</SimpleData>
+		<SimpleData name="IMB_PL_MET">TRUE</SimpleData>
+		<SimpleData name="ORGANICO">TRUE</SimpleData>
+		<SimpleData name="IMB_VETRO">TRUE</SimpleData>
+		<SimpleData name="INDUMENTI">FALSE</SimpleData>
+		<SimpleData name="NOTE">In questa isola trovi la raccolta separata del cartone con apposito gazebo</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>10.539032466478313,45.807732815875447</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#isole_C8_utf_info_estese">
+		<SimpleData name="POD">2069</SimpleData>
+		<SimpleData name="comune">BONDO</SimpleData>
+		<SimpleData name="riferiment">BONDO VIA SEF</SimpleData>
+		<SimpleData name="GETTONIERA">FALSE</SimpleData>
+		<SimpleData name="RESIDUO">TRUE</SimpleData>
+		<SimpleData name="IMB_CARTA">TRUE</SimpleData>
+		<SimpleData name="IMB_PL_MET">TRUE</SimpleData>
+		<SimpleData name="ORGANICO">TRUE</SimpleData>
+		<SimpleData name="IMB_VETRO">TRUE</SimpleData>
+		<SimpleData name="INDUMENTI">FALSE</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>10.692215980755673,45.9965458186078</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#isole_C8_utf_info_estese">
+		<SimpleData name="POD">2072</SimpleData>
+		<SimpleData name="comune">BONDO</SimpleData>
+		<SimpleData name="riferiment">BONDO CIMITERO</SimpleData>
+		<SimpleData name="GETTONIERA">FALSE</SimpleData>
+		<SimpleData name="RESIDUO">TRUE</SimpleData>
+		<SimpleData name="IMB_CARTA">TRUE</SimpleData>
+		<SimpleData name="IMB_PL_MET">TRUE</SimpleData>
+		<SimpleData name="ORGANICO">TRUE</SimpleData>
+		<SimpleData name="IMB_VETRO">TRUE</SimpleData>
+		<SimpleData name="INDUMENTI">TRUE</SimpleData>
+		<SimpleData name="NOTE">In questa isola trovi la raccolta separata del cartone con apposito gazebo</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>10.694467845129131,45.999861560424264</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#isole_C8_utf_info_estese">
+		<SimpleData name="POD">2071</SimpleData>
+		<SimpleData name="comune">BONDO</SimpleData>
+		<SimpleData name="riferiment">BONDO CHIESA SAN BARNABA</SimpleData>
+		<SimpleData name="GETTONIERA">FALSE</SimpleData>
+		<SimpleData name="RESIDUO">TRUE</SimpleData>
+		<SimpleData name="IMB_CARTA">TRUE</SimpleData>
+		<SimpleData name="IMB_PL_MET">TRUE</SimpleData>
+		<SimpleData name="ORGANICO">TRUE</SimpleData>
+		<SimpleData name="IMB_VETRO">TRUE</SimpleData>
+		<SimpleData name="INDUMENTI">FALSE</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>10.692342734680185,46.000859984111344</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#isole_C8_utf_info_estese">
+		<SimpleData name="POD">2103</SimpleData>
+		<SimpleData name="comune">BOLBENO</SimpleData>
+		<SimpleData name="riferiment">BOLBENO Loc STELE</SimpleData>
+		<SimpleData name="GETTONIERA">FALSE</SimpleData>
+		<SimpleData name="RESIDUO">TRUE</SimpleData>
+		<SimpleData name="IMB_CARTA">FALSE</SimpleData>
+		<SimpleData name="IMB_PL_MET">FALSE</SimpleData>
+		<SimpleData name="ORGANICO">FALSE</SimpleData>
+		<SimpleData name="IMB_VETRO">FALSE</SimpleData>
+		<SimpleData name="INDUMENTI">FALSE</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>10.722793899194782,46.026960211996048</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#isole_C8_utf_info_estese">
+		<SimpleData name="POD">2099</SimpleData>
+		<SimpleData name="comune">BOLBENO</SimpleData>
+		<SimpleData name="riferiment">BOLBENO CIMITERO</SimpleData>
+		<SimpleData name="GETTONIERA">FALSE</SimpleData>
+		<SimpleData name="RESIDUO">TRUE</SimpleData>
+		<SimpleData name="IMB_CARTA">TRUE</SimpleData>
+		<SimpleData name="IMB_PL_MET">TRUE</SimpleData>
+		<SimpleData name="ORGANICO">TRUE</SimpleData>
+		<SimpleData name="IMB_VETRO">TRUE</SimpleData>
+		<SimpleData name="INDUMENTI">TRUE</SimpleData>
+		<SimpleData name="NOTE">In questa isola trovi la raccolta separata del cartone con apposito gazebo</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>10.739255131949628,46.033034302543449</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#isole_C8_utf_info_estese">
+		<SimpleData name="POD">1720</SimpleData>
+		<SimpleData name="comune">BOCENAGO</SimpleData>
+		<SimpleData name="riferiment">BOCENAGO PARCHEGGIO VIA CAVOUR</SimpleData>
+		<SimpleData name="GETTONIERA">FALSE</SimpleData>
+		<SimpleData name="RESIDUO">TRUE</SimpleData>
+		<SimpleData name="IMB_CARTA">TRUE</SimpleData>
+		<SimpleData name="IMB_PL_MET">TRUE</SimpleData>
+		<SimpleData name="ORGANICO">TRUE</SimpleData>
+		<SimpleData name="IMB_VETRO">TRUE</SimpleData>
+		<SimpleData name="INDUMENTI">TRUE</SimpleData>
+		<SimpleData name="NOTE">In questa isola trovi la raccolta separata del cartone con apposito gazebo</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>10.757377189626816,46.116386956020747</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#isole_C8_utf_info_estese">
+		<SimpleData name="POD">1722</SimpleData>
+		<SimpleData name="comune">BOCENAGO</SimpleData>
+		<SimpleData name="riferiment">BOCENAGO PARCHEGGIO MUNICIPIO</SimpleData>
+		<SimpleData name="GETTONIERA">FALSE</SimpleData>
+		<SimpleData name="RESIDUO">TRUE</SimpleData>
+		<SimpleData name="IMB_CARTA">TRUE</SimpleData>
+		<SimpleData name="IMB_PL_MET">TRUE</SimpleData>
+		<SimpleData name="ORGANICO">TRUE</SimpleData>
+		<SimpleData name="IMB_VETRO">TRUE</SimpleData>
+		<SimpleData name="INDUMENTI">FALSE</SimpleData>
+		<SimpleData name="NOTE">In questa isola trovi la raccolta separata del cartone con apposito gazebo</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>10.75955951240161,46.11882250780679</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#isole_C8_utf_info_estese">
+		<SimpleData name="POD">1725</SimpleData>
+		<SimpleData name="comune">BOCENAGO</SimpleData>
+		<SimpleData name="riferiment">BOCENAGO Loc GALL</SimpleData>
+		<SimpleData name="GETTONIERA">FALSE</SimpleData>
+		<SimpleData name="RESIDUO">TRUE</SimpleData>
+		<SimpleData name="IMB_CARTA">TRUE</SimpleData>
+		<SimpleData name="IMB_PL_MET">TRUE</SimpleData>
+		<SimpleData name="ORGANICO">TRUE</SimpleData>
+		<SimpleData name="IMB_VETRO">TRUE</SimpleData>
+		<SimpleData name="INDUMENTI">FALSE</SimpleData>
+		<SimpleData name="NOTE">In questa isola trovi la raccolta separata del cartone con apposito gazebo</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>10.764509905533147,46.131771010639277</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#isole_C8_utf_info_estese">
+		<SimpleData name="POD">1780</SimpleData>
+		<SimpleData name="comune">BLEGGIO SUPERIORE</SimpleData>
+		<SimpleData name="riferiment">BLEGGIO SUP Fraz SANTA CROCE BIVIO BIVEDO</SimpleData>
+		<SimpleData name="GETTONIERA">FALSE</SimpleData>
+		<SimpleData name="RESIDUO">TRUE</SimpleData>
+		<SimpleData name="IMB_CARTA">TRUE</SimpleData>
+		<SimpleData name="IMB_PL_MET">TRUE</SimpleData>
+		<SimpleData name="ORGANICO">TRUE</SimpleData>
+		<SimpleData name="IMB_VETRO">TRUE</SimpleData>
+		<SimpleData name="INDUMENTI">TRUE</SimpleData>
+		<SimpleData name="NOTE">In questa isola trovi la raccolta separata del cartone con apposito gazebo</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>10.836261587858594,46.024524299346858</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#isole_C8_utf_info_estese">
+		<SimpleData name="POD">1776</SimpleData>
+		<SimpleData name="comune">BLEGGIO SUPERIORE</SimpleData>
+		<SimpleData name="riferiment">BLEGGIO SUP Fraz MARAZZONE</SimpleData>
+		<SimpleData name="GETTONIERA">FALSE</SimpleData>
+		<SimpleData name="RESIDUO">TRUE</SimpleData>
+		<SimpleData name="IMB_CARTA">TRUE</SimpleData>
+		<SimpleData name="IMB_PL_MET">TRUE</SimpleData>
+		<SimpleData name="ORGANICO">TRUE</SimpleData>
+		<SimpleData name="IMB_VETRO">TRUE</SimpleData>
+		<SimpleData name="INDUMENTI">FALSE</SimpleData>
+		<SimpleData name="NOTE">In questa isola trovi la raccolta separata del cartone con apposito gazebo</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>10.819331539432589,46.024574009467429</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#isole_C8_utf_info_estese">
+		<SimpleData name="POD">1777</SimpleData>
+		<SimpleData name="comune">BLEGGIO SUPERIORE</SimpleData>
+		<SimpleData name="riferiment">BLEGGIO SUP Fraz LARIDO PARCHEGGIO</SimpleData>
+		<SimpleData name="GETTONIERA">FALSE</SimpleData>
+		<SimpleData name="RESIDUO">TRUE</SimpleData>
+		<SimpleData name="IMB_CARTA">TRUE</SimpleData>
+		<SimpleData name="IMB_PL_MET">TRUE</SimpleData>
+		<SimpleData name="ORGANICO">TRUE</SimpleData>
+		<SimpleData name="IMB_VETRO">TRUE</SimpleData>
+		<SimpleData name="INDUMENTI">TRUE</SimpleData>
+		<SimpleData name="NOTE">In questa isola trovi la raccolta separata del cartone con apposito gazebo</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>10.825213776725919,46.028797323210256</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#isole_C8_utf_info_estese">
+		<SimpleData name="POD">1792</SimpleData>
+		<SimpleData name="comune">BLEGGIO SUPERIORE</SimpleData>
+		<SimpleData name="riferiment">BLEGGIO SUP Fraz CORNELLE</SimpleData>
+		<SimpleData name="GETTONIERA">FALSE</SimpleData>
+		<SimpleData name="RESIDUO">TRUE</SimpleData>
+		<SimpleData name="IMB_CARTA">TRUE</SimpleData>
+		<SimpleData name="IMB_PL_MET">TRUE</SimpleData>
+		<SimpleData name="ORGANICO">TRUE</SimpleData>
+		<SimpleData name="IMB_VETRO">TRUE</SimpleData>
+		<SimpleData name="INDUMENTI">FALSE</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>10.824216567197883,46.004351170922476</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#isole_C8_utf_info_estese">
+		<SimpleData name="POD">1790</SimpleData>
+		<SimpleData name="comune">BLEGGIO SUPERIORE</SimpleData>
+		<SimpleData name="riferiment">BLEGGIO SUP Fraz CAVRASTO INIZIO PAESE</SimpleData>
+		<SimpleData name="GETTONIERA">FALSE</SimpleData>
+		<SimpleData name="RESIDUO">TRUE</SimpleData>
+		<SimpleData name="IMB_CARTA">TRUE</SimpleData>
+		<SimpleData name="IMB_PL_MET">TRUE</SimpleData>
+		<SimpleData name="ORGANICO">TRUE</SimpleData>
+		<SimpleData name="IMB_VETRO">TRUE</SimpleData>
+		<SimpleData name="INDUMENTI">FALSE</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>10.821895139223219,46.01720695847682</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#isole_C8_utf_info_estese">
+		<SimpleData name="POD">1788</SimpleData>
+		<SimpleData name="comune">BLEGGIO SUPERIORE</SimpleData>
+		<SimpleData name="riferiment">BLEGGIO SUP Fraz CAVRASTO CAMPO CALCIO</SimpleData>
+		<SimpleData name="GETTONIERA">FALSE</SimpleData>
+		<SimpleData name="RESIDUO">TRUE</SimpleData>
+		<SimpleData name="IMB_CARTA">TRUE</SimpleData>
+		<SimpleData name="IMB_PL_MET">TRUE</SimpleData>
+		<SimpleData name="ORGANICO">TRUE</SimpleData>
+		<SimpleData name="IMB_VETRO">TRUE</SimpleData>
+		<SimpleData name="INDUMENTI">TRUE</SimpleData>
+		<SimpleData name="NOTE">In questa isola trovi la raccolta separata del cartone con apposito gazebo</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>10.815788018940463,46.014718660088604</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#isole_C8_utf_info_estese">
+		<SimpleData name="POD">2485</SimpleData>
+		<SimpleData name="comune">BLEGGIO SUPERIORE</SimpleData>
+		<SimpleData name="riferiment">BLEGGIO SUP Fraz BALBIDO PARCHEGGIO</SimpleData>
+		<SimpleData name="GETTONIERA">FALSE</SimpleData>
+		<SimpleData name="RESIDUO">TRUE</SimpleData>
+		<SimpleData name="IMB_CARTA">TRUE</SimpleData>
+		<SimpleData name="IMB_PL_MET">TRUE</SimpleData>
+		<SimpleData name="ORGANICO">TRUE</SimpleData>
+		<SimpleData name="IMB_VETRO">TRUE</SimpleData>
+		<SimpleData name="INDUMENTI">FALSE</SimpleData>
+		<SimpleData name="NOTE">In questa isola trovi la raccolta separata del cartone con apposito gazebo</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>10.810885401640515,46.015009095238746</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#isole_C8_utf_info_estese">
+		<SimpleData name="POD">2025</SimpleData>
+		<SimpleData name="comune">VALDAONE</SimpleData>
+		<SimpleData name="riferiment">BERSONE Fraz FORMINO</SimpleData>
+		<SimpleData name="GETTONIERA">FALSE</SimpleData>
+		<SimpleData name="RESIDUO">TRUE</SimpleData>
+		<SimpleData name="IMB_CARTA">TRUE</SimpleData>
+		<SimpleData name="IMB_PL_MET">TRUE</SimpleData>
+		<SimpleData name="ORGANICO">TRUE</SimpleData>
+		<SimpleData name="IMB_VETRO">TRUE</SimpleData>
+		<SimpleData name="INDUMENTI">FALSE</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>10.632630507236849,45.946452109672762</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#isole_C8_utf_info_estese">
+		<SimpleData name="POD">2022</SimpleData>
+		<SimpleData name="comune">VALDAONE</SimpleData>
+		<SimpleData name="riferiment">BERSONE C/O EX SCUOLE</SimpleData>
+		<SimpleData name="GETTONIERA">FALSE</SimpleData>
+		<SimpleData name="RESIDUO">TRUE</SimpleData>
+		<SimpleData name="IMB_CARTA">TRUE</SimpleData>
+		<SimpleData name="IMB_PL_MET">TRUE</SimpleData>
+		<SimpleData name="ORGANICO">TRUE</SimpleData>
+		<SimpleData name="IMB_VETRO">TRUE</SimpleData>
+		<SimpleData name="INDUMENTI">TRUE</SimpleData>
+		<SimpleData name="NOTE">In questa isola trovi la raccolta separata del cartone con apposito gazebo</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>10.633064866612395,45.943972628218432</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#isole_C8_utf_info_estese">
+		<SimpleData name="POD">2040</SimpleData>
+		<SimpleData name="comune">VALDAONE</SimpleData>
+		<SimpleData name="riferiment">DAONE SCUOLA MATERNA</SimpleData>
+		<SimpleData name="GETTONIERA">FALSE</SimpleData>
+		<SimpleData name="RESIDUO">TRUE</SimpleData>
+		<SimpleData name="IMB_CARTA">TRUE</SimpleData>
+		<SimpleData name="IMB_PL_MET">TRUE</SimpleData>
+		<SimpleData name="ORGANICO">TRUE</SimpleData>
+		<SimpleData name="IMB_VETRO">TRUE</SimpleData>
+		<SimpleData name="INDUMENTI">FALSE</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>10.61836044263832,45.946444596785241</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#isole_C8_utf_info_estese">
+		<SimpleData name="POD">2067</SimpleData>
+		<SimpleData name="comune">VALDAONE</SimpleData>
+		<SimpleData name="riferiment">DAONE VIA DE BIASI</SimpleData>
+		<SimpleData name="GETTONIERA">FALSE</SimpleData>
+		<SimpleData name="RESIDUO">TRUE</SimpleData>
+		<SimpleData name="IMB_CARTA">TRUE</SimpleData>
+		<SimpleData name="IMB_PL_MET">TRUE</SimpleData>
+		<SimpleData name="ORGANICO">TRUE</SimpleData>
+		<SimpleData name="IMB_VETRO">TRUE</SimpleData>
+		<SimpleData name="INDUMENTI">FALSE</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>10.623530687888946,45.947182598577541</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#isole_C8_utf_info_estese">
+		<SimpleData name="POD">2043</SimpleData>
+		<SimpleData name="comune">VALDAONE</SimpleData>
+		<SimpleData name="riferiment">VALLE DI DAONE VERMONGOI</SimpleData>
+		<SimpleData name="GETTONIERA">TRUE</SimpleData>
+		<SimpleData name="RESIDUO">TRUE</SimpleData>
+		<SimpleData name="IMB_CARTA">TRUE</SimpleData>
+		<SimpleData name="IMB_PL_MET">TRUE</SimpleData>
+		<SimpleData name="ORGANICO">TRUE</SimpleData>
+		<SimpleData name="IMB_VETRO">TRUE</SimpleData>
+		<SimpleData name="INDUMENTI">FALSE</SimpleData>
+		<SimpleData name="NOTE">Questa isola è operativa solo nella stagione estiva</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>10.562817627464755,45.971496529259589</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#isole_C8_utf_info_estese">
+		<SimpleData name="POD">2039</SimpleData>
+		<SimpleData name="comune">VALDAONE</SimpleData>
+		<SimpleData name="riferiment">DAONE DIREZIONE BERSONE</SimpleData>
+		<SimpleData name="GETTONIERA">FALSE</SimpleData>
+		<SimpleData name="RESIDUO">TRUE</SimpleData>
+		<SimpleData name="IMB_CARTA">TRUE</SimpleData>
+		<SimpleData name="IMB_PL_MET">TRUE</SimpleData>
+		<SimpleData name="ORGANICO">TRUE</SimpleData>
+		<SimpleData name="IMB_VETRO">TRUE</SimpleData>
+		<SimpleData name="INDUMENTI">FALSE</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>10.62234534328822,45.94641986645253</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#isole_C8_utf_info_estese">
+		<SimpleData name="POD">2415</SimpleData>
+		<SimpleData name="comune">VALDAONE</SimpleData>
+		<SimpleData name="riferiment">DAONE INCROCIO MORANDINO</SimpleData>
+		<SimpleData name="GETTONIERA">FALSE</SimpleData>
+		<SimpleData name="RESIDUO">TRUE</SimpleData>
+		<SimpleData name="IMB_CARTA">TRUE</SimpleData>
+		<SimpleData name="IMB_PL_MET">TRUE</SimpleData>
+		<SimpleData name="ORGANICO">TRUE</SimpleData>
+		<SimpleData name="IMB_VETRO">TRUE</SimpleData>
+		<SimpleData name="INDUMENTI">TRUE</SimpleData>
+		<SimpleData name="NOTE">In questa isola trovi la raccolta separata del cartone con apposito gazebo</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>10.616746139775675,45.947173414287434</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#isole_C8_utf_info_estese">
+		<SimpleData name="POD">2038</SimpleData>
+		<SimpleData name="comune">VALDAONE</SimpleData>
+		<SimpleData name="riferiment">DAONE CHIESA</SimpleData>
+		<SimpleData name="GETTONIERA">FALSE</SimpleData>
+		<SimpleData name="RESIDUO">TRUE</SimpleData>
+		<SimpleData name="IMB_CARTA">TRUE</SimpleData>
+		<SimpleData name="IMB_PL_MET">TRUE</SimpleData>
+		<SimpleData name="ORGANICO">TRUE</SimpleData>
+		<SimpleData name="IMB_VETRO">TRUE</SimpleData>
+		<SimpleData name="INDUMENTI">FALSE</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>10.62059213170442,45.946494935205322</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#isole_C8_utf_info_estese">
+		<SimpleData name="POD">1970</SimpleData>
+		<SimpleData name="comune">CONDINO</SimpleData>
+		<SimpleData name="riferiment">CONDINO VIA SASSOLO</SimpleData>
+		<SimpleData name="GETTONIERA">FALSE</SimpleData>
+		<SimpleData name="RESIDUO">TRUE</SimpleData>
+		<SimpleData name="IMB_CARTA">TRUE</SimpleData>
+		<SimpleData name="IMB_PL_MET">TRUE</SimpleData>
+		<SimpleData name="ORGANICO">TRUE</SimpleData>
+		<SimpleData name="IMB_VETRO">TRUE</SimpleData>
+		<SimpleData name="INDUMENTI">FALSE</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>10.602309950819631,45.893494235703876</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#isole_C8_utf_info_estese">
+		<SimpleData name="POD">1961</SimpleData>
+		<SimpleData name="comune">CONDINO</SimpleData>
+		<SimpleData name="riferiment">CONDINO VIA ROMA SUD</SimpleData>
+		<SimpleData name="GETTONIERA">FALSE</SimpleData>
+		<SimpleData name="RESIDUO">TRUE</SimpleData>
+		<SimpleData name="IMB_CARTA">TRUE</SimpleData>
+		<SimpleData name="IMB_PL_MET">TRUE</SimpleData>
+		<SimpleData name="ORGANICO">TRUE</SimpleData>
+		<SimpleData name="IMB_VETRO">TRUE</SimpleData>
+		<SimpleData name="INDUMENTI">FALSE</SimpleData>
+		<SimpleData name="NOTE">In questa isola trovi la raccolta separata del cartone con apposito gazebo</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>10.595983017013442,45.884601770178641</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#isole_C8_utf_info_estese">
+		<SimpleData name="POD">2474</SimpleData>
+		<SimpleData name="comune">CONDINO</SimpleData>
+		<SimpleData name="riferiment">CONDINO VIA MARCONI</SimpleData>
+		<SimpleData name="GETTONIERA">FALSE</SimpleData>
+		<SimpleData name="RESIDUO">TRUE</SimpleData>
+		<SimpleData name="IMB_CARTA">TRUE</SimpleData>
+		<SimpleData name="IMB_PL_MET">TRUE</SimpleData>
+		<SimpleData name="ORGANICO">TRUE</SimpleData>
+		<SimpleData name="IMB_VETRO">TRUE</SimpleData>
+		<SimpleData name="INDUMENTI">FALSE</SimpleData>
+		<SimpleData name="NOTE">In questa isola trovi la raccolta separata del cartone con apposito gazebo</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>10.599028310287101,45.889551157589686</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#isole_C8_utf_info_estese">
+		<SimpleData name="POD">1963</SimpleData>
+		<SimpleData name="comune">CONDINO</SimpleData>
+		<SimpleData name="riferiment">CONDINO BIM</SimpleData>
+		<SimpleData name="GETTONIERA">FALSE</SimpleData>
+		<SimpleData name="RESIDUO">TRUE</SimpleData>
+		<SimpleData name="IMB_CARTA">TRUE</SimpleData>
+		<SimpleData name="IMB_PL_MET">TRUE</SimpleData>
+		<SimpleData name="ORGANICO">TRUE</SimpleData>
+		<SimpleData name="IMB_VETRO">TRUE</SimpleData>
+		<SimpleData name="INDUMENTI">TRUE</SimpleData>
+		<SimpleData name="NOTE">In questa isola trovi la raccolta separata del cartone con apposito gazebo</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>10.599288552158974,45.887934827582285</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#isole_C8_utf_info_estese">
+		<SimpleData name="POD">1968</SimpleData>
+		<SimpleData name="comune">CONDINO</SimpleData>
+		<SimpleData name="riferiment">CONDINO ALBERGO CONDINO</SimpleData>
+		<SimpleData name="GETTONIERA">FALSE</SimpleData>
+		<SimpleData name="RESIDUO">TRUE</SimpleData>
+		<SimpleData name="IMB_CARTA">TRUE</SimpleData>
+		<SimpleData name="IMB_PL_MET">TRUE</SimpleData>
+		<SimpleData name="ORGANICO">TRUE</SimpleData>
+		<SimpleData name="IMB_VETRO">TRUE</SimpleData>
+		<SimpleData name="INDUMENTI">FALSE</SimpleData>
+		<SimpleData name="NOTE">In questa isola trovi la raccolta separata del cartone con apposito gazebo</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>10.602006322305391,45.891975308294882</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#isole_C8_utf_info_estese">
+		<SimpleData name="POD">1887</SimpleData>
+		<SimpleData name="comune">COMANO TERME</SimpleData>
+		<SimpleData name="riferiment">COMANO TERME DASINDO</SimpleData>
+		<SimpleData name="GETTONIERA">FALSE</SimpleData>
+		<SimpleData name="RESIDUO">TRUE</SimpleData>
+		<SimpleData name="IMB_CARTA">TRUE</SimpleData>
+		<SimpleData name="IMB_PL_MET">TRUE</SimpleData>
+		<SimpleData name="ORGANICO">TRUE</SimpleData>
+		<SimpleData name="IMB_VETRO">TRUE</SimpleData>
+		<SimpleData name="INDUMENTI">FALSE</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>10.860803653475649,46.010164850926692</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#isole_C8_utf_info_estese">
+		<SimpleData name="POD">1879</SimpleData>
+		<SimpleData name="comune">COMANO TERME</SimpleData>
+		<SimpleData name="riferiment">COMANO TERME VIGO LOMASO</SimpleData>
+		<SimpleData name="GETTONIERA">FALSE</SimpleData>
+		<SimpleData name="RESIDUO">TRUE</SimpleData>
+		<SimpleData name="IMB_CARTA">TRUE</SimpleData>
+		<SimpleData name="IMB_PL_MET">TRUE</SimpleData>
+		<SimpleData name="ORGANICO">TRUE</SimpleData>
+		<SimpleData name="IMB_VETRO">TRUE</SimpleData>
+		<SimpleData name="INDUMENTI">TRUE</SimpleData>
+		<SimpleData name="NOTE">In questa isola trovi la raccolta separata del cartone con apposito gazebo</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>10.870038152469611,46.01261039582274</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#isole_C8_utf_info_estese">
+		<SimpleData name="POD">1883</SimpleData>
+		<SimpleData name="comune">COMANO TERME</SimpleData>
+		<SimpleData name="riferiment">COMANO TERME POIA</SimpleData>
+		<SimpleData name="GETTONIERA">FALSE</SimpleData>
+		<SimpleData name="RESIDUO">TRUE</SimpleData>
+		<SimpleData name="IMB_CARTA">TRUE</SimpleData>
+		<SimpleData name="IMB_PL_MET">TRUE</SimpleData>
+		<SimpleData name="ORGANICO">TRUE</SimpleData>
+		<SimpleData name="IMB_VETRO">TRUE</SimpleData>
+		<SimpleData name="INDUMENTI">FALSE</SimpleData>
+		<SimpleData name="NOTE">In questa isola trovi la raccolta separata del cartone con apposito gazebo</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>10.879562427341765,46.03151495275965</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#isole_C8_utf_info_estese">
+		<SimpleData name="POD">1886</SimpleData>
+		<SimpleData name="comune">COMANO TERME</SimpleData>
+		<SimpleData name="riferiment">COMANO TERME COMANO</SimpleData>
+		<SimpleData name="GETTONIERA">FALSE</SimpleData>
+		<SimpleData name="RESIDUO">TRUE</SimpleData>
+		<SimpleData name="IMB_CARTA">TRUE</SimpleData>
+		<SimpleData name="IMB_PL_MET">TRUE</SimpleData>
+		<SimpleData name="ORGANICO">TRUE</SimpleData>
+		<SimpleData name="IMB_VETRO">TRUE</SimpleData>
+		<SimpleData name="INDUMENTI">FALSE</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>10.890507763421722,46.034977905143066</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#isole_C8_utf_info_estese">
+		<SimpleData name="POD">1880</SimpleData>
+		<SimpleData name="comune">COMANO TERME</SimpleData>
+		<SimpleData name="riferiment">COMANO TERME LUNDO</SimpleData>
+		<SimpleData name="GETTONIERA">FALSE</SimpleData>
+		<SimpleData name="RESIDUO">TRUE</SimpleData>
+		<SimpleData name="IMB_CARTA">TRUE</SimpleData>
+		<SimpleData name="IMB_PL_MET">TRUE</SimpleData>
+		<SimpleData name="ORGANICO">TRUE</SimpleData>
+		<SimpleData name="IMB_VETRO">TRUE</SimpleData>
+		<SimpleData name="INDUMENTI">FALSE</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>10.884878770988889,46.012972107747913</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#isole_C8_utf_info_estese">
+		<SimpleData name="POD">1877</SimpleData>
+		<SimpleData name="comune">COMANO TERME</SimpleData>
+		<SimpleData name="riferiment">COMANO TERME CAMPO MINORE</SimpleData>
+		<SimpleData name="GETTONIERA">FALSE</SimpleData>
+		<SimpleData name="RESIDUO">TRUE</SimpleData>
+		<SimpleData name="IMB_CARTA">TRUE</SimpleData>
+		<SimpleData name="IMB_PL_MET">TRUE</SimpleData>
+		<SimpleData name="ORGANICO">TRUE</SimpleData>
+		<SimpleData name="IMB_VETRO">TRUE</SimpleData>
+		<SimpleData name="INDUMENTI">FALSE</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>10.868571769813165,46.02210626468127</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#isole_C8_utf_info_estese">
+		<SimpleData name="POD">1878</SimpleData>
+		<SimpleData name="comune">COMANO TERME</SimpleData>
+		<SimpleData name="riferiment">COMANO TERME CAMPO MAGGIORE</SimpleData>
+		<SimpleData name="GETTONIERA">FALSE</SimpleData>
+		<SimpleData name="RESIDUO">TRUE</SimpleData>
+		<SimpleData name="IMB_CARTA">TRUE</SimpleData>
+		<SimpleData name="IMB_PL_MET">TRUE</SimpleData>
+		<SimpleData name="ORGANICO">TRUE</SimpleData>
+		<SimpleData name="IMB_VETRO">TRUE</SimpleData>
+		<SimpleData name="INDUMENTI">TRUE</SimpleData>
+		<SimpleData name="NOTE">In questa isola trovi la raccolta separata del cartone con apposito gazebo</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>10.865970062965818,46.024430598710026</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#isole_C8_utf_info_estese">
+		<SimpleData name="POD">1803</SimpleData>
+		<SimpleData name="comune">COMANO TERME</SimpleData>
+		<SimpleData name="riferiment">COMANO TERME BONO</SimpleData>
+		<SimpleData name="GETTONIERA">FALSE</SimpleData>
+		<SimpleData name="RESIDUO">TRUE</SimpleData>
+		<SimpleData name="IMB_CARTA">TRUE</SimpleData>
+		<SimpleData name="IMB_PL_MET">TRUE</SimpleData>
+		<SimpleData name="ORGANICO">TRUE</SimpleData>
+		<SimpleData name="IMB_VETRO">TRUE</SimpleData>
+		<SimpleData name="INDUMENTI">FALSE</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>10.849607996959428,46.024837172481114</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#isole_C8_utf_info_estese">
+		<SimpleData name="POD">1794</SimpleData>
+		<SimpleData name="comune">COMANO TERME</SimpleData>
+		<SimpleData name="riferiment">COMANO TERME DUVREDO CAPITELLO</SimpleData>
+		<SimpleData name="GETTONIERA">FALSE</SimpleData>
+		<SimpleData name="RESIDUO">TRUE</SimpleData>
+		<SimpleData name="IMB_CARTA">TRUE</SimpleData>
+		<SimpleData name="IMB_PL_MET">TRUE</SimpleData>
+		<SimpleData name="ORGANICO">TRUE</SimpleData>
+		<SimpleData name="IMB_VETRO">TRUE</SimpleData>
+		<SimpleData name="INDUMENTI">FALSE</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>10.838594721198888,46.028673523544697</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#isole_C8_utf_info_estese">
+		<SimpleData name="POD">1782</SimpleData>
+		<SimpleData name="comune">COMANO TERME</SimpleData>
+		<SimpleData name="riferiment">COMANO TERME SANTA CROCE CIMITERO</SimpleData>
+		<SimpleData name="GETTONIERA">FALSE</SimpleData>
+		<SimpleData name="RESIDUO">TRUE</SimpleData>
+		<SimpleData name="IMB_CARTA">TRUE</SimpleData>
+		<SimpleData name="IMB_PL_MET">TRUE</SimpleData>
+		<SimpleData name="ORGANICO">TRUE</SimpleData>
+		<SimpleData name="IMB_VETRO">TRUE</SimpleData>
+		<SimpleData name="INDUMENTI">FALSE</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>10.839005438969137,46.025127095489978</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#isole_C8_utf_info_estese">
+		<SimpleData name="POD">2486</SimpleData>
+		<SimpleData name="comune">DARÈ</SimpleData>
+		<SimpleData name="riferiment">DARÈ VIA SAN ROCCO</SimpleData>
+		<SimpleData name="GETTONIERA">FALSE</SimpleData>
+		<SimpleData name="RESIDUO">TRUE</SimpleData>
+		<SimpleData name="IMB_CARTA">TRUE</SimpleData>
+		<SimpleData name="IMB_PL_MET">TRUE</SimpleData>
+		<SimpleData name="ORGANICO">TRUE</SimpleData>
+		<SimpleData name="IMB_VETRO">TRUE</SimpleData>
+		<SimpleData name="INDUMENTI">TRUE</SimpleData>
+		<SimpleData name="NOTE">In questa isola trovi la raccolta separata del cartone con apposito gazebo</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>10.719206384632287,46.075628731560421</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#isole_C8_utf_info_estese">
+		<SimpleData name="POD">1711</SimpleData>
+		<SimpleData name="comune">PELUGO</SimpleData>
+		<SimpleData name="riferiment">PELUGO PARCHEGGIO LUNGO SS 237</SimpleData>
+		<SimpleData name="GETTONIERA">FALSE</SimpleData>
+		<SimpleData name="RESIDUO">TRUE</SimpleData>
+		<SimpleData name="IMB_CARTA">TRUE</SimpleData>
+		<SimpleData name="IMB_PL_MET">TRUE</SimpleData>
+		<SimpleData name="ORGANICO">TRUE</SimpleData>
+		<SimpleData name="IMB_VETRO">TRUE</SimpleData>
+		<SimpleData name="INDUMENTI">TRUE</SimpleData>
+		<SimpleData name="NOTE">In questa isola trovi la raccolta separata del cartone con apposito gazebo</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>10.726634660224251,46.08898495199805</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#isole_C8_utf_info_estese">
+		<SimpleData name="POD">1897</SimpleData>
+		<SimpleData name="comune">FIAVÈ</SimpleData>
+		<SimpleData name="riferiment">FIAVÈ DOSS</SimpleData>
+		<SimpleData name="GETTONIERA">FALSE</SimpleData>
+		<SimpleData name="RESIDUO">TRUE</SimpleData>
+		<SimpleData name="IMB_CARTA">TRUE</SimpleData>
+		<SimpleData name="IMB_PL_MET">TRUE</SimpleData>
+		<SimpleData name="ORGANICO">TRUE</SimpleData>
+		<SimpleData name="IMB_VETRO">TRUE</SimpleData>
+		<SimpleData name="INDUMENTI">FALSE</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>10.837869592063671,45.992519901387801</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#isole_C8_utf_info_estese">
+		<SimpleData name="POD">2488</SimpleData>
+		<SimpleData name="comune">FIAVÈ</SimpleData>
+		<SimpleData name="riferiment">FIAVÈ TENNIS</SimpleData>
+		<SimpleData name="GETTONIERA">FALSE</SimpleData>
+		<SimpleData name="RESIDUO">TRUE</SimpleData>
+		<SimpleData name="IMB_CARTA">TRUE</SimpleData>
+		<SimpleData name="IMB_PL_MET">TRUE</SimpleData>
+		<SimpleData name="ORGANICO">TRUE</SimpleData>
+		<SimpleData name="IMB_VETRO">TRUE</SimpleData>
+		<SimpleData name="INDUMENTI">FALSE</SimpleData>
+		<SimpleData name="NOTE">In questa isola trovi la raccolta separata del cartone con apposito gazebo</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>10.841030932985589,46.004362410189195</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#isole_C8_utf_info_estese">
+		<SimpleData name="POD">1888</SimpleData>
+		<SimpleData name="comune">FIAVÈ</SimpleData>
+		<SimpleData name="riferiment">FIAVÈ STUMIAGA</SimpleData>
+		<SimpleData name="GETTONIERA">FALSE</SimpleData>
+		<SimpleData name="RESIDUO">TRUE</SimpleData>
+		<SimpleData name="IMB_CARTA">TRUE</SimpleData>
+		<SimpleData name="IMB_PL_MET">TRUE</SimpleData>
+		<SimpleData name="ORGANICO">TRUE</SimpleData>
+		<SimpleData name="IMB_VETRO">TRUE</SimpleData>
+		<SimpleData name="INDUMENTI">FALSE</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>10.850694233049312,46.007771211249739</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#isole_C8_utf_info_estese">
+		<SimpleData name="POD">1890</SimpleData>
+		<SimpleData name="comune">FIAVÈ</SimpleData>
+		<SimpleData name="riferiment">FIAVÈ FAVRIO</SimpleData>
+		<SimpleData name="GETTONIERA">FALSE</SimpleData>
+		<SimpleData name="RESIDUO">TRUE</SimpleData>
+		<SimpleData name="IMB_CARTA">TRUE</SimpleData>
+		<SimpleData name="IMB_PL_MET">TRUE</SimpleData>
+		<SimpleData name="ORGANICO">TRUE</SimpleData>
+		<SimpleData name="IMB_VETRO">TRUE</SimpleData>
+		<SimpleData name="INDUMENTI">FALSE</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>10.857133846055195,46.000479988729715</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#isole_C8_utf_info_estese">
+		<SimpleData name="POD">1899</SimpleData>
+		<SimpleData name="comune">FIAVÈ</SimpleData>
+		<SimpleData name="riferiment">FIAVÈ BALLINO</SimpleData>
+		<SimpleData name="GETTONIERA">FALSE</SimpleData>
+		<SimpleData name="RESIDUO">TRUE</SimpleData>
+		<SimpleData name="IMB_CARTA">TRUE</SimpleData>
+		<SimpleData name="IMB_PL_MET">TRUE</SimpleData>
+		<SimpleData name="ORGANICO">TRUE</SimpleData>
+		<SimpleData name="IMB_VETRO">TRUE</SimpleData>
+		<SimpleData name="INDUMENTI">FALSE</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>10.809822576889955,45.964591175871313</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#isole_C8_utf_info_estese">
+		<SimpleData name="POD">1891</SimpleData>
+		<SimpleData name="comune">FIAVÈ</SimpleData>
+		<SimpleData name="riferiment">FIAVÈ SCUOLA</SimpleData>
+		<SimpleData name="GETTONIERA">FALSE</SimpleData>
+		<SimpleData name="RESIDUO">TRUE</SimpleData>
+		<SimpleData name="IMB_CARTA">TRUE</SimpleData>
+		<SimpleData name="IMB_PL_MET">TRUE</SimpleData>
+		<SimpleData name="ORGANICO">TRUE</SimpleData>
+		<SimpleData name="IMB_VETRO">TRUE</SimpleData>
+		<SimpleData name="INDUMENTI">FALSE</SimpleData>
+		<SimpleData name="NOTE">In questa isola trovi la raccolta separata del cartone con apposito gazebo</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>10.843335453391216,46.002409795042055</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#isole_C8_utf_info_estese">
+		<SimpleData name="POD">1896</SimpleData>
+		<SimpleData name="comune">FIAVÈ</SimpleData>
+		<SimpleData name="riferiment">FIAVÈ CIMITERO</SimpleData>
+		<SimpleData name="GETTONIERA">FALSE</SimpleData>
+		<SimpleData name="RESIDUO">TRUE</SimpleData>
+		<SimpleData name="IMB_CARTA">TRUE</SimpleData>
+		<SimpleData name="IMB_PL_MET">TRUE</SimpleData>
+		<SimpleData name="ORGANICO">TRUE</SimpleData>
+		<SimpleData name="IMB_VETRO">TRUE</SimpleData>
+		<SimpleData name="INDUMENTI">FALSE</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>10.840193154633042,46.00016524692478</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#isole_C8_utf_info_estese">
+		<SimpleData name="POD">1852</SimpleData>
+		<SimpleData name="comune">SAN LORENZO - DORSINO</SimpleData>
+		<SimpleData name="riferiment">DORSINO ANDOGNO</SimpleData>
+		<SimpleData name="GETTONIERA">FALSE</SimpleData>
+		<SimpleData name="RESIDUO">TRUE</SimpleData>
+		<SimpleData name="IMB_CARTA">TRUE</SimpleData>
+		<SimpleData name="IMB_PL_MET">TRUE</SimpleData>
+		<SimpleData name="ORGANICO">TRUE</SimpleData>
+		<SimpleData name="IMB_VETRO">TRUE</SimpleData>
+		<SimpleData name="INDUMENTI">FALSE</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>10.895300864919914,46.065875168958023</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#isole_C8_utf_info_estese">
+		<SimpleData name="POD">1854</SimpleData>
+		<SimpleData name="comune">SAN LORENZO - DORSINO</SimpleData>
+		<SimpleData name="riferiment">DORSINO TAVODO</SimpleData>
+		<SimpleData name="GETTONIERA">FALSE</SimpleData>
+		<SimpleData name="RESIDUO">TRUE</SimpleData>
+		<SimpleData name="IMB_CARTA">TRUE</SimpleData>
+		<SimpleData name="IMB_PL_MET">TRUE</SimpleData>
+		<SimpleData name="ORGANICO">TRUE</SimpleData>
+		<SimpleData name="IMB_VETRO">TRUE</SimpleData>
+		<SimpleData name="INDUMENTI">FALSE</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>10.892103939102972,46.066350554927602</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#isole_C8_utf_info_estese">
+		<SimpleData name="POD">1855</SimpleData>
+		<SimpleData name="comune">SAN LORENZO - DORSINO</SimpleData>
+		<SimpleData name="riferiment">DORSINO PIAZZA MUNICIPIO</SimpleData>
+		<SimpleData name="GETTONIERA">FALSE</SimpleData>
+		<SimpleData name="RESIDUO">TRUE</SimpleData>
+		<SimpleData name="IMB_CARTA">TRUE</SimpleData>
+		<SimpleData name="IMB_PL_MET">TRUE</SimpleData>
+		<SimpleData name="ORGANICO">TRUE</SimpleData>
+		<SimpleData name="IMB_VETRO">TRUE</SimpleData>
+		<SimpleData name="INDUMENTI">TRUE</SimpleData>
+		<SimpleData name="NOTE">In questa isola trovi la raccolta separata del cartone con apposito gazebo</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>10.896727593462375,46.073216315297998</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#isole_C8_utf_info_estese">
+		<SimpleData name="POD">2058</SimpleData>
+		<SimpleData name="comune">RONCONE</SimpleData>
+		<SimpleData name="riferiment">RONCONE CENTRO SCOLASTICO</SimpleData>
+		<SimpleData name="GETTONIERA">FALSE</SimpleData>
+		<SimpleData name="RESIDUO">TRUE</SimpleData>
+		<SimpleData name="IMB_CARTA">TRUE</SimpleData>
+		<SimpleData name="IMB_PL_MET">TRUE</SimpleData>
+		<SimpleData name="ORGANICO">TRUE</SimpleData>
+		<SimpleData name="IMB_VETRO">TRUE</SimpleData>
+		<SimpleData name="INDUMENTI">TRUE</SimpleData>
+		<SimpleData name="NOTE">In questa isola trovi la raccolta separata del cartone con apposito gazebo</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>10.668090817003382,45.982481972853925</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#isole_C8_utf_info_estese">
+		<SimpleData name="POD">2065</SimpleData>
+		<SimpleData name="comune">RONCONE</SimpleData>
+		<SimpleData name="riferiment">RONCONE VIA BENEDETTO LUCCHI</SimpleData>
+		<SimpleData name="GETTONIERA">FALSE</SimpleData>
+		<SimpleData name="RESIDUO">TRUE</SimpleData>
+		<SimpleData name="IMB_CARTA">TRUE</SimpleData>
+		<SimpleData name="IMB_PL_MET">TRUE</SimpleData>
+		<SimpleData name="ORGANICO">TRUE</SimpleData>
+		<SimpleData name="IMB_VETRO">TRUE</SimpleData>
+		<SimpleData name="INDUMENTI">FALSE</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>10.66922187166708,45.985662343307936</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#isole_C8_utf_info_estese">
+		<SimpleData name="POD">2061</SimpleData>
+		<SimpleData name="comune">RONCONE</SimpleData>
+		<SimpleData name="riferiment">RONCONE PIAZZA CESARE BATTISTI</SimpleData>
+		<SimpleData name="GETTONIERA">FALSE</SimpleData>
+		<SimpleData name="RESIDUO">TRUE</SimpleData>
+		<SimpleData name="IMB_CARTA">TRUE</SimpleData>
+		<SimpleData name="IMB_PL_MET">TRUE</SimpleData>
+		<SimpleData name="ORGANICO">TRUE</SimpleData>
+		<SimpleData name="IMB_VETRO">TRUE</SimpleData>
+		<SimpleData name="INDUMENTI">FALSE</SimpleData>
+		<SimpleData name="NOTE">In questa isola trovi la raccolta separata del cartone con apposito gazebo</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>10.669266004236357,45.984017249725646</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#isole_C8_utf_info_estese">
+		<SimpleData name="POD">2053</SimpleData>
+		<SimpleData name="comune">RONCONE</SimpleData>
+		<SimpleData name="riferiment">RONCONE CASE ITEA</SimpleData>
+		<SimpleData name="GETTONIERA">FALSE</SimpleData>
+		<SimpleData name="RESIDUO">TRUE</SimpleData>
+		<SimpleData name="IMB_CARTA">TRUE</SimpleData>
+		<SimpleData name="IMB_PL_MET">TRUE</SimpleData>
+		<SimpleData name="ORGANICO">TRUE</SimpleData>
+		<SimpleData name="IMB_VETRO">TRUE</SimpleData>
+		<SimpleData name="INDUMENTI">FALSE</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>10.671454142710738,45.983127068288447</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#isole_C8_utf_info_estese">
+		<SimpleData name="POD">2052</SimpleData>
+		<SimpleData name="comune">RONCONE</SimpleData>
+		<SimpleData name="riferiment">RONCONE ALBERGO RONCONE</SimpleData>
+		<SimpleData name="GETTONIERA">FALSE</SimpleData>
+		<SimpleData name="RESIDUO">TRUE</SimpleData>
+		<SimpleData name="IMB_CARTA">TRUE</SimpleData>
+		<SimpleData name="IMB_PL_MET">TRUE</SimpleData>
+		<SimpleData name="ORGANICO">TRUE</SimpleData>
+		<SimpleData name="IMB_VETRO">TRUE</SimpleData>
+		<SimpleData name="INDUMENTI">FALSE</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>10.670624704269938,45.983554075613938</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#isole_C8_utf_info_estese">
+		<SimpleData name="POD">2049</SimpleData>
+		<SimpleData name="comune">RONCONE</SimpleData>
+		<SimpleData name="riferiment">RONCONE FONTANEDO</SimpleData>
+		<SimpleData name="GETTONIERA">FALSE</SimpleData>
+		<SimpleData name="RESIDUO">TRUE</SimpleData>
+		<SimpleData name="IMB_CARTA">TRUE</SimpleData>
+		<SimpleData name="IMB_PL_MET">TRUE</SimpleData>
+		<SimpleData name="ORGANICO">TRUE</SimpleData>
+		<SimpleData name="IMB_VETRO">TRUE</SimpleData>
+		<SimpleData name="INDUMENTI">FALSE</SimpleData>
+		<SimpleData name="NOTE">In questa isola trovi la raccolta separata del cartone con apposito gazebo</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>10.664983946025517,45.977102110693949</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#isole_C8_utf_info_estese">
+		<SimpleData name="POD">2030</SimpleData>
+		<SimpleData name="comune">VALDAONE</SimpleData>
+		<SimpleData name="riferiment">PRASO SEVROR</SimpleData>
+		<SimpleData name="GETTONIERA">FALSE</SimpleData>
+		<SimpleData name="RESIDUO">TRUE</SimpleData>
+		<SimpleData name="IMB_CARTA">TRUE</SimpleData>
+		<SimpleData name="IMB_PL_MET">TRUE</SimpleData>
+		<SimpleData name="ORGANICO">TRUE</SimpleData>
+		<SimpleData name="IMB_VETRO">TRUE</SimpleData>
+		<SimpleData name="INDUMENTI">FALSE</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>10.642031431134662,45.954870313232206</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#isole_C8_utf_info_estese">
+		<SimpleData name="POD">2031</SimpleData>
+		<SimpleData name="comune">VALDAONE</SimpleData>
+		<SimpleData name="riferiment">PRASO VIA PRATI</SimpleData>
+		<SimpleData name="GETTONIERA">FALSE</SimpleData>
+		<SimpleData name="RESIDUO">TRUE</SimpleData>
+		<SimpleData name="IMB_CARTA">TRUE</SimpleData>
+		<SimpleData name="IMB_PL_MET">TRUE</SimpleData>
+		<SimpleData name="ORGANICO">TRUE</SimpleData>
+		<SimpleData name="IMB_VETRO">TRUE</SimpleData>
+		<SimpleData name="INDUMENTI">FALSE</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>10.637799632877602,45.950280404389503</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#isole_C8_utf_info_estese">
+		<SimpleData name="POD">2502</SimpleData>
+		<SimpleData name="comune">VALDAONE</SimpleData>
+		<SimpleData name="riferiment">PRASO CIMITERO</SimpleData>
+		<SimpleData name="GETTONIERA">FALSE</SimpleData>
+		<SimpleData name="RESIDUO">TRUE</SimpleData>
+		<SimpleData name="IMB_CARTA">TRUE</SimpleData>
+		<SimpleData name="IMB_PL_MET">TRUE</SimpleData>
+		<SimpleData name="ORGANICO">TRUE</SimpleData>
+		<SimpleData name="IMB_VETRO">TRUE</SimpleData>
+		<SimpleData name="INDUMENTI">FALSE</SimpleData>
+		<SimpleData name="NOTE">In questa isola trovi la raccolta separata del cartone con apposito gazebo</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>10.637678480562943,45.949464931130443</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#isole_C8_utf_info_estese">
+		<SimpleData name="POD">2045</SimpleData>
+		<SimpleData name="comune">LARDARO</SimpleData>
+		<SimpleData name="riferiment">LARDARO VIA ORTI</SimpleData>
+		<SimpleData name="GETTONIERA">FALSE</SimpleData>
+		<SimpleData name="RESIDUO">TRUE</SimpleData>
+		<SimpleData name="IMB_CARTA">TRUE</SimpleData>
+		<SimpleData name="IMB_PL_MET">TRUE</SimpleData>
+		<SimpleData name="ORGANICO">TRUE</SimpleData>
+		<SimpleData name="IMB_VETRO">TRUE</SimpleData>
+		<SimpleData name="INDUMENTI">TRUE</SimpleData>
+		<SimpleData name="NOTE">In questa isola trovi la raccolta separata del cartone con apposito gazebo</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>10.661103027882154,45.970206902810133</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#isole_C8_utf_info_estese">
+		<SimpleData name="POD">2174</SimpleData>
+		<SimpleData name="comune">GIUSTINO</SimpleData>
+		<SimpleData name="riferiment">GIUSTINO PARCHEGGIO BOTTE</SimpleData>
+		<SimpleData name="GETTONIERA">FALSE</SimpleData>
+		<SimpleData name="RESIDUO">TRUE</SimpleData>
+		<SimpleData name="IMB_CARTA">TRUE</SimpleData>
+		<SimpleData name="IMB_PL_MET">TRUE</SimpleData>
+		<SimpleData name="ORGANICO">TRUE</SimpleData>
+		<SimpleData name="IMB_VETRO">TRUE</SimpleData>
+		<SimpleData name="INDUMENTI">FALSE</SimpleData>
+		<SimpleData name="NOTE">In questa isola trovi la raccolta separata del cartone con apposito gazebo</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>10.766632989659252,46.151806541197509</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#isole_C8_utf_info_estese">
+		<SimpleData name="POD">2156</SimpleData>
+		<SimpleData name="comune">GIUSTINO</SimpleData>
+		<SimpleData name="riferiment">GIUSTINO STRADA STATALE</SimpleData>
+		<SimpleData name="GETTONIERA">FALSE</SimpleData>
+		<SimpleData name="RESIDUO">TRUE</SimpleData>
+		<SimpleData name="IMB_CARTA">TRUE</SimpleData>
+		<SimpleData name="IMB_PL_MET">TRUE</SimpleData>
+		<SimpleData name="ORGANICO">TRUE</SimpleData>
+		<SimpleData name="IMB_VETRO">TRUE</SimpleData>
+		<SimpleData name="INDUMENTI">TRUE</SimpleData>
+		<SimpleData name="NOTE">In questa isola trovi la raccolta separata del cartone con apposito gazebo</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>10.767152747246763,46.148944628572423</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#isole_C8_utf_info_estese">
+		<SimpleData name="POD">2153</SimpleData>
+		<SimpleData name="comune">GIUSTINO</SimpleData>
+		<SimpleData name="riferiment">GIUSTINO DIREZIONE MASSIMENO</SimpleData>
+		<SimpleData name="GETTONIERA">FALSE</SimpleData>
+		<SimpleData name="RESIDUO">TRUE</SimpleData>
+		<SimpleData name="IMB_CARTA">TRUE</SimpleData>
+		<SimpleData name="IMB_PL_MET">TRUE</SimpleData>
+		<SimpleData name="ORGANICO">TRUE</SimpleData>
+		<SimpleData name="IMB_VETRO">TRUE</SimpleData>
+		<SimpleData name="INDUMENTI">FALSE</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>10.770218980546545,46.14601318290314</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#isole_C8_utf_info_estese">
+		<SimpleData name="POD">2195</SimpleData>
+		<SimpleData name="comune">MASSIMENO</SimpleData>
+		<SimpleData name="riferiment">MASSINENO DIREZIONE BOCENAGO</SimpleData>
+		<SimpleData name="GETTONIERA">FALSE</SimpleData>
+		<SimpleData name="RESIDUO">TRUE</SimpleData>
+		<SimpleData name="IMB_CARTA">TRUE</SimpleData>
+		<SimpleData name="IMB_PL_MET">TRUE</SimpleData>
+		<SimpleData name="ORGANICO">TRUE</SimpleData>
+		<SimpleData name="IMB_VETRO">TRUE</SimpleData>
+		<SimpleData name="INDUMENTI">TRUE</SimpleData>
+		<SimpleData name="NOTE">In questa isola trovi la raccolta separata del cartone con apposito gazebo</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>10.772922204789239,46.140780426613539</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#isole_C8_utf_info_estese">
+		<SimpleData name="POD">2152</SimpleData>
+		<SimpleData name="comune">MASSIMENO</SimpleData>
+		<SimpleData name="riferiment">MASSIMENO FONTANA</SimpleData>
+		<SimpleData name="GETTONIERA">FALSE</SimpleData>
+		<SimpleData name="RESIDUO">TRUE</SimpleData>
+		<SimpleData name="IMB_CARTA">TRUE</SimpleData>
+		<SimpleData name="IMB_PL_MET">TRUE</SimpleData>
+		<SimpleData name="ORGANICO">TRUE</SimpleData>
+		<SimpleData name="IMB_VETRO">TRUE</SimpleData>
+		<SimpleData name="INDUMENTI">FALSE</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>10.773657919311939,46.142557285923736</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#isole_C8_utf_info_estese">
+		<SimpleData name="POD">2015</SimpleData>
+		<SimpleData name="comune">PIEVE DI BONO - PREZZO</SimpleData>
+		<SimpleData name="riferiment">PIEVE DI BONO POR</SimpleData>
+		<SimpleData name="GETTONIERA">FALSE</SimpleData>
+		<SimpleData name="RESIDUO">TRUE</SimpleData>
+		<SimpleData name="IMB_CARTA">TRUE</SimpleData>
+		<SimpleData name="IMB_PL_MET">TRUE</SimpleData>
+		<SimpleData name="ORGANICO">TRUE</SimpleData>
+		<SimpleData name="IMB_VETRO">TRUE</SimpleData>
+		<SimpleData name="INDUMENTI">FALSE</SimpleData>
+		<SimpleData name="NOTE">In questa isola trovi la raccolta separata del cartone con apposito gazebo</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>10.64909314968545,45.939693287617274</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#isole_C8_utf_info_estese">
+		<SimpleData name="POD">2002</SimpleData>
+		<SimpleData name="comune">PIEVE DI BONO - PREZZO</SimpleData>
+		<SimpleData name="riferiment">PIEVE DI BONO COLOGNA</SimpleData>
+		<SimpleData name="GETTONIERA">FALSE</SimpleData>
+		<SimpleData name="RESIDUO">TRUE</SimpleData>
+		<SimpleData name="IMB_CARTA">TRUE</SimpleData>
+		<SimpleData name="IMB_PL_MET">TRUE</SimpleData>
+		<SimpleData name="ORGANICO">TRUE</SimpleData>
+		<SimpleData name="IMB_VETRO">TRUE</SimpleData>
+		<SimpleData name="INDUMENTI">FALSE</SimpleData>
+		<SimpleData name="NOTE">In questa isola trovi la raccolta separata del cartone con apposito gazebo</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>10.636375928607261,45.929366980981868</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#isole_C8_utf_info_estese">
+		<SimpleData name="POD">2017</SimpleData>
+		<SimpleData name="comune">PIEVE DI BONO - PREZZO</SimpleData>
+		<SimpleData name="riferiment">PIEVE DI BONO AGRONE FRUGONE</SimpleData>
+		<SimpleData name="GETTONIERA">FALSE</SimpleData>
+		<SimpleData name="RESIDUO">TRUE</SimpleData>
+		<SimpleData name="IMB_CARTA">TRUE</SimpleData>
+		<SimpleData name="IMB_PL_MET">TRUE</SimpleData>
+		<SimpleData name="ORGANICO">TRUE</SimpleData>
+		<SimpleData name="IMB_VETRO">TRUE</SimpleData>
+		<SimpleData name="INDUMENTI">FALSE</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>10.649907868810535,45.954948387363586</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#isole_C8_utf_info_estese">
+		<SimpleData name="POD">2421</SimpleData>
+		<SimpleData name="comune">PIEVE DI BONO - PREZZO</SimpleData>
+		<SimpleData name="riferiment">PIEVE DI BONO PROSNAVALLE</SimpleData>
+		<SimpleData name="GETTONIERA">FALSE</SimpleData>
+		<SimpleData name="RESIDUO">TRUE</SimpleData>
+		<SimpleData name="IMB_CARTA">TRUE</SimpleData>
+		<SimpleData name="IMB_PL_MET">TRUE</SimpleData>
+		<SimpleData name="ORGANICO">TRUE</SimpleData>
+		<SimpleData name="IMB_VETRO">TRUE</SimpleData>
+		<SimpleData name="INDUMENTI">FALSE</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>10.630162870413139,45.925715192098458</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#isole_C8_utf_info_estese">
+		<SimpleData name="POD">1999</SimpleData>
+		<SimpleData name="comune">PIEVE DI BONO - PREZZO</SimpleData>
+		<SimpleData name="riferiment">PREZZO</SimpleData>
+		<SimpleData name="GETTONIERA">FALSE</SimpleData>
+		<SimpleData name="RESIDUO">TRUE</SimpleData>
+		<SimpleData name="IMB_CARTA">TRUE</SimpleData>
+		<SimpleData name="IMB_PL_MET">TRUE</SimpleData>
+		<SimpleData name="ORGANICO">TRUE</SimpleData>
+		<SimpleData name="IMB_VETRO">TRUE</SimpleData>
+		<SimpleData name="INDUMENTI">FALSE</SimpleData>
+		<SimpleData name="NOTE">In questa isola trovi la raccolta separata del cartone con apposito gazebo</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>10.632792323015986,45.933220757534784</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#isole_C8_utf_info_estese">
+		<SimpleData name="POD">2056</SimpleData>
+		<SimpleData name="comune">RONCONE</SimpleData>
+		<SimpleData name="riferiment">RONCONE PRA DI BONDO</SimpleData>
+		<SimpleData name="GETTONIERA">FALSE</SimpleData>
+		<SimpleData name="RESIDUO">TRUE</SimpleData>
+		<SimpleData name="IMB_CARTA">TRUE</SimpleData>
+		<SimpleData name="IMB_PL_MET">TRUE</SimpleData>
+		<SimpleData name="ORGANICO">TRUE</SimpleData>
+		<SimpleData name="IMB_VETRO">TRUE</SimpleData>
+		<SimpleData name="INDUMENTI">FALSE</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>10.691231729298083,45.995241321617584</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#isole_C8_utf_info_estese">
+		<SimpleData name="POD">2057</SimpleData>
+		<SimpleData name="comune">RONCONE</SimpleData>
+		<SimpleData name="riferiment">RONCONE VIGILI DEL FUOCO</SimpleData>
+		<SimpleData name="GETTONIERA">FALSE</SimpleData>
+		<SimpleData name="RESIDUO">TRUE</SimpleData>
+		<SimpleData name="IMB_CARTA">TRUE</SimpleData>
+		<SimpleData name="IMB_PL_MET">TRUE</SimpleData>
+		<SimpleData name="ORGANICO">TRUE</SimpleData>
+		<SimpleData name="IMB_VETRO">TRUE</SimpleData>
+		<SimpleData name="INDUMENTI">FALSE</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>10.666837801084267,45.980629970128113</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#isole_C8_utf_info_estese">
+		<SimpleData name="POD">1728</SimpleData>
+		<SimpleData name="comune">STREMBO</SimpleData>
+		<SimpleData name="riferiment">STREMBO CRM</SimpleData>
+		<SimpleData name="GETTONIERA">FALSE</SimpleData>
+		<SimpleData name="RESIDUO">TRUE</SimpleData>
+		<SimpleData name="IMB_CARTA">TRUE</SimpleData>
+		<SimpleData name="IMB_PL_MET">TRUE</SimpleData>
+		<SimpleData name="ORGANICO">TRUE</SimpleData>
+		<SimpleData name="IMB_VETRO">TRUE</SimpleData>
+		<SimpleData name="INDUMENTI">TRUE</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>10.753476507108125,46.11960188162368</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#isole_C8_utf_info_estese">
+		<SimpleData name="POD">1729</SimpleData>
+		<SimpleData name="comune">STREMBO</SimpleData>
+		<SimpleData name="riferiment">STREMBO ZONA SUD</SimpleData>
+		<SimpleData name="GETTONIERA">FALSE</SimpleData>
+		<SimpleData name="RESIDUO">TRUE</SimpleData>
+		<SimpleData name="IMB_CARTA">TRUE</SimpleData>
+		<SimpleData name="IMB_PL_MET">TRUE</SimpleData>
+		<SimpleData name="ORGANICO">TRUE</SimpleData>
+		<SimpleData name="IMB_VETRO">TRUE</SimpleData>
+		<SimpleData name="INDUMENTI">FALSE</SimpleData>
+		<SimpleData name="NOTE">In questa isola trovi la raccolta separata del cartone con apposito gazebo</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>10.750336065418871,46.116755988676552</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#isole_C8_utf_info_estese">
+		<SimpleData name="POD">1773</SimpleData>
+		<SimpleData name="comune">TIONE DI TRENTO</SimpleData>
+		<SimpleData name="riferiment">TIONE BASSO ARNO</SimpleData>
+		<SimpleData name="GETTONIERA">FALSE</SimpleData>
+		<SimpleData name="RESIDUO">TRUE</SimpleData>
+		<SimpleData name="IMB_CARTA">TRUE</SimpleData>
+		<SimpleData name="IMB_PL_MET">TRUE</SimpleData>
+		<SimpleData name="ORGANICO">TRUE</SimpleData>
+		<SimpleData name="IMB_VETRO">TRUE</SimpleData>
+		<SimpleData name="INDUMENTI">FALSE</SimpleData>
+		<SimpleData name="NOTE">In questa isola trovi la raccolta separata del cartone con apposito gazebo</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>10.732837046342599,46.035634441295528</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#isole_C8_utf_info_estese">
+		<SimpleData name="POD">1743</SimpleData>
+		<SimpleData name="comune">TIONE DI TRENTO</SimpleData>
+		<SimpleData name="riferiment">TIONE COMUNITA DELLE GIUDICARIE</SimpleData>
+		<SimpleData name="GETTONIERA">FALSE</SimpleData>
+		<SimpleData name="RESIDUO">TRUE</SimpleData>
+		<SimpleData name="IMB_CARTA">TRUE</SimpleData>
+		<SimpleData name="IMB_PL_MET">TRUE</SimpleData>
+		<SimpleData name="ORGANICO">TRUE</SimpleData>
+		<SimpleData name="IMB_VETRO">TRUE</SimpleData>
+		<SimpleData name="INDUMENTI">FALSE</SimpleData>
+		<SimpleData name="NOTE">In questa isola trovi la raccolta separata del cartone con apposito gazebo</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>10.722636781923331,46.031912625448093</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#isole_C8_utf_info_estese">
+		<SimpleData name="POD">1771</SimpleData>
+		<SimpleData name="comune">TIONE DI TRENTO</SimpleData>
+		<SimpleData name="riferiment">TIONE VIA ROMA</SimpleData>
+		<SimpleData name="GETTONIERA">FALSE</SimpleData>
+		<SimpleData name="RESIDUO">TRUE</SimpleData>
+		<SimpleData name="IMB_CARTA">TRUE</SimpleData>
+		<SimpleData name="IMB_PL_MET">TRUE</SimpleData>
+		<SimpleData name="ORGANICO">TRUE</SimpleData>
+		<SimpleData name="IMB_VETRO">TRUE</SimpleData>
+		<SimpleData name="INDUMENTI">FALSE</SimpleData>
+		<SimpleData name="NOTE">In questa isola trovi la raccolta separata del cartone con apposito gazebo</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>10.724786250758767,46.032471079542709</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#isole_C8_utf_info_estese">
+		<SimpleData name="POD">1750</SimpleData>
+		<SimpleData name="comune">TIONE DI TRENTO</SimpleData>
+		<SimpleData name="riferiment">TIONE PARCHEGGIO VIA PIAVE</SimpleData>
+		<SimpleData name="GETTONIERA">FALSE</SimpleData>
+		<SimpleData name="RESIDUO">TRUE</SimpleData>
+		<SimpleData name="IMB_CARTA">TRUE</SimpleData>
+		<SimpleData name="IMB_PL_MET">TRUE</SimpleData>
+		<SimpleData name="ORGANICO">TRUE</SimpleData>
+		<SimpleData name="IMB_VETRO">TRUE</SimpleData>
+		<SimpleData name="INDUMENTI">FALSE</SimpleData>
+		<SimpleData name="NOTE">In questa isola trovi la raccolta separata del cartone con apposito gazebo</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>10.722877563202047,46.038963512787902</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#isole_C8_utf_info_estese">
+		<SimpleData name="POD">2106</SimpleData>
+		<SimpleData name="comune">TIONE DI TRENTO</SimpleData>
+		<SimpleData name="riferiment">TIONE VIA DEI MONTI CANTES</SimpleData>
+		<SimpleData name="GETTONIERA">FALSE</SimpleData>
+		<SimpleData name="RESIDUO">TRUE</SimpleData>
+		<SimpleData name="IMB_CARTA">TRUE</SimpleData>
+		<SimpleData name="IMB_PL_MET">TRUE</SimpleData>
+		<SimpleData name="ORGANICO">TRUE</SimpleData>
+		<SimpleData name="IMB_VETRO">TRUE</SimpleData>
+		<SimpleData name="INDUMENTI">FALSE</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>10.722186560547911,46.034815161428753</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#isole_C8_utf_info_estese">
+		<SimpleData name="POD">1748</SimpleData>
+		<SimpleData name="comune">TIONE DI TRENTO</SimpleData>
+		<SimpleData name="riferiment">TIONE TENNIS</SimpleData>
+		<SimpleData name="GETTONIERA">FALSE</SimpleData>
+		<SimpleData name="RESIDUO">TRUE</SimpleData>
+		<SimpleData name="IMB_CARTA">TRUE</SimpleData>
+		<SimpleData name="IMB_PL_MET">TRUE</SimpleData>
+		<SimpleData name="ORGANICO">TRUE</SimpleData>
+		<SimpleData name="IMB_VETRO">TRUE</SimpleData>
+		<SimpleData name="INDUMENTI">FALSE</SimpleData>
+		<SimpleData name="NOTE">In questa isola trovi la raccolta separata del cartone con apposito gazebo</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>10.722917552996277,46.033141302192512</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#isole_C8_utf_info_estese">
+		<SimpleData name="POD">1756</SimpleData>
+		<SimpleData name="comune">TIONE DI TRENTO</SimpleData>
+		<SimpleData name="riferiment">TIONE CIRCONVALLAZIONE</SimpleData>
+		<SimpleData name="GETTONIERA">FALSE</SimpleData>
+		<SimpleData name="RESIDUO">TRUE</SimpleData>
+		<SimpleData name="IMB_CARTA">TRUE</SimpleData>
+		<SimpleData name="IMB_PL_MET">TRUE</SimpleData>
+		<SimpleData name="ORGANICO">TRUE</SimpleData>
+		<SimpleData name="IMB_VETRO">TRUE</SimpleData>
+		<SimpleData name="INDUMENTI">FALSE</SimpleData>
+		<SimpleData name="NOTE">In questa isola trovi la raccolta separata del cartone con apposito gazebo</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>10.727518885819981,46.0402116601241</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#isole_C8_utf_info_estese">
+		<SimpleData name="POD">1752</SimpleData>
+		<SimpleData name="comune">TIONE DI TRENTO</SimpleData>
+		<SimpleData name="riferiment">TIONE SIVRE</SimpleData>
+		<SimpleData name="GETTONIERA">FALSE</SimpleData>
+		<SimpleData name="RESIDUO">TRUE</SimpleData>
+		<SimpleData name="IMB_CARTA">TRUE</SimpleData>
+		<SimpleData name="IMB_PL_MET">TRUE</SimpleData>
+		<SimpleData name="ORGANICO">TRUE</SimpleData>
+		<SimpleData name="IMB_VETRO">TRUE</SimpleData>
+		<SimpleData name="INDUMENTI">FALSE</SimpleData>
+		<SimpleData name="NOTE">In questa isola trovi la raccolta separata del cartone con apposito gazebo</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>10.724697022883413,46.039538298701743</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#isole_C8_utf_info_estese">
+		<SimpleData name="POD">1763</SimpleData>
+		<SimpleData name="comune">TIONE DI TRENTO</SimpleData>
+		<SimpleData name="riferiment">TIONE PARCHEGGIO CHIESA</SimpleData>
+		<SimpleData name="GETTONIERA">FALSE</SimpleData>
+		<SimpleData name="RESIDUO">TRUE</SimpleData>
+		<SimpleData name="IMB_CARTA">TRUE</SimpleData>
+		<SimpleData name="IMB_PL_MET">TRUE</SimpleData>
+		<SimpleData name="ORGANICO">TRUE</SimpleData>
+		<SimpleData name="IMB_VETRO">TRUE</SimpleData>
+		<SimpleData name="INDUMENTI">FALSE</SimpleData>
+		<SimpleData name="NOTE">In questa isola trovi la raccolta separata del cartone con apposito gazebo</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>10.72890050275001,46.035065072480108</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#isole_C8_utf_info_estese">
+		<SimpleData name="POD">2086</SimpleData>
+		<SimpleData name="comune">TIONE DI TRENTO</SimpleData>
+		<SimpleData name="riferiment">TIONE POLIN</SimpleData>
+		<SimpleData name="GETTONIERA">FALSE</SimpleData>
+		<SimpleData name="RESIDUO">TRUE</SimpleData>
+		<SimpleData name="IMB_CARTA">TRUE</SimpleData>
+		<SimpleData name="IMB_PL_MET">TRUE</SimpleData>
+		<SimpleData name="ORGANICO">TRUE</SimpleData>
+		<SimpleData name="IMB_VETRO">TRUE</SimpleData>
+		<SimpleData name="INDUMENTI">FALSE</SimpleData>
+		<SimpleData name="NOTE">In questa isola trovi la raccolta separata del cartone con apposito gazebo</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>10.721052278788186,46.026287195664551</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#isole_C8_utf_info_estese">
+		<SimpleData name="POD">2088</SimpleData>
+		<SimpleData name="comune">TIONE DI TRENTO</SimpleData>
+		<SimpleData name="riferiment">TIONE SAONE</SimpleData>
+		<SimpleData name="GETTONIERA">FALSE</SimpleData>
+		<SimpleData name="RESIDUO">TRUE</SimpleData>
+		<SimpleData name="IMB_CARTA">TRUE</SimpleData>
+		<SimpleData name="IMB_PL_MET">TRUE</SimpleData>
+		<SimpleData name="ORGANICO">TRUE</SimpleData>
+		<SimpleData name="IMB_VETRO">TRUE</SimpleData>
+		<SimpleData name="INDUMENTI">FALSE</SimpleData>
+		<SimpleData name="NOTE">In questa isola trovi la raccolta separata del cartone con apposito gazebo</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>10.766313074194171,46.042455736595578</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#isole_C8_utf_info_estese">
+		<SimpleData name="POD">1864</SimpleData>
+		<SimpleData name="comune">SAN LORENZO - DORSINO</SimpleData>
+		<SimpleData name="riferiment">SAN LORENZO BANALE CHIESA SAN MATTEO</SimpleData>
+		<SimpleData name="GETTONIERA">FALSE</SimpleData>
+		<SimpleData name="RESIDUO">TRUE</SimpleData>
+		<SimpleData name="IMB_CARTA">FALSE</SimpleData>
+		<SimpleData name="IMB_PL_MET">FALSE</SimpleData>
+		<SimpleData name="ORGANICO">FALSE</SimpleData>
+		<SimpleData name="IMB_VETRO">FALSE</SimpleData>
+		<SimpleData name="INDUMENTI">FALSE</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>10.904008078378629,46.079155201365175</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#isole_C8_utf_info_estese">
+		<SimpleData name="POD">1865</SimpleData>
+		<SimpleData name="comune">SAN LORENZO - DORSINO</SimpleData>
+		<SimpleData name="riferiment">SAN LORENZO BANALE SENASO</SimpleData>
+		<SimpleData name="GETTONIERA">FALSE</SimpleData>
+		<SimpleData name="RESIDUO">FALSE</SimpleData>
+		<SimpleData name="IMB_CARTA">TRUE</SimpleData>
+		<SimpleData name="IMB_PL_MET">TRUE</SimpleData>
+		<SimpleData name="ORGANICO">TRUE</SimpleData>
+		<SimpleData name="IMB_VETRO">TRUE</SimpleData>
+		<SimpleData name="INDUMENTI">FALSE</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>10.904472385880055,46.078380581469098</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#isole_C8_utf_info_estese">
+		<SimpleData name="POD">1861</SimpleData>
+		<SimpleData name="comune">SAN LORENZO - DORSINO</SimpleData>
+		<SimpleData name="riferiment">SAN LORENZO BANALE DOLASO</SimpleData>
+		<SimpleData name="GETTONIERA">FALSE</SimpleData>
+		<SimpleData name="RESIDUO">TRUE</SimpleData>
+		<SimpleData name="IMB_CARTA">TRUE</SimpleData>
+		<SimpleData name="IMB_PL_MET">TRUE</SimpleData>
+		<SimpleData name="ORGANICO">TRUE</SimpleData>
+		<SimpleData name="IMB_VETRO">TRUE</SimpleData>
+		<SimpleData name="INDUMENTI">TRUE</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>10.903226090172161,46.077036992465473</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#isole_C8_utf_info_estese">
+		<SimpleData name="POD">1863</SimpleData>
+		<SimpleData name="comune">SAN LORENZO - DORSINO</SimpleData>
+		<SimpleData name="riferiment">SAN LORENZO BANALE COOPERATIVA</SimpleData>
+		<SimpleData name="GETTONIERA">FALSE</SimpleData>
+		<SimpleData name="RESIDUO">TRUE</SimpleData>
+		<SimpleData name="IMB_CARTA">TRUE</SimpleData>
+		<SimpleData name="IMB_PL_MET">TRUE</SimpleData>
+		<SimpleData name="ORGANICO">TRUE</SimpleData>
+		<SimpleData name="IMB_VETRO">TRUE</SimpleData>
+		<SimpleData name="INDUMENTI">FALSE</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>10.910050791401815,46.076979986879543</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#isole_C8_utf_info_estese">
+		<SimpleData name="POD">1859</SimpleData>
+		<SimpleData name="comune">SAN LORENZO - DORSINO</SimpleData>
+		<SimpleData name="riferiment">SAN LORENZO BANALE TORNANTE APT</SimpleData>
+		<SimpleData name="GETTONIERA">FALSE</SimpleData>
+		<SimpleData name="RESIDUO">TRUE</SimpleData>
+		<SimpleData name="IMB_CARTA">TRUE</SimpleData>
+		<SimpleData name="IMB_PL_MET">TRUE</SimpleData>
+		<SimpleData name="ORGANICO">TRUE</SimpleData>
+		<SimpleData name="IMB_VETRO">TRUE</SimpleData>
+		<SimpleData name="INDUMENTI">FALSE</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>10.908042186811031,46.075961310678082</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#isole_C8_utf_info_estese">
+		<SimpleData name="POD">1869</SimpleData>
+		<SimpleData name="comune">SAN LORENZO - DORSINO</SimpleData>
+		<SimpleData name="riferiment">SAN LORENZO BANALE NEMBIA</SimpleData>
+		<SimpleData name="GETTONIERA">FALSE</SimpleData>
+		<SimpleData name="RESIDUO">TRUE</SimpleData>
+		<SimpleData name="IMB_CARTA">TRUE</SimpleData>
+		<SimpleData name="IMB_PL_MET">TRUE</SimpleData>
+		<SimpleData name="ORGANICO">TRUE</SimpleData>
+		<SimpleData name="IMB_VETRO">TRUE</SimpleData>
+		<SimpleData name="INDUMENTI">FALSE</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>10.933040470680483,46.096180987288122</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#isole_C8_utf_info_estese">
+		<SimpleData name="POD">2265</SimpleData>
+		<SimpleData name="comune">SAN LORENZO - DORSINO</SimpleData>
+		<SimpleData name="riferiment">SAN LORENZO BANALE MOLINE</SimpleData>
+		<SimpleData name="GETTONIERA">FALSE</SimpleData>
+		<SimpleData name="RESIDUO">TRUE</SimpleData>
+		<SimpleData name="IMB_CARTA">TRUE</SimpleData>
+		<SimpleData name="IMB_PL_MET">TRUE</SimpleData>
+		<SimpleData name="ORGANICO">FALSE</SimpleData>
+		<SimpleData name="IMB_VETRO">FALSE</SimpleData>
+		<SimpleData name="INDUMENTI">FALSE</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>10.922152926974048,46.082978368531947</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#isole_C8_utf_info_estese">
+		<SimpleData name="POD">1866</SimpleData>
+		<SimpleData name="comune">SAN LORENZO - DORSINO</SimpleData>
+		<SimpleData name="riferiment">SAN LORENZO BANALE CASTELMANI</SimpleData>
+		<SimpleData name="GETTONIERA">FALSE</SimpleData>
+		<SimpleData name="RESIDUO">TRUE</SimpleData>
+		<SimpleData name="IMB_CARTA">TRUE</SimpleData>
+		<SimpleData name="IMB_PL_MET">TRUE</SimpleData>
+		<SimpleData name="ORGANICO">TRUE</SimpleData>
+		<SimpleData name="IMB_VETRO">TRUE</SimpleData>
+		<SimpleData name="INDUMENTI">FALSE</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>10.913644448694253,46.074131178845505</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#isole_C8_utf_info_estese">
+		<SimpleData name="POD">1868</SimpleData>
+		<SimpleData name="comune">SAN LORENZO - DORSINO</SimpleData>
+		<SimpleData name="riferiment">SAN LORENZO BANALE BERGHI</SimpleData>
+		<SimpleData name="GETTONIERA">FALSE</SimpleData>
+		<SimpleData name="RESIDUO">TRUE</SimpleData>
+		<SimpleData name="IMB_CARTA">TRUE</SimpleData>
+		<SimpleData name="IMB_PL_MET">TRUE</SimpleData>
+		<SimpleData name="ORGANICO">TRUE</SimpleData>
+		<SimpleData name="IMB_VETRO">TRUE</SimpleData>
+		<SimpleData name="INDUMENTI">FALSE</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>10.911835769515671,46.07820311420825</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#isole_C8_utf_info_estese">
+		<SimpleData name="POD">1851</SimpleData>
+		<SimpleData name="comune">STENICO</SimpleData>
+		<SimpleData name="riferiment">STENICO SCLEMO</SimpleData>
+		<SimpleData name="GETTONIERA">FALSE</SimpleData>
+		<SimpleData name="RESIDUO">TRUE</SimpleData>
+		<SimpleData name="IMB_CARTA">TRUE</SimpleData>
+		<SimpleData name="IMB_PL_MET">TRUE</SimpleData>
+		<SimpleData name="ORGANICO">TRUE</SimpleData>
+		<SimpleData name="IMB_VETRO">TRUE</SimpleData>
+		<SimpleData name="INDUMENTI">FALSE</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>10.884015328650325,46.056064716949578</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#isole_C8_utf_info_estese">
+		<SimpleData name="POD">1848</SimpleData>
+		<SimpleData name="comune">STENICO</SimpleData>
+		<SimpleData name="riferiment">STENICO SEO</SimpleData>
+		<SimpleData name="GETTONIERA">FALSE</SimpleData>
+		<SimpleData name="RESIDUO">TRUE</SimpleData>
+		<SimpleData name="IMB_CARTA">TRUE</SimpleData>
+		<SimpleData name="IMB_PL_MET">TRUE</SimpleData>
+		<SimpleData name="ORGANICO">TRUE</SimpleData>
+		<SimpleData name="IMB_VETRO">TRUE</SimpleData>
+		<SimpleData name="INDUMENTI">FALSE</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>10.87284501936414,46.056861469403444</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#isole_C8_utf_info_estese">
+		<SimpleData name="POD">1872</SimpleData>
+		<SimpleData name="comune">STENICO</SimpleData>
+		<SimpleData name="riferiment">STENICO VILLA BANALE</SimpleData>
+		<SimpleData name="GETTONIERA">FALSE</SimpleData>
+		<SimpleData name="RESIDUO">TRUE</SimpleData>
+		<SimpleData name="IMB_CARTA">TRUE</SimpleData>
+		<SimpleData name="IMB_PL_MET">TRUE</SimpleData>
+		<SimpleData name="ORGANICO">TRUE</SimpleData>
+		<SimpleData name="IMB_VETRO">TRUE</SimpleData>
+		<SimpleData name="INDUMENTI">FALSE</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>10.887188511489745,46.046339774093802</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#isole_C8_utf_info_estese">
+		<SimpleData name="POD">1874</SimpleData>
+		<SimpleData name="comune">STENICO</SimpleData>
+		<SimpleData name="riferiment">STENICO PREMIONE</SimpleData>
+		<SimpleData name="GETTONIERA">FALSE</SimpleData>
+		<SimpleData name="RESIDUO">TRUE</SimpleData>
+		<SimpleData name="IMB_CARTA">TRUE</SimpleData>
+		<SimpleData name="IMB_PL_MET">TRUE</SimpleData>
+		<SimpleData name="ORGANICO">TRUE</SimpleData>
+		<SimpleData name="IMB_VETRO">TRUE</SimpleData>
+		<SimpleData name="INDUMENTI">FALSE</SimpleData>
+		<SimpleData name="NOTE">In questa isola trovi la raccolta separata del cartone con apposito gazebo</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>10.874309365241251,46.048335063647514</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#isole_C8_utf_info_estese">
+		<SimpleData name="POD">1870</SimpleData>
+		<SimpleData name="comune">STENICO</SimpleData>
+		<SimpleData name="riferiment">STENICO DOS DIA</SimpleData>
+		<SimpleData name="GETTONIERA">FALSE</SimpleData>
+		<SimpleData name="RESIDUO">TRUE</SimpleData>
+		<SimpleData name="IMB_CARTA">TRUE</SimpleData>
+		<SimpleData name="IMB_PL_MET">TRUE</SimpleData>
+		<SimpleData name="ORGANICO">TRUE</SimpleData>
+		<SimpleData name="IMB_VETRO">FALSE</SimpleData>
+		<SimpleData name="INDUMENTI">FALSE</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>10.897679374675144,46.054249356636866</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#isole_C8_utf_info_estese">
+		<SimpleData name="POD">1842</SimpleData>
+		<SimpleData name="comune">STENICO</SimpleData>
+		<SimpleData name="riferiment">STENICO SCUOLA</SimpleData>
+		<SimpleData name="GETTONIERA">FALSE</SimpleData>
+		<SimpleData name="RESIDUO">TRUE</SimpleData>
+		<SimpleData name="IMB_CARTA">TRUE</SimpleData>
+		<SimpleData name="IMB_PL_MET">TRUE</SimpleData>
+		<SimpleData name="ORGANICO">TRUE</SimpleData>
+		<SimpleData name="IMB_VETRO">TRUE</SimpleData>
+		<SimpleData name="INDUMENTI">FALSE</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>10.85587020157093,46.049198145129573</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#isole_C8_utf_info_estese">
+		<SimpleData name="POD">1846</SimpleData>
+		<SimpleData name="comune">STENICO</SimpleData>
+		<SimpleData name="riferiment">STENICO VIA DEL DOS MARIN</SimpleData>
+		<SimpleData name="GETTONIERA">FALSE</SimpleData>
+		<SimpleData name="RESIDUO">TRUE</SimpleData>
+		<SimpleData name="IMB_CARTA">TRUE</SimpleData>
+		<SimpleData name="IMB_PL_MET">TRUE</SimpleData>
+		<SimpleData name="ORGANICO">TRUE</SimpleData>
+		<SimpleData name="IMB_VETRO">TRUE</SimpleData>
+		<SimpleData name="INDUMENTI">FALSE</SimpleData>
+		<SimpleData name="NOTE">In questa isola trovi la raccolta separata del cartone con apposito gazebo</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>10.860339579522702,46.052364986868469</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#isole_C8_utf_info_estese">
+		<SimpleData name="POD">1841</SimpleData>
+		<SimpleData name="comune">STENICO</SimpleData>
+		<SimpleData name="riferiment">STENICO ELIPORTO</SimpleData>
+		<SimpleData name="GETTONIERA">FALSE</SimpleData>
+		<SimpleData name="RESIDUO">TRUE</SimpleData>
+		<SimpleData name="IMB_CARTA">TRUE</SimpleData>
+		<SimpleData name="IMB_PL_MET">TRUE</SimpleData>
+		<SimpleData name="ORGANICO">TRUE</SimpleData>
+		<SimpleData name="IMB_VETRO">TRUE</SimpleData>
+		<SimpleData name="INDUMENTI">TRUE</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>10.859330713376348,46.048113901100592</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#isole_C8_utf_info_estese">
+		<SimpleData name="POD">1845</SimpleData>
+		<SimpleData name="comune">STENICO</SimpleData>
+		<SimpleData name="riferiment">STENICO TEATRO</SimpleData>
+		<SimpleData name="GETTONIERA">FALSE</SimpleData>
+		<SimpleData name="RESIDUO">TRUE</SimpleData>
+		<SimpleData name="IMB_CARTA">TRUE</SimpleData>
+		<SimpleData name="IMB_PL_MET">TRUE</SimpleData>
+		<SimpleData name="ORGANICO">TRUE</SimpleData>
+		<SimpleData name="IMB_VETRO">TRUE</SimpleData>
+		<SimpleData name="INDUMENTI">FALSE</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>10.853095694016755,46.053125086084329</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#isole_C8_utf_info_estese">
+		<SimpleData name="POD">1718</SimpleData>
+		<SimpleData name="comune">SPIAZZO</SimpleData>
+		<SimpleData name="riferiment">SPIAZZO MORTASO</SimpleData>
+		<SimpleData name="GETTONIERA">FALSE</SimpleData>
+		<SimpleData name="RESIDUO">TRUE</SimpleData>
+		<SimpleData name="IMB_CARTA">TRUE</SimpleData>
+		<SimpleData name="IMB_PL_MET">TRUE</SimpleData>
+		<SimpleData name="ORGANICO">TRUE</SimpleData>
+		<SimpleData name="IMB_VETRO">TRUE</SimpleData>
+		<SimpleData name="INDUMENTI">FALSE</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>10.742802015685886,46.108094501692293</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#isole_C8_utf_info_estese">
+		<SimpleData name="POD">1714</SimpleData>
+		<SimpleData name="comune">SPIAZZO</SimpleData>
+		<SimpleData name="riferiment">SPIAZZO FISTO</SimpleData>
+		<SimpleData name="GETTONIERA">FALSE</SimpleData>
+		<SimpleData name="RESIDUO">TRUE</SimpleData>
+		<SimpleData name="IMB_CARTA">TRUE</SimpleData>
+		<SimpleData name="IMB_PL_MET">TRUE</SimpleData>
+		<SimpleData name="ORGANICO">TRUE</SimpleData>
+		<SimpleData name="IMB_VETRO">TRUE</SimpleData>
+		<SimpleData name="INDUMENTI">FALSE</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>10.738344554966419,46.09743602914002</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#isole_C8_utf_info_estese">
+		<SimpleData name="POD">2446</SimpleData>
+		<SimpleData name="comune">SPIAZZO</SimpleData>
+		<SimpleData name="riferiment">SPIAZZO CIMITERO</SimpleData>
+		<SimpleData name="GETTONIERA">FALSE</SimpleData>
+		<SimpleData name="RESIDUO">TRUE</SimpleData>
+		<SimpleData name="IMB_CARTA">TRUE</SimpleData>
+		<SimpleData name="IMB_PL_MET">TRUE</SimpleData>
+		<SimpleData name="ORGANICO">TRUE</SimpleData>
+		<SimpleData name="IMB_VETRO">TRUE</SimpleData>
+		<SimpleData name="INDUMENTI">TRUE</SimpleData>
+		<SimpleData name="NOTE">In questa isola trovi la raccolta separata del cartone con apposito gazebo</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>10.738927406109818,46.103583282209442</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#isole_C8_utf_info_estese">
+		<SimpleData name="POD">2127</SimpleData>
+		<SimpleData name="comune">SPIAZZO</SimpleData>
+		<SimpleData name="riferiment">SPIAZZO BORZAGO</SimpleData>
+		<SimpleData name="GETTONIERA">FALSE</SimpleData>
+		<SimpleData name="RESIDUO">TRUE</SimpleData>
+		<SimpleData name="IMB_CARTA">TRUE</SimpleData>
+		<SimpleData name="IMB_PL_MET">TRUE</SimpleData>
+		<SimpleData name="ORGANICO">TRUE</SimpleData>
+		<SimpleData name="IMB_VETRO">TRUE</SimpleData>
+		<SimpleData name="INDUMENTI">FALSE</SimpleData>
+		<SimpleData name="NOTE">In questa isola trovi la raccolta separata del cartone con apposito gazebo</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>10.734186005385894,46.098556463014674</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#isole_C8_utf_info_estese">
+		<SimpleData name="POD">1699</SimpleData>
+		<SimpleData name="comune">VILLA RENDENA</SimpleData>
+		<SimpleData name="riferiment">VILLA RENDENA IAVRE CIMITERO</SimpleData>
+		<SimpleData name="GETTONIERA">FALSE</SimpleData>
+		<SimpleData name="RESIDUO">TRUE</SimpleData>
+		<SimpleData name="IMB_CARTA">TRUE</SimpleData>
+		<SimpleData name="IMB_PL_MET">TRUE</SimpleData>
+		<SimpleData name="ORGANICO">TRUE</SimpleData>
+		<SimpleData name="IMB_VETRO">TRUE</SimpleData>
+		<SimpleData name="INDUMENTI">TRUE</SimpleData>
+		<SimpleData name="NOTE">In questa isola trovi la raccolta separata del cartone con apposito gazebo</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>10.712809080392512,46.067981106952956</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#isole_C8_utf_info_estese">
+		<SimpleData name="POD">2143</SimpleData>
+		<SimpleData name="comune">VILLA RENDENA</SimpleData>
+		<SimpleData name="riferiment">VILLA RENDENA CIMITERO</SimpleData>
+		<SimpleData name="GETTONIERA">FALSE</SimpleData>
+		<SimpleData name="RESIDUO">TRUE</SimpleData>
+		<SimpleData name="IMB_CARTA">TRUE</SimpleData>
+		<SimpleData name="IMB_PL_MET">TRUE</SimpleData>
+		<SimpleData name="ORGANICO">TRUE</SimpleData>
+		<SimpleData name="IMB_VETRO">TRUE</SimpleData>
+		<SimpleData name="INDUMENTI">TRUE</SimpleData>
+		<SimpleData name="NOTE">In questa isola trovi la raccolta separata del cartone con apposito gazebo</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>10.713091026676281,46.063112181502859</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#isole_C8_utf_info_estese">
+		<SimpleData name="POD">1696</SimpleData>
+		<SimpleData name="comune">VILLA RENDENA</SimpleData>
+		<SimpleData name="riferiment">VILLA RENDENA VERDESINA</SimpleData>
+		<SimpleData name="GETTONIERA">FALSE</SimpleData>
+		<SimpleData name="RESIDUO">TRUE</SimpleData>
+		<SimpleData name="IMB_CARTA">TRUE</SimpleData>
+		<SimpleData name="IMB_PL_MET">TRUE</SimpleData>
+		<SimpleData name="ORGANICO">TRUE</SimpleData>
+		<SimpleData name="IMB_VETRO">TRUE</SimpleData>
+		<SimpleData name="INDUMENTI">TRUE</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>10.712016324546685,46.057266555816689</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#isole_C8_utf_info_estese">
+		<SimpleData name="POD">1708</SimpleData>
+		<SimpleData name="comune">VIGO RENDENA</SimpleData>
+		<SimpleData name="riferiment">VIGO RENDENA VIA AL SARCA</SimpleData>
+		<SimpleData name="GETTONIERA">FALSE</SimpleData>
+		<SimpleData name="RESIDUO">TRUE</SimpleData>
+		<SimpleData name="IMB_CARTA">TRUE</SimpleData>
+		<SimpleData name="IMB_PL_MET">TRUE</SimpleData>
+		<SimpleData name="ORGANICO">TRUE</SimpleData>
+		<SimpleData name="IMB_VETRO">TRUE</SimpleData>
+		<SimpleData name="INDUMENTI">TRUE</SimpleData>
+		<SimpleData name="NOTE">In questa isola trovi la raccolta separata del cartone con apposito gazebo</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>10.723097058184013,46.078224964666617</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#isole_C8_utf_info_estese">
+		<SimpleData name="POD">1741</SimpleData>
+		<SimpleData name="comune">MONTAGNE</SimpleData>
+		<SimpleData name="riferiment">MONTAGNE VILLA SANTI</SimpleData>
+		<SimpleData name="GETTONIERA">FALSE</SimpleData>
+		<SimpleData name="RESIDUO">TRUE</SimpleData>
+		<SimpleData name="IMB_CARTA">TRUE</SimpleData>
+		<SimpleData name="IMB_PL_MET">TRUE</SimpleData>
+		<SimpleData name="ORGANICO">TRUE</SimpleData>
+		<SimpleData name="IMB_VETRO">TRUE</SimpleData>
+		<SimpleData name="INDUMENTI">FALSE</SimpleData>
+		<SimpleData name="NOTE">Questa isola non è operativa nella stagione invernale</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>10.74537836435678,46.070084551277866</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#isole_C8_utf_info_estese">
+		<SimpleData name="POD">1740</SimpleData>
+		<SimpleData name="comune">MONTAGNE</SimpleData>
+		<SimpleData name="riferiment">MONTAGNE BINIO</SimpleData>
+		<SimpleData name="GETTONIERA">FALSE</SimpleData>
+		<SimpleData name="RESIDUO">TRUE</SimpleData>
+		<SimpleData name="IMB_CARTA">TRUE</SimpleData>
+		<SimpleData name="IMB_PL_MET">TRUE</SimpleData>
+		<SimpleData name="ORGANICO">TRUE</SimpleData>
+		<SimpleData name="IMB_VETRO">TRUE</SimpleData>
+		<SimpleData name="INDUMENTI">FALSE</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>10.755375952563464,46.065550996817421</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#isole_C8_utf_info_estese">
+		<SimpleData name="POD">1742</SimpleData>
+		<SimpleData name="comune">MONTAGNE</SimpleData>
+		<SimpleData name="riferiment">MONTAGNE LARZANA</SimpleData>
+		<SimpleData name="GETTONIERA">FALSE</SimpleData>
+		<SimpleData name="RESIDUO">TRUE</SimpleData>
+		<SimpleData name="IMB_CARTA">TRUE</SimpleData>
+		<SimpleData name="IMB_PL_MET">TRUE</SimpleData>
+		<SimpleData name="ORGANICO">TRUE</SimpleData>
+		<SimpleData name="IMB_VETRO">TRUE</SimpleData>
+		<SimpleData name="INDUMENTI">TRUE</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>10.751131431380447,46.057408188307335</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#isole_C8_utf_info_estese">
+		<SimpleData name="POD">1738</SimpleData>
+		<SimpleData name="comune">MONTAGNE</SimpleData>
+		<SimpleData name="riferiment">MONTAGNE CORT</SimpleData>
+		<SimpleData name="GETTONIERA">FALSE</SimpleData>
+		<SimpleData name="RESIDUO">TRUE</SimpleData>
+		<SimpleData name="IMB_CARTA">TRUE</SimpleData>
+		<SimpleData name="IMB_PL_MET">TRUE</SimpleData>
+		<SimpleData name="ORGANICO">TRUE</SimpleData>
+		<SimpleData name="IMB_VETRO">TRUE</SimpleData>
+		<SimpleData name="INDUMENTI">FALSE</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>10.753754678828249,46.051390784707444</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#isole_C8_utf_info_estese">
+		<SimpleData name="POD">2133</SimpleData>
+		<SimpleData name="comune">RAGOLI</SimpleData>
+		<SimpleData name="riferiment">RAGOLI COLTURA</SimpleData>
+		<SimpleData name="GETTONIERA">FALSE</SimpleData>
+		<SimpleData name="RESIDUO">TRUE</SimpleData>
+		<SimpleData name="IMB_CARTA">TRUE</SimpleData>
+		<SimpleData name="IMB_PL_MET">TRUE</SimpleData>
+		<SimpleData name="ORGANICO">TRUE</SimpleData>
+		<SimpleData name="IMB_VETRO">TRUE</SimpleData>
+		<SimpleData name="INDUMENTI">FALSE</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>10.796057402796963,46.058044118790818</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#isole_C8_utf_info_estese">
+		<SimpleData name="POD">2135</SimpleData>
+		<SimpleData name="comune">RAGOLI</SimpleData>
+		<SimpleData name="riferiment">RAGOLI CENTRALE</SimpleData>
+		<SimpleData name="GETTONIERA">FALSE</SimpleData>
+		<SimpleData name="RESIDUO">TRUE</SimpleData>
+		<SimpleData name="IMB_CARTA">TRUE</SimpleData>
+		<SimpleData name="IMB_PL_MET">TRUE</SimpleData>
+		<SimpleData name="ORGANICO">TRUE</SimpleData>
+		<SimpleData name="IMB_VETRO">TRUE</SimpleData>
+		<SimpleData name="INDUMENTI">FALSE</SimpleData>
+		<SimpleData name="NOTE">In questa isola trovi la raccolta separata del cartone con apposito gazebo</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>10.779600005514665,46.053938773842084</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#isole_C8_utf_info_estese">
+		<SimpleData name="POD">2137</SimpleData>
+		<SimpleData name="comune">RAGOLI</SimpleData>
+		<SimpleData name="riferiment">RAGOLI PARTE BASSA</SimpleData>
+		<SimpleData name="GETTONIERA">FALSE</SimpleData>
+		<SimpleData name="RESIDUO">TRUE</SimpleData>
+		<SimpleData name="IMB_CARTA">TRUE</SimpleData>
+		<SimpleData name="IMB_PL_MET">TRUE</SimpleData>
+		<SimpleData name="ORGANICO">TRUE</SimpleData>
+		<SimpleData name="IMB_VETRO">TRUE</SimpleData>
+		<SimpleData name="INDUMENTI">TRUE</SimpleData>
+		<SimpleData name="NOTE">In questa isola trovi la raccolta separata del cartone con apposito gazebo</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>10.774805152206984,46.050821510505223</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#isole_C8_utf_info_estese">
+		<SimpleData name="POD">2139</SimpleData>
+		<SimpleData name="comune">PREORE</SimpleData>
+		<SimpleData name="riferiment">PREORE INCROCIO COOPERATIVA</SimpleData>
+		<SimpleData name="GETTONIERA">FALSE</SimpleData>
+		<SimpleData name="RESIDUO">TRUE</SimpleData>
+		<SimpleData name="IMB_CARTA">TRUE</SimpleData>
+		<SimpleData name="IMB_PL_MET">TRUE</SimpleData>
+		<SimpleData name="ORGANICO">TRUE</SimpleData>
+		<SimpleData name="IMB_VETRO">TRUE</SimpleData>
+		<SimpleData name="INDUMENTI">FALSE</SimpleData>
+		<SimpleData name="NOTE">In questa isola trovi la raccolta separata del cartone con apposito gazebo</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>10.761802723918157,46.046455790912063</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#isole_C8_utf_info_estese">
+		<SimpleData name="POD">2141</SimpleData>
+		<SimpleData name="comune">PREORE</SimpleData>
+		<SimpleData name="riferiment">PREORE TENNIS</SimpleData>
+		<SimpleData name="GETTONIERA">FALSE</SimpleData>
+		<SimpleData name="RESIDUO">TRUE</SimpleData>
+		<SimpleData name="IMB_CARTA">TRUE</SimpleData>
+		<SimpleData name="IMB_PL_MET">TRUE</SimpleData>
+		<SimpleData name="ORGANICO">TRUE</SimpleData>
+		<SimpleData name="IMB_VETRO">TRUE</SimpleData>
+		<SimpleData name="INDUMENTI">TRUE</SimpleData>
+		<SimpleData name="NOTE">In questa isola trovi la raccolta separata del cartone con apposito gazebo</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>10.75239597135716,46.044820509434558</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#isole_C8_utf_info_estese">
+		<SimpleData name="POD">2097</SimpleData>
+		<SimpleData name="comune">ZUCLO</SimpleData>
+		<SimpleData name="riferiment">ZUCLO VIA GARIBALDI</SimpleData>
+		<SimpleData name="GETTONIERA">FALSE</SimpleData>
+		<SimpleData name="RESIDUO">TRUE</SimpleData>
+		<SimpleData name="IMB_CARTA">TRUE</SimpleData>
+		<SimpleData name="IMB_PL_MET">TRUE</SimpleData>
+		<SimpleData name="ORGANICO">TRUE</SimpleData>
+		<SimpleData name="IMB_VETRO">TRUE</SimpleData>
+		<SimpleData name="INDUMENTI">FALSE</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>10.751312992528794,46.032446121638408</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#isole_C8_utf_info_estese">
+		<SimpleData name="POD">2096</SimpleData>
+		<SimpleData name="comune">ZUCLO</SimpleData>
+		<SimpleData name="riferiment">ZUCLO MUNICIPIO</SimpleData>
+		<SimpleData name="GETTONIERA">FALSE</SimpleData>
+		<SimpleData name="RESIDUO">TRUE</SimpleData>
+		<SimpleData name="IMB_CARTA">TRUE</SimpleData>
+		<SimpleData name="IMB_PL_MET">TRUE</SimpleData>
+		<SimpleData name="ORGANICO">TRUE</SimpleData>
+		<SimpleData name="IMB_VETRO">TRUE</SimpleData>
+		<SimpleData name="INDUMENTI">FALSE</SimpleData>
+		<SimpleData name="NOTE">In questa isola trovi la raccolta separata del cartone con apposito gazebo</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>10.751273313742876,46.034991176109955</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#isole_C8_utf_info_estese">
+		<SimpleData name="POD">2093</SimpleData>
+		<SimpleData name="comune">ZUCLO</SimpleData>
+		<SimpleData name="riferiment">ZUCLO INCROCIO TONELLO</SimpleData>
+		<SimpleData name="GETTONIERA">FALSE</SimpleData>
+		<SimpleData name="RESIDUO">TRUE</SimpleData>
+		<SimpleData name="IMB_CARTA">TRUE</SimpleData>
+		<SimpleData name="IMB_PL_MET">TRUE</SimpleData>
+		<SimpleData name="ORGANICO">TRUE</SimpleData>
+		<SimpleData name="IMB_VETRO">TRUE</SimpleData>
+		<SimpleData name="INDUMENTI">TRUE</SimpleData>
+		<SimpleData name="NOTE">In questa isola trovi la raccolta separata del cartone con apposito gazebo</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>10.747617158369234,46.034063504473359</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#isole_C8_utf_info_estese">
+		<SimpleData name="POD">2014</SimpleData>
+		<SimpleData name="comune">PIEVE DI BONO - PREZZO</SimpleData>
+		<SimpleData name="riferiment">PIEVE DI BONO STRADA DIETRO RSA</SimpleData>
+		<SimpleData name="GETTONIERA">FALSE</SimpleData>
+		<SimpleData name="RESIDUO">TRUE</SimpleData>
+		<SimpleData name="IMB_CARTA">TRUE</SimpleData>
+		<SimpleData name="IMB_PL_MET">TRUE</SimpleData>
+		<SimpleData name="ORGANICO">TRUE</SimpleData>
+		<SimpleData name="IMB_VETRO">TRUE</SimpleData>
+		<SimpleData name="INDUMENTI">FALSE</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>10.64210199030507,45.944633681157121</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#isole_C8_utf_info_estese">
+		<SimpleData name="POD">2005</SimpleData>
+		<SimpleData name="comune">PIEVE DI BONO - PREZZO</SimpleData>
+		<SimpleData name="riferiment">PIEVE DI BONO CENTRO PROTEZIONE CIVILE</SimpleData>
+		<SimpleData name="GETTONIERA">FALSE</SimpleData>
+		<SimpleData name="RESIDUO">TRUE</SimpleData>
+		<SimpleData name="IMB_CARTA">TRUE</SimpleData>
+		<SimpleData name="IMB_PL_MET">TRUE</SimpleData>
+		<SimpleData name="ORGANICO">TRUE</SimpleData>
+		<SimpleData name="IMB_VETRO">TRUE</SimpleData>
+		<SimpleData name="INDUMENTI">FALSE</SimpleData>
+		<SimpleData name="NOTE">In questa isola trovi la raccolta separata del cartone con apposito gazebo</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>10.636873277847524,45.939221605736066</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#isole_C8_utf_info_estese">
+		<SimpleData name="POD">2004</SimpleData>
+		<SimpleData name="comune">PIEVE DI BONO - PREZZO</SimpleData>
+		<SimpleData name="riferiment">PIEVE DI BONO PESA PUBBLICA</SimpleData>
+		<SimpleData name="GETTONIERA">FALSE</SimpleData>
+		<SimpleData name="RESIDUO">TRUE</SimpleData>
+		<SimpleData name="IMB_CARTA">TRUE</SimpleData>
+		<SimpleData name="IMB_PL_MET">TRUE</SimpleData>
+		<SimpleData name="ORGANICO">TRUE</SimpleData>
+		<SimpleData name="IMB_VETRO">TRUE</SimpleData>
+		<SimpleData name="INDUMENTI">FALSE</SimpleData>
+		<SimpleData name="NOTE">In questa isola trovi la raccolta separata del cartone con apposito gazebo</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>10.63943152509945,45.93604321871733</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#isole_C8_utf_info_estese">
+		<SimpleData name="POD">2008</SimpleData>
+		<SimpleData name="comune">PIEVE DI BONO - PREZZO</SimpleData>
+		<SimpleData name="riferiment">PIEVE DI BONO POLO SCOLASTICO</SimpleData>
+		<SimpleData name="GETTONIERA">FALSE</SimpleData>
+		<SimpleData name="RESIDUO">TRUE</SimpleData>
+		<SimpleData name="IMB_CARTA">TRUE</SimpleData>
+		<SimpleData name="IMB_PL_MET">TRUE</SimpleData>
+		<SimpleData name="ORGANICO">TRUE</SimpleData>
+		<SimpleData name="IMB_VETRO">TRUE</SimpleData>
+		<SimpleData name="INDUMENTI">FALSE</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>10.638356350923537,45.941135892108861</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#isole_C8_utf_info_estese">
+		<SimpleData name="POD">2011</SimpleData>
+		<SimpleData name="comune">PIEVE DI BONO - PREZZO</SimpleData>
+		<SimpleData name="riferiment">PIEVE DI BONO CAMPO SPORTIVO</SimpleData>
+		<SimpleData name="GETTONIERA">FALSE</SimpleData>
+		<SimpleData name="RESIDUO">TRUE</SimpleData>
+		<SimpleData name="IMB_CARTA">TRUE</SimpleData>
+		<SimpleData name="IMB_PL_MET">TRUE</SimpleData>
+		<SimpleData name="ORGANICO">TRUE</SimpleData>
+		<SimpleData name="IMB_VETRO">TRUE</SimpleData>
+		<SimpleData name="INDUMENTI">FALSE</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>10.640582614531478,45.941537226278051</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#isole_C8_utf_info_estese">
+		<SimpleData name="POD">1917</SimpleData>
+		<SimpleData name="comune">STORO</SimpleData>
+		<SimpleData name="riferiment">STORO VIA TRENTO NORD</SimpleData>
+		<SimpleData name="GETTONIERA">FALSE</SimpleData>
+		<SimpleData name="RESIDUO">TRUE</SimpleData>
+		<SimpleData name="IMB_CARTA">TRUE</SimpleData>
+		<SimpleData name="IMB_PL_MET">TRUE</SimpleData>
+		<SimpleData name="ORGANICO">TRUE</SimpleData>
+		<SimpleData name="IMB_VETRO">TRUE</SimpleData>
+		<SimpleData name="INDUMENTI">FALSE</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>10.578603345608988,45.851332202110704</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#isole_C8_utf_info_estese">
+		<SimpleData name="POD">1923</SimpleData>
+		<SimpleData name="comune">STORO</SimpleData>
+		<SimpleData name="riferiment">STORO VIA TRENTO SUD</SimpleData>
+		<SimpleData name="GETTONIERA">FALSE</SimpleData>
+		<SimpleData name="RESIDUO">TRUE</SimpleData>
+		<SimpleData name="IMB_CARTA">TRUE</SimpleData>
+		<SimpleData name="IMB_PL_MET">TRUE</SimpleData>
+		<SimpleData name="ORGANICO">TRUE</SimpleData>
+		<SimpleData name="IMB_VETRO">TRUE</SimpleData>
+		<SimpleData name="INDUMENTI">TRUE</SimpleData>
+		<SimpleData name="NOTE">In questa isola trovi la raccolta separata del cartone con apposito gazebo</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>10.577581045817539,45.847943600408257</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#isole_C8_utf_info_estese">
+		<SimpleData name="POD">1911</SimpleData>
+		<SimpleData name="comune">STORO</SimpleData>
+		<SimpleData name="riferiment">STORO VIA SETTE PIEVI</SimpleData>
+		<SimpleData name="GETTONIERA">FALSE</SimpleData>
+		<SimpleData name="RESIDUO">TRUE</SimpleData>
+		<SimpleData name="IMB_CARTA">TRUE</SimpleData>
+		<SimpleData name="IMB_PL_MET">TRUE</SimpleData>
+		<SimpleData name="ORGANICO">TRUE</SimpleData>
+		<SimpleData name="IMB_VETRO">TRUE</SimpleData>
+		<SimpleData name="INDUMENTI">FALSE</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>10.574837964265992,45.846850552215329</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#isole_C8_utf_info_estese">
+		<SimpleData name="POD">1929</SimpleData>
+		<SimpleData name="comune">STORO</SimpleData>
+		<SimpleData name="riferiment">STORO VIA CESARE BATTISTI</SimpleData>
+		<SimpleData name="GETTONIERA">FALSE</SimpleData>
+		<SimpleData name="RESIDUO">TRUE</SimpleData>
+		<SimpleData name="IMB_CARTA">TRUE</SimpleData>
+		<SimpleData name="IMB_PL_MET">TRUE</SimpleData>
+		<SimpleData name="ORGANICO">TRUE</SimpleData>
+		<SimpleData name="IMB_VETRO">TRUE</SimpleData>
+		<SimpleData name="INDUMENTI">FALSE</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>10.576041703669357,45.850567078024859</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#isole_C8_utf_info_estese">
+		<SimpleData name="POD">1931</SimpleData>
+		<SimpleData name="comune">STORO</SimpleData>
+		<SimpleData name="riferiment">STORO VIA SAN FLORIANO</SimpleData>
+		<SimpleData name="GETTONIERA">FALSE</SimpleData>
+		<SimpleData name="RESIDUO">TRUE</SimpleData>
+		<SimpleData name="IMB_CARTA">TRUE</SimpleData>
+		<SimpleData name="IMB_PL_MET">TRUE</SimpleData>
+		<SimpleData name="ORGANICO">TRUE</SimpleData>
+		<SimpleData name="IMB_VETRO">TRUE</SimpleData>
+		<SimpleData name="INDUMENTI">TRUE</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>10.576528935453943,45.851458714141664</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#isole_C8_utf_info_estese">
+		<SimpleData name="POD">1915</SimpleData>
+		<SimpleData name="comune">STORO</SimpleData>
+		<SimpleData name="riferiment">STORO CHIESA</SimpleData>
+		<SimpleData name="GETTONIERA">FALSE</SimpleData>
+		<SimpleData name="RESIDUO">TRUE</SimpleData>
+		<SimpleData name="IMB_CARTA">TRUE</SimpleData>
+		<SimpleData name="IMB_PL_MET">TRUE</SimpleData>
+		<SimpleData name="ORGANICO">TRUE</SimpleData>
+		<SimpleData name="IMB_VETRO">TRUE</SimpleData>
+		<SimpleData name="INDUMENTI">FALSE</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>10.580352581926382,45.850375363174699</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#isole_C8_utf_info_estese">
+		<SimpleData name="POD">1934</SimpleData>
+		<SimpleData name="comune">STORO</SimpleData>
+		<SimpleData name="riferiment">STORO CA ROSSA</SimpleData>
+		<SimpleData name="GETTONIERA">FALSE</SimpleData>
+		<SimpleData name="RESIDUO">TRUE</SimpleData>
+		<SimpleData name="IMB_CARTA">TRUE</SimpleData>
+		<SimpleData name="IMB_PL_MET">TRUE</SimpleData>
+		<SimpleData name="ORGANICO">TRUE</SimpleData>
+		<SimpleData name="IMB_VETRO">TRUE</SimpleData>
+		<SimpleData name="INDUMENTI">FALSE</SimpleData>
+		<SimpleData name="NOTE">In questa isola trovi la raccolta separata del cartone con apposito gazebo</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>10.568674117098086,45.854519547588467</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#isole_C8_utf_info_estese">
+		<SimpleData name="POD">1913</SimpleData>
+		<SimpleData name="comune">STORO</SimpleData>
+		<SimpleData name="riferiment">STORO Loc PIANE</SimpleData>
+		<SimpleData name="GETTONIERA">FALSE</SimpleData>
+		<SimpleData name="RESIDUO">TRUE</SimpleData>
+		<SimpleData name="IMB_CARTA">TRUE</SimpleData>
+		<SimpleData name="IMB_PL_MET">TRUE</SimpleData>
+		<SimpleData name="ORGANICO">TRUE</SimpleData>
+		<SimpleData name="IMB_VETRO">TRUE</SimpleData>
+		<SimpleData name="INDUMENTI">TRUE</SimpleData>
+		<SimpleData name="NOTE">In questa isola trovi la raccolta separata del cartone con apposito gazebo</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>10.583483446444976,45.844709315087634</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#isole_C8_utf_info_estese">
+		<SimpleData name="POD">1925</SimpleData>
+		<SimpleData name="comune">STORO</SimpleData>
+		<SimpleData name="riferiment">STORO VIA G PAPALEONI</SimpleData>
+		<SimpleData name="GETTONIERA">FALSE</SimpleData>
+		<SimpleData name="RESIDUO">TRUE</SimpleData>
+		<SimpleData name="IMB_CARTA">TRUE</SimpleData>
+		<SimpleData name="IMB_PL_MET">TRUE</SimpleData>
+		<SimpleData name="ORGANICO">TRUE</SimpleData>
+		<SimpleData name="IMB_VETRO">TRUE</SimpleData>
+		<SimpleData name="INDUMENTI">FALSE</SimpleData>
+		<SimpleData name="NOTE">In questa isola trovi la raccolta separata del cartone con apposito gazebo</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>10.575599403738813,45.849485779817549</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#isole_C8_utf_info_estese">
+		<SimpleData name="POD">1926</SimpleData>
+		<SimpleData name="comune">STORO</SimpleData>
+		<SimpleData name="riferiment">STORO VIA SALETTO</SimpleData>
+		<SimpleData name="GETTONIERA">FALSE</SimpleData>
+		<SimpleData name="RESIDUO">TRUE</SimpleData>
+		<SimpleData name="IMB_CARTA">TRUE</SimpleData>
+		<SimpleData name="IMB_PL_MET">TRUE</SimpleData>
+		<SimpleData name="ORGANICO">TRUE</SimpleData>
+		<SimpleData name="IMB_VETRO">TRUE</SimpleData>
+		<SimpleData name="INDUMENTI">FALSE</SimpleData>
+		<SimpleData name="NOTE">In questa isola trovi la raccolta separata del cartone con apposito gazebo</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>10.571301463792468,45.851749887323699</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#isole_C8_utf_info_estese">
+		<SimpleData name="POD">2778</SimpleData>
+		<SimpleData name="comune">STORO</SimpleData>
+		<SimpleData name="riferiment">STORO DARZO POLIVALENTE</SimpleData>
+		<SimpleData name="GETTONIERA">FALSE</SimpleData>
+		<SimpleData name="RESIDUO">TRUE</SimpleData>
+		<SimpleData name="IMB_CARTA">TRUE</SimpleData>
+		<SimpleData name="IMB_PL_MET">TRUE</SimpleData>
+		<SimpleData name="ORGANICO">TRUE</SimpleData>
+		<SimpleData name="IMB_VETRO">TRUE</SimpleData>
+		<SimpleData name="INDUMENTI">FALSE</SimpleData>
+		<SimpleData name="NOTE">In questa isola trovi la raccolta separata del cartone con apposito gazebo</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>10.552131267006708,45.836985758685032</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#isole_C8_utf_info_estese">
+		<SimpleData name="POD">1941</SimpleData>
+		<SimpleData name="comune">STORO</SimpleData>
+		<SimpleData name="riferiment">STORO DARZO CHIESA</SimpleData>
+		<SimpleData name="GETTONIERA">FALSE</SimpleData>
+		<SimpleData name="RESIDUO">TRUE</SimpleData>
+		<SimpleData name="IMB_CARTA">TRUE</SimpleData>
+		<SimpleData name="IMB_PL_MET">TRUE</SimpleData>
+		<SimpleData name="ORGANICO">TRUE</SimpleData>
+		<SimpleData name="IMB_VETRO">TRUE</SimpleData>
+		<SimpleData name="INDUMENTI">FALSE</SimpleData>
+		<SimpleData name="NOTE">In questa isola trovi la raccolta separata del cartone con apposito gazebo</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>10.549586517678078,45.841102240722464</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#isole_C8_utf_info_estese">
+		<SimpleData name="POD">1950</SimpleData>
+		<SimpleData name="comune">STORO</SimpleData>
+		<SimpleData name="riferiment">STORO LODRONE VIA CAMPINI</SimpleData>
+		<SimpleData name="GETTONIERA">FALSE</SimpleData>
+		<SimpleData name="RESIDUO">TRUE</SimpleData>
+		<SimpleData name="IMB_CARTA">TRUE</SimpleData>
+		<SimpleData name="IMB_PL_MET">TRUE</SimpleData>
+		<SimpleData name="ORGANICO">TRUE</SimpleData>
+		<SimpleData name="IMB_VETRO">TRUE</SimpleData>
+		<SimpleData name="INDUMENTI">FALSE</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>10.532287444797118,45.82415630741388</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#isole_C8_utf_info_estese">
+		<SimpleData name="POD">1952</SimpleData>
+		<SimpleData name="comune">STORO</SimpleData>
+		<SimpleData name="riferiment">STORO RICCOMASSIMO</SimpleData>
+		<SimpleData name="GETTONIERA">FALSE</SimpleData>
+		<SimpleData name="RESIDUO">TRUE</SimpleData>
+		<SimpleData name="IMB_CARTA">TRUE</SimpleData>
+		<SimpleData name="IMB_PL_MET">TRUE</SimpleData>
+		<SimpleData name="ORGANICO">FALSE</SimpleData>
+		<SimpleData name="IMB_VETRO">TRUE</SimpleData>
+		<SimpleData name="INDUMENTI">FALSE</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>10.507180763537868,45.829166137409942</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#isole_C8_utf_info_estese">
+		<SimpleData name="POD">1948</SimpleData>
+		<SimpleData name="comune">STORO</SimpleData>
+		<SimpleData name="riferiment">STORO LODRONE CIMITERO</SimpleData>
+		<SimpleData name="GETTONIERA">FALSE</SimpleData>
+		<SimpleData name="RESIDUO">TRUE</SimpleData>
+		<SimpleData name="IMB_CARTA">TRUE</SimpleData>
+		<SimpleData name="IMB_PL_MET">TRUE</SimpleData>
+		<SimpleData name="ORGANICO">TRUE</SimpleData>
+		<SimpleData name="IMB_VETRO">TRUE</SimpleData>
+		<SimpleData name="INDUMENTI">FALSE</SimpleData>
+		<SimpleData name="NOTE">In questa isola trovi la raccolta separata del cartone con apposito gazebo</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>10.540120074962221,45.828874028807846</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#isole_C8_utf_info_estese">
+		<SimpleData name="POD">1731</SimpleData>
+		<SimpleData name="comune">STREMBO</SimpleData>
+		<SimpleData name="riferiment">STREMBO NORD</SimpleData>
+		<SimpleData name="GETTONIERA">FALSE</SimpleData>
+		<SimpleData name="RESIDUO">TRUE</SimpleData>
+		<SimpleData name="IMB_CARTA">TRUE</SimpleData>
+		<SimpleData name="IMB_PL_MET">TRUE</SimpleData>
+		<SimpleData name="ORGANICO">TRUE</SimpleData>
+		<SimpleData name="IMB_VETRO">TRUE</SimpleData>
+		<SimpleData name="INDUMENTI">FALSE</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>10.75217638839854,46.121843374254659</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#isole_C8_utf_info_estese">
+		<SimpleData name="POD">2358</SimpleData>
+		<SimpleData name="comune">MADONNA DI CAMPIGLIO</SimpleData>
+		<SimpleData name="riferiment">MADONNA DI CAMPIGLIO VIA PRESANELLA FUNIVIA 5LAGHI</SimpleData>
+		<SimpleData name="GETTONIERA">FALSE</SimpleData>
+		<SimpleData name="RESIDUO">TRUE</SimpleData>
+		<SimpleData name="IMB_CARTA">TRUE</SimpleData>
+		<SimpleData name="IMB_PL_MET">TRUE</SimpleData>
+		<SimpleData name="ORGANICO">TRUE</SimpleData>
+		<SimpleData name="IMB_VETRO">TRUE</SimpleData>
+		<SimpleData name="INDUMENTI">FALSE</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>10.8259119726908,46.229587653652914</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#isole_C8_utf_info_estese">
+		<SimpleData name="POD">2368</SimpleData>
+		<SimpleData name="comune">MADONNA DI CAMPIGLIO</SimpleData>
+		<SimpleData name="riferiment">MADONNA DI CAMPIGLIO VIA PRADALAGO FUNIVIA</SimpleData>
+		<SimpleData name="GETTONIERA">FALSE</SimpleData>
+		<SimpleData name="RESIDUO">TRUE</SimpleData>
+		<SimpleData name="IMB_CARTA">TRUE</SimpleData>
+		<SimpleData name="IMB_PL_MET">TRUE</SimpleData>
+		<SimpleData name="ORGANICO">TRUE</SimpleData>
+		<SimpleData name="IMB_VETRO">TRUE</SimpleData>
+		<SimpleData name="INDUMENTI">FALSE</SimpleData>
+		<SimpleData name="NOTE">In questa isola trovi la raccolta separata del cartone con apposito gazebo</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>10.825511527711202,46.234374990749728</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#isole_C8_utf_info_estese">
+		<SimpleData name="POD">2286</SimpleData>
+		<SimpleData name="comune">MADONNA DI CAMPIGLIO</SimpleData>
+		<SimpleData name="riferiment">MADONNA DI CAMPIGLIO PARCHEGGIO VIA CIMA TOSA</SimpleData>
+		<SimpleData name="GETTONIERA">FALSE</SimpleData>
+		<SimpleData name="RESIDUO">TRUE</SimpleData>
+		<SimpleData name="IMB_CARTA">TRUE</SimpleData>
+		<SimpleData name="IMB_PL_MET">TRUE</SimpleData>
+		<SimpleData name="ORGANICO">TRUE</SimpleData>
+		<SimpleData name="IMB_VETRO">TRUE</SimpleData>
+		<SimpleData name="INDUMENTI">FALSE</SimpleData>
+		<SimpleData name="NOTE">In questa isola trovi la raccolta separata del cartone con apposito gazebo</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>10.8233183027581,46.233951646629819</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#isole_C8_utf_info_estese">
+		<SimpleData name="POD">2356</SimpleData>
+		<SimpleData name="comune">MADONNA DI CAMPIGLIO</SimpleData>
+		<SimpleData name="riferiment">MADONNA DI CAMPIGLIO VIA PRESANELLA PARCHEGGIO</SimpleData>
+		<SimpleData name="GETTONIERA">FALSE</SimpleData>
+		<SimpleData name="RESIDUO">TRUE</SimpleData>
+		<SimpleData name="IMB_CARTA">TRUE</SimpleData>
+		<SimpleData name="IMB_PL_MET">TRUE</SimpleData>
+		<SimpleData name="ORGANICO">TRUE</SimpleData>
+		<SimpleData name="IMB_VETRO">TRUE</SimpleData>
+		<SimpleData name="INDUMENTI">FALSE</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>10.825106073454188,46.226800211583893</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#isole_C8_utf_info_estese">
+		<SimpleData name="POD">2342</SimpleData>
+		<SimpleData name="comune">MADONNA DI CAMPIGLIO</SimpleData>
+		<SimpleData name="riferiment">MADONNA DI CAMPIGLIO VIA MONTE SPINALE</SimpleData>
+		<SimpleData name="GETTONIERA">FALSE</SimpleData>
+		<SimpleData name="RESIDUO">TRUE</SimpleData>
+		<SimpleData name="IMB_CARTA">TRUE</SimpleData>
+		<SimpleData name="IMB_PL_MET">TRUE</SimpleData>
+		<SimpleData name="ORGANICO">TRUE</SimpleData>
+		<SimpleData name="IMB_VETRO">TRUE</SimpleData>
+		<SimpleData name="INDUMENTI">FALSE</SimpleData>
+		<SimpleData name="NOTE">In questa isola trovi la raccolta separata del cartone con apposito gazebo</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>10.827421197190452,46.230322995863233</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#isole_C8_utf_info_estese">
+		<SimpleData name="POD">2300</SimpleData>
+		<SimpleData name="comune">MADONNA DI CAMPIGLIO</SimpleData>
+		<SimpleData name="riferiment">MADONNA DI CAMPIGLIO VIA CARE ALTO</SimpleData>
+		<SimpleData name="GETTONIERA">FALSE</SimpleData>
+		<SimpleData name="RESIDUO">TRUE</SimpleData>
+		<SimpleData name="IMB_CARTA">TRUE</SimpleData>
+		<SimpleData name="IMB_PL_MET">TRUE</SimpleData>
+		<SimpleData name="ORGANICO">TRUE</SimpleData>
+		<SimpleData name="IMB_VETRO">TRUE</SimpleData>
+		<SimpleData name="INDUMENTI">FALSE</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>10.822723003454289,46.221361399648494</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#isole_C8_utf_info_estese">
+		<SimpleData name="POD">2311</SimpleData>
+		<SimpleData name="comune">MADONNA DI CAMPIGLIO</SimpleData>
+		<SimpleData name="riferiment">MADONNA DI CAMPIGLIO VIA PIETRA GRANDE</SimpleData>
+		<SimpleData name="GETTONIERA">FALSE</SimpleData>
+		<SimpleData name="RESIDUO">TRUE</SimpleData>
+		<SimpleData name="IMB_CARTA">TRUE</SimpleData>
+		<SimpleData name="IMB_PL_MET">TRUE</SimpleData>
+		<SimpleData name="ORGANICO">TRUE</SimpleData>
+		<SimpleData name="IMB_VETRO">TRUE</SimpleData>
+		<SimpleData name="INDUMENTI">FALSE</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>10.82502592775748,46.224382580834025</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#isole_C8_utf_info_estese">
+		<SimpleData name="POD">2312</SimpleData>
+		<SimpleData name="comune">MADONNA DI CAMPIGLIO</SimpleData>
+		<SimpleData name="riferiment">MADONNA CAMPIGLIO VIA CASTELLETTO INFERIORE NORD</SimpleData>
+		<SimpleData name="GETTONIERA">FALSE</SimpleData>
+		<SimpleData name="RESIDUO">TRUE</SimpleData>
+		<SimpleData name="IMB_CARTA">TRUE</SimpleData>
+		<SimpleData name="IMB_PL_MET">TRUE</SimpleData>
+		<SimpleData name="ORGANICO">TRUE</SimpleData>
+		<SimpleData name="IMB_VETRO">TRUE</SimpleData>
+		<SimpleData name="INDUMENTI">FALSE</SimpleData>
+		<SimpleData name="NOTE">In questa isola trovi la raccolta separata del cartone con apposito gazebo</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>10.8252390009336,46.221940192681409</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#isole_C8_utf_info_estese">
+		<SimpleData name="POD">2294</SimpleData>
+		<SimpleData name="comune">MADONNA DI CAMPIGLIO</SimpleData>
+		<SimpleData name="riferiment">MADONNA DI CAMPIGLIO VIA CASTELLETTO INFERIORE SUD</SimpleData>
+		<SimpleData name="GETTONIERA">FALSE</SimpleData>
+		<SimpleData name="RESIDUO">TRUE</SimpleData>
+		<SimpleData name="IMB_CARTA">TRUE</SimpleData>
+		<SimpleData name="IMB_PL_MET">TRUE</SimpleData>
+		<SimpleData name="ORGANICO">TRUE</SimpleData>
+		<SimpleData name="IMB_VETRO">TRUE</SimpleData>
+		<SimpleData name="INDUMENTI">FALSE</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>10.823145622518734,46.218184645197532</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#isole_C8_utf_info_estese">
+		<SimpleData name="POD">2436</SimpleData>
+		<SimpleData name="comune">RAGOLI</SimpleData>
+		<SimpleData name="riferiment">RAGOLI PARTE 2 CAMPIGLIO VALLESINELLA</SimpleData>
+		<SimpleData name="GETTONIERA">FALSE</SimpleData>
+		<SimpleData name="RESIDUO">TRUE</SimpleData>
+		<SimpleData name="IMB_CARTA">TRUE</SimpleData>
+		<SimpleData name="IMB_PL_MET">TRUE</SimpleData>
+		<SimpleData name="ORGANICO">TRUE</SimpleData>
+		<SimpleData name="IMB_VETRO">TRUE</SimpleData>
+		<SimpleData name="INDUMENTI">FALSE</SimpleData>
+		<SimpleData name="NOTE">Questa isola è operativa solo nella stagione estiva</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>10.852018203750388,46.206809356233144</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#isole_C8_utf_info_estese">
+		<SimpleData name="POD">2323</SimpleData>
+		<SimpleData name="comune">RAGOLI</SimpleData>
+		<SimpleData name="riferiment">RAGOLI PARTE 2 CAMPIGLIO VIA MANDRON</SimpleData>
+		<SimpleData name="GETTONIERA">FALSE</SimpleData>
+		<SimpleData name="RESIDUO">TRUE</SimpleData>
+		<SimpleData name="IMB_CARTA">TRUE</SimpleData>
+		<SimpleData name="IMB_PL_MET">TRUE</SimpleData>
+		<SimpleData name="ORGANICO">TRUE</SimpleData>
+		<SimpleData name="IMB_VETRO">TRUE</SimpleData>
+		<SimpleData name="INDUMENTI">FALSE</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>10.828633184295128,46.223052734285886</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#isole_C8_utf_info_estese">
+		<SimpleData name="POD">2233</SimpleData>
+		<SimpleData name="comune">PINZOLO</SimpleData>
+		<SimpleData name="riferiment">PINZOLO MAVIGNOLA ALBERGO ALLA POSTA</SimpleData>
+		<SimpleData name="GETTONIERA">FALSE</SimpleData>
+		<SimpleData name="RESIDUO">TRUE</SimpleData>
+		<SimpleData name="IMB_CARTA">FALSE</SimpleData>
+		<SimpleData name="IMB_PL_MET">FALSE</SimpleData>
+		<SimpleData name="ORGANICO">TRUE</SimpleData>
+		<SimpleData name="IMB_VETRO">TRUE</SimpleData>
+		<SimpleData name="INDUMENTI">FALSE</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>10.788923350303991,46.19142397019025</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#isole_C8_utf_info_estese">
+		<SimpleData name="POD">2232</SimpleData>
+		<SimpleData name="comune">PINZOLO</SimpleData>
+		<SimpleData name="riferiment">PINZOLO MAVIGNOLA VIA VAL BRENTA</SimpleData>
+		<SimpleData name="GETTONIERA">TRUE</SimpleData>
+		<SimpleData name="RESIDUO">TRUE</SimpleData>
+		<SimpleData name="IMB_CARTA">TRUE</SimpleData>
+		<SimpleData name="IMB_PL_MET">TRUE</SimpleData>
+		<SimpleData name="ORGANICO">TRUE</SimpleData>
+		<SimpleData name="IMB_VETRO">TRUE</SimpleData>
+		<SimpleData name="INDUMENTI">FALSE</SimpleData>
+		<SimpleData name="NOTE">In questa isola trovi la raccolta separata del cartone con apposito gazebo</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>10.797811294173311,46.192965699693822</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#isole_C8_utf_info_estese">
+		<SimpleData name="POD">2227</SimpleData>
+		<SimpleData name="comune">PINZOLO</SimpleData>
+		<SimpleData name="riferiment">PINZOLO MAVIGNOLA PNAB</SimpleData>
+		<SimpleData name="GETTONIERA">FALSE</SimpleData>
+		<SimpleData name="RESIDUO">TRUE</SimpleData>
+		<SimpleData name="IMB_CARTA">TRUE</SimpleData>
+		<SimpleData name="IMB_PL_MET">TRUE</SimpleData>
+		<SimpleData name="ORGANICO">TRUE</SimpleData>
+		<SimpleData name="IMB_VETRO">TRUE</SimpleData>
+		<SimpleData name="INDUMENTI">FALSE</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>10.785873072674887,46.189986197386091</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#isole_C8_utf_info_estese">
+		<SimpleData name="POD">2226</SimpleData>
+		<SimpleData name="comune">PINZOLO</SimpleData>
+		<SimpleData name="riferiment">PINZOLO MAVIGNOLA PRIDELA</SimpleData>
+		<SimpleData name="GETTONIERA">FALSE</SimpleData>
+		<SimpleData name="RESIDUO">TRUE</SimpleData>
+		<SimpleData name="IMB_CARTA">TRUE</SimpleData>
+		<SimpleData name="IMB_PL_MET">TRUE</SimpleData>
+		<SimpleData name="ORGANICO">TRUE</SimpleData>
+		<SimpleData name="IMB_VETRO">TRUE</SimpleData>
+		<SimpleData name="INDUMENTI">TRUE</SimpleData>
+		<SimpleData name="NOTE">In questa isola trovi la raccolta separata del cartone con apposito gazebo</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>10.782611301961074,46.186621187750241</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#isole_C8_utf_info_estese">
+		<SimpleData name="POD">2180</SimpleData>
+		<SimpleData name="comune">PINZOLO</SimpleData>
+		<SimpleData name="riferiment">PINZOLO PIAZZA BAVDIN</SimpleData>
+		<SimpleData name="GETTONIERA">FALSE</SimpleData>
+		<SimpleData name="RESIDUO">TRUE</SimpleData>
+		<SimpleData name="IMB_CARTA">TRUE</SimpleData>
+		<SimpleData name="IMB_PL_MET">TRUE</SimpleData>
+		<SimpleData name="ORGANICO">TRUE</SimpleData>
+		<SimpleData name="IMB_VETRO">TRUE</SimpleData>
+		<SimpleData name="INDUMENTI">FALSE</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>10.761862809379682,46.15781711218262</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#isole_C8_utf_info_estese">
+		<SimpleData name="POD">2218</SimpleData>
+		<SimpleData name="comune">PINZOLO</SimpleData>
+		<SimpleData name="riferiment">PINZOLO VIA FUCINE</SimpleData>
+		<SimpleData name="GETTONIERA">FALSE</SimpleData>
+		<SimpleData name="RESIDUO">TRUE</SimpleData>
+		<SimpleData name="IMB_CARTA">TRUE</SimpleData>
+		<SimpleData name="IMB_PL_MET">TRUE</SimpleData>
+		<SimpleData name="ORGANICO">TRUE</SimpleData>
+		<SimpleData name="IMB_VETRO">TRUE</SimpleData>
+		<SimpleData name="INDUMENTI">FALSE</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>10.763051631387299,46.165038844916012</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#isole_C8_utf_info_estese">
+		<SimpleData name="POD">2206</SimpleData>
+		<SimpleData name="comune">PINZOLO</SimpleData>
+		<SimpleData name="riferiment">PINZOLO VIA GENOVA VIA FUCINE</SimpleData>
+		<SimpleData name="GETTONIERA">FALSE</SimpleData>
+		<SimpleData name="RESIDUO">TRUE</SimpleData>
+		<SimpleData name="IMB_CARTA">TRUE</SimpleData>
+		<SimpleData name="IMB_PL_MET">TRUE</SimpleData>
+		<SimpleData name="ORGANICO">TRUE</SimpleData>
+		<SimpleData name="IMB_VETRO">TRUE</SimpleData>
+		<SimpleData name="INDUMENTI">FALSE</SimpleData>
+		<SimpleData name="NOTE">In questa isola trovi la raccolta separata del cartone con apposito gazebo</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>10.761040493722613,46.161392944770505</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#isole_C8_utf_info_estese">
+		<SimpleData name="POD">2179</SimpleData>
+		<SimpleData name="comune">PINZOLO</SimpleData>
+		<SimpleData name="riferiment">PINZOLO VIA GENOVA VIA DEI MULINI</SimpleData>
+		<SimpleData name="GETTONIERA">FALSE</SimpleData>
+		<SimpleData name="RESIDUO">TRUE</SimpleData>
+		<SimpleData name="IMB_CARTA">TRUE</SimpleData>
+		<SimpleData name="IMB_PL_MET">TRUE</SimpleData>
+		<SimpleData name="ORGANICO">TRUE</SimpleData>
+		<SimpleData name="IMB_VETRO">TRUE</SimpleData>
+		<SimpleData name="INDUMENTI">FALSE</SimpleData>
+		<SimpleData name="NOTE">In questa isola trovi la raccolta separata del cartone con apposito gazebo</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>10.761540244837528,46.159476527769442</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#isole_C8_utf_info_estese">
+		<SimpleData name="POD">2669</SimpleData>
+		<SimpleData name="comune">PINZOLO</SimpleData>
+		<SimpleData name="riferiment">PINZOLO FUNIVIA</SimpleData>
+		<SimpleData name="GETTONIERA">TRUE</SimpleData>
+		<SimpleData name="RESIDUO">TRUE</SimpleData>
+		<SimpleData name="IMB_CARTA">TRUE</SimpleData>
+		<SimpleData name="IMB_PL_MET">TRUE</SimpleData>
+		<SimpleData name="ORGANICO">TRUE</SimpleData>
+		<SimpleData name="IMB_VETRO">TRUE</SimpleData>
+		<SimpleData name="INDUMENTI">TRUE</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>10.765562815167991,46.16376217252207</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#isole_C8_utf_info_estese">
+		<SimpleData name="POD">2187</SimpleData>
+		<SimpleData name="comune">PINZOLO</SimpleData>
+		<SimpleData name="riferiment">PINZOLO CORSO TRENTO</SimpleData>
+		<SimpleData name="GETTONIERA">FALSE</SimpleData>
+		<SimpleData name="RESIDUO">TRUE</SimpleData>
+		<SimpleData name="IMB_CARTA">TRUE</SimpleData>
+		<SimpleData name="IMB_PL_MET">TRUE</SimpleData>
+		<SimpleData name="ORGANICO">TRUE</SimpleData>
+		<SimpleData name="IMB_VETRO">TRUE</SimpleData>
+		<SimpleData name="INDUMENTI">FALSE</SimpleData>
+		<SimpleData name="NOTE">In questa isola trovi la raccolta separata del cartone con apposito gazebo</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>10.765910432975005,46.155591649042847</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#isole_C8_utf_info_estese">
+		<SimpleData name="POD">2172</SimpleData>
+		<SimpleData name="comune">PINZOLO</SimpleData>
+		<SimpleData name="riferiment">PINZOLO EX PESA</SimpleData>
+		<SimpleData name="GETTONIERA">FALSE</SimpleData>
+		<SimpleData name="RESIDUO">TRUE</SimpleData>
+		<SimpleData name="IMB_CARTA">TRUE</SimpleData>
+		<SimpleData name="IMB_PL_MET">TRUE</SimpleData>
+		<SimpleData name="ORGANICO">TRUE</SimpleData>
+		<SimpleData name="IMB_VETRO">TRUE</SimpleData>
+		<SimpleData name="INDUMENTI">FALSE</SimpleData>
+		<SimpleData name="NOTE">In questa isola trovi la raccolta separata del cartone con apposito gazebo</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>10.765668380786703,46.161343282820638</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#isole_C8_utf_info_estese">
+		<SimpleData name="POD">2437</SimpleData>
+		<SimpleData name="comune">PINZOLO</SimpleData>
+		<SimpleData name="riferiment">PINZOLO VIA ROMA</SimpleData>
+		<SimpleData name="GETTONIERA">FALSE</SimpleData>
+		<SimpleData name="RESIDUO">TRUE</SimpleData>
+		<SimpleData name="IMB_CARTA">TRUE</SimpleData>
+		<SimpleData name="IMB_PL_MET">TRUE</SimpleData>
+		<SimpleData name="ORGANICO">TRUE</SimpleData>
+		<SimpleData name="IMB_VETRO">TRUE</SimpleData>
+		<SimpleData name="INDUMENTI">FALSE</SimpleData>
+		<SimpleData name="NOTE">In questa isola trovi la raccolta separata del cartone con apposito gazebo</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>10.764392299033585,46.157272887530375</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#isole_C8_utf_info_estese">
+		<SimpleData name="POD">2169</SimpleData>
+		<SimpleData name="comune">PINZOLO</SimpleData>
+		<SimpleData name="riferiment">PINZOLO VIA LEONE COLLINI BORCIOL</SimpleData>
+		<SimpleData name="GETTONIERA">FALSE</SimpleData>
+		<SimpleData name="RESIDUO">TRUE</SimpleData>
+		<SimpleData name="IMB_CARTA">TRUE</SimpleData>
+		<SimpleData name="IMB_PL_MET">TRUE</SimpleData>
+		<SimpleData name="ORGANICO">TRUE</SimpleData>
+		<SimpleData name="IMB_VETRO">TRUE</SimpleData>
+		<SimpleData name="INDUMENTI">FALSE</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>10.766986811317469,46.159475248707558</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#isole_C8_utf_info_estese">
+		<SimpleData name="POD">2178</SimpleData>
+		<SimpleData name="comune">PINZOLO</SimpleData>
+		<SimpleData name="riferiment">PINZOLO VIA CALVET SUD</SimpleData>
+		<SimpleData name="GETTONIERA">FALSE</SimpleData>
+		<SimpleData name="RESIDUO">TRUE</SimpleData>
+		<SimpleData name="IMB_CARTA">TRUE</SimpleData>
+		<SimpleData name="IMB_PL_MET">TRUE</SimpleData>
+		<SimpleData name="ORGANICO">TRUE</SimpleData>
+		<SimpleData name="IMB_VETRO">TRUE</SimpleData>
+		<SimpleData name="INDUMENTI">FALSE</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>10.758601113622348,46.156953142145866</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#isole_C8_utf_info_estese">
+		<SimpleData name="POD">2198</SimpleData>
+		<SimpleData name="comune">PINZOLO</SimpleData>
+		<SimpleData name="riferiment">PINZOLO VIA SORANO</SimpleData>
+		<SimpleData name="GETTONIERA">FALSE</SimpleData>
+		<SimpleData name="RESIDUO">TRUE</SimpleData>
+		<SimpleData name="IMB_CARTA">TRUE</SimpleData>
+		<SimpleData name="IMB_PL_MET">TRUE</SimpleData>
+		<SimpleData name="ORGANICO">TRUE</SimpleData>
+		<SimpleData name="IMB_VETRO">TRUE</SimpleData>
+		<SimpleData name="INDUMENTI">FALSE</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>10.764656586839102,46.160155299804607</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#isole_C8_utf_info_estese">
+		<SimpleData name="POD">2263</SimpleData>
+		<SimpleData name="comune">MADONNA DI CAMPIGLIO</SimpleData>
+		<SimpleData name="riferiment">MADONNA DI CAMPIGLIO VIA ZELEDRIA</SimpleData>
+		<SimpleData name="GETTONIERA">FALSE</SimpleData>
+		<SimpleData name="RESIDUO">TRUE</SimpleData>
+		<SimpleData name="IMB_CARTA">TRUE</SimpleData>
+		<SimpleData name="IMB_PL_MET">TRUE</SimpleData>
+		<SimpleData name="ORGANICO">TRUE</SimpleData>
+		<SimpleData name="IMB_VETRO">TRUE</SimpleData>
+		<SimpleData name="INDUMENTI">FALSE</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>10.838933473207145,46.24316464153771</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#isole_C8_utf_info_estese">
+		<SimpleData name="POD">2282</SimpleData>
+		<SimpleData name="comune">MADONNA DI CAMPIGLIO</SimpleData>
+		<SimpleData name="riferiment">MADONNA DI CAMPIGLIO PATASCOSS</SimpleData>
+		<SimpleData name="GETTONIERA">FALSE</SimpleData>
+		<SimpleData name="RESIDUO">TRUE</SimpleData>
+		<SimpleData name="IMB_CARTA">TRUE</SimpleData>
+		<SimpleData name="IMB_PL_MET">TRUE</SimpleData>
+		<SimpleData name="ORGANICO">TRUE</SimpleData>
+		<SimpleData name="IMB_VETRO">TRUE</SimpleData>
+		<SimpleData name="INDUMENTI">FALSE</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>10.815857375336673,46.23073314050059</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#isole_C8_utf_info_estese">
+		<SimpleData name="POD">2281</SimpleData>
+		<SimpleData name="comune">MADONNA DI CAMPIGLIO</SimpleData>
+		<SimpleData name="riferiment">MADONNA DI CAMPIGLIO VIA NAMBINO</SimpleData>
+		<SimpleData name="GETTONIERA">FALSE</SimpleData>
+		<SimpleData name="RESIDUO">TRUE</SimpleData>
+		<SimpleData name="IMB_CARTA">TRUE</SimpleData>
+		<SimpleData name="IMB_PL_MET">TRUE</SimpleData>
+		<SimpleData name="ORGANICO">TRUE</SimpleData>
+		<SimpleData name="IMB_VETRO">TRUE</SimpleData>
+		<SimpleData name="INDUMENTI">FALSE</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>10.819502935853471,46.237470182191323</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#isole_C8_utf_info_estese">
+		<SimpleData name="POD">2517</SimpleData>
+		<SimpleData name="comune">MADONNA DI CAMPIGLIO</SimpleData>
+		<SimpleData name="riferiment">MADONNA DI CAMPIGLIO LE VILLE</SimpleData>
+		<SimpleData name="GETTONIERA">FALSE</SimpleData>
+		<SimpleData name="RESIDUO">TRUE</SimpleData>
+		<SimpleData name="IMB_CARTA">FALSE</SimpleData>
+		<SimpleData name="IMB_PL_MET">FALSE</SimpleData>
+		<SimpleData name="ORGANICO">TRUE</SimpleData>
+		<SimpleData name="IMB_VETRO">FALSE</SimpleData>
+		<SimpleData name="INDUMENTI">FALSE</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>10.827600370851513,46.234339934648496</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#isole_C8_utf_info_estese">
+		<SimpleData name="POD">2357</SimpleData>
+		<SimpleData name="comune">MADONNA DI CAMPIGLIO</SimpleData>
+		<SimpleData name="riferiment">MADONNA DI CAMPIGLIO VIA ADAMELLO</SimpleData>
+		<SimpleData name="GETTONIERA">FALSE</SimpleData>
+		<SimpleData name="RESIDUO">TRUE</SimpleData>
+		<SimpleData name="IMB_CARTA">TRUE</SimpleData>
+		<SimpleData name="IMB_PL_MET">TRUE</SimpleData>
+		<SimpleData name="ORGANICO">TRUE</SimpleData>
+		<SimpleData name="IMB_VETRO">TRUE</SimpleData>
+		<SimpleData name="INDUMENTI">FALSE</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>10.823667055285663,46.224760584595217</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#isole_C8_utf_info_estese">
+		<SimpleData name="POD">2347</SimpleData>
+		<SimpleData name="comune">MADONNA DI CAMPIGLIO</SimpleData>
+		<SimpleData name="riferiment">MADONNA DI CAMPIGLIO PARCHEGGIO SCUOLA MATERNA</SimpleData>
+		<SimpleData name="GETTONIERA">FALSE</SimpleData>
+		<SimpleData name="RESIDUO">TRUE</SimpleData>
+		<SimpleData name="IMB_CARTA">TRUE</SimpleData>
+		<SimpleData name="IMB_PL_MET">TRUE</SimpleData>
+		<SimpleData name="ORGANICO">TRUE</SimpleData>
+		<SimpleData name="IMB_VETRO">TRUE</SimpleData>
+		<SimpleData name="INDUMENTI">TRUE</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>10.824882098547691,46.224915164327129</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#isole_C8_utf_info_estese">
+		<SimpleData name="POD">2290</SimpleData>
+		<SimpleData name="comune">MADONNA DI CAMPIGLIO</SimpleData>
+		<SimpleData name="riferiment">MADONNA DI CAMPIGLIO VIA PANORAMA</SimpleData>
+		<SimpleData name="GETTONIERA">FALSE</SimpleData>
+		<SimpleData name="RESIDUO">TRUE</SimpleData>
+		<SimpleData name="IMB_CARTA">TRUE</SimpleData>
+		<SimpleData name="IMB_PL_MET">TRUE</SimpleData>
+		<SimpleData name="ORGANICO">TRUE</SimpleData>
+		<SimpleData name="IMB_VETRO">TRUE</SimpleData>
+		<SimpleData name="INDUMENTI">FALSE</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>10.820706651638366,46.21307789699906</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#isole_C8_utf_info_estese">
+		<SimpleData name="POD">1111</SimpleData>
+		<SimpleData name="comune">BONDONE</SimpleData>
+		<SimpleData name="riferiment">BONDONE CASA SOCIALE</SimpleData>
+		<SimpleData name="GETTONIERA">FALSE</SimpleData>
+		<SimpleData name="RESIDUO">TRUE</SimpleData>
+		<SimpleData name="IMB_CARTA">TRUE</SimpleData>
+		<SimpleData name="IMB_PL_MET">TRUE</SimpleData>
+		<SimpleData name="ORGANICO">TRUE</SimpleData>
+		<SimpleData name="IMB_VETRO">TRUE</SimpleData>
+		<SimpleData name="INDUMENTI">FALSE</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>10.540645729142662,45.808002286034757</coordinates></Point>
+  </Placemark>
+</Folder>
+</Document></kml>
