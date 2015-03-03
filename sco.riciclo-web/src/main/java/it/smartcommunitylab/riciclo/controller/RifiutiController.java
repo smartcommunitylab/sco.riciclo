@@ -16,12 +16,15 @@
 
 package it.smartcommunitylab.riciclo.controller;
 
-
 import it.smartcommunitylab.riciclo.model.Rifiuti;
 import it.smartcommunitylab.riciclo.storage.AppDescriptor;
 import it.smartcommunitylab.riciclo.storage.RepositoryManager;
 
+import java.io.ByteArrayOutputStream;
+import java.io.OutputStream;
 import java.util.List;
+import java.util.zip.ZipEntry;
+import java.util.zip.ZipOutputStream;
 
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
@@ -35,50 +38,105 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-	@RestController
-	public class RifiutiController {
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.SerializationFeature;
+
+@RestController
+public class RifiutiController {
+
+	@Autowired
+	private RepositoryManager storage;
+
+	@Autowired
+	private ServletContext context;
+
+	@RequestMapping(method = RequestMethod.GET, value = "/ping")
+	public @ResponseBody
+	void ping(HttpServletRequest request, HttpServletResponse response, HttpSession session) {
+		System.out.println("PING");
+	}
+
+	@RequestMapping(method = RequestMethod.POST, value = "/publish/{appId}")
+	public @ResponseBody
+	void publish(HttpServletResponse response, @PathVariable String appId) {
+		storage.publish(appId);
+	}
+
+	@RequestMapping(method = RequestMethod.GET, value = "/appDescriptor/{appId}")
+	public AppDescriptor appDescriptor(HttpServletResponse response, @PathVariable String appId) {
+		return storage.getAppDescriptor(appId);
+	}
+
+	@RequestMapping(method = RequestMethod.GET, value = "/rifiuti/{appId}")
+	public Rifiuti get(HttpServletResponse response, @PathVariable String appId) {
+		return storage.findRifiuti(appId, false);
+	}
+
+	@RequestMapping(method = RequestMethod.GET, value = "/rifiuti/{appId}/draft")
+	public Rifiuti getDraft(HttpServletResponse response, @PathVariable String appId) {
+		return storage.findRifiuti(appId, true);
+	}
+
+	@RequestMapping(method = RequestMethod.GET, value = "/rifiuti/{className}/{appId}")
+	public List get(HttpServletResponse response, @PathVariable String className, @PathVariable String appId) throws Exception {
+		return storage.findRifiuti(className, appId, false);
+	}
+
+	@RequestMapping(method = RequestMethod.GET, value = "/rifiuti/{className}/{appId}/draft")
+	public List getDraft(HttpServletResponse response, @PathVariable String className, @PathVariable String appId) throws Exception {
+		return storage.findRifiuti(className, appId, true);
+	}
+
+	@RequestMapping(method = RequestMethod.GET, value = "/zip/{appId}")
+	public void zip(HttpServletResponse response, @PathVariable String appId) throws Exception {
+		response.setContentType("application/zip");
+		response.addHeader("Content-Disposition", "attachment; filename=\"final-" + appId + ".zip\"");
+		response.addHeader("Content-Transfer-Encoding", "binary");
+		ByteArrayOutputStream outputBuffer = new ByteArrayOutputStream();
 		
-		@Autowired
-		private RepositoryManager storage;
+		Rifiuti rifiuti = get(response, appId);
+		ObjectMapper mapper = new ObjectMapper();
+		mapper.configure(SerializationFeature.WRITE_NULL_MAP_VALUES, false);
+		mapper.setSerializationInclusion(Include.NON_NULL);
+		String r = mapper.writeValueAsString(rifiuti);
+		String r2 = new String(r.getBytes("UTF-8"));
 		
-		@Autowired
-		private ServletContext context;		
+		compress(outputBuffer, r2.getBytes(), "final-" + appId + ".json");
+		response.getOutputStream().write(outputBuffer.toByteArray());
+		response.getOutputStream().flush();
+		outputBuffer.close();
+	}
+	
+	@RequestMapping(method = RequestMethod.GET, value = "/zip/{appId}/draft")
+	public void zipDraft(HttpServletResponse response, @PathVariable String appId) throws Exception {
+		response.setContentType("application/zip");
+		response.addHeader("Content-Disposition", "attachment; filename=\"draft-" + appId + ".zip\"");
+		response.addHeader("Content-Transfer-Encoding", "binary");
+		ByteArrayOutputStream outputBuffer = new ByteArrayOutputStream();
 		
-		@RequestMapping(method = RequestMethod.GET, value = "/ping")
-		public @ResponseBody
-		void ping(HttpServletRequest request, HttpServletResponse response, HttpSession session) {
-			System.out.println("PING");
-		}		
+		Rifiuti rifiuti = getDraft(response, appId);
+		ObjectMapper mapper = new ObjectMapper();
+		mapper.configure(SerializationFeature.WRITE_NULL_MAP_VALUES, false);
+		mapper.setSerializationInclusion(Include.NON_NULL);
+		String r = mapper.writeValueAsString(rifiuti);
+		String r2 = new String(r.getBytes("UTF-8"));
 		
-		@RequestMapping(method = RequestMethod.POST, value = "/publish/{appId}")
-		public @ResponseBody
-		void publish(HttpServletResponse response, @PathVariable String appId) {
-			storage.publish(appId);
-		}	
-		
-		@RequestMapping(method = RequestMethod.GET, value = "/appDescriptor/{appId}")
-		public AppDescriptor appDescriptor(HttpServletResponse response, @PathVariable String appId) {
-			return storage.getAppDescriptor(appId);
-		}		
-		
-		@RequestMapping(method = RequestMethod.GET, value = "/rifiuti/{appId}")
-		public Rifiuti get(HttpServletResponse response, @PathVariable String appId) {
-			return storage.findRifiuti(appId, false);
-		}		
-		
-		@RequestMapping(method = RequestMethod.GET, value = "/rifiuti/{appId}/draft")
-		public Rifiuti getDraft(HttpServletResponse response, @PathVariable String appId) {
-			return storage.findRifiuti(appId, true);
-		}			
-		
-		@RequestMapping(method = RequestMethod.GET, value = "/rifiuti/{className}/{appId}")
-		public List get(HttpServletResponse response, @PathVariable String className, @PathVariable String appId) throws Exception {
-			return storage.findRifiuti(className, appId, false);
-		}			
-		
-		@RequestMapping(method = RequestMethod.GET, value = "/rifiuti/{className}/{appId}/draft")
-		public List getDraft(HttpServletResponse response, @PathVariable String className, @PathVariable String appId) throws Exception {
-			return storage.findRifiuti(className, appId, true);
-		}			
-		
+		compress(outputBuffer, r2.getBytes(), "draft-" + appId + ".json");
+		response.getOutputStream().write(outputBuffer.toByteArray());
+		response.getOutputStream().flush();
+		outputBuffer.close();
+	}	
+
+	void compress(final OutputStream out, byte[] b, String entryName) throws Exception {
+		ZipOutputStream zos = new ZipOutputStream(out);
+		zos.setLevel(ZipOutputStream.DEFLATED);
+
+		ZipEntry ze = new ZipEntry(entryName);
+		zos.putNextEntry(ze);
+		zos.write(b, 0, b.length);
+
+		zos.close();
+	}
+
 }
