@@ -88,11 +88,28 @@ public class RepositoryManager {
 			}
 		}
 
+		increaseAppId(appId);
+	}
+	
+	public void createAppId(String appId) {
+		Query query = new Query(new Criteria("appId").is(appId));
+		List<AppDescriptor> apps = finalTemplate.find(query, AppDescriptor.class);
+		if (apps == null || apps.isEmpty()) {
+			AppDescriptor appDescr = new AppDescriptor();
+			appDescr.setAppId(appId);
+			appDescr.setVersion(0L);
+			appDescr.setTimestamp(System.currentTimeMillis());
+			finalTemplate.save(appDescr);
+		}
+		
+	}
+	
+	public void increaseAppId(String appId) {
 		Query query = new Query(new Criteria("appId").is(appId));
 		Update update = new Update();
 		update.inc("version", 1);		
 		update.set("timestamp", System.currentTimeMillis());
-		finalTemplate.upsert(query, update, AppDescriptor.class);
+		finalTemplate.upsert(query, update, AppDescriptor.class);		
 	}
 	
 	public List findRifiuti(String className, String appId, boolean draft) throws ClassNotFoundException {

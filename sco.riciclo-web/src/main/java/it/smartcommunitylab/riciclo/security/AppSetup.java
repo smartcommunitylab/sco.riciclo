@@ -1,5 +1,7 @@
 package it.smartcommunitylab.riciclo.security;
 
+import it.smartcommunitylab.riciclo.storage.RepositoryManager;
+
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
@@ -7,6 +9,7 @@ import java.util.Map;
 
 import javax.annotation.PostConstruct;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.Resource;
 import org.springframework.stereotype.Component;
@@ -18,12 +21,19 @@ public class AppSetup {
 
 	@Value("classpath:/apps-access.yml")
 	private Resource resource;
+	
+	@Autowired
+	private RepositoryManager storage;	
 
 	@PostConstruct
 	public void init() throws IOException {
 		Yaml yaml = new Yaml(new Constructor(AppSetup.class));
 		AppSetup data = (AppSetup) yaml.load(resource.getInputStream());
 		this.apps = data.apps;
+		
+		for (AppCredentials cred: data.getApps()) {
+			storage.createAppId(cred.getId());
+		}
 	}
 	
 
