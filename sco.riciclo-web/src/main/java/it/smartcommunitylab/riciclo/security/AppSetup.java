@@ -35,7 +35,6 @@ public class AppSetup {
 	}
 
 	public void setApps(List<AppCredentials> apps) {
-		System.out.println(apps);
 		this.apps = apps;
 	}
 
