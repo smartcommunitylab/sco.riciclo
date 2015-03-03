@@ -50,10 +50,6 @@ public class GiudicarieController {
 	@Autowired
 	private ServletContext context;
 
-	@RequestMapping(value = "/")
-	public String giudicarie() {
-		return "giudicarie/upload";
-	}
 
 	@RequestMapping(value = "/savefiles", method = RequestMethod.POST)
 	public String upload(@ModelAttribute("fileList") FileList fileList, Model map) throws Exception {
