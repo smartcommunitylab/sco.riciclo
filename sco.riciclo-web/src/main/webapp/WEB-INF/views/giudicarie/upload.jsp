@@ -34,47 +34,31 @@ a:active {
 		<p>Giudicarie</p>
 
 		<div>
-			<form:form method="post" modelAttribute="fileList" action="savefiles"
-				enctype="multipart/form-data">
+			<form:form method="post" modelAttribute="fileList"
+				action="giudicarie/savefiles" enctype="multipart/form-data">
 				<table id="fileTable">
 					<tr>
 						<td>Modello</td>
-						<td><input name="files[0]" type="file"/></td>
+						<td><input name="files[0]" type="file" /></td>
 					</tr>
 					<tr>
 						<td>Isole</td>
-						<td><input name="files[1]" type="file"/></td>
+						<td><input name="files[1]" type="file" /></td>
 					</tr>
 					<tr>
 						<td>CRM</td>
-						<td><input name="files[2]" type="file"/></td>
-					</tr>					
+						<td><input name="files[2]" type="file" /></td>
+					</tr>
 				</table>
 				<br />
-				
+
 				<input type="submit" value="submit">
-				
-		</form:form>
-		</div> 
+
+			</form:form>
+		</div>
 
 
-<%-- 			<form method="POST" action="savefiles"
-				enctype="multipart/form-data">
-				Modello <input type="file" name="file">
-				<br/><br/>
-				Isole<input type="file" name="file">
-				<br/><br/>
-				CRM<input type="file" name="file">
-				<br/><br/>
-				<input type="submit" value="Upload">
-			</form> --%> <%-- <form:form  method="POST" action="savefiles" enctype="multipart/form-data">
-<input name="files[0]" type="file" multiple="multiple"/>
-<input name="files[1]" type="file" multiple="multiple"/>
-<input type="submit" value="Send" />
-</form:form> --%>
-
-		
-						</div>
+		</div>
 
 	</font>
 </body>
