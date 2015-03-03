@@ -20,6 +20,7 @@ import java.util.List;
 
 public class Rifiuti extends BaseObject {
 
+	private List<Profilo> profili;
 	private List<Area> aree;
 	private List<Gestore> gestori;
 	private List<Istituzione> istituzioni;
@@ -28,6 +29,14 @@ public class Rifiuti extends BaseObject {
 	private List<Raccolta> raccolta;
 
 	private Categorie categorie;
+
+	public List<Profilo> getProfili() {
+		return profili;
+	}
+
+	public void setProfili(List<Profilo> profili) {
+		this.profili = profili;
+	}
 
 	public List<Area> getAree() {
 		return aree;

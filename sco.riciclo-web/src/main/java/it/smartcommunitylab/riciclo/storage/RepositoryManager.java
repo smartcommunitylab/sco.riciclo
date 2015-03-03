@@ -20,6 +20,7 @@ import it.smartcommunitylab.riciclo.model.Area;
 import it.smartcommunitylab.riciclo.model.Categorie;
 import it.smartcommunitylab.riciclo.model.Gestore;
 import it.smartcommunitylab.riciclo.model.Istituzione;
+import it.smartcommunitylab.riciclo.model.Profilo;
 import it.smartcommunitylab.riciclo.model.PuntoRaccolta;
 import it.smartcommunitylab.riciclo.model.Raccolta;
 import it.smartcommunitylab.riciclo.model.Riciclabolario;
@@ -36,7 +37,7 @@ import org.springframework.data.mongodb.core.query.Update;
 
 public class RepositoryManager {
 
-	private Class[] classes = {Categorie.class, Area.class, Gestore.class, Istituzione.class, PuntoRaccolta.class, Raccolta.class, Riciclabolario.class};
+	private Class[] classes = {Categorie.class, Area.class, Gestore.class, Istituzione.class, PuntoRaccolta.class, Raccolta.class, Riciclabolario.class, Profilo.class};
 	
 	private MongoTemplate draftTemplate;
 	private MongoTemplate finalTemplate;
@@ -58,6 +59,9 @@ public class RepositoryManager {
 		for (Area area: rifiuti.getAree()) {
 			draftTemplate.save(area);
 		}
+		for (Profilo profilo: rifiuti.getProfili()) {
+			draftTemplate.save(profilo);
+		}		
 		for (Gestore gestore: rifiuti.getGestori()) {
 			draftTemplate.save(gestore);
 		}
@@ -117,6 +121,7 @@ public class RepositoryManager {
 		Rifiuti rifiuti = new Rifiuti();
 		Query query = new Query(new Criteria("appId").is(appId));
 		rifiuti.setAree(template.find(query, Area.class));
+		rifiuti.setProfili(template.find(query, Profilo.class));
 		rifiuti.setCategorie(template.findOne(query, Categorie.class));
 		rifiuti.setGestori(template.find(query, Gestore.class));
 		rifiuti.setIstituzioni(template.find(query, Istituzione.class));
