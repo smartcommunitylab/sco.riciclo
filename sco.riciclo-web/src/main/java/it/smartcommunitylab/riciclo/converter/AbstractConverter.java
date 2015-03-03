@@ -19,6 +19,7 @@ package it.smartcommunitylab.riciclo.converter;
 import it.smartcommunitylab.riciclo.model.Area;
 import it.smartcommunitylab.riciclo.model.Gestore;
 import it.smartcommunitylab.riciclo.model.Istituzione;
+import it.smartcommunitylab.riciclo.model.Profilo;
 import it.smartcommunitylab.riciclo.model.PuntoRaccolta;
 import it.smartcommunitylab.riciclo.model.Raccolta;
 import it.smartcommunitylab.riciclo.model.Riciclabolario;
@@ -70,7 +71,6 @@ public abstract class AbstractConverter implements RifiutiConverter {
 				problems.add(s);				
 			}	
 			
-			// ???
 			if (!gestori.contains(area.getGestore())) {
 				String s = "Gestore <" + area.getIstituzione() + "> not found for " + area;
 				problems.add(s);				
@@ -82,6 +82,14 @@ public abstract class AbstractConverter implements RifiutiConverter {
 			String s = "No root for Aree";
 			problems.add(s);					
 		}
+		
+		for (Profilo profilo: rifiuti.getProfili()) {
+			if (!tipologiaUtenza.contains(profilo.getTipologiaUtenza())) {
+				String s = "Tipologia Utenza <" + profilo.getTipologiaUtenza() + "> not found for " + profilo;
+				problems.add(s);				
+			}
+		}
+		
 		
 		for (PuntoRaccolta puntoRaccolta: rifiuti.getPuntiRaccolta()) {
 			if (!tipologiaPuntoRaccolta.contains(puntoRaccolta.getTipologiaPuntiRaccolta())) {
