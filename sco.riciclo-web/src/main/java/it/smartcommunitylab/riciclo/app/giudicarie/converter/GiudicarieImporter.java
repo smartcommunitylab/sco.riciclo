@@ -189,14 +189,13 @@ public class GiudicarieImporter {
 	}
 
 
-	private void completePuntiRaccolta(Rifiuti rifiuti) {
+	private void completePuntiRaccolta(Rifiuti rifiuti) throws Exception {
 		List<PuntiRaccolta> toRemove = Lists.newArrayList();
 		List<PuntiRaccolta> toAdd = Lists.newArrayList();		
 		
 		for (PuntiRaccolta puntoRaccolta : rifiuti.getPuntiRaccolta()) {
 
 			String name;
-			List<List<String>> result = new ArrayList<List<String>>();
 			Map<String, Collection<KMLData>> kml;
 			boolean isCrm = false;
 			boolean hasDescription = puntoRaccolta.getIndirizzo() == null || puntoRaccolta.getIndirizzo().isEmpty();
@@ -231,8 +230,9 @@ public class GiudicarieImporter {
 			
 			ObjectMapper mapper = new ObjectMapper();
 			toRemove.add(puntoRaccolta);
+			String prString = mapper.writeValueAsString(puntoRaccolta);
 			while (it.hasNext()) {
-				PuntiRaccolta newPuntoRaccolta = mapper.convertValue(puntoRaccolta, PuntiRaccolta.class);
+				PuntiRaccolta newPuntoRaccolta = mapper.readValue(prString, PuntiRaccolta.class);
 				toAdd.add(newPuntoRaccolta);
 				KMLData next = (KMLData) it.next();
 				newPuntoRaccolta.setLocalizzazione(next.getLat() + "," + next.getLon());
@@ -278,7 +278,6 @@ public class GiudicarieImporter {
 		
 		rifiuti.getPuntiRaccolta().removeAll(toRemove);
 		rifiuti.getPuntiRaccolta().addAll(toAdd);
-		
 	}
 
 

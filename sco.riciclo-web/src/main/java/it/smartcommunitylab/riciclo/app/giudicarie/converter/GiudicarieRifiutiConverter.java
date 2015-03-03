@@ -19,6 +19,7 @@ package it.smartcommunitylab.riciclo.app.giudicarie.converter;
 import it.smartcommunitylab.riciclo.app.giudicarie.model.Aree;
 import it.smartcommunitylab.riciclo.app.giudicarie.model.Gestori;
 import it.smartcommunitylab.riciclo.app.giudicarie.model.Istituzioni;
+import it.smartcommunitylab.riciclo.app.giudicarie.model.Profili;
 import it.smartcommunitylab.riciclo.app.giudicarie.model.PuntiRaccolta;
 import it.smartcommunitylab.riciclo.app.giudicarie.model.TipologiaPuntiRaccolta;
 import it.smartcommunitylab.riciclo.app.giudicarie.model.TipologiaRaccolta;
@@ -29,6 +30,7 @@ import it.smartcommunitylab.riciclo.model.Categorie;
 import it.smartcommunitylab.riciclo.model.Gestore;
 import it.smartcommunitylab.riciclo.model.Istituzione;
 import it.smartcommunitylab.riciclo.model.OrarioApertura;
+import it.smartcommunitylab.riciclo.model.Profilo;
 import it.smartcommunitylab.riciclo.model.PuntoRaccolta;
 import it.smartcommunitylab.riciclo.model.Raccolta;
 import it.smartcommunitylab.riciclo.model.Riciclabolario;
@@ -40,6 +42,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 
@@ -82,6 +85,7 @@ public class GiudicarieRifiutiConverter extends AbstractConverter {
 
 	public Rifiuti convert(Object input) throws Exception {
 		it.smartcommunitylab.riciclo.app.giudicarie.model.Rifiuti rifiuti = (it.smartcommunitylab.riciclo.app.giudicarie.model.Rifiuti) input;
+		
 		ObjectMapper mapper = new ObjectMapper();
 		mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
 
@@ -95,29 +99,49 @@ public class GiudicarieRifiutiConverter extends AbstractConverter {
 		categorie.setColori(new HashSet<Tipologia>());
 		categorie.setTipologiaIstituzione(new HashSet<Tipologia>());
 		categorie.setTipologiaRaccolta(new HashSet<Tipologia>());
-
+		
 		categorie.setTipologiaPuntiRaccolta(new HashSet());
 		for (TipologiaPuntiRaccolta tpr : rifiuti.getTipologiaPuntiRaccolta()) {
-			Tipologia cat = new Tipologia(tpr.getNome(), tpr.getInfoPuntiRaccolta(), null);
+			Tipologia cat = new Tipologia(StringUtils.capitalize(tpr.getNome().toLowerCase()).replace("Crm", "CRM"), tpr.getInfoPuntiRaccolta(), null);
 			categorie.getTipologiaPuntiRaccolta().add(cat);
 		}
 
 		categorie.setTipologiaRifiuto(new HashSet());
 		for (TipologiaRifiuto tr : rifiuti.getTipologiaRifiuto()) {
-			Tipologia cat = new Tipologia(tr.getValore(), null, null);
+			Tipologia cat = new Tipologia(StringUtils.capitalize(tr.getValore().toLowerCase()), null, null);
 			categorie.getTipologiaRifiuto().add(cat);
 		}
 
 		output.setCategorie(categorie);
 
+		List<Profilo> profili = Lists.newArrayList();
+		for (Profili pr : rifiuti.getProfili()) {
+			Profilo profilo = mapper.convertValue(pr, Profilo.class);
+			profilo.setAppId(appId);
+			profili.add(profilo);
+		}
+		output.setProfili(profili);
+		
 		List<Area> aree = Lists.newArrayList();
 		for (Aree ar : rifiuti.getAree()) {
 			Area area = mapper.convertValue(ar, Area.class);
 			area.setAppId(appId);
 			Map<String, Boolean> utenza = Maps.newTreeMap();
-			utenza.put(UTENZA_DOMESTICA, Boolean.parseBoolean(ar.getUtenzaDomestica()));
-			utenza.put(UTENZA_NON_DOMESTICA, Boolean.parseBoolean(ar.getUtenzaNonDomestica()));
-			utenza.put(UTENZA_OCCASIONALE, Boolean.parseBoolean(ar.getUtenzaOccasionale()));
+			if (ar.getUtenzaDomestica() != null && !ar.getUtenzaDomestica().isEmpty()) {
+				utenza.put(UTENZA_DOMESTICA, Boolean.parseBoolean(ar.getUtenzaDomestica()));
+			} else {
+				utenza.put(UTENZA_DOMESTICA, true);
+			}
+			if (ar.getUtenzaNonDomestica() != null && !ar.getUtenzaNonDomestica().isEmpty()) {
+				utenza.put(UTENZA_NON_DOMESTICA, Boolean.parseBoolean(ar.getUtenzaNonDomestica()));
+			} else {
+				utenza.put(UTENZA_NON_DOMESTICA, true);
+			}
+			if (ar.getUtenzaOccasionale() != null && !ar.getUtenzaOccasionale().isEmpty()) {
+				utenza.put(UTENZA_OCCASIONALE, Boolean.parseBoolean(ar.getUtenzaOccasionale()));
+			} else {
+				utenza.put(UTENZA_OCCASIONALE, true);
+			}
 			area.setUtenza(utenza);
 			aree.add(area);
 		}
@@ -143,6 +167,9 @@ public class GiudicarieRifiutiConverter extends AbstractConverter {
 		List<Raccolta> raccolte = Lists.newArrayList();
 		for (it.smartcommunitylab.riciclo.app.giudicarie.model.Raccolta rc : (List<it.smartcommunitylab.riciclo.app.giudicarie.model.Raccolta>) rifiuti.getRaccolta()) {
 			Raccolta raccolta = mapper.convertValue(rc, Raccolta.class);
+			raccolta.setTipologiaPuntoRaccolta(StringUtils.capitalize(raccolta.getTipologiaPuntoRaccolta().toLowerCase()).replace("Crm", "CRM"));
+			raccolta.setTipologiaRifiuto(StringUtils.capitalize(raccolta.getTipologiaRifiuto().toLowerCase()));
+			raccolta.setTipologiaRaccolta(StringUtils.capitalize(raccolta.getTipologiaRaccolta().toLowerCase().replace("crm", "CRM")));
 			raccolta.setAppId(appId);
 			raccolte.add(raccolta);
 			categorie.getColori().add(new Tipologia(raccolta.getColore(), null, null));
@@ -150,7 +177,7 @@ public class GiudicarieRifiutiConverter extends AbstractConverter {
 		output.setRaccolta(raccolte);
 
 		for (TipologiaRaccolta tr : rifiuti.getTipologiaRaccolta()) {
-			categorie.getTipologiaRaccolta().add(new Tipologia(tr.getNome(), null, tr.getIcona()));
+			categorie.getTipologiaRaccolta().add(new Tipologia(StringUtils.capitalize(tr.getNome().toLowerCase().replace("crm", "CRM")), null, tr.getIcona()));
 		}
 
 		output.setPuntiRaccolta(compactPuntiRaccolta(rifiuti.getPuntiRaccolta(), appId));
@@ -158,6 +185,7 @@ public class GiudicarieRifiutiConverter extends AbstractConverter {
 		List<Riciclabolario> riciclabolario = Lists.newArrayList();
 		for (it.smartcommunitylab.riciclo.app.giudicarie.model.Riciclabolario rc : (List<it.smartcommunitylab.riciclo.app.giudicarie.model.Riciclabolario>) rifiuti.getRiciclabolario()) {
 			Riciclabolario ric = mapper.convertValue(rc, Riciclabolario.class);
+			ric.setTipologiaRifiuto(StringUtils.capitalize(ric.getTipologiaRifiuto().toLowerCase()));
 			ric.setAppId(appId);
 			riciclabolario.add(ric);
 		}
@@ -194,6 +222,9 @@ public class GiudicarieRifiutiConverter extends AbstractConverter {
 					caratteristiche.put(INDUMENTI, Boolean.parseBoolean(pr.getResiduo()));
 					npr.setCaratteristiche(caratteristiche);
 				}
+				if (pr.getDataDa() ==  null || pr.getDataDa().isEmpty() || pr.getDataA() ==  null || pr.getDataA().isEmpty() || pr.getIl() ==  null || pr.getIl().isEmpty()) {
+					continue;
+				}
 				OrarioApertura oa = new OrarioApertura();
 				oa.setAlle(pr.getAlle());
 				oa.setDalle(pr.getDalle());
@@ -202,11 +233,18 @@ public class GiudicarieRifiutiConverter extends AbstractConverter {
 				oa.setIl(pr.getIl());
 				orari.add(oa);
 			}
+			if (!orari.isEmpty()) {
+				npr.setOrarioApertura(orari);
+			}
 			npr.setOrarioApertura(orari);
 			npr.setAppId(appId);
 			result.add(npr);
 		}
 
+		for (PuntoRaccolta pr: result) {
+			pr.setTipologiaPuntiRaccolta(StringUtils.capitalize(pr.getTipologiaPuntiRaccolta().toLowerCase()).replace("Crm", "CRM"));
+		}
+		
 		return result;
 	}
 
