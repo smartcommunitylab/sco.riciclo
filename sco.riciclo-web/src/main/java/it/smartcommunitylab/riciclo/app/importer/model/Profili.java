@@ -14,43 +14,34 @@
  *    limitations under the License.
  */
 
-package it.smartcommunitylab.riciclo.app.giudicarie.model;
+package it.smartcommunitylab.riciclo.app.importer.model;
 
-import java.util.List;
 
-public class ProfiloUtente {
+public class Profili {
 
-	private String utenza;
-	private String comune;
-	private String indirizzo;
-	private List<Aree> aree;
+	private String profilo;
+	private String tipologiaUtenza;
+	private String descrizione;
 	
-	public String getUtenza() {
-		return utenza;
+	public String getProfilo() {
+		return profilo;
 	}
-	public void setUtenza(String utenza) {
-		this.utenza = utenza;
+	public void setProfilo(String profilo) {
+		this.profilo = profilo;
 	}
-	public String getComune() {
-		return comune;
+	public String getTipologiaUtenza() {
+		return tipologiaUtenza;
 	}
-	public void setComune(String comune) {
-		this.comune = comune;
+	public void setTipologiaUtenza(String tipologiaUtenza) {
+		this.tipologiaUtenza = tipologiaUtenza;
 	}
-	public String getIndirizzo() {
-		return indirizzo;
+	public String getDescrizione() {
+		return descrizione;
 	}
-	public void setIndirizzo(String indirizzo) {
-		this.indirizzo = indirizzo;
+	public void setDescrizione(String descrizione) {
+		this.descrizione = descrizione;
 	}
-	public List<Aree> getAree() {
-		return aree;
-	}
-	public void setAree(List<Aree> aree) {
-		this.aree = aree;
-	}
-
-
 	
 	
+
 }

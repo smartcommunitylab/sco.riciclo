@@ -14,24 +14,20 @@
  *    limitations under the License.
  */
 
-package it.smartcommunitylab.riciclo.app.giudicarie.model;
+package it.smartcommunitylab.riciclo.app.importer.model;
 
 
-public class Riciclabolario {
+public class Raccolta {
 
-	private String nome;
-	
 	private String area;
 	private String tipologiaUtenza;
+	
 	private String tipologiaRifiuto;
-
-	public String getNome() {
-		return nome;
-	}
-
-	public void setNome(String nome) {
-		this.nome = nome;
-	}
+	private String tipologiaPuntoRaccolta;
+	
+	private String tipologiaRaccolta;
+	private String colore;
+	private String infoRaccolta;
 
 	public String getArea() {
 		return area;
@@ -56,5 +52,37 @@ public class Riciclabolario {
 	public void setTipologiaRifiuto(String tipologiaRifiuto) {
 		this.tipologiaRifiuto = tipologiaRifiuto;
 	}
+
+	public String getTipologiaPuntoRaccolta() {
+		return tipologiaPuntoRaccolta;
+	}
+
+	public void setTipologiaPuntoRaccolta(String tipologiaPuntoRaccolta) {
+		this.tipologiaPuntoRaccolta = tipologiaPuntoRaccolta;
+	}
+
+	public String getTipologiaRaccolta() {
+		return tipologiaRaccolta;
+	}
+
+	public void setTipologiaRaccolta(String tipologiaRaccolta) {
+		this.tipologiaRaccolta = tipologiaRaccolta;
+	}
+
+	public String getColore() {
+		return colore;
+	}
+
+	public void setColore(String colore) {
+		this.colore = colore;
+	}
+
+	public String getInfoRaccolta() {
+		return infoRaccolta;
+	}
+
+	public void setInfoRaccolta(String infoRaccolta) {
+		this.infoRaccolta = infoRaccolta;
+	}	
 	
 }

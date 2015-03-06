@@ -14,7 +14,7 @@
  *    limitations under the License.
  */
 
-package it.smartcommunitylab.riciclo.app.giudicarie.kml;
+package it.smartcommunitylab.riciclo.app.importer.kml;
 
 import java.io.InputStream;
 import java.util.Collection;

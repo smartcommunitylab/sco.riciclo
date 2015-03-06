@@ -48,11 +48,7 @@ public class RepositoryManager {
 	}
 	
 	public void save(Rifiuti rifiuti, String appId) {
-		Query query = new Query(new Criteria("appId").is(appId));
-		
-		for (Class clazz: classes) {
-			draftTemplate.remove(query, clazz);
-		}
+		cleanByAppId(appId, true);
 		
 		draftTemplate.save(rifiuti.getCategorie());
 
@@ -77,6 +73,28 @@ public class RepositoryManager {
 		for (Riciclabolario riciclabolario: rifiuti.getRiciclabolario()) {
 			draftTemplate.save(riciclabolario);
 		}			
+	}
+	
+	public void cleanByAppId(String appId, boolean draft) {
+		MongoTemplate template;
+		if (draft) {
+			template = draftTemplate;
+		} else {
+			template = finalTemplate;
+		}		
+		
+		Query query = new Query(new Criteria("appId").is(appId));
+		
+		for (Class clazz: classes) {
+			template.remove(query, clazz);
+		}
+		
+		try {
+			Thread.sleep(1000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	
 	public void publish(String appId) {

@@ -14,7 +14,7 @@
  *    limitations under the License.
  */
 
-package it.smartcommunitylab.riciclo.app.giudicarie.model;
+package it.smartcommunitylab.riciclo.app.importer.model;
 
 import java.util.List;
 
@@ -30,6 +30,7 @@ public class Rifiuti {
 	private List<Raccolta>raccolta;
 	private List<TipologiaPuntiRaccolta>tipologiaPuntiRaccolta;
 	private List<TipologiaRaccolta>tipologiaRaccolta;
+	private List<TipologiaUtenza>tipologiaUtenza;
 	
 	public List<Aree>getAree() {
 		return aree;
@@ -109,6 +110,14 @@ public class Rifiuti {
 
 	public void setTipologiaRaccolta(List<TipologiaRaccolta>tipologiaRaccolta) {
 		this.tipologiaRaccolta = tipologiaRaccolta;
+	}
+
+	public List<TipologiaUtenza> getTipologiaUtenza() {
+		return tipologiaUtenza;
+	}
+
+	public void setTipologiaUtenza(List<TipologiaUtenza> tipologiaUtenza) {
+		this.tipologiaUtenza = tipologiaUtenza;
 	}
 
 }

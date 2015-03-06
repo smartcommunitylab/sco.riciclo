@@ -14,32 +14,28 @@
  *    limitations under the License.
  */
 
-package it.smartcommunitylab.riciclo.app.giudicarie.model;
+package it.smartcommunitylab.riciclo.app.importer.model;
 
 
-public class Gestori {
+public class Istituzioni {
 
-	private String ragioneSociale;
+	private String nome;
+	private String tipologia;
 	private String descrizione;
 	private String ufficio;
 	private String indirizzo;
 	private String orarioUfficio;
-	private String sitoWeb;
+	private String sitoIstituzionale;
+	private String pec;
 	private String email;
 	private String telefono;
 	private String fax;
 	
-	public String getRagioneSociale() {
-		return ragioneSociale;
+	public String getNome() {
+		return nome;
 	}
-	public void setRagioneSociale(String ragioneSociale) {
-		this.ragioneSociale = ragioneSociale;
-	}
-	public String getDescrizione() {
-		return descrizione;
-	}
-	public void setDescrizione(String descrizione) {
-		this.descrizione = descrizione;
+	public void setNome(String nome) {
+		this.nome = nome;
 	}
 	public String getUfficio() {
 		return ufficio;
@@ -53,17 +49,35 @@ public class Gestori {
 	public void setIndirizzo(String indirizzo) {
 		this.indirizzo = indirizzo;
 	}
+	public String getTipologia() {
+		return tipologia;
+	}
+	public void setTipologia(String tipologia) {
+		this.tipologia = tipologia;
+	}
+	public String getDescrizione() {
+		return descrizione;
+	}
+	public void setDescrizione(String descrizione) {
+		this.descrizione = descrizione;
+	}
+	public String getSitoIstituzionale() {
+		return sitoIstituzionale;
+	}
 	public String getOrarioUfficio() {
 		return orarioUfficio;
 	}
 	public void setOrarioUfficio(String orarioUfficio) {
 		this.orarioUfficio = orarioUfficio;
 	}
-	public String getSitoWeb() {
-		return sitoWeb;
+	public void setSitoIstituzionale(String sitoIstituzionale) {
+		this.sitoIstituzionale = sitoIstituzionale;
 	}
-	public void setSitoWeb(String sitoWeb) {
-		this.sitoWeb = sitoWeb;
+	public String getPec() {
+		return pec;
+	}
+	public void setPec(String pec) {
+		this.pec = pec;
 	}
 	public String getEmail() {
 		return email;
@@ -83,7 +97,5 @@ public class Gestori {
 	public void setFax(String fax) {
 		this.fax = fax;
 	}
-	
-	
 
 }

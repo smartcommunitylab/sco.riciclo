@@ -14,7 +14,7 @@
  *    limitations under the License.
  */
 
-package it.smartcommunitylab.riciclo.app.giudicarie.model;
+package it.smartcommunitylab.riciclo.app.importer.model;
 
 
 public class Aree {
@@ -30,9 +30,12 @@ public class Aree {
 	private String via;
 	private String numero;
 	
-	private String utenzaDomestica;
-	private String utenzaNonDomestica;
-	private String utenzaOccasionale;
+//	private String utenzaDomestica;
+//	private String utenzaNonDomestica;
+//	private String utenzaOccasionale;
+//	private String utenzaCondominiale;
+	
+	private String utenze;
 	
 	public String getIstituzione() {
 		return istituzione;
@@ -106,28 +109,44 @@ public class Aree {
 		this.localita = localita;
 	}
 
-	public String getUtenzaDomestica() {
-		return utenzaDomestica;
+	public String getUtenze() {
+		return utenze;
 	}
 
-	public void setUtenzaDomestica(String utenzaDomestica) {
-		this.utenzaDomestica = utenzaDomestica;
+	public void setUtenze(String utenze) {
+		this.utenze = utenze;
 	}
 
-	public String getUtenzaNonDomestica() {
-		return utenzaNonDomestica;
-	}
-
-	public void setUtenzaNonDomestica(String utenzaNonDomestica) {
-		this.utenzaNonDomestica = utenzaNonDomestica;
-	}
-
-	public String getUtenzaOccasionale() {
-		return utenzaOccasionale;
-	}
-
-	public void setUtenzaOccasionale(String utenzaOccasionale) {
-		this.utenzaOccasionale = utenzaOccasionale;
-	}
+//	public String getUtenzaDomestica() {
+//		return utenzaDomestica;
+//	}
+//
+//	public void setUtenzaDomestica(String utenzaDomestica) {
+//		this.utenzaDomestica = utenzaDomestica;
+//	}
+//
+//	public String getUtenzaNonDomestica() {
+//		return utenzaNonDomestica;
+//	}
+//
+//	public void setUtenzaNonDomestica(String utenzaNonDomestica) {
+//		this.utenzaNonDomestica = utenzaNonDomestica;
+//	}
+//
+//	public String getUtenzaOccasionale() {
+//		return utenzaOccasionale;
+//	}
+//
+//	public void setUtenzaOccasionale(String utenzaOccasionale) {
+//		this.utenzaOccasionale = utenzaOccasionale;
+//	}
+//
+//	public String getUtenzaCondominiale() {
+//		return utenzaCondominiale;
+//	}
+//
+//	public void setUtenzaCondominiale(String utenzaCondominiale) {
+//		this.utenzaCondominiale = utenzaCondominiale;
+//	}
 	
 }

@@ -16,6 +16,9 @@
 	</head>
 	<body>
 		<font face="verdana" size="4">
+		
+			<a href=".">Uploads</a>
+		
 			<p>ERROR</p>
 	
 	
@@ -31,7 +34,7 @@
 				<c:forEach items="${validationErrors}" var="validationError">
 	         	${validationError} <br>
 				</c:forEach>
-			</ol> <br /> <a href="..">Uploads</a>
+			</ol> <br /> <a href=".">Uploads</a>
 	
 		</font>
 	

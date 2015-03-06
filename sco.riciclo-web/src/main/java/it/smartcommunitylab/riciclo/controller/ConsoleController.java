@@ -16,8 +16,8 @@
 
 package it.smartcommunitylab.riciclo.controller;
 
+import it.smartcommunitylab.riciclo.security.AppDetails;
 import it.smartcommunitylab.riciclo.security.AppSetup;
-import it.smartcommunitylab.riciclo.security.CustomAuthenticationProvider.AppDetails;
 
 import javax.servlet.ServletContext;
 
@@ -38,8 +38,8 @@ public class ConsoleController {
 	
 	@RequestMapping(value = "/")
 	public String root() {
-		String dir = getAppId().toLowerCase();
-		return dir + "/upload";
+//		String dir = getAppId().toLowerCase();
+		return "upload";
 	}		
 	
 	@RequestMapping(value = "/login")

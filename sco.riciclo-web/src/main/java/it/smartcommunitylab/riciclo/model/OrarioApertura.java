@@ -23,6 +23,7 @@ public class OrarioApertura {
 	private String il;
 	private String dalle;
 	private String alle;
+	private String eccezione;
 	
 	public String getDataDa() {
 		return dataDa;
@@ -53,6 +54,12 @@ public class OrarioApertura {
 	}
 	public void setAlle(String alle) {
 		this.alle = alle;
+	}
+	public String getEccezione() {
+		return eccezione;
+	}
+	public void setEccezione(String eccezione) {
+		this.eccezione = eccezione;
 	}	
 	
 	

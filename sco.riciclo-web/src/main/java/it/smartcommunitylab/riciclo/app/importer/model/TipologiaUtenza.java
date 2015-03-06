@@ -14,32 +14,18 @@
  *    limitations under the License.
  */
 
-package it.smartcommunitylab.riciclo.app.giudicarie.model;
+package it.smartcommunitylab.riciclo.app.importer.model;
 
+public class TipologiaUtenza {
 
-public class Profili {
+	private String valore;
 
-	private String profilo;
-	private String tipologiaUtenza;
-	private String descrizione;
-	
-	public String getProfilo() {
-		return profilo;
+	public String getValore() {
+		return valore;
 	}
-	public void setProfilo(String profilo) {
-		this.profilo = profilo;
-	}
-	public String getTipologiaUtenza() {
-		return tipologiaUtenza;
-	}
-	public void setTipologiaUtenza(String tipologiaUtenza) {
-		this.tipologiaUtenza = tipologiaUtenza;
-	}
-	public String getDescrizione() {
-		return descrizione;
-	}
-	public void setDescrizione(String descrizione) {
-		this.descrizione = descrizione;
+
+	public void setValore(String valore) {
+		this.valore = valore;
 	}
 	
 	

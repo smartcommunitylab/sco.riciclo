@@ -23,6 +23,7 @@ import it.smartcommunitylab.riciclo.model.Rifiuti;
 import it.smartcommunitylab.riciclo.security.AppCredentials;
 import it.smartcommunitylab.riciclo.security.AppDetails;
 import it.smartcommunitylab.riciclo.storage.AppDescriptor;
+import it.smartcommunitylab.riciclo.storage.RepositoryManager;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -59,16 +60,17 @@ import com.google.common.collect.Lists;
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes = { RifiutiConfig.class }, loader = AnnotationConfigWebContextLoader.class)
 @WebAppConfiguration
-public class GiudicarieTest {
+public class TrentoTest {
 
-	private static final String EXCEL_MODELLO_CONCETTUALE_XLS = "giudicarie/ExcelModelloConcettuale_V0.28.xls";
-	private static final String CRM_KML = "giudicarie/crm.kml";
-	private static final String ISOLE_ESTESE_KML = "giudicarie/isole_estese.kml";
+	private static final String EXCEL_MODELLO_CONCETTUALE_XLS = "trento/ExcelModelloConcettuale_V0 03.xls";
 
-	private final static String APP_ID = "GIUDICARIE";
+	private final static String APP_ID = "TRENTO";
 	
 	@Autowired
 	private WebApplicationContext wac;
+	
+	@Autowired
+	private RepositoryManager storage;	
 
 	private MockMvc mocker;
 	
@@ -84,7 +86,7 @@ public class GiudicarieTest {
 		AppDetails details = new AppDetails(credentials);
 		details.setApp(credentials);
 		TestingAuthenticationToken auth = new TestingAuthenticationToken(details, null);
-		SecurityContextHolder.getContext().setAuthentication(auth);		
+		SecurityContextHolder.getContext().setAuthentication(auth);
 		
 		ImportController controller = wac.getBean(ImportController.class);
 		
@@ -172,17 +174,17 @@ public class GiudicarieTest {
 		FileList fileList = new FileList();
 		
 		InputStream xlsIs = Thread.currentThread().getContextClassLoader().getResourceAsStream(EXCEL_MODELLO_CONCETTUALE_XLS);
-		InputStream isoleIs = Thread.currentThread().getContextClassLoader().getResourceAsStream(ISOLE_ESTESE_KML);
-		InputStream crmIs = Thread.currentThread().getContextClassLoader().getResourceAsStream(CRM_KML);		
+//		InputStream isoleIs = Thread.currentThread().getContextClassLoader().getResourceAsStream(ISOLE_ESTESE_KML);
+//		InputStream crmIs = Thread.currentThread().getContextClassLoader().getResourceAsStream(CRM_KML);		
 		
 		MockMultipartFile xlsFile = new MockMultipartFile(EXCEL_MODELLO_CONCETTUALE_XLS, xlsIs);
-		MockMultipartFile isoleFile = new MockMultipartFile(ISOLE_ESTESE_KML, isoleIs);
-		MockMultipartFile crmFile = new MockMultipartFile(CRM_KML, crmIs);
+//		MockMultipartFile isoleFile = new MockMultipartFile(ISOLE_ESTESE_KML, isoleIs);
+//		MockMultipartFile crmFile = new MockMultipartFile(CRM_KML, crmIs);
 		
 		List<MultipartFile> files = Lists.newArrayList();
 		files.add(xlsFile);
-		files.add(isoleFile);
-		files.add(crmFile);
+//		files.add(isoleFile);
+//		files.add(crmFile);
 		
 		fileList.setFiles(files);
 		

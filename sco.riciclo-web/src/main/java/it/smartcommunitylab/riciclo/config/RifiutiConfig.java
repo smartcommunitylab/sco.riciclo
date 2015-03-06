@@ -16,7 +16,8 @@
 
 package it.smartcommunitylab.riciclo.config;
 
-import it.smartcommunitylab.riciclo.app.giudicarie.converter.GiudicarieRifiutiConverter;
+import it.smartcommunitylab.riciclo.app.importer.converter.RifiutiConverter;
+import it.smartcommunitylab.riciclo.app.importer.converter.RifiutiValidator;
 import it.smartcommunitylab.riciclo.storage.RepositoryManager;
 
 import java.net.UnknownHostException;
@@ -72,8 +73,13 @@ public class RifiutiConfig {
 	}
 
 	@Bean
-	GiudicarieRifiutiConverter getGiudicarieRifiutiConverter() {
-		return new GiudicarieRifiutiConverter();
+	RifiutiConverter getRifiutiConverter() {
+		return new RifiutiConverter();
 	}
+	
+	@Bean
+	RifiutiValidator getRifiutiValidator() {
+		return new RifiutiValidator();
+	}	
 
 }

@@ -14,28 +14,47 @@
  *    limitations under the License.
  */
 
-package it.smartcommunitylab.riciclo.app.giudicarie.model;
+package it.smartcommunitylab.riciclo.app.importer.model;
 
-public class TipologiaPuntiRaccolta {
+
+public class Riciclabolario {
 
 	private String nome;
-	private String infoPuntiRaccolta;
 	
+	private String area;
+	private String tipologiaUtenza;
+	private String tipologiaRifiuto;
+
 	public String getNome() {
 		return nome;
 	}
+
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
-	public String getInfoPuntiRaccolta() {
-		return infoPuntiRaccolta;
-	}
-	public void setInfoPuntiRaccolta(String infoPuntiRaccolta) {
-		this.infoPuntiRaccolta = infoPuntiRaccolta;
+
+	public String getArea() {
+		return area;
 	}
 
+	public void setArea(String area) {
+		this.area = area;
+	}
 
-	
-	
+	public String getTipologiaUtenza() {
+		return tipologiaUtenza;
+	}
 
+	public void setTipologiaUtenza(String tipologiaUtenza) {
+		this.tipologiaUtenza = tipologiaUtenza;
+	}
+
+	public String getTipologiaRifiuto() {
+		return tipologiaRifiuto;
+	}
+
+	public void setTipologiaRifiuto(String tipologiaRifiuto) {
+		this.tipologiaRifiuto = tipologiaRifiuto;
+	}
+	
 }

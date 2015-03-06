@@ -16,7 +16,7 @@
 	<body> 
 		<font face="verdana" size="4">
 			<p>SUCCESS</p>
-			<a href="..">Uploads</a>
+			<a href=".">Uploads</a>
 		</font>
 	</body>
 </html>

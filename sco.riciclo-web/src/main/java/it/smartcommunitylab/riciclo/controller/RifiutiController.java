@@ -100,6 +100,7 @@ public class RifiutiController {
 		mapper.configure(SerializationFeature.WRITE_NULL_MAP_VALUES, false);
 		mapper.setSerializationInclusion(Include.NON_NULL);
 		String r = mapper.writeValueAsString(rifiuti);
+		r = r.replace("\"appId\":\"" + appId + "\",","");
 		String r2 = new String(r.getBytes("UTF-8"));
 		
 		compress(outputBuffer, r2.getBytes(), "final-" + appId + ".json");
@@ -120,6 +121,7 @@ public class RifiutiController {
 		mapper.configure(SerializationFeature.WRITE_NULL_MAP_VALUES, false);
 		mapper.setSerializationInclusion(Include.NON_NULL);
 		String r = mapper.writeValueAsString(rifiuti);
+		r = r.replace("\"appId\":\"" + appId + "\",","");
 		String r2 = new String(r.getBytes("UTF-8"));
 		
 		compress(outputBuffer, r2.getBytes(), "draft-" + appId + ".json");

@@ -14,18 +14,43 @@
  *    limitations under the License.
  */
 
-package it.smartcommunitylab.riciclo.converter;
-
-import it.smartcommunitylab.riciclo.model.Rifiuti;
+package it.smartcommunitylab.riciclo.app.importer.model;
 
 import java.util.List;
 
-public interface RifiutiConverter {
+public class ProfiloUtente {
 
-	public void setAppId(String appId);
-	public String getAppId();
-	public Rifiuti convert(Object input) throws Exception;
+	private String utenza;
+	private String comune;
+	private String indirizzo;
+	private List<Aree> aree;
 	
-	public List<String> specificValidate(Rifiuti rifiuti) throws Exception;
+	public String getUtenza() {
+		return utenza;
+	}
+	public void setUtenza(String utenza) {
+		this.utenza = utenza;
+	}
+	public String getComune() {
+		return comune;
+	}
+	public void setComune(String comune) {
+		this.comune = comune;
+	}
+	public String getIndirizzo() {
+		return indirizzo;
+	}
+	public void setIndirizzo(String indirizzo) {
+		this.indirizzo = indirizzo;
+	}
+	public List<Aree> getAree() {
+		return aree;
+	}
+	public void setAree(List<Aree> aree) {
+		this.aree = aree;
+	}
+
+
+	
 	
 }

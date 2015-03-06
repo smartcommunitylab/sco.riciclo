@@ -1,20 +1,4 @@
-/**
- *    Copyright 2015 Fondazione Bruno Kessler - Trento RISE
- *
- *    Licensed under the Apache License, Version 2.0 (the "License");
- *    you may not use this file except in compliance with the License.
- *    You may obtain a copy of the License at
- *
- *        http://www.apache.org/licenses/LICENSE-2.0
- *
- *    Unless required by applicable law or agreed to in writing, software
- *    distributed under the License is distributed on an "AS IS" BASIS,
- *    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- *    See the License for the specific language governing permissions and
- *    limitations under the License.
- */
-
-package it.smartcommunitylab.riciclo.converter;
+package it.smartcommunitylab.riciclo.app.importer.converter;
 
 import it.smartcommunitylab.riciclo.model.Area;
 import it.smartcommunitylab.riciclo.model.Gestore;
@@ -36,7 +20,7 @@ import org.apache.commons.lang.WordUtils;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
 
-public abstract class AbstractConverter implements RifiutiConverter {
+public class RifiutiValidator {
 
 	public List<String> validate(Rifiuti rifiuti) throws Exception {
 		List<String> problems = Lists.newArrayList();
@@ -52,6 +36,7 @@ public abstract class AbstractConverter implements RifiutiConverter {
 		Set<String> istituzioni = flattenList(rifiuti.getIstituzioni(), Istituzione.class);
 		
 		Set<String> gestori = flattenList(rifiuti.getGestori(), Gestore.class, "ragioneSociale");
+		Set<String> comuni = flattenList(rifiuti.getAree(), Area.class, "comune");
 		
 		for (Istituzione istituzione: rifiuti.getIstituzioni()) {
 			if (!tipologiaIstituzione.contains(istituzione.getTipologia())) {
@@ -110,6 +95,30 @@ public abstract class AbstractConverter implements RifiutiConverter {
 					problems.add(s);
 				}
 			}
+			
+			if (!comuni.contains(puntoRaccolta.getIndirizzo())) {
+				if (puntoRaccolta.getIndirizzo() != null && !puntoRaccolta.getIndirizzo().isEmpty()) {
+					String s = "Comune <" + puntoRaccolta.getIndirizzo() + "> not found for " + puntoRaccolta;
+					problems.add(s);
+				}
+			}
+//			boolean needAddress = "crm".equals(puntoRaccolta.getTipologiaPuntiRaccolta().toLowerCase()) || "crz".equals(puntoRaccolta.getTipologiaPuntiRaccolta().toLowerCase()) || "isola ecologica".equals(puntoRaccolta.getTipologiaPuntiRaccolta().toLowerCase());
+//			
+//			if (needAddress) {
+//				if (puntoRaccolta.getIndirizzo() == null || puntoRaccolta.getIndirizzo().isEmpty()) {
+//					String s = "Missing 'indirizzo' for " + puntoRaccolta;
+//					problems.add(s);
+//				}
+//				if (puntoRaccolta.getDettaglioIndirizzo() == null || puntoRaccolta.getDettaglioIndirizzo().isEmpty()) {
+//					String s = "Missing 'dettaglioIndirizzo' for " + puntoRaccolta;
+//					problems.add(s);
+//				}
+//				if (puntoRaccolta.getLocalizzazione() == null || puntoRaccolta.getLocalizzazione().isEmpty()) {
+//					String s = "Missing 'localizzazione' for " + puntoRaccolta;
+//					problems.add(s);
+//				}
+//			}			
+			
 		}
 		
 		for (Raccolta raccolta: rifiuti.getRaccolta()) {
@@ -154,8 +163,6 @@ public abstract class AbstractConverter implements RifiutiConverter {
 			}
 		}
 		
-		problems.addAll(specificValidate(rifiuti));
-		
 		return problems;
 	}
 	
@@ -175,6 +182,6 @@ public abstract class AbstractConverter implements RifiutiConverter {
 			result.add(value);
 		}
 		return result;
-	}		
+	}			
 	
 }

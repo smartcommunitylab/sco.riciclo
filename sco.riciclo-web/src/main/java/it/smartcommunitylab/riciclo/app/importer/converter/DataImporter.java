@@ -14,12 +14,12 @@
  *    limitations under the License.
  */
 
-package it.smartcommunitylab.riciclo.app.giudicarie.converter;
+package it.smartcommunitylab.riciclo.app.importer.converter;
 
-import it.smartcommunitylab.riciclo.app.giudicarie.kml.KMLData;
-import it.smartcommunitylab.riciclo.app.giudicarie.kml.KMLReader;
-import it.smartcommunitylab.riciclo.app.giudicarie.model.PuntiRaccolta;
-import it.smartcommunitylab.riciclo.app.giudicarie.model.Rifiuti;
+import it.smartcommunitylab.riciclo.app.importer.kml.KMLData;
+import it.smartcommunitylab.riciclo.app.importer.kml.KMLReader;
+import it.smartcommunitylab.riciclo.app.importer.model.PuntiRaccolta;
+import it.smartcommunitylab.riciclo.app.importer.model.Rifiuti;
 
 import java.io.InputStream;
 import java.lang.reflect.Method;
@@ -48,7 +48,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.common.collect.Lists;
 
 @Component
-public class GiudicarieImporter {
+public class DataImporter {
 
 	private List<String> oneColumnAsMany;
 	private Properties primaryKeys;
@@ -56,17 +56,21 @@ public class GiudicarieImporter {
 	private Map<String, Collection<KMLData>> isole;
 	private Map<String, Collection<KMLData>> crm;
 
-	public GiudicarieImporter() throws Exception {
-		String[] exSheets = new String[] { "TIPOLOGIA_RIFIUTO" };
+	public DataImporter() throws Exception {
+		String[] exSheets = new String[] { "TIPOLOGIA_RIFIUTO", "TIPOLOGIA_UTENZA" };
 		primaryKeys = new Properties();
-		primaryKeys.load(Thread.currentThread().getContextClassLoader().getResourceAsStream("giudicarie/primary_keys.txt"));
+		primaryKeys.load(Thread.currentThread().getContextClassLoader().getResourceAsStream("primary_keys.txt"));
 		
 		oneColumnAsMany = Arrays.asList(exSheets);
 	}
 	
 	public Rifiuti importRifiuti(InputStream xlsIs, InputStream isoleIs, InputStream crmIs) throws Exception {
-		isole = KMLReader.readIsole(isoleIs);
-		crm = KMLReader.readCRM(crmIs);
+		if (isoleIs != null) {
+			isole = KMLReader.readIsole(isoleIs);
+		}
+		if (crmIs != null) {
+			crm = KMLReader.readCRM(crmIs);
+		}
 		return readExcel(xlsIs);
 	}
 
@@ -82,8 +86,10 @@ public class GiudicarieImporter {
 		for (int i = 0; i < wb.getNumberOfSheets(); i++) {
 			Sheet sheet = wb.getSheetAt(i);
 			Thread.sleep(1000);
+//			System.out.println(sheet.getSheetName());
 			if (sheet.getRow(0).getLastCellNum() == 1 && !oneColumnAsMany.contains(sheet.getSheetName())) {
 			} else {
+//				System.out.println(">" + sheet.getSheetName());
 				List<Map<String, String>> result = getSheetMap(sheet);
 				mapMap(rifiuti, sheet.getSheetName(), result);
 			}
@@ -163,7 +169,7 @@ public class GiudicarieImporter {
 	}
 
 	private Rifiuti mapMap(Rifiuti rifiuti, String sheetName, List<Map<String, String>> data) throws Exception {
-		String className = "it.smartcommunitylab.riciclo.app.giudicarie.model." + WordUtils.capitalizeFully(sheetName.replace(' ', '_'), new char[] { '_' }).replace("_", "").trim();
+		String className = "it.smartcommunitylab.riciclo.app.importer.model." + WordUtils.capitalizeFully(sheetName.replace(' ', '_'), new char[] { '_' }).replace("_", "").trim();
 		String field = WordUtils.capitalizeFully(" " + sheetName.replace(' ', '_'), new char[] { '_' }).replace("_", "").trim();
 
 		Class<?> clazz = null;
@@ -199,7 +205,7 @@ public class GiudicarieImporter {
 			Map<String, Collection<KMLData>> kml;
 			boolean isCrm = false;
 			boolean hasDescription = puntoRaccolta.getIndirizzo() == null || puntoRaccolta.getIndirizzo().isEmpty();
-			if ("crm".equals(puntoRaccolta.getTipologiaPuntiRaccolta().toLowerCase())) {
+			if (isCrmLike(puntoRaccolta.getTipologiaPuntiRaccolta().toLowerCase())) {
 				kml = crm;
 				name = puntoRaccolta.getIndirizzo().toLowerCase();
 				isCrm = true;
@@ -214,62 +220,64 @@ public class GiudicarieImporter {
 				continue;
 			}
 
-			if (!name.isEmpty() && (!kml.containsKey(name) || (isCrm && hasDescription == true))) {
-				continue;
-			}
-
-			Collection<KMLData> data = kml.get(name);
-			if (name.isEmpty()) {
-				data = new HashSet<KMLData>();
-				for (Collection<KMLData> colls : kml.values()) {
-					data.addAll(colls);
+			if (kml != null) {
+				if (!name.isEmpty() && (!kml.containsKey(name) || (isCrm && hasDescription == true))) {
+					continue;
 				}
-			}
-
-			Iterator<KMLData> it = data.iterator();
-			
-			ObjectMapper mapper = new ObjectMapper();
-			toRemove.add(puntoRaccolta);
-			String prString = mapper.writeValueAsString(puntoRaccolta);
-			while (it.hasNext()) {
-				PuntiRaccolta newPuntoRaccolta = mapper.readValue(prString, PuntiRaccolta.class);
-				toAdd.add(newPuntoRaccolta);
-				KMLData next = (KMLData) it.next();
-				newPuntoRaccolta.setLocalizzazione(next.getLat() + "," + next.getLon());
+				
+				Collection<KMLData> data = kml.get(name);
 				if (name.isEmpty()) {
-					newPuntoRaccolta.setIndirizzo(next.getName());
+					data = new HashSet<KMLData>();
+					for (Collection<KMLData> colls : kml.values()) {
+						data.addAll(colls);
+					}
 				}
-				if (next.getAttributes() != null) {
-					for (Integer key : next.getAttributes().keySet()) {
-						String value = next.getAttributes().get(key);
-						switch (key) {
-						case 5:
-							newPuntoRaccolta.setDettaglioIndirizzo(value);
-							break;
-						case 11:
-							newPuntoRaccolta.setGettoniera(value);
-							break;
-						case 12:
-							newPuntoRaccolta.setResiduo(value);
-							break;
-						case 13:
-							newPuntoRaccolta.setImbCarta(value);
-							break;
-						case 14:
-							newPuntoRaccolta.setImbPlMet(value);
-							break;
-						case 15:
-							newPuntoRaccolta.setOrganico(value);
-							break;
-						case 16:
-							newPuntoRaccolta.setImbVetro(value);
-							break;
-						case 17:
-							newPuntoRaccolta.setIndumenti(value);
-							break;
-						case 18:
-							newPuntoRaccolta.setNote(value);
-							break;
+
+				Iterator<KMLData> it = data.iterator();
+
+				ObjectMapper mapper = new ObjectMapper();
+				toRemove.add(puntoRaccolta);
+				String prString = mapper.writeValueAsString(puntoRaccolta);
+				while (it.hasNext()) {
+					PuntiRaccolta newPuntoRaccolta = mapper.readValue(prString, PuntiRaccolta.class);
+					toAdd.add(newPuntoRaccolta);
+					KMLData next = (KMLData) it.next();
+					newPuntoRaccolta.setLocalizzazione(next.getLat() + "," + next.getLon());
+					if (name.isEmpty()) {
+						newPuntoRaccolta.setIndirizzo(next.getName());
+					}
+					if (next.getAttributes() != null) {
+						for (Integer key : next.getAttributes().keySet()) {
+							String value = next.getAttributes().get(key);
+							switch (key) {
+							case 5:
+								newPuntoRaccolta.setDettaglioIndirizzo(value);
+								break;
+							case 11:
+								newPuntoRaccolta.setGettoniera(value);
+								break;
+							case 12:
+								newPuntoRaccolta.setResiduo(value);
+								break;
+							case 13:
+								newPuntoRaccolta.setImbCarta(value);
+								break;
+							case 14:
+								newPuntoRaccolta.setImbPlMet(value);
+								break;
+							case 15:
+								newPuntoRaccolta.setOrganico(value);
+								break;
+							case 16:
+								newPuntoRaccolta.setImbVetro(value);
+								break;
+							case 17:
+								newPuntoRaccolta.setIndumenti(value);
+								break;
+							case 18:
+								newPuntoRaccolta.setNote(value);
+								break;
+							}
 						}
 					}
 				}
@@ -280,6 +288,9 @@ public class GiudicarieImporter {
 		rifiuti.getPuntiRaccolta().addAll(toAdd);
 	}
 
+	private boolean isCrmLike(String tipologia) {
+		return "crm".equals(tipologia.toLowerCase()) || "crz".equals(tipologia.toLowerCase());
+	}
 
 
 }

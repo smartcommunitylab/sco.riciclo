@@ -1,4 +1,6 @@
 apps:
   - id: GIUDICARIE
-    password: GIUDICARIE 
+    password: GIUDICARIE
+  - id: TRENTO
+    password: TRENTO      
           

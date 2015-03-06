@@ -31,11 +31,11 @@ a:active {
 </head>
 <body>
 	<font face="verdana" size="4">
-		<p>Giudicarie</p>
+		<p>Upload</p>
 
 		<div>
 			<form:form method="post" modelAttribute="fileList"
-				action="giudicarie/savefiles" enctype="multipart/form-data">
+				action="savefiles" enctype="multipart/form-data">
 				<table id="fileTable">
 					<tr>
 						<td>Modello</td>

@@ -14,17 +14,17 @@
  *    limitations under the License.
  */
 
-package it.smartcommunitylab.riciclo.app.giudicarie.converter;
+package it.smartcommunitylab.riciclo.app.importer.converter;
 
-import it.smartcommunitylab.riciclo.app.giudicarie.model.Aree;
-import it.smartcommunitylab.riciclo.app.giudicarie.model.Gestori;
-import it.smartcommunitylab.riciclo.app.giudicarie.model.Istituzioni;
-import it.smartcommunitylab.riciclo.app.giudicarie.model.Profili;
-import it.smartcommunitylab.riciclo.app.giudicarie.model.PuntiRaccolta;
-import it.smartcommunitylab.riciclo.app.giudicarie.model.TipologiaPuntiRaccolta;
-import it.smartcommunitylab.riciclo.app.giudicarie.model.TipologiaRaccolta;
-import it.smartcommunitylab.riciclo.app.giudicarie.model.TipologiaRifiuto;
-import it.smartcommunitylab.riciclo.converter.AbstractConverter;
+import it.smartcommunitylab.riciclo.app.importer.model.Aree;
+import it.smartcommunitylab.riciclo.app.importer.model.Gestori;
+import it.smartcommunitylab.riciclo.app.importer.model.Istituzioni;
+import it.smartcommunitylab.riciclo.app.importer.model.Profili;
+import it.smartcommunitylab.riciclo.app.importer.model.PuntiRaccolta;
+import it.smartcommunitylab.riciclo.app.importer.model.TipologiaPuntiRaccolta;
+import it.smartcommunitylab.riciclo.app.importer.model.TipologiaRaccolta;
+import it.smartcommunitylab.riciclo.app.importer.model.TipologiaRifiuto;
+import it.smartcommunitylab.riciclo.app.importer.model.TipologiaUtenza;
 import it.smartcommunitylab.riciclo.model.Area;
 import it.smartcommunitylab.riciclo.model.Categorie;
 import it.smartcommunitylab.riciclo.model.Gestore;
@@ -43,8 +43,6 @@ import java.util.Map;
 import java.util.Set;
 
 import org.apache.commons.lang.StringUtils;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -55,11 +53,7 @@ import com.google.common.collect.Maps;
 import com.google.common.collect.Multimap;
 import com.google.common.collect.Sets;
 
-public class GiudicarieRifiutiConverter extends AbstractConverter {
-
-	private static final String UTENZA_DOMESTICA = "utenza domestica";
-	private static final String UTENZA_NON_DOMESTICA = "utenza non domestica";
-	private static final String UTENZA_OCCASIONALE = "utenza occasionale";
+public class RifiutiConverter {
 
 	private static final String GETTONIERA = "GETTONIERA";
 	private static final String RESIDUO = "RESIDUO";
@@ -69,22 +63,8 @@ public class GiudicarieRifiutiConverter extends AbstractConverter {
 	private static final String IMB_VETRO = "IMB_VETRO";
 	private static final String INDUMENTI = "INDUMENTI";
 
-	@Autowired
-	@Value("${giudicarie.appId}")
-	private String appId;
-
-	@Override
-	public void setAppId(String appId) {
-		this.appId = appId;
-	}
-
-	@Override
-	public String getAppId() {
-		return appId;
-	}
-
-	public Rifiuti convert(Object input) throws Exception {
-		it.smartcommunitylab.riciclo.app.giudicarie.model.Rifiuti rifiuti = (it.smartcommunitylab.riciclo.app.giudicarie.model.Rifiuti) input;
+	public Rifiuti convert(Object input, String appId) throws Exception {
+		it.smartcommunitylab.riciclo.app.importer.model.Rifiuti rifiuti = (it.smartcommunitylab.riciclo.app.importer.model.Rifiuti) input;
 		
 		ObjectMapper mapper = new ObjectMapper();
 		mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
@@ -93,7 +73,7 @@ public class GiudicarieRifiutiConverter extends AbstractConverter {
 
 		Categorie categorie = new Categorie();
 		categorie.setAppId(appId);
-		categorie.setTipologiaUtenza(buildTipologieSet(new String[] { UTENZA_DOMESTICA, UTENZA_NON_DOMESTICA, UTENZA_OCCASIONALE }));
+		
 		categorie.setCaratteristicaPuntoRaccolta(buildTipologieSet(new String[] { GETTONIERA, RESIDUO, IMB_CARTA, IMB_PL_MET, ORGANICO, IMB_VETRO, INDUMENTI }));
 
 		categorie.setColori(new HashSet<Tipologia>());
@@ -102,7 +82,7 @@ public class GiudicarieRifiutiConverter extends AbstractConverter {
 		
 		categorie.setTipologiaPuntiRaccolta(new HashSet());
 		for (TipologiaPuntiRaccolta tpr : rifiuti.getTipologiaPuntiRaccolta()) {
-			Tipologia cat = new Tipologia(StringUtils.capitalize(tpr.getNome().toLowerCase()).replace("Crm", "CRM"), tpr.getInfoPuntiRaccolta(), null);
+			Tipologia cat = new Tipologia(StringUtils.capitalize(tpr.getNome().toLowerCase()).replace("Crm", "CRM").replace("Crz", "CRZ"), tpr.getInfoPuntiRaccolta(), null);
 			categorie.getTipologiaPuntiRaccolta().add(cat);
 		}
 
@@ -111,6 +91,13 @@ public class GiudicarieRifiutiConverter extends AbstractConverter {
 			Tipologia cat = new Tipologia(StringUtils.capitalize(tr.getValore().toLowerCase()), null, null);
 			categorie.getTipologiaRifiuto().add(cat);
 		}
+		
+		categorie.setTipologiaUtenza(new HashSet());
+		for (TipologiaUtenza tr : rifiuti.getTipologiaUtenza()) {
+			Tipologia cat = new Tipologia(tr.getValore().toLowerCase(), null, null);
+			categorie.getTipologiaUtenza().add(cat);
+		}		
+		
 
 		output.setCategorie(categorie);
 
@@ -127,21 +114,22 @@ public class GiudicarieRifiutiConverter extends AbstractConverter {
 			Area area = mapper.convertValue(ar, Area.class);
 			area.setAppId(appId);
 			Map<String, Boolean> utenza = Maps.newTreeMap();
-			if (ar.getUtenzaDomestica() != null && !ar.getUtenzaDomestica().isEmpty()) {
-				utenza.put(UTENZA_DOMESTICA, Boolean.parseBoolean(ar.getUtenzaDomestica()));
+			String[] utenze = null;
+			boolean defaultValue = false;
+			if (ar.getUtenze() == null) {
+				defaultValue = true;
 			} else {
-				utenza.put(UTENZA_DOMESTICA, true);
+				utenze = ar.getUtenze().split(";");
 			}
-			if (ar.getUtenzaNonDomestica() != null && !ar.getUtenzaNonDomestica().isEmpty()) {
-				utenza.put(UTENZA_NON_DOMESTICA, Boolean.parseBoolean(ar.getUtenzaNonDomestica()));
-			} else {
-				utenza.put(UTENZA_NON_DOMESTICA, true);
+			for (Tipologia ut: categorie.getTipologiaUtenza()) {
+				utenza.put(ut.getNome(), defaultValue);
 			}
-			if (ar.getUtenzaOccasionale() != null && !ar.getUtenzaOccasionale().isEmpty()) {
-				utenza.put(UTENZA_OCCASIONALE, Boolean.parseBoolean(ar.getUtenzaOccasionale()));
-			} else {
-				utenza.put(UTENZA_OCCASIONALE, true);
+			if (utenze != null) {
+				for (String ut : utenze) {
+					utenza.put(ut, true);
+				}
 			}
+			
 			area.setUtenza(utenza);
 			aree.add(area);
 		}
@@ -165,11 +153,11 @@ public class GiudicarieRifiutiConverter extends AbstractConverter {
 		output.setIstituzioni(istituzioni);
 
 		List<Raccolta> raccolte = Lists.newArrayList();
-		for (it.smartcommunitylab.riciclo.app.giudicarie.model.Raccolta rc : (List<it.smartcommunitylab.riciclo.app.giudicarie.model.Raccolta>) rifiuti.getRaccolta()) {
+		for (it.smartcommunitylab.riciclo.app.importer.model.Raccolta rc : (List<it.smartcommunitylab.riciclo.app.importer.model.Raccolta>) rifiuti.getRaccolta()) {
 			Raccolta raccolta = mapper.convertValue(rc, Raccolta.class);
-			raccolta.setTipologiaPuntoRaccolta(StringUtils.capitalize(raccolta.getTipologiaPuntoRaccolta().toLowerCase()).replace("Crm", "CRM"));
+			raccolta.setTipologiaPuntoRaccolta(StringUtils.capitalize(raccolta.getTipologiaPuntoRaccolta().toLowerCase()).replace("Crm", "CRM").replace("Crz", "CRZ"));
 			raccolta.setTipologiaRifiuto(StringUtils.capitalize(raccolta.getTipologiaRifiuto().toLowerCase()));
-			raccolta.setTipologiaRaccolta(StringUtils.capitalize(raccolta.getTipologiaRaccolta().toLowerCase().replace("crm", "CRM")));
+			raccolta.setTipologiaRaccolta(StringUtils.capitalize(raccolta.getTipologiaRaccolta().toLowerCase().replace("crm", "CRM").replace("crz", "CRZ")));
 			raccolta.setAppId(appId);
 			raccolte.add(raccolta);
 			categorie.getColori().add(new Tipologia(raccolta.getColore(), null, null));
@@ -177,13 +165,13 @@ public class GiudicarieRifiutiConverter extends AbstractConverter {
 		output.setRaccolta(raccolte);
 
 		for (TipologiaRaccolta tr : rifiuti.getTipologiaRaccolta()) {
-			categorie.getTipologiaRaccolta().add(new Tipologia(StringUtils.capitalize(tr.getNome().toLowerCase().replace("crm", "CRM")), null, tr.getIcona()));
+			categorie.getTipologiaRaccolta().add(new Tipologia(StringUtils.capitalize(tr.getNome().toLowerCase().replace("crm", "CRM").replace("crz", "CRZ")), null, tr.getIcona()));
 		}
 
 		output.setPuntiRaccolta(compactPuntiRaccolta(rifiuti.getPuntiRaccolta(), appId));
 
 		List<Riciclabolario> riciclabolario = Lists.newArrayList();
-		for (it.smartcommunitylab.riciclo.app.giudicarie.model.Riciclabolario rc : (List<it.smartcommunitylab.riciclo.app.giudicarie.model.Riciclabolario>) rifiuti.getRiciclabolario()) {
+		for (it.smartcommunitylab.riciclo.app.importer.model.Riciclabolario rc : (List<it.smartcommunitylab.riciclo.app.importer.model.Riciclabolario>) rifiuti.getRiciclabolario()) {
 			Riciclabolario ric = mapper.convertValue(rc, Riciclabolario.class);
 			ric.setTipologiaRifiuto(StringUtils.capitalize(ric.getTipologiaRifiuto().toLowerCase()));
 			ric.setAppId(appId);
@@ -231,6 +219,7 @@ public class GiudicarieRifiutiConverter extends AbstractConverter {
 				oa.setDataA(pr.getDataA());
 				oa.setDataDa(pr.getDataDa());
 				oa.setIl(pr.getIl());
+				oa.setEccezione(pr.getEccezione());
 				orari.add(oa);
 			}
 			if (!orari.isEmpty()) {
@@ -242,7 +231,7 @@ public class GiudicarieRifiutiConverter extends AbstractConverter {
 		}
 
 		for (PuntoRaccolta pr: result) {
-			pr.setTipologiaPuntiRaccolta(StringUtils.capitalize(pr.getTipologiaPuntiRaccolta().toLowerCase()).replace("Crm", "CRM"));
+			pr.setTipologiaPuntiRaccolta(StringUtils.capitalize(pr.getTipologiaPuntiRaccolta().toLowerCase()).replace("Crm", "CRM").replace("Crz", "CRZ"));
 		}
 		
 		return result;
@@ -255,24 +244,6 @@ public class GiudicarieRifiutiConverter extends AbstractConverter {
 			result.add(nc);
 		}
 		return result;
-	}
-
-	@Override
-	public List<String> specificValidate(Rifiuti rifiuti) throws Exception {
-		List<String> problems = Lists.newArrayList();
-		
-		Set<String> comuni = flattenList(rifiuti.getAree(), Area.class, "comune");
-		
-		for (PuntoRaccolta puntoRaccolta : rifiuti.getPuntiRaccolta()) {
-			if (!comuni.contains(puntoRaccolta.getIndirizzo())) {
-				if (puntoRaccolta.getIndirizzo() != null && !puntoRaccolta.getIndirizzo().isEmpty()) {
-					String s = "Comune <" + puntoRaccolta.getIndirizzo() + "> not found for " + puntoRaccolta;
-					problems.add(s);
-				}
-			}
-		}
-		
-		return problems;
 	}
 
 }

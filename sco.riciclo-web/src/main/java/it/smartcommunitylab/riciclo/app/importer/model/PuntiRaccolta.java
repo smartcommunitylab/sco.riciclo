@@ -14,7 +14,7 @@
  *    limitations under the License.
  */
 
-package it.smartcommunitylab.riciclo.app.giudicarie.model;
+package it.smartcommunitylab.riciclo.app.importer.model;
 
 
 public class PuntiRaccolta {
@@ -40,6 +40,7 @@ public class PuntiRaccolta {
 	private String indumenti;
 	private String note;
 	
+	private String eccezione;
 	
 	
 	public String getArea() {
@@ -192,6 +193,14 @@ public class PuntiRaccolta {
 
 	public void setNote(String note) {
 		this.note = note;
+	}
+
+	public String getEccezione() {
+		return eccezione;
+	}
+
+	public void setEccezione(String eccezione) {
+		this.eccezione = eccezione;
 	}
 
 	@Override
