@@ -60,6 +60,66 @@ public class OrarioApertura {
 	}
 	public void setEccezione(String eccezione) {
 		this.eccezione = eccezione;
+	}
+	
+	@Override
+	public String toString() {
+		return "(" + dataDa + "," + dataA + "," + dalle + "," + alle + "," + il + ")";
+	}
+	
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((alle == null) ? 0 : alle.hashCode());
+		result = prime * result + ((dalle == null) ? 0 : dalle.hashCode());
+		result = prime * result + ((dataA == null) ? 0 : dataA.hashCode());
+		result = prime * result + ((dataDa == null) ? 0 : dataDa.hashCode());
+		result = prime * result + ((eccezione == null) ? 0 : eccezione.hashCode());
+		result = prime * result + ((il == null) ? 0 : il.hashCode());
+		return result;
+	}
+	
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		OrarioApertura other = (OrarioApertura) obj;
+		if (alle == null) {
+			if (other.alle != null)
+				return false;
+		} else if (!alle.equals(other.alle))
+			return false;
+		if (dalle == null) {
+			if (other.dalle != null)
+				return false;
+		} else if (!dalle.equals(other.dalle))
+			return false;
+		if (dataA == null) {
+			if (other.dataA != null)
+				return false;
+		} else if (!dataA.equals(other.dataA))
+			return false;
+		if (dataDa == null) {
+			if (other.dataDa != null)
+				return false;
+		} else if (!dataDa.equals(other.dataDa))
+			return false;
+		if (eccezione == null) {
+			if (other.eccezione != null)
+				return false;
+		} else if (!eccezione.equals(other.eccezione))
+			return false;
+		if (il == null) {
+			if (other.il != null)
+				return false;
+		} else if (!il.equals(other.il))
+			return false;
+		return true;
 	}	
 	
 	

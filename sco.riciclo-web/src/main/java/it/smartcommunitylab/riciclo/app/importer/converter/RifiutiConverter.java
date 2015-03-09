@@ -36,6 +36,7 @@ import it.smartcommunitylab.riciclo.model.Raccolta;
 import it.smartcommunitylab.riciclo.model.Riciclabolario;
 import it.smartcommunitylab.riciclo.model.Rifiuti;
 import it.smartcommunitylab.riciclo.model.Tipologia;
+import it.smartcommunitylab.riciclo.model.UtenzaArea;
 
 import java.util.HashSet;
 import java.util.List;
@@ -183,23 +184,30 @@ public class RifiutiConverter {
 	}
 
 	private List<PuntoRaccolta> compactPuntiRaccolta(List<PuntiRaccolta> puntiRaccolta, String appId) throws Exception {
-		Multimap<String, PuntiRaccolta> map = ArrayListMultimap.create();
+		Multimap<String, PuntiRaccolta> puntiRaccoltaMap = ArrayListMultimap.create();
 		for (PuntiRaccolta p : puntiRaccolta) {
 			String key = p.getArea() + "_" + p.getTipologiaPuntiRaccolta() + "_" + p.getTipologiaUtenza() + "_" + p.getIndirizzo() + "_" + p.getDettaglioIndirizzo();
-			map.put(key, p);
+			puntiRaccoltaMap.put(key, p);
 		}
 
 		ObjectMapper mapper = new ObjectMapper();
 		mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
 		mapper.configure(SerializationFeature.INDENT_OUTPUT, true);
 
-		List<PuntoRaccolta> result = Lists.newArrayList();
-		for (String key : map.keySet()) {
+		List<PuntoRaccolta> firstResult = Lists.newArrayList();
+		for (String key : puntiRaccoltaMap.keySet()) {
 			List<OrarioApertura> orari = Lists.newArrayList();
 			PuntoRaccolta npr = null;
-			for (PuntiRaccolta pr : map.get(key)) {
+			for (PuntiRaccolta pr : puntiRaccoltaMap.get(key)) {
 				if (npr == null) {
 					npr = mapper.convertValue(pr, PuntoRaccolta.class);
+					UtenzaArea ua = new UtenzaArea();
+					ua.setArea(pr.getArea());
+					ua.setTipologiaUtenza(pr.getTipologiaUtenza());
+					List<UtenzaArea> lua = Lists.newArrayList();
+					lua.add(ua);
+					npr.setUtenzaArea(lua);
+					
 					Map<String, Boolean> caratteristiche = Maps.newTreeMap();
 					caratteristiche.put(GETTONIERA, Boolean.parseBoolean(pr.getGettoniera()));
 					caratteristiche.put(RESIDUO, Boolean.parseBoolean(pr.getResiduo()));
@@ -227,14 +235,33 @@ public class RifiutiConverter {
 			}
 			npr.setOrarioApertura(orari);
 			npr.setAppId(appId);
-			result.add(npr);
+			firstResult.add(npr);
 		}
 
-		for (PuntoRaccolta pr: result) {
+		for (PuntoRaccolta pr: firstResult) {
 			pr.setTipologiaPuntiRaccolta(StringUtils.capitalize(pr.getTipologiaPuntiRaccolta().toLowerCase()).replace("Crm", "CRM").replace("Crz", "CRZ"));
 		}
 		
-		return result;
+		Set<PuntoRaccolta> puntoRaccoltaSet = Sets.newHashSet(firstResult);
+		
+		Multimap<PuntoRaccolta, PuntoRaccolta> puntoRaccoltaMap = ArrayListMultimap.create();
+		for (PuntoRaccolta pr: firstResult) {
+			puntoRaccoltaMap.put(pr, pr);
+		}
+		
+		List<PuntoRaccolta> secondResult = Lists.newArrayList();
+		
+		for (PuntoRaccolta key: puntoRaccoltaMap.keySet()) {
+			secondResult.add(key);
+			for (PuntoRaccolta pr : puntoRaccoltaMap.get(key)) {
+				if (pr == key) {
+					continue;
+				}
+				key.getUtenzaArea().addAll(pr.getUtenzaArea());
+			}
+		}
+		
+		return secondResult;
 	}
 
 	private static Set<Tipologia> buildTipologieSet(String[] cat) {

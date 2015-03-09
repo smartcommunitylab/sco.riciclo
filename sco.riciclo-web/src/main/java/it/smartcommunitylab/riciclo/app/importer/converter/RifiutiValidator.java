@@ -9,6 +9,7 @@ import it.smartcommunitylab.riciclo.model.Raccolta;
 import it.smartcommunitylab.riciclo.model.Riciclabolario;
 import it.smartcommunitylab.riciclo.model.Rifiuti;
 import it.smartcommunitylab.riciclo.model.Tipologia;
+import it.smartcommunitylab.riciclo.model.UtenzaArea;
 
 import java.lang.reflect.Method;
 import java.util.Collection;
@@ -75,19 +76,21 @@ public class RifiutiValidator {
 			}
 		}
 		
-		
 		for (PuntoRaccolta puntoRaccolta: rifiuti.getPuntiRaccolta()) {
 			if (!tipologiaPuntoRaccolta.contains(puntoRaccolta.getTipologiaPuntiRaccolta())) {
 				String s = "Tipologia Punto Raccolta <" + puntoRaccolta.getTipologiaPuntiRaccolta() + "> not found for " + puntoRaccolta;
 				problems.add(s);				
 			}
-			if(!tipologiaUtenza.contains(puntoRaccolta.getTipologiaUtenza())) {
-				String s = "Tipologia Utenza <" + puntoRaccolta.getTipologiaPuntiRaccolta() + "> not found for " + puntoRaccolta;
-				problems.add(s);				
-			}
-			if(!aree.contains(puntoRaccolta.getArea())) {
-				String s = "Area <" + puntoRaccolta.getArea() + "> not found for " + puntoRaccolta;
-				problems.add(s);				
+			
+			for (UtenzaArea ua : puntoRaccolta.getUtenzaArea()) {
+				if (!tipologiaUtenza.contains(ua.getTipologiaUtenza())) {
+					String s = "Tipologia Utenza <" + ua.getTipologiaUtenza() + "> not found for " + puntoRaccolta;
+					problems.add(s);
+				}
+				if (!aree.contains(ua.getArea())) {
+					String s = "Area <" + ua.getArea() + "> not found for " + puntoRaccolta;
+					problems.add(s);
+				}
 			}
 			for (String caratt : puntoRaccolta.getCaratteristiche().keySet()) {
 				if (!caratteristiche.contains(caratt)) {

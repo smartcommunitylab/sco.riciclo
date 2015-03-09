@@ -21,9 +21,8 @@ import java.util.Map;
 
 public class PuntoRaccolta extends BaseObject {
 
-	private String area;
 	private String tipologiaPuntiRaccolta;
-	private String tipologiaUtenza;
+	private List<UtenzaArea> utenzaArea;
 	private String localizzazione;
 	private String indirizzo;
 	private String dettaglioIndirizzo;
@@ -34,14 +33,6 @@ public class PuntoRaccolta extends BaseObject {
 	
 	private String note;
 
-	public String getArea() {
-		return area;
-	}
-
-	public void setArea(String area) {
-		this.area = area;
-	}
-
 	public String getTipologiaPuntiRaccolta() {
 		return tipologiaPuntiRaccolta;
 	}
@@ -50,12 +41,12 @@ public class PuntoRaccolta extends BaseObject {
 		this.tipologiaPuntiRaccolta = tipologiaPuntiRaccolta;
 	}
 
-	public String getTipologiaUtenza() {
-		return tipologiaUtenza;
+	public List<UtenzaArea> getUtenzaArea() {
+		return utenzaArea;
 	}
 
-	public void setTipologiaUtenza(String tipologiaUtenza) {
-		this.tipologiaUtenza = tipologiaUtenza;
+	public void setUtenzaArea(List<UtenzaArea> utenzaArea) {
+		this.utenzaArea = utenzaArea;
 	}
 
 	public String getLocalizzazione() {
@@ -106,9 +97,55 @@ public class PuntoRaccolta extends BaseObject {
 		this.note = note;
 	}
 
+
+	
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((dettaglioIndirizzo == null) ? 0 : dettaglioIndirizzo.hashCode());
+		result = prime * result + ((indirizzo == null) ? 0 : indirizzo.hashCode());
+		result = prime * result + ((orarioApertura == null) ? 0 : orarioApertura.hashCode());
+		result = prime * result + ((tipologiaPuntiRaccolta == null) ? 0 : tipologiaPuntiRaccolta.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		PuntoRaccolta other = (PuntoRaccolta) obj;
+		if (dettaglioIndirizzo == null) {
+			if (other.dettaglioIndirizzo != null)
+				return false;
+		} else if (!dettaglioIndirizzo.equals(other.dettaglioIndirizzo))
+			return false;
+		if (indirizzo == null) {
+			if (other.indirizzo != null)
+				return false;
+		} else if (!indirizzo.equals(other.indirizzo))
+			return false;
+		if (orarioApertura == null) {
+			if (other.orarioApertura != null)
+				return false;
+		} else if (!orarioApertura.equals(other.orarioApertura))
+			return false;
+		if (tipologiaPuntiRaccolta == null) {
+			if (other.tipologiaPuntiRaccolta != null)
+				return false;
+		} else if (!tipologiaPuntiRaccolta.equals(other.tipologiaPuntiRaccolta))
+			return false;
+		return true;
+	}
+
 	@Override
 	public String toString() {
-		return "PuntoRaccolta [" + area + "," + tipologiaPuntiRaccolta + "," + tipologiaUtenza + "," + indirizzo + "," + dettaglioIndirizzo + "]";
+		return "PuntoRaccolta [" + utenzaArea + "," + tipologiaPuntiRaccolta + "," + indirizzo + "," + dettaglioIndirizzo + "->" + orarioApertura + "]";
 	}
 
 }
