@@ -27,6 +27,7 @@ import it.smartcommunitylab.riciclo.storage.RepositoryManager;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
@@ -62,7 +63,7 @@ import com.google.common.collect.Lists;
 @WebAppConfiguration
 public class TrentoTest {
 
-	private static final String EXCEL_MODELLO_CONCETTUALE_XLS = "trento/ExcelModelloConcettuale_V0 03.xls";
+	private static final String EXCEL_MODELLO_CONCETTUALE_XLS = "trento/ExcelModelloConcettuale_V0 04.xls";
 
 	private final static String APP_ID = "TRENTO";
 	
@@ -185,6 +186,8 @@ public class TrentoTest {
 		files.add(xlsFile);
 //		files.add(isoleFile);
 //		files.add(crmFile);
+		
+		fileList.getType().addAll(Arrays.asList("modello"));
 		
 		fileList.setFiles(files);
 		

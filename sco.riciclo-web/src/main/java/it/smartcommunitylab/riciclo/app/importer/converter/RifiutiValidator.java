@@ -105,22 +105,22 @@ public class RifiutiValidator {
 					problems.add(s);
 				}
 			}
-//			boolean needAddress = "crm".equals(puntoRaccolta.getTipologiaPuntiRaccolta().toLowerCase()) || "crz".equals(puntoRaccolta.getTipologiaPuntiRaccolta().toLowerCase()) || "isola ecologica".equals(puntoRaccolta.getTipologiaPuntiRaccolta().toLowerCase());
-//			
-//			if (needAddress) {
-//				if (puntoRaccolta.getIndirizzo() == null || puntoRaccolta.getIndirizzo().isEmpty()) {
-//					String s = "Missing 'indirizzo' for " + puntoRaccolta;
-//					problems.add(s);
-//				}
-//				if (puntoRaccolta.getDettaglioIndirizzo() == null || puntoRaccolta.getDettaglioIndirizzo().isEmpty()) {
-//					String s = "Missing 'dettaglioIndirizzo' for " + puntoRaccolta;
-//					problems.add(s);
-//				}
-//				if (puntoRaccolta.getLocalizzazione() == null || puntoRaccolta.getLocalizzazione().isEmpty()) {
-//					String s = "Missing 'localizzazione' for " + puntoRaccolta;
-//					problems.add(s);
-//				}
-//			}			
+			boolean needAddress = "crm".equals(puntoRaccolta.getTipologiaPuntiRaccolta().toLowerCase()) || "crz".equals(puntoRaccolta.getTipologiaPuntiRaccolta().toLowerCase()) || "isola ecologica".equals(puntoRaccolta.getTipologiaPuntiRaccolta().toLowerCase());
+			
+			if (needAddress) {
+				if (puntoRaccolta.getIndirizzo() == null || puntoRaccolta.getIndirizzo().isEmpty()) {
+					String s = "Missing 'indirizzo' for " + puntoRaccolta;
+					problems.add(s);
+				}
+				if (puntoRaccolta.getDettaglioIndirizzo() == null || puntoRaccolta.getDettaglioIndirizzo().isEmpty()) {
+					String s = "Missing 'dettaglioIndirizzo' for " + puntoRaccolta;
+					problems.add(s);
+				}
+				if (puntoRaccolta.getLocalizzazione() == null || puntoRaccolta.getLocalizzazione().isEmpty()) {
+					String s = "Missing 'localizzazione' for " + puntoRaccolta;
+					problems.add(s);
+				}
+			}			
 			
 		}
 		
