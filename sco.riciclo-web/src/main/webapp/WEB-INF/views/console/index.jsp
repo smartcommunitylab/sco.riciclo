@@ -3,7 +3,7 @@
 <html>
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-		<title>Uploaded</title>
+		<title>Console  ${appId}</title>
 		
 		<style type="text/css">
 			a:link { color: #3366CC; text-decoration: none}
@@ -15,8 +15,10 @@
 	</head>
 	<body> 
 		<font face="verdana" size="4">
-			<p>SUCCESS</p>
-			<a href=".">Uploads</a>
+			<a href="upload">Upload</a>
+			<br/>
+			<br/>
+			<a href="publish">Publish</a>
 		</font>
 	</body>
 </html>
