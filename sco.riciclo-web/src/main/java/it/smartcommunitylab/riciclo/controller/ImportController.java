@@ -37,6 +37,8 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.google.common.collect.Sets;
+
 @Controller
 public class ImportController {
 
@@ -68,17 +70,28 @@ public class ImportController {
 		try {
 			String appId = getAppId();
 			
+			map.addAttribute("appId", getAppId());
+			
+			if (Sets.newConcurrentHashSet(fileList.getType()).size() != fileList.getType().size()) {
+				map.addAttribute("error", "Same type selected for different files.");
+				return "console/error";
+			}
+			
+			int xlsIndex = fileList.getType().indexOf("modello");
+			int isoleIndex = fileList.getType().indexOf("isole");
+			int crmIndex = fileList.getType().indexOf("crm");
+			
 			
 			InputStream xlsIs = null;
 			InputStream isoleIs = null;
 			InputStream crmIs = null;
 
-			xlsIs = fileList.getFiles().get(0).getInputStream();
-			if (fileList.getFiles().size() == 3 && !fileList.getFiles().get(1).isEmpty()) {
-				isoleIs = fileList.getFiles().get(1).getInputStream();
+			xlsIs = fileList.getFiles().get(xlsIndex).getInputStream();
+			if (isoleIndex != -1 && !fileList.getFiles().get(isoleIndex).isEmpty()) {
+				isoleIs = fileList.getFiles().get(isoleIndex).getInputStream();
 			}
-			if (fileList.getFiles().size() == 3 && !fileList.getFiles().get(2).isEmpty()) {
-				crmIs = fileList.getFiles().get(2).getInputStream();
+			if (crmIndex != -1 && !fileList.getFiles().get(crmIndex).isEmpty()) {
+				crmIs = fileList.getFiles().get(crmIndex).getInputStream();
 			}
 
 			it.smartcommunitylab.riciclo.app.importer.model.Rifiuti rifiuti = importer.importRifiuti(xlsIs, isoleIs, crmIs);
@@ -90,15 +103,15 @@ public class ImportController {
 				storage.save(convertedRifiuti, appId);
 			} else {
 				map.addAttribute("validationErrors", validationResult);
-				return "error";
+				return "console/error";
 			}
 
-			return "success";
+			return "console/success";
 		} catch (Exception e) {
-			map.addAttribute("exception", e.getMessage());
+			map.addAttribute("exception", e.getClass().getName() + " " + e.getMessage());
 			map.addAttribute("trace", e.getStackTrace());
 			e.printStackTrace();
-			return "error";
+			return "console/error";
 		}
 	}
 

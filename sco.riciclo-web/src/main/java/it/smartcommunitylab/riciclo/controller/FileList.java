@@ -24,12 +24,22 @@ import com.google.common.collect.Lists;
 
 public class FileList {
 
+	private List<String> type;
 	private List<MultipartFile> files;
 
 	public FileList() {
+		type= Lists.newArrayList();
 		files = Lists.newArrayList();
 	}
 	
+	public List<String> getType() {
+		return type;
+	}
+
+	public void setType(List<String> type) {
+		this.type = type;
+	}
+
 	public List<MultipartFile> getFiles() {
         return files;
     }

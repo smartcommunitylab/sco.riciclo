@@ -57,12 +57,6 @@ public class RifiutiController {
 		System.out.println("PING");
 	}
 
-	@RequestMapping(method = RequestMethod.POST, value = "/publish/{appId}")
-	public @ResponseBody
-	void publish(HttpServletResponse response, @PathVariable String appId) {
-		storage.publish(appId);
-	}
-
 	@RequestMapping(method = RequestMethod.GET, value = "/appDescriptor/{appId}")
 	public AppDescriptor appDescriptor(HttpServletResponse response, @PathVariable String appId) {
 		return storage.getAppDescriptor(appId);

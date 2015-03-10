@@ -18,12 +18,15 @@ package it.smartcommunitylab.riciclo.controller;
 
 import it.smartcommunitylab.riciclo.security.AppDetails;
 import it.smartcommunitylab.riciclo.security.AppSetup;
+import it.smartcommunitylab.riciclo.storage.AppDescriptor;
+import it.smartcommunitylab.riciclo.storage.RepositoryManager;
 
 import javax.servlet.ServletContext;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 
@@ -34,18 +37,39 @@ public class ConsoleController {
 	private ServletContext context;		
 	
 	@Autowired
+	private RepositoryManager storage;
+	
+	@Autowired
 	private AppSetup appSetup;	
 	
 	@RequestMapping(value = "/")
-	public String root() {
-//		String dir = getAppId().toLowerCase();
-		return "upload";
+	public String root(Model map) {
+		map.addAttribute("appId", getAppId());
+		return "console/index";
 	}		
+	
+	@RequestMapping(value = "upload")
+	public String upload(Model map) {
+		map.addAttribute("appId", getAppId());
+		return "console/upload";
+	}			
 	
 	@RequestMapping(value = "/login")
 	public String login() {
-		return "loginForm";
+		return "console/loginForm";
 	}		
+	
+	@RequestMapping(value = "/publish")
+	public String publish(Model map) {
+		String appId = getAppId();
+		storage.publish(appId);
+		AppDescriptor descr = storage.getAppDescriptor(appId);
+		map.addAttribute("appId", appId);
+		map.addAttribute("version", descr.getVersion());
+		return "console/published";
+	}	
+	
+	
 	
 	private String getAppId() {
 		AppDetails details = (AppDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
