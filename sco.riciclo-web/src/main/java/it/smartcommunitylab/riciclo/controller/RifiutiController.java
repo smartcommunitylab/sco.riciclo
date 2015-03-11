@@ -17,7 +17,7 @@
 package it.smartcommunitylab.riciclo.controller;
 
 import it.smartcommunitylab.riciclo.model.Rifiuti;
-import it.smartcommunitylab.riciclo.storage.AppDescriptor;
+import it.smartcommunitylab.riciclo.storage.App;
 import it.smartcommunitylab.riciclo.storage.RepositoryManager;
 
 import java.io.ByteArrayOutputStream;
@@ -53,12 +53,12 @@ public class RifiutiController {
 
 	@RequestMapping(method = RequestMethod.GET, value = "/ping")
 	public @ResponseBody
-	void ping(HttpServletRequest request, HttpServletResponse response, HttpSession session) {
-		System.out.println("PING");
+	String ping(HttpServletRequest request, HttpServletResponse response, HttpSession session) {
+		return "PONG";
 	}
 
 	@RequestMapping(method = RequestMethod.GET, value = "/appDescriptor/{appId}")
-	public AppDescriptor appDescriptor(HttpServletResponse response, @PathVariable String appId) {
+	public App appState(HttpServletResponse response, @PathVariable String appId) {
 		return storage.getAppDescriptor(appId);
 	}
 
@@ -73,12 +73,12 @@ public class RifiutiController {
 	}
 
 	@RequestMapping(method = RequestMethod.GET, value = "/rifiuti/{className}/{appId}")
-	public List get(HttpServletResponse response, @PathVariable String className, @PathVariable String appId) throws Exception {
+	public List<?> get(HttpServletResponse response, @PathVariable String className, @PathVariable String appId) throws Exception {
 		return storage.findRifiuti(className, appId, false);
 	}
 
 	@RequestMapping(method = RequestMethod.GET, value = "/rifiuti/{className}/{appId}/draft")
-	public List getDraft(HttpServletResponse response, @PathVariable String className, @PathVariable String appId) throws Exception {
+	public List<?> getDraft(HttpServletResponse response, @PathVariable String className, @PathVariable String appId) throws Exception {
 		return storage.findRifiuti(className, appId, true);
 	}
 

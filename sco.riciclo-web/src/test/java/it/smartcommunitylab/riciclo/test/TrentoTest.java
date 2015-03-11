@@ -16,20 +16,20 @@
 
 package it.smartcommunitylab.riciclo.test;
 
+import it.smartcommunitylab.riciclo.app.importer.FileList;
+import it.smartcommunitylab.riciclo.app.importer.ImportConstants;
+import it.smartcommunitylab.riciclo.app.importer.ImportError;
+import it.smartcommunitylab.riciclo.app.importer.ImportManager;
 import it.smartcommunitylab.riciclo.config.RifiutiConfig;
-import it.smartcommunitylab.riciclo.controller.FileList;
-import it.smartcommunitylab.riciclo.controller.ImportController;
 import it.smartcommunitylab.riciclo.model.Rifiuti;
-import it.smartcommunitylab.riciclo.security.AppCredentials;
 import it.smartcommunitylab.riciclo.security.AppDetails;
-import it.smartcommunitylab.riciclo.storage.AppDescriptor;
+import it.smartcommunitylab.riciclo.storage.App;
+import it.smartcommunitylab.riciclo.storage.AppInfo;
 import it.smartcommunitylab.riciclo.storage.RepositoryManager;
 
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Arrays;
-import java.util.List;
-import java.util.Map;
 
 import org.junit.Assert;
 import org.junit.Before;
@@ -50,13 +50,9 @@ import org.springframework.test.web.servlet.ResultActions;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
-import org.springframework.ui.ExtendedModelMap;
-import org.springframework.ui.Model;
 import org.springframework.web.context.WebApplicationContext;
-import org.springframework.web.multipart.MultipartFile;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.google.common.collect.Lists;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes = { RifiutiConfig.class }, loader = AnnotationConfigWebContextLoader.class)
@@ -81,30 +77,27 @@ public class TrentoTest {
 	
 	@Test
 	public void testUpload() throws Exception {
-		AppCredentials credentials = new AppCredentials();
-		credentials.setId(APP_ID);
-		credentials.setPassword(APP_ID);		
+		AppInfo credentials = new AppInfo();
+		credentials.setAppId(APP_ID);
+		credentials.setPassword(APP_ID);	
+		credentials.setModelElements(Arrays.asList(ImportConstants.MODEL));
 		AppDetails details = new AppDetails(credentials);
 		details.setApp(credentials);
 		TestingAuthenticationToken auth = new TestingAuthenticationToken(details, null);
 		SecurityContextHolder.getContext().setAuthentication(auth);
 		
-		ImportController controller = wac.getBean(ImportController.class);
+		ImportManager manager = wac.getBean(ImportManager.class);
 		
 		FileList fileList = readFiles();
 		
-		Model model = new ExtendedModelMap();
-		controller.upload(fileList, model);
-		
-		Map<String, Object> modelMap = model.asMap();
-		if (modelMap.containsKey("validationErrors")) {
-			List<String> errors = (List<String>)modelMap.get("validationErrors");
-			for (String error: errors) {
-				System.err.println(error);
-			}
+		ImportError error = null;
+		try {
+			manager.uploadFiles(fileList, credentials);
+		} catch (ImportError e) {
+			error = e;
 		}
 		
-		Assert.assertTrue(model.asMap().keySet().isEmpty());
+		Assert.assertNull(error);
 		
 		mocker = MockMvcBuilders.webAppContextSetup(wac).build();
 		ObjectMapper mapper = new ObjectMapper();
@@ -152,28 +145,27 @@ public class TrentoTest {
 		
 		result = mocker.perform(MockMvcRequestBuilders.get("/appDescriptor/" + APP_ID).accept(MediaType.APPLICATION_JSON));
 		res = result.andExpect(MockMvcResultMatchers.status().is(200)).andReturn();
-		AppDescriptor appDescriptor = mapper.readValue(res.getResponse().getContentAsString(), AppDescriptor.class);		
+		App appDescriptor = mapper.readValue(res.getResponse().getContentAsString(), App.class);		
 		
 		System.out.println(appDescriptor);
 		
-		Long version = appDescriptor.getVersion();		
+		Long version = appDescriptor.getPublishState().getVersion();		
 		
 		result = mocker.perform(MockMvcRequestBuilders.post("/publish/" + APP_ID).accept(MediaType.APPLICATION_JSON));
 		res = result.andExpect(MockMvcResultMatchers.status().is(200)).andReturn();
 		
 		result = mocker.perform(MockMvcRequestBuilders.get("/appDescriptor/" + APP_ID).accept(MediaType.APPLICATION_JSON));
 		res = result.andExpect(MockMvcResultMatchers.status().is(200)).andReturn();
-		appDescriptor = mapper.readValue(res.getResponse().getContentAsString(), AppDescriptor.class);
+		appDescriptor = mapper.readValue(res.getResponse().getContentAsString(), App.class);
 		
 		System.out.println(appDescriptor);
 		
-		Assert.assertEquals((version + 1), (long)appDescriptor.getVersion());
+		Assert.assertEquals((version + 1), (long)appDescriptor.getPublishState().getVersion());
 		
 	}
 	
 	private FileList readFiles() throws IOException {
 		FileList fileList = new FileList();
-		
 		InputStream xlsIs = Thread.currentThread().getContextClassLoader().getResourceAsStream(EXCEL_MODELLO_CONCETTUALE_XLS);
 //		InputStream isoleIs = Thread.currentThread().getContextClassLoader().getResourceAsStream(ISOLE_ESTESE_KML);
 //		InputStream crmIs = Thread.currentThread().getContextClassLoader().getResourceAsStream(CRM_KML);		
@@ -182,14 +174,10 @@ public class TrentoTest {
 //		MockMultipartFile isoleFile = new MockMultipartFile(ISOLE_ESTESE_KML, isoleIs);
 //		MockMultipartFile crmFile = new MockMultipartFile(CRM_KML, crmIs);
 		
-		List<MultipartFile> files = Lists.newArrayList();
-		files.add(xlsFile);
 //		files.add(isoleFile);
 //		files.add(crmFile);
 		
-		fileList.getType().addAll(Arrays.asList("modello"));
-		
-		fileList.setFiles(files);
+		fileList.setModel(xlsFile);
 		
 		return fileList;
 	}

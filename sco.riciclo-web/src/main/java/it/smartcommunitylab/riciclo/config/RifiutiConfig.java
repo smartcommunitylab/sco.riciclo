@@ -30,7 +30,13 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
 import org.springframework.data.mongodb.core.MongoTemplate;
+import org.springframework.web.multipart.MultipartResolver;
+import org.springframework.web.multipart.commons.CommonsMultipartResolver;
+import org.springframework.web.servlet.ViewResolver;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
+import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
+import org.springframework.web.servlet.view.InternalResourceViewResolver;
 
 import com.mongodb.MongoClient;
 import com.mongodb.MongoException;
@@ -39,7 +45,7 @@ import com.mongodb.MongoException;
 @ComponentScan("it.smartcommunitylab.riciclo")
 @PropertySource("classpath:rifiuti.properties")
 @EnableWebMvc
-public class RifiutiConfig {
+public class RifiutiConfig extends WebMvcConfigurerAdapter {
 
 	@Autowired
 	@Value("${db.draft}")
@@ -82,4 +88,32 @@ public class RifiutiConfig {
 		return new RifiutiValidator();
 	}	
 
+	@Bean
+	public ViewResolver getViewResolver() {
+		InternalResourceViewResolver resolver = new InternalResourceViewResolver();
+		resolver.setPrefix("/resources/");
+		resolver.setSuffix(".html");
+		return resolver;
+	}
+
+	@Override
+	public void addResourceHandlers(ResourceHandlerRegistry registry) {
+		registry.addResourceHandler("/resources/*").addResourceLocations(
+				"/resources/");
+		registry.addResourceHandler("/css/**").addResourceLocations(
+				"/resources/css/");
+		registry.addResourceHandler("/fonts/**").addResourceLocations(
+				"/resources/fonts/");
+		registry.addResourceHandler("/js/**").addResourceLocations(
+				"/resources/js/");
+		registry.addResourceHandler("/lib/**").addResourceLocations(
+				"/resources/lib/");
+		registry.addResourceHandler("/templates/**").addResourceLocations(
+				"/resources/templates/");
+	}
+
+	@Bean
+	public MultipartResolver multipartResolver() {
+		return new CommonsMultipartResolver();
+	}
 }

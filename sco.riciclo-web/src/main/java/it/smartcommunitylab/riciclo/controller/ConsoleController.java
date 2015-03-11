@@ -16,9 +16,13 @@
 
 package it.smartcommunitylab.riciclo.controller;
 
+import it.smartcommunitylab.riciclo.app.importer.FileList;
+import it.smartcommunitylab.riciclo.app.importer.ImportConstants;
+import it.smartcommunitylab.riciclo.app.importer.ImportError;
+import it.smartcommunitylab.riciclo.app.importer.ImportManager;
 import it.smartcommunitylab.riciclo.security.AppDetails;
-import it.smartcommunitylab.riciclo.security.AppSetup;
-import it.smartcommunitylab.riciclo.storage.AppDescriptor;
+import it.smartcommunitylab.riciclo.storage.App;
+import it.smartcommunitylab.riciclo.storage.AppSetup;
 import it.smartcommunitylab.riciclo.storage.RepositoryManager;
 
 import javax.servlet.ServletContext;
@@ -26,8 +30,14 @@ import javax.servlet.ServletContext;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
+import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
+
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 
 @Controller
@@ -42,34 +52,51 @@ public class ConsoleController {
 	@Autowired
 	private AppSetup appSetup;	
 	
+	@Autowired
+	private ImportManager manager;
+
 	@RequestMapping(value = "/")
-	public String root(Model map) {
-		map.addAttribute("appId", getAppId());
-		return "console/index";
+	public String root() {
+		return "index";
 	}		
-	
-	@RequestMapping(value = "upload")
-	public String upload(Model map) {
-		map.addAttribute("appId", getAppId());
-		return "console/upload";
-	}			
 	
 	@RequestMapping(value = "/login")
 	public String login() {
-		return "console/loginForm";
+		return "login";
 	}		
 	
-	@RequestMapping(value = "/publish")
-	public String publish(Model map) {
+	@RequestMapping(value = "/console/data")
+	public @ResponseBody App data() {
+		return storage.getAppDescriptor(getAppId());
+	}		
+	
+	@RequestMapping(value = "/console/publish", method=RequestMethod.PUT)
+	public @ResponseBody App publish() {
 		String appId = getAppId();
 		storage.publish(appId);
-		AppDescriptor descr = storage.getAppDescriptor(appId);
-		map.addAttribute("appId", appId);
-		map.addAttribute("version", descr.getVersion());
-		return "console/published";
+		App descr = storage.getAppDescriptor(appId);
+		return descr;
 	}	
 	
-	
+	@RequestMapping(value = "/savefiles", method = RequestMethod.POST)
+	public @ResponseBody String upload(MultipartHttpServletRequest req) throws Exception {
+		MultiValueMap<String, MultipartFile> multiFileMap = req.getMultiFileMap();
+		FileList fileList = new FileList();
+		String res = "";
+		for (String key : multiFileMap.keySet()) {
+			if (ImportConstants.CRM.equals(key)) fileList.setCrm(multiFileMap.getFirst(key));
+			if (ImportConstants.ISOLE.equals(key)) fileList.setIsole(multiFileMap.getFirst(key));
+			if (ImportConstants.MODEL.equals(key)) fileList.setModel(multiFileMap.getFirst(key));
+		}
+		try {
+			String appId = getAppId();
+			manager.uploadFiles(fileList, storage.getAppDescriptor(appId).getAppInfo());
+			res = new ObjectMapper().writeValueAsString(storage.getAppDescriptor(appId));
+		} catch (ImportError e) {
+			res = new ObjectMapper().writeValueAsString(e);
+		}
+		return res;
+	}
 	
 	private String getAppId() {
 		AppDetails details = (AppDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
