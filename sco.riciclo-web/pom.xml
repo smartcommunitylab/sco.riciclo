@@ -206,7 +206,7 @@
 			</plugin>
 
 		</plugins>
-		<finalName>sco.riciclo-web</finalName>
+		<finalName>riciclo</finalName>
 	</build>
 
 </project>
