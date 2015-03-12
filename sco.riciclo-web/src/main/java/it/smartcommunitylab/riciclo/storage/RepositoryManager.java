@@ -36,7 +36,16 @@ import org.springframework.data.mongodb.core.query.Update;
 
 public class RepositoryManager {
 
-	private Class<?>[] classes = {Categorie.class, Area.class, Gestore.class, Istituzione.class, PuntoRaccolta.class, Raccolta.class, Riciclabolario.class, Profilo.class};
+	private Class<?>[] classes = {
+			Categorie.class, 
+			Area.class, 
+			Gestore.class, 
+			Istituzione.class, 
+			PuntoRaccolta.class, 
+			Raccolta.class, 
+			Riciclabolario.class, 
+			Profilo.class
+			};
 
 	@Autowired
 	private AppSetup appSetup;
@@ -97,9 +106,10 @@ public class RepositoryManager {
 	}
 	
 	public void publish(String appId) {
+		Query query = appQuery(appId);
 		for (Class<?> clazz: classes) {
-			List<?> objects = draftTemplate.findAll(clazz);
-			finalTemplate.remove(appQuery(appId), clazz);
+			List<?> objects = draftTemplate.find(query, clazz);
+			finalTemplate.remove(query, clazz);
 			for (Object obj: objects) {
 				finalTemplate.save(obj);
 			}
