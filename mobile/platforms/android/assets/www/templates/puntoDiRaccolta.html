@@ -1,0 +1,55 @@
+<ion-view>
+    <ion-nav-title>
+        <div class="nav-title">
+            <div class="nav-title-main">{{"Punto di raccolta"|translate}}</div>
+            <div class="nav-title-sub">{{pdr.tipologiaPuntiRaccolta}} {{pdr.indirizzo}}</div>
+        </div>
+    </ion-nav-title>
+
+    <ion-nav-buttons side="left">
+        <button ng-click="back()" class="row button button-icon ion-ios7-arrow-back">
+            <img ng-if="!noteSelected" class="nav-button-app-logo" src="img/ic_launcher.png">
+        </button>
+    </ion-nav-buttons>
+
+    <ion-content class="puntodiraccolta" has-bouncing="false">
+        <!-- DETTAGLI -->
+        <div class="subpage-title">
+            <h1>{{"DETTAGLI"|translate}}</h1>
+        </div>
+        <div class="row row-center dettagli">
+            <div class="col col-67">
+                <div class="row pdr-dettaglio">{{pdr.dettaglioIndirizzo || pdr.indirizzo}}</div>
+                <div class="row pdr-specifica"></div>
+                <!--per ora niente...-->
+            </div>
+            <div class="col action">
+                <a class="hidden-link" href="#/app/puntiDiRaccolta/{{pdr.dettaglioIndirizzo || pdr.indirizzo}}">
+                    <img src="img/ic_map_green.png">
+                </a>
+                <a class="hidden-link" target="_system" ng-click="clickNav()">
+                    <img src="img/ic_directions.png">
+                </a>
+            </div>
+        </div>
+        <div ng-show="!!pdr.orarioApertura && pdr.orarioApertura.length > 0">
+            <div class="subpage-title">
+                <h1 class="title">ORARIO</h1>
+            </div>
+            <div>
+                <div ng-repeat="item in orari">
+                    <span>{{item.giorno}}: </span><span ng-repeat="orario in item.orari"><span ng-if="$index>0">, </span>{{orario}}</span>
+                </div>
+            </div>
+        </div>
+        <!-- TIPOLOGIE DI RACCOLTA -->
+        <div class="subpage-title">
+            <h1 class="title">{{"TIPOLOGIE DI RACCOLTA"|translate}}</h1>
+        </div>
+        <ion-list class="tipologie">
+            <ion-item ng-repeat="rifiuto in rifiuti" href="#/app/raccolta/{{rifiuto}}">
+                {{rifiuto|translate}}
+            </ion-item>
+        </ion-list>
+    </ion-content>
+</ion-view>

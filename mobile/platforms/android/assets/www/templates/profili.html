@@ -1,0 +1,40 @@
+<ion-view>
+    <ion-nav-title>
+        <div class="nav-title">
+            <div class="nav-title-main">{{"Profili" | translate}}</div>
+            <div class="nav-title-sub">{{selectedProfile.name}}</div>
+        </div>
+    </ion-nav-title>
+
+    <ion-nav-buttons side="left">
+        <button menu-toggle="left" class="row button button-icon ion-navicon">
+            <img ng-if="!noteSelected" class="nav-button-app-logo" src="img/ic_launcher.png">
+        </button>
+    </ion-nav-buttons>
+    <ion-nav-buttons side="right">
+        <a href="#/app/aggProfilo" class="button button-icon icon-left btn">
+            <img ng-src="img/ic_add.png" />
+        </a>
+    </ion-nav-buttons>
+
+    <ion-content class="profiles" has-bouncing="false">
+        <div class="row profile-card" ng-repeat="profilo in profili track by $index">
+            <div class="col profile-card-content" style="">
+                <a class="hidden-link" ng-href="#app/modificaProfilo/{{profilo.id}}">
+                    <div>
+                        <div class="row profile-name">
+                            <div class="col">
+                                {{profilo.name}}
+                            </div>
+                        </div>
+                        <div class="row profile-info">
+                            <div class="col">
+                                {{profilo.utenza.profilo|translate}}: {{profilo.area.localita}}
+                            </div>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </ion-content>
+</ion-view>

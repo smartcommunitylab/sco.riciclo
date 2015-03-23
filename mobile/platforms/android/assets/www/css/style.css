@@ -1,0 +1,720 @@
+/* Empty. Add your own CSS if you like */
+
+.scroll-content > #map1 {
+    height: 100%;
+}
+
+.angular-google-map-container {
+    height: 800px;
+}
+
+.nav-button-app-logo {
+    margin-left: 5px;
+    height: 30px;
+    width: 30px;
+}
+/* Expandable list */
+
+.expandable-list-items {
+    background-color: #eeeeee;
+}
+
+.expandable-list-item:not(:first-child) {
+    padding-top: 1px;
+}
+
+.expandable-list-item-header {
+    background-color: #cecece;
+}
+
+.expandable-list-item-title {
+    color: #47772b;
+    font-weight: bold;
+    font-size: larger;
+    padding-bottom: 0;
+}
+
+.expandable-list-item-subtitle {
+    padding-bottom: 0;
+}
+
+.expandable-list-item-desc {
+    line-height: 1;
+}
+
+.expandable-list-item-content div > div.sub {
+    text-align: right;
+}
+
+.expandable-list-item-empty {
+    background-color: #eeeeee;
+}
+/* Navigation drawer and menus */
+
+.navigation-drawer {
+    background-color: #3c3c3b;
+}
+
+.navigation-drawer ion-list ion-item {
+    background-color: #3c3c3b !important;
+    color: white !important;
+}
+
+.navigation-drawer ion-list ion-item a {
+    background-color: #3c3c3b !important;
+    padding: 0 !important;
+}
+
+.navigation-drawer ion-list ion-item i {
+    margin-right: 10px;
+}
+
+.navigation-drawer ion-list ion-item img {
+    width: 30px;
+    height: 30px;
+}
+
+.navigation-drawer ion-list.profiles-list ion-item {
+    border: 0;
+    padding: 0;
+}
+/* Bar and buttons */
+
+.button-100r-select {
+    text-align: left;
+    color: black !important;
+}
+
+.button-100r-select.icon-right:before {
+    color: #b2b2b2;
+}
+
+.bar-100r {
+    background-color: #63ac3d !important;
+}
+
+.bar-100r .btn {
+    padding: 0;
+}
+
+.bar-100r .btn img {
+    width: 35px;
+    height: 35px;
+}
+
+.bar-100r .btn-edit {
+    left: auto;
+}
+
+.bar-100r .btn-delete {
+    left: auto;
+}
+
+.bar-100r .btn-variable::after {
+    position: relative;
+}
+/* Buttons */
+
+.button.button-100r {
+    border-color: #47772b;
+    background-color: #47772b;
+    color: #fff;
+}
+/* Tabs */
+
+.tabs-100r .tabs {
+    background-color: #47772b;
+    border-color: #47772b;
+}
+
+.home-tabs .tabs {
+    height: 30px;
+    line-height: 30px;
+}
+
+.home-tabs .tab-item {
+    font-size: 12px;
+}
+
+.home-tabs .has-tabs-top {
+    top: 74px !important;
+}
+
+.platform-ios:not(.fullscreen) .home-tabs .has-tabs-top {
+    top: 93px !important;
+}
+
+/*
+.home-tabs.tabs-striped .tab-item-active,
+.home-tabs.tabs-striped .tab-item.active,
+.home-tabs.tabs-striped .tab-item.activated {
+    border-color: transparent !important;
+}
+
+.home-tabs.tabs-striped .tab-item + .tab-item:before {
+    border-left: 0;
+}
+*/
+/* Home - Tipi di rifiuti */
+
+.home-tipidirifiuti {
+    background-color: #eeeeee;
+}
+
+.home-searchbar {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.home-searchbar button {
+    font-size: 20px;
+}
+
+.home-grid {
+    height: 80px;
+    text-align: center;
+    line-height: 14px;
+    /*font-size: 12px;*/
+}
+
+.home-grid img {
+    height: 40px;
+    margin: 0 auto;
+    display: block;
+}
+
+.home-grid:hover {
+    background-color: #8de058;
+}
+/* Home - Notes */
+
+.home-notes {
+    background-color: #eeeeee;
+    background-position: center;
+}
+
+.home-notes .home-notes-none {
+    position: relative;
+    color: #BFBFBF;
+    text-align: center;
+}
+
+.home-notes .home-notes-none img {
+    position: relative;
+}
+
+.home-notes .home-notes-item {
+    padding: 10px;
+    /*!important*/
+}
+
+.home-notes .home-notes-item.home-notes-item-selected {
+    background-color: #8de058;
+}
+/* Home - Calendar */
+
+.home-calendar {
+    background-color: #eeeeee;
+}
+
+.home-calendar .month-bar {
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+.home-calendar .month-bar .month-name {
+    text-align: center;
+    color: #63ac3d;
+    font-size: 16px;
+    line-height: 16px;
+    font-weight: bold;
+}
+
+.home-calendar .month-bar .btn-next {
+    text-align: right;
+}
+
+.home-calendar .week-days {
+    text-align: center;
+    font-size: 12px;
+    line-height: 12px;
+    font-weight: bold;
+}
+
+.home-calendar .week {
+    padding-right: 0;
+    margin-bottom: 5px;
+}
+
+.home-calendar .week .day {
+    -webkit-box-flex: 0;
+    -webkit-flex: 0 0 13%;
+    -moz-box-flex: 0;
+    -moz-flex: 0 0 13%;
+    -ms-flex: 0 0 13%;
+    flex: 0 0 13%;
+    max-width: 13%;
+    margin-right: 1.2%;
+    background-color: white;
+    color: black;
+}
+
+.home-calendar .week .noday {
+    -webkit-box-flex: 0;
+    -webkit-flex: 0 0 13%;
+    -moz-box-flex: 0;
+    -moz-flex: 0 0 13%;
+    -ms-flex: 0 0 13%;
+    flex: 0 0 13%;
+    max-width: 13%;
+    margin-right: 1.2%;
+}
+.home-calendar .week .day.today {
+    padding: 0px;
+    margin-right: 1.2%;
+    border-style: solid;
+    border-width: 3px;
+    border-color: #47772b;
+}
+
+.home-calendar .week .day .day-date {
+    text-align: left;
+    font-size: 11px;
+    line-height: 11px;
+    padding-bottom: 5px;
+}
+
+.home-calendar .week .day .day-slots {
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+}
+
+.home-calendar .week .day .day-slots .day-slot {
+    padding: 1px;
+}
+
+.home-calendar .week .day .day-slots .day-slot > div {
+    height: 5px;
+    width: 5px;
+}
+
+.home-calendar .agenda .day .day-title {
+    background-color: #eeeeee;
+    text-align: center;
+}
+
+.home-calendar .agenda .day .day-content {}
+
+.home-calendar .agenda .day .day-content-active {
+    background-color: #8de058 !important;
+}
+
+.home-calendar .agenda .day .day-content .content-title {
+    color: #47772b !important;
+    text-align: left !important;
+    font-weight: bold;
+}
+
+.home-calendar .agenda .day .day-content .content-event,
+.home-calendar .agenda .day .day-content .content-event .event-desc {
+    padding: 0 !important;
+}
+/* Tipi di rifiuto */
+
+.tipidirifiuto,
+.tipidirifiuto ion-list,
+.tipidirifiuto ion-list ion-item,
+.tipidirifiuto ion-list ion-item a {
+    background-color: #eeeeee !important;
+}
+/* Tipo di rifiuto */
+
+.tipodirifiuto .tipodirifiuto-icon,
+.tipodirifiuto .distance {
+    text-align: right;
+}
+/* Punti di raccolta */
+
+.puntidiraccolta {}
+
+.puntodiraccolta {
+    background-color: #eeeeee;
+}
+
+.puntodiraccolta .dettagli {
+    padding: 5px;
+}
+
+.puntodiraccolta .dettagli .pdr-dettaglio {
+    padding-left: 0;
+    text-decoration: bold;
+    white-space: nowrap;
+}
+
+.puntodiraccolta .dettagli .pdr-specifica {
+    padding-left: 0;
+    font-size: 10px;
+    line-height: 11px;
+}
+
+.puntodiraccolta .dettagli .action {
+    padding: 0;
+    text-align: right;
+}
+
+.puntodiraccolta .dettagli .action img {
+    width: 35px;
+    height: 35px;
+}
+
+.puntodiraccolta .tipologie ion-item {
+    padding: 0;
+    background-color: #eeeeee;
+}
+
+.puntodiraccolta .tipologie ion-item a {
+    padding: 5px 10px;
+    background-color: #eeeeee;
+}
+
+.tipodiraccolta,
+.tipodiraccolta ion-list ion-item,
+.tipodiraccolta ion-list ion-item a {
+    background-color: #eeeeee !important;
+}
+
+.tipologiediraccolta {
+    background-color: #eeeeee;
+}
+
+.tipologiediraccolta ion-item {
+    border-color: #cecece !important;
+    padding-top: 0;
+    padding-bottom: 0;
+}
+
+.tipologiediraccolta ion-item a {
+    background-color: #eeeeee !important;
+    padding: 0 !important;
+}
+
+.tipologiediraccolta .tipologiediraccolta-icons {
+    padding: 0 5px;
+}
+
+.tipologiediraccolta .tipologiediraccolta-icons div {}
+
+.contatti-item-list ion-item {
+    border-color: #cecece !important;
+}
+
+.contatti-item-list ion-item a {
+    background-color: #eeeeee !important;
+    padding: 0 !important;
+}
+/* PROFILES, PROFILE */
+
+.profiles {
+    background-color: #eeeeee;
+}
+
+.profiles .profile-card {
+    padding: 5px;
+}
+
+.profiles .profile-card-content {
+    background-color: white;
+    color: black;
+}
+
+.profiles .profile-card .profile-name {
+    padding-top: 0;
+    font-size: 18px;
+}
+
+.profiles .profile-card .profile-info {
+    padding-bottom: 0;
+    font-size: 14px;
+}
+
+.profiles .profile-card .profile-name div,
+.profiles .profile-card .profile-info div {
+    border: none;
+}
+
+.profile {
+    padding: 10px 10px 0 10px;
+    background-color: #eeeeee !important;
+    font-size: 16px;
+}
+
+.profile .profile-block {
+    padding-top: 20px;
+}
+
+.profile .profile-block:first-child {
+    padding-top: 0;
+}
+
+.profile .profile-title {
+    font-weight: bold;
+}
+
+.profile .profile-block p {
+    padding-top: 5px;
+}
+
+.profile .profile-name input {
+    background-color: #eeeeee;
+    border: none;
+    border-bottom: thin solid #cccccc;
+    padding: 0;
+    font-size: 16px;
+}
+
+.profile .profile-types a img {
+    width: 35px;
+    height: 35px;
+    vertical-align: middle;
+}
+
+.profile .profile-types .profile-type {
+    padding: 5px 0;
+}
+
+.profile .profile-types .profile-type span {
+    padding-left: 5px;
+}
+
+.profile .profile-where .profile-title {
+    padding-bottom: 5px;
+}
+
+.profile .profile-where label,
+.profile .profile-where label select {
+    height: 52px;
+    background-color: #eeeeee;
+}
+
+.profile .profile-where select {
+    width: 100%;
+    font-size: 16px;
+    right: auto;
+    padding: 13px 45px 15px 0px;
+    direction: ltr;
+}
+
+.localita-modal ion-footer-bar button{
+    margin: 0 !important;
+}
+/* SEGNALA */
+
+.segnala {
+    background-color: #eeeeee;
+}
+
+.segnala .segnala-desc {
+    padding: 10px;
+    font-size: 14px;
+    line-height: 17px;
+}
+
+.segnala .segnala-text-input {
+    border-style: none;
+    background-color: #eeeeee;
+    margin-top: 7px;
+}
+
+.segnala .segnala-text-input input {
+    background-color: #eeeeee;
+    border-bottom: #cecece !important;
+    border-bottom-style: solid !important;
+    border-bottom-width: thin !important;
+    font-size: 16px;
+}
+
+.segnala .segnala-photo,
+.segnala .segnala-position {
+    margin-top: 10px;
+    font-size: 16px;
+    vertical-align: middle;
+    line-height: 35px;
+}
+
+.segnala .segnala-photo button img,
+.segnala .segnala-position button img {
+    width: 35px;
+    height: 35px;
+}
+
+.segnala .segnala-image {
+    background-color: #cecece;
+    margin-left: 3%;
+    width: 94%;
+    height: 150px;
+}
+
+.segnala .segnala-image img {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.segnala .segnala-position {
+    padding: 0;
+    margin-top: 1opx;
+}
+
+.segnala-send {
+    top: -15px;
+    height: 35px;
+    background-color: #47772b !important;
+    border-color: #47772b !important;
+    font-size: larger !important;
+}
+
+.segnala-send a {
+    text-decoration: none;
+    color: white;
+}
+/* Contatti */
+
+.contatto {
+    background-color: #eeeeee;
+}
+
+.contatto .row {
+    padding: 10px;
+    border-style: solid !important;
+    border-bottom-width: 1px;
+    border-color: #cecece;
+    margin-bottom: 5px;
+}
+
+.contatto button.icon {
+    color: #47772b !important;
+    position: relative;
+}
+
+.contatto button.icon img {
+    width: 35px;
+    height: 35px;
+    margin: auto;
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+}
+/* INFO */
+
+.info {
+    text-align: center;
+    background-color: #eeeeee;
+}
+
+.info .project {
+    color: #63ac3d;
+    font-size: 18px;
+    margin-top: 40px;
+}
+
+.info .project-desc {
+    padding-left: 30px;
+    padding-right: 30px;
+}
+
+.info .version {
+    color: #cecece;
+    margin-top: 10px;
+}
+
+.info .subtitle {
+    color: #63ac3d;
+    margin-top: 40px;
+    font-size: 16px;
+}
+
+.info .mail {
+    text-decoration: underline;
+    color: black;
+    font-size: 18px;
+}
+/* Tutorial */
+
+.position-absolute {
+    position: absolute !important;
+}
+
+.position-relative {
+    position: relative !important;
+}
+
+.tutorial-button {
+    width: 105px;
+}
+/* Nav title */
+
+.nav-bar-title {
+    display: table;
+    height: 100%;
+}
+
+.nav-title {
+    display: table-cell;
+    vertical-align: middle;
+    line-height: 1.2;
+}
+
+.nav-title .nav-title-single {}
+
+.nav-title .nav-title-main {}
+
+.nav-title .nav-title-sub {
+    font-size: smaller;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+/* Others */
+
+.subpage-title {
+    background-color: #47772b !important;
+    height: 30px;
+}
+
+.subpage-title h1 {
+    color: #eeeeee !important;
+    padding-left: 5px;
+    font-size: 20px;
+    line-height: 30px !important;
+}
+
+.hidden-link {
+    color: inherit !important;
+    text-decoration: inherit !important;
+}
+
+.col-15 {
+    -webkit-box-flex: 0;
+    -webkit-flex: 0 0 15%;
+    -moz-box-flex: 0;
+    -moz-flex: 0 0 15%;
+    -ms-flex: 0 0 15%;
+    flex: 0 0 15%;
+    max-width: 15%;
+}
+
+.item {
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+
+.nowrap {
+    white-space: nowrap;
+}
+
+.splashscreen {
+    width: 100%;
+    height: 100%;
+}

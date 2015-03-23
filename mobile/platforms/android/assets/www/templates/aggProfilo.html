@@ -1,0 +1,76 @@
+<ion-view>
+    <ion-nav-title>
+        <div class="nav-title">
+            <div class="nav-title-main">{{"Profili"|translate}}</div>
+            <div class="nav-title-sub">{{selectedProfile.name}}</div>
+        </div>
+    </ion-nav-title>
+
+    <ion-nav-buttons side="left">
+        <button ng-click="back()" class="row button button-icon ion-ios7-arrow-back">
+            <img class="nav-button-app-logo" src="img/ic_launcher.png">
+        </button>
+    </ion-nav-buttons>
+    <ion-nav-buttons side="right">
+        <button ng-click="save()" class="button button-icon btn btn-variable">
+            <img src="img/ic_save.png" />
+        </button>
+    </ion-nav-buttons>
+
+    <!-- OLD STYLE -->
+    <!--<ion-content class="background-grey-light" has-bouncing="false">
+        <div class="high-padding profili-titolo">{{"Nome del profilo" | translate}}</div>
+        <div class="item item-input-inset no-border background-grey-light">
+            <input type="search" ng-model="profilo.name" placeholder="{{'Nome del profilo'|translate}}" class="border-underline background-grey-light">
+        </div>
+        <div class="list background-grey-light">
+            <div class="high-padding profili-titolo">{{"Tipo di utenza" | translate}}</div>
+            <label class="item item-input item-select background-grey-light no-border fixed-height">
+                <select ng-model="profilo.utenza" ng-options="item.profilo|translate for item in tipologiaUtenza" class="background-grey-light max-width">
+                </select>
+            </label>
+        </div>
+        <div class="list background-grey-light">
+            <div class="high-padding profili-titolo">{{"Comune o Località" | translate}}</div>
+            <label class="item item-input item-select background-grey-light no-border fixed-height">
+                <select ng-model="profilo.localita" ng-options="item for item in locs" class="background-grey-light max-width">
+                    <option value="">{{"Selezionare" | translate}}</option>
+                </select>
+            </label>
+        </div>
+    </ion-content>-->
+
+    <ion-content class="profile" has-bouncing="false">
+        <div class="profile-block profile-name">
+            <div class="profile-title">{{"Nome del profilo"|translate}}</div>
+            <input type="text" ng-model="profilo.name" placeholder="Nome del profilo">
+        </div>
+
+        <div class="profile-block profile-types">
+            <div class="profile-title">{{"Tipo di utenza"|translate}}
+                <a ng-click="help()"><img ng-src="img/ic_help.png" />
+                </a>
+            </div>
+            <div>
+                <div class="profile-type" ng-repeat="item in tipologiaUtenza">
+                    <input type="radio" ng-model="profilo.utenza" ng-change="updateLocations()" ng-value="item"><span class="">{{item.profilo}}</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="profile-block profile-where">
+            <div class="profile-title">{{"Comune o Località"|translate}}</div>
+            <button class="button button-100r-select button-block button-outline icon-right ion-arrow-down-b" ng-click="localitaPopup()">
+                <span ng-if="!!profilo.area">{{profilo.area.localita}}</span>
+                <span ng-if="!!!profilo.area">{{"Selezionare"|translate}}</span>
+            </button>
+            <!--<div class="">
+                <label class="item item-input item-select">
+                    <select class="" ng-model="profilo.area" ng-options="item.localita for item in aree">
+                        <option value="">{{"Selezionare"|translate}}</option>
+                    </select>
+                </label>
+            </div>-->
+        </div>
+    </ion-content>
+</ion-view>
