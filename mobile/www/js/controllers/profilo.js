@@ -11,6 +11,9 @@ angular.module('rifiuti.controllers.profilo', [])
     };
 
     Profili.tipidiutenza().then(function (tipi) {
+        tipi = tipi.sort(function(a,b){
+            return a.profilo.localeCompare(b.profilo);
+        });
         $scope.tipologiaUtenza = tipi;
         if (!$scope.id) {
             $scope.profilo.utenza = tipi[0];

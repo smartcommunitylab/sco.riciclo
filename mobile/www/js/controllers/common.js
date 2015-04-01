@@ -4,8 +4,6 @@ angular.module('rifiuti.controllers.common', [])
 .controller('AppCtrl', function ($scope, $rootScope, $location, Profili, DataManager) {
     $scope.app_name = APP_NAME;
 
-    $rootScope.loadingShow();
-
     $scope.showTutorial = function () {
         $rootScope.showTutorial = true;
     };
@@ -17,7 +15,7 @@ angular.module('rifiuti.controllers.common', [])
     //localStorage.removeItem('profiles');
     if (!localStorage.profiles || localStorage.profiles.length == 0) {
         $rootScope.promptedToProfile = true;
-        $location.url("app/aggProfilo");
+        $location.path("app/aggProfilo");
     } else {
         Profili.read();
         Profili.select(Profili.selectedProfileIndex());

@@ -67,6 +67,9 @@ angular.module('rifiuti', [
         $ionicLoading.hide();
     };
 
+    $rootScope.loadingShow();
+
+
     $rootScope.profili = [];
     $rootScope.selectedProfile = null;
 
@@ -117,6 +120,32 @@ angular.module('rifiuti', [
         console.log('CANNOT LOCATE!');
     });
 
+    var backCallback = function (event) {
+        console.log('going back in ' + $state.current.name);
+        if ($rootScope.profili == null || $rootScope.profili.length == 0) {
+            ionic.Platform.exitApp();
+            return;
+        }
+        switch ($state.current.name) {
+        case "app.home.tipidirifiuti":
+            //              case "app.home":
+            //              case "app.home.note":
+            //              case "app.home.calendario":
+            //              case "app.puntiDiRaccolta":
+            //              case "app.tipiDiRaccolta":
+            //              case "app.rifiuti":
+            //              case "app.profili":
+            //              case "app.segnala":
+            //              case "app.contatti":
+            //              case "app.info":
+            $rootScope.reallyexitapp();
+            break;
+        default:
+            navigator.app.backHistory();
+        }
+    };
+    //$ionicPlatform.onHardwareBackButton(backCallback);
+    $ionicPlatform.registerBackButtonAction(backCallback, 100);
 
     $ionicPlatform.ready(function () {
         // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
@@ -139,26 +168,6 @@ angular.module('rifiuti', [
             }, null);
         }
 
-        $ionicPlatform.registerBackButtonAction(function (event) {
-            //            console.log('going back in ' + $state.current.name);
-            switch ($state.current.name) {
-            case "app.home.tipidirifiuti":
-                //              case "app.home":
-                //              case "app.home.note":
-                //              case "app.home.calendario":
-                //              case "app.puntiDiRaccolta":
-                //              case "app.tipiDiRaccolta":
-                //              case "app.rifiuti":
-                //              case "app.profili":
-                //              case "app.segnala":
-                //              case "app.contatti":
-                //              case "app.info":
-                $rootScope.reallyexitapp();
-                break;
-            default:
-                navigator.app.backHistory();
-            }
-        }, 100);
     });
 
     window.addEventListener('filePluginIsReady', function () {
