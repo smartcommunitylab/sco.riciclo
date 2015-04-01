@@ -41,11 +41,12 @@ angular.module('rifiuti.services.profili', [])
                       if (targetDate.getTime() > dFrom.getTime()) {
                         if (!(dStr in daymap)) {
                           daymap[dStr] = {
-                            id: n.id+'_'+dStr,
+                            id: targetDate.getTime(),
                             title: 'Domani a '+n.comune,
                             text: {},
-                            at: targetDate,
-                            autoCancel: true
+//                            smallIcon: 'res://icon.png',
+                            firstAt: targetDate
+//                            autoCancel: true
                           };
                         }
                         daymap[dStr].text[n.tipologiaPuntiRaccolta] = 1;
@@ -54,14 +55,17 @@ angular.module('rifiuti.services.profili', [])
                   }
                 });
               });
+              var notifArray = [];
               for (var d in daymap) {
                 var n = daymap[d];
                 n.text = toMessage(n.text);
                 if (n.text) {
-				  console.log('scheduling '+n.text);
-                  cordova.plugins.notification.local.schedule(n);
+				  console.log('scheduling '+n.id+' at '+n.firstAt);
+                  notifArray.push(n);
+                  //break;
                 }
               }
+              if (notifArray) cordova.plugins.notification.local.schedule(notifArray);
             }
           });
         });

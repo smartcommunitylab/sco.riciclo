@@ -168,6 +168,10 @@ angular.module('rifiuti', [
             }, null);
         }
 
+        if (localStorage.profiles && localStorage.profiles.length > 0) {
+            Profili.updateNotifications();
+        }
+
     });
 
     window.addEventListener('filePluginIsReady', function () {
