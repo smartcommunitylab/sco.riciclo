@@ -1,0 +1,12 @@
+apps:
+  - appId: GIUDICARIE
+    password: GIUDICARIE
+    modelElements:
+    - modello
+    - isole
+    - crm
+  - appId: TRENTO
+    password: TRENTO      
+    modelElements:
+    - modello
+          

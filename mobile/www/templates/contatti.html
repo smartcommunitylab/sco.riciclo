@@ -1,0 +1,25 @@
+<ion-view>
+    <ion-nav-title>
+        <div class="nav-title">
+            <div class="nav-title-main">Contatti</div>
+            <div class="nav-title-sub">{{selectedProfile.name}}</div>
+        </div>
+    </ion-nav-title>
+
+    <ion-nav-buttons side="left">
+        <button menu-toggle="left" class="row button button-icon ion-navicon">
+            <img ng-if="!noteSelected" class="nav-button-app-logo" src="img/ic_launcher.png">
+        </button>
+    </ion-nav-buttons>
+
+    <ion-content class="expandable-list-items" has-bouncing="false" delegate-handle="mainScroll" on-scroll-complete="mainScrollResize()">
+        <div class="expandable-list-item" ng-repeat="item in contatti">
+            <a class="hidden-link" ng-href="#app/contatti/{{$index}}">
+                <div class="row expandable-list-item-header">
+                    <div class="col" ng-if="item.ufficio">{{item.ufficio}}</div>
+                    <div class="col" ng-if="item.ragioneSociale">{{item.ragioneSociale}}</div>
+                </div>
+            </a>
+        </div>
+    </ion-content>
+</ion-view>

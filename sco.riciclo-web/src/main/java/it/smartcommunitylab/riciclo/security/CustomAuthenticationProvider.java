@@ -1,5 +1,8 @@
 package it.smartcommunitylab.riciclo.security;
 
+import it.smartcommunitylab.riciclo.storage.AppInfo;
+import it.smartcommunitylab.riciclo.storage.AppSetup;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -21,7 +24,7 @@ public class CustomAuthenticationProvider extends AbstractUserDetailsAuthenticat
 	
 	@Override
 	protected UserDetails retrieveUser(String username, UsernamePasswordAuthenticationToken authentication) throws AuthenticationException {
-		AppCredentials app = appSetup.findAppById(username);
+		AppInfo app = appSetup.findAppById(username);
 		if (app == null) {
 			throw new UsernameNotFoundException(username);
 		}

@@ -28,16 +28,27 @@ import it.smartcommunitylab.riciclo.model.Rifiuti;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.data.mongodb.core.query.Update;
 
-
-
 public class RepositoryManager {
 
-	private Class[] classes = {Categorie.class, Area.class, Gestore.class, Istituzione.class, PuntoRaccolta.class, Raccolta.class, Riciclabolario.class, Profilo.class};
+	private Class<?>[] classes = {
+			Categorie.class, 
+			Area.class, 
+			Gestore.class, 
+			Istituzione.class, 
+			PuntoRaccolta.class, 
+			Raccolta.class, 
+			Riciclabolario.class, 
+			Profilo.class
+			};
+
+	@Autowired
+	private AppSetup appSetup;
 	
 	private MongoTemplate draftTemplate;
 	private MongoTemplate finalTemplate;
@@ -48,98 +59,100 @@ public class RepositoryManager {
 	}
 	
 	public void save(Rifiuti rifiuti, String appId) {
+		AppState oldDraft = getAppState(appId, true);
 		cleanByAppId(appId, true);
 		
+		rifiuti.getCategorie().setAppId(appId);
 		draftTemplate.save(rifiuti.getCategorie());
 
 		for (Area area: rifiuti.getAree()) {
+			area.setAppId(appId);
 			draftTemplate.save(area);
 		}
 		for (Profilo profilo: rifiuti.getProfili()) {
+			profilo.setAppId(appId);
 			draftTemplate.save(profilo);
 		}		
 		for (Gestore gestore: rifiuti.getGestori()) {
+			gestore.setAppId(appId);
 			draftTemplate.save(gestore);
 		}
 		for (Istituzione istituzione: rifiuti.getIstituzioni()) {
+			istituzione.setAppId(appId);
 			draftTemplate.save(istituzione);
 		}		
 		for (PuntoRaccolta puntoRaccolta: rifiuti.getPuntiRaccolta()) {
+			puntoRaccolta.setAppId(appId);
 			draftTemplate.save(puntoRaccolta);
 		}		
 		for (Raccolta raccolta: rifiuti.getRaccolta()) {
+			raccolta.setAppId(appId);
 			draftTemplate.save(raccolta);
 		}	
 		for (Riciclabolario riciclabolario: rifiuti.getRiciclabolario()) {
+			riciclabolario.setAppId(appId);
 			draftTemplate.save(riciclabolario);
 		}			
+		saveAppVersion(appId, oldDraft.getVersion()+1, true);
 	}
 	
 	public void cleanByAppId(String appId, boolean draft) {
-		MongoTemplate template;
-		if (draft) {
-			template = draftTemplate;
-		} else {
-			template = finalTemplate;
-		}		
+		MongoTemplate template = draft ? draftTemplate : finalTemplate;
+		Query query = appQuery(appId);
 		
-		Query query = new Query(new Criteria("appId").is(appId));
-		
-		for (Class clazz: classes) {
+		for (Class<?> clazz: classes) {
 			template.remove(query, clazz);
-		}
-		
-		try {
-			Thread.sleep(1000);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
 		}
 	}
 	
 	public void publish(String appId) {
-		for (Class clazz: classes) {
-			List objects = draftTemplate.findAll(clazz);
-			finalTemplate.remove(new Query(), clazz);
+		Query query = appQuery(appId);
+		for (Class<?> clazz: classes) {
+			List<?> objects = draftTemplate.find(query, clazz);
+			finalTemplate.remove(query, clazz);
 			for (Object obj: objects) {
 				finalTemplate.save(obj);
 			}
 		}
 
-		increaseAppId(appId);
+		AppState draft = getAppState(appId, true);
+		saveAppVersion(appId, draft.getVersion(), false);
 	}
 	
-	public void createAppId(String appId) {
-		Query query = new Query(new Criteria("appId").is(appId));
-		List<AppDescriptor> apps = finalTemplate.find(query, AppDescriptor.class);
-		if (apps == null || apps.isEmpty()) {
-			AppDescriptor appDescr = new AppDescriptor();
+	public void createApp(String appId) {
+		saveApp(appId, true);
+		saveApp(appId, false);
+	}
+
+	public void saveApp(String appId, boolean draft) {
+		MongoTemplate template = draft ? draftTemplate : finalTemplate;
+		Query query = appQuery(appId);
+		AppState app = template.findOne(query, AppState.class);
+		if (app == null) {
+			AppState appDescr = new AppState();
 			appDescr.setAppId(appId);
 			appDescr.setVersion(0L);
 			appDescr.setTimestamp(System.currentTimeMillis());
-			finalTemplate.save(appDescr);
+			template.save(appDescr);
 		}
 		
 	}
-	
-	public void increaseAppId(String appId) {
-		Query query = new Query(new Criteria("appId").is(appId));
+
+	private void saveAppVersion(String appId, long version, boolean draft) {
+		MongoTemplate template = draft ? draftTemplate : finalTemplate;
+		Query query = appQuery(appId);
 		Update update = new Update();
-		update.inc("version", 1);		
+		update.set("version", version);		
 		update.set("timestamp", System.currentTimeMillis());
-		finalTemplate.upsert(query, update, AppDescriptor.class);		
+		template.upsert(query, update, AppState.class);		
 	}
 	
-	public List findRifiuti(String className, String appId, boolean draft) throws ClassNotFoundException {
-		MongoTemplate template;
-		if (draft) {
-			template = draftTemplate;
-		} else {
-			template = finalTemplate;
-		}
+
+	public List<?> findRifiuti(String className, String appId, boolean draft) throws ClassNotFoundException {
+		MongoTemplate template = draft ? draftTemplate : finalTemplate;
 		
-		Query query = new Query(new Criteria("appId").is(appId));
-		List result = template.find(query, Class.forName(className));
+		Query query = appQuery(appId);
+		List<?> result = template.find(query, Class.forName(className));
 		
 		return result;
 	}	
@@ -154,7 +167,7 @@ public class RepositoryManager {
 		
 		
 		Rifiuti rifiuti = new Rifiuti();
-		Query query = new Query(new Criteria("appId").is(appId));
+		Query query = appQuery(appId);
 		rifiuti.setAree(template.find(query, Area.class));
 		rifiuti.setProfili(template.find(query, Profilo.class));
 		rifiuti.setCategorie(template.findOne(query, Categorie.class));
@@ -168,9 +181,24 @@ public class RepositoryManager {
 		return rifiuti;
 	}
 	
-	public AppDescriptor getAppDescriptor(String appId) {
-		Query query = new Query(new Criteria("appId").is(appId));
-		return finalTemplate.findOne(query, AppDescriptor.class);
+	private AppState getAppState(String appId, boolean draft) {
+		Query query = appQuery(appId);
+		MongoTemplate template = draft ? draftTemplate : finalTemplate;
+		return template.findOne(query, AppState.class);
+	}
+	
+	public App getAppDescriptor(String appId) {
+		AppState draft = getAppState(appId, true);
+		AppState published = getAppState(appId, false);
+		App app = new App();
+		app.setAppInfo(appSetup.findAppById(appId));
+		app.setDraftState(draft);
+		app.setPublishState(published);
+		return app;
+	}
+
+	private Query appQuery(String appId) {
+		return new Query(new Criteria("appId").is(appId));
 	}
 
 }

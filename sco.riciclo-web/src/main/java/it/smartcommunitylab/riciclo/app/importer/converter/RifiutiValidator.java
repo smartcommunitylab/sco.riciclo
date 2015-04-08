@@ -1,5 +1,8 @@
 package it.smartcommunitylab.riciclo.app.importer.converter;
 
+import it.smartcommunitylab.riciclo.app.importer.FileList;
+import it.smartcommunitylab.riciclo.app.importer.ImportConstants;
+import it.smartcommunitylab.riciclo.app.importer.ImportError;
 import it.smartcommunitylab.riciclo.model.Area;
 import it.smartcommunitylab.riciclo.model.Gestore;
 import it.smartcommunitylab.riciclo.model.Istituzione;
@@ -10,6 +13,7 @@ import it.smartcommunitylab.riciclo.model.Riciclabolario;
 import it.smartcommunitylab.riciclo.model.Rifiuti;
 import it.smartcommunitylab.riciclo.model.Tipologia;
 import it.smartcommunitylab.riciclo.model.UtenzaArea;
+import it.smartcommunitylab.riciclo.storage.AppInfo;
 
 import java.lang.reflect.Method;
 import java.util.Collection;
@@ -169,15 +173,15 @@ public class RifiutiValidator {
 		return problems;
 	}
 	
-	protected Set<String> flattenList(Collection objects) throws Exception {
+	protected Set<String> flattenList(Collection<?> objects) throws Exception {
 		return flattenList(objects, Tipologia.class, "nome");
 	}		
 	
-	protected Set<String> flattenList(Collection objects, Class clz) throws Exception {
+	protected Set<String> flattenList(Collection<?> objects, Class<?> clz) throws Exception {
 		return flattenList(objects, clz, "nome");
 	}		
 	
-	protected Set<String> flattenList(Collection objects, Class clz, String field) throws Exception {
+	protected Set<String> flattenList(Collection<?> objects, Class<?> clz, String field) throws Exception {
 		Set<String> result = Sets.newHashSet();
 		for (Object element: objects) {
 			Method m = clz.getMethod("get" + WordUtils.capitalize(field));
@@ -185,6 +189,18 @@ public class RifiutiValidator {
 			result.add(value);
 		}
 		return result;
+	}
+
+	public void validateInput(AppInfo appInfo, FileList fileList) throws ImportError {
+		if (fileList.getModel() == null || fileList.getModel().isEmpty()) {
+			throw new ImportError("Missing model file");
+		}
+		if (appInfo.getModelElements().contains(ImportConstants.CRM) && (fileList.getCrm() == null || fileList.getCrm().isEmpty())) {
+			throw new ImportError("Missing CRM file");
+		}
+		if (appInfo.getModelElements().contains(ImportConstants.ISOLE) && (fileList.getIsole() == null || fileList.getModel().isEmpty())) {
+			throw new ImportError("Missing 'isole' file");
+		}
 	}			
 	
 }
