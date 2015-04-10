@@ -164,21 +164,26 @@ angular.module('rifiuti.services.profili', [])
 
     var aree = function(p) {
       var myAree = [];
-      var myComuni = [];
+      var myGestori = [];
+      var myIstituzioni = [];
       var areeList = DataManager.getSync('aree');
       areeList.forEach(function(area,ai,dbAree){
             if (area.nome==p.area.nome) {
               var utenzaOK = area.utenza[p.utenza.tipologiaUtenza];
               if (utenzaOK) {
                 myAree.push(area.nome);
-                myComuni.push(area.comune);
+                myIstituzioni.push(area.istituzione);
+                myGestori.push(area.gestore);
               }
               treeWalkUp(dbAree,area.parent,'nome',myAree);
-              treeWalkUp(dbAree,area.parent,'comune',myComuni);
+              treeWalkUp(dbAree,area.parent,'istituzione',myIstituzioni);
+              treeWalkUp(dbAree,area.parent,'gestore',myGestori);
             }
       });
       p.aree=myAree;
-      p.comuni=myComuni;
+      p.gestori = myGestori;
+      p.istituzioni = myIstituzioni;
+//      p.comuni=myComuni;
     };
     
     return {

@@ -131,7 +131,9 @@ angular.module('rifiuti.services.utili', [])
       return (!!icona?'img/ic_poi_'+icona+'.png':null);
     },
     belongsTo: function(pr, area, profile) {
-      return profile.aree.indexOf(area) != -1 && (pr.tipologiaPuntiRaccolta=='CRM' || pr.tipologiaPuntiRaccolta=='CRZ' || !pr.indirizzo || profile.comuni.indexOf(pr.indirizzo)!=-1);
+      return profile.aree.indexOf(area) != -1
+          //&& (pr.tipologiaPuntiRaccolta=='CRM' || pr.tipologiaPuntiRaccolta=='CRZ' || !pr.indirizzo || profile.comuni.indexOf(pr.indirizzo)!=-1)
+        ;
     },
     isPaP: function(tipologia) {
       return !!tipologia && tipologia.toLowerCase().indexOf('porta a porta') == 0;

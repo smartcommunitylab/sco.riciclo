@@ -91,7 +91,8 @@ angular.module('rifiuti.services.rifiuti', [])
               if (options && options.tipopunto && regola.tipologiaPuntoRaccolta!=options.tipopunto) optionsOK=false;
               if (options && options.tipipunto && options.tipipunto.indexOf(regola.tipologiaPuntoRaccolta)==-1) optionsOK=false;
 
-              if (optionsOK && $rootScope.selectedProfile.aree.indexOf(regola.area)!=-1 && regola.tipologiaUtenza==$rootScope.selectedProfile.utenza.tipologiaUtenza) {
+              if (optionsOK && $rootScope.selectedProfile.aree.indexOf(regola.area)!=-1 &&
+                  regola.tipologiaUtenza==$rootScope.selectedProfile.utenza.tipologiaUtenza) {
                 var icona = Utili.iconFromRegola(regola);
                 if (icona) regola['icon'] = icona;
                 myRaccolta.push(regola);
@@ -139,9 +140,18 @@ angular.module('rifiuti.services.rifiuti', [])
     contatti: function() {
       var deferred = $q.defer();
       DataManager.get('data/db/istituzioni.json').then(function (results) {
-        var data=results.data;
+        var data=[];
+        for (var i = 0; i < results.data.length; i++) {
+            if ($rootScope.selectedProfile.istituzioni.indexOf(results.data[i].nome) >= 0) {
+                data.push(results.data[i]);
+            }
+        }
         DataManager.get('data/db/gestori.json').then(function (gest) {
-          data = data.concat(gest.data);
+          for (var i = 0; i < gest.data.length; i++) {
+            if ($rootScope.selectedProfile.gestori.indexOf(gest.data[i].ragioneSociale) >= 0) {
+                data.push(gest.data[i]);
+            }
+          }
           deferred.resolve(data);    
         });
      });
