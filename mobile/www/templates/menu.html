@@ -56,12 +56,28 @@
                         <div class="col">{{"Gestione profili" | translate}}</div>
                     </div>
                 </ion-item>
+                <ion-item nav-clear menu-close href="#/app/menunote" ng-if="showNews()">
+                    <div class="row row-center">
+                        <div class="col col-15 ">
+                            <img src="img/ic_notes.png" />
+                        </div>
+                        <div class="col">{{"Le mie note" | translate}}</div>
+                    </div>
+                </ion-item>
                 <ion-item nav-clear menu-close href="#/app/segnala">
                     <div class="row row-center">
                         <div class="col col-15 ">
                             <img src="img/ic_segnala.png" />
                         </div>
                         <div class="col">{{"Segnala" | translate}}</div>
+                    </div>
+                </ion-item>
+                <ion-item nav-clear menu-close href="#/app/settings">
+                    <div class="row row-center">
+                        <div class="col col-15 ">
+                            <img src="img/ic_settings.png" />
+                        </div>
+                        <div class="col">{{"Impostazioni" | translate}}</div>
                     </div>
                 </ion-item>
                 <ion-item nav-clear menu-close href="#/app/contatti">

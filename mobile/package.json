@@ -30,5 +30,8 @@
     "de.appplant.cordova.plugin.email-composer",
     "de.appplant.cordova.plugin.local-notification",
     "org.apache.cordova.geolocation"
+  ],
+  "cordovaPlatforms": [
+    "ios"
   ]
 }

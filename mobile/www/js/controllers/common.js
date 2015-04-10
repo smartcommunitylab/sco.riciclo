@@ -1,11 +1,15 @@
 angular.module('rifiuti.controllers.common', [])
 
 
-.controller('AppCtrl', function ($scope, $rootScope, $location, Profili, DataManager) {
+.controller('AppCtrl', function ($scope, $rootScope, $location, Profili, DataManager, Conf) {
     $scope.app_name = APP_NAME;
 
     $scope.showTutorial = function () {
         $rootScope.showTutorial = true;
+    };
+
+    $scope.showNews = function() {
+        return Conf.showNews();
     };
 
     DataManager.checkVersion($rootScope.profili).then(function () {
@@ -106,12 +110,11 @@ angular.module('rifiuti.controllers.common', [])
 
 })
 
-
-
-
-
-
-
+.controller('SettingsCtrl', function ($scope, $ionicScrollDelegate, Raccolta) {
+    $scope.mainScrollResize = function () {
+        $ionicScrollDelegate.$getByHandle('mainScroll').resize();
+    }
+})
 
 .controller('ContattiCtrl', function ($scope, $ionicScrollDelegate, Raccolta) {
     Raccolta.contatti().then(function (data) {

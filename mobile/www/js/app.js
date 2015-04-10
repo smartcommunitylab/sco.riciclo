@@ -297,24 +297,12 @@ angular.module('rifiuti', [
         TTQuattro: "Calendario",
         TTCinque: "Menù laterale",
         Selezionare: "Seleziona Comune/Località",
-
-        y1: "Servizio TIA e informatica",
-        y2: "Per informazioni in merito alla Tariffa di Igiene Urbana",
-        y3: "Via Padre Gnesotti, 2 38079 Tione di Trento TN",
-        y4: "lunedì - giovedì 8.30-12.30 14.00-17.00 venerdì 8.30-12.30",
-        y5: "www.comunitadellegiudicarie.it",
-        y6: "0465/339532",
-        y7: "serviziotiaeinformatica@comunedellegiudicarie.it",
-        y8: "c.giudicarie.legamail.it",
-        y9: "0465/339548",
-
-        u1: "Ufficio Igiene Ambientale",
-        u2: "Per informazioni in merito alla raccolta differenziata",
-        u3: "Centro Integrato, Loc. Zuclo 38079 Zuclo TN",
-        u4: "lunedì - giovedì 8.30-12.30 14.00-17.00 venerdì 8.30-12.30",
-        i2: "Il gestore dei rifiuti per la Comunità dell Giudicarie",
-
-
+        "Le mie note": "Le mie note",
+        "Impostazioni": "Impostazioni",
+        "NOTE": "NOTE",
+        "Note": "Note",
+        "NEWS": "NEWS",
+        "News": "News"
 
     });
     /*
@@ -918,6 +906,16 @@ angular.module('rifiuti', [
         }
     })
 
+    .state('app.home.news', {
+        url: "/news",
+        views: {
+            'note': {
+                templateUrl: "templates/home/news.html",
+                controller: 'newsCtrl'
+            }
+        }
+    })
+
     .state('app.home.tipidirifiuti', {
         url: "/tipidirifiuti",
         views: {
@@ -1034,6 +1032,26 @@ angular.module('rifiuti', [
             'menuContent': {
                 templateUrl: "templates/segnala.html",
                 controller: 'SegnalaCtrl'
+            }
+        }
+    })
+
+    .state('app.settings', {
+        url: "/settings",
+        views: {
+            'menuContent': {
+                templateUrl: "templates/settings.html",
+                controller: 'SettingsCtrl'
+            }
+        }
+    })
+
+    .state('app.menunote', {
+        url: "/menunote",
+        views: {
+            'menuContent': {
+                templateUrl: "templates/menunote.html",
+                controller: 'noteCtrl'
             }
         }
     })

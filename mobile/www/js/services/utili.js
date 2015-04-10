@@ -1,5 +1,14 @@
 angular.module('rifiuti.services.utili', [])
 
+.factory('Conf', function() {
+
+    return {
+        showNews: function() {
+            return SHOW_NEWS;
+        }
+    };
+})
+
 
 .factory('Utili', function () {
   var mesi = ["Gennaio", "Febbraio", "Marzo", "Aprile", "Maggio", "Giugno", "Luglio", "Agosto", "Settembre", "Ottobre", "Novembre", "Dicembre"];

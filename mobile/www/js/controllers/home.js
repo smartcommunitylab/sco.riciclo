@@ -1,7 +1,8 @@
 angular.module('rifiuti.controllers.home', [])
 
-.controller('HomeCtrl', function ($scope, $rootScope, $ionicSideMenuDelegate, DataManager, $ionicLoading, $ionicScrollDelegate) {
-    $rootScope.noteSelected = false;
+.controller('HomeCtrl', function ($scope, $rootScope, $ionicSideMenuDelegate, DataManager, $ionicLoading, $ionicScrollDelegate, Conf) {
+   // $rootScope.noteSelected = false;
+    $scope.showNews = Conf.showNews;
 
     $scope.height = window.innerHeight;
     $scope.width = window.innerWidth;
@@ -33,27 +34,27 @@ angular.module('rifiuti.controllers.home', [])
     });
 
     $scope.titleText = function () {
-        if (!$rootScope.noteSelected) {
+//        if (!$rootScope.noteSelected) {
             return APP_NAME;
-        } else {
-            return '';
-        }
+//        } else {
+//            return '';
+//        }
     };
 
     $scope.subTitleText = function () {
-        if (!$rootScope.noteSelected) {
+//        if (!$rootScope.noteSelected) {
             return ($scope.selectedProfile ? $scope.selectedProfile.name : '');
-        } else {
-            return '';
-        }
+//        } else {
+//            return '';
+//        }
     };
 
     $scope.leftClick = function () {
-        if (!$rootScope.noteSelected) {
+//        if (!$rootScope.noteSelected) {
             $ionicSideMenuDelegate.toggleLeft();
-        } else {
-            $rootScope.noteSelected = false;
-        }
+//        } else {
+//            $rootScope.noteSelected = false;
+//        }
     };
 
     $scope.oneInThree = function (v) {
@@ -102,15 +103,15 @@ angular.module('rifiuti.controllers.home', [])
 })
 
 .controller('noteCtrl', function ($scope, $rootScope, $ionicPopup, $filter, Profili) {
-    $rootScope.noteSelected = false;
+    $scope.noteSelected = false;
 
     $scope.variableIMG = "img/ic_add.png";
     var updateIMG = function () {
-        $scope.variableIMG = !$rootScope.noteSelected ? "img/ic_add.png" : "img/ic_menu_delete.png";
+        $scope.variableIMG = !$scope.noteSelected ? "img/ic_add.png" : "img/ic_menu_delete.png";
     };
 
     $rootScope.$watch('noteSelected', function () {
-        if (!$rootScope.noteSelected) {
+        if (!$scope.noteSelected) {
             $scope.selectedNotes = [];
             $scope.multipleNoteSelected = false;
         }
@@ -141,7 +142,7 @@ angular.module('rifiuti.controllers.home', [])
                 $scope.notes = Profili.deleteNotes(idx);
                 $scope.selectedNotes = [];
                 $scope.multipleNoteSelected = false;
-                $rootScope.noteSelected = false;
+                $scope.noteSelected = false;
                 updateIMG();
             }
         });
@@ -151,13 +152,13 @@ angular.module('rifiuti.controllers.home', [])
         var p = $scope.selectedNotes.indexOf(idx);
         if (p == -1) {
             $scope.selectedNotes.push(idx);
-            $rootScope.noteSelected = true;
+            $scope.noteSelected = true;
             if ($scope.selectedNotes.length > 1) $scope.multipleNoteSelected = true;
         } else {
             $scope.selectedNotes.splice(p, 1);
             if ($scope.selectedNotes.length <= 1) {
                 $scope.multipleNoteSelected = false;
-                if ($scope.selectedNotes.length < 1) $rootScope.noteSelected = false;
+                if ($scope.selectedNotes.length < 1) $scope.noteSelected = false;
             }
         }
         updateIMG();
@@ -205,7 +206,7 @@ angular.module('rifiuti.controllers.home', [])
         };
     };
     $scope.click = function () {
-        if ($rootScope.noteSelected) {
+        if ($scope.noteSelected) {
             $scope.removeNotes($scope.selectedNotes);
         } else {
             $scope.data = {};
@@ -228,7 +229,7 @@ angular.module('rifiuti.controllers.home', [])
                 $scope.notes = Profili.updateNote($scope.data.idx, res);
                 $scope.selectedNotes = [];
                 $scope.multipleNoteSelected = false;
-                $rootScope.noteSelected = false;
+                $scope.noteSelected = false;
             }
         });
     };
@@ -244,7 +245,7 @@ angular.module('rifiuti.controllers.home', [])
 		return window._globalscrollid;
 	};
 
-    $rootScope.noteSelected = false;
+    $scope.noteSelected = false;
 
     $scope.switchView = function () {
         $scope.calendarView = !$scope.calendarView;

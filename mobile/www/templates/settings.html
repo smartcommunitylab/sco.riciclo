@@ -1,0 +1,17 @@
+<ion-view>
+    <ion-nav-title>
+        <div class="nav-title">
+            <div class="nav-title-main">{{"Impostazioni"|translate}}</div>
+            <div class="nav-title-sub">{{selectedProfile.name}}</div>
+        </div>
+    </ion-nav-title>
+
+    <ion-nav-buttons side="left">
+        <button menu-toggle="left" class="row button button-icon ion-navicon">
+            <img ng-if="!noteSelected" class="nav-button-app-logo" src="img/ic_launcher.png">
+        </button>
+    </ion-nav-buttons>
+
+    <ion-content class="segnala">
+    </ion-content>
+</ion-view>
