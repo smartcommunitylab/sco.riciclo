@@ -100,6 +100,7 @@ angular.module('rifiuti', [
             return this * Math.PI / 180;
         }
     }
+
     document.addEventListener("pause", function () {
         console.log('app paused');
         if (typeof $rootScope.locationWatchID != 'undefined') {
@@ -109,10 +110,12 @@ angular.module('rifiuti', [
             console.log('geolocation reset');
         }
     }, false);
+
     document.addEventListener("resume", function () {
         console.log('app resumed');
         GeoLocate.locate();
     }, false);
+
     GeoLocate.locate().then(function (position) {
         $rootScope.myPosition = position;
         //console.log('first geolocation: ' + position);
@@ -148,6 +151,8 @@ angular.module('rifiuti', [
     $ionicPlatform.registerBackButtonAction(backCallback, 100);
 
     $ionicPlatform.ready(function () {
+        $rootScope.platform = ionic.Platform;
+
         // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
         // for form inputs)
         if (window.cordova && window.cordova.plugins.Keyboard) {
@@ -254,26 +259,26 @@ angular.module('rifiuti', [
         SAB: "SAB",
         DOM: "DOM",
 
-		lun: "lunedì",
-		mar: "martedì",
-		mer: "mercoledì",
-		gio: "giovedì",
-		ven: "venerdì",
-		sab: "sabato",
-		dom: "domenicat",
+        lun: "lunedì",
+        mar: "martedì",
+        mer: "mercoledì",
+        gio: "giovedì",
+        ven: "venerdì",
+        sab: "sabato",
+        dom: "domenicat",
 
-		Gennaio: "gennaio",
-		Febbraio: "febbraio",
-		Marzo: "marzo",
-		Aprile: "aprile",
-		Maggio: "maggio",
-		Giugno: "giugno",
-		Luglio: "luglio",
-		Agosto: "agosto",
-		Settembre: "settembre",
-		Ottobre: "ottobre",
-		Novembre: "novembre",
-		Dicembre: "dicembre",
+        Gennaio: "gennaio",
+        Febbraio: "febbraio",
+        Marzo: "marzo",
+        Aprile: "aprile",
+        Maggio: "maggio",
+        Giugno: "giugno",
+        Luglio: "luglio",
+        Agosto: "agosto",
+        Settembre: "settembre",
+        Ottobre: "ottobre",
+        Novembre: "novembre",
+        Dicembre: "dicembre",
 
         Tocca: "Tocca + per aggiungere una nota",
         empty_elem: "Nessun elemento da visualizzare",

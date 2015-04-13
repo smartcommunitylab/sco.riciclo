@@ -1,7 +1,17 @@
 <ion-side-menus>
     <!-- enable-menu-with-back-views="true" -->
     <ion-side-menu-content edge-drag-threshold="30">
-        <ion-nav-bar class="bar-balanced bar-100r" align-title="left" delegate-handle="navBar"></ion-nav-bar>
+        <ion-nav-bar class="bar-balanced bar-100r" align-title="left" delegate-handle="navBar">
+            <ion-nav-back-button>
+            </ion-nav-back-button>
+
+            <ion-nav-buttons side="left">
+                <!-- O: button-clear or button-icon -->
+                <button class="button button-clear" menu-toggle="left">
+                    <i class="icon ion-navicon"></i>
+                </button>
+            </ion-nav-buttons>
+        </ion-nav-bar>
         <ion-nav-view name="menuContent" animation="slide-left-right"></ion-nav-view>
     </ion-side-menu-content>
 

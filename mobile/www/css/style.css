@@ -472,7 +472,7 @@
     font-size: 16px;
 }
 
-.profile .profile-types a img {
+.help img {
     width: 35px;
     height: 35px;
     vertical-align: middle;
@@ -504,7 +504,7 @@
     direction: ltr;
 }
 
-.localita-modal ion-footer-bar button{
+.localita-modal ion-footer-bar button {
     margin: 0 !important;
 }
 /* SEGNALA */
