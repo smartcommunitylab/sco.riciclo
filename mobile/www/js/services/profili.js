@@ -95,7 +95,7 @@ angular.module('rifiuti.services.profili', [])
         }
         DataManager.updateProfiles($rootScope.profili);
         ProfiliFactory.updateNotifications();
-        select(profileIndex);
+        ProfiliFactory.select(profileIndex);
     };
 
     var indexof = function (id) {

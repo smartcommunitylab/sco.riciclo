@@ -183,7 +183,7 @@ angular.module('rifiuti.controllers.profilo', [])
 
     $scope.localitaSelected = function (item) {
         $scope.profilo.area = item;
-        //$scope.closeLocalitaModal();
+        $scope.closeLocalitaSelector();
     };
 
     //Cleanup the modal when we're done with it!
