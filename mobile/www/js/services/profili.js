@@ -127,7 +127,7 @@ angular.module('rifiuti.services.profili', [])
 
     ProfiliFactory.select = function (profileIndex) {
         if (!!$rootScope.selectedProfile) {
-            var p = byId($rootScope.selectedProfile.id);
+            var p = ProfiliFactory.byId($rootScope.selectedProfile.id);
             if (p) p.image = "img/rifiuti_btn_radio_off_holo_dark.png";
             $rootScope.selectedProfile = null;
         }

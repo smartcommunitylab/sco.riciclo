@@ -465,6 +465,7 @@
 }
 
 .profile .profile-name input {
+    width: 100%;
     background-color: #eeeeee;
     border: none;
     border-bottom: thin solid #cccccc;
