@@ -132,7 +132,7 @@ angular.module('rifiuti.services.utili', [])
     },
     belongsTo: function(pr, area, profile) {
       return profile.aree.indexOf(area) != -1
-          //&& (pr.tipologiaPuntiRaccolta=='CRM' || pr.tipologiaPuntiRaccolta=='CRZ' || !pr.indirizzo || profile.comuni.indexOf(pr.indirizzo)!=-1)
+          //&& (pr.tipologiaPuntiRaccolta=='CRM' || pr.tipologiaPuntiRaccolta=='CRZ' || !pr.zona || profile.comuni.indexOf(pr.zona)!=-1)
         ;
     },
     isPaP: function(tipologia) {

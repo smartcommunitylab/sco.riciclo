@@ -43,7 +43,7 @@
                 </div>
             </div>-->
             <div class="list" ng-if="editMode">
-                <ion-radio ng-repeat="item in tipologiaUtenza" ng-model="profilo.utenza" ng-change="updateLocations()" ng-value="item">{{item.profilo}}</ion-radio>
+                <ion-radio ng-repeat="item in tipologiaUtenza" ng-model="profilo.utenza" ng-change="updateLocations()" ng-value="item">{{item.nome}}</ion-radio>
             </div>
             <p ng-if="!editMode">{{profilo.utenza.profilo | translate}}</p>
         </div>
@@ -54,7 +54,7 @@
                 <span ng-if="!!profilo.area">{{profilo.area.localita}}</span>
                 <span ng-if="!!!profilo.area">{{"Selezionare" | translate}}</span>
             </button>
-            <p ng-if="!editMode">{{profilo.area.localita}}</p>
+            <p ng-if="!editMode">{{profilo.area.etichetta}}</p>
         </div>
     </ion-content>
 </ion-view>

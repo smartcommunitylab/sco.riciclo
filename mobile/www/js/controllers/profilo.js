@@ -29,7 +29,7 @@ angular.module('rifiuti.controllers.profilo', [])
     // popola tipi di utenza e relative locations
     Profili.tipidiutenza().then(function (tipi) {
         tipi = tipi.sort(function (a, b) {
-            return a.profilo.localeCompare(b.profilo);
+            return a.nome.localeCompare(b.nome);
         });
         $scope.tipologiaUtenza = tipi;
 

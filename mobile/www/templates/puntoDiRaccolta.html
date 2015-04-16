@@ -2,15 +2,17 @@
     <ion-nav-title>
         <div class="nav-title">
             <div class="nav-title-main">{{"Punto di raccolta"|translate}}</div>
-            <div class="nav-title-sub">{{pdr.tipologiaPuntiRaccolta}} {{pdr.indirizzo}}</div>
+            <div class="nav-title-sub">{{pdr.tipologiaPuntiRaccolta}} {{pdr.zona}}</div>
         </div>
     </ion-nav-title>
 
+<!--
     <ion-nav-buttons side="left">
         <button ng-click="back()" class="row button button-icon ion-ios7-arrow-back">
             <img ng-if="!noteSelected" class="nav-button-app-logo" src="img/ic_launcher.png">
         </button>
     </ion-nav-buttons>
+-->
 
     <ion-content class="puntodiraccolta" has-bouncing="false">
         <!-- DETTAGLI -->
@@ -19,12 +21,12 @@
         </div>
         <div class="row row-center dettagli">
             <div class="col col-67">
-                <div class="row pdr-dettaglio">{{pdr.dettaglioIndirizzo || pdr.indirizzo}}</div>
+                <div class="row pdr-dettaglio">{{pdr.dettagliZona || pdr.zona}}</div>
                 <div class="row pdr-specifica"></div>
                 <!--per ora niente...-->
             </div>
             <div class="col action">
-                <a class="hidden-link" href="#/app/puntiDiRaccolta/{{pdr.dettaglioIndirizzo || pdr.indirizzo}}">
+                <a class="hidden-link" href="#/app/puntiDiRaccolta/{{pdr.dettagliZona || pdr.zona}}">
                     <img src="img/ic_map_green.png">
                 </a>
                 <a class="hidden-link" target="_system" ng-click="clickNav()">

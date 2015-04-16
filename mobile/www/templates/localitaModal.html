@@ -11,10 +11,10 @@
     <ion-content>
         <ion-list>
             <ion-item class="item-icon-right" ng-repeat="item in aree" ng-click="localitaSelected(item)">
-                {{item.localita}}
+                {{item.etichetta}}
                 <a class="help" ng-click="help()"><img ng-src="img/ic_help.png" /></a>
                 <!--ng-if="!!item.descrizione"-->
-                <i class="icon ion-checkmark" ng-if="item.localita == profilo.area.localita"></i>
+                <i class="icon ion-checkmark" ng-if="item.etichetta == profilo.area.etichetta"></i>
             </ion-item>
         </ion-list>
     </ion-content>

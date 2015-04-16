@@ -137,13 +137,13 @@ angular.module('rifiuti.controllers.raccolta', [])
       var points = [];
       var list = [];
       punti.forEach(function(punto){
-        if ($scope.id == null || punto.dettaglioIndirizzo == $scope.id) {
+        if ($scope.id == null || punto.dettagliZona == $scope.id) {
           var icon = {
             url: Utili.poiIcon(punto.tipologiaPuntiRaccolta),
             scaledSize: new google.maps.Size(45, 45)
           };
           points.push({
-            id: punto.dettaglioIndirizzo,
+            id: punto.dettagliZona,
             latitude: punto.localizzazione.split(',')[0],
             longitude: punto.localizzazione.split(',')[1],
             icon: icon
@@ -269,10 +269,10 @@ angular.module('rifiuti.controllers.raccolta', [])
   
   $scope.clickNav = function() {
     if ($scope.pdr.localizzazione) window.open("http://maps.google.com?daddr="+$scope.pdr.localizzazione,"_system");
-    else window.open("http://maps.google.com?daddr="+$scope.pdr.dettaglioIndirizzo,"_system");
+    else window.open("http://maps.google.com?daddr="+$scope.pdr.dettagliZona,"_system");
   };
   
-  Raccolta.puntiraccolta({ indirizzo:$scope.id, all:true }).then(function(punti){
+  Raccolta.puntiraccolta({ zona:$scope.id, all:true }).then(function(punti){
     $scope.pdr = punti[0];
     punti.forEach(function(punto){
       punto.orarioApertura.forEach(function(orario) {
