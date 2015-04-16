@@ -243,6 +243,20 @@ angular.module('rifiuti.services.rifiuti', [])
       });
       return deferred.promise;    
     },
+    segnalazioni: function(aree) {
+      var deferred = $q.defer();
+      DataManager.get('data/db/segnalazioni.json').then(function(results) {
+        var data = results.data;
+        var res = [];
+          for (var i = 0; i < data.length;i++) {
+            if (aree.indexOf(data[i].area) >=0) {
+                res.push(data[i]);
+            }
+          }
+          deferred.resolve(res);
+      });
+      return deferred.promise;
+    },
     immagini: function() {
       return DataManager.get('data/support/tipologiaRifiutoImmagini.json').then(function (results) {
         var imgs={};

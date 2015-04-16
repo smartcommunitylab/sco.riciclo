@@ -29,7 +29,7 @@ angular.module('rifiuti.controllers.common', [])
 
 .controller('InfoCtrl', function ($scope) {})
 
-.controller('SegnalaCtrl', function ($scope, $rootScope, $cordovaCamera) {
+.controller('SegnalaCtrl', function ($scope, $rootScope, $cordovaCamera, Raccolta) {
 
     //    $scope.GPScoords = null;
     //    var GPScoordsTmp = null;
@@ -52,6 +52,13 @@ angular.module('rifiuti.controllers.common', [])
     $scope.msg = {
         text: null
     };
+
+
+    $scope.tipiSegnalazioni = [];
+
+    Raccolta.segnalazioni($scope.selectedProfile.aree).then(function(data){
+        $scope.tipiSegnalazioni = data;
+    });
 
     $scope.takePicture = function () {
         var options = {
@@ -158,14 +165,34 @@ angular.module('rifiuti.controllers.common', [])
         }
     };
 
-    var getX = function (id) {
-        var div = document.getElementById(id);
+    var findElement = function(id,eclass, eidx) {
+        if (id) {
+            return document.getElementById(id);
+        } else {
+            var arr = document.getElementsByClassName(eclass);
+            var idx = eidx ? eidx : 0;
+            if (arr.length > 0) {
+                for (var i = 0; i < arr.length; i++) {
+                    if (arr[i].clientWidth > 0 && arr[i].clientHeight > 0) {
+                      if (idx == 0) return arr[i];
+                      else idx--;
+                    }
+                }
+            }
+            return null;
+        }
+    }
+
+    var getX = function (id, eclass, eidx) {
+        var div = findElement(id, eclass, eidx);
+        if (!div) return 0;
         var rect = div.getBoundingClientRect();
         return rect.left + 0.5 * (rect.right - rect.left);
         var width = window.innerWidth;
     };
-    var getY = function (id) {
-        var div = document.getElementById(id);
+    var getY = function (id, eclass, eidx) {
+        var div = findElement(id, eclass, eidx);
+        if (!div) return 0;
         var rect = div.getBoundingClientRect();
         return rect.top + 0.5 * (rect.bottom - rect.top);
     };
@@ -179,11 +206,12 @@ angular.module('rifiuti.controllers.common', [])
             y: 40,
             text: "TutorialUno",
             imgX: function () {
-                var width = window.innerWidth;
-                return width - 80
+//                var width = window.innerWidth;
+//                return width - 80
+               return  getX("searchButton")-48
             }, //getX("searchButton")-320},
             imgY: function () {
-                return getY("searchButton") - 50
+                return getY("searchButton") - 48
             },
             skippable: true
   },
@@ -194,10 +222,10 @@ angular.module('rifiuti.controllers.common', [])
             y: 40,
             text: "TutorialDue",
             imgX: function () {
-                return getX("rifiutoId") - 45
+                return getX("rifiutoId") - 48
             },
             imgY: function () {
-                return getY("rifiutoId") - 40
+                return getY("rifiutoId") - 48
             },
             skippable: true
   },
@@ -206,12 +234,12 @@ angular.module('rifiuti.controllers.common', [])
             title: "TTTre",
             x: 3,
             y: 40,
-            text: "TutorialTre",
+            text: SHOW_NEWS ? "TutorialNews": "TutorialTre",
             imgX: function () {
-                return getX("noteId") + 25
+                return getX(null, "tab-item", 0) - 48
             },
             imgY: function () {
-                return getY("noteId") - 50
+                return getY(null, "tab-item", 0) - 48
             },
             skippable: true
   },
@@ -222,11 +250,12 @@ angular.module('rifiuti.controllers.common', [])
             y: 40,
             text: "TutorialQuattro",
             imgX: function () {
-                var width = window.innerWidth;
-                return 0.5 * width + 80
+                //var width = window.innerWidth;
+                //return 0.5 * width + 80
+                return getX(null, "tab-item", 2)-48
             }, //return getX("calendarioId")+305},
             imgY: function () {
-                return getY("calendarioId") - 50
+                return getY(null, "tab-item", 2) - 48
             },
             skippable: true
   },
@@ -237,10 +266,10 @@ angular.module('rifiuti.controllers.common', [])
             y: 40,
             text: "TutorialCinque",
             imgX: function () {
-                return getX("menuId") - 66
+                return getX(null, "left-buttons") - 48
             },
             imgY: function () {
-                return getY("menuId") - 50
+                return getY(null, "left-buttons") - 48
             },
             skippable: false
   }
