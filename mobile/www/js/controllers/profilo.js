@@ -9,8 +9,8 @@ angular.module('rifiuti.controllers.profilo', [])
 
     $scope.profilo = {
         name: '',
-        utenza: '',
-        area: ''
+        utenza: {},
+        area: {}
     };
 
     $scope.updateLocations = function () {
