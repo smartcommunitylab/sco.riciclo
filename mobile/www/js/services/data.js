@@ -39,30 +39,7 @@ angular.module('rifiuti.services.data', [])
                     var ua = pr.utenzaArea[i];
                     ua.colore = colorMap[ua.tipologiaUtenza + '--' + pr.tipologiaPuntiRaccolta];
                 }
-                //      var arr = prMap['puntiRaccolta_'+pr.tipologiaUtenza];
-                //      if (arr==null) {
-                //        arr = [];
-                //        prMap['puntiRaccolta_'+pr.tipologiaUtenza] = arr;
-                //      }
-                //      arr.push(pr);
-                //      if (pr.orarioApertura) {
-                //        var arrCal = prCalMap['puntiRaccoltaCalendar_'+pr.tipologiaUtenza];
-                //        if (arrCal == null) {
-                //          arrCal = [];
-                //          prCalMap['puntiRaccoltaCalendar_'+pr.tipologiaUtenza] = arrCal;
-                //        }
-                //        pr.colore = colorMap[pr.tipologiaUtenza + '--'+ pr.tipologiaPuntiRaccolta];
-                //        arrCal.push(pr);
-                //      }
-
             });
-            //    for (var key in prMap) {
-            //      data[key] = prMap[key];
-            //    }
-            //    for (var key in prCalMap) {
-            //      data[key] = prCalMap[key];
-            //    }
-
             return data;
         }
         // limit the data to the necessary one only
@@ -74,7 +51,7 @@ angular.module('rifiuti.services.data', [])
         profileData.aree = completeData.aree;
         profileData.gestori = completeData.gestori;
         profileData.istituzioni = completeData.istituzioni;
-        profileData.profili = completeData.profili;
+        profileData.tipologiaProfilo = completeData.tipologiaProfilo;
         profileData.raccolta = completeData.raccolta;
         profileData.riciclabolario = completeData.riciclabolario;
         profileData.categorie = completeData.categorie;
@@ -86,7 +63,7 @@ angular.module('rifiuti.services.data', [])
             });
             profili.forEach(function (p) {
                 completeData.puntiRaccolta.forEach(function (pr) {
-                    var prKey = pr.tipologiaPuntiRaccolta + ' ' + pr.dettaglioIndirizzo;
+                    var prKey = pr.tipologiaPuntiRaccolta + ' ' + pr.dettagliZona;
                     for (var i = 0; i < pr.utenzaArea.length; i++) {
                         var ua = pr.utenzaArea[i];
                         if (ua.tipologiaUtenza !== p.utenza.tipologiaUtenza) continue;
@@ -202,7 +179,7 @@ angular.module('rifiuti.services.data', [])
             });
         } else if (url === 'data/db/profili.json') {
             deferred.resolve({
-                data: profileData.profili
+                data: profileData.tipologiaProfilo
             });
         } else if (url === 'data/db/riciclabolario.json') {
             deferred.resolve({

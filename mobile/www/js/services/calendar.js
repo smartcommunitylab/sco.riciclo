@@ -18,7 +18,7 @@ angular.module('rifiuti.services.calendar', [])
           descr : [puntoDiRaccolta.tipologiaPuntiRaccolta.substr(14)]
         };
       } else  {
-        key = puntoDiRaccolta.tipologiaPuntiRaccolta + puntoDiRaccolta.dettaglioIndirizzo;
+        key = puntoDiRaccolta.tipologiaPuntiRaccolta + puntoDiRaccolta.dettagliZona;
         t = puntoDiRaccolta.tipologiaPuntiRaccolta;
         if (!!cell.events[key] && cell.events[key].events.length > 0) {
           proto = cell.events[key].events[0];
@@ -28,7 +28,7 @@ angular.module('rifiuti.services.calendar', [])
           proto = {
             tipologiaPuntiRaccolta: puntoDiRaccolta.tipologiaPuntiRaccolta,
             colore: puntoDiRaccolta.colore,
-            descr : [puntoDiRaccolta.dettaglioIndirizzo, calItem.dalle +'-'+calItem.alle]
+            descr : [puntoDiRaccolta.dettagliZona, calItem.dalle +'-'+calItem.alle]
           };
         }
       }

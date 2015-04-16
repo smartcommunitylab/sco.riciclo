@@ -6,11 +6,13 @@
         </div>
     </ion-nav-title>
 
+<!--
     <ion-nav-buttons side="left">
         <button ng-click="back()" class="row button button-icon ion-ios7-arrow-back">
             <img ng-if="!noteSelected" class="nav-button-app-logo" src="img/ic_launcher.png">
         </button>
     </ion-nav-buttons>
+-->
 
     <ion-tabs class="tabs-balanced tabs-100r">
         <ion-tab title="{{'PUNTI DI RACCOLTA'|translate}}">
@@ -43,10 +45,10 @@
                             </div>
                         </div>
                         <div ng-show="item.aperto">
-                            <a ng-repeat="punto in item.punti" class="hidden-link expandable-list-item-content" ng-href="#/app/puntoDiRaccolta/{{punto.dettaglioIndirizzo || punto.indirizzo}}">
+                            <a ng-repeat="punto in item.punti" class="hidden-link expandable-list-item-content" ng-href="#/app/puntoDiRaccolta/{{punto.dettagliZona || punto.zona}}">
                                 <div class="row">
                                     <div class="col col-80">
-                                        {{punto.dettaglioIndirizzo || punto.indirizzo}}
+                                        {{punto.dettagliZona || punto.zona}}
                                     </div>
                                     <div class="col col-20 distance" ng-if="punto.distance">
                                         {{punto.distance | number:1}} Km

@@ -20,10 +20,10 @@ angular.module('rifiuti.services.rifiuti', [])
           if ($rootScope.selectedProfile) {
             results.data.forEach(function(punto,pi,dbPunti){
               var optionsOK=true;
-              if (options && options.indirizzo && punto.dettaglioIndirizzo!=options.indirizzo) optionsOK=false;
+              if (options && options.zona && punto.dettagliZona!=options.zona) optionsOK=false;
               if (options && options.tipo && punto.tipologiaPuntiRaccolta!=options.tipo) optionsOK=false;
-              if (optionsOK && punto.indirizzo && Utili.belongsTo(punto, punto.area, $rootScope.selectedProfile)) {
-                if (myPuntiDone.indexOf(punto.dettaglioIndirizzo)==-1) {
+              if (optionsOK && punto.zona && Utili.belongsTo(punto, punto.area, $rootScope.selectedProfile)) {
+                if (myPuntiDone.indexOf(punto.dettagliZona)==-1) {
 //                  var extcheckOK=true;
 //                  if (punto.caratteristiche!="" && punto.gettoniera!="True" && punto.residuo!="" && punto.residuo!="True" && punto.tipologiaPuntiRaccolta=="Residuo") extcheckOK=false;
 //                  if (punto.imbCarta!="" && punto.imbCarta!="True" && punto.tipologiaPuntiRaccolta=="Carta, cartone e cartoni per bevande") extcheckOK=false;
@@ -33,9 +33,9 @@ angular.module('rifiuti.services.rifiuti', [])
 //                  if (punto.indumenti!="" && punto.indumenti!="True" && punto.tipologiaPuntiRaccolta=="Indumenti usati") extcheckOK=false;
 //                  if (extcheckOK) {
                     myPunti.push(punto);
-                    if (!options || !options.all) myPuntiDone.push(punto.dettaglioIndirizzo);
+                    if (!options || !options.all) myPuntiDone.push(punto.dettagliZona);
 //                  }
-                //} else { console.log('already: '+punto.dettaglioIndirizzo); 
+                //} else { console.log('already: '+punto.dettagliZona);
                 }
               }
             });
@@ -47,7 +47,7 @@ angular.module('rifiuti.services.rifiuti', [])
                 punto['distance'] = distance;
               });
             } else {
-              console.log('invalid location for: '+punto.dettaglioIndirizzo);
+              console.log('invalid location for: '+punto.dettagliZona);
             }
           });
           
@@ -60,7 +60,7 @@ angular.module('rifiuti.services.rifiuti', [])
 //                  var distance=$rootScope.distance([position.coords.latitude,position.coords.longitude],punto.localizzazione.split(','));
 //                  punto['distance']=distance;
 //                } else {
-//                  console.log('invalid location for: '+punto.dettaglioIndirizzo);
+//                  console.log('invalid location for: '+punto.dettagliZona);
 //                }
 //              });
 //            } else {
@@ -207,7 +207,7 @@ angular.module('rifiuti.services.rifiuti', [])
         var res = [];
         for (var i =0; i < data.length; i++) {
             var a = data[i];
-            if (!!a.localita) {
+            if (!!a.etichetta) {
               if (a.utenza[profile])
                 {
                     res.push(a);
@@ -215,7 +215,7 @@ angular.module('rifiuti.services.rifiuti', [])
             }
         }
         res.sort(function(a,b) {
-            return a.localita.localeCompare(b.localita);
+            return a.etichetta.localeCompare(b.etichetta);
         });  
         deferred.resolve(res);  
       });
