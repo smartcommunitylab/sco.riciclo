@@ -24,7 +24,11 @@
     <ion-content class="profile" has-bouncing="false">
         <div class="profile-block profile-name">
             <div class="profile-title">{{"Nome del profilo" | translate}}</div>
-            <input type="text" ng-model="profilo.name" placeholder="Nome del profilo" ng-if="editMode">
+            <div class="item item-input-inset" ng-if="editMode">
+                <label class="item-input-wrapper">
+                    <input type="text" ng-model="profilo.name" placeholder="Nome del profilo" />
+                </label>
+            </div>
             <p ng-if="!editMode">{{profilo.name}}</p>
         </div>
 
@@ -46,7 +50,7 @@
 
         <div class="profile-block profile-where">
             <div class="profile-title">{{"Comune o Località" | translate}}</div>
-            <button class="button button-100r-select button-block button-outline icon-right ion-arrow-down-b" ng-click="openLocalitaSelector()" ng-if="editMode">
+            <button class="button button-100r-select button-block icon-right ion-arrow-down-b" ng-click="openLocalitaSelector()" ng-if="editMode">
                 <span ng-if="!!profilo.area">{{profilo.area.localita}}</span>
                 <span ng-if="!!!profilo.area">{{"Selezionare" | translate}}</span>
             </button>

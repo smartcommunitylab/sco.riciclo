@@ -82,11 +82,13 @@
 
 .button-100r-select {
     text-align: left;
-    color: black !important;
+    color: #444;
+    background-color: #eee;
+    border-color: #ddd;
 }
 
 .button-100r-select.icon-right:before {
-    color: #b2b2b2;
+    color: #444;
 }
 
 .bar-100r {
@@ -113,12 +115,21 @@
 .bar-100r .btn-variable::after {
     position: relative;
 }
-/* Buttons */
+/* Input */
 
 .button.button-100r {
     border-color: #47772b;
     background-color: #47772b;
     color: #fff;
+}
+
+.toggle.toggle-100r input:checked + .track {
+    border-color: #47772b;
+    background-color: #47772b;
+}
+
+.toggle-small .toggle.toggle-100r input:checked + .track .handle {
+    background: #63ac3d;
 }
 /* Tabs */
 
@@ -143,7 +154,6 @@
 .platform-ios:not(.fullscreen) .home-tabs .has-tabs-top {
     top: 93px !important;
 }
-
 /*
 .home-tabs.tabs-striped .tab-item-active,
 .home-tabs.tabs-striped .tab-item.active,
@@ -269,6 +279,7 @@
     max-width: 13%;
     margin-right: 1.2%;
 }
+
 .home-calendar .week .day.today {
     padding: 0px;
     margin-right: 1.2%;
@@ -458,6 +469,7 @@
 
 .profile .profile-title {
     font-weight: bold;
+    padding-bottom: 5px;
 }
 
 .profile .profile-block p {
@@ -466,11 +478,11 @@
 
 .profile .profile-name input {
     width: 100%;
-    background-color: #eeeeee;
+    font-size: 16px;
+    /*background-color: #eeeeee;
     border: none;
     border-bottom: thin solid #cccccc;
-    padding: 0;
-    font-size: 16px;
+    padding: 0;*/
 }
 
 .help img {
@@ -479,30 +491,12 @@
     vertical-align: middle;
 }
 
-.profile .profile-types .profile-type {
-    padding: 5px 0;
+.profile .profile-name .item {
+    background-color: #eee;
 }
 
-.profile .profile-types .profile-type span {
-    padding-left: 5px;
-}
-
-.profile .profile-where .profile-title {
-    padding-bottom: 5px;
-}
-
-.profile .profile-where label,
-.profile .profile-where label select {
-    height: 52px;
-    background-color: #eeeeee;
-}
-
-.profile .profile-where select {
-    width: 100%;
-    font-size: 16px;
-    right: auto;
-    padding: 13px 45px 15px 0px;
-    direction: ltr;
+.profile .profile-types .item.item-radio .item-content {
+    background-color: #eee !important;
 }
 
 .localita-modal ion-footer-bar button {
@@ -707,8 +701,8 @@
 }
 
 .item {
-    padding-top: 5px;
-    padding-bottom: 5px;
+    /*padding-top: 5px;
+    padding-bottom: 5px;*/
 }
 
 .nowrap {
