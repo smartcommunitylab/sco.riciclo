@@ -55,6 +55,7 @@ angular.module('rifiuti.services.data', [])
         profileData.raccolta = completeData.raccolta;
         profileData.riciclabolario = completeData.riciclabolario;
         profileData.categorie = completeData.categorie;
+        profileData.segnalazione = completeData.segnalazione;
         if (profili) {
             var map = {};
             profili.forEach(function (p) {
@@ -188,6 +189,10 @@ angular.module('rifiuti.services.data', [])
         } else if (url === 'data/db/tipologiaRifiuto.json') {
             deferred.resolve({
                 data: profileData.categorie.tipologiaRifiuto
+            });
+        } else if (url === 'data/db/segnalazioni.json') {
+            deferred.resolve({
+                data: profileData.segnalazione
             });
         } else {
             console.log('USING OLD FILE! ' + url);

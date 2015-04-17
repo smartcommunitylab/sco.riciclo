@@ -295,6 +295,7 @@ angular.module('rifiuti', [
         TutorialUno: "Questo tutorial ti inlustrerà il funzionamento della app. Per sapere dove buttare uno specifico rifiuto, scrivine il nome qui e premi sulla lente d'ingrandimento.",
         TutorialDue: "Scopri quali rifiuti appartengono ad una determinata categoria e scopri dove devono essere conferiti",
         TutorialTre: "Aggiungi delle note personali o dei promemoria legati alla gestione dei rifiuti (e.g. pagamento della bolletta, oggetti da portare al CRM, etc)",
+        TutorialNews: "NEWS!",
         TutorialQuattro: "Tieni sotto controllo le scadenze della raccolta porta a porta e aggiungi delle note personali.",
         TutorialCinque: "Premi qui per aprire il menù laterale e scoprire ulteriori funzionalità",
         TTUno: "Benvenuto!",
