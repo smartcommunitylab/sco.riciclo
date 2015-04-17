@@ -53,11 +53,13 @@ angular.module('rifiuti.controllers.common', [])
         text: null
     };
 
+    $scope.selectedTipoSegnalazione = null;
 
     $scope.tipiSegnalazioni = [];
 
     Raccolta.segnalazioni($scope.selectedProfile.aree).then(function(data){
         $scope.tipiSegnalazioni = data;
+        if (data.length == 1) $scope.selectedTipoSegnalazione = data[0];
     });
 
     $scope.takePicture = function () {
@@ -97,7 +99,7 @@ angular.module('rifiuti.controllers.common', [])
             var body = $scope.msg.text ? ($scope.msg.text + ' ') : '';
             body += $scope.checked ? $scope.GPScoords : '';
             window.plugin.email.open({
-                to: [SEGNALA_EMAIL],
+                to: [$scope.selectedTipoSegnalazione.email],
                 subject: "segnalazione dalla app '" + APP_NAME + "'", // subject of the email
                 body: [body],
                 isHtml: false,

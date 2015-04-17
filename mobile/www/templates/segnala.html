@@ -18,6 +18,12 @@
         <div class="segnala-desc">
             {{"Invia"|translate}}
         </div>
+        <div ng-if="tipiSegnalazioni.length > 1">
+            <div class="segnala-desc">{{"Scegli una categoria:" | translate}}</div>
+            <div>
+                <ion-radio ng-repeat="item in tipiSegnalazioni" ng-model="selectedTipoSegnalazione" ng-value="item">{{item.tipologia}}</ion-radio>
+            </div>
+        </div>
         <div class="item item-input-inset segnala-text-input">
             <input type="text" ng-model="msg.text" placeholder="{{'Inserisci qui il testo della segnalazione'|translate}}">
         </div>
