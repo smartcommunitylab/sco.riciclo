@@ -13,6 +13,7 @@ angular.module('rifiuti', [
     'rifiuti.services.rifiuti',
     'rifiuti.services.utili',
     'rifiuti.services.geo',
+    'rifiuti.services.feed',
     'rifiuti.services.calendar',
     'rifiuti.controllers.common',
     'rifiuti.controllers.home',
@@ -915,7 +916,7 @@ angular.module('rifiuti', [
     .state('app.home.news', {
         url: "/news",
         views: {
-            'note': {
+            'news': {
                 templateUrl: "templates/home/news.html",
                 controller: 'newsCtrl'
             }

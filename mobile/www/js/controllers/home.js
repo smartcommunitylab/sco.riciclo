@@ -102,6 +102,13 @@ angular.module('rifiuti.controllers.home', [])
     });
 })
 
+.controller('newsCtrl', function ($scope, $rootScope, FeedService) {
+    FeedService.load(FEED_URL,APP_ID).then(function(entries) {
+        $scope.entries = entries;
+    });
+
+})
+
 .controller('noteCtrl', function ($scope, $rootScope, $ionicPopup, $filter, Profili) {
     $scope.noteSelected = false;
 
