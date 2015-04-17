@@ -8,7 +8,7 @@ angular.module('rifiuti.controllers.common', [])
         $rootScope.showTutorial = true;
     };
 
-    $scope.showNews = function() {
+    $scope.showNews = function () {
         return Conf.showNews();
     };
 
@@ -111,9 +111,15 @@ angular.module('rifiuti.controllers.common', [])
 })
 
 .controller('SettingsCtrl', function ($scope, $ionicScrollDelegate, Raccolta) {
-    $scope.mainScrollResize = function () {
+    /*$scope.mainScrollResize = function () {
         $ionicScrollDelegate.$getByHandle('mainScroll').resize();
-    }
+    }*/
+
+    $scope.timepickerSlots = {
+        epochTime: 12600,
+        format: 24,
+        step: 1
+    };
 })
 
 .controller('ContattiCtrl', function ($scope, $ionicScrollDelegate, Raccolta) {

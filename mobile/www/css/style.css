@@ -80,17 +80,6 @@
 }
 /* Bar and buttons */
 
-.button-100r-select {
-    text-align: left;
-    color: #444;
-    background-color: #eee;
-    border-color: #ddd;
-}
-
-.button-100r-select.icon-right:before {
-    color: #444;
-}
-
 .bar-100r {
     background-color: #63ac3d !important;
 }
@@ -123,6 +112,17 @@
     color: #fff;
 }
 
+.button.button-100r-select {
+    text-align: left;
+    color: #444;
+    background-color: #eee;
+    border-color: #ddd;
+}
+
+.button.button-100r-select.icon-right:before {
+    color: #444;
+}
+
 .toggle.toggle-100r input:checked + .track {
     border-color: #47772b;
     background-color: #47772b;
@@ -130,6 +130,12 @@
 
 .toggle-small .toggle.toggle-100r input:checked + .track .handle {
     background: #63ac3d;
+}
+
+.checkbox-100r input:checked:before,
+.checkbox-100r input:checked + .checkbox-icon:before {
+    background: #47772b;
+    border-color: #47772b;
 }
 /* Tabs */
 
@@ -504,7 +510,8 @@
 }
 /* SEGNALA */
 
-.segnala {
+.segnala,
+.segnala .item {
     background-color: #eeeeee;
 }
 
@@ -713,6 +720,7 @@
     width: 100%;
     height: 100%;
 }
+
 .profili-titolo {
     font-weight: bold;
 }
