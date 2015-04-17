@@ -22,7 +22,8 @@ angular.module('rifiuti', [
     'pascalprecht.translate',
     'uiGmapgoogle-maps',
     //'google-maps',
-    'angular.filter'
+    'angular.filter',
+    'ionic-timepicker'
 ])
 
 .config(function (uiGmapGoogleMapApiProvider) {

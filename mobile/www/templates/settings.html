@@ -7,8 +7,63 @@
     </ion-nav-title>
 
     <ion-content class="segnala padding">
-        <!--<ion-toggle ng-model="enableNotifications" toggle-class="toggle-100r">Notifiche</ion-toggle>
-        <label>Desidero ricevere notifiche riguardanti</label>
-        <ul class="list"></ul>-->
+        <ion-toggle ng-model="enableNotifications" toggle-class="toggle-100r">Notifiche</ion-toggle>
+
+        <div class="padding-top">
+            <label>Desidero ricevere notifiche riguardanti</label>
+            <ul class="list">
+                <li class="item item-checkbox">
+                    <label class="checkbox checkbox-100r">
+                        <input type="checkbox">
+                    </label>
+                    Porta a porta residuo
+                </li>
+                <li class="item item-checkbox">
+                    <label class="checkbox checkbox-100r">
+                        <input type="checkbox">
+                    </label>
+                    Porta a porta organico
+                </li>
+                <li class="item item-checkbox">
+                    <label class="checkbox checkbox-100r">
+                        <input type="checkbox">
+                    </label>
+                    Porta a porta carta e cartone
+                </li>
+                <li class="item item-checkbox">
+                    <label class="checkbox checkbox-100r">
+                        <input type="checkbox">
+                    </label>
+                    Porta a porta imballaggi leggeri
+                </li>
+                <li class="item item-checkbox">
+                    <label class="checkbox checkbox-100r">
+                        <input type="checkbox">
+                    </label>
+                    Porta a porta vetro
+                </li>
+            </ul>
+        </div>
+
+        <div class="padding-top">
+            <!--<label>Desidero ricevere le notifiche alle</label>
+            <button class="button button-100r-select icon-right ion-arrow-down-b"></button>-->
+
+            <label>Desidero ricevere le notifiche alle</label>
+            <ionic-time-picker etime="timepickerSlots.epochTime" format="timepickerSlots.format" step="timepickerSlots.step">
+                {{timepickerSlots.epochTime}}
+            </ionic-time-picker>
+
+            <!--<label class="item item-input item-select">
+                <div class="input-label">
+                    Desidero ricevere le notifiche alle
+                </div>
+                <select>
+                    <option>Blue</option>
+                    <option selected>Green</option>
+                    <option>Red</option>
+                </select>
+            </label>-->
+        </div>
     </ion-content>
 </ion-view>
