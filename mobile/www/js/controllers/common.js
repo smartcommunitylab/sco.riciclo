@@ -108,7 +108,7 @@ angular.module('rifiuti.controllers.common', [])
             });
         } else {
             //console.log('using "mailto:" schema in location...');
-            window.open("mailto:" + SEGNALA_EMAIL, "_system");
+            window.open("mailto:" + $scope.selectedTipoSegnalazione.email, "_system");
         }
     };
 
