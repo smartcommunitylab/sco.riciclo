@@ -18,10 +18,10 @@
         <div class="segnala-desc">
             {{"Invia"|translate}}
         </div>
-        <div ng-if="tipiSegnalazioni.length > 1">
+        <div ng-if="tipiSegnalazioni.length > 1" >
             <div class="segnala-desc">{{"Scegli una categoria:" | translate}}</div>
-            <div>
-                <ion-radio ng-repeat="item in tipiSegnalazioni" ng-model="selectedTipoSegnalazione" ng-value="item">{{item.tipologia}}</ion-radio>
+            <div class="list">
+                <ion-radio ng-repeat="item in tipiSegnalazioni" ng-model="signal.selectedTipoSegnalazione" ng-value="item">{{item.tipologia}}</ion-radio>
             </div>
         </div>
         <div class="item item-input-inset segnala-text-input">
