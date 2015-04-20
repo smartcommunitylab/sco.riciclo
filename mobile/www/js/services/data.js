@@ -223,6 +223,7 @@ angular.module('rifiuti.services.data', [])
         } else {
             storedVersion = v;
         }
+        if (!storedVersion) storedVersion = DATA_VERSION;
 
         if (storedVersion && storedVersion >= v) {
             deferred.resolve(true);

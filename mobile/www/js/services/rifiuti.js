@@ -129,6 +129,7 @@ angular.module('rifiuti.services.rifiuti', [])
                 if (myTipologie.indexOf(rifiuto.tipologiaRifiuto)==-1) myTipologie.push(rifiuto.tipologiaRifiuto);
               }
             });
+            myRifiuti = myRifiuti.sort(function(a,b){return a.nome.localeCompare(b.nome)});
             $rootScope.selectedProfile.rifiuti=myRifiuti;
             $rootScope.selectedProfile.tipologie=myTipologie.sort();
           }
