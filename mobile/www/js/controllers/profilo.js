@@ -105,10 +105,11 @@ angular.module('rifiuti.controllers.profilo', [])
         }
     };
 
-    $scope.help = function () {
+    $scope.help = function (area) {
         var popup = $ionicPopup.show({
-            title: '<b class="popup-title">Tipo di utenza<b/>',
-            templateUrl: 'templates/profiloHelp.html',
+            title: '<b class="popup-title">' + area.etichetta + '<b/>',
+            //templateUrl: 'templates/profiloHelp.html',
+            template: area.descrizione,
             scope: $scope,
             buttons: [
                 {

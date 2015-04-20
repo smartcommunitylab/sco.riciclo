@@ -12,7 +12,9 @@
         <ion-list>
             <ion-item class="item-icon-right" ng-repeat="item in aree" ng-click="localitaSelected(item)">
                 {{item.etichetta}}
-                <a class="help" ng-click="help()"><img ng-src="img/ic_help.png" /></a>
+                <a class="icon help" ng-click="help(item)" ion-stop-event="click" ng-if="!!item.descrizione">
+                    <img ng-src="img/ic_help.png" />
+                </a>
                 <!--ng-if="!!item.descrizione"-->
                 <i class="icon ion-checkmark" ng-if="item.etichetta == profilo.area.etichetta"></i>
             </ion-item>
