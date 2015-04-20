@@ -28,6 +28,8 @@ public class Gestori {
 	private String email;
 	private String telefono;
 	private String fax;
+	private String localizzazione;
+	private String facebook;
 	
 	public String getRagioneSociale() {
 		return ragioneSociale;
@@ -82,6 +84,18 @@ public class Gestori {
 	}
 	public void setFax(String fax) {
 		this.fax = fax;
+	}
+	public String getLocalizzazione() {
+		return localizzazione;
+	}
+	public void setLocalizzazione(String localizzazione) {
+		this.localizzazione = localizzazione;
+	}
+	public String getFacebook() {
+		return facebook;
+	}
+	public void setFacebook(String facebook) {
+		this.facebook = facebook;
 	}
 	
 	

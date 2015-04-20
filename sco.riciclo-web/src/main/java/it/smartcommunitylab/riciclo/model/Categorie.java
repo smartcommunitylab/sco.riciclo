@@ -21,9 +21,8 @@ import java.util.Set;
 public class Categorie extends BaseObject {
 
 	private Set<Tipologia> tipologiaUtenza;
-	private Set<Tipologia> tipologiaIstituzione;
+//	private Set<Tipologia> tipologiaIstituzione;
 	private Set<Tipologia> tipologiaRifiuto;
-	private Set<Tipologia> colori;
 	private Set<Tipologia> tipologiaRaccolta;
 	private Set<Tipologia> tipologiaPuntiRaccolta;
 	private Set<Tipologia> caratteristicaPuntoRaccolta;
@@ -34,23 +33,17 @@ public class Categorie extends BaseObject {
 	public void setTipologiaUtenza(Set<Tipologia> tipologiaUtenza) {
 		this.tipologiaUtenza = tipologiaUtenza;
 	}
-	public Set<Tipologia> getTipologiaIstituzione() {
-		return tipologiaIstituzione;
-	}
-	public void setTipologiaIstituzione(Set<Tipologia> tipologiaIstituzione) {
-		this.tipologiaIstituzione = tipologiaIstituzione;
-	}
+//	public Set<Tipologia> getTipologiaIstituzione() {
+//		return tipologiaIstituzione;
+//	}
+//	public void setTipologiaIstituzione(Set<Tipologia> tipologiaIstituzione) {
+//		this.tipologiaIstituzione = tipologiaIstituzione;
+//	}
 	public Set<Tipologia> getTipologiaRifiuto() {
 		return tipologiaRifiuto;
 	}
 	public void setTipologiaRifiuto(Set<Tipologia> tipologiaRifiuto) {
 		this.tipologiaRifiuto = tipologiaRifiuto;
-	}
-	public Set<Tipologia> getColori() {
-		return colori;
-	}
-	public void setColori(Set<Tipologia> colori) {
-		this.colori = colori;
 	}
 	public Set<Tipologia> getTipologiaRaccolta() {
 		return tipologiaRaccolta;

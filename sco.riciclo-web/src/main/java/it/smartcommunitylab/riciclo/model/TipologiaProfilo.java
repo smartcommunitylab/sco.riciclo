@@ -17,17 +17,17 @@
 package it.smartcommunitylab.riciclo.model;
 
 
-public class Profilo extends BaseObject {
+public class TipologiaProfilo extends BaseObject {
 
-	private String profilo;
+	private String nome;
 	private String tipologiaUtenza;
 	private String descrizione;
 	
-	public String getProfilo() {
-		return profilo;
+	public String getNome() {
+		return nome;
 	}
-	public void setProfilo(String profilo) {
-		this.profilo = profilo;
+	public void setNome(String profilo) {
+		this.nome = profilo;
 	}
 	public String getTipologiaUtenza() {
 		return tipologiaUtenza;
@@ -44,7 +44,7 @@ public class Profilo extends BaseObject {
 	
 	@Override
 	public String toString() {
-		return "Profilo [" + profilo + "," + tipologiaUtenza + "]";
+		return "Profilo [" + nome + "," + tipologiaUtenza + "]";
 	}	
 	
 

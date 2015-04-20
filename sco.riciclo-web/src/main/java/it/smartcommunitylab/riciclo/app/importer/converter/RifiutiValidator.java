@@ -4,14 +4,15 @@ import it.smartcommunitylab.riciclo.app.importer.FileList;
 import it.smartcommunitylab.riciclo.app.importer.ImportConstants;
 import it.smartcommunitylab.riciclo.app.importer.ImportError;
 import it.smartcommunitylab.riciclo.model.Area;
+import it.smartcommunitylab.riciclo.model.Colore;
 import it.smartcommunitylab.riciclo.model.Gestore;
 import it.smartcommunitylab.riciclo.model.Istituzione;
-import it.smartcommunitylab.riciclo.model.Profilo;
 import it.smartcommunitylab.riciclo.model.PuntoRaccolta;
 import it.smartcommunitylab.riciclo.model.Raccolta;
 import it.smartcommunitylab.riciclo.model.Riciclabolario;
 import it.smartcommunitylab.riciclo.model.Rifiuti;
 import it.smartcommunitylab.riciclo.model.Tipologia;
+import it.smartcommunitylab.riciclo.model.TipologiaProfilo;
 import it.smartcommunitylab.riciclo.model.UtenzaArea;
 import it.smartcommunitylab.riciclo.storage.AppInfo;
 
@@ -30,25 +31,25 @@ public class RifiutiValidator {
 	public List<String> validate(Rifiuti rifiuti) throws Exception {
 		List<String> problems = Lists.newArrayList();
 
-		Set<String> tipologiaIstituzione = flattenList(rifiuti.getCategorie().getTipologiaIstituzione());
+//		Set<String> tipologiaIstituzione = flattenList(rifiuti.getCategorie().getTipologiaIstituzione());
 		Set<String> tipologiaPuntoRaccolta = flattenList(rifiuti.getCategorie().getTipologiaPuntiRaccolta());
 		Set<String> tipologiaUtenza = flattenList(rifiuti.getCategorie().getTipologiaUtenza());
 		Set<String> tipologiaRaccolta = flattenList(rifiuti.getCategorie().getTipologiaRaccolta());
 		Set<String> tipologiaRifiuto = flattenList(rifiuti.getCategorie().getTipologiaRifiuto());
 		Set<String> aree = flattenList(rifiuti.getAree(), Area.class);
-		Set<String> colori = flattenList(rifiuti.getCategorie().getColori());
+		Set<String> colori = flattenList(rifiuti.getColore(), Colore.class);
 		Set<String> caratteristiche = flattenList(rifiuti.getCategorie().getCaratteristicaPuntoRaccolta());
 		Set<String> istituzioni = flattenList(rifiuti.getIstituzioni(), Istituzione.class);
 		
 		Set<String> gestori = flattenList(rifiuti.getGestori(), Gestore.class, "ragioneSociale");
-		Set<String> comuni = flattenList(rifiuti.getAree(), Area.class, "comune");
+//		Set<String> comuni = flattenList(rifiuti.getAree(), Area.class, "comune");
 		
-		for (Istituzione istituzione: rifiuti.getIstituzioni()) {
-			if (!tipologiaIstituzione.contains(istituzione.getTipologia())) {
-				String s = "Tipologia Istituzione <" + istituzione.getTipologia() + "> not found for " + istituzione;
-				problems.add(s);
-			}
-		}			
+//		for (Istituzione istituzione: rifiuti.getIstituzioni()) {
+//			if (!tipologiaIstituzione.contains(istituzione.getTipologia())) {
+//				String s = "Tipologia Istituzione <" + istituzione.getTipologia() + "> not found for " + istituzione;
+//				problems.add(s);
+//			}
+//		}			
 		
 		List<String> parentErrors = Lists.newArrayList();
 		for (Area area : rifiuti.getAree()) {
@@ -73,7 +74,7 @@ public class RifiutiValidator {
 			problems.add(s);					
 		}
 		
-		for (Profilo profilo: rifiuti.getProfili()) {
+		for (TipologiaProfilo profilo: rifiuti.getTipologiaProfilo()) {
 			if (!tipologiaUtenza.contains(profilo.getTipologiaUtenza())) {
 				String s = "Tipologia Utenza <" + profilo.getTipologiaUtenza() + "> not found for " + profilo;
 				problems.add(s);				
@@ -103,20 +104,20 @@ public class RifiutiValidator {
 				}
 			}
 			
-			if (!comuni.contains(puntoRaccolta.getIndirizzo())) {
-				if (puntoRaccolta.getIndirizzo() != null && !puntoRaccolta.getIndirizzo().isEmpty()) {
-					String s = "Comune <" + puntoRaccolta.getIndirizzo() + "> not found for " + puntoRaccolta;
-					problems.add(s);
-				}
-			}
+//			if (!comuni.contains(puntoRaccolta.getIndirizzo())) {
+//				if (puntoRaccolta.getIndirizzo() != null && !puntoRaccolta.getIndirizzo().isEmpty()) {
+//					String s = "Comune <" + puntoRaccolta.getIndirizzo() + "> not found for " + puntoRaccolta;
+//					problems.add(s);
+//				}
+//			}
 			boolean needAddress = "crm".equals(puntoRaccolta.getTipologiaPuntiRaccolta().toLowerCase()) || "crz".equals(puntoRaccolta.getTipologiaPuntiRaccolta().toLowerCase()) || "isola ecologica".equals(puntoRaccolta.getTipologiaPuntiRaccolta().toLowerCase());
 			
 			if (needAddress) {
-				if (puntoRaccolta.getIndirizzo() == null || puntoRaccolta.getIndirizzo().isEmpty()) {
+				if (puntoRaccolta.getZona() == null || puntoRaccolta.getZona().isEmpty()) {
 					String s = "Missing 'indirizzo' for " + puntoRaccolta;
 					problems.add(s);
 				}
-				if (puntoRaccolta.getDettaglioIndirizzo() == null || puntoRaccolta.getDettaglioIndirizzo().isEmpty()) {
+				if (puntoRaccolta.getDettagliZona() == null || puntoRaccolta.getDettagliZona().isEmpty()) {
 					String s = "Missing 'dettaglioIndirizzo' for " + puntoRaccolta;
 					problems.add(s);
 				}
@@ -149,10 +150,11 @@ public class RifiutiValidator {
 				String s = "Area <" + raccolta.getArea() + "> not found for " + raccolta;
 				problems.add(s);				
 			}
-			if(!colori.contains(raccolta.getColore())) {
-				String s = "Colore <" + raccolta.getColore() + "> not found for " + raccolta;
-				problems.add(s);				
-			}			
+			// colore is optional
+//			if(!colori.contains(raccolta.getColore())) {
+//				String s = "Colore <" + raccolta.getColore() + "> not found for " + raccolta;
+//				problems.add(s);				
+//			}			
 		}
 		
 		for (Riciclabolario riciclabolario: rifiuti.getRiciclabolario()) {

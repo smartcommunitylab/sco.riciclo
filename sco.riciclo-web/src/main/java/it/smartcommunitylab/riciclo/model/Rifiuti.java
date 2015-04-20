@@ -20,22 +20,24 @@ import java.util.List;
 
 public class Rifiuti extends BaseObject {
 
-	private List<Profilo> profili;
+	private List<TipologiaProfilo> tipologiaProfilo;
 	private List<Area> aree;
 	private List<Gestore> gestori;
 	private List<Istituzione> istituzioni;
 	private List<PuntoRaccolta> puntiRaccolta;
 	private List<Riciclabolario> riciclabolario;
 	private List<Raccolta> raccolta;
+	private List<Colore> colore;
+	private List<Segnalazione> segnalazione;
 
 	private Categorie categorie;
 
-	public List<Profilo> getProfili() {
-		return profili;
+	public List<TipologiaProfilo> getTipologiaProfilo() {
+		return tipologiaProfilo;
 	}
 
-	public void setProfili(List<Profilo> profili) {
-		this.profili = profili;
+	public void setTipologiaProfilo(List<TipologiaProfilo> profili) {
+		this.tipologiaProfilo = profili;
 	}
 
 	public List<Area> getAree() {
@@ -92,6 +94,22 @@ public class Rifiuti extends BaseObject {
 
 	public void setCategorie(Categorie categorie) {
 		this.categorie = categorie;
+	}
+
+	public List<Colore> getColore() {
+		return colore;
+	}
+
+	public void setColore(List<Colore> colore) {
+		this.colore = colore;
+	}
+
+	public List<Segnalazione> getSegnalazione() {
+		return segnalazione;
+	}
+
+	public void setSegnalazione(List<Segnalazione> segnalazione) {
+		this.segnalazione = segnalazione;
 	}
 
 }

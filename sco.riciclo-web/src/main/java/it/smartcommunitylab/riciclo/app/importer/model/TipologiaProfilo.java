@@ -17,72 +17,31 @@
 package it.smartcommunitylab.riciclo.app.importer.model;
 
 
-public class Aree {
+public class TipologiaProfilo {
 
-	private String istituzione;
-	
 	private String nome;
-	private String parent;
-	private String gestore;
+	private String tipologiaUtenza;
 	private String descrizione;
-	private String etichetta;
 	
-	private String utenze;
-	
-	public String getIstituzione() {
-		return istituzione;
-	}
-
-	public void setIstituzione(String istituzione) {
-		this.istituzione = istituzione;
-	}
-
 	public String getNome() {
 		return nome;
 	}
-
-	public void setNome(String nome) {
-		this.nome = nome;
+	public void setNome(String profilo) {
+		this.nome = profilo;
 	}
-
-	public String getParent() {
-		return parent;
+	public String getTipologiaUtenza() {
+		return tipologiaUtenza;
 	}
-
-	public void setParent(String parent) {
-		this.parent = parent;
+	public void setTipologiaUtenza(String tipologiaUtenza) {
+		this.tipologiaUtenza = tipologiaUtenza;
 	}
-
-	public String getGestore() {
-		return gestore;
-	}
-
-	public void setGestore(String gestore) {
-		this.gestore = gestore;
-	}
-
 	public String getDescrizione() {
 		return descrizione;
 	}
-
 	public void setDescrizione(String descrizione) {
 		this.descrizione = descrizione;
 	}
-
-	public String getEtichetta() {
-		return etichetta;
-	}
-
-	public void setEtichetta(String etichetta) {
-		this.etichetta = etichetta;
-	}
-
-	public String getUtenze() {
-		return utenze;
-	}
-
-	public void setUtenze(String utenze) {
-		this.utenze = utenze;
-	}
 	
+	
+
 }

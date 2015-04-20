@@ -19,23 +19,24 @@ package it.smartcommunitylab.riciclo.app.importer.converter;
 import it.smartcommunitylab.riciclo.app.importer.model.Aree;
 import it.smartcommunitylab.riciclo.app.importer.model.Gestori;
 import it.smartcommunitylab.riciclo.app.importer.model.Istituzioni;
-import it.smartcommunitylab.riciclo.app.importer.model.Profili;
 import it.smartcommunitylab.riciclo.app.importer.model.PuntiRaccolta;
-import it.smartcommunitylab.riciclo.app.importer.model.TipologiaPuntiRaccolta;
+import it.smartcommunitylab.riciclo.app.importer.model.TipologiaPuntoRaccolta;
 import it.smartcommunitylab.riciclo.app.importer.model.TipologiaRaccolta;
 import it.smartcommunitylab.riciclo.app.importer.model.TipologiaRifiuto;
 import it.smartcommunitylab.riciclo.app.importer.model.TipologiaUtenza;
 import it.smartcommunitylab.riciclo.model.Area;
 import it.smartcommunitylab.riciclo.model.Categorie;
+import it.smartcommunitylab.riciclo.model.Colore;
 import it.smartcommunitylab.riciclo.model.Gestore;
 import it.smartcommunitylab.riciclo.model.Istituzione;
 import it.smartcommunitylab.riciclo.model.OrarioApertura;
-import it.smartcommunitylab.riciclo.model.Profilo;
 import it.smartcommunitylab.riciclo.model.PuntoRaccolta;
 import it.smartcommunitylab.riciclo.model.Raccolta;
 import it.smartcommunitylab.riciclo.model.Riciclabolario;
 import it.smartcommunitylab.riciclo.model.Rifiuti;
+import it.smartcommunitylab.riciclo.model.Segnalazione;
 import it.smartcommunitylab.riciclo.model.Tipologia;
+import it.smartcommunitylab.riciclo.model.TipologiaProfilo;
 import it.smartcommunitylab.riciclo.model.UtenzaArea;
 
 import java.util.HashSet;
@@ -77,12 +78,12 @@ public class RifiutiConverter {
 		
 		categorie.setCaratteristicaPuntoRaccolta(buildTipologieSet(new String[] { GETTONIERA, RESIDUO, IMB_CARTA, IMB_PL_MET, ORGANICO, IMB_VETRO, INDUMENTI }));
 
-		categorie.setColori(new HashSet<Tipologia>());
-		categorie.setTipologiaIstituzione(new HashSet<Tipologia>());
+//		categorie.setColori(new HashSet<Tipologia>());
+//		categorie.setTipologiaIstituzione(new HashSet<Tipologia>());
 		categorie.setTipologiaRaccolta(new HashSet<Tipologia>());
 		
 		categorie.setTipologiaPuntiRaccolta(new HashSet());
-		for (TipologiaPuntiRaccolta tpr : rifiuti.getTipologiaPuntiRaccolta()) {
+		for (TipologiaPuntoRaccolta tpr : rifiuti.getTipologiaPuntoRaccolta()) {
 			Tipologia cat = new Tipologia(StringUtils.capitalize(tpr.getNome().toLowerCase()).replace("Crm", "CRM").replace("Crz", "CRZ"), tpr.getInfoPuntiRaccolta(), null);
 			categorie.getTipologiaPuntiRaccolta().add(cat);
 		}
@@ -102,13 +103,13 @@ public class RifiutiConverter {
 
 		output.setCategorie(categorie);
 
-		List<Profilo> profili = Lists.newArrayList();
-		for (Profili pr : rifiuti.getProfili()) {
-			Profilo profilo = mapper.convertValue(pr, Profilo.class);
+		List<TipologiaProfilo> profili = Lists.newArrayList();
+		for (it.smartcommunitylab.riciclo.app.importer.model.TipologiaProfilo pr : rifiuti.getTipologiaProfilo()) {
+			TipologiaProfilo profilo = mapper.convertValue(pr, TipologiaProfilo.class);
 			profilo.setAppId(appId);
 			profili.add(profilo);
 		}
-		output.setProfili(profili);
+		output.setTipologiaProfilo(profili);
 		
 		List<Area> aree = Lists.newArrayList();
 		for (Aree ar : rifiuti.getAree()) {
@@ -149,24 +150,24 @@ public class RifiutiConverter {
 			Istituzione istituzione = mapper.convertValue(is, Istituzione.class);
 			istituzione.setAppId(appId);
 			istituzioni.add(istituzione);
-			categorie.getTipologiaIstituzione().add(new Tipologia(is.getTipologia(), null, null));
+//			categorie.getTipologiaIstituzione().add(new Tipologia(is.getTipologia(), null, null));
 		}
 		output.setIstituzioni(istituzioni);
 
 		List<Raccolta> raccolte = Lists.newArrayList();
-		for (it.smartcommunitylab.riciclo.app.importer.model.Raccolta rc : (List<it.smartcommunitylab.riciclo.app.importer.model.Raccolta>) rifiuti.getRaccolta()) {
+		for (it.smartcommunitylab.riciclo.app.importer.model.Raccolte rc : (List<it.smartcommunitylab.riciclo.app.importer.model.Raccolte>) rifiuti.getRaccolte()) {
 			Raccolta raccolta = mapper.convertValue(rc, Raccolta.class);
 			raccolta.setTipologiaPuntoRaccolta(StringUtils.capitalize(raccolta.getTipologiaPuntoRaccolta().toLowerCase()).replace("Crm", "CRM").replace("Crz", "CRZ"));
 			raccolta.setTipologiaRifiuto(StringUtils.capitalize(raccolta.getTipologiaRifiuto().toLowerCase()));
 			raccolta.setTipologiaRaccolta(StringUtils.capitalize(raccolta.getTipologiaRaccolta().toLowerCase().replace("crm", "CRM").replace("crz", "CRZ")));
 			raccolta.setAppId(appId);
 			raccolte.add(raccolta);
-			categorie.getColori().add(new Tipologia(raccolta.getColore(), null, null));
+//			categorie.getColori().add(new Tipologia(raccolta.getColore(), null, null));
 		}
 		output.setRaccolta(raccolte);
 
 		for (TipologiaRaccolta tr : rifiuti.getTipologiaRaccolta()) {
-			categorie.getTipologiaRaccolta().add(new Tipologia(StringUtils.capitalize(tr.getNome().toLowerCase().replace("crm", "CRM").replace("crz", "CRZ")), null, tr.getIcona()));
+			categorie.getTipologiaRaccolta().add(new Tipologia(StringUtils.capitalize(tr.getValore().toLowerCase().replace("crm", "CRM").replace("crz", "CRZ")), null, null));
 		}
 
 		output.setPuntiRaccolta(compactPuntiRaccolta(rifiuti.getPuntiRaccolta(), appId));
@@ -179,6 +180,21 @@ public class RifiutiConverter {
 			riciclabolario.add(ric);
 		}
 		output.setRiciclabolario(riciclabolario);
+		
+		
+		List<Colore> colori = Lists.newArrayList();
+		for (it.smartcommunitylab.riciclo.app.importer.model.Colori col: (List<it.smartcommunitylab.riciclo.app.importer.model.Colori>)rifiuti.getColori()) {
+			Colore colore = mapper.convertValue(col, Colore.class);
+			colori.add(colore);
+		}
+		output.setColore(colori);	
+		
+		List<Segnalazione> segnalazioni = Lists.newArrayList();
+		for (it.smartcommunitylab.riciclo.app.importer.model.Segnalazioni sgn: (List<it.smartcommunitylab.riciclo.app.importer.model.Segnalazioni>)rifiuti.getSegnalazioni()) {
+			Segnalazione sg = mapper.convertValue(sgn, Segnalazione.class);
+			segnalazioni.add(sg);
+		}
+		output.setSegnalazione(segnalazioni);
 
 		return output;
 	}
@@ -186,7 +202,7 @@ public class RifiutiConverter {
 	private List<PuntoRaccolta> compactPuntiRaccolta(List<PuntiRaccolta> puntiRaccolta, String appId) throws Exception {
 		Multimap<String, PuntiRaccolta> puntiRaccoltaMap = ArrayListMultimap.create();
 		for (PuntiRaccolta p : puntiRaccolta) {
-			String key = p.getArea() + "_" + p.getTipologiaPuntiRaccolta() + "_" + p.getTipologiaUtenza() + "_" + p.getIndirizzo() + "_" + p.getDettaglioIndirizzo();
+			String key = p.getArea() + "_" + p.getTipologiaPuntiRaccolta() + "_" + p.getTipologiaUtenza() + "_" + p.getZona() + "_" + p.getDettagliZona();
 			puntiRaccoltaMap.put(key, p);
 		}
 

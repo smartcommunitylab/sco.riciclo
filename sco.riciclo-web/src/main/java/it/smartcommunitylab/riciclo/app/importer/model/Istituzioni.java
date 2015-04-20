@@ -20,16 +20,17 @@ package it.smartcommunitylab.riciclo.app.importer.model;
 public class Istituzioni {
 
 	private String nome;
-	private String tipologia;
 	private String descrizione;
 	private String ufficio;
 	private String indirizzo;
 	private String orarioUfficio;
-	private String sitoIstituzionale;
+	private String sito;
 	private String pec;
 	private String email;
 	private String telefono;
 	private String fax;
+	private String localizzazione;
+	private String facebook;	
 	
 	public String getNome() {
 		return nome;
@@ -49,20 +50,14 @@ public class Istituzioni {
 	public void setIndirizzo(String indirizzo) {
 		this.indirizzo = indirizzo;
 	}
-	public String getTipologia() {
-		return tipologia;
-	}
-	public void setTipologia(String tipologia) {
-		this.tipologia = tipologia;
-	}
 	public String getDescrizione() {
 		return descrizione;
 	}
 	public void setDescrizione(String descrizione) {
 		this.descrizione = descrizione;
 	}
-	public String getSitoIstituzionale() {
-		return sitoIstituzionale;
+	public String getSito() {
+		return sito;
 	}
 	public String getOrarioUfficio() {
 		return orarioUfficio;
@@ -70,8 +65,8 @@ public class Istituzioni {
 	public void setOrarioUfficio(String orarioUfficio) {
 		this.orarioUfficio = orarioUfficio;
 	}
-	public void setSitoIstituzionale(String sitoIstituzionale) {
-		this.sitoIstituzionale = sitoIstituzionale;
+	public void setSito(String sitoIstituzionale) {
+		this.sito = sitoIstituzionale;
 	}
 	public String getPec() {
 		return pec;
@@ -97,5 +92,17 @@ public class Istituzioni {
 	public void setFax(String fax) {
 		this.fax = fax;
 	}
+	public String getLocalizzazione() {
+		return localizzazione;
+	}
+	public void setLocalizzazione(String localizzazione) {
+		this.localizzazione = localizzazione;
+	}
+	public String getFacebook() {
+		return facebook;
+	}
+	public void setFacebook(String facebook) {
+		this.facebook = facebook;
+	}	
 
 }
