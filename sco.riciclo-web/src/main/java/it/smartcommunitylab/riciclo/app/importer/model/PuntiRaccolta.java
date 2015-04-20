@@ -23,8 +23,8 @@ public class PuntiRaccolta {
 	private String tipologiaPuntiRaccolta;
 	private String tipologiaUtenza;
 	private String localizzazione;
-	private String indirizzo;
-	private String dettaglioIndirizzo;
+	private String zona;
+	private String dettagliZona;
 	private String dataDa;
 	private String dataA;
 	private String il;
@@ -75,20 +75,20 @@ public class PuntiRaccolta {
 		this.localizzazione = localizzazione;
 	}
 
-	public String getIndirizzo() {
-		return indirizzo;
+	public String getZona() {
+		return zona;
 	}
 
-	public void setIndirizzo(String indirizzo) {
-		this.indirizzo = indirizzo;
+	public void setZona(String indirizzo) {
+		this.zona = indirizzo;
 	}
 
-	public String getDettaglioIndirizzo() {
-		return dettaglioIndirizzo;
+	public String getDettagliZona() {
+		return dettagliZona;
 	}
 
-	public void setDettaglioIndirizzo(String dettaglioIndirizzo) {
-		this.dettaglioIndirizzo = dettaglioIndirizzo;
+	public void setDettagliZona(String dettaglioIndirizzo) {
+		this.dettagliZona = dettaglioIndirizzo;
 	}
 
 	public String getDataDa() {
@@ -205,7 +205,7 @@ public class PuntiRaccolta {
 
 	@Override
 	public String toString() {
-		return "PuntiRaccolta [dettaglioIndirizzo=" + dettaglioIndirizzo + "]";
+		return "PuntiRaccolta [dettaglioIndirizzo=" + dettagliZona + "]";
 	}
 
 	

@@ -24,8 +24,8 @@ public class PuntoRaccolta extends BaseObject {
 	private String tipologiaPuntiRaccolta;
 	private List<UtenzaArea> utenzaArea;
 	private String localizzazione;
-	private String indirizzo;
-	private String dettaglioIndirizzo;
+	private String zona;
+	private String dettagliZona;
 
 	private List<OrarioApertura> orarioApertura;
 
@@ -57,20 +57,20 @@ public class PuntoRaccolta extends BaseObject {
 		this.localizzazione = localizzazione;
 	}
 
-	public String getIndirizzo() {
-		return indirizzo;
+	public String getZona() {
+		return zona;
 	}
 
-	public void setIndirizzo(String indirizzo) {
-		this.indirizzo = indirizzo;
+	public void setZona(String indirizzo) {
+		this.zona = indirizzo;
 	}
 
-	public String getDettaglioIndirizzo() {
-		return dettaglioIndirizzo;
+	public String getDettagliZona() {
+		return dettagliZona;
 	}
 
-	public void setDettaglioIndirizzo(String dettaglioIndirizzo) {
-		this.dettaglioIndirizzo = dettaglioIndirizzo;
+	public void setDettagliZona(String dettaglioIndirizzo) {
+		this.dettagliZona = dettaglioIndirizzo;
 	}
 
 	public List<OrarioApertura> getOrarioApertura() {
@@ -104,8 +104,8 @@ public class PuntoRaccolta extends BaseObject {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((dettaglioIndirizzo == null) ? 0 : dettaglioIndirizzo.hashCode());
-		result = prime * result + ((indirizzo == null) ? 0 : indirizzo.hashCode());
+		result = prime * result + ((dettagliZona == null) ? 0 : dettagliZona.hashCode());
+		result = prime * result + ((zona == null) ? 0 : zona.hashCode());
 		result = prime * result + ((orarioApertura == null) ? 0 : orarioApertura.hashCode());
 		result = prime * result + ((tipologiaPuntiRaccolta == null) ? 0 : tipologiaPuntiRaccolta.hashCode());
 		return result;
@@ -120,15 +120,15 @@ public class PuntoRaccolta extends BaseObject {
 		if (getClass() != obj.getClass())
 			return false;
 		PuntoRaccolta other = (PuntoRaccolta) obj;
-		if (dettaglioIndirizzo == null) {
-			if (other.dettaglioIndirizzo != null)
+		if (dettagliZona == null) {
+			if (other.dettagliZona != null)
 				return false;
-		} else if (!dettaglioIndirizzo.equals(other.dettaglioIndirizzo))
+		} else if (!dettagliZona.equals(other.dettagliZona))
 			return false;
-		if (indirizzo == null) {
-			if (other.indirizzo != null)
+		if (zona == null) {
+			if (other.zona != null)
 				return false;
-		} else if (!indirizzo.equals(other.indirizzo))
+		} else if (!zona.equals(other.zona))
 			return false;
 		if (orarioApertura == null) {
 			if (other.orarioApertura != null)
@@ -145,7 +145,7 @@ public class PuntoRaccolta extends BaseObject {
 
 	@Override
 	public String toString() {
-		return "PuntoRaccolta [" + utenzaArea + "," + tipologiaPuntiRaccolta + "," + indirizzo + "," + dettaglioIndirizzo + "->" + orarioApertura + "]";
+		return "PuntoRaccolta [" + utenzaArea + "," + tipologiaPuntiRaccolta + "," + zona + "," + dettagliZona + "->" + orarioApertura + "]";
 	}
 
 }

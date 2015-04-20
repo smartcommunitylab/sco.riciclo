@@ -18,13 +18,15 @@ package it.smartcommunitylab.riciclo.storage;
 
 import it.smartcommunitylab.riciclo.model.Area;
 import it.smartcommunitylab.riciclo.model.Categorie;
+import it.smartcommunitylab.riciclo.model.Colore;
 import it.smartcommunitylab.riciclo.model.Gestore;
 import it.smartcommunitylab.riciclo.model.Istituzione;
-import it.smartcommunitylab.riciclo.model.Profilo;
 import it.smartcommunitylab.riciclo.model.PuntoRaccolta;
 import it.smartcommunitylab.riciclo.model.Raccolta;
 import it.smartcommunitylab.riciclo.model.Riciclabolario;
 import it.smartcommunitylab.riciclo.model.Rifiuti;
+import it.smartcommunitylab.riciclo.model.Segnalazione;
+import it.smartcommunitylab.riciclo.model.TipologiaProfilo;
 
 import java.util.List;
 
@@ -44,7 +46,9 @@ public class RepositoryManager {
 			PuntoRaccolta.class, 
 			Raccolta.class, 
 			Riciclabolario.class, 
-			Profilo.class
+			TipologiaProfilo.class,
+			Colore.class,
+			Segnalazione.class
 			};
 
 	@Autowired
@@ -69,7 +73,7 @@ public class RepositoryManager {
 			area.setAppId(appId);
 			draftTemplate.save(area);
 		}
-		for (Profilo profilo: rifiuti.getProfili()) {
+		for (TipologiaProfilo profilo: rifiuti.getTipologiaProfilo()) {
 			profilo.setAppId(appId);
 			draftTemplate.save(profilo);
 		}		
@@ -92,8 +96,17 @@ public class RepositoryManager {
 		for (Riciclabolario riciclabolario: rifiuti.getRiciclabolario()) {
 			riciclabolario.setAppId(appId);
 			draftTemplate.save(riciclabolario);
-		}			
-		saveAppVersion(appId, oldDraft.getVersion()+1, true);
+		}
+		for (Colore colore: rifiuti.getColore()) {
+			colore.setAppId(appId);
+			draftTemplate.save(colore);
+		}
+		for (Segnalazione segnalazione: rifiuti.getSegnalazione()) {
+			segnalazione.setAppId(appId);
+			draftTemplate.save(segnalazione);
+		}				
+		
+		saveAppVersion(appId, oldDraft.getVersion() + 1, true);
 	}
 	
 	public void cleanByAppId(String appId, boolean draft) {
@@ -169,13 +182,15 @@ public class RepositoryManager {
 		Rifiuti rifiuti = new Rifiuti();
 		Query query = appQuery(appId);
 		rifiuti.setAree(template.find(query, Area.class));
-		rifiuti.setProfili(template.find(query, Profilo.class));
+		rifiuti.setTipologiaProfilo(template.find(query, TipologiaProfilo.class));
 		rifiuti.setCategorie(template.findOne(query, Categorie.class));
 		rifiuti.setGestori(template.find(query, Gestore.class));
 		rifiuti.setIstituzioni(template.find(query, Istituzione.class));
 		rifiuti.setPuntiRaccolta(template.find(query, PuntoRaccolta.class));
 		rifiuti.setRaccolta(template.find(query, Raccolta.class));
 		rifiuti.setRiciclabolario(template.find(query, Riciclabolario.class));
+		rifiuti.setColore(template.find(query, Colore.class));
+		rifiuti.setSegnalazione(template.find(query, Segnalazione.class));
 		rifiuti.setAppId(appId);
 		
 		return rifiuti;
