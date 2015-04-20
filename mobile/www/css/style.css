@@ -207,37 +207,36 @@
 .home-notes {
     background-color: #eeeeee;
     background-position: center;
+    height: 100%;
 }
 
 .home-notes .home-notes-none {
-    position: relative;
     color: #BFBFBF;
     text-align: center;
-}
-
-.home-notes .home-notes-none img {
-    position: relative;
+    height: 100%;
 }
 
 .home-notes .home-notes-item {
     padding: 10px;
-    /*!important*/
 }
 
 .home-notes .home-notes-item.home-notes-item-selected {
     background-color: #8de058;
 }
 /* Home - News */
+
 .news-date {
     font-size: 12px;
     text-align: right;
 }
 /* Home - News */
+
 .news-title {
     font-size: 12px;
     font-weight: bold;
     white-space: normal !important;
 }
+
 .news-more {
     font-size: 12px;
     text-align: right;

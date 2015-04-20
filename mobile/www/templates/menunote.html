@@ -6,13 +6,12 @@
         </div>
     </ion-nav-title>
 
-<!--
-    <ion-nav-buttons side="left">
+    <!--<ion-nav-buttons side="left">
         <button menu-toggle="left" class="row button button-icon ion-navicon">
             <img class="nav-button-app-logo" src="img/ic_launcher.png">
         </button>
-    </ion-nav-buttons>
--->
+    </ion-nav-buttons>-->
+
     <ion-nav-buttons side="right">
         <div class="nowrap">
             <button ng-click="edit()" class="button button-icon btn btn-edit" ng-if="noteSelected && !multipleNoteSelected">
@@ -24,17 +23,22 @@
         </div>
     </ion-nav-buttons>
 
-    <ion-content class="home-notes" has-bouncing="false">
-        <div class="home-notes-none" ng-if="notes[0]==null">
-            <p>{{"Tocca" | translate}}</p>
-            <img src="img/ic_note.png">
-            <p>{{"ad esempio" | translate}}
-                <br />
-                <!-- {{(height-74)*0.5+40-((height-74)*0.5-100)}}px -->
-                {{"Portare la tv al CRM"| translate}}
-                <br /> {{"Pagare la bolletta dei rifiuti"| translate}}
-            </p>
+    <ion-content class="home-notes" scroll="false" has-bouncing="false" ng-if="notes[0] == null">
+        <div class="home-notes-none row">
+            <div class="col col-center">
+                <p>{{"Tocca" | translate}}</p>
+                <img src="img/ic_note.png">
+                <p>{{"ad esempio" | translate}}
+                    <br />
+                    <!-- {{(height-74)*0.5+40-((height-74)*0.5-100)}}px -->
+                    {{"Portare la tv al CRM"| translate}}
+                    <br /> {{"Pagare la bolletta dei rifiuti"| translate}}
+                </p>
+            </div>
         </div>
+    </ion-content>
+
+    <ion-content class="home-notes" has-bouncing="false">
         <ion-item ng-repeat="item in notes" class="home-notes-item" ng-click="noteSelect($index)" ng-class="{'home-notes-item-selected': selectedNotes.indexOf($index) != -1}">
             {{item}}
         </ion-item>
