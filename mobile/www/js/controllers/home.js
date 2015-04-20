@@ -104,9 +104,15 @@ angular.module('rifiuti.controllers.home', [])
 
 .controller('newsCtrl', function ($scope, $rootScope, FeedService) {
     FeedService.load(FEED_URL,APP_ID).then(function(entries) {
+        entries.forEach(function(entry) {
+            entry.dateTime = new Date(entry.publishedDate);
+        });
         $scope.entries = entries;
     });
 
+})
+.controller('newsItemCtrl', function ($scope, $rootScope, FeedService) {
+    console.log('item');
 })
 
 .controller('noteCtrl', function ($scope, $rootScope, $ionicPopup, $filter, Profili) {

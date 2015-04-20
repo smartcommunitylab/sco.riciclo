@@ -6,7 +6,15 @@
         </div>
     </ion-nav-title>
 
-    <ion-content class="home-tipidirifiuti" has-bouncing="false">
-        NEWS
+    <ion-content class="home-news" has-bouncing="false">
+        <ion-list>
+            <ion-item ng-repeat="entry in entries" ng-href="#/app/news/newsitem/{{$index}}">
+                <div class="news-date">{{entry.dateTime| date:'dd/MM/yyyy HH:mm'}}</div>
+                <div class="news-title" ng-bind-html="entry.title"></div>
+                <div class="news-more">{{'Read more'|translate}}</div>
+<!--                <div class="news-snippet">{{entry.contentSnippet}}</div>-->
+            </ion-item>
+        </ion-list>
     </ion-content>
 </ion-view>
+

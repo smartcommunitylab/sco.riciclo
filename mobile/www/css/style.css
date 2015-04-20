@@ -227,6 +227,24 @@
 .home-notes .home-notes-item.home-notes-item-selected {
     background-color: #8de058;
 }
+/* Home - News */
+.news-date {
+    font-size: 12px;
+    text-align: right;
+}
+/* Home - News */
+.news-title {
+    font-size: 12px;
+    font-weight: bold;
+    white-space: normal !important;
+}
+.news-more {
+    font-size: 12px;
+    text-align: right;
+    font-weight: bold;
+    color: #47772b;
+}
+
 /* Home - Calendar */
 
 .home-calendar {

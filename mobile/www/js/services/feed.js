@@ -6,7 +6,7 @@ angular.module('rifiuti.services.feed', [])
 
         var oldTimestamp = localStorage['timestamp_'+id];
         if(oldTimestamp && new Date().getTime() - 10*60*1000 < oldTimestamp) {
-            deferred.resolve(localStorage['entries_'+id]);
+            deferred.resolve(JSON.parse(localStorage['entries_'+id]));
         } else {
             $http.jsonp('//ajax.googleapis.com/ajax/services/feed/load?v=1.0&num=50&callback=JSON_CALLBACK&q=' + encodeURIComponent(url))
             .success(function(data) {
