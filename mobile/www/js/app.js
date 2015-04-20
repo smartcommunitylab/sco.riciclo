@@ -8,6 +8,7 @@ angular.module('rifiuti', [
     'ionic',
     'ngCordova',
     'rifiuti.filters',
+    'rifiuti.directives',
     'rifiuti.services.data',
     'rifiuti.services.profili',
     'rifiuti.services.rifiuti',
