@@ -57,7 +57,7 @@ angular.module('rifiuti.controllers.common', [])
 
     $scope.tipiSegnalazioni = [];
 
-    Raccolta.segnalazioni($scope.selectedProfile.aree).then(function(data){
+    Raccolta.segnalazioni($scope.selectedProfile.aree).then(function (data) {
         $scope.tipiSegnalazioni = data;
         if (data.length == 1) $scope.selectedTipoSegnalazione = data[0];
     });
@@ -119,17 +119,29 @@ angular.module('rifiuti.controllers.common', [])
 
 })
 
-.controller('SettingsCtrl', function ($scope, $rootScope, $ionicScrollDelegate, Raccolta) {
+.controller('SettingsCtrl', function ($scope, $rootScope, $ionicScrollDelegate, Raccolta, settingsService) {
     /*$scope.mainScrollResize = function () {
         $ionicScrollDelegate.$getByHandle('mainScroll').resize();
     }*/
 
     $scope.papTypes = $rootScope.selectedProfile.PaP;
 
+    $scope.settings = {
+        enableNotifications: true,
+        papTypes: {},
+        notificationsTime: 54000
+    };
+
+    $scope.settings = settingsService.getSettings();
+
     $scope.timepickerSlots = {
-        epochTime: 12600,
+        epochTime: 54000,
         format: 24,
         step: 1
+    };
+
+    $scope.saveSettings = function () {
+        settingsService.setSettings($scope.settings).then(function (settings) {});
     };
 })
 
@@ -175,7 +187,7 @@ angular.module('rifiuti.controllers.common', [])
         }
     };
 
-    var findElement = function(id,eclass, eidx) {
+    var findElement = function (id, eclass, eidx) {
         if (id) {
             return document.getElementById(id);
         } else {
@@ -184,8 +196,8 @@ angular.module('rifiuti.controllers.common', [])
             if (arr.length > 0) {
                 for (var i = 0; i < arr.length; i++) {
                     if (arr[i].clientWidth > 0 && arr[i].clientHeight > 0) {
-                      if (idx == 0) return arr[i];
-                      else idx--;
+                        if (idx == 0) return arr[i];
+                        else idx--;
                     }
                 }
             }
@@ -216,9 +228,9 @@ angular.module('rifiuti.controllers.common', [])
             y: 40,
             text: "TutorialUno",
             imgX: function () {
-//                var width = window.innerWidth;
-//                return width - 80
-               return  getX("searchButton")-48
+                //                var width = window.innerWidth;
+                //                return width - 80
+                return getX("searchButton") - 48
             }, //getX("searchButton")-320},
             imgY: function () {
                 return getY("searchButton") - 48
@@ -244,7 +256,7 @@ angular.module('rifiuti.controllers.common', [])
             title: "TTTre",
             x: 3,
             y: 40,
-            text: SHOW_NEWS ? "TutorialNews": "TutorialTre",
+            text: SHOW_NEWS ? "TutorialNews" : "TutorialTre",
             imgX: function () {
                 return getX(null, "tab-item", 0) - 48
             },
@@ -262,7 +274,7 @@ angular.module('rifiuti.controllers.common', [])
             imgX: function () {
                 //var width = window.innerWidth;
                 //return 0.5 * width + 80
-                return getX(null, "tab-item", 2)-48
+                return getX(null, "tab-item", 2) - 48
             }, //return getX("calendarioId")+305},
             imgY: function () {
                 return getY(null, "tab-item", 2) - 48
