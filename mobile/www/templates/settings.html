@@ -12,35 +12,10 @@
         <div class="padding-top">
             <label>Desidero ricevere notifiche riguardanti</label>
             <ul class="list">
-                <li class="item item-checkbox">
+                <li class="item item-checkbox" ng-repeat="pap in papTypes">
                     <label class="checkbox checkbox-100r">
                         <input type="checkbox">
-                    </label>
-                    Porta a porta residuo
-                </li>
-                <li class="item item-checkbox">
-                    <label class="checkbox checkbox-100r">
-                        <input type="checkbox">
-                    </label>
-                    Porta a porta organico
-                </li>
-                <li class="item item-checkbox">
-                    <label class="checkbox checkbox-100r">
-                        <input type="checkbox">
-                    </label>
-                    Porta a porta carta e cartone
-                </li>
-                <li class="item item-checkbox">
-                    <label class="checkbox checkbox-100r">
-                        <input type="checkbox">
-                    </label>
-                    Porta a porta imballaggi leggeri
-                </li>
-                <li class="item item-checkbox">
-                    <label class="checkbox checkbox-100r">
-                        <input type="checkbox">
-                    </label>
-                    Porta a porta vetro
+                    </label>{{pap}}
                 </li>
             </ul>
         </div>

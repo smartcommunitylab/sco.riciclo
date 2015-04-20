@@ -119,10 +119,12 @@ angular.module('rifiuti.controllers.common', [])
 
 })
 
-.controller('SettingsCtrl', function ($scope, $ionicScrollDelegate, Raccolta) {
+.controller('SettingsCtrl', function ($scope, $rootScope, $ionicScrollDelegate, Raccolta) {
     /*$scope.mainScrollResize = function () {
         $ionicScrollDelegate.$getByHandle('mainScroll').resize();
     }*/
+
+    $scope.papTypes = $rootScope.selectedProfile.PaP;
 
     $scope.timepickerSlots = {
         epochTime: 12600,
