@@ -58,88 +58,38 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 @WebAppConfiguration
 public class GiudicarieTest {
 
-	private static final String EXCEL_MODELLO_CONCETTUALE_XLS = "giudicarie/ExcelModelloConcettuale_V0.28.xls";
+	private static final String EXCEL_MODELLO_CONCETTUALE_XLS = "giudicarie/ExcelModelloConcettuale_NEW.xls";
 	private static final String CRM_KML = "giudicarie/crm.kml";
 	private static final String ISOLE_ESTESE_KML = "giudicarie/isole_estese.kml";
 
 	private final static String APP_ID = "GIUDICARIE";
-	
 	@Autowired
 	private WebApplicationContext wac;
 
 	private MockMvc mocker;
-	
+
 	@Before
 	public void setup() {
-    }	
-	
+	}
+
 	@Test
 	public void testUpload() throws Exception {
 		AppInfo credentials = new AppInfo();
 		credentials.setAppId(APP_ID);
-		credentials.setPassword(APP_ID);		
-		credentials.setModelElements(Arrays.asList(ImportConstants.MODEL, ImportConstants.CRM, ImportConstants.ISOLE));
+		credentials.setPassword(APP_ID);
+		credentials.setModelElements(Arrays.asList(ImportConstants.MODEL,
+				ImportConstants.CRM, ImportConstants.ISOLE));
 		AppDetails details = new AppDetails(credentials);
 		details.setApp(credentials);
-		TestingAuthenticationToken auth = new TestingAuthenticationToken(details, null);
-		SecurityContextHolder.getContext().setAuthentication(auth);		
-		
-		ImportManager manager = wac.getBean(ImportManager.class);
-		
-		FileList fileList = readFiles();
-		
-		ImportError error = null;
-		try {
-			manager.uploadFiles(fileList, credentials);
-		} catch (ImportError e) {
-			error = e;
-		}
-		
-		Assert.assertNull(error);
+		TestingAuthenticationToken auth = new TestingAuthenticationToken(
+				details, null);
+		SecurityContextHolder.getContext().setAuthentication(auth);
 		
 		mocker = MockMvcBuilders.webAppContextSetup(wac).build();
 		ObjectMapper mapper = new ObjectMapper();
-
-		ResultActions result = mocker.perform(MockMvcRequestBuilders.get("/rifiuti/" + APP_ID + "/draft").accept(MediaType.APPLICATION_JSON));
-		MvcResult  res = result.andExpect(MockMvcResultMatchers.status().is(200)).andReturn();
-		Rifiuti rifiuti = mapper.readValue(res.getResponse().getContentAsString(), Rifiuti.class);
-		Assert.assertEquals(APP_ID, rifiuti.getAppId());
 		
-		Assert.assertNotNull(rifiuti.getAree());
-		Assert.assertNotNull(rifiuti.getGestori());
-		Assert.assertNotNull(rifiuti.getIstituzioni());
-		Assert.assertNotNull(rifiuti.getPuntiRaccolta());
-		Assert.assertNotNull(rifiuti.getRaccolta());
-		Assert.assertNotNull(rifiuti.getRiciclabolario());
-		
-		Assert.assertFalse(rifiuti.getAree().isEmpty());
-		Assert.assertFalse(rifiuti.getGestori().isEmpty());
-		Assert.assertFalse(rifiuti.getIstituzioni().isEmpty());
-		Assert.assertFalse(rifiuti.getPuntiRaccolta().isEmpty());
-		Assert.assertFalse(rifiuti.getRaccolta().isEmpty());
-		Assert.assertFalse(rifiuti.getRiciclabolario().isEmpty());		
-
-		result = mocker.perform(MockMvcRequestBuilders.post("/publish/" + APP_ID).accept(MediaType.APPLICATION_JSON));
-		res = result.andExpect(MockMvcResultMatchers.status().is(200)).andReturn();
-		
-		result = mocker.perform(MockMvcRequestBuilders.get("/rifiuti/" + APP_ID).accept(MediaType.APPLICATION_JSON));
-		res = result.andExpect(MockMvcResultMatchers.status().is(200)).andReturn();
-		rifiuti = mapper.readValue(res.getResponse().getContentAsString(), Rifiuti.class);
-		Assert.assertEquals(APP_ID, rifiuti.getAppId());
-		
-		Assert.assertNotNull(rifiuti.getAree());
-		Assert.assertNotNull(rifiuti.getGestori());
-		Assert.assertNotNull(rifiuti.getIstituzioni());
-		Assert.assertNotNull(rifiuti.getPuntiRaccolta());
-		Assert.assertNotNull(rifiuti.getRaccolta());
-		Assert.assertNotNull(rifiuti.getRiciclabolario());
-		
-		Assert.assertFalse(rifiuti.getAree().isEmpty());
-		Assert.assertFalse(rifiuti.getGestori().isEmpty());
-		Assert.assertFalse(rifiuti.getIstituzioni().isEmpty());
-		Assert.assertFalse(rifiuti.getPuntiRaccolta().isEmpty());
-		Assert.assertFalse(rifiuti.getRaccolta().isEmpty());
-		Assert.assertFalse(rifiuti.getRiciclabolario().isEmpty());		
+		ResultActions result;
+		MvcResult res;
 		
 		result = mocker.perform(MockMvcRequestBuilders.get("/appDescriptor/" + APP_ID).accept(MediaType.APPLICATION_JSON));
 		res = result.andExpect(MockMvcResultMatchers.status().is(200)).andReturn();
@@ -149,38 +99,120 @@ public class GiudicarieTest {
 		
 		Long version = appDescriptor.getPublishState().getVersion();		
 		
-		result = mocker.perform(MockMvcRequestBuilders.post("/publish/" + APP_ID).accept(MediaType.APPLICATION_JSON));
-		res = result.andExpect(MockMvcResultMatchers.status().is(200)).andReturn();
 		
-		result = mocker.perform(MockMvcRequestBuilders.get("/appDescriptor/" + APP_ID).accept(MediaType.APPLICATION_JSON));
-		res = result.andExpect(MockMvcResultMatchers.status().is(200)).andReturn();
-		appDescriptor = mapper.readValue(res.getResponse().getContentAsString(), App.class);
+		ImportManager manager = wac.getBean(ImportManager.class);
+		FileList fileList = readFiles();
+		ImportError error = null;
+		try {
+			manager.uploadFiles(fileList, credentials);
+		} catch (ImportError e) {
+			error = e;
+		}
+		Assert.assertNull(error);
+
+		result = mocker.perform(MockMvcRequestBuilders.get(
+				"/rifiuti/" + APP_ID + "/draft").accept(
+				MediaType.APPLICATION_JSON));
+		res = result
+				.andExpect(MockMvcResultMatchers.status().is(200)).andReturn();
+		Rifiuti rifiuti = mapper.readValue(res.getResponse()
+				.getContentAsString(), Rifiuti.class);
+		Assert.assertEquals(APP_ID, rifiuti.getAppId());
+		Assert.assertNotNull(rifiuti.getAree());
+		Assert.assertNotNull(rifiuti.getGestori());
+		Assert.assertNotNull(rifiuti.getIstituzioni());
+		Assert.assertNotNull(rifiuti.getPuntiRaccolta());
+		Assert.assertNotNull(rifiuti.getRaccolta());
+		Assert.assertNotNull(rifiuti.getRiciclabolario());
+		Assert.assertFalse(rifiuti.getAree().isEmpty());
+		Assert.assertFalse(rifiuti.getGestori().isEmpty());
+		Assert.assertFalse(rifiuti.getIstituzioni().isEmpty());
+		Assert.assertFalse(rifiuti.getPuntiRaccolta().isEmpty());
+		Assert.assertFalse(rifiuti.getRaccolta().isEmpty());
+		Assert.assertFalse(rifiuti.getRiciclabolario().isEmpty());
+		Assert.assertFalse(rifiuti.getColore().isEmpty());
+		Assert.assertFalse(rifiuti.getSegnalazione().isEmpty());
+
+		// result = mocker.perform(MockMvcRequestBuilders.put("/publish/" +
+		// APP_ID).accept(MediaType.APPLICATION_JSON));
+		result = mocker.perform(MockMvcRequestBuilders.put("/console/publish/")
+				.accept(MediaType.APPLICATION_JSON));
+		res = result.andExpect(MockMvcResultMatchers.status().is(200))
+				.andReturn();
+		result = mocker.perform(MockMvcRequestBuilders
+				.get("/rifiuti/" + APP_ID).accept(MediaType.APPLICATION_JSON));
+		res = result.andExpect(MockMvcResultMatchers.status().is(200))
+				.andReturn();
+		rifiuti = mapper.readValue(res.getResponse().getContentAsString(),
+				Rifiuti.class);
+		Assert.assertEquals(APP_ID, rifiuti.getAppId());
+		Assert.assertNotNull(rifiuti.getAree());
+		Assert.assertNotNull(rifiuti.getGestori());
+		Assert.assertNotNull(rifiuti.getIstituzioni());
+		Assert.assertNotNull(rifiuti.getPuntiRaccolta());
+		Assert.assertNotNull(rifiuti.getRaccolta());
+		Assert.assertNotNull(rifiuti.getRiciclabolario());
+		Assert.assertFalse(rifiuti.getAree().isEmpty());
+		Assert.assertFalse(rifiuti.getGestori().isEmpty());
+		Assert.assertFalse(rifiuti.getIstituzioni().isEmpty());
+		Assert.assertFalse(rifiuti.getPuntiRaccolta().isEmpty());
+		Assert.assertFalse(rifiuti.getRaccolta().isEmpty());
+		Assert.assertFalse(rifiuti.getRiciclabolario().isEmpty());
 		
+		// result = mocker.perform(MockMvcRequestBuilders.post("/publish/" +
+		// APP_ID).accept(MediaType.APPLICATION_JSON));
+		result = mocker.perform(MockMvcRequestBuilders.put("/console/publish/")
+				.accept(MediaType.APPLICATION_JSON));
+		res = result.andExpect(MockMvcResultMatchers.status().is(200))
+				.andReturn();
+		result = mocker.perform(MockMvcRequestBuilders.get(
+				"/appDescriptor/" + APP_ID).accept(MediaType.APPLICATION_JSON));
+		res = result.andExpect(MockMvcResultMatchers.status().is(200))
+				.andReturn();
+		appDescriptor = mapper.readValue(
+				res.getResponse().getContentAsString(), App.class);
 		System.out.println(appDescriptor);
 		
-		Assert.assertEquals((version + 1), (long)appDescriptor.getPublishState().getVersion());
 		
+//		ValidatorFactory validatorFactory = Validation.buildDefaultValidatorFactory();
+//		Validator validator = validatorFactory.getValidator();
+//		GenericApplicationContext appCtx = new GenericApplicationContext();
+//		AnnotationBeanValidationConfigurationLoader l = new AnnotationBeanValidationConfigurationLoader();
+//		l.setCheckValidatableAnnotation(true);
+//		l.setApplicationContext(appCtx);
+//		l.loadConfiguration(Colore.class);
+//
+//		BeanValidator bv = new BeanValidator();
+//		bv.setConfigurationLoader(l);
+//
+//		for (Colore colore: rifiuti.getColore()) {
+//			BindException errors = new BindException(colore, "target");
+//			bv.validate(colore, errors);	
+//		}
+		
+		Assert.assertEquals((version + 1), (long) appDescriptor.getPublishState().getVersion());
+
 	}
-	
+
 	private FileList readFiles() throws IOException {
 		FileList fileList = new FileList();
-		
-		InputStream xlsIs = Thread.currentThread().getContextClassLoader().getResourceAsStream(EXCEL_MODELLO_CONCETTUALE_XLS);
-		InputStream isoleIs = Thread.currentThread().getContextClassLoader().getResourceAsStream(ISOLE_ESTESE_KML);
-		InputStream crmIs = Thread.currentThread().getContextClassLoader().getResourceAsStream(CRM_KML);		
-		
-		MockMultipartFile xlsFile = new MockMultipartFile(EXCEL_MODELLO_CONCETTUALE_XLS, xlsIs);
-		MockMultipartFile isoleFile = new MockMultipartFile(ISOLE_ESTESE_KML, isoleIs);
+		InputStream xlsIs = Thread.currentThread().getContextClassLoader()
+				.getResourceAsStream(EXCEL_MODELLO_CONCETTUALE_XLS);
+		InputStream isoleIs = Thread.currentThread().getContextClassLoader()
+				.getResourceAsStream(ISOLE_ESTESE_KML);
+		InputStream crmIs = Thread.currentThread().getContextClassLoader()
+				.getResourceAsStream(CRM_KML);
+		MockMultipartFile xlsFile = new MockMultipartFile(
+				EXCEL_MODELLO_CONCETTUALE_XLS, xlsIs);
+		MockMultipartFile isoleFile = new MockMultipartFile(ISOLE_ESTESE_KML,
+				isoleIs);
 		MockMultipartFile crmFile = new MockMultipartFile(CRM_KML, crmIs);
-		
 		fileList.setModel(xlsFile);
 		fileList.setCrm(crmFile);
 		fileList.setIsole(isoleFile);
 
 		return fileList;
 	}
-	
 
-//	@ModelAttribute("fileList") FileList fileList
-	
+	// @ModelAttribute("fileList") FileList fileList
 }

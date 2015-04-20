@@ -106,7 +106,7 @@ public class RepositoryManager {
 			draftTemplate.save(segnalazione);
 		}				
 		
-		saveAppVersion(appId, oldDraft.getVersion()+1, true);
+		saveAppVersion(appId, oldDraft.getVersion() + 1, true);
 	}
 	
 	public void cleanByAppId(String appId, boolean draft) {

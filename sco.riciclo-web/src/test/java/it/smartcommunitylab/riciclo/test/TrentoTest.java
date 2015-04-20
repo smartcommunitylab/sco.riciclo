@@ -59,7 +59,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 @WebAppConfiguration
 public class TrentoTest {
 
-	private static final String EXCEL_MODELLO_CONCETTUALE_XLS = "trento/ExcelModelloConcettuale_V0 04.xls";
+	private static final String EXCEL_MODELLO_CONCETTUALE_XLS = "trento/ExcelModelloConcettuale_V1.xls";
 
 	private final static String APP_ID = "TRENTO";
 	
@@ -86,6 +86,20 @@ public class TrentoTest {
 		TestingAuthenticationToken auth = new TestingAuthenticationToken(details, null);
 		SecurityContextHolder.getContext().setAuthentication(auth);
 		
+		mocker = MockMvcBuilders.webAppContextSetup(wac).build();
+		ObjectMapper mapper = new ObjectMapper();
+		
+		ResultActions result;
+		MvcResult res;
+		
+		result = mocker.perform(MockMvcRequestBuilders.get("/appDescriptor/" + APP_ID).accept(MediaType.APPLICATION_JSON));
+		res = result.andExpect(MockMvcResultMatchers.status().is(200)).andReturn();
+		App appDescriptor = mapper.readValue(res.getResponse().getContentAsString(), App.class);		
+		
+		System.out.println(appDescriptor);
+		
+		Long version = appDescriptor.getPublishState().getVersion();		
+		
 		ImportManager manager = wac.getBean(ImportManager.class);
 		
 		FileList fileList = readFiles();
@@ -94,16 +108,14 @@ public class TrentoTest {
 		try {
 			manager.uploadFiles(fileList, credentials);
 		} catch (ImportError e) {
+			e.printStackTrace();
 			error = e;
 		}
 		
 		Assert.assertNull(error);
-		
-		mocker = MockMvcBuilders.webAppContextSetup(wac).build();
-		ObjectMapper mapper = new ObjectMapper();
 
-		ResultActions result = mocker.perform(MockMvcRequestBuilders.get("/rifiuti/" + APP_ID + "/draft").accept(MediaType.APPLICATION_JSON));
-		MvcResult  res = result.andExpect(MockMvcResultMatchers.status().is(200)).andReturn();
+		result = mocker.perform(MockMvcRequestBuilders.get("/rifiuti/" + APP_ID + "/draft").accept(MediaType.APPLICATION_JSON));
+		res = result.andExpect(MockMvcResultMatchers.status().is(200)).andReturn();
 		Rifiuti rifiuti = mapper.readValue(res.getResponse().getContentAsString(), Rifiuti.class);
 		Assert.assertEquals(APP_ID, rifiuti.getAppId());
 		
@@ -121,7 +133,7 @@ public class TrentoTest {
 		Assert.assertFalse(rifiuti.getRaccolta().isEmpty());
 		Assert.assertFalse(rifiuti.getRiciclabolario().isEmpty());		
 
-		result = mocker.perform(MockMvcRequestBuilders.post("/publish/" + APP_ID).accept(MediaType.APPLICATION_JSON));
+		result = mocker.perform(MockMvcRequestBuilders.put("/console/publish/").accept(MediaType.APPLICATION_JSON));
 		res = result.andExpect(MockMvcResultMatchers.status().is(200)).andReturn();
 		
 		result = mocker.perform(MockMvcRequestBuilders.get("/rifiuti/" + APP_ID).accept(MediaType.APPLICATION_JSON));
@@ -143,15 +155,9 @@ public class TrentoTest {
 		Assert.assertFalse(rifiuti.getRaccolta().isEmpty());
 		Assert.assertFalse(rifiuti.getRiciclabolario().isEmpty());		
 		
-		result = mocker.perform(MockMvcRequestBuilders.get("/appDescriptor/" + APP_ID).accept(MediaType.APPLICATION_JSON));
-		res = result.andExpect(MockMvcResultMatchers.status().is(200)).andReturn();
-		App appDescriptor = mapper.readValue(res.getResponse().getContentAsString(), App.class);		
+	
 		
-		System.out.println(appDescriptor);
-		
-		Long version = appDescriptor.getPublishState().getVersion();		
-		
-		result = mocker.perform(MockMvcRequestBuilders.post("/publish/" + APP_ID).accept(MediaType.APPLICATION_JSON));
+		result = mocker.perform(MockMvcRequestBuilders.put("/console/publish/").accept(MediaType.APPLICATION_JSON));
 		res = result.andExpect(MockMvcResultMatchers.status().is(200)).andReturn();
 		
 		result = mocker.perform(MockMvcRequestBuilders.get("/appDescriptor/" + APP_ID).accept(MediaType.APPLICATION_JSON));
@@ -167,15 +173,8 @@ public class TrentoTest {
 	private FileList readFiles() throws IOException {
 		FileList fileList = new FileList();
 		InputStream xlsIs = Thread.currentThread().getContextClassLoader().getResourceAsStream(EXCEL_MODELLO_CONCETTUALE_XLS);
-//		InputStream isoleIs = Thread.currentThread().getContextClassLoader().getResourceAsStream(ISOLE_ESTESE_KML);
-//		InputStream crmIs = Thread.currentThread().getContextClassLoader().getResourceAsStream(CRM_KML);		
 		
 		MockMultipartFile xlsFile = new MockMultipartFile(EXCEL_MODELLO_CONCETTUALE_XLS, xlsIs);
-//		MockMultipartFile isoleFile = new MockMultipartFile(ISOLE_ESTESE_KML, isoleIs);
-//		MockMultipartFile crmFile = new MockMultipartFile(CRM_KML, crmIs);
-		
-//		files.add(isoleFile);
-//		files.add(crmFile);
 		
 		fileList.setModel(xlsFile);
 		
@@ -183,6 +182,5 @@ public class TrentoTest {
 	}
 	
 
-//	@ModelAttribute("fileList") FileList fileList
 	
 }
