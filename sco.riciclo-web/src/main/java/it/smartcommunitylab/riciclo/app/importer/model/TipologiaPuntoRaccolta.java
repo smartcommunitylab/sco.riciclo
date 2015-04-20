@@ -16,18 +16,26 @@
 
 package it.smartcommunitylab.riciclo.app.importer.model;
 
+public class TipologiaPuntoRaccolta {
 
-public class TipologiaRaccolta {
+	private String nome;
+	private String infoPuntiRaccolta;
 	
-	private String valore;
-
-	public String getValore() {
-		return valore;
+	public String getNome() {
+		return nome;
+	}
+	public void setNome(String nome) {
+		this.nome = nome;
+	}
+	public String getInfoPuntiRaccolta() {
+		return infoPuntiRaccolta;
+	}
+	public void setInfoPuntiRaccolta(String infoPuntiRaccolta) {
+		this.infoPuntiRaccolta = infoPuntiRaccolta;
 	}
 
-	public void setValore(String nome) {
-		this.valore = nome;
-	}
+
 	
 	
+
 }

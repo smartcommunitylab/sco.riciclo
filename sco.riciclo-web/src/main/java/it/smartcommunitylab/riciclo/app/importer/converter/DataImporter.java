@@ -24,7 +24,6 @@ import it.smartcommunitylab.riciclo.app.importer.model.Rifiuti;
 import java.io.InputStream;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Collection;
 import java.util.GregorianCalendar;
@@ -57,11 +56,12 @@ public class DataImporter {
 	private Map<String, Collection<KMLData>> crm;
 
 	public DataImporter() throws Exception {
-		String[] exSheets = new String[] { "TIPOLOGIA_RIFIUTO", "TIPOLOGIA_UTENZA" };
+		String[] exSheets = new String[] { "TIPOLOGIA_RIFIUTO", "TIPOLOGIA_UTENZA", "TIPOLOGIA_RACCOLTA" };
 		primaryKeys = new Properties();
 		primaryKeys.load(Thread.currentThread().getContextClassLoader().getResourceAsStream("primary_keys.txt"));
 		
-		oneColumnAsMany = Arrays.asList(exSheets);
+//		oneColumnAsMany = Arrays.asList(exSheets);
+		oneColumnAsMany = Lists.newArrayList();
 	}
 	
 	public Rifiuti importRifiuti(InputStream xlsIs, InputStream isoleIs, InputStream crmIs) throws Exception {
@@ -87,9 +87,10 @@ public class DataImporter {
 			Sheet sheet = wb.getSheetAt(i);
 			Thread.sleep(1000);
 //			System.out.println(sheet.getSheetName());
-			if (sheet.getRow(0).getLastCellNum() == 1 && !oneColumnAsMany.contains(sheet.getSheetName())) {
-			} else {
-//				System.out.println(">" + sheet.getSheetName());
+//			if (sheet.getRow(0).getLastCellNum() == 1 && !oneColumnAsMany.contains(sheet.getSheetName())) {
+//			} else {
+			{
+				System.err.println(">" + sheet.getSheetName());
 				List<Map<String, String>> result = getSheetMap(sheet);
 				mapMap(rifiuti, sheet.getSheetName(), result);
 			}
@@ -110,7 +111,7 @@ public class DataImporter {
 				keys.add(key);
 			}
 		} else {
-			firstRow = 0;
+			firstRow = 1;
 			keys.add("valore");
 		}
 
@@ -172,6 +173,11 @@ public class DataImporter {
 		String className = "it.smartcommunitylab.riciclo.app.importer.model." + WordUtils.capitalizeFully(sheetName.replace(' ', '_'), new char[] { '_' }).replace("_", "").trim();
 		String field = WordUtils.capitalizeFully(" " + sheetName.replace(' ', '_'), new char[] { '_' }).replace("_", "").trim();
 
+		System.err.println(className);
+//		if ("it.smartcommunitylab.riciclo.app.importer.model.Colori".equals(className)) {
+//			System.out.println();
+//		}
+		
 		Class<?> clazz = null;
 		try {
 			clazz = Class.forName(className);
@@ -204,17 +210,17 @@ public class DataImporter {
 			String name;
 			Map<String, Collection<KMLData>> kml;
 			boolean isCrm = false;
-			boolean hasDescription = puntoRaccolta.getIndirizzo() == null || puntoRaccolta.getIndirizzo().isEmpty();
+			boolean hasDescription = puntoRaccolta.getZona() == null || puntoRaccolta.getZona().isEmpty();
 			if (isCrmLike(puntoRaccolta.getTipologiaPuntiRaccolta().toLowerCase())) {
 				kml = crm;
-				name = puntoRaccolta.getIndirizzo().toLowerCase();
+				name = puntoRaccolta.getZona().toLowerCase();
 				isCrm = true;
 			} else if ("isola ecologica".equals(puntoRaccolta.getTipologiaPuntiRaccolta().toLowerCase())) {
 				kml = isole;
-				if (puntoRaccolta.getIndirizzo() == null || puntoRaccolta.getIndirizzo().isEmpty()) {
+				if (puntoRaccolta.getZona() == null || puntoRaccolta.getZona().isEmpty()) {
 					name = "";
 				} else {
-					name = puntoRaccolta.getIndirizzo().toLowerCase();
+					name = puntoRaccolta.getZona().toLowerCase();
 				}
 			} else {
 				continue;
@@ -244,14 +250,14 @@ public class DataImporter {
 					KMLData next = (KMLData) it.next();
 					newPuntoRaccolta.setLocalizzazione(next.getLat() + "," + next.getLon());
 					if (name.isEmpty()) {
-						newPuntoRaccolta.setIndirizzo(next.getName());
+						newPuntoRaccolta.setZona(next.getName());
 					}
 					if (next.getAttributes() != null) {
 						for (Integer key : next.getAttributes().keySet()) {
 							String value = next.getAttributes().get(key);
 							switch (key) {
 							case 5:
-								newPuntoRaccolta.setDettaglioIndirizzo(value);
+								newPuntoRaccolta.setDettagliZona(value);
 								break;
 							case 11:
 								newPuntoRaccolta.setGettoniera(value);

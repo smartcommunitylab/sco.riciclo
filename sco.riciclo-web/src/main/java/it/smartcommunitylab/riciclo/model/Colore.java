@@ -14,20 +14,27 @@
  *    limitations under the License.
  */
 
-package it.smartcommunitylab.riciclo.app.importer.model;
+package it.smartcommunitylab.riciclo.model;
 
 
-public class TipologiaRaccolta {
+public class Colore extends BaseObject {
+
+	private String nome;
+	private String codice;
 	
-	private String valore;
-
-	public String getValore() {
-		return valore;
+	public String getNome() {
+		return nome;
+	}
+	public void setNome(String nome) {
+		this.nome = nome;
+	}
+	public String getCodice() {
+		return codice;
+	}
+	public void setCodice(String codice) {
+		this.codice = codice;
 	}
 
-	public void setValore(String nome) {
-		this.valore = nome;
-	}
 	
-	
+
 }

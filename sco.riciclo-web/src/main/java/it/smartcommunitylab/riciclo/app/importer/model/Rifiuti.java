@@ -20,55 +20,57 @@ import java.util.List;
 
 public class Rifiuti {
 
-	private List<Aree>aree;
-	private List<Gestori>gestori;
-	private List<Istituzioni>istituzioni;
-	private List<Profili>profili;
-	private List<PuntiRaccolta>puntiRaccolta;
+	private List<Aree> aree;
+	private List<Gestori> gestori;
+	private List<Istituzioni> istituzioni;
+	private List<TipologiaProfilo> tipologiaProfilo;
+	private List<PuntiRaccolta> puntiRaccolta;
 	private List<TipologiaRifiuto> tipologiaRifiuto;
-	private List<Riciclabolario>riciclabolario;
-	private List<Raccolta>raccolta;
-	private List<TipologiaPuntiRaccolta>tipologiaPuntiRaccolta;
-	private List<TipologiaRaccolta>tipologiaRaccolta;
-	private List<TipologiaUtenza>tipologiaUtenza;
-	
-	public List<Aree>getAree() {
+	private List<Riciclabolario> riciclabolario;
+	private List<Raccolte> raccolte;
+	private List<TipologiaPuntoRaccolta> tipologiaPuntoRaccolta;
+	private List<TipologiaRaccolta> tipologiaRaccolta;
+	private List<TipologiaUtenza> tipologiaUtenza;
+	private List<Colori> colori;
+	private List<Segnalazioni> segnalazioni;
+
+	public List<Aree> getAree() {
 		return aree;
 	}
 
-	public void setAree(List<Aree>aree) {
+	public void setAree(List<Aree> aree) {
 		this.aree = aree;
 	}
 
-	public List<Gestori>getGestori() {
+	public List<Gestori> getGestori() {
 		return gestori;
 	}
 
-	public void setGestori(List<Gestori>gestori) {
+	public void setGestori(List<Gestori> gestori) {
 		this.gestori = gestori;
 	}
 
-	public List<Istituzioni>getIstituzioni() {
+	public List<Istituzioni> getIstituzioni() {
 		return istituzioni;
 	}
 
-	public void setIstituzioni(List<Istituzioni>istituzioni) {
+	public void setIstituzioni(List<Istituzioni> istituzioni) {
 		this.istituzioni = istituzioni;
 	}
 
-	public List<Profili>getProfili() {
-		return profili;
+	public List<TipologiaProfilo> getTipologiaProfilo() {
+		return tipologiaProfilo;
 	}
 
-	public void setProfili(List<Profili>profili) {
-		this.profili = profili;
+	public void setTipologiaProfilo(List<TipologiaProfilo> profili) {
+		this.tipologiaProfilo = profili;
 	}
 
-	public List<PuntiRaccolta>getPuntiRaccolta() {
+	public List<PuntiRaccolta> getPuntiRaccolta() {
 		return puntiRaccolta;
 	}
 
-	public void setPuntiRaccolta(List<PuntiRaccolta>puntiRaccolta) {
+	public void setPuntiRaccolta(List<PuntiRaccolta> puntiRaccolta) {
 		this.puntiRaccolta = puntiRaccolta;
 	}
 
@@ -80,35 +82,36 @@ public class Rifiuti {
 		this.tipologiaRifiuto = tipologiaRifiuto;
 	}
 
-	public List<Riciclabolario>getRiciclabolario() {
+	public List<Riciclabolario> getRiciclabolario() {
 		return riciclabolario;
 	}
 
-	public void setRiciclabolario(List<Riciclabolario>riciclabolario) {
+	public void setRiciclabolario(List<Riciclabolario> riciclabolario) {
 		this.riciclabolario = riciclabolario;
 	}
 
-	public List<Raccolta>getRaccolta() {
-		return raccolta;
+	public List<Raccolte> getRaccolte() {
+		return raccolte;
 	}
 
-	public void setRaccolta(List<Raccolta>raccolta) {
-		this.raccolta = raccolta;
+	public void setRaccolte(List<Raccolte> raccolta) {
+		this.raccolte = raccolta;
 	}
 
-	public List<TipologiaPuntiRaccolta> getTipologiaPuntiRaccolta() {
-		return tipologiaPuntiRaccolta;
+	public List<TipologiaPuntoRaccolta> getTipologiaPuntoRaccolta() {
+		return tipologiaPuntoRaccolta;
 	}
 
-	public void setTipologiaPuntiRaccolta(List<TipologiaPuntiRaccolta> tipologiaPuntiRaccolta) {
-		this.tipologiaPuntiRaccolta = tipologiaPuntiRaccolta;
+	public void setTipologiaPuntoRaccolta(
+			List<TipologiaPuntoRaccolta> tipologiaPuntiRaccolta) {
+		this.tipologiaPuntoRaccolta = tipologiaPuntiRaccolta;
 	}
 
-	public List<TipologiaRaccolta>getTipologiaRaccolta() {
+	public List<TipologiaRaccolta> getTipologiaRaccolta() {
 		return tipologiaRaccolta;
 	}
 
-	public void setTipologiaRaccolta(List<TipologiaRaccolta>tipologiaRaccolta) {
+	public void setTipologiaRaccolta(List<TipologiaRaccolta> tipologiaRaccolta) {
 		this.tipologiaRaccolta = tipologiaRaccolta;
 	}
 
@@ -118,6 +121,21 @@ public class Rifiuti {
 
 	public void setTipologiaUtenza(List<TipologiaUtenza> tipologiaUtenza) {
 		this.tipologiaUtenza = tipologiaUtenza;
+	}
+
+	public List<Colori> getColori() {
+		return colori;
+	}
+	public void setColori(List<Colori> colori) {
+		this.colori = colori;
+	}
+
+	public List<Segnalazioni> getSegnalazioni() {
+		return segnalazioni;
+	}
+
+	public void setSegnalazioni(List<Segnalazioni> segnalazioni) {
+		this.segnalazioni = segnalazioni;
 	}
 
 }
