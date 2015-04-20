@@ -1,6 +1,6 @@
 angular.module('rifiuti.services.profili', [])
 
-.factory('Profili', function (DataManager, $rootScope, Raccolta, Calendar) {
+.factory('Profili', function (DataManager, $rootScope, Raccolta, Calendar, Utili) {
     var ProfiliFactory = {};
 
     var toMessage = function (typemap) {
@@ -80,6 +80,7 @@ angular.module('rifiuti.services.profili', [])
     var save = function () {
         $rootScope.profili.forEach(function (p) {
             buildAree(p);
+            buildPaP(p);
         });
         localStorage.profiles = JSON.stringify($rootScope.profili);
 
@@ -195,6 +196,18 @@ angular.module('rifiuti.services.profili', [])
         p.istituzioni = myIstituzioni;
         //p.comuni=myComuni;
     };
+    var buildPaP = function(p) {
+        var data = DataManager.getSync('raccolta');
+        var res = [];
+        for (var i =0; i < data.length; i++) {
+          if (!!data[i].tipologiaPuntoRaccolta && Utili.isPaP(data[i].tipologiaPuntoRaccolta) &&
+              data[i].tipologiaUtenza == p.utenza.tipologiaUtenza && p.aree.indexOf(data[i].area)>=0)
+          {
+              if (res.indexOf(data[i].tipologiaPuntoRaccolta) < 0) res.push(data[i].tipologiaPuntoRaccolta);
+          }
+        }
+        p.PaP = res;
+    }
 
     ProfiliFactory.tipidiutenza = function () {
         return DataManager.get('data/db/profili.json').then(function (results) {

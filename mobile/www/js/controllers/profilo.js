@@ -56,7 +56,7 @@ angular.module('rifiuti.controllers.profilo', [])
             $scope.editMode = true;
 
             for (var i = 0; i < $scope.tipologiaUtenza.length; i++) {
-                if ($scope.tipologiaUtenza[i].profilo === $scope.profilo.utenza.profilo) {
+                if ($scope.tipologiaUtenza[i].nome === $scope.profilo.utenza.nome) {
                     $scope.profilo.utenza = $scope.tipologiaUtenza[i];
                 }
             }
