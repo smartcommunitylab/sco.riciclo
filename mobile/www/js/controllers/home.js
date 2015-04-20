@@ -111,8 +111,13 @@ angular.module('rifiuti.controllers.home', [])
     });
 
 })
-.controller('newsItemCtrl', function ($scope, $rootScope, FeedService) {
-    console.log('item');
+.controller('newsItemCtrl', function ($scope, $stateParams, $rootScope, FeedService) {
+    $scope.newsItem = null;
+    $scope.idx = $stateParams.id;
+    FeedService.getByIdx($scope.idx, FEED_URL,APP_ID).then(function(data){
+        $scope.newsItem = data;
+        $scope.newsItem.dateTime = new Date($scope.newsItem.publishedDate);
+    });
 })
 
 .controller('noteCtrl', function ($scope, $rootScope, $ionicPopup, $filter, Profili) {

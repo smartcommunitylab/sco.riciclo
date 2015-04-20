@@ -4,17 +4,26 @@
             <div class="nav-title-main">{{"News"|translate}}</div>
         </div>
     </ion-nav-title>
-<!--
-    <ion-nav-title>
-        <div class="nav-title">
-            <div class="nav-title-main">{{titleText()}}</div>
-            <div class="nav-title-sub">{{subTitleText()}}</div>
+    <ion-content class="home-news contatto" has-bouncing="false">
+      <div class="news-block">
+        <div ng-if="!!newsItem.image">
+            <img class="news-image" ng-src="{{newsItem.image}}"/>
         </div>
-    </ion-nav-title>
--->
-
-    <ion-content class="home-news" has-bouncing="false">
-        ELEMENT
+        <div class="news-date">{{newsItem.dateTime| date:'dd/MM/yyyy HH:mm'}}</div>
+        <p/>
+        <div class="news-title" ng-bind-html="newsItem.title"></div>
+        <p/>
+        <div ng-bind-html="newsItem.content"></div>
+        <p/>
+      </div>
+      <a class="hidden-link" ng-click="clickLink(newsItem.link)">
+         <div class="row">
+            <button class="col col-10 icon button-balanced button-clear">
+              <img src="img/ic_web.png">
+            </button>
+            <div class="col col-50 col-center">{{'Dettagli'|translate}}</div>
+         </div>
+      </a>
     </ion-content>
 </ion-view>
 
