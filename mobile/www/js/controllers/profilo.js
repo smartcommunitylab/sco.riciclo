@@ -105,6 +105,20 @@ angular.module('rifiuti.controllers.profilo', [])
         }
     };
 
+    $scope.helpTipi = function (area) {
+        var popup = $ionicPopup.show({
+            title: '<b class="popup-title">Info<b/>',
+            templateUrl: 'templates/profiloHelp.html',
+            scope: $scope,
+            buttons: [
+                {
+                    text: 'Chiudi'
+                }
+            ]
+        });
+        return;
+    };
+
     $scope.help = function (area) {
         var popup = $ionicPopup.show({
             title: '<b class="popup-title">' + area.etichetta + '<b/>',

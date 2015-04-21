@@ -13,7 +13,7 @@ angular.module('rifiuti.services.feed', [])
                 deferred.resolve(cache = JSON.parse(localStorage['entries_'+feedKey]));
             }
         } else {
-            $http.jsonp('//ajax.googleapis.com/ajax/services/feed/load?v=1.0&num=50&callback=JSON_CALLBACK&q=' + encodeURIComponent(url))
+            $http.jsonp('https://ajax.googleapis.com/ajax/services/feed/load?v=1.0&num=50&callback=JSON_CALLBACK&q=' + encodeURIComponent(url))
             .success(function(data) {
                 var res = data.responseData.feed.entries;
                 localStorage['entries_'+feedKey] = JSON.stringify(res);
