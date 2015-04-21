@@ -31,6 +31,8 @@ angular.module('rifiuti.services.settings', [])
         } else {
             deferred.reject();
         }
+
+        return deferred.promise;
     };
 
     return settingsService;

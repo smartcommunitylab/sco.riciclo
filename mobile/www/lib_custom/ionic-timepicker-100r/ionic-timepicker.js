@@ -12,21 +12,36 @@ angular.module('ionic-timepicker', ['ionic', 'ionictimepicker.templates'])
             format: '=format', //format getting from a template
             step: '=step' //step getting from a template
         },
-        template: '<button class="button button-100r-select icon-right ion-arrow-down-b">{{etime}}</button>',
+        template: '<button class="button button-100r-select icon-right ion-arrow-down-b">{{time.hours + \':\' + (time.minutes < 10 ? \'0\' + time.minutes : time.minutes)}}</button>',
         link: function (scope, element, attrs) {
-            element.on("click", function () {
-                var obj = {
-                    epochTime: scope.etime,
-                    step: scope.step,
-                    format: scope.format
-                };
-                scope.time = {
-                    hours: 0,
-                    minutes: 0,
-                    meridian: ""
-                };
-                var objDate = new Date(obj.epochTime * 1000); // Epoch time in milliseconds.
+            scope.time = {
+                hours: 0,
+                minutes: 0,
+                meridian: ''
+            };
 
+            var obj = {
+                epochTime: scope.etime,
+                step: scope.step,
+                format: scope.format
+            };
+
+            var objDate = new Date(obj.epochTime * 1000); // Epoch time in milliseconds.
+
+            if (obj.format == 12) {
+                scope.time.meridian = (objDate.getUTCHours() >= 12) ? "PM" : "AM";
+                scope.time.hours = (objDate.getUTCHours() > 12) ? ((objDate.getUTCHours() - 12)) : (objDate.getUTCHours());
+                scope.time.minutes = (objDate.getUTCMinutes());
+
+                if (scope.time.hours == 0 && scope.time.meridian == "AM") {
+                    scope.time.hours = 12;
+                }
+            } else if (obj.format == 24) {
+                scope.time.hours = (objDate.getUTCHours());
+                scope.time.minutes = (objDate.getUTCMinutes());
+            }
+
+            element.on("click", function () {
                 scope.increaseHours = function () {
                     if (obj.format == 12) {
                         if (scope.time.hours != 12) {
@@ -80,14 +95,6 @@ angular.module('ionic-timepicker', ['ionic', 'ionictimepicker.templates'])
                 };
 
                 if (obj.format == 12) {
-                    scope.time.meridian = (objDate.getUTCHours() >= 12) ? "PM" : "AM";
-                    scope.time.hours = (objDate.getUTCHours() > 12) ? ((objDate.getUTCHours() - 12)) : (objDate.getUTCHours());
-                    scope.time.minutes = (objDate.getUTCMinutes());
-
-                    if (scope.time.hours == 0 && scope.time.meridian == "AM") {
-                        scope.time.hours = 12;
-                    }
-
                     scope.changeMeridian = function () {
                         scope.time.meridian = (scope.time.meridian === "AM") ? "PM" : "AM";
                     };
@@ -100,7 +107,7 @@ angular.module('ionic-timepicker', ['ionic', 'ionictimepicker.templates'])
                         buttons: [
                             {
                                 text: 'Cancel'
-                                },
+                            },
                             {
                                 text: 'Set',
                                 type: 'button-100r',
@@ -119,17 +126,15 @@ angular.module('ionic-timepicker', ['ionic', 'ionictimepicker.templates'])
                                     } else if (scope.time.meridian === "PM") {
                                         totalSec += 43200;
                                     }
+
                                     scope.etime = totalSec;
                                 }
                             }
                         ]
-                    })
+                    });
                 }
 
                 if (obj.format == 24) {
-                    scope.time.hours = (objDate.getUTCHours());
-                    scope.time.minutes = (objDate.getUTCMinutes());
-
                     $ionicPopup.show({
                         templateUrl: 'time-picker-24-hour.html',
                         title: '<strong>Scegli l\'orario</strong>',
@@ -138,14 +143,12 @@ angular.module('ionic-timepicker', ['ionic', 'ionictimepicker.templates'])
                         buttons: [
                             {
                                 text: 'Cancel'
-                                },
+                            },
                             {
                                 text: 'Set',
                                 type: 'button-100r',
                                 onTap: function (e) {
-
                                     scope.loadingContent = true;
-
                                     var totalSec = 0;
 
                                     if (scope.time.hours != 24) {
@@ -153,11 +156,12 @@ angular.module('ionic-timepicker', ['ionic', 'ionictimepicker.templates'])
                                     } else {
                                         totalSec = scope.time.minutes * 60;
                                     }
+
                                     scope.etime = totalSec;
                                 }
-                                }
-                            ]
-                    })
+                            }
+                        ]
+                    });
                 }
             });
         }
