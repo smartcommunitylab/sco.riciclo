@@ -81,6 +81,7 @@ angular.module('rifiuti.services.profili', [])
         $rootScope.profili.forEach(function (p) {
             buildAree(p);
             buildPaP(p);
+            buildSettings(p);
         });
         localStorage.profiles = JSON.stringify($rootScope.profili);
 
@@ -196,18 +197,42 @@ angular.module('rifiuti.services.profili', [])
         p.istituzioni = myIstituzioni;
         //p.comuni=myComuni;
     };
-    var buildPaP = function(p) {
+
+    var buildPaP = function (p) {
         var data = DataManager.getSync('raccolta');
         var res = [];
-        for (var i =0; i < data.length; i++) {
-          if (!!data[i].tipologiaPuntoRaccolta && Utili.isPaP(data[i].tipologiaPuntoRaccolta) &&
-              data[i].tipologiaUtenza == p.utenza.tipologiaUtenza && p.aree.indexOf(data[i].area)>=0)
-          {
-              if (res.indexOf(data[i].tipologiaPuntoRaccolta) < 0) res.push(data[i].tipologiaPuntoRaccolta);
-          }
+        for (var i = 0; i < data.length; i++) {
+            if (!!data[i].tipologiaPuntoRaccolta && Utili.isPaP(data[i].tipologiaPuntoRaccolta) &&
+                data[i].tipologiaUtenza == p.utenza.tipologiaUtenza && p.aree.indexOf(data[i].area) >= 0) {
+                if (res.indexOf(data[i].tipologiaPuntoRaccolta) < 0) res.push(data[i].tipologiaPuntoRaccolta);
+            }
         }
         p.PaP = res;
     }
+
+    var buildSettings = function (p) {
+        if (!p.settings) {
+            // init
+            p.settings = {
+                enableNotifications: true,
+                papTypes: {},
+                notificationsTime: 54000
+            };
+
+            for (var i = 0; i < p.PaP.length; i++) {
+                var pap = p.PaP[i];
+                p.settings.papTypes[pap] = true;
+            }
+        } else {
+            // update missing PaPs
+            for (var i = 0; i < p.PaP.length; i++) {
+                var pap = p.PaP[i];
+                if (!p.settings.papTypes[pap]) {
+                    p.settings.papTypes[pap] = true;
+                }
+            }
+        }
+    };
 
     ProfiliFactory.tipidiutenza = function () {
         return DataManager.get('data/db/profili.json').then(function (results) {
@@ -242,6 +267,10 @@ angular.module('rifiuti.services.profili', [])
             return old;
         }
         return null;
+    };
+
+    ProfiliFactory.saveAll = function () {
+        localStorage.profiles = JSON.stringify($rootScope.profili);
     };
 
     ProfiliFactory.remove = function (id) {

@@ -1,6 +1,5 @@
 angular.module('rifiuti.controllers.common', [])
 
-
 .controller('AppCtrl', function ($scope, $rootScope, $location, Profili, DataManager, Conf) {
     $scope.app_name = APP_NAME;
 
@@ -121,31 +120,21 @@ angular.module('rifiuti.controllers.common', [])
 
 })
 
-.controller('SettingsCtrl', function ($scope, $rootScope, $ionicScrollDelegate, Raccolta, settingsService, Profili) {
+.controller('SettingsCtrl', function ($scope, $rootScope, $ionicScrollDelegate, Raccolta, Profili) {
     /*$scope.mainScrollResize = function () {
         $ionicScrollDelegate.$getByHandle('mainScroll').resize();
     }*/
 
     $scope.papTypes = $rootScope.selectedProfile.PaP;
-
-    $scope.settings = {
-        enableNotifications: true,
-        papTypes: {},
-        notificationsTime: 54000
-    };
-
-    $scope.settings = settingsService.getSettings();
+    $scope.settings = $rootScope.selectedProfile.settings;
 
     $scope.timepickerSlots = {
-        epochTime: 54000,
         format: 24,
         step: 5
     };
 
     $scope.saveSettings = function () {
-        settingsService.setSettings($scope.settings).then(function (settings) {
-            Profili.updateNotifications();
-        });
+        Profili.saveAll();
     };
 })
 
@@ -216,6 +205,7 @@ angular.module('rifiuti.controllers.common', [])
         return rect.left + 0.5 * (rect.right - rect.left);
         var width = window.innerWidth;
     };
+
     var getY = function (id, eclass, eidx) {
         var div = findElement(id, eclass, eidx);
         if (!div) return 0;
@@ -240,7 +230,7 @@ angular.module('rifiuti.controllers.common', [])
                 return getY("searchButton") - 48
             },
             skippable: true
-  },
+        },
         {
             index: 1,
             title: "TTDue",
@@ -254,7 +244,7 @@ angular.module('rifiuti.controllers.common', [])
                 return getY("rifiutoId") - 48
             },
             skippable: true
-  },
+        },
         {
             index: 1,
             title: "TTTre",
@@ -268,7 +258,7 @@ angular.module('rifiuti.controllers.common', [])
                 return getY(null, "tab-item", 0) - 48
             },
             skippable: true
-  },
+        },
         {
             index: 1,
             title: "TTQuattro",
@@ -284,7 +274,7 @@ angular.module('rifiuti.controllers.common', [])
                 return getY(null, "tab-item", 2) - 48
             },
             skippable: true
-  },
+        },
         {
             index: 1,
             title: "TTCinque",
@@ -298,6 +288,6 @@ angular.module('rifiuti.controllers.common', [])
                 return getY(null, "left-buttons") - 48
             },
             skippable: false
-  }
- ];
-})
+        }
+    ];
+});

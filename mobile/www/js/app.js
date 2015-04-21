@@ -16,7 +16,6 @@ angular.module('rifiuti', [
     'rifiuti.services.geo',
     'rifiuti.services.feed',
     'rifiuti.services.calendar',
-    'rifiuti.services.settings',
     'rifiuti.controllers.common',
     'rifiuti.controllers.home',
     'rifiuti.controllers.raccolta',
@@ -493,6 +492,7 @@ angular.module('rifiuti', [
 
     .state('app.settings', {
         url: "/settings",
+        cache: false,
         views: {
             'menuContent': {
                 templateUrl: "templates/settings.html",
