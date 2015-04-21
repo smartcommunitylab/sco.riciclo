@@ -254,7 +254,7 @@ angular.module('rifiuti.controllers.common', [])
         },
         {
             index: 1,
-            title: "TTTre",
+            title: SHOW_NEWS ? "TTNews": "TTTre",
             x: 3,
             y: 40,
             text: SHOW_NEWS ? "TutorialNews" : "TutorialTre",
