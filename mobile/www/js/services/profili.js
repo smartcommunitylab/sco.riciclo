@@ -271,6 +271,7 @@ angular.module('rifiuti.services.profili', [])
 
     ProfiliFactory.saveAll = function () {
         localStorage.profiles = JSON.stringify($rootScope.profili);
+        ProfiliFactory.updateNotifications();
     };
 
     ProfiliFactory.remove = function (id) {

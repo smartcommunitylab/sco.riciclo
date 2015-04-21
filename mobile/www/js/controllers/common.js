@@ -136,6 +136,13 @@ angular.module('rifiuti.controllers.common', [])
     $scope.saveSettings = function () {
         Profili.saveAll();
     };
+
+    $rootScope.$watch('selectedProfile', function (a, b) {
+        if (b == null || a.id != b.id) {
+            $scope.papTypes = a.PaP;
+            $scope.settings = a.settings;
+        }
+    });
 })
 
 .controller('ContattiCtrl', function ($scope, $ionicScrollDelegate, Raccolta) {
