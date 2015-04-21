@@ -98,5 +98,14 @@
         {
             "valore": "Verde e ramaglie",
             "immagine": "img/rif_ic_verde_ramaglie.png"
+        },
+        {
+            "valore": "Siringhe",
+            "immagine": "img/rif_ic_siringa.png"
+        },
+        {
+            "valore": "Rifiuti particolari",
+            "immagine": "img/rif_ic_rifiuti_particolari.png"
         }
+
     ]
