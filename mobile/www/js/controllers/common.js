@@ -53,7 +53,9 @@ angular.module('rifiuti.controllers.common', [])
         text: null
     };
 
-    $scope.signal = {selectedTipoSegnalazione : null};
+    $scope.signal = {
+        selectedTipoSegnalazione: null
+    };
 
     $scope.tipiSegnalazioni = [];
 
@@ -119,7 +121,7 @@ angular.module('rifiuti.controllers.common', [])
 
 })
 
-.controller('SettingsCtrl', function ($scope, $rootScope, $ionicScrollDelegate, Raccolta, settingsService) {
+.controller('SettingsCtrl', function ($scope, $rootScope, $ionicScrollDelegate, Raccolta, settingsService, Profili) {
     /*$scope.mainScrollResize = function () {
         $ionicScrollDelegate.$getByHandle('mainScroll').resize();
     }*/
@@ -137,11 +139,13 @@ angular.module('rifiuti.controllers.common', [])
     $scope.timepickerSlots = {
         epochTime: 54000,
         format: 24,
-        step: 1
+        step: 5
     };
 
     $scope.saveSettings = function () {
-        settingsService.setSettings($scope.settings).then(function (settings) {});
+        settingsService.setSettings($scope.settings).then(function (settings) {
+            Profili.updateNotifications();
+        });
     };
 })
 
