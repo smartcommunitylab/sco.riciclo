@@ -18,16 +18,54 @@ import it.smartcommunitylab.riciclo.storage.AppInfo;
 
 import java.lang.reflect.Method;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 import java.util.Set;
 
+import javax.validation.ConstraintViolation;
+import javax.validation.Validation;
+import javax.validation.Validator;
+import javax.validation.ValidatorFactory;
+
 import org.apache.commons.lang.WordUtils;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
 
 public class RifiutiValidator {
 
+	@Autowired
+	@Value("${validate.input}")
+	private Boolean validateInput;	
+	
+	private Validator validator;
+	
+	public RifiutiValidator() {
+		ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
+	    validator = factory.getValidator();
+	}
+	
+	public List<String> validateInputData(
+			it.smartcommunitylab.riciclo.app.importer.model.Rifiuti rifiuti) {
+		List<String> problems = Lists.newArrayList();
+
+		if (validateInput) {
+			Set<ConstraintViolation<it.smartcommunitylab.riciclo.app.importer.model.Rifiuti>> errors = validator
+					.validate(rifiuti);
+			for (ConstraintViolation<it.smartcommunitylab.riciclo.app.importer.model.Rifiuti> violation : errors) {
+				String problem = violation.getRootBeanClass().getSimpleName()
+						+ "." + violation.getPropertyPath() + " "
+						+ violation.getMessage();
+				problems.add(problem);
+			}
+			Collections.sort(problems);
+		}
+
+		return problems;
+	}
+	
 	public List<String> validate(Rifiuti rifiuti) throws Exception {
 		List<String> problems = Lists.newArrayList();
 
@@ -114,11 +152,11 @@ public class RifiutiValidator {
 			
 			if (needAddress) {
 				if (puntoRaccolta.getZona() == null || puntoRaccolta.getZona().isEmpty()) {
-					String s = "Missing 'indirizzo' for " + puntoRaccolta;
+					String s = "Missing 'zona' for " + puntoRaccolta;
 					problems.add(s);
 				}
 				if (puntoRaccolta.getDettagliZona() == null || puntoRaccolta.getDettagliZona().isEmpty()) {
-					String s = "Missing 'dettaglioIndirizzo' for " + puntoRaccolta;
+					String s = "Missing 'dettagliZona' for " + puntoRaccolta;
 					problems.add(s);
 				}
 				if (puntoRaccolta.getLocalizzazione() == null || puntoRaccolta.getLocalizzazione().isEmpty()) {

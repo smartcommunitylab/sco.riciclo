@@ -18,20 +18,35 @@ package it.smartcommunitylab.riciclo.app.importer.model;
 
 import java.util.List;
 
+import javax.validation.Valid;
+
 public class Rifiuti {
 
+	@Valid
 	private List<Aree> aree;
+	@Valid
 	private List<Gestori> gestori;
+	@Valid
 	private List<Istituzioni> istituzioni;
+	@Valid
 	private List<TipologiaProfilo> tipologiaProfilo;
+	@Valid
 	private List<PuntiRaccolta> puntiRaccolta;
+	@Valid
 	private List<TipologiaRifiuto> tipologiaRifiuto;
+	@Valid
 	private List<Riciclabolario> riciclabolario;
+	@Valid
 	private List<Raccolte> raccolte;
+	@Valid
 	private List<TipologiaPuntoRaccolta> tipologiaPuntoRaccolta;
+	@Valid
 	private List<TipologiaRaccolta> tipologiaRaccolta;
+	@Valid
 	private List<TipologiaUtenza> tipologiaUtenza;
+	@Valid
 	private List<Colori> colori;
+	@Valid
 	private List<Segnalazioni> segnalazioni;
 
 	public List<Aree> getAree() {

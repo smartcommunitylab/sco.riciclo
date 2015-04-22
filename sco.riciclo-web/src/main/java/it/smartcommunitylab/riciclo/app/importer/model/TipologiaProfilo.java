@@ -16,11 +16,16 @@
 
 package it.smartcommunitylab.riciclo.app.importer.model;
 
+import org.hibernate.validator.constraints.NotEmpty;
+
 
 public class TipologiaProfilo {
 
+	@NotEmpty
 	private String nome;
+	@NotEmpty
 	private String tipologiaUtenza;
+	@NotEmpty
 	private String descrizione;
 	
 	public String getNome() {

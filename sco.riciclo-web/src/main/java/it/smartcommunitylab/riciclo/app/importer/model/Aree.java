@@ -16,17 +16,21 @@
 
 package it.smartcommunitylab.riciclo.app.importer.model;
 
+import org.hibernate.validator.constraints.NotEmpty;
+
 
 public class Aree {
 
+	@NotEmpty
 	private String istituzione;
-	
+	@NotEmpty
 	private String nome;
 	private String parent;
+	@NotEmpty
 	private String gestore;
 	private String descrizione;
 	private String etichetta;
-	
+	@NotEmpty
 	private String utenze;
 	
 	public String getIstituzione() {
