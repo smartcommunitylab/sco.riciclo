@@ -60,7 +60,7 @@ angular.module('rifiuti.controllers.common', [])
 
     Raccolta.segnalazioni($scope.selectedProfile.aree).then(function (data) {
         $scope.tipiSegnalazioni = data;
-        if (data.length == 1) $scope.signal.selectedTipoSegnalazione = data[0];
+        if (data.length >= 1) $scope.signal.selectedTipoSegnalazione = data[0];
     });
 
     $scope.takePicture = function () {
