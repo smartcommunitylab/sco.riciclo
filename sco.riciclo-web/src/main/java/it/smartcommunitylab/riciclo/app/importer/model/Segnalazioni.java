@@ -1,9 +1,14 @@
 package it.smartcommunitylab.riciclo.app.importer.model;
 
+import org.hibernate.validator.constraints.NotEmpty;
+
 public class Segnalazioni {
 
+	@NotEmpty
 	private String area;
+	@NotEmpty
 	private String tipologia;
+	@NotEmpty
 	private String email;
 	
 	public String getArea() {

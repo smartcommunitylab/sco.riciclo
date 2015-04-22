@@ -16,10 +16,14 @@
 
 package it.smartcommunitylab.riciclo.app.importer.model;
 
+import org.hibernate.validator.constraints.NotEmpty;
+
 
 public class Istituzioni {
 
+	@NotEmpty
 	private String nome;
+	@NotEmpty
 	private String descrizione;
 	private String ufficio;
 	private String indirizzo;

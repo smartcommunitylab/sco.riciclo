@@ -16,8 +16,11 @@
 
 package it.smartcommunitylab.riciclo.app.importer.model;
 
+import org.hibernate.validator.constraints.NotEmpty;
+
 public class TipologiaRifiuto {
 
+	@NotEmpty
 	private String valore;
 
 	public String getValore() {
@@ -27,7 +30,7 @@ public class TipologiaRifiuto {
 	public void setValore(String valore) {
 		this.valore = valore;
 	}
-	
-	
+
+
 
 }

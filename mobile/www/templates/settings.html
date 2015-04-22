@@ -6,11 +6,11 @@
         </div>
     </ion-nav-title>
 
-    <ion-content class="segnala padding">
+    <ion-content class="settings padding">
         <ion-toggle ng-model="settings.enableNotifications" toggle-class="toggle-100r" ng-change="saveSettings()">Notifiche</ion-toggle>
 
         <div class="padding-top">
-            <label>Desidero ricevere notifiche riguardanti</label>
+            <label class="item item-input">Categorie di notifiche</label>
             <ion-checkbox ng-class="{'checkbox-100r': !!settings.enableNotifications, 'checkbox-light': !settings.enableNotifications}" ng-repeat="pap in papTypes" ng-model="settings.papTypes[pap]" ng-change="saveSettings()" ng-disabled="!settings.enableNotifications">
                 {{pap}}
             </ion-checkbox>
@@ -20,10 +20,19 @@
             <!--<label>Desidero ricevere le notifiche alle</label>
             <button class="button button-100r-select icon-right ion-arrow-down-b"></button>-->
 
-            <label>Desidero ricevere le notifiche alle</label>
+            <!--<label>Desidero ricevere le notifiche alle</label>
             <ionic-time-picker etime="settings.notificationsTime" format="timepickerSlots.format" step="timepickerSlots.step">
                 {{settings.notificationsTime}}
-            </ionic-time-picker>
+            </ionic-time-picker>-->
+
+            <label class="item item-input item-divider">
+                <div class="input-label">
+                    Orario notifiche
+                </div>
+                <ionic-time-picker etime="settings.notificationsTime" format="timepickerSlots.format" step="timepickerSlots.step" ng-disabled="!settings.enableNotifications">
+                    {{settings.notificationsTime}}
+                </ionic-time-picker>
+            </label>
 
             <!--<label class="item item-input item-select">
                 <div class="input-label">

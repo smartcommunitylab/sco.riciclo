@@ -243,6 +243,7 @@
     font-weight: bold;
     color: #47772b;
 }
+
 .news-block {
     padding: 10px;
 }
@@ -605,6 +606,22 @@
 .segnala-send a {
     text-decoration: none;
     color: white;
+}
+/* Settings */
+
+.settings,
+.settings .item {
+    background-color: #eeeeee;
+}
+
+.settings .item {
+    border-color: transparent;
+}
+
+.settings .button-100r-select {
+    position: absolute;
+    right: 19px;
+    top: 0;
 }
 /* Contatti */
 

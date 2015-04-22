@@ -16,8 +16,11 @@
 
 package it.smartcommunitylab.riciclo.app.importer.model;
 
+import org.hibernate.validator.constraints.NotEmpty;
+
 public class TipologiaPuntoRaccolta {
 
+	@NotEmpty
 	private String nome;
 	private String infoPuntiRaccolta;
 	

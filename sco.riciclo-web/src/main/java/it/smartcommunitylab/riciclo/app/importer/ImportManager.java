@@ -21,9 +21,9 @@ public class ImportManager {
 
 	@Autowired
 	private RifiutiConverter converter;
-	
+
 	@Autowired
-	private RifiutiValidator validator;	
+	private RifiutiValidator validator;
 
 	@Autowired
 	private RepositoryManager storage;
@@ -35,7 +35,7 @@ public class ImportManager {
 			InputStream crmIs = null;
 
 			validator.validateInput(appInfo, fileList);
-			
+
 			xlsIs = fileList.getModel().getInputStream();
 			if (fileList.getIsole() != null) {
 				isoleIs = fileList.getIsole().getInputStream();
@@ -45,9 +45,16 @@ public class ImportManager {
 			}
 
 			it.smartcommunitylab.riciclo.app.importer.model.Rifiuti rifiuti = importer.importRifiuti(xlsIs, isoleIs, crmIs);
+			List<String> validationResult = validator.validateInputData(rifiuti);
+			if (!validationResult.isEmpty()) {
+				for (String error: validationResult) {
+					System.err.println(error);
+				}
+				throw new ImportError(validationResult);
+			}
 
 			Rifiuti convertedRifiuti = converter.convert(rifiuti, appInfo.getAppId());
-			List<String> validationResult = validator.validate(convertedRifiuti);
+			validationResult = validator.validate(convertedRifiuti);
 
 			if (validationResult.isEmpty()) {
 				storage.save(convertedRifiuti, appInfo.getAppId());
