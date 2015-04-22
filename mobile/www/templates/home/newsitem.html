@@ -2,8 +2,10 @@
     <ion-nav-title>
         <div class="nav-title">
             <div class="nav-title-main">{{"News"|translate}}</div>
+            <div class="nav-title-sub">{{subTitleText()}}</div>
         </div>
     </ion-nav-title>
+
     <ion-content class="home-news contatto" has-bouncing="false">
       <div class="news-block">
         <div ng-if="!!newsItem.image">

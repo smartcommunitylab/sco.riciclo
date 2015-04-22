@@ -3,11 +3,11 @@ angular.module('rifiuti.services.feed', [])
 .factory('FeedService', function ($q, $rootScope, $http, $q) {
     var cache = [];
 
-    var load = function(url, feedKey) {
+    var load = function(url, feedKey, forceLoad) {
         var deferred = $q.defer();
 
         var oldTimestamp = localStorage['timestamp_'+feedKey];
-        if(oldTimestamp && new Date().getTime() - 10*60*1000 < oldTimestamp) {
+        if(!forceLoad && oldTimestamp && new Date().getTime() - 10*60*1000 < oldTimestamp) {
             if (cache.length > 0) deferred.resolve(cache);
             else {
                 deferred.resolve(cache = JSON.parse(localStorage['entries_'+feedKey]));

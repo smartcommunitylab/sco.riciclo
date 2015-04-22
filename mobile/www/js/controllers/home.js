@@ -103,15 +103,31 @@ angular.module('rifiuti.controllers.home', [])
 })
 
 .controller('newsCtrl', function ($scope, $rootScope, FeedService) {
+
+    $rootScope.loadingShow();
     FeedService.load(FEED_URL,APP_ID).then(function(entries) {
         entries.forEach(function(entry) {
             entry.dateTime = new Date(entry.publishedDate);
         });
         $scope.entries = entries;
+        $rootScope.loadingHide();
     });
+
+    $scope.doRefresh = function() {
+        FeedService.load(FEED_URL,APP_ID, true).then(function(entries) {
+            entries.forEach(function(entry) {
+                entry.dateTime = new Date(entry.publishedDate);
+            });
+            $scope.entries = entries;
+            $scope.$broadcast('scroll.refreshComplete');
+        });
+    };
 
 })
 .controller('newsItemCtrl', function ($scope, $stateParams, $rootScope, FeedService) {
+    $scope.subTitleText = function () {
+        return ($scope.selectedProfile ? $scope.selectedProfile.name : '');
+    };
     $scope.newsItem = null;
     $scope.idx = $stateParams.id;
     FeedService.getByIdx($scope.idx, FEED_URL,APP_ID).then(function(data){

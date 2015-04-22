@@ -23,11 +23,13 @@ angular.module('rifiuti.services.profili', [])
     };
 
     ProfiliFactory.updateNotifications = function () {
-        if (window.plugin && cordova.plugins && cordova.plugins.notification) {
+        if (window.plugin && cordova && cordova.plugins && cordova.plugins.notification) {
             console.log('initializing notifications...');
-            //window.plugin.notification.local.cancelAll();
+            window.plugin.notification.local.cancelAll();
             $rootScope.profili.forEach(function (p) {
-                Raccolta.notificationCalendar(p.aree, p.utenza.tipologiaUtenza, p.id, p.area.comune).then(function (data) {
+                if (!!p.settings && !p.settings.enableNotifications) return;
+
+                Raccolta.notificationCalendar(p).then(function (data) {
                     // TODO: group by date?
                     if (data) {
                         var daymap = {};
@@ -42,11 +44,13 @@ angular.module('rifiuti.services.profili', [])
                                     var dStr = cal.dates[i];
                                     var currDate = new Date(Date.parse(dStr));
                                     if (currDate.getTime() >= dFrom.getTime() && currDate.getTime() < dTo.getTime()) {
-                                        var targetDate = new Date(currDate.getFullYear(), currDate.getMonth(), currDate.getDate() - 1, 15, 0, 0, 0);
+                                        var hours = Math.floor(n.ora / 3600);
+                                        var mins = (n.ora % 3600) / 60;
+                                        var targetDate = new Date(currDate.getFullYear(), currDate.getMonth(), currDate.getDate() - 1, hours, mins, 0, 0);
                                         if (targetDate.getTime() > dFrom.getTime()) {
                                             if (!(dStr in daymap)) {
                                                 daymap[dStr] = {
-                                                    id: targetDate.getTime(),
+                                                    id: Math.floor(targetDate.getTime() / 1000),
                                                     title: 'Domani a ' + n.comune,
                                                     text: {},
                                                     // smallIcon: 'res://icon.png',
@@ -70,7 +74,7 @@ angular.module('rifiuti.services.profili', [])
                                 //break;
                             }
                         }
-                        if (notifArray) cordova.plugins.notification.local.schedule(notifArray);
+                        if (cordova && cordova.plugins && cordova.plugins.notification && notifArray) cordova.plugins.notification.local.schedule(notifArray);
                     }
                 });
             });

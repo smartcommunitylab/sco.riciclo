@@ -63,7 +63,7 @@ angular.module('rifiuti', [
 
     $rootScope.loadingShow = function () {
         $ionicLoading.show({
-            template: '<i class="ion-loading-c"></i>'
+            template: '<ion-spinner></ion-spinner>'
         });
     };
 
@@ -333,6 +333,7 @@ angular.module('rifiuti', [
 
     .state('app.home', {
         url: "/home",
+        abstract: true,
         views: {
             'menuContent': {
                 templateUrl: "templates/home.html",
@@ -361,10 +362,10 @@ angular.module('rifiuti', [
         }
     })
 
-    .state('app.newsitem', {
-        url: "/news/newsitem/:id",
+    .state('app.home.newsitem', {
+        url: "/newsitem/:id",
         views: {
-            'menuContent': {
+            'news': {
                 templateUrl: "templates/home/newsitem.html",
                 controller: 'newsItemCtrl'
             }

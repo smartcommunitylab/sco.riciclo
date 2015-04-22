@@ -20,12 +20,14 @@
         </div>
         <div ng-if="tipiSegnalazioni.length > 1" >
             <div class="segnala-desc">{{"Scegli una categoria:" | translate}}</div>
-            <div class="list">
+            <div class="row"><div class="col">
+              <div class="list">
                 <ion-radio ng-repeat="item in tipiSegnalazioni" ng-model="signal.selectedTipoSegnalazione" ng-value="item">{{item.tipologia}}</ion-radio>
-            </div>
+              </div>
+            </div></div>
         </div>
         <div class="item item-input-inset segnala-text-input">
-            <input type="text" ng-model="msg.text" placeholder="{{'Inserisci qui il testo della segnalazione'|translate}}">
+            <input type="text" class="col" ng-model="msg.text" placeholder="{{'Inserisci qui il testo della segnalazione'|translate}}">
         </div>
         <div class="row segnala-photo" ng-click="takePicture()">
             <button class="button-clear">

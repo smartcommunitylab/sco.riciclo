@@ -246,6 +246,9 @@
 .news-block {
     padding: 10px;
 }
+.news-item .item-content {
+    padding: 16px !important;
+}
 /* Home - Calendar */
 
 .home-calendar {
@@ -532,7 +535,11 @@
 
 .segnala,
 .segnala .item {
+    /*border-color: transparent; */
     background-color: #eeeeee;
+}
+.segnala .item-content {
+    background-color: #eeeeee !important;
 }
 
 .segnala .segnala-desc {

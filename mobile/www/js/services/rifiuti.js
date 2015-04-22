@@ -117,7 +117,7 @@ angular.module('rifiuti.services.rifiuti', [])
       var deferred = $q.defer();
       this.aree().then(function(myAree){
         DataManager.get('data/db/riciclabolario.json').then(function (results) {
-          var myTipologie=[];
+//          var myTipologie=[];
           var myRifiuti=[];
           if ($rootScope.selectedProfile) {
             results.data.forEach(function(rifiuto,ri,dbRifiuti){
@@ -126,12 +126,12 @@ angular.module('rifiuti.services.rifiuti', [])
               if (options && options.tipi && options.tipi.indexOf(rifiuto.tipologiaRifiuto)==-1) optionsOK=false;
               if (optionsOK && $rootScope.selectedProfile.aree.indexOf(rifiuto.area)!=-1 && rifiuto.tipologiaUtenza==$rootScope.selectedProfile.utenza.tipologiaUtenza) {
                 myRifiuti.push(rifiuto);
-                if (myTipologie.indexOf(rifiuto.tipologiaRifiuto)==-1) myTipologie.push(rifiuto.tipologiaRifiuto);
+//                if (myTipologie.indexOf(rifiuto.tipologiaRifiuto)==-1) myTipologie.push(rifiuto.tipologiaRifiuto);
               }
             });
             myRifiuti = myRifiuti.sort(function(a,b){return a.nome.localeCompare(b.nome)});
-            $rootScope.selectedProfile.rifiuti=myRifiuti;
-            $rootScope.selectedProfile.tipologie=myTipologie.sort();
+//            $rootScope.selectedProfile.rifiuti=myRifiuti;
+//            $rootScope.selectedProfile.tipologie=myTipologie.sort();
           }
           deferred.resolve(myRifiuti);
         })
@@ -181,19 +181,23 @@ angular.module('rifiuti.services.rifiuti', [])
       });
       return deferred.promise;    
     },
-    notificationCalendar : function(aree, utenza, id, comune) {
+    notificationCalendar : function(profilo) {
       var deferred = $q.defer();
-      if (!aree) aree = [];
-      DataManager.get('data/db/puntiRaccoltaCalendar_'+utenza+'.json').then(function (results) {
+      if (!profilo.aree) profilo.aree = [];
+      DataManager.get('data/db/puntiRaccoltaCalendar_'+profilo.utenza.tipologiaUtenza+'.json').then(function (results) {
         var data = results.data;
         var filtered = [];
         for (var i = 0; i < data.length; i++) {
-          if (aree.indexOf(data[i].area)>=0 && Utili.isPaP(data[i].tipologiaPuntiRaccolta)) {
+          if (profilo.aree.indexOf(data[i].area)>=0 &&
+              Utili.isPaP(data[i].tipologiaPuntiRaccolta) &&
+              (!profilo.settings.papTypes || profilo.settings.papTypes[data[i].tipologiaPuntiRaccolta]))
+          {
             filtered.push({
-              id: id,
-              comune: comune,
+              id: profilo.id,
+              comune: profilo.area.etichetta,
               orarioApertura: data[i].orarioApertura,
-              tipologiaPuntiRaccolta: data[i].tipologiaPuntiRaccolta
+              tipologiaPuntiRaccolta: data[i].tipologiaPuntiRaccolta,
+              ora: profilo.settings.notificationsTime
             });
           }
         }

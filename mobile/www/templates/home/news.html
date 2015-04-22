@@ -7,13 +7,19 @@
     </ion-nav-title>
 
     <ion-content class="home-news" has-bouncing="false">
+        <ion-refresher
+            on-refresh="doRefresh()">
+        </ion-refresher>
         <ion-list>
-            <ion-item ng-repeat="entry in entries" ng-href="#/app/news/newsitem/{{$index}}">
+            <ion-item class="news-item" ng-repeat="entry in entries" ng-href="#/app/home/newsitem/{{$index}}">
                 <div class="news-date">{{entry.dateTime| date:'dd/MM/yyyy HH:mm'}}</div>
                 <div class="news-title" ng-bind-html="entry.title"></div>
-                <div class="news-more">{{'Read more'|translate}}</div>
+                <div class="news-more">{{'Dettagli'|translate}}</div>
 <!--                <div class="news-snippet">{{entry.contentSnippet}}</div>-->
             </ion-item>
+            <div class="row row-center nowrap" ng-if="!entries || entries.length==0">
+                {{'empty_elem'|translate}}
+            </div>
         </ion-list>
     </ion-content>
 </ion-view>

@@ -14,20 +14,33 @@ angular.module('rifiuti.controllers.raccolta', [])
     }
   };
   
+  $scope.rifiuti = [];
+
   var init = function() {
     if ($scope.selectedProfile) {
-      Raccolta.rifiuti().then(function(){
+      Raccolta.rifiuti().then(function(data){
+        $scope.rifiuti = data;
         Raccolta.immagini().then(function(){
+          var tipologieMap = {};
           var results=[], row=[], counter=-1;
-          for (var i=0; i<$scope.selectedProfile.tipologie.length; i++) {
-            var tipologia=$scope.selectedProfile.tipologie[i];
+          for (var i = 0; i < $scope.rifiuti.length; i++) {
+              var tipologia = $scope.rifiuti[i].tipologiaRifiuto;
+              if (!(tipologia in tipologieMap)) tipologieMap[tipologia] = {label:tipologia, img:$scope.immagini[tipologia]};
+          }
+          var tipologieArray = [];
+          for (var t in tipologieMap) {
+            tipologieArray.push(tipologieMap[t]);
+          }
+          tipologieArray = tipologieArray.sort(function(a,b) {return a.label.localeCompare(b.label);});
+
+          for (var i=0; i<tipologieArray.length; i++) {
             counter++;
             if (counter==3) {
               counter=0;
               results.push(row);
               row=[];
             }
-            row.push({ label:tipologia, img:$scope.immagini[tipologia] });
+            row.push(tipologieArray[i]);
           };
           if (row.length>0) results.push(row);
           $scope.tipologie=results;
@@ -159,6 +172,9 @@ angular.module('rifiuti.controllers.raccolta', [])
         icon: 'icon',
         doCluster: false
       };
+      if (list.length == 1) {
+        list[0].aperto = true;
+      }
       $scope.list = list;
     });
 
@@ -216,13 +232,16 @@ angular.module('rifiuti.controllers.raccolta', [])
           item['punti']=punti;
         });
       });
+      if (raccolta.length == 1) raccolta[0].aperto = true;
       $scope.raccolta=raccolta;
     });
   });
 })
 
-.controller('RifiutiCtrl', function ($scope, $stateParams, Raccolta) {
+.controller('RifiutiCtrl', function ($scope, $stateParams, $ionicConfig, $ionicHistory, Raccolta) {
   $scope.tipo = $stateParams.tipo;
+
+  $scope.backButtonStyle = $ionicConfig.backButton.icon();
 
   Raccolta.raccolta({ tiporifiuto:$scope.tipo }).then(function(raccolta){
     raccolta.forEach(function(item){
@@ -230,6 +249,7 @@ angular.module('rifiuti.controllers.raccolta', [])
         item['punti']=punti;
       });
     });
+    if (raccolta.length == 1) raccolta[0].aperto = true;
     $scope.raccolta=raccolta;
   });
 
@@ -248,6 +268,7 @@ angular.module('rifiuti.controllers.raccolta', [])
           item['punti']=punti;
         });
       });
+      if (raccolta.length == 1) raccolta[0].aperto = true;
       $scope.raccolta=raccolta;
     });
   });
