@@ -571,6 +571,10 @@
     line-height: 35px;
 }
 
+.segnala .segnala-photo {
+    color: #444;
+}
+
 .segnala .segnala-photo button img,
 .segnala .segnala-position button img {
     width: 35px;

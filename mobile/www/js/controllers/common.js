@@ -46,8 +46,8 @@ angular.module('rifiuti.controllers.common', [])
     //        // }
     //    };
 
-    $scope.checked = true;
-    $scope.checkboxImage = "img/rifiuti_btn_check_on_holo_light.png";
+    $scope.attachPosition = true;
+
     $scope.msg = {
         text: null
     };
@@ -83,13 +83,6 @@ angular.module('rifiuti.controllers.common', [])
         });
     }
 
-    $scope.toggleCheck = function () {
-        //$scope.posizioneG();
-        $scope.checked = !$scope.checked;
-        $scope.checkboxImage = $scope.checked ? "img/rifiuti_btn_check_on_holo_light.png" : "img/rifiuti_btn_check_off_holo_light.png";
-        $scope.GPScoords = $scope.checked ? GPScoordsTmp : "";
-    };
-
     $scope.sendEmail = function () {
         var emailPlugin = null;
         if (ionic.Platform.isWebView()) {
@@ -98,10 +91,10 @@ angular.module('rifiuti.controllers.common', [])
         }
         if (emailPlugin) {
             var body = $scope.msg.text ? ($scope.msg.text + ' ') : '';
-            body += $scope.checked ? $scope.GPScoords : '';
+            body += $scope.attachPosition ? GPScoordsTmp : '';
             window.plugin.email.open({
                 to: [$scope.signal.selectedTipoSegnalazione.email],
-                subject: "segnalazione dalla app '" + APP_NAME + "'", // subject of the email
+                subject: 'segnalazione dalla app \'' + APP_NAME + '\'', // subject of the email
                 body: [body],
                 isHtml: false,
                 attachments: $scope.imgURI
@@ -109,12 +102,12 @@ angular.module('rifiuti.controllers.common', [])
             });
         } else {
             //console.log('using "mailto:" schema in location...');
-            window.open("mailto:" + $scope.signal.selectedTipoSegnalazione.email, "_system");
+            window.open('mailto:' + $scope.signal.selectedTipoSegnalazione.email, '_system');
         }
     };
 
     if ($rootScope.myPosition) {
-        $scope.GPScoords = "[ " + $rootScope.myPosition.join(', ') + " ]";
+        $scope.GPScoords = '[ ' + $rootScope.myPosition.join(', ') + ' ]';
     }
     //    posizioneG();
 
