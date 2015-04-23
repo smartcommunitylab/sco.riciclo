@@ -10,8 +10,11 @@ import it.smartcommunitylab.riciclo.storage.RepositoryManager;
 import java.io.InputStream;
 import java.util.List;
 
+import org.apache.commons.lang.exception.ExceptionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import com.google.common.collect.Lists;
 
 @Service
 public class ImportManager {
@@ -21,9 +24,9 @@ public class ImportManager {
 
 	@Autowired
 	private RifiutiConverter converter;
-
+	
 	@Autowired
-	private RifiutiValidator validator;
+	private RifiutiValidator validator;	
 
 	@Autowired
 	private RepositoryManager storage;
@@ -35,7 +38,7 @@ public class ImportManager {
 			InputStream crmIs = null;
 
 			validator.validateInput(appInfo, fileList);
-
+			
 			xlsIs = fileList.getModel().getInputStream();
 			if (fileList.getIsole() != null) {
 				isoleIs = fileList.getIsole().getInputStream();
@@ -51,8 +54,8 @@ public class ImportManager {
 					System.err.println(error);
 				}
 				throw new ImportError(validationResult);
-			}
-
+			}			
+			
 			Rifiuti convertedRifiuti = converter.convert(rifiuti, appInfo.getAppId());
 			validationResult = validator.validate(convertedRifiuti);
 
@@ -65,7 +68,7 @@ public class ImportManager {
 			throw e;
 		} catch (Exception e) {
 			e.printStackTrace();
-			throw new ImportError(e.getMessage());
+			throw new ImportError(Lists.newArrayList("Exception: " + ExceptionUtils.getMessage(e)));
 		}
 	}
 
