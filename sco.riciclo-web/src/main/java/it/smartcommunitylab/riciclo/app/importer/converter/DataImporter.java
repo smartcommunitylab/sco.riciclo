@@ -16,6 +16,7 @@
 
 package it.smartcommunitylab.riciclo.app.importer.converter;
 
+import it.smartcommunitylab.riciclo.app.importer.ImportError;
 import it.smartcommunitylab.riciclo.app.importer.kml.KMLData;
 import it.smartcommunitylab.riciclo.app.importer.kml.KMLReader;
 import it.smartcommunitylab.riciclo.app.importer.model.PuntiRaccolta;
@@ -32,6 +33,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Properties;
+import java.util.Set;
 import java.util.TreeMap;
 
 import org.apache.commons.lang.WordUtils;
@@ -45,23 +47,26 @@ import org.springframework.stereotype.Component;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.common.collect.Lists;
+import com.google.common.collect.Sets;
 
 @Component
 public class DataImporter {
 
-	private List<String> oneColumnAsMany;
+	private Set<String> expectedSheets;
+//	private List<String> oneColumnAsMany;
 	private Properties primaryKeys;
 	
 	private Map<String, Collection<KMLData>> isole;
 	private Map<String, Collection<KMLData>> crm;
 
 	public DataImporter() throws Exception {
-		String[] exSheets = new String[] { "TIPOLOGIA_RIFIUTO", "TIPOLOGIA_UTENZA", "TIPOLOGIA_RACCOLTA" };
+		expectedSheets = Sets.newHashSet("TIPOLOGIA_PROFILO","TIPOLOGIA_UTENZA","GESTORI","ISTITUZIONI","AREE","SEGNALAZIONI","RICICLABOLARIO","TIPOLOGIA_RIFIUTO","COLORI","TIPOLOGIA_RACCOLTA","RACCOLTE","TIPOLOGIA_PUNTO_RACCOLTA","PUNTI_RACCOLTA");
+//		String[] exSheets = new String[] { "TIPOLOGIA_RIFIUTO", "TIPOLOGIA_UTENZA", "TIPOLOGIA_RACCOLTA" };
 		primaryKeys = new Properties();
 		primaryKeys.load(Thread.currentThread().getContextClassLoader().getResourceAsStream("primary_keys.txt"));
 		
 //		oneColumnAsMany = Arrays.asList(exSheets);
-		oneColumnAsMany = Lists.newArrayList();
+//		oneColumnAsMany = Lists.newArrayList();
 	}
 	
 	public Rifiuti importRifiuti(InputStream xlsIs, InputStream isoleIs, InputStream crmIs) throws Exception {
@@ -83,6 +88,21 @@ public class DataImporter {
 
 		Rifiuti rifiuti = new Rifiuti();
 
+		Set<String> sheetNames = Sets.newHashSet();
+		for (int i = 0; i < wb.getNumberOfSheets(); i++) {
+			sheetNames.add(wb.getSheetAt(i).getSheetName());
+		}
+		
+		Set missingExpected = Sets.newHashSet(expectedSheets);
+		missingExpected.removeAll(sheetNames);
+		
+		Set additionalFound = Sets.newHashSet(sheetNames);
+		additionalFound.removeAll(expectedSheets);		
+		
+		if (!missingExpected.isEmpty() || !additionalFound.isEmpty()) {
+			throw new ImportError(Lists.newArrayList("Missing sheet(s) expected: " + missingExpected, "Additional sheet(s) found: " + additionalFound));
+		}
+		
 		for (int i = 0; i < wb.getNumberOfSheets(); i++) {
 			Sheet sheet = wb.getSheetAt(i);
 			Thread.sleep(1000);
@@ -182,8 +202,8 @@ public class DataImporter {
 		try {
 			clazz = Class.forName(className);
 		} catch (ClassNotFoundException e) {
-			System.err.println("No class");
-			return rifiuti;
+			System.err.println("No class found for " + sheetName);
+			throw new ImportError(Lists.newArrayList("No class found for " + sheetName));
 		}
 
 		ObjectMapper mapper = new ObjectMapper();
