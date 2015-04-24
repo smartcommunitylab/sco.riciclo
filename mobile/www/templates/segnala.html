@@ -12,30 +12,22 @@
         </button>
     </ion-nav-buttons>-->
 
-    <ion-content class="segnala">
+    <ion-content class="segnala padding">
         <div class="segnala-desc">
             {{'Invia' | translate}}
         </div>
         <div ng-if="tipiSegnalazioni.length > 1">
             <div class="segnala-desc">{{'Scegli una categoria:' | translate}}</div>
-            <div class="row">
-                <div class="col">
-                    <div class="list">
-                        <ion-radio ng-repeat="item in tipiSegnalazioni" ng-model="signal.selectedTipoSegnalazione" ng-value="item">{{item.tipologia}}</ion-radio>
-                    </div>
-                </div>
+            <div class="list">
+                <ion-radio ng-repeat="item in tipiSegnalazioni" ng-model="signal.selectedTipoSegnalazione" ng-value="item">{{item.tipologia}}</ion-radio>
             </div>
         </div>
         <div class="item item-input-inset segnala-text-input">
-            <input type="text" class="col" ng-model="msg.text" placeholder="{{'Inserisci qui il testo della segnalazione' | translate}}">
+            <label class="item-input-wrapper">
+                <input type="text" ng-model="msg.text" placeholder="{{'Inserisci qui il testo della segnalazione' | translate}}" />
+            </label>
         </div>
 
-        <!--<ion-item class="item-button-left">
-            <button class="button button-icon">
-                <i class="icon ion-camera"></i>
-            </button>
-            {{'Scatta una foto' | translate}}
-        </ion-item>-->
         <div class="row segnala-photo" ng-click="takePicture()">
             <button class="button-clear">
                 <img src="img/ic_camera.png" />
@@ -46,7 +38,7 @@
             <img ng-show="imgURI !== undefined" ng-src="{{imgURI}}">
         </div>
 
-        <ion-checkbox class="checkbox-100r" ng-model="attachPosition">
+        <ion-checkbox class="checkbox-100r segnala-position" ng-model="attachPosition">
             {{'Allega la tua posizione' | translate}}
         </ion-checkbox>
 
