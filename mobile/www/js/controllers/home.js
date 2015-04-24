@@ -144,13 +144,13 @@ angular.module('rifiuti.controllers.home', [])
         $scope.variableIMG = !$scope.noteSelected ? "img/ic_add.png" : "img/ic_menu_delete.png";
     };
 
-    $rootScope.$watch('noteSelected', function () {
-        if (!$scope.noteSelected) {
-            $scope.selectedNotes = [];
-            $scope.multipleNoteSelected = false;
-        }
-        updateIMG();
-    });
+//    $rootScope.$watch('noteSelected', function () {
+//        if (!$scope.noteSelected) {
+//            $scope.selectedNotes = [];
+//            $scope.multipleNoteSelected = false;
+//        }
+//        updateIMG();
+//    });
 
     var init = function () {
         $scope.notes = Profili.getNotes();
@@ -247,6 +247,10 @@ angular.module('rifiuti.controllers.home', [])
             $ionicPopup.show(popupCreate()).then(function (res) {
                 if (res != null && res != undefined) {
                     $scope.addNote(res);
+                    $scope.selectedNotes = [];
+                    $scope.multipleNoteSelected = false;
+                    $scope.noteSelected = false;
+                    updateIMG();
                 }
             });
         }
@@ -264,6 +268,7 @@ angular.module('rifiuti.controllers.home', [])
                 $scope.selectedNotes = [];
                 $scope.multipleNoteSelected = false;
                 $scope.noteSelected = false;
+                updateIMG();
             }
         });
     };
