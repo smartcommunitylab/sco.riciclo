@@ -45,6 +45,12 @@ angular.module('rifiuti.controllers.profilo', [])
                 $scope.updateLocations();
             }
         }
+        if (!!$rootScope.selectedProfile && $rootScope.selectedProfile.name == $scope.profilo.name) {
+            $scope.isCurrentProfile = true;
+        } else {
+            $scope.isCurrentProfile = false;
+        }
+
     });
 
     $scope.isCurrentProfile = true;
@@ -174,11 +180,6 @@ angular.module('rifiuti.controllers.profilo', [])
         });
     };
 
-    if (!!$rootScope.selectedProfile && $rootScope.selectedProfile.name == $scope.profilo.name) {
-        $scope.isCurrentProfile = true;
-    } else {
-        $scope.isCurrentProfile = false;
-    }
 
     /* LOCALITA SELECTOR */
     $ionicModal.fromTemplateUrl('templates/localitaModal.html', {
