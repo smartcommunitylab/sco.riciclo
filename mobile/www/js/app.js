@@ -255,6 +255,7 @@ angular.module('rifiuti', [
         what_remember: "Cosa vuoi ricordare?",
         save: "Salva",
         cancel: "Annulla",
+        set: 'Imposta',
         exitapp_ok: "OK",
         LUN: "LUN",
         MAR: "MAR",
@@ -263,15 +264,13 @@ angular.module('rifiuti', [
         VEN: "VEN",
         SAB: "SAB",
         DOM: "DOM",
-
         lun: "lunedì",
         mar: "martedì",
         mer: "mercoledì",
         gio: "giovedì",
         ven: "venerdì",
         sab: "sabato",
-        dom: "domenicat",
-
+        dom: "domenica",
         Gennaio: "gennaio",
         Febbraio: "febbraio",
         Marzo: "marzo",
@@ -284,10 +283,8 @@ angular.module('rifiuti', [
         Ottobre: "ottobre",
         Novembre: "novembre",
         Dicembre: "dicembre",
-
         Tocca: "Tocca + per aggiungere una nota",
         empty_elem: "Nessun elemento da visualizzare",
-
         'ad esempio': "Ad esempio:",
         Invia: "Invia una email per segnalare un problema direttamente all'ente che si occupa della gestione dei rifiuti. Puoi allegare una foto e le coordinate GPS della tua posizione.",
         Progetto: '"' + APP_NAME + '"',
@@ -295,7 +292,6 @@ angular.module('rifiuti', [
         Progetto_di: 'Un progetto di:',
         Collaborazione: "In collaborazione con:",
         Eventuali: "Per informazioni:",
-
         TutorialUno: "Questo tutorial ti inlustrerà il funzionamento della app. Per sapere dove buttare uno specifico rifiuto, scrivine il nome qui e premi sulla lente d'ingrandimento.",
         TutorialDue: "Scopri quali rifiuti appartengono ad una determinata categoria e scopri dove devono essere conferiti",
         TutorialTre: "Aggiungi delle note personali o dei promemoria legati alla gestione dei rifiuti (e.g. pagamento della bolletta, oggetti da portare al CRM, etc)",
@@ -314,10 +310,11 @@ angular.module('rifiuti', [
         "NOTE": "NOTE",
         "Note": "Note",
         "NEWS": "NEWS",
-        "News": "News"
-
+        "News": "News",
+        pick_time: 'Scegli l\'orario'
     });
     $translateProvider.preferredLanguage(current_lang);
+
     //debug only
     //$translateProvider.preferredLanguage("en"); // solo lingua inglese, commentare per attivare il riconoscimento della lingua automatico
     //end debug only

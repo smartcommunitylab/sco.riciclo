@@ -3,7 +3,7 @@
 
 angular.module('ionic-timepicker', ['ionic', 'ionictimepicker.templates'])
 
-.directive('ionicTimePicker', ['$ionicPopup', function ($ionicPopup) {
+.directive('ionicTimePicker', ['$ionicPopup', '$filter', function ($ionicPopup, $filter) {
     return {
         restrict: 'AE',
         replace: true,
@@ -101,15 +101,15 @@ angular.module('ionic-timepicker', ['ionic', 'ionictimepicker.templates'])
 
                     $ionicPopup.show({
                         templateUrl: 'time-picker-12-hour.html',
-                        title: '<strong>12-Hour Format</strong>',
+                        title: '<strong>' + $filter('translate')('pick_time') + '</strong>',
                         subTitle: '',
                         scope: scope,
                         buttons: [
                             {
-                                text: 'Cancel'
+                                text: $filter('translate')('cancel')
                             },
                             {
-                                text: 'Set',
+                                text: $filter('translate')('set'),
                                 type: 'button-100r',
                                 onTap: function (e) {
                                     scope.loadingContent = true;
@@ -137,15 +137,15 @@ angular.module('ionic-timepicker', ['ionic', 'ionictimepicker.templates'])
                 if (obj.format == 24) {
                     $ionicPopup.show({
                         templateUrl: 'time-picker-24-hour.html',
-                        title: '<strong>Scegli l\'orario</strong>',
+                        title: '<strong>' + $filter('translate')('pick_time') + '</strong>',
                         subTitle: '',
                         scope: scope,
                         buttons: [
                             {
-                                text: 'Cancel'
+                                text: $filter('translate')('cancel')
                             },
                             {
-                                text: 'Set',
+                                text: $filter('translate')('set'),
                                 type: 'button-100r',
                                 onTap: function (e) {
                                     scope.loadingContent = true;
