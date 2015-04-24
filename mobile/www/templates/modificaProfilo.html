@@ -1,4 +1,10 @@
 <ion-view title="{{'Profili'  |  translate}}">
+    <ion-nav-buttons side="left">
+        <button ng-click="back()" class="button back-button buttons  button-clear header-item" ng-if="!profili || profili.length == 0">
+            <i class="icon" ng-class="backButtonStyle" ></i>
+        </button>
+    </ion-nav-buttons>
+
     <ion-nav-buttons side="right">
         <div class="nowrap">
             <button ng-click="edit()" class="button button-clear btn btn-edit">

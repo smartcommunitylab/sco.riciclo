@@ -58,7 +58,7 @@ angular.module('rifiuti', [
     $ionicConfigProvider.backButton.text('');
 })
 
-.run(function ($ionicPlatform, $rootScope, $ionicNavBarDelegate, $ionicHistory, $translate, $ionicPopup, $filter, $state, Profili, GeoLocate, $cordovaSplashscreen, $ionicLoading) {
+.run(function ($ionicPlatform, $rootScope, $ionicNavBarDelegate, $ionicHistory, $translate, $ionicPopup, $filter, $state, Profili, GeoLocate, $cordovaSplashscreen, $ionicLoading, $ionicConfig) {
     $rootScope.version = '2.0';
 
     $rootScope.loadingShow = function () {
@@ -156,6 +156,7 @@ angular.module('rifiuti', [
 
     $ionicPlatform.ready(function () {
         $rootScope.platform = ionic.Platform;
+        $rootScope.backButtonStyle = $ionicConfig.backButton.icon();
 
         // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
         // for form inputs)
@@ -333,7 +334,7 @@ angular.module('rifiuti', [
 
     .state('app.home', {
         url: "/home",
-        abstract: true,
+  //      abstract: true,
         views: {
             'menuContent': {
                 templateUrl: "templates/home.html",
