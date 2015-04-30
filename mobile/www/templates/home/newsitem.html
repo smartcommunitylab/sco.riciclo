@@ -16,7 +16,7 @@
             <div class="padding-top" compile="newsItem.content"></div>
         </div>
 
-        <a class="hidden-link" ng-click="clickLink(newsItem.link)">
+        <a class="hidden-link" ng-if="newsItem.link" ng-click="clickLink(newsItem.link)">
             <div class="row">
                 <button class="col col-10 icon button-balanced button-clear">
                     <img src="img/ic_web.png">

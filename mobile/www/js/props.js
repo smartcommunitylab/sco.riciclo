@@ -20,7 +20,8 @@ APP_NAME="100% Riciclo - Trento";
 ICON_COLOR_MAP = {'ARANCIONE': 'orange', 'AZZURRO': 'lightblue', 'BLU': 'blue', 'GIALLO': 'yellow', 'MARRONE': 'brown', 'ROSSO': 'red', 'VERDE CHIARO': 'lightgreen', 'VERDE': 'green', 'VERDE SCURO': 'darkgreen', 'VIOLA':'purple'};
 ICON_POINT_MAP = {'Isola ecologica': 'isola_eco', 'CRM': 'crm', 'CRZ': 'crz', 'Farmacia': 'farmacia', 'Rivenditore': 'rivenditore', 'Porta a porta carta':'porta_a_porta', 'Porta a porta organico':'porta_a_porta', 'Porta a porta residuo':'porta_a_porta', 'Porta a porta cartone':'porta_a_porta', 'Porta a porta plastica e metallo':'porta_a_porta', 'Porta a porta carta e cartone':'porta_a_porta', 'Porta a porta imballaggi leggeri':'porta_a_porta', 'Porta a porta vetro':'porta_a_porta', 'Porta a porta sfalci e potatura':'porta_a_porta', 'Ditta specializzata':'furgone', 'Esercenti convenzionati':'farmacia'};
 SHOW_NEWS = true;
-FEED_URL = "https://www.facebook.com/feeds/page.php?format=rss20&id=359265280840287";
+FEED_URL = "http://www.asvo.it/feed/";
+EXT_URL = "http://www.asvo.it";
 
 
 // PORTOGRUARO

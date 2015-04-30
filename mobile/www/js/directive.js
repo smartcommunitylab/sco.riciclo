@@ -2,7 +2,10 @@ angular.module('rifiuti.directives', [])
 
 .directive('compile', function ($compile) {
     // directive factory creates a link function
-    return function (scope, element, attrs) {
+    return {
+      scope: true,
+      link: function (scope, element, attrs) {
+        scope.COMPILED = true;
         scope.$watch(
             function (scope) {
                 // watch the 'compile' expression for changes
@@ -20,6 +23,7 @@ angular.module('rifiuti.directives', [])
                 $compile(element.contents())(scope);
             }
         );
+      }
     };
 })
 
@@ -49,6 +53,21 @@ angular.module('rifiuti.directives', [])
                 });
             }
         };
+}])
+
+.directive('img', [
+  function () {
+    return {
+        retrict: 'E',
+        controller: function ($scope, $element, $attrs) {
+            if ($scope.COMPILED && !$attrs['src'].startsWith('http://')) $attrs.$set('src', EXT_URL+$attrs['src']);
+        },
+        link: function (scope, elem, attrs) {
+            attrs.$observe('src', function (val) {
+                console.log(val);
+            });
+        }
+    };
 }])
 
 .directive('leadingZero', function () {
