@@ -11,17 +11,19 @@ angular.module('rifiuti.controllers.common', [])
         return Conf.showNews();
     };
 
-    DataManager.checkVersion($rootScope.profili).then(function () {
-        $rootScope.loadingHide();
-    });
-
     //localStorage.removeItem('profiles');
     if (!localStorage.profiles || localStorage.profiles.length == 0) {
         $rootScope.promptedToProfile = true;
         $location.path("app/aggProfilo");
+        DataManager.checkVersion($rootScope.profili).then(function () {
+            $rootScope.loadingHide();
+        });
     } else {
         Profili.read();
         Profili.select(Profili.selectedProfileIndex());
+        DataManager.checkVersion($rootScope.profili).then(function () {
+            $rootScope.loadingHide();
+        });
         Profili.updateNotifications();
     }
 })

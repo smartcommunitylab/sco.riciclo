@@ -64,7 +64,7 @@ angular.module('rifiuti.directives', [])
         },
         link: function (scope, elem, attrs) {
             attrs.$observe('src', function (val) {
-                console.log(val);
+                //console.log(val);
             });
         }
     };

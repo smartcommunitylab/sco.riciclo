@@ -392,6 +392,7 @@ angular.module('rifiuti', [
 
     .state('app.puntiDiRaccolta', {
         url: "/puntiDiRaccolta/:id",
+        cache: false,
         views: {
             'menuContent': {
                 templateUrl: "templates/puntiDiRaccolta.html",
@@ -442,6 +443,7 @@ angular.module('rifiuti', [
 
     .state('app.puntoDiRaccolta', {
         url: "/puntoDiRaccolta/:id",
+        cache: false,
         views: {
             'menuContent': {
                 templateUrl: "templates/puntoDiRaccolta.html",

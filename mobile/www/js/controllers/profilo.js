@@ -68,7 +68,7 @@ angular.module('rifiuti.controllers.profilo', [])
             }
         } else {
             // save
-            if (!!$scope.profilo.name && !!$scope.profilo.area) {
+            if (!!$scope.profilo.name && !!$scope.profilo.area && !!$scope.profilo.area.nome) {
                 var newProfile = null;
 
                 if (!!$scope.id) {
