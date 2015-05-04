@@ -128,7 +128,7 @@ public class RifiutiConverter {
 			}
 			if (utenze != null) {
 				for (String ut : utenze) {
-					utenza.put(ut, true);
+					utenza.put(ut.trim(), true);
 				}
 			}
 			
