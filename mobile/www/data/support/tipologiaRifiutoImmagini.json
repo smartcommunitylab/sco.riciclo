@@ -106,6 +106,10 @@
         {
             "valore": "Rifiuti particolari",
             "immagine": "img/rif_ic_rifiuti_particolari.png"
+        },
+        {
+            "valore": "Rifiuti speciali",
+            "immagine": "img/rif_ic_rifiuti_speciali.png"
         }
 
     ]
