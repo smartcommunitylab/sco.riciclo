@@ -26,7 +26,7 @@
                 <!--per ora niente...-->
             </div>
             <div class="col action">
-                <a class="hidden-link" href="#/app/puntiDiRaccolta/{{pdr.dettagliZona || pdr.zona}}">
+                <a class="hidden-link" href="#/app/puntiDiRaccolta/{{addr2id(pdr.dettagliZona) || pdr.zona}}">
                     <img src="img/ic_map_green.png">
                 </a>
                 <a class="hidden-link" target="_system" ng-click="clickNav()">

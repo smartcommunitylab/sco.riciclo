@@ -142,7 +142,7 @@ angular.module('rifiuti.controllers.raccolta', [])
   var init = function() {
     
     $scope.mapView = true;
-    $scope.id = $stateParams.id != '!' ? $stateParams.id : null;
+    $scope.id = $stateParams.id != '!' ? $rootScope.id2addr($stateParams.id) : null;
     $scope.list = [];
     $scope.variableIMG = "img/ic_list.png";
 
@@ -274,9 +274,9 @@ angular.module('rifiuti.controllers.raccolta', [])
   });
 })
 
-.controller('PuntoDiRaccoltaCtrl', function ($scope, $stateParams, $ionicNavBarDelegate, Raccolta) {
+.controller('PuntoDiRaccoltaCtrl', function ($scope, $rootScope, $stateParams, $ionicNavBarDelegate, Raccolta) {
 
-  $scope.id = !!$stateParams.id && $stateParams.id != 'undefined' && $stateParams.id != 'null'? $stateParams.id : null;
+  $scope.id = !!$stateParams.id && $stateParams.id != 'undefined' && $stateParams.id != 'null'? $rootScope.id2addr($stateParams.id) : null;
   $scope.pdr = {};
   $scope.orari = [];
   //[{giorno:"lunedì",orari:["12.00-14.00","15.30-17.30"...]}...]
