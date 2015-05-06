@@ -10,19 +10,24 @@ angular.module('rifiuti.services.calendar', [])
       
       var key = null, t = null, descr = null;
       var proto = null;
+      var hour = calItem.dalle;
+      if(calItem.dalle != calItem.alle){
+        hour = calItem.dalle +'-'+calItem.alle;
+      }
+
       if (Utili.isPaP(puntoDiRaccolta.tipologiaPuntiRaccolta)) {
         key = 'Porta a porta'; t = key;
         proto = {
           tipologiaPuntiRaccolta: puntoDiRaccolta.tipologiaPuntiRaccolta,
           colore: puntoDiRaccolta.colore,
-          descr : [puntoDiRaccolta.tipologiaPuntiRaccolta.substr(14)]
+          descr : [puntoDiRaccolta.tipologiaPuntiRaccolta.substr(14)+' '+hour]
         };
       } else  {
         key = puntoDiRaccolta.tipologiaPuntiRaccolta + puntoDiRaccolta.dettagliZona;
         t = puntoDiRaccolta.tipologiaPuntiRaccolta;
         if (!!cell.events[key] && cell.events[key].events.length > 0) {
           proto = cell.events[key].events[0];
-          proto.descr[proto.descr.length-1] += ', ' + calItem.dalle +'-'+calItem.alle;
+          proto.descr[proto.descr.length-1] += ', ' + hour;
           cell.events[key].events = [];
         } else {
           proto = {
