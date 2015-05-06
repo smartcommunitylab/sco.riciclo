@@ -1,5 +1,13 @@
 /* Empty. Add your own CSS if you like */
 
+body.platform-browser .ng-animate .scroll-bar {
+  visibility: visible !important;
+}
+
+body.platform-browser .scroll-bar-fade-out{
+  opacity:1 !important
+}
+
 .scroll-content > #map1 {
     height: 100%;
 }
