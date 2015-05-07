@@ -68,6 +68,13 @@ angular.module('rifiuti', [
         });
     };
 
+    $rootScope.addr2id = function(addr) {
+        return addr ? addr.replace('/','_') : null;
+    }
+    $rootScope.id2addr = function(id) {
+        return id ? id.replace('_','/') : null;
+    }
+
     $rootScope.loadingHide = function () {
         $ionicLoading.hide();
     };

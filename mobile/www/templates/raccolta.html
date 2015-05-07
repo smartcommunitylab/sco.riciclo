@@ -61,7 +61,7 @@
                                 </div>
                             </div>
                             <div ng-show="item.aperto">
-                                <a ng-repeat="punto in item.punti" class="hidden-link expandable-list-item-content" ng-href="#/app/puntoDiRaccolta/{{punto.dettagliZona || punto.zona}}">
+                                <a ng-repeat="punto in item.punti" class="hidden-link expandable-list-item-content" ng-href="#/app/puntoDiRaccolta/{{addr2id(punto.dettagliZona) || punto.zona}}">
                                     <div class="row">
                                         <div class="col">
                                             {{punto.dettagliZona || punto.zona}}

@@ -20,7 +20,7 @@ angular.module('rifiuti.services.calendar', [])
         proto = {
           tipologiaPuntiRaccolta: puntoDiRaccolta.tipologiaPuntiRaccolta,
           colore: puntoDiRaccolta.colore,
-          descr : [puntoDiRaccolta.tipologiaPuntiRaccolta.substr(14)+' '+hour]
+          descr : [puntoDiRaccolta.tipologiaPuntiRaccolta.substr(14), hour]
         };
       } else  {
         key = puntoDiRaccolta.tipologiaPuntiRaccolta + puntoDiRaccolta.dettagliZona;
