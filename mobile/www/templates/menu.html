@@ -82,7 +82,7 @@
                         <div class="col">{{"Segnala" | translate}}</div>
                     </div>
                 </ion-item>
-                <ion-item nav-clear menu-close href="#/app/settings" ng-if="!!selectedProfile.PaP && selectedProfile.PaP.length > 0">
+                <ion-item ng-if="!isWebView" nav-clear menu-close href="#/app/settings" ng-if="!!selectedProfile.PaP && selectedProfile.PaP.length > 0">
                     <div class="row row-center">
                         <div class="col col-15 ">
                             <img src="img/ic_settings.png" />

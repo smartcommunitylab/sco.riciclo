@@ -61,6 +61,7 @@ angular.module('rifiuti', [
 .run(function ($ionicPlatform, $rootScope, $ionicNavBarDelegate, $ionicHistory, $translate, $ionicPopup, $filter, $state, Profili, GeoLocate, $cordovaSplashscreen, $ionicLoading, $ionicConfig) {
     $rootScope.version = '2.0';
 
+    $rootScope.isWebView = ionic.Platform.isWebView();
     $rootScope.loadingShow = function () {
         $ionicLoading.show({
             template: '<ion-spinner></ion-spinner>'
