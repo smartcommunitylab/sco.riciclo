@@ -70,7 +70,7 @@ angular.module('rifiuti.controllers.raccolta', [])
   };
 
   $scope.openMarkerClick = function ($markerModel) {
-    $location.url('/app/puntoDiRaccolta/' + $markerModel.model.id);
+    $location.url('/app/puntoDiRaccolta/' + $rootScope.addr2id($markerModel.model.id));
   };
 
   $scope.map = {
