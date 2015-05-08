@@ -18,6 +18,7 @@ package it.smartcommunitylab.riciclo.config;
 
 import it.smartcommunitylab.riciclo.app.importer.converter.RifiutiConverter;
 import it.smartcommunitylab.riciclo.app.importer.converter.RifiutiValidator;
+import it.smartcommunitylab.riciclo.storage.NotificationManager;
 import it.smartcommunitylab.riciclo.storage.RepositoryManager;
 
 import java.net.UnknownHostException;
@@ -71,6 +72,10 @@ public class RifiutiConfig extends WebMvcConfigurerAdapter {
 	@Bean
 	RepositoryManager getRepositoryManager() throws UnknownHostException, MongoException {
 		return new RepositoryManager(getDraftMongo(), getFinalMongo());
+	}
+	
+	@Bean NotificationManager getNotificationManager() throws UnknownHostException, MongoException {
+		return new NotificationManager(getFinalMongo());
 	}
 
 	@Bean
