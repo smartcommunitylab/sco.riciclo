@@ -16,8 +16,10 @@
 
 package it.smartcommunitylab.riciclo.controller;
 
+import it.smartcommunitylab.riciclo.model.Notification;
 import it.smartcommunitylab.riciclo.model.Rifiuti;
 import it.smartcommunitylab.riciclo.storage.App;
+import it.smartcommunitylab.riciclo.storage.NotificationManager;
 import it.smartcommunitylab.riciclo.storage.RepositoryManager;
 
 import java.io.ByteArrayOutputStream;
@@ -33,6 +35,7 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -47,7 +50,9 @@ public class RifiutiController {
 
 	@Autowired
 	private RepositoryManager storage;
-
+	@Autowired
+	private NotificationManager notificationManager;
+	
 	@Autowired
 	private ServletContext context;
 
@@ -80,6 +85,16 @@ public class RifiutiController {
 	@RequestMapping(method = RequestMethod.GET, value = "/rifiuti/{className}/{appId}/draft")
 	public List<?> getDraft(HttpServletResponse response, @PathVariable String className, @PathVariable String appId) throws Exception {
 		return storage.findRifiuti(className, appId, true);
+	}
+
+	@RequestMapping(method = RequestMethod.GET, value = "/notifications/{appId}")
+	public @ResponseBody List<Notification> getNotificatons(@PathVariable String appId) throws Exception {
+		return notificationManager.getNotifications(appId);
+	}
+
+	@RequestMapping(method = RequestMethod.POST, value = "/notifications/{appId}")
+	public @ResponseBody Notification saveNotificaton(@RequestBody Notification notification, @PathVariable String appId) throws Exception {
+		return notificationManager.saveNotification(notification, appId);
 	}
 
 	@RequestMapping(method = RequestMethod.GET, value = "/zip/{appId}")
