@@ -1,3 +1,5 @@
+// variabili dichiarate senza var sono globali
+
 // GIUDICARIE
 //APP_ID = "GIUDICARIE";
 //DATA_VERSION = 0;
@@ -22,7 +24,7 @@ ICON_POINT_MAP = {'Isola ecologica': 'isola_eco', 'CRM': 'crm', 'CRZ': 'crz', 'F
 SHOW_NEWS = true;
 FEED_URL = "http://www.asvo.it/feed/";
 EXT_URL = "http://www.asvo.it";
-
+IF_HIDDEN_FIELDS = false;
 
 // PORTOGRUARO
 //APP_ID = "PORTOGRUARO";

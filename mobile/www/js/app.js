@@ -62,6 +62,8 @@ angular.module('rifiuti', [
     $rootScope.version = '2.0';
 
     $rootScope.isWebView = ionic.Platform.isWebView();
+    $rootScope.isPopUp = $rootScope.isWebView && !IF_HIDDEN_FIELDS;
+    $rootScope.isHiddenFields = IF_HIDDEN_FIELDS;
     $rootScope.loadingShow = function () {
         $ionicLoading.show({
             template: '<ion-spinner></ion-spinner>'

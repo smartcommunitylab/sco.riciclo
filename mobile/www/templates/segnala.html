@@ -31,13 +31,23 @@
         <div ng-if="calendarView" class="agenda">
         </div>
 
-        <div ng-if="!isWebView" class="row segnala-photo" ng-click="takePicture()">
+        <div ng-if="(!isPopUp && !isHiddenFields)" class="row segnala-photo" ng-click="takePicture()">
             <button class="button-clear">
                 <img src="img/ic_camera.png" />
             </button>
             <div class="col">{{'Scatta una foto' | translate}}</div>
         </div>
-        <div ng-if="!isWebView" ng-show="imgURI !== undefined" class="row segnala-image">
+        <div ng-if="(!isPopUp && !isHiddenFields)" ng-show="imgURI !== undefined" class="row segnala-image">
+            <img ng-show="imgURI !== undefined" ng-src="{{imgURI}}">
+        </div>
+
+        <div ng-if="isPopUp" class="row segnala-photo" ng-click="showAlert()">
+            <button class="button-clear">
+                <img src="img/ic_camera.png" />
+            </button>
+            <div class="col">{{'Scatta una foto' | translate}}</div>
+        </div>
+        <div ng-if="isPopUp" ng-show="imgURI !== undefined" class="row segnala-image">
             <img ng-show="imgURI !== undefined" ng-src="{{imgURI}}">
         </div>
 

@@ -1,11 +1,18 @@
-angular.module('rifiuti.controllers.common', [])
+angular.module('rifiuti.controllers.common', ['ionic'])
 
-.controller('AppCtrl', function ($scope, $rootScope, $location, Profili, DataManager, Conf) {
+.controller('AppCtrl', function ($scope, $rootScope, $location, Profili, DataManager, Conf, $ionicPopup) {
     $scope.app_name = APP_NAME;
 
     $scope.showTutorial = function () {
         $rootScope.showTutorial = true;
     };
+
+    $scope.showAlert = function(link) {
+        var alertPopup = $ionicPopup.alert({
+            title: 'Version Alert',
+            template: 'This feature is disabled'
+        });
+   };
 
     $scope.showNews = function () {
         return Conf.showNews();
