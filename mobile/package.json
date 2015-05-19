@@ -29,7 +29,8 @@
     "org.apache.cordova.camera",
     "de.appplant.cordova.plugin.email-composer",
     "de.appplant.cordova.plugin.local-notification",
-    "org.apache.cordova.geolocation"
+    "org.apache.cordova.geolocation",
+    "https://github.com/EddyVerbruggen/LaunchMyApp-PhoneGap-Plugin.git"
   ],
   "cordovaPlatforms": [
     "ios"

@@ -1,18 +1,19 @@
 angular.module('rifiuti.controllers.common', ['ionic'])
 
-.controller('AppCtrl', function ($scope, $rootScope, $location, Profili, DataManager, Conf, $ionicPopup) {
+.controller('AppCtrl', function ($scope, $rootScope, $location, $timeout, Profili, DataManager, Conf, $ionicPopup) {
     $scope.app_name = APP_NAME;
+
+    $scope.checkSettings = function() {
+        if ($rootScope.isPopUp) {
+            $timeout(function(){
+                $rootScope.showAlert();
+            }, 200);
+        }
+    }
 
     $scope.showTutorial = function () {
         $rootScope.showTutorial = true;
     };
-
-    $scope.showAlert = function(link) {
-        var alertPopup = $ionicPopup.alert({
-            title: 'Version Alert',
-            template: 'This feature is disabled'
-        });
-   };
 
     $scope.showNews = function () {
         return Conf.showNews();
@@ -38,6 +39,7 @@ angular.module('rifiuti.controllers.common', ['ionic'])
 .controller('InfoCtrl', function ($scope) {})
 
 .controller('SegnalaCtrl', function ($scope, $rootScope, $cordovaCamera, Raccolta) {
+
 
     //    $scope.GPScoords = null;
     //    var GPScoordsTmp = null;

@@ -294,6 +294,7 @@ angular.module('rifiuti.controllers.home', [])
 
     $scope.selectDay = function (i) {
         if (i.colors.length == 0) return;
+        $rootScope.loadingShow();
         $scope.currListItem = i;
         $scope.showDate = i.date;
         $scope.daySubList = Calendar.toWeek($scope.dayList, $scope.showDate, $scope.daySubListRunningEnd);
@@ -302,6 +303,7 @@ angular.module('rifiuti.controllers.home', [])
             $location.hash('id' + i.date.getTime());
             //window._globalscrollid = 'id' + i.date.getTime();
             $ionicScrollDelegate.anchorScroll(true);
+            $rootScope.loadingHide();
         }, 200);
 
         $scope.calendarView = !$scope.calendarView;

@@ -175,6 +175,10 @@ angular.module('rifiuti.controllers.raccolta', [])
       if (list.length == 1) {
         list[0].aperto = true;
       }
+      else {
+          Raccolta.sortRaccolta(list);
+      }
+
       $scope.list = list;
     });
 
@@ -212,7 +216,7 @@ angular.module('rifiuti.controllers.raccolta', [])
 
 })
 
-.controller('RaccoltaCtrl', function ($scope, $stateParams, Raccolta) {
+.controller('RaccoltaCtrl', function ($scope, $stateParams, Raccolta, Utili) {
   $scope.id = $stateParams.id;
 
   Raccolta.raccolta({ tipo:$scope.id }).then(function(raccolta){
@@ -233,6 +237,9 @@ angular.module('rifiuti.controllers.raccolta', [])
         });
       });
       if (raccolta.length == 1) raccolta[0].aperto = true;
+      else {
+          Raccolta.sortRaccolta(raccolta);
+      }
       $scope.raccolta=raccolta;
     });
   });
@@ -250,6 +257,9 @@ angular.module('rifiuti.controllers.raccolta', [])
       });
     });
     if (raccolta.length == 1) raccolta[0].aperto = true;
+    else {
+          Raccolta.sortRaccolta(raccolta);
+    }
     $scope.raccolta=raccolta;
   });
 
@@ -269,6 +279,9 @@ angular.module('rifiuti.controllers.raccolta', [])
         });
       });
       if (raccolta.length == 1) raccolta[0].aperto = true;
+      else {
+          Raccolta.sortRaccolta(raccolta);
+      }
       $scope.raccolta=raccolta;
     });
   });

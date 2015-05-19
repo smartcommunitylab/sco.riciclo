@@ -271,6 +271,15 @@ angular.module('rifiuti.services.rifiuti', [])
         $rootScope.immagini=imgs;
         return imgs;
       });
+    },
+    sortRaccolta: function(raccolta) {
+            raccolta.sort(function(a,b){
+            var aPaP = Utili.isPaP(a.tipologiaPuntoRaccolta);
+            var bPaP = Utili.isPaP(b.tipologiaPuntoRaccolta);
+            if (aPaP && !bPaP) return -1;
+            if (bPaP && !aPaP) return 1;
+            return a.tipologiaPuntoRaccolta.localeCompare(b.tipologiaPuntoRaccolta);
+        });
     }
   }
 })

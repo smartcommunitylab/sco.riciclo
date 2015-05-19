@@ -82,15 +82,7 @@
                         <div class="col">{{"Segnala" | translate}}</div>
                     </div>
                 </ion-item>
-                <ion-item nav-clear ng-click="showAlert()" href ng-if="isPopUp && (!!selectedProfile.PaP && selectedProfile.PaP.length > 0)">
-                    <div class="row row-center">
-                        <div class="col col-15 ">
-                            <img src="img/ic_settings.png" />
-                        </div>
-                        <div class="col">{{"Impostazioni" | translate}}</div>
-                    </div>
-                </ion-item>
-                <ion-item nav-clear menu-close href="#/app/settings" ng-if="(!isPopUp && !isHiddenFields) && (!!selectedProfile.PaP && selectedProfile.PaP.length > 0)">
+                <ion-item nav-clear menu-close ng-click="checkSettings()" href="#/app/settings" ng-if="!isHiddenFields && (!!selectedProfile.PaP && selectedProfile.PaP.length > 0)">
                     <div class="row row-center">
                         <div class="col col-15 ">
                             <img src="img/ic_settings.png" />

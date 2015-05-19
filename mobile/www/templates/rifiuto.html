@@ -17,7 +17,8 @@
     <ion-tabs class="tabs-balanced tabs-top tabs-100r">
         <ion-tab title="{{'PUNTI DI RACCOLTA'|translate}}">
             <ion-view>
-                <ion-content class="expandable-list-items" scroll="false">
+                <ion-content class="expandable-list-items"  has-bouncing="false">
+                  <div>
                     <div class="expandable-list-item" ng-repeat="item in raccolta">
                         <div class="row expandable-list-item-header" ng-click="item.aperto=!item.aperto">
                             <div class="col col-10 col-center">
@@ -61,6 +62,7 @@
                             </div>
                         </div>
                     </div>
+                  </div>
                 </ion-content>
             </ion-view>
         </ion-tab>

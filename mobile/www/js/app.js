@@ -62,13 +62,27 @@ angular.module('rifiuti', [
     $rootScope.version = '2.0';
 
     $rootScope.isWebView = ionic.Platform.isWebView();
-    $rootScope.isPopUp = $rootScope.isWebView && !IF_HIDDEN_FIELDS;
+    $rootScope.isPopUp = !$rootScope.isWebView && !IF_HIDDEN_FIELDS;
     $rootScope.isHiddenFields = IF_HIDDEN_FIELDS;
     $rootScope.loadingShow = function () {
         $ionicLoading.show({
             template: '<ion-spinner></ion-spinner>'
         });
     };
+
+    $rootScope.showAlert = function(link) {
+        var alertPopup = $ionicPopup.alert({
+            title: 'Attenzione!',
+            template: 'Non disponibile nella versione Web',
+            buttons: [
+            {
+                text: 'OK',
+                type: 'button-100r'
+            }
+          ]
+        });
+   };
+
 
     $rootScope.addr2id = function(addr) {
         return addr ? addr.replace('/','_') : null;
@@ -302,7 +316,7 @@ angular.module('rifiuti', [
         Progetto_di: 'Un progetto di:',
         Collaborazione: "In collaborazione con:",
         Eventuali: "Per informazioni:",
-        TutorialUno: "Questo tutorial ti inlustrerà il funzionamento della app. Per sapere dove buttare uno specifico rifiuto, scrivine il nome qui e premi sulla lente d'ingrandimento.",
+        TutorialUno: "Questo tutorial ti illustrerà il funzionamento della app. Per sapere dove buttare uno specifico rifiuto, scrivine il nome qui e premi sulla lente d'ingrandimento.",
         TutorialDue: "Scopri quali rifiuti appartengono ad una determinata categoria e scopri dove devono essere conferiti",
         TutorialTre: "Aggiungi delle note personali o dei promemoria legati alla gestione dei rifiuti (e.g. pagamento della bolletta, oggetti da portare al CRM, etc)",
         TutorialNews: "Tieniti informato delle novità della raccolta nel tuo comune",

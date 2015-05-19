@@ -33,7 +33,7 @@
     </ion-content>
 
     <ion-content class="home-notes" has-bouncing="false">
-        <ion-item ng-repeat="item in notes" class="home-notes-item" ng-click="noteSelect($index)" ng-class="{'home-notes-item-selected': selectedNotes.indexOf($index) != -1}">
+        <ion-item ng-repeat="item in notes track by $index" class="home-notes-item" ng-click="noteSelect($index)" ng-class="{'home-notes-item-selected': selectedNotes.indexOf($index) != -1}">
             {{item}}
         </ion-item>
     </ion-content>
