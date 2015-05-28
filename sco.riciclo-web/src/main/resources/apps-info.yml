@@ -9,4 +9,8 @@ apps:
     password: TRENTO      
     modelElements:
     - modello
+  - appId: ROVERETO
+    password: ROVERETO      
+    modelElements:
+    - modello
           
