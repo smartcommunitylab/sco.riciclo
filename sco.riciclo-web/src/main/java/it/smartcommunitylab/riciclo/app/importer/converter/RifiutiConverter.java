@@ -177,7 +177,16 @@ public class RifiutiConverter {
 			Riciclabolario ric = mapper.convertValue(rc, Riciclabolario.class);
 			ric.setTipologiaRifiuto(StringUtils.capitalize(ric.getTipologiaRifiuto().toLowerCase()));
 			ric.setAppId(appId);
-			riciclabolario.add(ric);
+			String[] split = StringUtils.split(ric.getTipologiaUtenza(),";");
+			for (String tu : split) {
+				Riciclabolario newRic = new Riciclabolario();
+				newRic.setAppId(appId);
+				newRic.setArea(ric.getArea());
+				newRic.setNome(ric.getNome());
+				newRic.setTipologiaRifiuto(ric.getTipologiaRifiuto());
+				newRic.setTipologiaUtenza(tu.trim());
+				riciclabolario.add(newRic);
+			}
 		}
 		output.setRiciclabolario(riciclabolario);
 		
