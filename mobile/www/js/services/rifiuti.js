@@ -19,23 +19,14 @@ angular.module('rifiuti.services.rifiuti', [])
           var myPuntiDone=[];
           if ($rootScope.selectedProfile) {
             results.data.forEach(function(punto,pi,dbPunti){
-              var optionsOK=true;
-              if (options && options.zona && punto.dettagliZona!=options.zona) optionsOK=false;
-              if (options && options.tipo && punto.tipologiaPuntiRaccolta!=options.tipo) optionsOK=false;
-              if (optionsOK && punto.zona && Utili.belongsTo(punto, punto.area, $rootScope.selectedProfile)) {
-                if (myPuntiDone.indexOf(punto.dettagliZona)==-1) {
-//                  var extcheckOK=true;
-//                  if (punto.caratteristiche!="" && punto.gettoniera!="True" && punto.residuo!="" && punto.residuo!="True" && punto.tipologiaPuntiRaccolta=="Residuo") extcheckOK=false;
-//                  if (punto.imbCarta!="" && punto.imbCarta!="True" && punto.tipologiaPuntiRaccolta=="Carta, cartone e cartoni per bevande") extcheckOK=false;
-//                  if (punto.imbPlMet!="" && punto.imbPlMet!="True" && punto.tipologiaPuntiRaccolta=="Imballaggi in plastica e metallo") extcheckOK=false;
-//                  if (punto.imbVetro!="" && punto.imbVetro!="True" && punto.tipologiaPuntiRaccolta=="Imballaggi in vetro") extcheckOK=false;
-//                  if (punto.organico!="" && punto.organico!="True" && punto.tipologiaPuntiRaccolta=="Organico") extcheckOK=false;
-//                  if (punto.indumenti!="" && punto.indumenti!="True" && punto.tipologiaPuntiRaccolta=="Indumenti usati") extcheckOK=false;
-//                  if (extcheckOK) {
+              if (options &&
+                  (options.zona && punto.dettagliZona!=options.zona ||
+                   options.tipo && punto.tipologiaPuntiRaccolta!=options.tipo)) return;
+
+              if (punto.dettagliZona && Utili.belongsTo(punto, punto.area, $rootScope.selectedProfile)) {
+                  if (myPuntiDone.indexOf(punto.dettagliZona)==-1) {
                     myPunti.push(punto);
                     if (!options || !options.all) myPuntiDone.push(punto.dettagliZona);
-//                  }
-                //} else { console.log('already: '+punto.dettagliZona);
                 }
               }
             });
@@ -82,16 +73,15 @@ angular.module('rifiuti.services.rifiuti', [])
           var myRaccolta=[];
           if ($rootScope.selectedProfile) {
             results.data.forEach(function(regola,ri,dbRaccolta){
-              var optionsOK=true;
-              if (options && options.tipo && regola.tipologiaRaccolta!=options.tipo) optionsOK=false;
+              if (options && options.tipo && regola.tipologiaRaccolta!=options.tipo) return;
 
-              if (options && options.tiporifiuto && regola.tipologiaRifiuto!=options.tiporifiuto) optionsOK=false;
-              if (options && options.tipirifiuto && options.tipirifiuto.indexOf(regola.tipologiaRifiuto)) optionsOK=false;
+              if (options && options.tiporifiuto && regola.tipologiaRifiuto!=options.tiporifiuto) return;
+              if (options && options.tipirifiuto && options.tipirifiuto.indexOf(regola.tipologiaRifiuto)) return;
 
-              if (options && options.tipopunto && regola.tipologiaPuntoRaccolta!=options.tipopunto) optionsOK=false;
-              if (options && options.tipipunto && options.tipipunto.indexOf(regola.tipologiaPuntoRaccolta)==-1) optionsOK=false;
+              if (options && options.tipopunto && regola.tipologiaPuntoRaccolta!=options.tipopunto) return;
+              if (options && options.tipipunto && options.tipipunto.indexOf(regola.tipologiaPuntoRaccolta)==-1) return;
 
-              if (optionsOK && $rootScope.selectedProfile.aree.indexOf(regola.area)!=-1 &&
+              if ($rootScope.selectedProfile.aree.indexOf(regola.area)!=-1 &&
                   regola.tipologiaUtenza==$rootScope.selectedProfile.utenza.tipologiaUtenza) {
                 var icona = Utili.iconFromRegola(regola);
                 if (icona) regola['icon'] = icona;
@@ -121,10 +111,9 @@ angular.module('rifiuti.services.rifiuti', [])
           var myRifiuti=[];
           if ($rootScope.selectedProfile) {
             results.data.forEach(function(rifiuto,ri,dbRifiuti){
-              var optionsOK=true;
-              if (options && options.tipo && rifiuto.tipologiaRifiuto!=options.tipo) optionsOK=false;
-              if (options && options.tipi && options.tipi.indexOf(rifiuto.tipologiaRifiuto)==-1) optionsOK=false;
-              if (optionsOK && $rootScope.selectedProfile.aree.indexOf(rifiuto.area)!=-1 && rifiuto.tipologiaUtenza==$rootScope.selectedProfile.utenza.tipologiaUtenza) {
+              if (options && options.tipo && rifiuto.tipologiaRifiuto!=options.tipo) return;
+              if (options && options.tipi && options.tipi.indexOf(rifiuto.tipologiaRifiuto)==-1) return;
+              if ($rootScope.selectedProfile.aree.indexOf(rifiuto.area)!=-1 && rifiuto.tipologiaUtenza==$rootScope.selectedProfile.utenza.tipologiaUtenza) {
                 myRifiuti.push(rifiuto);
 //                if (myTipologie.indexOf(rifiuto.tipologiaRifiuto)==-1) myTipologie.push(rifiuto.tipologiaRifiuto);
               }

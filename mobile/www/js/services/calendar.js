@@ -17,10 +17,12 @@ angular.module('rifiuti.services.calendar', [])
 
       if (Utili.isPaP(puntoDiRaccolta.tipologiaPuntiRaccolta)) {
         key = 'Porta a porta'; t = key;
+        var descr = puntoDiRaccolta.tipologiaPuntiRaccolta;
+        if (descr.indexOf(key) == 0) descr = descr.substr(key.length+1);
         proto = {
           tipologiaPuntiRaccolta: puntoDiRaccolta.tipologiaPuntiRaccolta,
           colore: puntoDiRaccolta.colore,
-          descr : [puntoDiRaccolta.tipologiaPuntiRaccolta.substr(14), hour]
+          descr : [descr, hour]
         };
       } else  {
         key = puntoDiRaccolta.tipologiaPuntiRaccolta + puntoDiRaccolta.dettagliZona;
