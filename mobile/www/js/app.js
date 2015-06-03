@@ -476,6 +476,17 @@ angular.module('rifiuti', [
         }
     })
 
+    .state('app.infoRaccolta', {
+        url: "/infoRaccolta/:id",
+        cache: false,
+        views: {
+            'menuContent': {
+                templateUrl: "templates/infoRaccolta.html",
+                controller: 'InfoRaccoltaCtrl'
+            }
+        }
+    })
+
     .state('app.profili', {
         url: "/profili",
         views: {

@@ -136,7 +136,7 @@ angular.module('rifiuti.services.utili', [])
         ;
     },
     isPaP: function(tipologia) {
-      return !!tipologia && tipologia.toLowerCase().indexOf('porta a porta') == 0;
+      return !!tipologia && (tipologia.toLowerCase().indexOf('porta a porta') == 0 || !!CUSTOM_PAP && CUSTOM_PAP.indexOf(tipologia) >= 0);
     },
 	fullDateFormat: function(d,transf) {
 		return transf(giorniShort[d.getDay()])+ ' ' +d.getDate()+' '+transf(mesi[d.getMonth()])+' '+d.getFullYear();

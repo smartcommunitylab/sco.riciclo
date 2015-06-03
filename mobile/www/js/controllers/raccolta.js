@@ -313,7 +313,53 @@ angular.module('rifiuti.controllers.raccolta', [])
       var j = $scope.checkGiorni(orario.il);
         if (j == -1) {
           $scope.orari.push({
-            giorno: orario.il,
+            giorno: orario.il.split(' '),
+            ecceto: orario.eccezione? orario.eccezione.split(' ') : [],
+            orari:[ orario.dalle + "-" + orario.alle ]
+          });
+        } else {
+          if ($scope.orari[j].orari.indexOf(orario.dalle + "-" + orario.alle) == -1) {
+            $scope.orari[j].orari.push(orario.dalle + "-" + orario.alle);
+          }
+        }
+      });
+    });
+    Raccolta.raccolta({ tipopunto:$scope.pdr.tipologiaPuntiRaccolta }).then(function(raccolta){
+      var myRifiuti=[];
+      raccolta.forEach(function(regola){
+        if (myRifiuti.indexOf(regola.tipologiaRaccolta)==-1) {
+          myRifiuti.push(regola.tipologiaRaccolta);
+        //} else { console.log('already: '+regola.tipologiaRaccolta);
+        }
+      });
+      $scope.rifiuti=myRifiuti;
+    });
+  });
+})
+
+.controller('InfoRaccoltaCtrl', function ($scope, $rootScope, $stateParams, $ionicNavBarDelegate, Raccolta) {
+
+  $scope.id = $stateParams.id;
+  $scope.pdr = {};
+  $scope.orari = [];
+  //[{giorno:"lunedì",orari:["12.00-14.00","15.30-17.30"...]}...]
+
+  $scope.checkGiorni = function (item) {
+    for (var j = 0; j < $scope.orari.length; j++) {
+      if ($scope.orari[j].giorno == item) return j;
+    }
+    return -1;
+  };
+
+  Raccolta.puntiraccolta({ tipo:$scope.id, all:true }).then(function(punti){
+    $scope.pdr = punti[0];
+    punti.forEach(function(punto){
+      punto.orarioApertura.forEach(function(orario) {
+      var j = $scope.checkGiorni(orario.il);
+        if (j == -1) {
+          $scope.orari.push({
+            giorno: orario.il.split(' '),
+            ecceto: orario.eccezione? orario.eccezione.split(' ') : [],
             orari:[ orario.dalle + "-" + orario.alle ]
           });
         } else {

@@ -157,9 +157,9 @@ public class RifiutiConverter {
 		List<Raccolta> raccolte = Lists.newArrayList();
 		for (it.smartcommunitylab.riciclo.app.importer.model.Raccolte rc : (List<it.smartcommunitylab.riciclo.app.importer.model.Raccolte>) rifiuti.getRaccolte()) {
 			Raccolta raccolta = mapper.convertValue(rc, Raccolta.class);
-			raccolta.setTipologiaPuntoRaccolta(StringUtils.capitalize(raccolta.getTipologiaPuntoRaccolta().toLowerCase()).replace("Crm", "CRM").replace("Crz", "CRZ"));
-			raccolta.setTipologiaRifiuto(StringUtils.capitalize(raccolta.getTipologiaRifiuto().toLowerCase()));
-			raccolta.setTipologiaRaccolta(StringUtils.capitalize(raccolta.getTipologiaRaccolta().toLowerCase().replace("crm", "CRM").replace("crz", "CRZ")));
+			raccolta.setTipologiaPuntoRaccolta(StringUtils.capitalize(raccolta.getTipologiaPuntoRaccolta().toLowerCase()).replace("Crm", "CRM").replace("Crz", "CRZ").trim());
+			raccolta.setTipologiaRifiuto(StringUtils.capitalize(raccolta.getTipologiaRifiuto().toLowerCase()).trim());
+			raccolta.setTipologiaRaccolta(StringUtils.capitalize(raccolta.getTipologiaRaccolta().toLowerCase().replace("crm", "CRM").replace("crz", "CRZ")).trim());
 			raccolta.setAppId(appId);
 			raccolte.add(raccolta);
 //			categorie.getColori().add(new Tipologia(raccolta.getColore(), null, null));
@@ -167,7 +167,7 @@ public class RifiutiConverter {
 		output.setRaccolta(raccolte);
 
 		for (TipologiaRaccolta tr : rifiuti.getTipologiaRaccolta()) {
-			categorie.getTipologiaRaccolta().add(new Tipologia(StringUtils.capitalize(tr.getValore().toLowerCase().replace("crm", "CRM").replace("crz", "CRZ")), null, null));
+			categorie.getTipologiaRaccolta().add(new Tipologia(StringUtils.capitalize(tr.getValore().toLowerCase().replace("crm", "CRM").replace("crz", "CRZ")).trim(), null, null));
 		}
 
 		output.setPuntiRaccolta(compactPuntiRaccolta(rifiuti.getPuntiRaccolta(), appId));
@@ -181,10 +181,10 @@ public class RifiutiConverter {
 			for (String tu : split) {
 				Riciclabolario newRic = new Riciclabolario();
 				newRic.setAppId(appId);
-				newRic.setArea(ric.getArea());
-				newRic.setNome(ric.getNome());
-				newRic.setTipologiaRifiuto(ric.getTipologiaRifiuto());
-				newRic.setTipologiaUtenza(tu.trim());
+				newRic.setArea(ric.getArea().trim());
+				newRic.setNome(ric.getNome().trim());
+				newRic.setTipologiaRifiuto(ric.getTipologiaRifiuto().trim());
+				newRic.setTipologiaUtenza(tu.trim().trim());
 				riciclabolario.add(newRic);
 			}
 		}
