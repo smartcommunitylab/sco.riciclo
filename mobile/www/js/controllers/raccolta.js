@@ -150,7 +150,7 @@ angular.module('rifiuti.controllers.raccolta', [])
       var points = [];
       var list = [];
       punti.forEach(function(punto){
-        if ($scope.id == null || punto.dettagliZona == $scope.id) {
+        if ($scope.id == null && !!punto.dettagliZona || punto.dettagliZona == $scope.id) {
           var icon = {
             url: Utili.poiIcon(punto.tipologiaPuntiRaccolta),
             scaledSize: new google.maps.Size(45, 45)
