@@ -57,7 +57,7 @@ angular.module('rifiuti.controllers.common', ['ionic'])
     //        // }
     //    };
 
-    $scope.attachPosition = true;
+    $scope.attachPosition = false;
 
     $scope.msg = {
         text: null
