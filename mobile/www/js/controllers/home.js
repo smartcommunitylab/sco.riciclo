@@ -7,32 +7,6 @@ angular.module('rifiuti.controllers.home', [])
     $scope.height = window.innerHeight;
     $scope.width = window.innerWidth;
 
-    $scope.rifiuti = [];
-    $scope.f = [];
-    $scope.listaRifiuti = [];
-
-    DataManager.get('data/db/riciclabolario.json').then(function (results) {
-        $scope.listaRifiuti = results.data;
-    });
-
-    DataManager.get('data/db/tipologiaRifiuto.json').then(function (results) {
-        for (var i = 0; i < results.data.length; i++) {
-            results.data[i].valore = results.data[i].nome.substr(0, 1) + results.data[i].nome.substr(1).toLowerCase();
-        }
-        $scope.rifiuti = results.data;
-        DataManager.get('data/support/tipologiaRifiutoImmagini.json').then(function (results) {
-            var tdri = results.data;
-            for (var i = 0; i < $scope.rifiuti.length; i++) {
-                for (var j = 0; j < tdri.length; j++) {
-                    if ($scope.rifiuti[i].valore == tdri[j].valore) {
-                        $scope.rifiuti[i].immagine = tdri[j].immagine;
-                    }
-                }
-            }
-            $scope.f = $scope.oneInThree($scope.rifiuti);
-        });
-    });
-
     $scope.titleText = function () {
 //        if (!$rootScope.noteSelected) {
             return APP_NAME;
