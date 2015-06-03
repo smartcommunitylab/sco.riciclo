@@ -23,7 +23,7 @@ angular.module('rifiuti.services.rifiuti', [])
                   (options.zona && punto.dettagliZona!=options.zona ||
                    options.tipo && punto.tipologiaPuntiRaccolta!=options.tipo)) return;
 
-              if (punto.dettagliZona && Utili.belongsTo(punto, punto.area, $rootScope.selectedProfile)) {
+              if (/*punto.dettagliZona && */Utili.belongsTo(punto, punto.area, $rootScope.selectedProfile)) {
                   if (myPuntiDone.indexOf(punto.dettagliZona)==-1) {
                     myPunti.push(punto);
                     if (!options || !options.all) myPuntiDone.push(punto.dettagliZona);

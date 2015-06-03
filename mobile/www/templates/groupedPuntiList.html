@@ -36,7 +36,7 @@
                 </div>
             </div>
         </a>
-        <a ng-if="!punto.dettagliZona && !punto.zona" ng-repeat="punto in item.punti" class="hidden-link expandable-list-item-content" ng-href="#/app/puntoDiRaccolta/{{addr2id(punto.dettagliZona) || punto.zona}}">
+        <a ng-if="!punto.dettagliZona && !punto.zona" ng-repeat="punto in item.punti" class="hidden-link expandable-list-item-content" ng-href="#/app/infoRaccolta/{{item.tipologiaPuntoRaccolta}}">
             <div class="row">
                 <div class="col col-100">
                     {{item.tipologiaPuntoRaccolta|translate}}
