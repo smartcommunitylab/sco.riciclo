@@ -9,8 +9,15 @@
         </button>-->
     </ion-header-bar>
     <ion-content>
-        <ion-list>
-            <ion-item class="item-icon-right" ng-repeat="item in aree" ng-click="localitaSelected(item)">
+        <div class="item item-input-inset" ng-if="!!aree && aree.length > 10">
+            <label class="item-input-wrapper">
+                <input type="search" ng-init="searchQuery.etichetta = ''" ng-model="searchQuery.etichetta">
+                <!--placeholder="{{'Che rifiuto vuoi buttare?' | translate}}"-->
+            </label>
+            <button id="searchButton" class="button button-small button-clear ion-close button-stable" ng-click="searchQuery.etichetta = ''"></button>
+        </div>
+        <ion-list ng-if="aree.length > 0">
+            <ion-item class="item-icon-right localita-animate-repeat" ng-repeat="item in aree | filter:searchQuery" ng-click="localitaSelected(item)">
                 {{item.etichetta}}
                 <a class="icon help" ng-click="help(item)" ion-stop-event="click" ng-if="!!item.descrizione">
                     <img ng-src="img/ic_help.png" />

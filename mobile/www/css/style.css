@@ -1,11 +1,11 @@
 /* Empty. Add your own CSS if you like */
 
 body.platform-browser .ng-animate .scroll-bar {
-  visibility: visible !important;
+    visibility: visible !important;
 }
 
-body.platform-browser .scroll-bar-fade-out{
-  opacity:1 !important
+body.platform-browser .scroll-bar-fade-out {
+    opacity: 1 !important
 }
 
 .scroll-content > #map1 {
@@ -528,6 +528,22 @@ body.platform-browser .scroll-bar-fade-out{
 
 .profile .profile-types .item.item-radio .item-content {
     background-color: #eee !important;
+}
+
+.localita-modal .localita-animate-repeat.ng-enter,
+.localita-modal .localita-animate-repeat.ng-leave {
+    -webkit-transition: all linear 0.25s;
+    transition: all linear 0.25s;
+}
+
+.localita-modal .localita-animate-repeat.ng-enter,
+.localita-modal .localita-animate-repeat.ng-leave.ng-leave-active {
+    opacity: 0;
+}
+
+.localita-modal .localita-animate-repeat.ng-leave,
+.localita-modal .localita-animate-repeat.ng-enter.ng-enter-active {
+    opacity: 1;
 }
 
 .localita-modal .help {

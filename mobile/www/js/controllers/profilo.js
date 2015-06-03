@@ -3,6 +3,8 @@ angular.module('rifiuti.controllers.profilo', [])
 .controller('ProfiliCtrl', function ($scope, $rootScope) {})
 
 .controller('ModificaProfiloCtrl', function ($scope, $rootScope, $ionicNavBarDelegate, $filter, DataManager, $stateParams, $ionicPopup, $ionicModal, Profili, Raccolta) {
+    $scope.searchQuery = {};
+
     $scope.aree = [];
 
     $scope.id = $stateParams.id;
