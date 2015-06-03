@@ -200,6 +200,7 @@ angular.module('rifiuti.controllers.profilo', [])
     };
 
     $scope.localitaSelected = function (item) {
+        $scope.searchQuery['etichetta'] = '';
         $scope.profilo.area = item;
         $scope.closeLocalitaSelector();
     };
