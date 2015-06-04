@@ -80,6 +80,10 @@ angular.module('rifiuti.services.utili', [])
     return null;
   }; 
   
+  var rgbColor = function(colore) {
+      if (colore in ICON_COLOR_MAP) return ICON_COLOR_MAP[colore];
+      return 'grey';
+  }
 
   return {
     jsDOWToShortText: function(dow) {
@@ -116,8 +120,11 @@ angular.module('rifiuti.services.utili', [])
     }, 
 
     getRGBColor: function(colore) {
-      if (colore in ICON_COLOR_MAP) return ICON_COLOR_MAP[colore];
-      return 'grey';
+        var c = rgbColor(colore);
+        if (c == 'white') {
+            return 'grey';
+        }
+        return c;
     },
     iconFromRegola: function(regola) {
       return this.icon(regola.tipologiaPuntoRaccolta, regola.colore);
@@ -126,8 +133,11 @@ angular.module('rifiuti.services.utili', [])
 //      var icona = iconType(tipologia);
 //      return (!!icona?'img/ic_'+icona+'_'+this.getRGBColor(colore)+'.png':null);
 //    },
-    icon: function(tipologia) {
+    icon: function(tipologia,colore) {
       var icona = iconType(tipologia);
+      if (rgbColor(colore)=='white') {
+        return icona + '-outline';
+      }
       return icona;
     },
     poiIcon: function(tipologia, colore) {

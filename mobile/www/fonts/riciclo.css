@@ -8,7 +8,19 @@
 	font-weight: normal;
 	font-style: normal;
 }
+[class^="riciclo-"], [class*=" riciclo-"] {
+	font-family: 'riciclo';
+	speak: none;
+	font-style: normal;
+	font-weight: normal;
+	font-variant: normal;
+	text-transform: none;
+	line-height: 1;
 
+	/* Better Font Rendering =========== */
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+}
 [class^="riciclo-"], [class*=" riciclo-"] {
 	font-family: 'riciclo';
 	speak: none;
@@ -23,6 +35,33 @@
 	-moz-osx-font-smoothing: grayscale;
 }
 
+.riciclo-crm-outline:before {
+	content: "\e62c";
+}
+.riciclo-crz-outline:before {
+	content: "\e62d";
+}
+.riciclo-domicilio-outline:before {
+	content: "\e625";
+}
+.riciclo-farmacia-outline:before {
+	content: "\e626";
+}
+.riciclo-furgone-outline:before {
+	content: "\e627";
+}
+.riciclo-isola_ecologica-outline:before {
+	content: "\e628";
+}
+.riciclo-porta_a_porta-outline:before {
+	content: "\e629";
+}
+.riciclo-rivenditore-outline:before {
+	content: "\e62a";
+}
+.riciclo-stradale-outline:before {
+	content: "\e62b";
+}
 .riciclo-add:before {
 	content: "\e600";
 }
