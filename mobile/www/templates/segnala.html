@@ -6,12 +6,6 @@
         </div>
     </ion-nav-title>
 
-    <!--<ion-nav-buttons side="left">
-        <button menu-toggle="left" class="row button button-icon ion-navicon">
-            <img ng-if="!noteSelected" class="nav-button-app-logo" src="img/ic_launcher.png">
-        </button>
-    </ion-nav-buttons>-->
-
     <ion-content class="segnala padding">
         <div class="segnala-desc">
             {{'Invia' | translate}}
@@ -33,7 +27,7 @@
 
         <div ng-if="(!isPopUp && !isHiddenFields)" class="row segnala-photo" ng-click="takePicture()">
             <button class="button-clear">
-                <img src="img/ic_camera.png" />
+                <i class="icon riciclo-camera icon-button"></i>
             </button>
             <div class="col">{{'Scatta una foto' | translate}}</div>
         </div>
@@ -43,7 +37,7 @@
 
         <div ng-if="isPopUp" class="row segnala-photo" ng-click="showAlert()">
             <button class="button-clear">
-                <img src="img/ic_camera.png" />
+                <i class="icon riciclo-camera icon-button"></i>
             </button>
             <div class="col">{{'Scatta una foto' | translate}}</div>
         </div>

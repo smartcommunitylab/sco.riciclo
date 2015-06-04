@@ -7,14 +7,6 @@
     </div>
   </ion-nav-title>
 
-<!--
-  <ion-nav-buttons side="left">
-    <button ng-click="back()" class="row button button-icon ion-ios7-arrow-back">
-      <img ng-if="!noteSelected" class="nav-button-app-logo" src="img/ic_launcher.png">
-    </button>
-  </ion-nav-buttons>
--->
-
   <ion-content class="contatto" has-bouncing="false" delegate-handle="mainScroll" on-scroll-complete="mainScrollResize()">
     <div class="row">
       <div class="col">
@@ -24,21 +16,21 @@
     <a class="hidden-link" ng-click="clickLink('http://maps.google.com?daddr='+contatto.coords)" ng-if="!!contatto.indirizzo">
       <div class="row">
         <button class="col icon button-balanced button-clear">
-          <img src="img/ic_directions.png">
+            <i class="riciclo-location icon-large"></i>
         </button>
         <div class="col col-90 col-center">{{contatto.indirizzo}}</div>
       </div>
     </a>
     <div class="row" ng-if="!!contatto.orarioUfficio">
       <button class="col icon button-balanced button-clear">
-        <img src="img/calendar.png">
+        <i class="riciclo-orari icon-large"></i>
       </button>
       <div class="col col-90 col-center">{{contatto.orarioUfficio}}</div>
     </div>
     <a class="hidden-link" ng-click="clickLink(contatto.sitoIstituzionale)" ng-if="!!contatto.sitoIstituzionale">
       <div class="row">
         <button class="col icon button-balanced button-clear">
-          <img src="img/ic_web.png">
+        <i class="riciclo-website icon-large"></i>
         </button>
         <div class="col col-90 col-center">{{contatto.sitoIstituzionale}}</div>
       </div>
@@ -46,7 +38,7 @@
     <a class="hidden-link" ng-click="clickLink(contatto.sitoWeb)" ng-if="!!contatto.sitoWeb">
       <div class="row">
         <button class="col icon button-balanced button-clear">
-          <img src="img/ic_web.png">
+            <i class="riciclo-website icon-large"></i>
         </button>
         <div class="col col-90 col-center">{{contatto.sitoWeb}}</div>
       </div>
@@ -54,21 +46,21 @@
     <a class="hidden-link" ng-click="clickLink('tel:'+contatto.telefono)" ng-if="!!contatto.telefono">
       <div class="row">
         <button class="col icon button-balanced button-clear">
-          <img src="img/ic_call.png">
+        <i class="riciclo-telephone icon-large"></i>
         </button>
         <div class="col col-90 col-center">{{contatto.telefono}}</div>
       </div>
     </a>
     <div class="row" ng-if="!!contatto.fax">
       <button class="col icon button-balanced button-clear">
-        <img src="img/ic_fax.png">
+        <i class="riciclo-fax icon-large"></i>
       </button>
       <div class="col col-90 col-center">{{contatto.fax}}</div>
     </div>
     <a class="hidden-link" ng-click="clickLink('mailto:'+contatto.email)" ng-if="!!contatto.email">
       <div class="row">
         <button class="col icon button-balanced button-clear">
-          <img src="img/ic_mail.png">
+        <i class="riciclo-email icon-large"></i>
         </button>
         <div class="col col-90 col-center">{{contatto.email}}</div>
       </div>
@@ -76,7 +68,7 @@
     <a class="hidden-link" ng-click="clickLink('mailto:'+contatto.pec)" ng-if="!!contatto.pec">
       <div class="row">
         <button class="col icon button-balanced button-clear">
-          <img src="img/ic_pec.png">
+        <i class="riciclo-pec icon-large"></i>
         </button>
         <div class="col col-90 col-center">{{contatto.pec}}</div>
       </div>
@@ -84,7 +76,7 @@
     <a class="hidden-link" ng-click="clickLink(contatto.facebook)" ng-if="!!contatto.facebook">
       <div class="row">
         <button class="col icon button-balanced button-clear">
-          <img src="img/ic_fb.png">
+        <i class="ion-social-facebook icon-large"></i>
         </button>
         <div class="col col-90 col-center">{{contatto.facebook}}</div>
       </div>

@@ -113,9 +113,9 @@ angular.module('rifiuti.controllers.home', [])
 .controller('noteCtrl', function ($scope, $rootScope, $ionicPopup, $filter, Profili) {
     $scope.noteSelected = false;
 
-    $scope.variableIMG = "img/ic_add.png";
+    $scope.variableIMG = "riciclo-add";
     var updateIMG = function () {
-        $scope.variableIMG = !$scope.noteSelected ? "img/ic_add.png" : "img/ic_menu_delete.png";
+        $scope.variableIMG = !$scope.noteSelected ? "riciclo-add" : "riciclo-discard";
     };
 
 //    $rootScope.$watch('noteSelected', function () {
@@ -284,10 +284,10 @@ angular.module('rifiuti.controllers.home', [])
         $scope.updateIMG2();
     }
 
-    $scope.variableIMG2 = "img/listView.png";
+    $scope.variableIMG2 = "riciclo-calendar_list";
 
     $scope.updateIMG2 = function () {
-        $scope.variableIMG2 = $scope.calendarView ? "img/tableView.png" : "img/listView.png";
+        $scope.variableIMG2 = $scope.calendarView ? "riciclo-calendar_table" : "riciclo-calendar_list";
     };
 
     $scope.firstDayIndex = function (week) {

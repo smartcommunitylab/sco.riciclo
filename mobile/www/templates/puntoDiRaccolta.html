@@ -6,14 +6,6 @@
         </div>
     </ion-nav-title>
 
-<!--
-    <ion-nav-buttons side="left">
-        <button ng-click="back()" class="row button button-icon ion-ios7-arrow-back">
-            <img ng-if="!noteSelected" class="nav-button-app-logo" src="img/ic_launcher.png">
-        </button>
-    </ion-nav-buttons>
--->
-
     <ion-content class="puntodiraccolta" has-bouncing="false">
         <!-- DETTAGLI -->
         <div class="subpage-title">
@@ -27,10 +19,10 @@
             </div>
             <div class="col action">
                 <a class="hidden-link" href="#/app/puntiDiRaccolta/{{addr2id(pdr.dettagliZona) || pdr.zona}}">
-                    <img src="img/ic_map_green.png">
+                    <i class="icon riciclo-map icon-button"></i>
                 </a>
                 <a class="hidden-link" target="_system" ng-click="clickNav()">
-                    <img src="img/ic_directions.png">
+                    <i class="icon riciclo-location icon-button"></i>
                 </a>
             </div>
         </div>

@@ -122,9 +122,13 @@ angular.module('rifiuti.services.utili', [])
     iconFromRegola: function(regola) {
       return this.icon(regola.tipologiaPuntoRaccolta, regola.colore);
     },
-    icon: function(tipologia, colore) {
+//    icon: function(tipologia, colore) {
+//      var icona = iconType(tipologia);
+//      return (!!icona?'img/ic_'+icona+'_'+this.getRGBColor(colore)+'.png':null);
+//    },
+    icon: function(tipologia) {
       var icona = iconType(tipologia);
-      return (!!icona?'img/ic_'+icona+'_'+this.getRGBColor(colore)+'.png':null);
+      return icona;
     },
     poiIcon: function(tipologia, colore) {
       var icona = iconType(tipologia);

@@ -8,10 +8,10 @@
     <ion-nav-buttons side="right">
         <div class="nowrap">
             <button ng-click="edit()" class="button button-clear btn btn-edit">
-                <img ng-src="{{!!editMode ? 'img/ic_save.png' : 'img/ic_edit.png'}}" />
+                <i class="icon {{!!editMode ? 'riciclo-save' : 'riciclo-edit'}}"></i>
             </button>
             <button ng-click="click()" class="button button-clear btn btn-variable" ng-if="!editMode">
-                <img ng-src="img/ic_menu_delete.png" />
+                <i class="icon riciclo-discard"></i>
             </button>
         </div>
     </ion-nav-buttons>
@@ -29,7 +29,7 @@
 
         <div class="profile-block profile-types">
             <div class="profile-title">{{"Tipo di utenza" | translate}}
-                <a class="help" ng-click="helpTipi()"><img ng-src="img/ic_help.png" />
+                <a class="help" ng-click="helpTipi()"><i class="icon riciclo-more_info icon-button"></i>
                 </a>
             </div>
             <!--<div ng-if="editMode">

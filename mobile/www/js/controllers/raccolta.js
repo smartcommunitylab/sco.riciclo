@@ -66,7 +66,7 @@ angular.module('rifiuti.controllers.raccolta', [])
   $rootScope.checkMap();  
   
   $scope.updateIMG = function () {
-    $scope.variableIMG = $scope.mapView ? "img/ic_list.png" : "img/ic_map.png";
+    $scope.variableIMG = $scope.mapView ? "riciclo-lista" : "riciclo-map";
   };
 
   $scope.openMarkerClick = function ($markerModel) {
@@ -144,7 +144,7 @@ angular.module('rifiuti.controllers.raccolta', [])
     $scope.mapView = true;
     $scope.id = $stateParams.id != '!' ? $rootScope.id2addr($stateParams.id) : null;
     $scope.list = [];
-    $scope.variableIMG = "img/ic_list.png";
+    $scope.variableIMG = "riciclo-lista";
 
     Raccolta.puntiraccolta().then(function(punti){
       var points = [];
@@ -198,6 +198,9 @@ angular.module('rifiuti.controllers.raccolta', [])
 .controller('TDRCtrl', function ($scope, $rootScope, DataManager, Raccolta, Utili) {
   $scope.icon = function(item) {
     return Utili.icon(item.tipologiaPuntoRaccolta,item.colore);
+  };
+  $scope.color = function(item) {
+    return Utili.getRGBColor(item.colore);
   };
   
   var init = function() {

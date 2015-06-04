@@ -96,7 +96,7 @@ body.platform-browser .scroll-bar-fade-out {
     padding: 0;
 }
 
-.bar-100r .btn img {
+.bar-100r .btn i {
     width: 35px;
     height: 35px;
 }
@@ -404,7 +404,7 @@ body.platform-browser .scroll-bar-fade-out {
     text-align: right;
 }
 
-.puntodiraccolta .dettagli .action img {
+.puntodiraccolta .dettagli .action i {
     width: 35px;
     height: 35px;
 }
@@ -516,7 +516,7 @@ body.platform-browser .scroll-bar-fade-out {
     padding: 0;*/
 }
 
-.help img {
+.help i {
     width: 35px;
     height: 35px;
     vertical-align: middle;
@@ -590,8 +590,8 @@ body.platform-browser .scroll-bar-fade-out {
     color: #444;
 }
 
-.segnala .segnala-photo button img,
-.segnala .segnala-position button img {
+.segnala .segnala-photo button i,
+.segnala .segnala-position button i {
     width: 35px;
     height: 35px;
 }
@@ -603,7 +603,7 @@ body.platform-browser .scroll-bar-fade-out {
     height: 150px;
 }
 
-.segnala .segnala-image img {
+.segnala .segnala-image i {
     display: block;
     margin-left: auto;
     margin-right: auto;
@@ -660,7 +660,7 @@ body.platform-browser .scroll-bar-fade-out {
     position: relative;
 }
 
-.contatto button.icon img {
+.contatto button.icon i {
     width: 35px;
     height: 35px;
     margin: auto;
@@ -780,4 +780,31 @@ body.platform-browser .scroll-bar-fade-out {
 
 .profili-titolo {
     font-weight: bold;
+}
+
+.icon-menu {
+    font-size: 30px;
+    color: #63ac3d;
+}
+
+.icon-button {
+    font-size: 35px;
+    color: #47772b;
+}
+
+.icon-large {
+    font-size: 30px;
+}
+
+.icon-xlarge {
+    font-size: 35px;
+}
+
+.icon-group {
+    font-size: 25px;
+    color: grey;
+}
+
+.icon-tipo {
+    font-size: 35px;
 }
