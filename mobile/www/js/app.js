@@ -329,6 +329,7 @@ angular.module('rifiuti', [
         TTQuattro: "Calendario",
         TTCinque: "Menù laterale",
         Selezionare: "Seleziona Comune/Località",
+        help_utenze: "Tipi di utenza",
         "Le mie note": "Le mie note",
         "Impostazioni": "Impostazioni",
         "NOTE": "NOTE",

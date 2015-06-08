@@ -117,6 +117,7 @@ angular.module('rifiuti.controllers.profilo', [])
         var popup = $ionicPopup.show({
             title: '<b class="popup-title">Info<b/>',
             templateUrl: 'templates/profiloHelp.html',
+            cssClass: 'popup-tipi',
             scope: $scope,
             buttons: [
                 {
@@ -182,32 +183,49 @@ angular.module('rifiuti.controllers.profilo', [])
         });
     };
 
+    $scope.modal = null;
+
+    $scope.closeModal = function () {
+        $scope.modal.hide();
+    };
 
     /* LOCALITA SELECTOR */
+    var modalLocalita = null;
     $ionicModal.fromTemplateUrl('templates/localitaModal.html', {
         scope: $scope,
         animation: 'slide-in-up'
     }).then(function (modal) {
-        $scope.localitaModal = modal;
+        modalLocalita = modal;
     });
 
     $scope.openLocalitaSelector = function () {
-        $scope.localitaModal.show();
-    };
-
-    $scope.closeLocalitaSelector = function () {
-        $scope.localitaModal.hide();
+        $scope.modal = modalLocalita;
+        $scope.modal.show();
     };
 
     $scope.localitaSelected = function (item) {
         $scope.searchQuery['etichetta'] = '';
         $scope.profilo.area = item;
-        $scope.closeLocalitaSelector();
+        $scope.closeModal();
+    };
+
+    /* TIPI UTENZE MODAL */
+    var modalUtenze = null;
+    $ionicModal.fromTemplateUrl('templates/utenzeModal.html', {
+        scope: $scope,
+        animation: 'slide-in-up'
+    }).then(function (modal) {
+        modalUtenze = modal;
+    });
+
+    $scope.openUtenzeModal = function () {
+        $scope.modal = modalUtenze;
+        $scope.modal.show();
     };
 
     //Cleanup the modal when we're done with it!
     $scope.$on('$destroy', function () {
-        $scope.localitaModal.remove();
+        $scope.modal.remove();
     });
 
     // Execute action on hide modal

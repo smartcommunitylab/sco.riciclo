@@ -1,7 +1,7 @@
 <ion-view title="{{'Profili'  |  translate}}">
     <ion-nav-buttons side="left">
         <button ng-click="back()" class="button back-button buttons  button-clear header-item" ng-if="!profili || profili.length == 0">
-            <i class="icon" ng-class="backButtonStyle" ></i>
+            <i class="icon" ng-class="backButtonStyle"></i>
         </button>
     </ion-nav-buttons>
 
@@ -29,7 +29,8 @@
 
         <div class="profile-block profile-types">
             <div class="profile-title">{{"Tipo di utenza" | translate}}
-                <a class="help" ng-click="helpTipi()"><i class="icon riciclo-more_info icon-button"></i>
+                <!--ng-click="helpTipi()"-->
+                <a class="help" ng-click="openUtenzeModal()"><i class="icon riciclo-more_info icon-button"></i>
                 </a>
             </div>
             <!--<div ng-if="editMode">

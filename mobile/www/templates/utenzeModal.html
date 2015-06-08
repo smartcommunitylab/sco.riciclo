@@ -1,0 +1,14 @@
+<ion-modal-view class="">
+    <ion-header-bar class="bar-balanced bar-100r">
+        <button class="button back-button button-clear" ng-click="closeModal()">
+            <i class="icon" ng-class="{'ion-android-arrow-back': platform.isAndroid(), 'ion-ios-arrow-back': !platform.isAndroid()}"></i>
+        </button>
+        <h1 class="title">{{"help_utenze"|translate}}</h1>
+    </ion-header-bar>
+    <ion-content class="padding">
+        <div ng-repeat="profile in tipologiaUtenza">
+            <div class="profili-titolo">{{profile.nome}}</div>
+            <p>{{profile.descrizione}}</p>
+        </div>
+    </ion-content>
+</ion-modal-view>
