@@ -251,6 +251,11 @@ angular.module('rifiuti.services.rifiuti', [])
       });
       return deferred.promise;
     },
+    hasSegnalazioni: function() {
+      var signals = DataManager.getSync('segnalazione');
+      if (signals != null && signals.length > 0) return true;
+      return false;
+    },
     immagini: function() {
       return DataManager.get('data/support/tipologiaRifiutoImmagini.json').then(function (results) {
         var imgs={};

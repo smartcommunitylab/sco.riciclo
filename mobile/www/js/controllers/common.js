@@ -1,6 +1,6 @@
 angular.module('rifiuti.controllers.common', ['ionic'])
 
-.controller('AppCtrl', function ($scope, $rootScope, $location, $timeout, Profili, DataManager, Conf, $ionicPopup) {
+.controller('AppCtrl', function ($scope, $rootScope, $location, $timeout, Profili, DataManager, Conf, Raccolta, $ionicPopup) {
     $scope.app_name = APP_NAME;
 
     $scope.checkSettings = function() {
@@ -17,6 +17,9 @@ angular.module('rifiuti.controllers.common', ['ionic'])
 
     $scope.showNews = function () {
         return Conf.showNews();
+    };
+    $scope.showReport = function () {
+        return Raccolta.hasSegnalazioni();
     };
 
     //localStorage.removeItem('profiles');
