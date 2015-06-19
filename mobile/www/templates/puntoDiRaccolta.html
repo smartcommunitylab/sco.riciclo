@@ -37,7 +37,7 @@
                             <tr ng-repeat="item in orari">
                                 <td class="col col-100" style="white-space:normal">
                                     <span ng-repeat="g in item.giorno"><strong>{{g}}</strong> </span>
-                                    <span ng-if="item.ecceto.length > 0"><br/>({{"ecceto"|translate}} <span ng-repeat="e in item.ecceto"> {{e}}</span>)</span>
+                                    <span ng-if="item.ecceto.length > 0"><br/>({{"eccetto"|translate}} <span ng-repeat="e in item.ecceto"> {{e}}</span>)</span>
                                 </td>
                                 <td><span ng-repeat="orario in item.orari"><span ng-if="$index>0">, </span>{{orario}}</span></td>
                             </tr>

@@ -170,7 +170,7 @@ angular.module('rifiuti.controllers.raccolta', [])
         coords: 'self',
         fit: true,
         icon: 'icon',
-        doCluster: false
+        doCluster: points.length > 10
       };
       if (list.length == 1) {
         list[0].aperto = true;
@@ -199,9 +199,7 @@ angular.module('rifiuti.controllers.raccolta', [])
   $scope.icon = function(item) {
     return Utili.icon(item.tipologiaPuntoRaccolta,item.colore);
   };
-  $scope.color = function(item) {
-    return Utili.getRGBColor(item.colore);
-  };
+
   
   var init = function() {
     Raccolta.tipiDiRaccolta($rootScope.selectedProfile.utenza.tipologiaUtenza, $rootScope.selectedProfile.aree).then(function (data) {

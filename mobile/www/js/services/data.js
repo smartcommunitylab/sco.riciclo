@@ -1,7 +1,7 @@
 angular.module('rifiuti.services.data', [])
 
 .factory('DataManager', function ($http, $q, Utili) {
-    var ENDPOINT_URL = 'https://dev.smartcommunitylab.it/riciclo';
+    var ENDPOINT_URL = 'https://tn.smartcommunitylab.it/riciclo';
     // TODO handle
     var USE_DRAFT = false;
 

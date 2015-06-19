@@ -58,8 +58,8 @@ angular.module('rifiuti', [
     $ionicConfigProvider.backButton.text('');
 })
 
-.run(function ($ionicPlatform, $rootScope, $ionicNavBarDelegate, $ionicHistory, $translate, $ionicPopup, $filter, $state, Profili, GeoLocate, $cordovaSplashscreen, $ionicLoading, $ionicConfig) {
-    $rootScope.version = '2.0';
+.run(function ($ionicPlatform, $rootScope, $ionicNavBarDelegate, $ionicHistory, $translate, $ionicPopup, $filter, $state, Profili, Utili, GeoLocate, $cordovaSplashscreen, $ionicLoading, $ionicConfig) {
+    $rootScope.version = VERSION;
 
     $rootScope.isWebView = ionic.Platform.isWebView();
     $rootScope.isPopUp = !$rootScope.isWebView && !IF_HIDDEN_FIELDS;
@@ -83,6 +83,9 @@ angular.module('rifiuti', [
         });
    };
 
+    $rootScope.color = function(item) {
+        return Utili.getRGBColor(item.colore);
+    }
 
     $rootScope.addr2id = function(addr) {
         return addr ? addr.replace('/','_') : null;
@@ -312,7 +315,7 @@ angular.module('rifiuti', [
         'ad esempio': "Ad esempio:",
         Invia: "Invia una email per segnalare un problema direttamente all'ente che si occupa della gestione dei rifiuti. Puoi allegare una foto e le coordinate GPS della tua posizione.",
         Progetto: '"' + APP_NAME + '"',
-        Progetto_DESC: 'Tutto quesllo che devi sapere sulla raccolta differenziata nel tuo Comune',
+        Progetto_DESC: 'Tutto quello che devi sapere sulla raccolta differenziata nel tuo Comune',
         Progetto_di: 'Un progetto di:',
         Collaborazione: "In collaborazione con:",
         Eventuali: "Per informazioni:",
