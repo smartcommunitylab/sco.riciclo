@@ -1,0 +1,35 @@
+<ion-view>
+    <ion-nav-title>
+        <div class="nav-title">
+            <div class="nav-title-single">{{"Credits"|translate}}</div>
+        </div>
+    </ion-nav-title>
+
+    <ion-nav-buttons side="left">
+        <button menu-toggle="left" class="row button button-icon ion-navicon">
+            <img ng-if="!noteSelected" class="nav-button-app-logo" src="img/ic_launcher.png">
+        </button>
+    </ion-nav-buttons>
+
+    <ion-content class="info" has-bouncing="false">
+        <p class="project"><strong>{{'Progetto'|translate}}</strong>
+        </p>
+        <p class="project-desc"><strong>{{'Progetto_DESC'|translate}}</strong>
+        </p>
+        <p class="version"><strong>{{version}}</strong>
+        </p>
+        <p class="subtitle">{{'Progetto_di'|translate}}</p>
+        <a ng-click="clickLink('http://www.smartcommunitylab.it')"> <img src="img/logo_SCO.png" width="160"> </a>
+        <a ng-click="clickLink('http://www.ladurnerambiente.it')"><img src="img/ladurnerenergy.png" width="140">
+        </a>
+        <br />
+        <a ng-click="clickLink('http://www.fbk.eu')"><img style="margin-top:10px;" src="img/fbk_credits.png" width="140" height="39">
+        </a>
+        <p class="subtitle">{{"Collaborazione"|translate}}</p>
+        <a ng-click="clickLink('http://www.comunitrentini.it')"><img src="img/autonomie_locali.png" width="140" height="55"></a>
+        <p class="subtitle">{{"Eventuali"|translate}}
+            <br>
+            <a class="mail" ng-click="clickLink('mailto:riciclo@smartcommunitylab.it')">riciclo@smartcommunitylab.it</a>
+        </p>
+    </ion-content>
+</ion-view>
