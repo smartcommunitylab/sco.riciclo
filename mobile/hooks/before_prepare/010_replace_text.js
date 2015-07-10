@@ -17,6 +17,7 @@ function replace_string_in_file(filename, to_replace, replace_with) {
     fs.writeFileSync(filename, result, 'utf8');
 }
 
+
 //current profile indicates the profile you want to get
 var currentProfileFile = path.join(rootdir, "config", "current_profile.txt");
 var target = fs.readFileSync(currentProfileFile,'utf8')
@@ -33,13 +34,15 @@ if (rootdir) {
 
     // filestoreplace is the file where you want to make the placeholder replacement
     var filestoreplace = [
-        "config/config-proto.xml",
+        "config.xml",
+        //"test.xml",
     ];
     filestoreplace.forEach(function(val, index, array) {
         var fullfilename = path.join(rootdir, val);
         if (fs.existsSync(fullfilename)) {
             for (var key in configobj[target]){
                 var val = configobj[target][key];
+                console.log("replace key: "+key+" with val: "+val);
                 replace_string_in_file(fullfilename, "\\*"+key+"\\*", val);
             }
         } else {
