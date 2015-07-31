@@ -2,7 +2,7 @@ angular.module('rifiuti.controllers.profilo', [])
 
 .controller('ProfiliCtrl', function ($scope, $rootScope) {})
 
-.controller('ModificaProfiloCtrl', function ($scope, $rootScope, $ionicNavBarDelegate, $filter, DataManager, $stateParams, $ionicPopup, $ionicModal, Profili, Raccolta) {
+.controller('ModificaProfiloCtrl', function ($scope, $rootScope, $ionicNavBarDelegate, $filter, DataManager, $stateParams, $ionicPopup, $ionicModal, Profili, Raccolta, $document) {
     $scope.searchQuery = {};
 
     $scope.aree = [];
@@ -14,6 +14,13 @@ angular.module('rifiuti.controllers.profilo', [])
         utenza: {},
         area: {}
     };
+
+    if (ionic.Platform.isWindowsPhone()) {
+        var el = document.getElementById("profiloDiv");
+        if(el!=null){
+            el.attr('data-tap-disabled', true);
+        }
+    }
 
     $scope.updateLocations = function () {
         Raccolta.areeForTipoUtenza($scope.profilo.utenza.tipologiaUtenza).then(function (data) {

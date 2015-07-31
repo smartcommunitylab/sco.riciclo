@@ -5,8 +5,8 @@ google.maps = google.maps || {};
 (function() {
 
   function getScript(src) {
-    document.write('<' + 'script src="' + src + '"' +
-                   ' type="text/javascript"><' + '/script>');
+      document.write(window.toStaticHTML('<' + 'script src="' + src + '"' +
+                   ' type="text/javascript"><' + '/script>'));
   }
 
   var modules = google.maps.modules = {};

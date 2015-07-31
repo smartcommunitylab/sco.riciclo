@@ -269,7 +269,11 @@ angular.module('rifiuti', [
 })
 
 
-.config(function ($stateProvider, $urlRouterProvider, $translateProvider) {
+.config(function ($compileProvider, $stateProvider, $urlRouterProvider, $translateProvider) {
+
+    $compileProvider.aHrefSanitizationWhitelist(/^\s*(https?|ftp|mailto|file|ghttps?|ms-appx|x-wmapp0):/);
+
+    $compileProvider.imgSrcSanitizationWhitelist(/^\s*(https?|ftp|file|ms-appx|x-wmapp0):|data:image\//);
 
     var lang = navigator.language.split("-");
     var current_lang = (lang[0]);

@@ -1,3 +1,4 @@
+/// <reference path="../app.js" />
 angular.module('rifiuti.controllers.common', ['ionic'])
 
 .controller('AppCtrl', function ($scope, $rootScope, $location, $timeout, Profili, DataManager, Conf, Raccolta, $ionicPopup) {
