@@ -21,15 +21,15 @@ import java.util.Map;
 
 public class Area extends BaseObject {
 
+	private String objectId;
 	private String istituzione;
-	
-	private String nome;
+	private Map<String, String> nome;
 	private String parent;
 	private String gestore;
-	private String descrizione;
+	private Map<String, String> descrizione;
 	private String etichetta;
-	
 	private Map<String, Boolean> utenza;
+	private String codiceISTAT;
 
 	public String getIstituzione() {
 		return istituzione;
@@ -37,14 +37,6 @@ public class Area extends BaseObject {
 
 	public void setIstituzione(String istituzione) {
 		this.istituzione = istituzione;
-	}
-
-	public String getNome() {
-		return nome;
-	}
-
-	public void setNome(String nome) {
-		this.nome = nome;
 	}
 
 	public String getParent() {
@@ -63,14 +55,6 @@ public class Area extends BaseObject {
 		this.gestore = gestore;
 	}
 
-	public String getDescrizione() {
-		return descrizione;
-	}
-
-	public void setDescrizione(String descrizione) {
-		this.descrizione = descrizione;
-	}
-	
 	public String getEtichetta() {
 		return etichetta;
 	}
@@ -90,6 +74,38 @@ public class Area extends BaseObject {
 	@Override
 	public String toString() {
 		return "Area [" + nome + "," + parent + "," + gestore + "]";
+	}
+
+	public String getObjectId() {
+		return objectId;
+	}
+
+	public void setObjectId(String objectId) {
+		this.objectId = objectId;
+	}
+
+	public Map<String, String> getNome() {
+		return nome;
+	}
+
+	public void setNome(Map<String, String> nome) {
+		this.nome = nome;
+	}
+
+	public Map<String, String> getDescrizione() {
+		return descrizione;
+	}
+
+	public void setDescrizione(Map<String, String> descrizione) {
+		this.descrizione = descrizione;
+	}
+
+	public String getCodiceISTAT() {
+		return codiceISTAT;
+	}
+
+	public void setCodiceISTAT(String codiceISTAT) {
+		this.codiceISTAT = codiceISTAT;
 	}			
 	
 }

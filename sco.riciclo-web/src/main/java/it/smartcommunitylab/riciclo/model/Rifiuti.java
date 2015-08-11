@@ -24,9 +24,11 @@ public class Rifiuti extends BaseObject {
 	private List<Area> aree;
 	private List<Gestore> gestori;
 	private List<Istituzione> istituzioni;
-	private List<PuntoRaccolta> puntiRaccolta;
 	private List<Riciclabolario> riciclabolario;
+	private List<Rifiuto> rifiuti;
 	private List<Raccolta> raccolta;
+	private List<PuntoRaccolta> puntiRaccolta;
+	private List<CalendarioRaccolta> calendariRaccolta;
 	private List<Colore> colore;
 	private List<Segnalazione> segnalazione;
 
@@ -110,6 +112,22 @@ public class Rifiuti extends BaseObject {
 
 	public void setSegnalazione(List<Segnalazione> segnalazione) {
 		this.segnalazione = segnalazione;
+	}
+
+	public List<Rifiuto> getRifiuti() {
+		return rifiuti;
+	}
+
+	public void setRifiuti(List<Rifiuto> rifiuti) {
+		this.rifiuti = rifiuti;
+	}
+
+	public List<CalendarioRaccolta> getCalendariRaccolta() {
+		return calendariRaccolta;
+	}
+
+	public void setCalendariRaccolta(List<CalendarioRaccolta> calendariRaccolta) {
+		this.calendariRaccolta = calendariRaccolta;
 	}
 
 }

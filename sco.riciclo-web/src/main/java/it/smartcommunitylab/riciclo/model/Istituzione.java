@@ -16,14 +16,17 @@
 
 package it.smartcommunitylab.riciclo.model;
 
+import java.util.Map;
+
 
 public class Istituzione extends BaseObject {
 
+	private String objectId;
 	private String nome;
-	private String descrizione;
+	private Map<String, String> descrizione;
 	private String ufficio;
-	private String indirizzo;
-	private String orarioUfficio;
+	private Map<String, String> indirizzo;
+	private Map<String, String> orarioUfficio;
 	private String sito;
 	private String pec;
 	private String email;
@@ -43,27 +46,6 @@ public class Istituzione extends BaseObject {
 	}
 	public void setUfficio(String ufficio) {
 		this.ufficio = ufficio;
-	}
-	public String getIndirizzo() {
-		return indirizzo;
-	}
-	public void setIndirizzo(String indirizzo) {
-		this.indirizzo = indirizzo;
-	}
-	public String getDescrizione() {
-		return descrizione;
-	}
-	public void setDescrizione(String descrizione) {
-		this.descrizione = descrizione;
-	}
-	public String getSito() {
-		return sito;
-	}
-	public String getOrarioUfficio() {
-		return orarioUfficio;
-	}
-	public void setOrarioUfficio(String orarioUfficio) {
-		this.orarioUfficio = orarioUfficio;
 	}
 	public void setSito(String sitoIstituzionale) {
 		this.sito = sitoIstituzionale;
@@ -108,6 +90,33 @@ public class Istituzione extends BaseObject {
 	@Override
 	public String toString() {
 		return "Istituzione [" + nome + "]";
+	}
+	public String getObjectId() {
+		return objectId;
+	}
+	public void setObjectId(String objectId) {
+		this.objectId = objectId;
+	}
+	public Map<String, String> getDescrizione() {
+		return descrizione;
+	}
+	public void setDescrizione(Map<String, String> descrizione) {
+		this.descrizione = descrizione;
+	}
+	public Map<String, String> getIndirizzo() {
+		return indirizzo;
+	}
+	public void setIndirizzo(Map<String, String> indirizzo) {
+		this.indirizzo = indirizzo;
+	}
+	public Map<String, String> getOrarioUfficio() {
+		return orarioUfficio;
+	}
+	public void setOrarioUfficio(Map<String, String> orarioUfficio) {
+		this.orarioUfficio = orarioUfficio;
+	}
+	public String getSito() {
+		return sito;
 	}
 	
 

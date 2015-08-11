@@ -16,10 +16,14 @@
 
 package it.smartcommunitylab.riciclo.model;
 
+import java.util.Date;
+
 
 public class BaseObject {
 
 	private String appId;
+	private Date creationDate;
+	private Date lastUpdate;
 
 	public String getAppId() {
 		return appId;
@@ -27,6 +31,22 @@ public class BaseObject {
 
 	public void setAppId(String appId) {
 		this.appId = appId;
+	}
+
+	public Date getCreationDate() {
+		return creationDate;
+	}
+
+	public void setCreationDate(Date creationDate) {
+		this.creationDate = creationDate;
+	}
+
+	public Date getLastUpdate() {
+		return lastUpdate;
+	}
+
+	public void setLastUpdate(Date lastUpdate) {
+		this.lastUpdate = lastUpdate;
 	}
 	
 }

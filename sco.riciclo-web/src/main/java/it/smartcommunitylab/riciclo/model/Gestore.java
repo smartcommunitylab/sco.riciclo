@@ -16,14 +16,17 @@
 
 package it.smartcommunitylab.riciclo.model;
 
+import java.util.Map;
+
 
 public class Gestore extends BaseObject {
 
+	private String objectId;
 	private String ragioneSociale;
-	private String descrizione;
+	private Map<String, String> descrizione;
 	private String ufficio;
-	private String indirizzo;
-	private String orarioUfficio;
+	private Map<String, String> indirizzo;
+	private Map<String, String> orarioUfficio;
 	private String sitoWeb;
 	private String email;
 	private String telefono;
@@ -37,29 +40,11 @@ public class Gestore extends BaseObject {
 	public void setRagioneSociale(String ragioneSociale) {
 		this.ragioneSociale = ragioneSociale;
 	}
-	public String getDescrizione() {
-		return descrizione;
-	}
-	public void setDescrizione(String descrizione) {
-		this.descrizione = descrizione;
-	}
 	public String getUfficio() {
 		return ufficio;
 	}
 	public void setUfficio(String ufficio) {
 		this.ufficio = ufficio;
-	}
-	public String getIndirizzo() {
-		return indirizzo;
-	}
-	public void setIndirizzo(String indirizzo) {
-		this.indirizzo = indirizzo;
-	}
-	public String getOrarioUfficio() {
-		return orarioUfficio;
-	}
-	public void setOrarioUfficio(String orarioUfficio) {
-		this.orarioUfficio = orarioUfficio;
 	}
 	public String getSitoWeb() {
 		return sitoWeb;
@@ -102,6 +87,30 @@ public class Gestore extends BaseObject {
 	@Override
 	public String toString() {
 		return "Gestore [" + ragioneSociale + "]";
+	}
+	public String getObjectId() {
+		return objectId;
+	}
+	public void setObjectId(String objectId) {
+		this.objectId = objectId;
+	}
+	public Map<String, String> getDescrizione() {
+		return descrizione;
+	}
+	public void setDescrizione(Map<String, String> descrizione) {
+		this.descrizione = descrizione;
+	}
+	public Map<String, String> getIndirizzo() {
+		return indirizzo;
+	}
+	public void setIndirizzo(Map<String, String> indirizzo) {
+		this.indirizzo = indirizzo;
+	}
+	public Map<String, String> getOrarioUfficio() {
+		return orarioUfficio;
+	}
+	public void setOrarioUfficio(Map<String, String> orarioUfficio) {
+		this.orarioUfficio = orarioUfficio;
 	}		
 	
 

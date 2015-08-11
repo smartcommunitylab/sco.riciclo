@@ -5,12 +5,21 @@ apps:
     - modello
     - isole
     - crm
+    comuni:
+    - 022017
+    - 022083
+    - 022182
+    - 022183
   - appId: TRENTO
     password: TRENTO      
     modelElements:
     - modello
+    comuni:
+    - 022205
   - appId: ROVERETO
     password: ROVERETO      
     modelElements:
     - modello
+    comuni:
+    - 022161
           

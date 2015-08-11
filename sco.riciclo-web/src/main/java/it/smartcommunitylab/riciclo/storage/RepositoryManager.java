@@ -16,7 +16,9 @@
 
 package it.smartcommunitylab.riciclo.storage;
 
+import it.smartcommunitylab.riciclo.exception.EntityNotFoundException;
 import it.smartcommunitylab.riciclo.model.Area;
+import it.smartcommunitylab.riciclo.model.CRM;
 import it.smartcommunitylab.riciclo.model.Categorie;
 import it.smartcommunitylab.riciclo.model.Colore;
 import it.smartcommunitylab.riciclo.model.Gestore;
@@ -25,14 +27,18 @@ import it.smartcommunitylab.riciclo.model.PuntoRaccolta;
 import it.smartcommunitylab.riciclo.model.Raccolta;
 import it.smartcommunitylab.riciclo.model.Riciclabolario;
 import it.smartcommunitylab.riciclo.model.Rifiuti;
+import it.smartcommunitylab.riciclo.model.Rifiuto;
 import it.smartcommunitylab.riciclo.model.Segnalazione;
 import it.smartcommunitylab.riciclo.model.TipologiaProfilo;
 
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
+import org.springframework.data.mongodb.core.query.CriteriaDefinition;
 import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.data.mongodb.core.query.Update;
 
@@ -132,12 +138,28 @@ public class RepositoryManager {
 		saveAppVersion(appId, draft.getVersion(), false);
 	}
 	
-	public void createApp(String appId) {
-		saveApp(appId, true);
-		saveApp(appId, false);
+	public void createApp(AppInfo appInfo) {
+		saveAppState(appInfo.getAppId(), true);
+		saveAppState(appInfo.getAppId(), false);
+		saveAppInfo(appInfo, true);
+		saveAppInfo(appInfo, false);
+	}
+	
+	private void saveAppInfo(AppInfo appInfo, boolean draft) {
+		MongoTemplate template = draft ? draftTemplate : finalTemplate;
+		Query query = appQuery(appInfo.getAppId());
+		AppInfo appInfoDB = template.findOne(query, AppInfo.class);
+		if(appInfoDB == null) {
+			template.save(appInfo);
+		} else {
+			appInfoDB.setPassword(appInfo.getPassword());
+			appInfoDB.setModelElements(appInfo.getModelElements());
+			appInfoDB.setComuni(appInfo.getComuni());
+			template.save(appInfoDB);
+		}
 	}
 
-	public void saveApp(String appId, boolean draft) {
+	public void saveAppState(String appId, boolean draft) {
 		MongoTemplate template = draft ? draftTemplate : finalTemplate;
 		Query query = appQuery(appId);
 		AppState app = template.findOne(query, AppState.class);
@@ -211,9 +233,136 @@ public class RepositoryManager {
 		app.setPublishState(published);
 		return app;
 	}
+	
+	public List<String> getComuniList(String appId, boolean draft) {
+		AppInfo appInfo = appSetup.findAppById(appId);
+		if(appInfo != null) {
+			return appInfo.getComuni();
+		} else {
+			return new ArrayList<String>();
+		}
+	}
 
+	public List<?> findData(Class<?> entityClass, Criteria criteria, String appId, boolean draft) throws ClassNotFoundException {
+		MongoTemplate template = draft ? draftTemplate : finalTemplate;
+		Query query = new Query(new Criteria("appId").is(appId).andOperator(criteria));
+		List<?> result = template.find(query, entityClass);
+		return result;
+	}
+	
+	public <T> T findOneData(Class<T> entityClass, Criteria criteria, String appId, boolean draft) throws ClassNotFoundException {
+		MongoTemplate template = draft ? draftTemplate : finalTemplate;
+		Query query = null;
+		if(criteria != null) {
+			query = new Query(new Criteria("appId").is(appId).andOperator(criteria));
+		} else {
+			query = new Query(new Criteria("appId").is(appId));
+		}
+		T result = template.findOne(query, entityClass);
+		return result;
+	}
+	
 	private Query appQuery(String appId) {
 		return new Query(new Criteria("appId").is(appId));
 	}
+	
+	public void addCRM(CRM crm, boolean draft) {
+		MongoTemplate template = draft ? draftTemplate : finalTemplate;
+		template.save(crm);
+	}
+
+	public void updateCRM(CRM crm, boolean draft) throws EntityNotFoundException {
+		MongoTemplate template = draft ? draftTemplate : finalTemplate;
+		Query query = new Query(new Criteria("appId").is(crm.getAppId()).and("objectId").is(crm.getObjectId()));
+		CRM crmDB = template.findOne(query, CRM.class);
+		if(crmDB == null) {
+			throw new EntityNotFoundException(String.format("CRM with id %s not found", crm.getObjectId()));
+		}
+		Update update = new Update();
+		update.set("lastUpdate", new Date());
+		//TODO
+		template.updateFirst(query, update, CRM.class);
+	}
+	
+	public void removeCRM(String appId, String objectId, boolean draft) throws EntityNotFoundException {
+		MongoTemplate template = draft ? draftTemplate : finalTemplate;
+		Query query = new Query(new Criteria("appId").is(appId).and("objectId").is(objectId));
+		CRM crmDB = template.findOne(query, CRM.class);
+		if(crmDB == null) {
+			throw new EntityNotFoundException(String.format("CRM with id %s not found", objectId));
+		}
+		template.findAndRemove(query, CRM.class);
+	}
+	
+	public void addRiciclabolario(Riciclabolario riciclabolario, boolean draft) {
+		MongoTemplate template = draft ? draftTemplate : finalTemplate;
+		template.save(riciclabolario);
+	}
+	
+	public void removeRiciclabolario(String appId, String objectId, boolean draft) throws EntityNotFoundException {
+		MongoTemplate template = draft ? draftTemplate : finalTemplate;
+		Query query = new Query(new Criteria("appId").is(appId).and("objectId").is(objectId));
+		Riciclabolario riciclabolarioDB = template.findOne(query, Riciclabolario.class);
+		if(riciclabolarioDB == null) {
+			throw new EntityNotFoundException(String.format("Riciclabolario with id %s not found", objectId));
+		}
+		template.findAndRemove(query, Riciclabolario.class);
+	}
+	
+	public void removeRiciclabolario(Riciclabolario riciclabolario, boolean draft) throws EntityNotFoundException {
+		MongoTemplate template = draft ? draftTemplate : finalTemplate;
+		Query query = new Query(new Criteria("appId").is(riciclabolario.getAppId()).and("area").is(riciclabolario.getArea())
+				.and("rifiuto").is(riciclabolario.getRifiuto()).and("tipologiaRifiuto").is(riciclabolario.getTipologiaRifiuto())
+				.and("tipologiaUtenza").is(riciclabolario.getTipologiaUtenza()));
+		Riciclabolario riciclabolarioDB = template.findOne(query, Riciclabolario.class);
+		if(riciclabolarioDB == null) {
+			throw new EntityNotFoundException(String.format("Riciclabolario %s not found", riciclabolario));
+		}
+		template.findAndRemove(query, Riciclabolario.class);
+	}
+	
+	public void addRaccolta(Raccolta raccolta, boolean draft) {
+		MongoTemplate template = draft ? draftTemplate : finalTemplate;
+		template.save(raccolta);
+	}
+	
+	public void removeRaccolta(String appId, String objectId, boolean draft) throws EntityNotFoundException {
+		MongoTemplate template = draft ? draftTemplate : finalTemplate;
+		Query query = new Query(new Criteria("appId").is(appId).and("objectId").is(objectId));
+		Raccolta raccoltaDB = template.findOne(query, Raccolta.class);
+		if(raccoltaDB == null) {
+			throw new EntityNotFoundException(String.format("Raccolta with id %s not found", objectId));
+		}
+		template.findAndRemove(query, Raccolta.class);
+	}
+	
+	public void addRifiuto(Rifiuto rifiuto, boolean draft) {
+		MongoTemplate template = draft ? draftTemplate : finalTemplate;
+		template.save(rifiuto);
+	}
+	
+	public void removeRifiuto(String appId, String objectId, boolean draft) throws EntityNotFoundException {
+		MongoTemplate template = draft ? draftTemplate : finalTemplate;
+		Query query = new Query(new Criteria("appId").is(appId).and("objectId").is(objectId));
+		Rifiuto rifiutoDB = template.findOne(query, Rifiuto.class);
+		if(rifiutoDB == null) {
+			throw new EntityNotFoundException(String.format("Rifiuto with id %s not found", objectId));
+		}
+		template.findAndRemove(query, Rifiuto.class);
+	}
+	
+	public void updateRifiuto(Rifiuto rifiuto, boolean draft) throws EntityNotFoundException {
+		MongoTemplate template = draft ? draftTemplate : finalTemplate;
+		Query query = new Query(new Criteria("appId").is(rifiuto.getAppId()).and("objectId").is(rifiuto.getObjectId()));
+		Rifiuto rifiutoDB = template.findOne(query, Rifiuto.class);
+		if(rifiutoDB == null) {
+			throw new EntityNotFoundException(String.format("Rifiuto with id %s not found", rifiuto.getObjectId()));
+		}
+		Update update = new Update();
+		update.set("lastUpdate", new Date());
+		//TODO
+		template.updateFirst(query, update, Rifiuto.class);
+	}
+	
 
 }

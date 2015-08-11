@@ -182,7 +182,6 @@ public class RifiutiConverter {
 				Riciclabolario newRic = new Riciclabolario();
 				newRic.setAppId(appId);
 				newRic.setArea(ric.getArea().trim());
-				newRic.setNome(ric.getNome().trim());
 				newRic.setTipologiaRifiuto(ric.getTipologiaRifiuto().trim());
 				newRic.setTipologiaUtenza(tu.trim().trim());
 				riciclabolario.add(newRic);

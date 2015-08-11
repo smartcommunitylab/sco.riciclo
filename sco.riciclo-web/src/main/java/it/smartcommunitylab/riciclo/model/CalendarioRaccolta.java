@@ -16,20 +16,22 @@
 
 package it.smartcommunitylab.riciclo.model;
 
+import java.util.List;
 
-public class PuntoRaccolta extends BaseObject {
+
+public class CalendarioRaccolta extends BaseObject {
 
 	private String objectId;
 	private String tipologiaPuntiRaccolta;
 	private String tipologiaUtenza;	
 	private String area;
-	private String crm;
+	private List<OrarioApertura> orarioApertura;
 
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((crm == null) ? 0 : crm.hashCode());
+		result = prime * result + ((orarioApertura == null) ? 0 : orarioApertura.hashCode());
 		result = prime * result + ((area == null) ? 0 : area.hashCode());
 		result = prime * result + ((tipologiaUtenza == null) ? 0 : tipologiaUtenza.hashCode());
 		result = prime * result + ((tipologiaPuntiRaccolta == null) ? 0 : tipologiaPuntiRaccolta.hashCode());
@@ -44,11 +46,11 @@ public class PuntoRaccolta extends BaseObject {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		PuntoRaccolta other = (PuntoRaccolta) obj;
-		if (crm == null) {
-			if (other.crm != null)
+		CalendarioRaccolta other = (CalendarioRaccolta) obj;
+		if (orarioApertura == null) {
+			if (other.orarioApertura != null)
 				return false;
-		} else if (!crm.equals(other.crm)) {
+		} else if (!orarioApertura.equals(other.orarioApertura)) {
 			return false;
 		}
 		if (area == null) {
@@ -74,7 +76,7 @@ public class PuntoRaccolta extends BaseObject {
 
 	@Override
 	public String toString() {
-		return "PuntoRaccolta [" + tipologiaUtenza + "," + tipologiaPuntiRaccolta + "," + area + "," + crm + "]";
+		return "PuntoRaccolta [" + tipologiaUtenza + "," + tipologiaPuntiRaccolta + "," + area + "," + orarioApertura + "]";
 	}
 
 	public String getTipologiaPuntiRaccolta() {
@@ -99,14 +101,6 @@ public class PuntoRaccolta extends BaseObject {
 
 	public void setArea(String area) {
 		this.area = area;
-	}
-
-	public String getCrm() {
-		return crm;
-	}
-
-	public void setCrm(String crm) {
-		this.crm = crm;
 	}
 
 	public String getObjectId() {

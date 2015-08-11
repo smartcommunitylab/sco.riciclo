@@ -30,7 +30,7 @@ public class AppSetup {
 		this.apps = data.apps;
 		
 		for (AppInfo cred: data.getApps()) {
-			storage.createApp(cred.getAppId());
+			storage.createApp(cred);
 		}
 	}
 	

@@ -67,6 +67,16 @@ public class RifiutiController {
 		return storage.getAppDescriptor(appId);
 	}
 
+	@RequestMapping(method = RequestMethod.GET, value = "/comuni/{appId}")
+	public List<String> appComuni(HttpServletResponse response, @PathVariable String appId) {
+		return storage.getComuniList(appId, false);
+	}
+	
+	@RequestMapping(method = RequestMethod.GET, value = "/comuni/{appId}/draft")
+	public List<String> appComuniDraft(HttpServletResponse response, @PathVariable String appId) {
+		return storage.getComuniList(appId, true);
+	}
+	
 	@RequestMapping(method = RequestMethod.GET, value = "/rifiuti/{appId}")
 	public Rifiuti get(HttpServletResponse response, @PathVariable String appId) {
 		return storage.findRifiuti(appId, false);
