@@ -20,7 +20,7 @@ package it.smartcommunitylab.riciclo.model;
 public class PuntoRaccolta extends BaseObject {
 
 	private String objectId;
-	private String tipologiaPuntiRaccolta;
+	private String tipologiaPuntoRaccolta;
 	private String tipologiaUtenza;	
 	private String area;
 	private String crm;
@@ -32,7 +32,7 @@ public class PuntoRaccolta extends BaseObject {
 		result = prime * result + ((crm == null) ? 0 : crm.hashCode());
 		result = prime * result + ((area == null) ? 0 : area.hashCode());
 		result = prime * result + ((tipologiaUtenza == null) ? 0 : tipologiaUtenza.hashCode());
-		result = prime * result + ((tipologiaPuntiRaccolta == null) ? 0 : tipologiaPuntiRaccolta.hashCode());
+		result = prime * result + ((tipologiaPuntoRaccolta == null) ? 0 : tipologiaPuntoRaccolta.hashCode());
 		return result;
 	}
 
@@ -63,10 +63,10 @@ public class PuntoRaccolta extends BaseObject {
 		} else if (!tipologiaUtenza.equals(other.tipologiaUtenza)) {
 			return false;
 		}
-		if (tipologiaPuntiRaccolta == null) {
-			if (other.tipologiaPuntiRaccolta != null)
+		if (tipologiaPuntoRaccolta == null) {
+			if (other.tipologiaPuntoRaccolta != null)
 				return false;
-		} else if (!tipologiaPuntiRaccolta.equals(other.tipologiaPuntiRaccolta)) {
+		} else if (!tipologiaPuntoRaccolta.equals(other.tipologiaPuntoRaccolta)) {
 			return false;
 		}
 		return true;
@@ -74,15 +74,15 @@ public class PuntoRaccolta extends BaseObject {
 
 	@Override
 	public String toString() {
-		return "PuntoRaccolta [" + tipologiaUtenza + "," + tipologiaPuntiRaccolta + "," + area + "," + crm + "]";
+		return "PuntoRaccolta [" + tipologiaUtenza + "," + tipologiaPuntoRaccolta + "," + area + "," + crm + "]";
 	}
 
-	public String getTipologiaPuntiRaccolta() {
-		return tipologiaPuntiRaccolta;
+	public String getTipologiaPuntoRaccolta() {
+		return tipologiaPuntoRaccolta;
 	}
 
-	public void setTipologiaPuntiRaccolta(String tipologiaPuntiRaccolta) {
-		this.tipologiaPuntiRaccolta = tipologiaPuntiRaccolta;
+	public void setTipologiaPuntoRaccolta(String tipologiaPuntoRaccolta) {
+		this.tipologiaPuntoRaccolta = tipologiaPuntoRaccolta;
 	}
 
 	public String getTipologiaUtenza() {

@@ -3,7 +3,7 @@ package it.smartcommunitylab.riciclo.app.importer;
 import it.smartcommunitylab.riciclo.app.importer.converter.DataImporter;
 import it.smartcommunitylab.riciclo.app.importer.converter.RifiutiConverter;
 import it.smartcommunitylab.riciclo.app.importer.converter.RifiutiValidator;
-import it.smartcommunitylab.riciclo.model.Rifiuti;
+import it.smartcommunitylab.riciclo.model.AppDataRifiuti;
 import it.smartcommunitylab.riciclo.storage.AppInfo;
 import it.smartcommunitylab.riciclo.storage.RepositoryManager;
 
@@ -56,7 +56,7 @@ public class ImportManager {
 				throw new ImportError(validationResult);
 			}			
 			
-			Rifiuti convertedRifiuti = converter.convert(rifiuti, appInfo.getAppId());
+			AppDataRifiuti convertedRifiuti = converter.convert(rifiuti, appInfo.getAppId());
 			validationResult = validator.validate(convertedRifiuti);
 
 			if (validationResult.isEmpty()) {

@@ -55,6 +55,10 @@ public class RifiutiConfig extends WebMvcConfigurerAdapter {
 	@Autowired
 	@Value("${db.final}")
 	private String finalDB;
+	
+	@Autowired
+	@Value("${defaultLang}")
+	private String defaultLang;
 
 	public RifiutiConfig() {
 	}
@@ -85,7 +89,7 @@ public class RifiutiConfig extends WebMvcConfigurerAdapter {
 
 	@Bean
 	RifiutiConverter getRifiutiConverter() {
-		return new RifiutiConverter();
+		return new RifiutiConverter(defaultLang);
 	}
 	
 	@Bean

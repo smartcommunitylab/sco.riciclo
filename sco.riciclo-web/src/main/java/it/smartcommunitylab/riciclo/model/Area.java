@@ -16,6 +16,7 @@
 
 package it.smartcommunitylab.riciclo.model;
 
+import java.util.HashMap;
 import java.util.Map;
 
 
@@ -23,12 +24,12 @@ public class Area extends BaseObject {
 
 	private String objectId;
 	private String istituzione;
-	private Map<String, String> nome;
+	private Map<String, String> nome = new HashMap<String, String>();
 	private String parent;
 	private String gestore;
-	private Map<String, String> descrizione;
+	private Map<String, String> descrizione = new HashMap<String, String>();
 	private String etichetta;
-	private Map<String, Boolean> utenza;
+	private Map<String, Boolean> utenza = new HashMap<String, Boolean>();
 	private String codiceISTAT;
 
 	public String getIstituzione() {

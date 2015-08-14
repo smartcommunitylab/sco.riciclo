@@ -18,7 +18,8 @@ package it.smartcommunitylab.riciclo.storage;
 
 import it.smartcommunitylab.riciclo.exception.EntityNotFoundException;
 import it.smartcommunitylab.riciclo.model.Area;
-import it.smartcommunitylab.riciclo.model.CRM;
+import it.smartcommunitylab.riciclo.model.CalendarioRaccolta;
+import it.smartcommunitylab.riciclo.model.Crm;
 import it.smartcommunitylab.riciclo.model.Categorie;
 import it.smartcommunitylab.riciclo.model.Colore;
 import it.smartcommunitylab.riciclo.model.Gestore;
@@ -26,7 +27,7 @@ import it.smartcommunitylab.riciclo.model.Istituzione;
 import it.smartcommunitylab.riciclo.model.PuntoRaccolta;
 import it.smartcommunitylab.riciclo.model.Raccolta;
 import it.smartcommunitylab.riciclo.model.Riciclabolario;
-import it.smartcommunitylab.riciclo.model.Rifiuti;
+import it.smartcommunitylab.riciclo.model.AppDataRifiuti;
 import it.smartcommunitylab.riciclo.model.Rifiuto;
 import it.smartcommunitylab.riciclo.model.Segnalazione;
 import it.smartcommunitylab.riciclo.model.TipologiaProfilo;
@@ -68,50 +69,61 @@ public class RepositoryManager {
 		this.finalTemplate = finalTemplate;
 	}
 	
-	public void save(Rifiuti rifiuti, String appId) {
+	public void save(AppDataRifiuti appDataRifiuti, String appId) {
 		AppState oldDraft = getAppState(appId, true);
 		cleanByAppId(appId, true);
 		
-		rifiuti.getCategorie().setAppId(appId);
-		draftTemplate.save(rifiuti.getCategorie());
+		appDataRifiuti.getCategorie().setAppId(appId);
+		draftTemplate.save(appDataRifiuti.getCategorie());
 
-		for (Area area: rifiuti.getAree()) {
+		for (Area area: appDataRifiuti.getAree()) {
 			area.setAppId(appId);
 			draftTemplate.save(area);
 		}
-		for (TipologiaProfilo profilo: rifiuti.getTipologiaProfilo()) {
+		for (TipologiaProfilo profilo: appDataRifiuti.getTipologiaProfilo()) {
 			profilo.setAppId(appId);
 			draftTemplate.save(profilo);
 		}		
-		for (Gestore gestore: rifiuti.getGestori()) {
+		for (Gestore gestore: appDataRifiuti.getGestori()) {
 			gestore.setAppId(appId);
 			draftTemplate.save(gestore);
 		}
-		for (Istituzione istituzione: rifiuti.getIstituzioni()) {
+		for (Istituzione istituzione: appDataRifiuti.getIstituzioni()) {
 			istituzione.setAppId(appId);
 			draftTemplate.save(istituzione);
 		}		
-		for (PuntoRaccolta puntoRaccolta: rifiuti.getPuntiRaccolta()) {
+		for (PuntoRaccolta puntoRaccolta: appDataRifiuti.getPuntiRaccolta()) {
 			puntoRaccolta.setAppId(appId);
 			draftTemplate.save(puntoRaccolta);
 		}		
-		for (Raccolta raccolta: rifiuti.getRaccolta()) {
+		for (Raccolta raccolta: appDataRifiuti.getRaccolta()) {
 			raccolta.setAppId(appId);
 			draftTemplate.save(raccolta);
 		}	
-		for (Riciclabolario riciclabolario: rifiuti.getRiciclabolario()) {
+		for (Riciclabolario riciclabolario: appDataRifiuti.getRiciclabolario()) {
 			riciclabolario.setAppId(appId);
 			draftTemplate.save(riciclabolario);
 		}
-		for (Colore colore: rifiuti.getColore()) {
+		for (Colore colore: appDataRifiuti.getColore()) {
 			colore.setAppId(appId);
 			draftTemplate.save(colore);
 		}
-		for (Segnalazione segnalazione: rifiuti.getSegnalazione()) {
+		for (Segnalazione segnalazione: appDataRifiuti.getSegnalazione()) {
 			segnalazione.setAppId(appId);
 			draftTemplate.save(segnalazione);
 		}				
-		
+		for(Rifiuto rifiuto : appDataRifiuti.getRifiuti()) {
+			rifiuto.setAppId(appId);
+			draftTemplate.save(rifiuto);
+		}
+		for(Crm crm : appDataRifiuti.getCrm()) {
+			crm.setAppId(appId);
+			draftTemplate.save(crm);
+		}
+		for(CalendarioRaccolta calendarioRaccolta : appDataRifiuti.getCalendariRaccolta()) {
+			calendarioRaccolta.setAppId(appId);
+			draftTemplate.save(calendarioRaccolta);
+		}
 		saveAppVersion(appId, oldDraft.getVersion() + 1, true);
 	}
 	
@@ -192,7 +204,7 @@ public class RepositoryManager {
 		return result;
 	}	
 	
-	public Rifiuti findRifiuti(String appId, boolean draft) {
+	public AppDataRifiuti findRifiuti(String appId, boolean draft) {
 		MongoTemplate template;
 		if (draft) {
 			template = draftTemplate;
@@ -201,21 +213,21 @@ public class RepositoryManager {
 		}
 		
 		
-		Rifiuti rifiuti = new Rifiuti();
+		AppDataRifiuti appDataRifiuti = new AppDataRifiuti();
 		Query query = appQuery(appId);
-		rifiuti.setAree(template.find(query, Area.class));
-		rifiuti.setTipologiaProfilo(template.find(query, TipologiaProfilo.class));
-		rifiuti.setCategorie(template.findOne(query, Categorie.class));
-		rifiuti.setGestori(template.find(query, Gestore.class));
-		rifiuti.setIstituzioni(template.find(query, Istituzione.class));
-		rifiuti.setPuntiRaccolta(template.find(query, PuntoRaccolta.class));
-		rifiuti.setRaccolta(template.find(query, Raccolta.class));
-		rifiuti.setRiciclabolario(template.find(query, Riciclabolario.class));
-		rifiuti.setColore(template.find(query, Colore.class));
-		rifiuti.setSegnalazione(template.find(query, Segnalazione.class));
-		rifiuti.setAppId(appId);
+		appDataRifiuti.setAree(template.find(query, Area.class));
+		appDataRifiuti.setTipologiaProfilo(template.find(query, TipologiaProfilo.class));
+		appDataRifiuti.setCategorie(template.findOne(query, Categorie.class));
+		appDataRifiuti.setGestori(template.find(query, Gestore.class));
+		appDataRifiuti.setIstituzioni(template.find(query, Istituzione.class));
+		appDataRifiuti.setPuntiRaccolta(template.find(query, PuntoRaccolta.class));
+		appDataRifiuti.setRaccolta(template.find(query, Raccolta.class));
+		appDataRifiuti.setRiciclabolario(template.find(query, Riciclabolario.class));
+		appDataRifiuti.setColore(template.find(query, Colore.class));
+		appDataRifiuti.setSegnalazione(template.find(query, Segnalazione.class));
+		appDataRifiuti.setAppId(appId);
 		
-		return rifiuti;
+		return appDataRifiuti;
 	}
 	
 	private AppState getAppState(String appId, boolean draft) {
@@ -266,32 +278,32 @@ public class RepositoryManager {
 		return new Query(new Criteria("appId").is(appId));
 	}
 	
-	public void addCRM(CRM crm, boolean draft) {
+	public void addCRM(Crm crm, boolean draft) {
 		MongoTemplate template = draft ? draftTemplate : finalTemplate;
 		template.save(crm);
 	}
 
-	public void updateCRM(CRM crm, boolean draft) throws EntityNotFoundException {
+	public void updateCRM(Crm crm, boolean draft) throws EntityNotFoundException {
 		MongoTemplate template = draft ? draftTemplate : finalTemplate;
 		Query query = new Query(new Criteria("appId").is(crm.getAppId()).and("objectId").is(crm.getObjectId()));
-		CRM crmDB = template.findOne(query, CRM.class);
+		Crm crmDB = template.findOne(query, Crm.class);
 		if(crmDB == null) {
 			throw new EntityNotFoundException(String.format("CRM with id %s not found", crm.getObjectId()));
 		}
 		Update update = new Update();
 		update.set("lastUpdate", new Date());
 		//TODO
-		template.updateFirst(query, update, CRM.class);
+		template.updateFirst(query, update, Crm.class);
 	}
 	
 	public void removeCRM(String appId, String objectId, boolean draft) throws EntityNotFoundException {
 		MongoTemplate template = draft ? draftTemplate : finalTemplate;
 		Query query = new Query(new Criteria("appId").is(appId).and("objectId").is(objectId));
-		CRM crmDB = template.findOne(query, CRM.class);
+		Crm crmDB = template.findOne(query, Crm.class);
 		if(crmDB == null) {
 			throw new EntityNotFoundException(String.format("CRM with id %s not found", objectId));
 		}
-		template.findAndRemove(query, CRM.class);
+		template.findAndRemove(query, Crm.class);
 	}
 	
 	public void addRiciclabolario(Riciclabolario riciclabolario, boolean draft) {

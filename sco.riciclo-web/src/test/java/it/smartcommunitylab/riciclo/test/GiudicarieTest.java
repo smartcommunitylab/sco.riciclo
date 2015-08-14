@@ -21,7 +21,7 @@ import it.smartcommunitylab.riciclo.app.importer.ImportConstants;
 import it.smartcommunitylab.riciclo.app.importer.ImportError;
 import it.smartcommunitylab.riciclo.app.importer.ImportManager;
 import it.smartcommunitylab.riciclo.config.RifiutiConfig;
-import it.smartcommunitylab.riciclo.model.Rifiuti;
+import it.smartcommunitylab.riciclo.model.AppDataRifiuti;
 import it.smartcommunitylab.riciclo.security.AppDetails;
 import it.smartcommunitylab.riciclo.storage.App;
 import it.smartcommunitylab.riciclo.storage.AppInfo;
@@ -115,8 +115,8 @@ public class GiudicarieTest {
 				MediaType.APPLICATION_JSON));
 		res = result
 				.andExpect(MockMvcResultMatchers.status().is(200)).andReturn();
-		Rifiuti rifiuti = mapper.readValue(res.getResponse()
-				.getContentAsString(), Rifiuti.class);
+		AppDataRifiuti rifiuti = mapper.readValue(res.getResponse()
+				.getContentAsString(), AppDataRifiuti.class);
 		Assert.assertEquals(APP_ID, rifiuti.getAppId());
 		Assert.assertNotNull(rifiuti.getAree());
 		Assert.assertNotNull(rifiuti.getGestori());
@@ -144,7 +144,7 @@ public class GiudicarieTest {
 		res = result.andExpect(MockMvcResultMatchers.status().is(200))
 				.andReturn();
 		rifiuti = mapper.readValue(res.getResponse().getContentAsString(),
-				Rifiuti.class);
+				AppDataRifiuti.class);
 		Assert.assertEquals(APP_ID, rifiuti.getAppId());
 		Assert.assertNotNull(rifiuti.getAree());
 		Assert.assertNotNull(rifiuti.getGestori());

@@ -16,16 +16,17 @@
 
 package it.smartcommunitylab.riciclo.model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
 public class CalendarioRaccolta extends BaseObject {
 
 	private String objectId;
-	private String tipologiaPuntiRaccolta;
+	private String tipologiaPuntoRaccolta;
 	private String tipologiaUtenza;	
 	private String area;
-	private List<OrarioApertura> orarioApertura;
+	private List<OrarioApertura> orarioApertura = new ArrayList<OrarioApertura>();
 
 	@Override
 	public int hashCode() {
@@ -34,7 +35,7 @@ public class CalendarioRaccolta extends BaseObject {
 		result = prime * result + ((orarioApertura == null) ? 0 : orarioApertura.hashCode());
 		result = prime * result + ((area == null) ? 0 : area.hashCode());
 		result = prime * result + ((tipologiaUtenza == null) ? 0 : tipologiaUtenza.hashCode());
-		result = prime * result + ((tipologiaPuntiRaccolta == null) ? 0 : tipologiaPuntiRaccolta.hashCode());
+		result = prime * result + ((tipologiaPuntoRaccolta == null) ? 0 : tipologiaPuntoRaccolta.hashCode());
 		return result;
 	}
 
@@ -65,10 +66,10 @@ public class CalendarioRaccolta extends BaseObject {
 		} else if (!tipologiaUtenza.equals(other.tipologiaUtenza)) {
 			return false;
 		}
-		if (tipologiaPuntiRaccolta == null) {
-			if (other.tipologiaPuntiRaccolta != null)
+		if (tipologiaPuntoRaccolta == null) {
+			if (other.tipologiaPuntoRaccolta != null)
 				return false;
-		} else if (!tipologiaPuntiRaccolta.equals(other.tipologiaPuntiRaccolta)) {
+		} else if (!tipologiaPuntoRaccolta.equals(other.tipologiaPuntoRaccolta)) {
 			return false;
 		}
 		return true;
@@ -76,15 +77,15 @@ public class CalendarioRaccolta extends BaseObject {
 
 	@Override
 	public String toString() {
-		return "PuntoRaccolta [" + tipologiaUtenza + "," + tipologiaPuntiRaccolta + "," + area + "," + orarioApertura + "]";
+		return "CalendarioRaccolta [" + tipologiaUtenza + "," + tipologiaPuntoRaccolta + "," + area + "," + orarioApertura + "]";
 	}
 
-	public String getTipologiaPuntiRaccolta() {
-		return tipologiaPuntiRaccolta;
+	public String getTipologiaPuntoRaccolta() {
+		return tipologiaPuntoRaccolta;
 	}
 
-	public void setTipologiaPuntiRaccolta(String tipologiaPuntiRaccolta) {
-		this.tipologiaPuntiRaccolta = tipologiaPuntiRaccolta;
+	public void setTipologiaPuntoRaccolta(String tipologiaPuntoRaccolta) {
+		this.tipologiaPuntoRaccolta = tipologiaPuntoRaccolta;
 	}
 
 	public String getTipologiaUtenza() {
@@ -109,6 +110,14 @@ public class CalendarioRaccolta extends BaseObject {
 
 	public void setObjectId(String objectId) {
 		this.objectId = objectId;
+	}
+
+	public List<OrarioApertura> getOrarioApertura() {
+		return orarioApertura;
+	}
+
+	public void setOrarioApertura(List<OrarioApertura> orarioApertura) {
+		this.orarioApertura = orarioApertura;
 	}
 
 }

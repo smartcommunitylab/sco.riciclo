@@ -16,6 +16,7 @@
 
 package it.smartcommunitylab.riciclo.model;
 
+import java.util.HashMap;
 import java.util.Map;
 
 
@@ -23,15 +24,15 @@ public class Gestore extends BaseObject {
 
 	private String objectId;
 	private String ragioneSociale;
-	private Map<String, String> descrizione;
+	private Map<String, String> descrizione = new HashMap<String, String>();
 	private String ufficio;
-	private Map<String, String> indirizzo;
-	private Map<String, String> orarioUfficio;
+	private Map<String, String> indirizzo = new HashMap<String, String>();
+	private Map<String, String> orarioUfficio = new HashMap<String, String>();
 	private String sitoWeb;
 	private String email;
 	private String telefono;
 	private String fax;
-	private String localizzazione;
+	private double[] geocoding;
 	private String facebook;	
 	
 	public String getRagioneSociale() {
@@ -70,24 +71,18 @@ public class Gestore extends BaseObject {
 	public void setFax(String fax) {
 		this.fax = fax;
 	}
-	public String getLocalizzazione() {
-		return localizzazione;
-	}
-	public void setLocalizzazione(String localizzazione) {
-		this.localizzazione = localizzazione;
-	}
 	public String getFacebook() {
 		return facebook;
 	}
 	public void setFacebook(String facebook) {
 		this.facebook = facebook;
-	}	
-	
+	}
 
 	@Override
 	public String toString() {
 		return "Gestore [" + ragioneSociale + "]";
 	}
+	
 	public String getObjectId() {
 		return objectId;
 	}
@@ -111,6 +106,12 @@ public class Gestore extends BaseObject {
 	}
 	public void setOrarioUfficio(Map<String, String> orarioUfficio) {
 		this.orarioUfficio = orarioUfficio;
+	}
+	public double[] getGeocoding() {
+		return geocoding;
+	}
+	public void setGeocoding(double[] geocoding) {
+		this.geocoding = geocoding;
 	}		
 	
 

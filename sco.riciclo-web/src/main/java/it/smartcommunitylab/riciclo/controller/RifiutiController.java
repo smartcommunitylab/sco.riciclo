@@ -17,7 +17,7 @@
 package it.smartcommunitylab.riciclo.controller;
 
 import it.smartcommunitylab.riciclo.model.Notification;
-import it.smartcommunitylab.riciclo.model.Rifiuti;
+import it.smartcommunitylab.riciclo.model.AppDataRifiuti;
 import it.smartcommunitylab.riciclo.storage.App;
 import it.smartcommunitylab.riciclo.storage.NotificationManager;
 import it.smartcommunitylab.riciclo.storage.RepositoryManager;
@@ -78,12 +78,12 @@ public class RifiutiController {
 	}
 	
 	@RequestMapping(method = RequestMethod.GET, value = "/rifiuti/{appId}")
-	public Rifiuti get(HttpServletResponse response, @PathVariable String appId) {
+	public AppDataRifiuti get(HttpServletResponse response, @PathVariable String appId) {
 		return storage.findRifiuti(appId, false);
 	}
 
 	@RequestMapping(method = RequestMethod.GET, value = "/rifiuti/{appId}/draft")
-	public Rifiuti getDraft(HttpServletResponse response, @PathVariable String appId) {
+	public AppDataRifiuti getDraft(HttpServletResponse response, @PathVariable String appId) {
 		return storage.findRifiuti(appId, true);
 	}
 
@@ -114,7 +114,7 @@ public class RifiutiController {
 		response.addHeader("Content-Transfer-Encoding", "binary");
 		ByteArrayOutputStream outputBuffer = new ByteArrayOutputStream();
 		
-		Rifiuti rifiuti = get(response, appId);
+		AppDataRifiuti rifiuti = get(response, appId);
 		ObjectMapper mapper = new ObjectMapper();
 		mapper.configure(SerializationFeature.WRITE_NULL_MAP_VALUES, false);
 		mapper.setSerializationInclusion(Include.NON_NULL);
@@ -135,7 +135,7 @@ public class RifiutiController {
 		response.addHeader("Content-Transfer-Encoding", "binary");
 		ByteArrayOutputStream outputBuffer = new ByteArrayOutputStream();
 		
-		Rifiuti rifiuti = getDraft(response, appId);
+		AppDataRifiuti rifiuti = getDraft(response, appId);
 		ObjectMapper mapper = new ObjectMapper();
 		mapper.configure(SerializationFeature.WRITE_NULL_MAP_VALUES, false);
 		mapper.setSerializationInclusion(Include.NON_NULL);

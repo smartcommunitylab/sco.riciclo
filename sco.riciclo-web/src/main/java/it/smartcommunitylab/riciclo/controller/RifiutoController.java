@@ -17,7 +17,7 @@
 package it.smartcommunitylab.riciclo.controller;
 
 import it.smartcommunitylab.riciclo.exception.EntityNotFoundException;
-import it.smartcommunitylab.riciclo.model.CRM;
+import it.smartcommunitylab.riciclo.model.Crm;
 import it.smartcommunitylab.riciclo.model.Rifiuto;
 import it.smartcommunitylab.riciclo.storage.AppSetup;
 import it.smartcommunitylab.riciclo.storage.RepositoryManager;
@@ -69,7 +69,7 @@ public class RifiutoController {
 	}
 	
 	@RequestMapping(value="/rifiuto/{appId}/{objectId}/{draft}", method=RequestMethod.DELETE)
-	public void deleteRifiuto(@RequestBody CRM crm, @PathVariable String appId, 
+	public void deleteRifiuto(@RequestBody Crm crm, @PathVariable String appId, 
 			@PathVariable String objectId, @PathVariable Boolean draft) throws EntityNotFoundException {
 		storage.removeRifiuto(appId, objectId, draft);
 	}

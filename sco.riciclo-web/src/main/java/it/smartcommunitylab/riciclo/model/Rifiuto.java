@@ -1,10 +1,11 @@
 package it.smartcommunitylab.riciclo.model;
 
+import java.util.HashMap;
 import java.util.Map;
 
 public class Rifiuto extends BaseObject {
 	private String objectId;
-	private Map<String, String> nome;
+	private Map<String, String> nome = new HashMap<String, String>();
 	
 	public String getObjectId() {
 		return objectId;

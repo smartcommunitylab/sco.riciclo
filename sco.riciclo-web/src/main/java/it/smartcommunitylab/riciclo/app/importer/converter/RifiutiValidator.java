@@ -10,7 +10,7 @@ import it.smartcommunitylab.riciclo.model.Istituzione;
 import it.smartcommunitylab.riciclo.model.PuntoRaccolta;
 import it.smartcommunitylab.riciclo.model.Raccolta;
 import it.smartcommunitylab.riciclo.model.Riciclabolario;
-import it.smartcommunitylab.riciclo.model.Rifiuti;
+import it.smartcommunitylab.riciclo.model.AppDataRifiuti;
 import it.smartcommunitylab.riciclo.model.Tipologia;
 import it.smartcommunitylab.riciclo.model.TipologiaProfilo;
 import it.smartcommunitylab.riciclo.model.UtenzaArea;
@@ -66,7 +66,7 @@ public class RifiutiValidator {
 		return problems;
 	}
 
-	public List<String> validate(Rifiuti rifiuti) throws Exception {
+	public List<String> validate(AppDataRifiuti rifiuti) throws Exception {
 		List<String> problems = Lists.newArrayList();
 
 //		Set<String> tipologiaIstituzione = flattenList(rifiuti.getCategorie().getTipologiaIstituzione());
@@ -74,7 +74,7 @@ public class RifiutiValidator {
 		Set<String> tipologiaUtenza = flattenList(rifiuti.getCategorie().getTipologiaUtenza());
 		Set<String> tipologiaRaccolta = flattenList(rifiuti.getCategorie().getTipologiaRaccolta());
 		Set<String> tipologiaRifiuto = flattenList(rifiuti.getCategorie().getTipologiaRifiuto());
-		Set<String> aree = flattenList(rifiuti.getAree(), Area.class);
+		Set<String> aree = flattenList(rifiuti.getAree(), Area.class, "objectId");
 		Set<String> colori = flattenList(rifiuti.getColore(), Colore.class);
 		Set<String> caratteristiche = flattenList(rifiuti.getCategorie().getCaratteristicaPuntoRaccolta());
 		Set<String> istituzioni = flattenList(rifiuti.getIstituzioni(), Istituzione.class);
@@ -120,51 +120,18 @@ public class RifiutiValidator {
 		}
 		
 		for (PuntoRaccolta puntoRaccolta: rifiuti.getPuntiRaccolta()) {
-			if (!tipologiaPuntoRaccolta.contains(puntoRaccolta.getTipologiaPuntiRaccolta())) {
-				String s = "Tipologia Punto Raccolta <" + puntoRaccolta.getTipologiaPuntiRaccolta() + "> not found for " + puntoRaccolta;
+			if (!tipologiaPuntoRaccolta.contains(puntoRaccolta.getTipologiaPuntoRaccolta())) {
+				String s = "Tipologia Punto Raccolta <" + puntoRaccolta.getTipologiaPuntoRaccolta() + "> not found for " + puntoRaccolta;
 				problems.add(s);				
 			}
-			
-			for (UtenzaArea ua : puntoRaccolta.getUtenzaArea()) {
-				if (!tipologiaUtenza.contains(ua.getTipologiaUtenza())) {
-					String s = "Tipologia Utenza <" + ua.getTipologiaUtenza() + "> not found for " + puntoRaccolta;
-					problems.add(s);
-				}
-				if (!aree.contains(ua.getArea())) {
-					String s = "Area <" + ua.getArea() + "> not found for " + puntoRaccolta;
-					problems.add(s);
-				}
+			if (!tipologiaUtenza.contains(puntoRaccolta.getTipologiaUtenza())) {
+				String s = "Tipologia Utenza <" + puntoRaccolta.getTipologiaUtenza() + "> not found for " + puntoRaccolta;
+				problems.add(s);
 			}
-			for (String caratt : puntoRaccolta.getCaratteristiche().keySet()) {
-				if (!caratteristiche.contains(caratt)) {
-					String s = "Caratteristica <" + caratt + "> not found for " + puntoRaccolta;
-					problems.add(s);
-				}
+			if (!aree.contains(puntoRaccolta.getArea())) {
+				String s = "Area <" + puntoRaccolta.getArea() + "> not found for " + puntoRaccolta;
+				problems.add(s);
 			}
-			
-//			if (!comuni.contains(puntoRaccolta.getIndirizzo())) {
-//				if (puntoRaccolta.getIndirizzo() != null && !puntoRaccolta.getIndirizzo().isEmpty()) {
-//					String s = "Comune <" + puntoRaccolta.getIndirizzo() + "> not found for " + puntoRaccolta;
-//					problems.add(s);
-//				}
-//			}
-			boolean needAddress = "crm".equals(puntoRaccolta.getTipologiaPuntiRaccolta().toLowerCase()) || "crz".equals(puntoRaccolta.getTipologiaPuntiRaccolta().toLowerCase()) || "isola ecologica".equals(puntoRaccolta.getTipologiaPuntiRaccolta().toLowerCase());
-			
-			if (needAddress) {
-				if (puntoRaccolta.getZona() == null || puntoRaccolta.getZona().isEmpty()) {
-					String s = "Missing 'zona' for " + puntoRaccolta;
-					problems.add(s);
-				}
-				if (puntoRaccolta.getDettagliZona() == null || puntoRaccolta.getDettagliZona().isEmpty()) {
-					String s = "Missing 'dettagliZona' for " + puntoRaccolta;
-					problems.add(s);
-				}
-				if (puntoRaccolta.getLocalizzazione() == null || puntoRaccolta.getLocalizzazione().isEmpty()) {
-					String s = "Missing 'localizzazione' for " + puntoRaccolta;
-					problems.add(s);
-				}
-			}			
-			
 		}
 		
 		for (Raccolta raccolta: rifiuti.getRaccolta()) {

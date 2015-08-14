@@ -17,7 +17,7 @@
 package it.smartcommunitylab.riciclo.controller;
 
 import it.smartcommunitylab.riciclo.exception.EntityNotFoundException;
-import it.smartcommunitylab.riciclo.model.CRM;
+import it.smartcommunitylab.riciclo.model.Crm;
 import it.smartcommunitylab.riciclo.model.OrarioApertura;
 import it.smartcommunitylab.riciclo.storage.AppSetup;
 import it.smartcommunitylab.riciclo.storage.RepositoryManager;
@@ -46,14 +46,14 @@ public class CRMController {
 	private AppSetup appSetup;	
 	
 	@SuppressWarnings("unchecked")
-	public @ResponseBody List<CRM> getCRM(@PathVariable String appId, @PathVariable Boolean draft) 
+	public @ResponseBody List<Crm> getCRM(@PathVariable String appId, @PathVariable Boolean draft) 
 			throws ClassNotFoundException {
-		List<CRM> result = (List<CRM>) storage.findData(CRM.class, null, appId, draft);
+		List<Crm> result = (List<Crm>) storage.findData(Crm.class, null, appId, draft);
 		return result;
 	}
 	
 	@RequestMapping(value="/crm/{appId}/{draft}", method=RequestMethod.POST) 
-	public @ResponseBody CRM addCRM(@RequestBody CRM crm, @PathVariable String appId, @PathVariable Boolean draft) {
+	public @ResponseBody Crm addCRM(@RequestBody Crm crm, @PathVariable String appId, @PathVariable Boolean draft) {
 		crm.setObjectId(UUID.randomUUID().toString());
 		crm.setAppId(appId);
 		Date actualDate = new Date();
@@ -64,22 +64,22 @@ public class CRMController {
 	}
 	
 	@RequestMapping(value="/crm/{appId}/{objectId}/{draft}", method=RequestMethod.PUT)
-	public void updateCRM(@RequestBody CRM crm, @PathVariable String appId, 
+	public void updateCRM(@RequestBody Crm crm, @PathVariable String appId, 
 			@PathVariable String objectId, @PathVariable Boolean draft) throws EntityNotFoundException {
 		storage.updateCRM(crm, draft);
 	}
 	
 	@RequestMapping(value="/crm/{appId}/{objectId}/{draft}", method=RequestMethod.DELETE)
-	public void deleteCRM(@RequestBody CRM crm, @PathVariable String appId, 
+	public void deleteCRM(@RequestBody Crm crm, @PathVariable String appId, 
 			@PathVariable String objectId, @PathVariable Boolean draft) throws EntityNotFoundException {
 		storage.removeCRM(appId, objectId, draft);
 	}
 	
 	@RequestMapping(value="/crm/{appId}/{objectId}/{draft}", method=RequestMethod.POST)
-	public @ResponseBody CRM addOrarioApertura(@RequestBody OrarioApertura orario, @PathVariable String appId, 
+	public @ResponseBody Crm addOrarioApertura(@RequestBody OrarioApertura orario, @PathVariable String appId, 
 			@PathVariable String objectId, @PathVariable Boolean draft) throws ClassNotFoundException, EntityNotFoundException {
 		Criteria criteriaId = new Criteria("objectId").is(objectId);
-		CRM crmDB = storage.findOneData(CRM.class, criteriaId, appId, draft);
+		Crm crmDB = storage.findOneData(Crm.class, criteriaId, appId, draft);
 		if(crmDB == null) {
 			throw new EntityNotFoundException(String.format("CRM with id %s not found", objectId));
 		}
@@ -89,10 +89,10 @@ public class CRMController {
 	}
 
 	@RequestMapping(value="/crm/{appId}/{objectId}/{position}/{draft}", method=RequestMethod.DELETE)
-	public @ResponseBody CRM deleteOrarioApertura(@PathVariable String appId, @PathVariable String objectId, 
+	public @ResponseBody Crm deleteOrarioApertura(@PathVariable String appId, @PathVariable String objectId, 
 			@PathVariable int position, @PathVariable Boolean draft) throws ClassNotFoundException, EntityNotFoundException {
 		Criteria criteriaId = new Criteria("objectId").is(objectId);
-		CRM crmDB = storage.findOneData(CRM.class, criteriaId, appId, draft);
+		Crm crmDB = storage.findOneData(Crm.class, criteriaId, appId, draft);
 		if(crmDB == null) {
 			throw new EntityNotFoundException(String.format("CRM with id %s not found", objectId));
 		}
