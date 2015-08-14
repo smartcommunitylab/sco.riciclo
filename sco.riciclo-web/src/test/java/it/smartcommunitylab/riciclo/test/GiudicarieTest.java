@@ -122,16 +122,16 @@ public class GiudicarieTest {
 		Assert.assertNotNull(rifiuti.getGestori());
 		Assert.assertNotNull(rifiuti.getIstituzioni());
 		Assert.assertNotNull(rifiuti.getPuntiRaccolta());
-		Assert.assertNotNull(rifiuti.getRaccolta());
+		Assert.assertNotNull(rifiuti.getRaccolte());
 		Assert.assertNotNull(rifiuti.getRiciclabolario());
 		Assert.assertFalse(rifiuti.getAree().isEmpty());
 		Assert.assertFalse(rifiuti.getGestori().isEmpty());
 		Assert.assertFalse(rifiuti.getIstituzioni().isEmpty());
 		Assert.assertFalse(rifiuti.getPuntiRaccolta().isEmpty());
-		Assert.assertFalse(rifiuti.getRaccolta().isEmpty());
+		Assert.assertFalse(rifiuti.getRaccolte().isEmpty());
 		Assert.assertFalse(rifiuti.getRiciclabolario().isEmpty());
 		Assert.assertFalse(rifiuti.getColore().isEmpty());
-		Assert.assertFalse(rifiuti.getSegnalazione().isEmpty());
+		Assert.assertFalse(rifiuti.getSegnalazioni().isEmpty());
 
 		// result = mocker.perform(MockMvcRequestBuilders.put("/publish/" +
 		// APP_ID).accept(MediaType.APPLICATION_JSON));
@@ -150,13 +150,13 @@ public class GiudicarieTest {
 		Assert.assertNotNull(rifiuti.getGestori());
 		Assert.assertNotNull(rifiuti.getIstituzioni());
 		Assert.assertNotNull(rifiuti.getPuntiRaccolta());
-		Assert.assertNotNull(rifiuti.getRaccolta());
+		Assert.assertNotNull(rifiuti.getRaccolte());
 		Assert.assertNotNull(rifiuti.getRiciclabolario());
 		Assert.assertFalse(rifiuti.getAree().isEmpty());
 		Assert.assertFalse(rifiuti.getGestori().isEmpty());
 		Assert.assertFalse(rifiuti.getIstituzioni().isEmpty());
 		Assert.assertFalse(rifiuti.getPuntiRaccolta().isEmpty());
-		Assert.assertFalse(rifiuti.getRaccolta().isEmpty());
+		Assert.assertFalse(rifiuti.getRaccolte().isEmpty());
 		Assert.assertFalse(rifiuti.getRiciclabolario().isEmpty());
 		
 		// result = mocker.perform(MockMvcRequestBuilders.post("/publish/" +

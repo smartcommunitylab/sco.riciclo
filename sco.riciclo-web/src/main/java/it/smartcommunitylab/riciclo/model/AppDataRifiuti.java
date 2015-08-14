@@ -16,31 +16,33 @@
 
 package it.smartcommunitylab.riciclo.model;
 
+
 import java.util.List;
 
 public class AppDataRifiuti extends BaseObject {
 
-	private List<TipologiaProfilo> tipologiaProfilo;
+	private List<TipologiaProfilo> tipologiaProfili;
 	private List<Area> aree;
 	private List<Gestore> gestori;
 	private List<Istituzione> istituzioni;
 	private List<Riciclabolario> riciclabolario;
 	private List<Rifiuto> rifiuti;
-	private List<Raccolta> raccolta;
+	private List<Raccolta> raccolte;
 	private List<PuntoRaccolta> puntiRaccolta;
 	private List<CalendarioRaccolta> calendariRaccolta;
 	private List<Colore> colore;
-	private List<Segnalazione> segnalazione;
+	private List<Segnalazione> segnalazioni;
 	private List<Crm> crm;
+	private List<TipologiaPuntoRaccolta> tipologiaPuntiRaccolta;
 
 	private Categorie categorie;
 
-	public List<TipologiaProfilo> getTipologiaProfilo() {
-		return tipologiaProfilo;
+	public List<TipologiaProfilo> getTipologiaProfili() {
+		return tipologiaProfili;
 	}
 
-	public void setTipologiaProfilo(List<TipologiaProfilo> profili) {
-		this.tipologiaProfilo = profili;
+	public void setTipologiaProfili(List<TipologiaProfilo> profili) {
+		this.tipologiaProfili = profili;
 	}
 
 	public List<Area> getAree() {
@@ -83,12 +85,12 @@ public class AppDataRifiuti extends BaseObject {
 		this.riciclabolario = riciclabolario;
 	}
 
-	public List<Raccolta> getRaccolta() {
-		return raccolta;
+	public List<Raccolta> getRaccolte() {
+		return raccolte;
 	}
 
-	public void setRaccolta(List<Raccolta> raccolta) {
-		this.raccolta = raccolta;
+	public void setRaccolte(List<Raccolta> raccolte) {
+		this.raccolte = raccolte;
 	}
 
 	public Categorie getCategorie() {
@@ -107,12 +109,12 @@ public class AppDataRifiuti extends BaseObject {
 		this.colore = colore;
 	}
 
-	public List<Segnalazione> getSegnalazione() {
-		return segnalazione;
+	public List<Segnalazione> getSegnalazioni() {
+		return segnalazioni;
 	}
 
-	public void setSegnalazione(List<Segnalazione> segnalazione) {
-		this.segnalazione = segnalazione;
+	public void setSegnalazioni(List<Segnalazione> segnalazioni) {
+		this.segnalazioni = segnalazioni;
 	}
 
 	public List<Rifiuto> getRifiuti() {
@@ -137,6 +139,14 @@ public class AppDataRifiuti extends BaseObject {
 
 	public void setCrm(List<Crm> crm) {
 		this.crm = crm;
+	}
+
+	public List<TipologiaPuntoRaccolta> getTipologiaPuntiRaccolta() {
+		return tipologiaPuntiRaccolta;
+	}
+
+	public void setTipologiaPuntiRaccolta(List<TipologiaPuntoRaccolta> tipologiaPuntiRaccolta) {
+		this.tipologiaPuntiRaccolta = tipologiaPuntiRaccolta;
 	}
 
 }

@@ -112,7 +112,7 @@ public class RifiutiValidator {
 			problems.add(s);					
 		}
 		
-		for (TipologiaProfilo profilo: rifiuti.getTipologiaProfilo()) {
+		for (TipologiaProfilo profilo: rifiuti.getTipologiaProfili()) {
 			if (!tipologiaUtenza.contains(profilo.getTipologiaUtenza())) {
 				String s = "Tipologia Utenza <" + profilo.getTipologiaUtenza() + "> not found for " + profilo;
 				problems.add(s);				
@@ -134,7 +134,7 @@ public class RifiutiValidator {
 			}
 		}
 		
-		for (Raccolta raccolta: rifiuti.getRaccolta()) {
+		for (Raccolta raccolta: rifiuti.getRaccolte()) {
 			if (!tipologiaPuntoRaccolta.contains(raccolta.getTipologiaPuntoRaccolta())) {
 				String s = "Tipologia Punto Raccolta <" + raccolta.getTipologiaPuntoRaccolta() + "> not found for " + raccolta;
 				problems.add(s);				
