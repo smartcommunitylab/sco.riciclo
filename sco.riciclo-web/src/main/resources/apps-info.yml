@@ -1,5 +1,5 @@
 apps:
-  - appId: GIUDICARIE
+  - ownerId: GIUDICARIE
     password: GIUDICARIE
     modelElements:
     - modello
@@ -10,13 +10,13 @@ apps:
     - 022083
     - 022182
     - 022183
-  - appId: TRENTO
+  - ownerId: TRENTO
     password: TRENTO      
     modelElements:
     - modello
     comuni:
     - 022205
-  - appId: ROVERETO
+  - ownerId: ROVERETO
     password: ROVERETO      
     modelElements:
     - modello

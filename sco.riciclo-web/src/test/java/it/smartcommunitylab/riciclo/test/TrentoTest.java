@@ -24,7 +24,7 @@ import it.smartcommunitylab.riciclo.config.RifiutiConfig;
 import it.smartcommunitylab.riciclo.model.AppDataRifiuti;
 import it.smartcommunitylab.riciclo.security.AppDetails;
 import it.smartcommunitylab.riciclo.storage.App;
-import it.smartcommunitylab.riciclo.storage.AppInfo;
+import it.smartcommunitylab.riciclo.storage.DataSetInfo;
 import it.smartcommunitylab.riciclo.storage.RepositoryManager;
 
 import java.io.IOException;
@@ -77,8 +77,8 @@ public class TrentoTest {
 	
 	@Test
 	public void testUpload() throws Exception {
-		AppInfo credentials = new AppInfo();
-		credentials.setAppId(APP_ID);
+		DataSetInfo credentials = new DataSetInfo();
+		credentials.setOwnerId(APP_ID);
 		credentials.setPassword(APP_ID);	
 		credentials.setModelElements(Arrays.asList(ImportConstants.MODEL));
 		AppDetails details = new AppDetails(credentials);
@@ -117,7 +117,7 @@ public class TrentoTest {
 		result = mocker.perform(MockMvcRequestBuilders.get("/rifiuti/" + APP_ID + "/draft").accept(MediaType.APPLICATION_JSON));
 		res = result.andExpect(MockMvcResultMatchers.status().is(200)).andReturn();
 		AppDataRifiuti rifiuti = mapper.readValue(res.getResponse().getContentAsString(), AppDataRifiuti.class);
-		Assert.assertEquals(APP_ID, rifiuti.getAppId());
+		Assert.assertEquals(APP_ID, rifiuti.getOwnerId());
 		
 		Assert.assertNotNull(rifiuti.getAree());
 		Assert.assertNotNull(rifiuti.getGestori());
@@ -139,7 +139,7 @@ public class TrentoTest {
 		result = mocker.perform(MockMvcRequestBuilders.get("/rifiuti/" + APP_ID).accept(MediaType.APPLICATION_JSON));
 		res = result.andExpect(MockMvcResultMatchers.status().is(200)).andReturn();
 		rifiuti = mapper.readValue(res.getResponse().getContentAsString(), AppDataRifiuti.class);
-		Assert.assertEquals(APP_ID, rifiuti.getAppId());
+		Assert.assertEquals(APP_ID, rifiuti.getOwnerId());
 		
 		Assert.assertNotNull(rifiuti.getAree());
 		Assert.assertNotNull(rifiuti.getGestori());

@@ -67,14 +67,14 @@ public class ConsoleController {
 	
 	@RequestMapping(value = "/console/data")
 	public @ResponseBody App data() {
-		return storage.getAppDescriptor(getAppId());
+		return storage.getAppDescriptor(getOwnerId());
 	}		
 	
 	@RequestMapping(value = "/console/publish", method=RequestMethod.PUT)
 	public @ResponseBody App publish() {
-		String appId = getAppId();
-		storage.publish(appId);
-		App descr = storage.getAppDescriptor(appId);
+		String ownerId = getOwnerId();
+		storage.publish(ownerId);
+		App descr = storage.getAppDescriptor(ownerId);
 		return descr;
 	}	
 	
@@ -89,16 +89,16 @@ public class ConsoleController {
 			if (ImportConstants.MODEL.equals(key)) fileList.setModel(multiFileMap.getFirst(key));
 		}
 		try {
-			String appId = getAppId();
-			manager.uploadFiles(fileList, storage.getAppDescriptor(appId).getAppInfo());
-			res = new ObjectMapper().writeValueAsString(storage.getAppDescriptor(appId));
+			String ownerId = getOwnerId();
+			manager.uploadFiles(fileList, storage.getAppDescriptor(ownerId).getAppInfo());
+			res = new ObjectMapper().writeValueAsString(storage.getAppDescriptor(ownerId));
 		} catch (ImportError e) {
 			res = new ObjectMapper().writeValueAsString(e);
 		}
 		return res;
 	}
 	
-	private String getAppId() {
+	private String getOwnerId() {
 		AppDetails details = (AppDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		String app = details.getUsername();
 		return app;

@@ -1,6 +1,6 @@
 package it.smartcommunitylab.riciclo.security;
 
-import it.smartcommunitylab.riciclo.storage.AppInfo;
+import it.smartcommunitylab.riciclo.storage.DataSetInfo;
 
 import java.util.Collection;
 import java.util.Collections;
@@ -12,13 +12,13 @@ import org.springframework.security.core.userdetails.UserDetails;
 public class AppDetails implements UserDetails {
 	private static final long serialVersionUID = 1970015369860723085L;
 
-	private AppInfo app;
+	private DataSetInfo app;
 	
 	public AppDetails() {
 		super();
 	}
 
-	public AppDetails(AppInfo app) {
+	public AppDetails(DataSetInfo app) {
 		super();
 		this.app = app;
 	}
@@ -26,7 +26,7 @@ public class AppDetails implements UserDetails {
 
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
-		return Collections.singletonList(new SimpleGrantedAuthority(app.getAppId()));
+		return Collections.singletonList(new SimpleGrantedAuthority(app.getOwnerId()));
 	}
 
 	@Override
@@ -36,7 +36,7 @@ public class AppDetails implements UserDetails {
 
 	@Override
 	public String getUsername() {
-		return app.getAppId();
+		return app.getOwnerId();
 	}
 
 	@Override
@@ -59,11 +59,11 @@ public class AppDetails implements UserDetails {
 		return true;
 	}
 
-	public AppInfo getApp() {
+	public DataSetInfo getApp() {
 		return app;
 	}
 
-	public void setApp(AppInfo app) {
+	public void setApp(DataSetInfo app) {
 		this.app = app;
 	}
 }

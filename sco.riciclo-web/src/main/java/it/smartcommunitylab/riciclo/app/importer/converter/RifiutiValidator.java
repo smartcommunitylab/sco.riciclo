@@ -14,7 +14,7 @@ import it.smartcommunitylab.riciclo.model.AppDataRifiuti;
 import it.smartcommunitylab.riciclo.model.Tipologia;
 import it.smartcommunitylab.riciclo.model.TipologiaProfilo;
 import it.smartcommunitylab.riciclo.model.UtenzaArea;
-import it.smartcommunitylab.riciclo.storage.AppInfo;
+import it.smartcommunitylab.riciclo.storage.DataSetInfo;
 
 import java.lang.reflect.Method;
 import java.util.Collection;
@@ -198,7 +198,7 @@ public class RifiutiValidator {
 		return result;
 	}
 
-	public void validateInput(AppInfo appInfo, FileList fileList) throws ImportError {
+	public void validateInput(DataSetInfo appInfo, FileList fileList) throws ImportError {
 		if (fileList.getModel() == null || fileList.getModel().isEmpty()) {
 			throw new ImportError("Missing model file");
 		}

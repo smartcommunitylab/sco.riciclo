@@ -1,6 +1,6 @@
 package it.smartcommunitylab.riciclo.security;
 
-import it.smartcommunitylab.riciclo.storage.AppInfo;
+import it.smartcommunitylab.riciclo.storage.DataSetInfo;
 import it.smartcommunitylab.riciclo.storage.AppSetup;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,7 +24,7 @@ public class CustomAuthenticationProvider extends AbstractUserDetailsAuthenticat
 	
 	@Override
 	protected UserDetails retrieveUser(String username, UsernamePasswordAuthenticationToken authentication) throws AuthenticationException {
-		AppInfo app = appSetup.findAppById(username);
+		DataSetInfo app = appSetup.findAppById(username);
 		if (app == null) {
 			throw new UsernameNotFoundException(username);
 		}

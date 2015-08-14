@@ -3,10 +3,10 @@ package it.smartcommunitylab.riciclo.storage;
 import java.io.Serializable;
 import java.util.List;
 
-public class AppInfo implements Serializable {
+public class DataSetInfo implements Serializable {
 	private static final long serialVersionUID = -130084868920590202L;
 
-	private String appId;
+	private String ownerId;
 	private String password;
 	private List<String> modelElements;
 	private List<String> comuni; //codice ISTAT dei comuni
@@ -19,12 +19,12 @@ public class AppInfo implements Serializable {
 		this.comuni = comuni;
 	}
 
-	public String getAppId() {
-		return appId;
+	public String getOwnerId() {
+		return ownerId;
 	}
 
-	public void setAppId(String appId) {
-		this.appId = appId;
+	public void setOwnerId(String appId) {
+		this.ownerId = appId;
 	}
 
 	public String getPassword() {
@@ -37,7 +37,7 @@ public class AppInfo implements Serializable {
 
 	@Override
 	public String toString() {
-		return appId + "=" + password;
+		return ownerId + "=" + password;
 	}
 
 	public List<String> getModelElements() {

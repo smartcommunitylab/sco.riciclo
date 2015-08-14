@@ -46,16 +46,16 @@ public class CRMController {
 	private AppSetup appSetup;	
 	
 	@SuppressWarnings("unchecked")
-	public @ResponseBody List<Crm> getCRM(@PathVariable String appId, @PathVariable Boolean draft) 
+	public @ResponseBody List<Crm> getCRM(@PathVariable String ownerId, @PathVariable Boolean draft) 
 			throws ClassNotFoundException {
-		List<Crm> result = (List<Crm>) storage.findData(Crm.class, null, appId, draft);
+		List<Crm> result = (List<Crm>) storage.findData(Crm.class, null, ownerId, draft);
 		return result;
 	}
 	
-	@RequestMapping(value="/crm/{appId}/{draft}", method=RequestMethod.POST) 
-	public @ResponseBody Crm addCRM(@RequestBody Crm crm, @PathVariable String appId, @PathVariable Boolean draft) {
+	@RequestMapping(value="/crm/{ownerId}/{draft}", method=RequestMethod.POST) 
+	public @ResponseBody Crm addCRM(@RequestBody Crm crm, @PathVariable String ownerId, @PathVariable Boolean draft) {
 		crm.setObjectId(UUID.randomUUID().toString());
-		crm.setAppId(appId);
+		crm.setOwnerId(ownerId);
 		Date actualDate = new Date();
 		crm.setCreationDate(actualDate);
 		crm.setLastUpdate(actualDate);
@@ -63,23 +63,23 @@ public class CRMController {
 		return crm;
 	}
 	
-	@RequestMapping(value="/crm/{appId}/{objectId}/{draft}", method=RequestMethod.PUT)
-	public void updateCRM(@RequestBody Crm crm, @PathVariable String appId, 
+	@RequestMapping(value="/crm/{ownerId}/{objectId}/{draft}", method=RequestMethod.PUT)
+	public void updateCRM(@RequestBody Crm crm, @PathVariable String ownerId, 
 			@PathVariable String objectId, @PathVariable Boolean draft) throws EntityNotFoundException {
 		storage.updateCRM(crm, draft);
 	}
 	
-	@RequestMapping(value="/crm/{appId}/{objectId}/{draft}", method=RequestMethod.DELETE)
-	public void deleteCRM(@RequestBody Crm crm, @PathVariable String appId, 
+	@RequestMapping(value="/crm/{ownerId}/{objectId}/{draft}", method=RequestMethod.DELETE)
+	public void deleteCRM(@RequestBody Crm crm, @PathVariable String ownerId, 
 			@PathVariable String objectId, @PathVariable Boolean draft) throws EntityNotFoundException {
-		storage.removeCRM(appId, objectId, draft);
+		storage.removeCRM(ownerId, objectId, draft);
 	}
 	
-	@RequestMapping(value="/crm/{appId}/{objectId}/{draft}", method=RequestMethod.POST)
-	public @ResponseBody Crm addOrarioApertura(@RequestBody OrarioApertura orario, @PathVariable String appId, 
+	@RequestMapping(value="/crm/{ownerId}/{objectId}/{draft}", method=RequestMethod.POST)
+	public @ResponseBody Crm addOrarioApertura(@RequestBody OrarioApertura orario, @PathVariable String ownerId, 
 			@PathVariable String objectId, @PathVariable Boolean draft) throws ClassNotFoundException, EntityNotFoundException {
 		Criteria criteriaId = new Criteria("objectId").is(objectId);
-		Crm crmDB = storage.findOneData(Crm.class, criteriaId, appId, draft);
+		Crm crmDB = storage.findOneData(Crm.class, criteriaId, ownerId, draft);
 		if(crmDB == null) {
 			throw new EntityNotFoundException(String.format("CRM with id %s not found", objectId));
 		}
@@ -88,11 +88,11 @@ public class CRMController {
 		return crmDB;
 	}
 
-	@RequestMapping(value="/crm/{appId}/{objectId}/{position}/{draft}", method=RequestMethod.DELETE)
-	public @ResponseBody Crm deleteOrarioApertura(@PathVariable String appId, @PathVariable String objectId, 
+	@RequestMapping(value="/crm/{ownerId}/{objectId}/{position}/{draft}", method=RequestMethod.DELETE)
+	public @ResponseBody Crm deleteOrarioApertura(@PathVariable String ownerId, @PathVariable String objectId, 
 			@PathVariable int position, @PathVariable Boolean draft) throws ClassNotFoundException, EntityNotFoundException {
 		Criteria criteriaId = new Criteria("objectId").is(objectId);
-		Crm crmDB = storage.findOneData(Crm.class, criteriaId, appId, draft);
+		Crm crmDB = storage.findOneData(Crm.class, criteriaId, ownerId, draft);
 		if(crmDB == null) {
 			throw new EntityNotFoundException(String.format("CRM with id %s not found", objectId));
 		}

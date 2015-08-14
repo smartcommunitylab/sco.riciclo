@@ -21,16 +21,16 @@ import java.util.Date;
 
 public class BaseObject {
 
-	private String appId;
+	private String ownerId;
 	private Date creationDate;
 	private Date lastUpdate;
 
-	public String getAppId() {
-		return appId;
+	public String getOwnerId() {
+		return ownerId;
 	}
 
-	public void setAppId(String appId) {
-		this.appId = appId;
+	public void setOwnerId(String ownerId) {
+		this.ownerId = ownerId;
 	}
 
 	public Date getCreationDate() {

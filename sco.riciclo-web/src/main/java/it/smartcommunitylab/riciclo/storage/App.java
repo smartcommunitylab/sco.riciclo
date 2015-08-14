@@ -1,14 +1,14 @@
 package it.smartcommunitylab.riciclo.storage;
 
 public class App {
-	private AppInfo appInfo;
+	private DataSetInfo appInfo;
 	private AppState publishState;
 	private AppState draftState;
 	
-	public AppInfo getAppInfo() {
+	public DataSetInfo getAppInfo() {
 		return appInfo;
 	}
-	public void setAppInfo(AppInfo appInfo) {
+	public void setAppInfo(DataSetInfo appInfo) {
 		this.appInfo = appInfo;
 	}
 	public AppState getPublishState() {

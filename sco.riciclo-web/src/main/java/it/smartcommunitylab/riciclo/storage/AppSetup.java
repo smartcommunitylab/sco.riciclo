@@ -29,20 +29,20 @@ public class AppSetup {
 		AppSetup data = (AppSetup) yaml.load(resource.getInputStream());
 		this.apps = data.apps;
 		
-		for (AppInfo cred: data.getApps()) {
+		for (DataSetInfo cred: data.getApps()) {
 			storage.createApp(cred);
 		}
 	}
 	
 
-	private List<AppInfo> apps;
-	private Map<String,AppInfo> appsMap;
+	private List<DataSetInfo> apps;
+	private Map<String,DataSetInfo> appsMap;
 
-	public List<AppInfo> getApps() {
+	public List<DataSetInfo> getApps() {
 		return apps;
 	}
 
-	public void setApps(List<AppInfo> apps) {
+	public void setApps(List<DataSetInfo> apps) {
 		this.apps = apps;
 	}
 
@@ -51,11 +51,11 @@ public class AppSetup {
 		return "AppSetup [apps=" + apps + "]";
 	}
 
-	public AppInfo findAppById(String username) {
+	public DataSetInfo findAppById(String username) {
 		if (appsMap == null) {
-			appsMap = new HashMap<String, AppInfo>();
-			for (AppInfo app : apps) {
-				appsMap.put(app.getAppId(), app);
+			appsMap = new HashMap<String, DataSetInfo>();
+			for (DataSetInfo app : apps) {
+				appsMap.put(app.getOwnerId(), app);
 			}
 		}
 		return appsMap.get(username);

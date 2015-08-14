@@ -19,7 +19,7 @@ package it.smartcommunitylab.riciclo.controller;
 import it.smartcommunitylab.riciclo.exception.EntityNotFoundException;
 import it.smartcommunitylab.riciclo.model.Area;
 import it.smartcommunitylab.riciclo.model.Raccolta;
-import it.smartcommunitylab.riciclo.storage.AppInfo;
+import it.smartcommunitylab.riciclo.storage.DataSetInfo;
 import it.smartcommunitylab.riciclo.storage.AppSetup;
 import it.smartcommunitylab.riciclo.storage.RepositoryManager;
 
@@ -49,10 +49,10 @@ public class RaccoltaController {
 	@Autowired
 	private AppSetup appSetup;	
 	
-	public @ResponseBody List<Raccolta> getRaccolte(@PathVariable String appId, @PathVariable Boolean draft) 
+	public @ResponseBody List<Raccolta> getRaccolte(@PathVariable String ownerId, @PathVariable Boolean draft) 
 			throws ClassNotFoundException {
 		//da appId estraggo lista comuni (codici ISTAT)
-		AppInfo appInfo = appSetup.findAppById(appId);
+		DataSetInfo appInfo = appSetup.findAppById(ownerId);
 		if(appInfo == null) {
 			return new ArrayList<Raccolta>();
 		}
@@ -62,19 +62,19 @@ public class RaccoltaController {
 		Map<String, Raccolta> resultMap = new HashMap<String, Raccolta>();
 		for(String comune : comuni) {
 			Criteria criteriaISTAT = new Criteria("codiceISTAT").is(comune);
-			Area areaComune = storage.findOneData(Area.class, criteriaISTAT, appId, draft);
+			Area areaComune = storage.findOneData(Area.class, criteriaISTAT, ownerId, draft);
 			List<Area> areaList = new ArrayList<Area>();
 			areaList.add(areaComune);
-			Utils.findRaccolte(areaList, appId, draft, resultMap, storage);
+			Utils.findRaccolte(areaList, ownerId, draft, resultMap, storage);
 		}
 		List<Raccolta> result = new ArrayList<Raccolta>(resultMap.size());
 		result.addAll(resultMap.values());
 		return result;
 	}
 	
-	@RequestMapping(value="/raccolta/{appId}/{draft}", method=RequestMethod.POST) 
+	@RequestMapping(value="/raccolta/{ownerId}/{draft}", method=RequestMethod.POST) 
 	public @ResponseBody Raccolta addRaccolta(@RequestBody Raccolta raccolta, 
-			@PathVariable String appId,	@PathVariable Boolean draft) {
+			@PathVariable String ownerId,	@PathVariable Boolean draft) {
 		Date actualDate = new Date();
 		raccolta.setObjectId(UUID.randomUUID().toString());
 		raccolta.setCreationDate(actualDate);
@@ -83,10 +83,10 @@ public class RaccoltaController {
 		return raccolta;
 	}
 	
-	@RequestMapping(value="/raccolta/{appId}/{objectId}/{draft}", method=RequestMethod.DELETE)
-	public void deleteRaccoltaById(@PathVariable String appId, @PathVariable String objectId, 
+	@RequestMapping(value="/raccolta/{ownerId}/{objectId}/{draft}", method=RequestMethod.DELETE)
+	public void deleteRaccoltaById(@PathVariable String ownerId, @PathVariable String objectId, 
 			@PathVariable Boolean draft) throws EntityNotFoundException {
-		storage.removeRaccolta(appId, objectId, draft);
+		storage.removeRaccolta(ownerId, objectId, draft);
 	}
 	
 }

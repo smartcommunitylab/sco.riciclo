@@ -19,7 +19,7 @@ package it.smartcommunitylab.riciclo.controller;
 import it.smartcommunitylab.riciclo.exception.EntityNotFoundException;
 import it.smartcommunitylab.riciclo.model.Area;
 import it.smartcommunitylab.riciclo.model.Riciclabolario;
-import it.smartcommunitylab.riciclo.storage.AppInfo;
+import it.smartcommunitylab.riciclo.storage.DataSetInfo;
 import it.smartcommunitylab.riciclo.storage.AppSetup;
 import it.smartcommunitylab.riciclo.storage.RepositoryManager;
 
@@ -49,10 +49,10 @@ public class RiciclabolarioController {
 	@Autowired
 	private AppSetup appSetup;	
 	
-	public @ResponseBody List<Riciclabolario> getRiciclabolario(@PathVariable String appId, 
+	public @ResponseBody List<Riciclabolario> getRiciclabolario(@PathVariable String ownerId, 
 			@PathVariable Boolean draft) throws ClassNotFoundException {
 		//da appId estraggo lista comuni (codici ISTAT)
-		AppInfo appInfo = appSetup.findAppById(appId);
+		DataSetInfo appInfo = appSetup.findAppById(ownerId);
 		if(appInfo == null) {
 			return new ArrayList<Riciclabolario>();
 		}
@@ -62,10 +62,10 @@ public class RiciclabolarioController {
 		Map<String, Riciclabolario> resultMap = new HashMap<String, Riciclabolario>();
 		for(String comune : comuni) {
 			Criteria criteriaISTAT = new Criteria("codiceISTAT").is(comune);
-			Area areaComune = storage.findOneData(Area.class, criteriaISTAT, appId, draft);
+			Area areaComune = storage.findOneData(Area.class, criteriaISTAT, ownerId, draft);
 			List<Area> areaList = new ArrayList<Area>();
 			areaList.add(areaComune);
-			Utils.findRiciclabolario(areaList, appId, draft, resultMap, storage);
+			Utils.findRiciclabolario(areaList, ownerId, draft, resultMap, storage);
 		}
 		List<Riciclabolario> result = new ArrayList<Riciclabolario>(resultMap.size());
 		result.addAll(resultMap.values());
@@ -73,9 +73,9 @@ public class RiciclabolarioController {
 	}
 	
 	@SuppressWarnings("unchecked")
-	@RequestMapping(value="/riciclabolario/{appId}/{draft}", method=RequestMethod.POST) 
+	@RequestMapping(value="/riciclabolario/{ownerId}/{draft}", method=RequestMethod.POST) 
 	public @ResponseBody List<Riciclabolario> addRiciclabolario(@RequestBody Map<String, Object> data, 
-			@PathVariable String appId,	@PathVariable Boolean draft) {
+			@PathVariable String ownerId,	@PathVariable Boolean draft) {
 		String area = (String) data.get("area");
 		String tipologiaRifiuto = (String) data.get("tipologiaRifiuto");
 		String rifiuto = (String) data.get("rifiuto");
@@ -85,7 +85,7 @@ public class RiciclabolarioController {
 		for(String tipologiaUtenza : tipologiaUtenzaList) {
 			Riciclabolario riciclabolario = new Riciclabolario();
 			riciclabolario.setObjectId(UUID.randomUUID().toString());
-			riciclabolario.setAppId(appId);
+			riciclabolario.setOwnerId(ownerId);
 			riciclabolario.setCreationDate(actualDate);
 			riciclabolario.setLastUpdate(actualDate);
 			riciclabolario.setArea(area);
@@ -98,13 +98,13 @@ public class RiciclabolarioController {
 		return response;
 	}
 	
-	@RequestMapping(value="/riciclabolario/{appId}/{objectId}/{draft}", method=RequestMethod.DELETE)
-	public void deleteRiciclabolarioById(@PathVariable String appId, @PathVariable String objectId, 
+	@RequestMapping(value="/riciclabolario/{ownerId}/{objectId}/{draft}", method=RequestMethod.DELETE)
+	public void deleteRiciclabolarioById(@PathVariable String ownerId, @PathVariable String objectId, 
 			@PathVariable Boolean draft) throws EntityNotFoundException {
-		storage.removeRiciclabolario(appId, objectId, draft);
+		storage.removeRiciclabolario(ownerId, objectId, draft);
 	}
 	
-	@RequestMapping(value="/riciclabolario/{appId}/{draft}", method=RequestMethod.DELETE)
+	@RequestMapping(value="/riciclabolario/{ownerId}/{draft}", method=RequestMethod.DELETE)
 	public void deleteRiciclabolario(@RequestBody Riciclabolario riciclabolario, @PathVariable String appId, 
 			@PathVariable Boolean draft) throws EntityNotFoundException {
 		storage.removeRiciclabolario(riciclabolario, draft);

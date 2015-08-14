@@ -45,16 +45,16 @@ public class RifiutoController {
 	private AppSetup appSetup;	
 	
 	@SuppressWarnings("unchecked")
-	public @ResponseBody List<Rifiuto> getRifiuti(@PathVariable String appId, @PathVariable Boolean draft) 
+	public @ResponseBody List<Rifiuto> getRifiuti(@PathVariable String ownerId, @PathVariable Boolean draft) 
 			throws ClassNotFoundException {
-		List<Rifiuto> result = (List<Rifiuto>) storage.findData(Rifiuto.class, null, appId, draft);
+		List<Rifiuto> result = (List<Rifiuto>) storage.findData(Rifiuto.class, null, ownerId, draft);
 		return result;
 	}
 	
-	@RequestMapping(value="/rifiuto/{appId}/{draft}", method=RequestMethod.POST) 
-	public @ResponseBody Rifiuto addRifiuto(@RequestBody Rifiuto rifiuto, @PathVariable String appId, @PathVariable Boolean draft) {
+	@RequestMapping(value="/rifiuto/{ownerId}/{draft}", method=RequestMethod.POST) 
+	public @ResponseBody Rifiuto addRifiuto(@RequestBody Rifiuto rifiuto, @PathVariable String ownerId, @PathVariable Boolean draft) {
 		rifiuto.setObjectId(UUID.randomUUID().toString());
-		rifiuto.setAppId(appId);
+		rifiuto.setOwnerId(ownerId);
 		Date actualDate = new Date();
 		rifiuto.setCreationDate(actualDate);
 		rifiuto.setLastUpdate(actualDate);
@@ -62,16 +62,16 @@ public class RifiutoController {
 		return rifiuto;
 	}
 	
-	@RequestMapping(value="/rifiuto/{appId}/{objectId}/{draft}", method=RequestMethod.PUT)
-	public void updateRifiuto(@RequestBody Rifiuto rifiuto, @PathVariable String appId, 
+	@RequestMapping(value="/rifiuto/{ownerId}/{objectId}/{draft}", method=RequestMethod.PUT)
+	public void updateRifiuto(@RequestBody Rifiuto rifiuto, @PathVariable String ownerId, 
 			@PathVariable String objectId, @PathVariable Boolean draft) throws EntityNotFoundException {
 		storage.updateRifiuto(rifiuto, draft);
 	}
 	
-	@RequestMapping(value="/rifiuto/{appId}/{objectId}/{draft}", method=RequestMethod.DELETE)
-	public void deleteRifiuto(@RequestBody Crm crm, @PathVariable String appId, 
+	@RequestMapping(value="/rifiuto/{ownerId}/{objectId}/{draft}", method=RequestMethod.DELETE)
+	public void deleteRifiuto(@RequestBody Crm crm, @PathVariable String ownerId, 
 			@PathVariable String objectId, @PathVariable Boolean draft) throws EntityNotFoundException {
-		storage.removeRifiuto(appId, objectId, draft);
+		storage.removeRifiuto(ownerId, objectId, draft);
 	}
 	
 }

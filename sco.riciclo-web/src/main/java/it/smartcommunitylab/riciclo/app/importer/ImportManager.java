@@ -4,7 +4,7 @@ import it.smartcommunitylab.riciclo.app.importer.converter.DataImporter;
 import it.smartcommunitylab.riciclo.app.importer.converter.RifiutiConverter;
 import it.smartcommunitylab.riciclo.app.importer.converter.RifiutiValidator;
 import it.smartcommunitylab.riciclo.model.AppDataRifiuti;
-import it.smartcommunitylab.riciclo.storage.AppInfo;
+import it.smartcommunitylab.riciclo.storage.DataSetInfo;
 import it.smartcommunitylab.riciclo.storage.RepositoryManager;
 
 import java.io.InputStream;
@@ -31,7 +31,7 @@ public class ImportManager {
 	@Autowired
 	private RepositoryManager storage;
 
-	public void uploadFiles(FileList fileList, AppInfo appInfo) throws ImportError {
+	public void uploadFiles(FileList fileList, DataSetInfo appInfo) throws ImportError {
 		try {
 			InputStream xlsIs = null;
 			InputStream isoleIs = null;
@@ -56,11 +56,11 @@ public class ImportManager {
 				throw new ImportError(validationResult);
 			}			
 			
-			AppDataRifiuti convertedRifiuti = converter.convert(rifiuti, appInfo.getAppId());
+			AppDataRifiuti convertedRifiuti = converter.convert(rifiuti, appInfo.getOwnerId());
 			validationResult = validator.validate(convertedRifiuti);
 
 			if (validationResult.isEmpty()) {
-				storage.save(convertedRifiuti, appInfo.getAppId());
+				storage.save(convertedRifiuti, appInfo.getOwnerId());
 			} else {
 				throw new ImportError(validationResult);
 			}

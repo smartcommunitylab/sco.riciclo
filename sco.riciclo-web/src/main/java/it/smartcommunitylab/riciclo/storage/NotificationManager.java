@@ -16,13 +16,13 @@ public class NotificationManager {
 		this.template = template;
 	}
 	
-	public Notification saveNotification(Notification n, String appId) {
-		n.setAppId(appId);
+	public Notification saveNotification(Notification n, String ownerId) {
+		n.setOwnerId(ownerId);
 		template.save(n);
 		return n;
 	}
 
-	public List<Notification> getNotifications(String appId) {
-		return template.find(Query.query(Criteria.where("appId").is(appId)), Notification.class);
+	public List<Notification> getNotifications(String ownerId) {
+		return template.find(Query.query(Criteria.where("ownerId").is(ownerId)), Notification.class);
 	}
 }

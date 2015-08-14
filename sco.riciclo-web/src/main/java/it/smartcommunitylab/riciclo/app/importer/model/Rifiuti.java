@@ -39,7 +39,7 @@ public class Rifiuti {
 	@Valid
 	private List<Raccolte> raccolte;
 	@Valid
-	private List<TipologiaPuntiRaccolta> tipologiaPuntoRaccolta;
+	private List<TipologiaPuntoRaccolta> tipologiaPuntoRaccolta;
 	@Valid
 	private List<TipologiaRaccolta> tipologiaRaccolta;
 	@Valid
@@ -113,12 +113,12 @@ public class Rifiuti {
 		this.raccolte = raccolta;
 	}
 
-	public List<TipologiaPuntiRaccolta> getTipologiaPuntoRaccolta() {
+	public List<TipologiaPuntoRaccolta> getTipologiaPuntoRaccolta() {
 		return tipologiaPuntoRaccolta;
 	}
 
 	public void setTipologiaPuntoRaccolta(
-			List<TipologiaPuntiRaccolta> tipologiaPuntiRaccolta) {
+			List<TipologiaPuntoRaccolta> tipologiaPuntiRaccolta) {
 		this.tipologiaPuntoRaccolta = tipologiaPuntiRaccolta;
 	}
 
