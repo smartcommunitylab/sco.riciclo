@@ -133,6 +133,7 @@ public class RifiutiConverter {
 		for (it.smartcommunitylab.riciclo.app.importer.model.TipologiaProfilo pr : rifiuti.getTipologiaProfilo()) {
 			TipologiaProfilo profilo = new TipologiaProfilo();
 			profilo.setOwnerId(ownerId);
+			profilo.setObjectId(pr.getNome());
 			profilo.setTipologiaUtenza(pr.getTipologiaUtenza());
 			profilo.getNome().put(defaultLang, pr.getNome());
 			profilo.getDescrizione().put(defaultLang, pr.getDescrizione());
@@ -153,6 +154,7 @@ public class RifiutiConverter {
 			area.setGestore(ar.getGestore());
 			area.getDescrizione().put(defaultLang, ar.getDescrizione());
 			area.setEtichetta(ar.getEtichetta());
+			area.setCodiceISTAT(ar.getCodiceIstat());
 			
 			Map<String, Boolean> utenza = Maps.newTreeMap();
 			String[] utenze = null;

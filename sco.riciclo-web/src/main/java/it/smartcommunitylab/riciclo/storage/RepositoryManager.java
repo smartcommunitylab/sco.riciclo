@@ -16,6 +16,7 @@
 
 package it.smartcommunitylab.riciclo.storage;
 
+import it.smartcommunitylab.riciclo.controller.Utils;
 import it.smartcommunitylab.riciclo.exception.EntityNotFoundException;
 import it.smartcommunitylab.riciclo.model.AppDataRifiuti;
 import it.smartcommunitylab.riciclo.model.Area;
@@ -35,18 +36,26 @@ import it.smartcommunitylab.riciclo.model.TipologiaPuntoRaccolta;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.data.mongodb.core.query.Update;
 
-public class RepositoryManager {
+import com.google.common.collect.Lists;
 
+public class RepositoryManager {
+	private static final transient Logger logger = LoggerFactory.getLogger(RepositoryManager.class);
+	
 	private Class<?>[] classes = { Categorie.class, Area.class, Gestore.class, Istituzione.class, PuntoRaccolta.class,
-			Raccolta.class, Riciclabolario.class, TipologiaProfilo.class, Colore.class, Segnalazione.class };
+			CalendarioRaccolta.class, Raccolta.class, Riciclabolario.class, TipologiaProfilo.class, Colore.class, 
+			Segnalazione.class, Crm.class, TipologiaPuntoRaccolta.class, Rifiuto.class };
 
 	@Autowired
 	private AppSetup appSetup;
@@ -62,60 +71,87 @@ public class RepositoryManager {
 	public void save(AppDataRifiuti appDataRifiuti, String ownerId) {
 		AppState oldDraft = getAppState(ownerId, true);
 		cleanByOwnerId(ownerId, true);
+		Date actualDate = new Date();
 
 		appDataRifiuti.getCategorie().setOwnerId(ownerId);
 		draftTemplate.save(appDataRifiuti.getCategorie());
 
 		for (Area area : appDataRifiuti.getAree()) {
 			area.setOwnerId(ownerId);
+			area.setCreationDate(actualDate);
+			area.setLastUpdate(actualDate);
 			draftTemplate.save(area);
 		}
 		for (TipologiaProfilo profilo : appDataRifiuti.getTipologiaProfili()) {
 			profilo.setOwnerId(ownerId);
+			profilo.setCreationDate(actualDate);
+			profilo.setLastUpdate(actualDate);
 			draftTemplate.save(profilo);
 		}
 		for (Gestore gestore : appDataRifiuti.getGestori()) {
 			gestore.setOwnerId(ownerId);
+			gestore.setCreationDate(actualDate);
+			gestore.setLastUpdate(actualDate);
 			draftTemplate.save(gestore);
 		}
 		for (Istituzione istituzione : appDataRifiuti.getIstituzioni()) {
 			istituzione.setOwnerId(ownerId);
+			istituzione.setCreationDate(actualDate);
+			istituzione.setLastUpdate(actualDate);
 			draftTemplate.save(istituzione);
 		}
 		for (PuntoRaccolta puntoRaccolta : appDataRifiuti.getPuntiRaccolta()) {
 			puntoRaccolta.setOwnerId(ownerId);
+			puntoRaccolta.setCreationDate(actualDate);
+			puntoRaccolta.setLastUpdate(actualDate);
 			draftTemplate.save(puntoRaccolta);
 		}
 		for(TipologiaPuntoRaccolta tipologiaPuntoRaccolta : appDataRifiuti.getTipologiaPuntiRaccolta()) {
 			tipologiaPuntoRaccolta.setOwnerId(ownerId);
+			tipologiaPuntoRaccolta.setCreationDate(actualDate);
+			tipologiaPuntoRaccolta.setLastUpdate(actualDate);
 			draftTemplate.save(tipologiaPuntoRaccolta);
 		}
 		for (Raccolta raccolta : appDataRifiuti.getRaccolte()) {
 			raccolta.setOwnerId(ownerId);
+			raccolta.setCreationDate(actualDate);
+			raccolta.setLastUpdate(actualDate);
 			draftTemplate.save(raccolta);
 		}
 		for (Riciclabolario riciclabolario : appDataRifiuti.getRiciclabolario()) {
 			riciclabolario.setOwnerId(ownerId);
+			riciclabolario.setCreationDate(actualDate);
+			riciclabolario.setLastUpdate(actualDate);
 			draftTemplate.save(riciclabolario);
 		}
 		for (Colore colore : appDataRifiuti.getColore()) {
 			colore.setOwnerId(ownerId);
+			colore.setCreationDate(actualDate);
+			colore.setLastUpdate(actualDate);
 			draftTemplate.save(colore);
 		}
 		for (Segnalazione segnalazione : appDataRifiuti.getSegnalazioni()) {
 			segnalazione.setOwnerId(ownerId);
+			segnalazione.setCreationDate(actualDate);
+			segnalazione.setLastUpdate(actualDate);
 			draftTemplate.save(segnalazione);
 		}
 		for (Rifiuto rifiuto : appDataRifiuti.getRifiuti()) {
 			rifiuto.setOwnerId(ownerId);
+			rifiuto.setCreationDate(actualDate);
+			rifiuto.setLastUpdate(actualDate);
 			draftTemplate.save(rifiuto);
 		}
 		for (Crm crm : appDataRifiuti.getCrm()) {
 			crm.setOwnerId(ownerId);
+			crm.setCreationDate(actualDate);
+			crm.setLastUpdate(actualDate);
 			draftTemplate.save(crm);
 		}
 		for (CalendarioRaccolta calendarioRaccolta : appDataRifiuti.getCalendariRaccolta()) {
 			calendarioRaccolta.setOwnerId(ownerId);
+			calendarioRaccolta.setCreationDate(actualDate);
+			calendarioRaccolta.setLastUpdate(actualDate);
 			draftTemplate.save(calendarioRaccolta);
 		}
 		saveAppVersion(ownerId, oldDraft.getVersion() + 1, true);
@@ -158,10 +194,11 @@ public class RepositoryManager {
 		if (appInfoDB == null) {
 			template.save(appInfo);
 		} else {
-			appInfoDB.setPassword(appInfo.getPassword());
-			appInfoDB.setModelElements(appInfo.getModelElements());
-			appInfoDB.setComuni(appInfo.getComuni());
-			template.save(appInfoDB);
+			Update update = new Update();
+			update.set("passowrd", appInfo.getPassword());
+			update.set("modelElements", appInfo.getModelElements());
+			update.set("comuni", appInfo.getComuni());
+			template.updateFirst(query, update, DataSetInfo.class);
 		}
 	}
 
@@ -198,27 +235,55 @@ public class RepositoryManager {
 	}
 
 	public AppDataRifiuti findRifiuti(String ownerId, boolean draft) {
-		MongoTemplate template;
-		if (draft) {
-			template = draftTemplate;
-		} else {
-			template = finalTemplate;
-		}
-
+		MongoTemplate template = draft ? draftTemplate : finalTemplate;
 		AppDataRifiuti appDataRifiuti = new AppDataRifiuti();
-		Query query = appQuery(ownerId);
-		appDataRifiuti.setAree(template.find(query, Area.class));
-		appDataRifiuti.setTipologiaProfili(template.find(query, TipologiaProfilo.class));
-		appDataRifiuti.setCategorie(template.findOne(query, Categorie.class));
-		appDataRifiuti.setGestori(template.find(query, Gestore.class));
-		appDataRifiuti.setIstituzioni(template.find(query, Istituzione.class));
-		appDataRifiuti.setPuntiRaccolta(template.find(query, PuntoRaccolta.class));
-		appDataRifiuti.setRaccolte(template.find(query, Raccolta.class));
-		appDataRifiuti.setRiciclabolario(template.find(query, Riciclabolario.class));
-		appDataRifiuti.setColore(template.find(query, Colore.class));
-		appDataRifiuti.setSegnalazioni(template.find(query, Segnalazione.class));
 		appDataRifiuti.setOwnerId(ownerId);
-
+		
+		DataSetInfo appInfo = appSetup.findAppById(ownerId);
+		if(appInfo!= null) {
+			List<String> comuni = appInfo.getComuni();
+			Map<String, Riciclabolario> resultMapRiciclabolario = new HashMap<String, Riciclabolario>();
+			Map<String, Raccolta> resultMapRaccolta  = new HashMap<String, Raccolta>();
+			Map<String, Area> resultMapArea  = new HashMap<String, Area>();
+			Map<String, Crm> resultMapCrm  = new HashMap<String, Crm>();
+			Map<String, PuntoRaccolta> resultMapPuntoRaccolta  = new HashMap<String, PuntoRaccolta>();
+			Map<String, CalendarioRaccolta> resultMapCalendarioRaccolta  = new HashMap<String, CalendarioRaccolta>();
+			Map<String, Segnalazione> resultMapSegnalazione  = new HashMap<String, Segnalazione>();
+			Map<String, Gestore> resultMapGestore  = new HashMap<String, Gestore>();
+			Map<String, Istituzione> resultMapIstituzione  = new HashMap<String, Istituzione>();
+			try {
+				for(String comune : comuni) {
+					Utils.findAree(comune, ownerId, draft, resultMapArea, this);
+					Utils.findRaccolte(comune, ownerId, draft, resultMapRaccolta, this);
+					Utils.findGestori(comune, ownerId, draft, resultMapGestore, this);
+					Utils.findIstituzioni(comune, ownerId, draft, resultMapIstituzione, this);
+					Utils.findPuntiRaccolta(comune, ownerId, draft, resultMapPuntoRaccolta, this);
+					Utils.findCalendariRaccolta(comune, ownerId, draft, resultMapCalendarioRaccolta, this);
+					Utils.findRiciclabolario(comune, ownerId, draft, resultMapRiciclabolario, this);
+					Utils.findSegnalazioni(comune, ownerId, draft, resultMapSegnalazione, this);
+				}
+				resultMapCrm = Utils.findCrm(resultMapPuntoRaccolta, ownerId, draft, this);
+				
+				Query query = appQuery(ownerId);
+				appDataRifiuti.setTipologiaProfili(template.find(query, TipologiaProfilo.class));
+				appDataRifiuti.setTipologiaPuntiRaccolta(template.find(query, TipologiaPuntoRaccolta.class));
+				appDataRifiuti.setCategorie(template.findOne(query, Categorie.class));
+				appDataRifiuti.setColore(template.find(query, Colore.class));
+				appDataRifiuti.setRifiuti(template.find(query, Rifiuto.class));
+				
+				appDataRifiuti.setAree(Lists.newArrayList(resultMapArea.values()));
+				appDataRifiuti.setRaccolte(Lists.newArrayList(resultMapRaccolta.values()));
+				appDataRifiuti.setGestori(Lists.newArrayList(resultMapGestore.values()));
+				appDataRifiuti.setIstituzioni(Lists.newArrayList(resultMapIstituzione.values()));
+				appDataRifiuti.setCrm(Lists.newArrayList(resultMapCrm.values()));
+				appDataRifiuti.setPuntiRaccolta(Lists.newArrayList(resultMapPuntoRaccolta.values()));
+				appDataRifiuti.setCalendariRaccolta(Lists.newArrayList(resultMapCalendarioRaccolta.values()));
+				appDataRifiuti.setRiciclabolario(Lists.newArrayList(resultMapRiciclabolario.values()));
+				appDataRifiuti.setSegnalazioni(Lists.newArrayList(resultMapSegnalazione.values()));
+			} catch (Exception e) {
+				logger.error("error in findRifiuti:" + e.getMessage(), e);
+			}
+		}
 		return appDataRifiuti;
 	}
 
@@ -250,7 +315,12 @@ public class RepositoryManager {
 	public List<?> findData(Class<?> entityClass, Criteria criteria, String ownerId, boolean draft)
 			throws ClassNotFoundException {
 		MongoTemplate template = draft ? draftTemplate : finalTemplate;
-		Query query = new Query(new Criteria("ownerId").is(ownerId).andOperator(criteria));
+		Query query = null;
+		if (criteria != null) {
+			query = new Query(new Criteria("ownerId").is(ownerId).andOperator(criteria));
+		} else {
+			query = new Query(new Criteria("ownerId").is(ownerId));
+		}
 		List<?> result = template.find(query, entityClass);
 		return result;
 	}

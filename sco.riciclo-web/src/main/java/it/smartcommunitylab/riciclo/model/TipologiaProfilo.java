@@ -22,6 +22,7 @@ import java.util.Map;
 
 public class TipologiaProfilo extends BaseObject {
 
+	private String objectId;
 	private Map<String, String> nome = new HashMap<String, String>();;
 	private String tipologiaUtenza;
 	private Map<String, String> descrizione = new HashMap<String, String>();;
@@ -53,6 +54,14 @@ public class TipologiaProfilo extends BaseObject {
 
 	public void setDescrizione(Map<String, String> descrizione) {
 		this.descrizione = descrizione;
+	}
+
+	public String getObjectId() {
+		return objectId;
+	}
+
+	public void setObjectId(String objectId) {
+		this.objectId = objectId;
 	}	
 	
 
