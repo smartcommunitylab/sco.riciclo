@@ -235,55 +235,61 @@ public class RepositoryManager {
 	}
 
 	public AppDataRifiuti findRifiuti(String ownerId, boolean draft) {
+		DataSetInfo appInfo = appSetup.findAppById(ownerId);
+		if(appInfo!= null) {
+			return findRifiuti(appInfo.getComuni(), "it", ownerId, draft);
+		} else {
+			return new AppDataRifiuti();
+		}
+	}
+	
+	public AppDataRifiuti findRifiuti(List<String> comuni, String lang, String ownerId, boolean draft) {
 		MongoTemplate template = draft ? draftTemplate : finalTemplate;
 		AppDataRifiuti appDataRifiuti = new AppDataRifiuti();
 		appDataRifiuti.setOwnerId(ownerId);
 		
-		DataSetInfo appInfo = appSetup.findAppById(ownerId);
-		if(appInfo!= null) {
-			List<String> comuni = appInfo.getComuni();
-			Map<String, Riciclabolario> resultMapRiciclabolario = new HashMap<String, Riciclabolario>();
-			Map<String, Raccolta> resultMapRaccolta  = new HashMap<String, Raccolta>();
-			Map<String, Area> resultMapArea  = new HashMap<String, Area>();
-			Map<String, Crm> resultMapCrm  = new HashMap<String, Crm>();
-			Map<String, PuntoRaccolta> resultMapPuntoRaccolta  = new HashMap<String, PuntoRaccolta>();
-			Map<String, CalendarioRaccolta> resultMapCalendarioRaccolta  = new HashMap<String, CalendarioRaccolta>();
-			Map<String, Segnalazione> resultMapSegnalazione  = new HashMap<String, Segnalazione>();
-			Map<String, Gestore> resultMapGestore  = new HashMap<String, Gestore>();
-			Map<String, Istituzione> resultMapIstituzione  = new HashMap<String, Istituzione>();
-			try {
-				for(String comune : comuni) {
-					Utils.findAree(comune, ownerId, draft, resultMapArea, this);
-					Utils.findRaccolte(comune, ownerId, draft, resultMapRaccolta, this);
-					Utils.findGestori(comune, ownerId, draft, resultMapGestore, this);
-					Utils.findIstituzioni(comune, ownerId, draft, resultMapIstituzione, this);
-					Utils.findPuntiRaccolta(comune, ownerId, draft, resultMapPuntoRaccolta, this);
-					Utils.findCalendariRaccolta(comune, ownerId, draft, resultMapCalendarioRaccolta, this);
-					Utils.findRiciclabolario(comune, ownerId, draft, resultMapRiciclabolario, this);
-					Utils.findSegnalazioni(comune, ownerId, draft, resultMapSegnalazione, this);
-				}
-				resultMapCrm = Utils.findCrm(resultMapPuntoRaccolta, ownerId, draft, this);
-				
-				Query query = appQuery(ownerId);
-				appDataRifiuti.setTipologiaProfili(template.find(query, TipologiaProfilo.class));
-				appDataRifiuti.setTipologiaPuntiRaccolta(template.find(query, TipologiaPuntoRaccolta.class));
-				appDataRifiuti.setCategorie(template.findOne(query, Categorie.class));
-				appDataRifiuti.setColore(template.find(query, Colore.class));
-				appDataRifiuti.setRifiuti(template.find(query, Rifiuto.class));
-				
-				appDataRifiuti.setAree(Lists.newArrayList(resultMapArea.values()));
-				appDataRifiuti.setRaccolte(Lists.newArrayList(resultMapRaccolta.values()));
-				appDataRifiuti.setGestori(Lists.newArrayList(resultMapGestore.values()));
-				appDataRifiuti.setIstituzioni(Lists.newArrayList(resultMapIstituzione.values()));
-				appDataRifiuti.setCrm(Lists.newArrayList(resultMapCrm.values()));
-				appDataRifiuti.setPuntiRaccolta(Lists.newArrayList(resultMapPuntoRaccolta.values()));
-				appDataRifiuti.setCalendariRaccolta(Lists.newArrayList(resultMapCalendarioRaccolta.values()));
-				appDataRifiuti.setRiciclabolario(Lists.newArrayList(resultMapRiciclabolario.values()));
-				appDataRifiuti.setSegnalazioni(Lists.newArrayList(resultMapSegnalazione.values()));
-			} catch (Exception e) {
-				logger.error("error in findRifiuti:" + e.getMessage(), e);
+		Map<String, Riciclabolario> resultMapRiciclabolario = new HashMap<String, Riciclabolario>();
+		Map<String, Raccolta> resultMapRaccolta  = new HashMap<String, Raccolta>();
+		Map<String, Area> resultMapArea  = new HashMap<String, Area>();
+		Map<String, Crm> resultMapCrm  = new HashMap<String, Crm>();
+		Map<String, PuntoRaccolta> resultMapPuntoRaccolta  = new HashMap<String, PuntoRaccolta>();
+		Map<String, CalendarioRaccolta> resultMapCalendarioRaccolta  = new HashMap<String, CalendarioRaccolta>();
+		Map<String, Segnalazione> resultMapSegnalazione  = new HashMap<String, Segnalazione>();
+		Map<String, Gestore> resultMapGestore  = new HashMap<String, Gestore>();
+		Map<String, Istituzione> resultMapIstituzione  = new HashMap<String, Istituzione>();
+		try {
+			for(String comune : comuni) {
+				Utils.findAree(comune, ownerId, draft, resultMapArea, this);
+				Utils.findRaccolte(resultMapArea, ownerId, draft, resultMapRaccolta, this);
+				Utils.findGestori(resultMapArea, ownerId, draft, resultMapGestore, this);
+				Utils.findIstituzioni(resultMapArea, ownerId, draft, resultMapIstituzione, this);
+				Utils.findPuntiRaccolta(resultMapArea, ownerId, draft, resultMapPuntoRaccolta, this);
+				Utils.findCalendariRaccolta(resultMapArea, ownerId, draft, resultMapCalendarioRaccolta, this);
+				Utils.findRiciclabolario(resultMapArea, ownerId, draft, resultMapRiciclabolario, this);
+				Utils.findSegnalazioni(resultMapArea, ownerId, draft, resultMapSegnalazione, this);
 			}
+			resultMapCrm = Utils.findCrm(resultMapPuntoRaccolta, ownerId, draft, this);
+			
+			Query query = appQuery(ownerId);
+			appDataRifiuti.setTipologiaProfili(template.find(query, TipologiaProfilo.class));
+			appDataRifiuti.setTipologiaPuntiRaccolta(template.find(query, TipologiaPuntoRaccolta.class));
+			appDataRifiuti.setCategorie(template.findOne(query, Categorie.class));
+			appDataRifiuti.setColore(template.find(query, Colore.class));
+			appDataRifiuti.setRifiuti(template.find(query, Rifiuto.class));
+			
+			appDataRifiuti.setAree(Lists.newArrayList(resultMapArea.values()));
+			appDataRifiuti.setRaccolte(Lists.newArrayList(resultMapRaccolta.values()));
+			appDataRifiuti.setGestori(Lists.newArrayList(resultMapGestore.values()));
+			appDataRifiuti.setIstituzioni(Lists.newArrayList(resultMapIstituzione.values()));
+			appDataRifiuti.setCrm(Lists.newArrayList(resultMapCrm.values()));
+			appDataRifiuti.setPuntiRaccolta(Lists.newArrayList(resultMapPuntoRaccolta.values()));
+			appDataRifiuti.setCalendariRaccolta(Lists.newArrayList(resultMapCalendarioRaccolta.values()));
+			appDataRifiuti.setRiciclabolario(Lists.newArrayList(resultMapRiciclabolario.values()));
+			appDataRifiuti.setSegnalazioni(Lists.newArrayList(resultMapSegnalazione.values()));
+		} catch (Exception e) {
+			logger.error("error in findRifiuti:" + e.getMessage(), e);
 		}
+		
 		return appDataRifiuti;
 	}
 

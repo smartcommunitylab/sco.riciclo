@@ -25,6 +25,7 @@ import it.smartcommunitylab.riciclo.storage.RepositoryManager;
 import java.io.ByteArrayOutputStream;
 import java.io.OutputStream;
 import java.util.List;
+import java.util.Map;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
 
@@ -86,7 +87,21 @@ public class AppDataRifiutiController {
 	public AppDataRifiuti getDraft(HttpServletResponse response, @PathVariable String ownerId) {
 		return storage.findRifiuti(ownerId, true);
 	}
-
+	
+	@SuppressWarnings("unchecked")
+	@RequestMapping(method = RequestMethod.POST, value = "/rifiuti/{ownerId}")
+	public AppDataRifiuti getDataByComuni(@RequestBody Map<String, Object> data, @PathVariable String ownerId,
+			HttpServletResponse response) {
+		String lang = (String) data.get("lang");
+		List<String> comuni = (List<String>) data.get("comuni");
+		String draftString = (String) data.get("draft");
+		boolean draft = false;
+		if(!Utils.isNull(draftString)) {
+			draft = Boolean.valueOf(draftString);
+		}
+		return storage.findRifiuti(comuni, lang, ownerId, draft);
+	}
+	
 	@RequestMapping(method = RequestMethod.GET, value = "/rifiuti/{className}/{ownerId}")
 	public List<?> get(HttpServletResponse response, @PathVariable String className, @PathVariable String ownerId) throws Exception {
 		return storage.findRifiuti(className, ownerId, false);

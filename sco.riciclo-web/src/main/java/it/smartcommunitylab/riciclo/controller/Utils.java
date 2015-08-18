@@ -18,8 +18,6 @@ import java.util.Map;
 
 import org.springframework.data.mongodb.core.query.Criteria;
 
-import com.google.common.collect.Lists;
-
 public class Utils {
 	
 	public static boolean isNull(String value) {
@@ -40,7 +38,7 @@ public class Utils {
 		return result;
 	}
 	
-	public static List<Area> findAreaListByComune(String comune, String ownerId, boolean draft, RepositoryManager storage)
+	public static List<Area> findAreaByComune(String comune, String ownerId, boolean draft, RepositoryManager storage)
 			throws ClassNotFoundException {
 		Criteria criteriaISTAT = new Criteria("codiceISTAT").is(comune);
 		Area areaComune = storage.findOneData(Area.class, criteriaISTAT, ownerId, draft);
@@ -49,18 +47,10 @@ public class Utils {
 		return areaList;
 	}
 	
-	public static void findRiciclabolario(String comune, String ownerId, boolean draft, 
-			Map<String, Riciclabolario> resultMap, RepositoryManager storage) throws ClassNotFoundException {
-		List<Area> areaList = findAreaListByComune(comune, ownerId, draft, storage);
-		Utils.findRiciclabolario(areaList, ownerId, draft, resultMap, storage);
-		//TODO navigare fino alla root
-	}
-	
 	@SuppressWarnings("unchecked")
-	public static void findRiciclabolario(List<Area> areaList, String ownerId, boolean draft, 
+	public static void findRiciclabolario(Map<String, Area> mapArea, String ownerId, boolean draft, 
 			Map<String, Riciclabolario> resultMap, RepositoryManager storage) throws ClassNotFoundException {
-		List<Area> newAreaList = new ArrayList<Area>();
-		for(Area area : areaList) {
+		for(Area area : mapArea.values()) {
 			String areaId = area.getObjectId();
 			//find Riciclabolario rows for specific area
 			Criteria criteriaArea = new Criteria("area").is(areaId);
@@ -69,28 +59,13 @@ public class Utils {
 			for(Riciclabolario riciclabolario : dataRows) {
 				resultMap.put(riciclabolario.getObjectId(), riciclabolario);
 			}
-			//search sub-area
-			Criteria criteriaParent = new Criteria("parent").is(areaId);
-			List<Area> subAreaList = (List<Area>) storage.findData(Area.class, criteriaParent, ownerId, draft);
-			newAreaList.addAll(subAreaList);
 		}
-		if(!newAreaList.isEmpty()) {
-			Utils.findRiciclabolario(newAreaList, ownerId, draft, resultMap, storage);
-		}
-	}
-	
-	public static void findRaccolte(String comune, String ownerId, boolean draft, 
-			Map<String, Raccolta> resultMap, RepositoryManager storage) throws ClassNotFoundException {
-		List<Area> areaList = findAreaListByComune(comune, ownerId, draft, storage);
-		Utils.findRaccolte(areaList, ownerId, draft, resultMap, storage);
-		//TODO navigare fino alla root
 	}
 	
 	@SuppressWarnings("unchecked")
-	public static void findRaccolte(List<Area> areaList, String ownerId, boolean draft, 
+	public static void findRaccolte(Map<String, Area> mapArea, String ownerId, boolean draft, 
 			Map<String, Raccolta> resultMap, RepositoryManager storage) throws ClassNotFoundException {
-		List<Area> newAreaList = new ArrayList<Area>();
-		for(Area area : areaList) {
+		for(Area area : mapArea.values()) {
 			String areaId = area.getObjectId();
 			//find Raccolta rows for specific area
 			Criteria criteriaArea = new Criteria("area").is(areaId);
@@ -99,29 +74,12 @@ public class Utils {
 			for(Raccolta raccolta : dataRows) {
 				resultMap.put(raccolta.getObjectId(), raccolta);
 			}
-			//search sub-area
-			Criteria criteriaParent = new Criteria("parent").is(areaId);
-			List<Area> subAreaList = (List<Area>) storage.findData(Area.class, criteriaParent, ownerId, draft);
-			newAreaList.addAll(subAreaList);
-		}
-		if(!newAreaList.isEmpty()) {
-			Utils.findRaccolte(newAreaList, ownerId, draft, resultMap, storage);
 		}
 	}
 	
-	public static void findGestori(String comune, String ownerId, boolean draft, 
+	public static void findGestori(Map<String, Area> mapArea, String ownerId, boolean draft, 
 			Map<String, Gestore> resultMap, RepositoryManager storage) throws ClassNotFoundException {
-		List<Area> areaList = findAreaListByComune(comune, ownerId, draft, storage);
-		Utils.findGestori(areaList, ownerId, draft, resultMap, storage);
-		//TODO navigare fino alla root
-	}
-	
-	@SuppressWarnings("unchecked")
-	public static void findGestori(List<Area> areaList, String ownerId, boolean draft, 
-			Map<String, Gestore> resultMap, RepositoryManager storage) throws ClassNotFoundException {
-		List<Area> newAreaList = new ArrayList<Area>();
-		for(Area area : areaList) {
-			String areaId = area.getObjectId();
+		for(Area area : mapArea.values()) {
 			String gestoreId = area.getGestore();
 			//find Gestore rows for specific area
 			Criteria criteriaId = new Criteria("objectId").is(gestoreId);
@@ -130,29 +88,12 @@ public class Utils {
 			if(gestore != null) {
 				resultMap.put(gestoreId, gestore);
 			}
-			//search sub-area
-			Criteria criteriaParent = new Criteria("parent").is(areaId);
-			List<Area> subAreaList = (List<Area>) storage.findData(Area.class, criteriaParent, ownerId, draft);
-			newAreaList.addAll(subAreaList);
-		}
-		if(!newAreaList.isEmpty()) {
-			Utils.findGestori(newAreaList, ownerId, draft, resultMap, storage);
 		}
 	}
 
-	public static void findIstituzioni(String comune, String ownerId, boolean draft, 
+	public static void findIstituzioni(Map<String, Area> mapArea, String ownerId, boolean draft, 
 			Map<String, Istituzione> resultMap, RepositoryManager storage) throws ClassNotFoundException {
-		List<Area> areaList = findAreaListByComune(comune, ownerId, draft, storage);
-		Utils.findIstituzioni(areaList, ownerId, draft, resultMap, storage);
-		//TODO navigare fino alla root
-	}
-	
-	@SuppressWarnings("unchecked")
-	public static void findIstituzioni(List<Area> areaList, String ownerId, boolean draft, 
-			Map<String, Istituzione> resultMap, RepositoryManager storage) throws ClassNotFoundException {
-		List<Area> newAreaList = new ArrayList<Area>();
-		for(Area area : areaList) {
-			String areaId = area.getObjectId();
+		for(Area area : mapArea.values()) {
 			String istituzioneId = area.getIstituzione();
 			//find Istituzione rows for specific area
 			Criteria criteriaId = new Criteria("objectId").is(istituzioneId);
@@ -161,29 +102,13 @@ public class Utils {
 			if(istituzione != null) {
 				resultMap.put(istituzioneId, istituzione);
 			}
-			//search sub-area
-			Criteria criteriaParent = new Criteria("parent").is(areaId);
-			List<Area> subAreaList = (List<Area>) storage.findData(Area.class, criteriaParent, ownerId, draft);
-			newAreaList.addAll(subAreaList);
-		}
-		if(!newAreaList.isEmpty()) {
-			Utils.findIstituzioni(newAreaList, ownerId, draft, resultMap, storage);
 		}
 	}
-	
-	public static void findPuntiRaccolta(String comune, String ownerId, boolean draft, 
-			Map<String, PuntoRaccolta> resultMap, RepositoryManager storage) throws ClassNotFoundException {
-		List<Area> areaList = findAreaListByComune(comune, ownerId, draft, storage);
-		Utils.findPuntiRaccolta(areaList, ownerId, draft, resultMap, storage);
-		//TODO navigare fino alla root
-	}
-
 	
 	@SuppressWarnings("unchecked")
-	public static void findPuntiRaccolta(List<Area> areaList, String ownerId, boolean draft, 
+	public static void findPuntiRaccolta(Map<String, Area> mapArea, String ownerId, boolean draft, 
 			Map<String, PuntoRaccolta> resultMap, RepositoryManager storage) throws ClassNotFoundException {
-		List<Area> newAreaList = new ArrayList<Area>();
-		for(Area area : areaList) {
+		for(Area area : mapArea.values()) {
 			String areaId = area.getObjectId();
 			//find PuntoRaccolta rows for specific area
 			Criteria criteriaArea = new Criteria("area").is(areaId);
@@ -192,28 +117,13 @@ public class Utils {
 			for(PuntoRaccolta puntoRaccolta : dataRows) { 
 				resultMap.put(puntoRaccolta.getObjectId(), puntoRaccolta);
 			}
-			//search sub-area
-			Criteria criteriaParent = new Criteria("parent").is(areaId);
-			List<Area> subAreaList = (List<Area>) storage.findData(Area.class, criteriaParent, ownerId, draft);
-			newAreaList.addAll(subAreaList);
 		}
-		if(!newAreaList.isEmpty()) {
-			Utils.findPuntiRaccolta(newAreaList, ownerId, draft, resultMap, storage);
-		}
-	}
-
-	public static void findCalendariRaccolta(String comune, String ownerId, boolean draft, 
-			Map<String, CalendarioRaccolta> resultMap, RepositoryManager storage) throws ClassNotFoundException {
-		List<Area> areaList = findAreaListByComune(comune, ownerId, draft, storage);
-		Utils.findCalendariRaccolta(areaList, ownerId, draft, resultMap, storage);
-		//TODO navigare fino alla root
 	}
 
 	@SuppressWarnings("unchecked")
-	public static void findCalendariRaccolta(List<Area> areaList, String ownerId, boolean draft, 
+	public static void findCalendariRaccolta(Map<String, Area> mapArea, String ownerId, boolean draft, 
 			Map<String, CalendarioRaccolta> resultMap, RepositoryManager storage) throws ClassNotFoundException {
-		List<Area> newAreaList = new ArrayList<Area>();
-		for(Area area : areaList) {
+		for(Area area : mapArea.values()) {
 			String areaId = area.getObjectId();
 			//find CalendarioRaccolta rows for specific area
 			Criteria criteriaArea = new Criteria("area").is(areaId);
@@ -223,28 +133,13 @@ public class Utils {
 			for(CalendarioRaccolta calendarioRaccolta : dataRows) { 
 				resultMap.put(calendarioRaccolta.getObjectId(), calendarioRaccolta);
 			}
-			//search sub-area
-			Criteria criteriaParent = new Criteria("parent").is(areaId);
-			List<Area> subAreaList = (List<Area>) storage.findData(Area.class, criteriaParent, ownerId, draft);
-			newAreaList.addAll(subAreaList);
-		}
-		if(!newAreaList.isEmpty()) {
-			Utils.findCalendariRaccolta(newAreaList, ownerId, draft, resultMap, storage);
 		}
 	}
 
-	public static void findSegnalazioni(String comune, String ownerId, boolean draft, 
-			Map<String, Segnalazione> resultMap, RepositoryManager storage) throws ClassNotFoundException {
-		List<Area> areaList = findAreaListByComune(comune, ownerId, draft, storage);
-		Utils.findSegnalazioni(areaList, ownerId, draft, resultMap, storage);
-		//TODO navigare fino alla root
-	}
-	
 	@SuppressWarnings("unchecked")
-	private static void findSegnalazioni(List<Area> areaList, String ownerId, boolean draft,
+	public static void findSegnalazioni(Map<String, Area> mapArea, String ownerId, boolean draft,
 			Map<String, Segnalazione> resultMap, RepositoryManager storage) throws ClassNotFoundException {
-		List<Area> newAreaList = new ArrayList<Area>();
-		for(Area area : areaList) {
+		for(Area area : mapArea.values()) {
 			String areaId = area.getObjectId();
 			//find Segnalazione rows for specific area
 			Criteria criteriaArea = new Criteria("area").is(areaId);
@@ -254,23 +149,28 @@ public class Utils {
 			for(Segnalazione segnalazione : dataRows) { 
 				resultMap.put(segnalazione.getObjectId(), segnalazione);
 			}
-			//search sub-area
-			Criteria criteriaParent = new Criteria("parent").is(areaId);
-			List<Area> subAreaList = (List<Area>) storage.findData(Area.class, criteriaParent, ownerId, draft);
-			newAreaList.addAll(subAreaList);
-		}
-		if(!newAreaList.isEmpty()) {
-			Utils.findSegnalazioni(newAreaList, ownerId, draft, resultMap, storage);
 		}
 	}
 	
 	public static void findAree(String comune, String ownerId, boolean draft, 
 			Map<String, Area> resultMap, RepositoryManager storage) throws ClassNotFoundException {
-		List<Area> areaList = findAreaListByComune(comune, ownerId, draft, storage);
+		//find Area by codice ISTAT	
+		List<Area> areaList = findAreaByComune(comune, ownerId, draft, storage);
+		Area comuneArea = areaList.get(0);
 		Utils.findAree(areaList, ownerId, draft, resultMap, storage);
-		//TODO navigare fino alla root
+		//find parent Area
+		String parentId = comuneArea.getParent();
+		while(!isNull(parentId)) {
+			Criteria criteriaId = new Criteria("objectId").is(parentId);
+			Area area = storage.findOneData(Area.class, criteriaId, ownerId, draft);
+			if(area != null) {
+				resultMap.put(area.getObjectId(), area);
+				parentId = area.getParent();
+			} else {
+				parentId = null;
+			}
+		}
 	}
-
 
 	@SuppressWarnings("unchecked")
 	private static void findAree(List<Area> areaList, String ownerId, boolean draft, 

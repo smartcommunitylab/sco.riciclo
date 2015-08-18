@@ -19,8 +19,8 @@ package it.smartcommunitylab.riciclo.controller;
 import it.smartcommunitylab.riciclo.exception.EntityNotFoundException;
 import it.smartcommunitylab.riciclo.model.Area;
 import it.smartcommunitylab.riciclo.model.Raccolta;
-import it.smartcommunitylab.riciclo.storage.DataSetInfo;
 import it.smartcommunitylab.riciclo.storage.AppSetup;
+import it.smartcommunitylab.riciclo.storage.DataSetInfo;
 import it.smartcommunitylab.riciclo.storage.RepositoryManager;
 
 import java.util.ArrayList;
@@ -31,13 +31,14 @@ import java.util.Map;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+
+import com.google.common.collect.Lists;
 
 
 @Controller
@@ -59,16 +60,13 @@ public class RaccoltaController {
 		List<String> comuni = appInfo.getComuni();
 		//ricerca tutt le Raccolte che insistono su un'area appartenete al sotto-albero di ogni comune individuato
 		//map <objectId, Raccolta>
-		Map<String, Raccolta> resultMap = new HashMap<String, Raccolta>();
+		Map<String, Raccolta> resultMapRaccolta = new HashMap<String, Raccolta>();
+		Map<String, Area> resultMapArea  = new HashMap<String, Area>();
 		for(String comune : comuni) {
-			Criteria criteriaISTAT = new Criteria("codiceISTAT").is(comune);
-			Area areaComune = storage.findOneData(Area.class, criteriaISTAT, ownerId, draft);
-			List<Area> areaList = new ArrayList<Area>();
-			areaList.add(areaComune);
-			Utils.findRaccolte(areaList, ownerId, draft, resultMap, storage);
+			Utils.findAree(comune, ownerId, draft, resultMapArea, storage);
+			Utils.findRaccolte(resultMapArea, ownerId, draft, resultMapRaccolta, storage);
 		}
-		List<Raccolta> result = new ArrayList<Raccolta>(resultMap.size());
-		result.addAll(resultMap.values());
+		List<Raccolta> result = Lists.newArrayList(resultMapRaccolta.values());
 		return result;
 	}
 	
