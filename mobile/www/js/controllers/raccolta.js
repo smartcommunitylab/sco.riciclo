@@ -268,8 +268,8 @@ angular.module('rifiuti.controllers.raccolta', [])
     $scope.rifiuti=rifiuti;
   });
 })
-.controller('RifiutoCtrl', function ($scope, $stateParams, Raccolta) {
-  $scope.nome = $stateParams.nome;
+.controller('RifiutoCtrl', function ($scope, $rootScope, $stateParams, Raccolta) {
+  $scope.nome = $rootScope.id2addr($stateParams.nome);
 
   Raccolta.rifiuto($scope.nome).then(function(rifiuto){
     if (!rifiuto) return;

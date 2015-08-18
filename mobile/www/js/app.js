@@ -315,8 +315,9 @@ angular.module('rifiuti', [
         'ad esempio': "Ad esempio:",
         Invia: "Invia una email per segnalare un problema direttamente all'ente che si occupa della gestione dei rifiuti. Puoi allegare una foto e le coordinate GPS della tua posizione.",
         Progetto: '"' + APP_NAME + '"',
-        Progetto_DESC: 'Tutto quello che devi sapere sulla raccolta differenziata nel tuo Comune',
-        Progetto_di: 'Un progetto di:',
+        Progetto_CREDITS: APP_NAME_CREDITS,
+        Progetto_DESC: 'Guida alla raccolta differenziata nel tuo Comune',
+        Progetto_di: 'Realizzato da:',
         Collaborazione: "In collaborazione con:",
         Eventuali: "Per informazioni:",
         TutorialUno: "Questo tutorial ti illustrerà il funzionamento della app. Per sapere dove buttare uno specifico rifiuto, scrivine il nome qui e premi sulla lente d'ingrandimento.",
@@ -352,6 +353,7 @@ angular.module('rifiuti', [
     $stateProvider
         .state('app', {
             url: "/app",
+            cache: false,
             abstract: true,
             templateUrl: "templates/menu.html",
             controller: 'AppCtrl'
@@ -360,6 +362,7 @@ angular.module('rifiuti', [
     .state('app.home', {
         url: "/home",
   //      abstract: true,
+        cache: false,
         views: {
             'menuContent': {
                 templateUrl: "templates/home.html",
@@ -370,6 +373,7 @@ angular.module('rifiuti', [
 
     .state('app.home.note', {
         url: "/note",
+        cache: false,
         views: {
             'note': {
                 templateUrl: "templates/home/note.html",
@@ -380,6 +384,7 @@ angular.module('rifiuti', [
 
     .state('app.home.news', {
         url: "/news",
+        cache: false,
         views: {
             'news': {
                 templateUrl: "templates/home/news.html",
@@ -400,6 +405,7 @@ angular.module('rifiuti', [
 
     .state('app.home.tipidirifiuti', {
         url: "/tipidirifiuti",
+        cache: false,
         views: {
             'tipidirifiuti': {
                 templateUrl: "templates/home/tipidirifiuti.html",
@@ -410,6 +416,7 @@ angular.module('rifiuti', [
 
     .state('app.home.calendario', {
         url: "/calendario",
+        cache: false,
         views: {
             'calendario': {
                 templateUrl: "templates/home/calendario.html",
@@ -431,6 +438,7 @@ angular.module('rifiuti', [
 
     .state('app.tipiDiRaccolta', {
         url: "/tipiDiRaccolta",
+        cache: false,
         views: {
             'menuContent': {
                 templateUrl: "templates/tipiDiRaccolta.html",
@@ -441,6 +449,7 @@ angular.module('rifiuti', [
 
     .state('app.raccolta', {
         url: "/raccolta/:id",
+        cache: false,
         views: {
             'menuContent': {
                 templateUrl: "templates/raccolta.html",
@@ -451,6 +460,7 @@ angular.module('rifiuti', [
 
     .state('app.rifiuti', {
         url: "/rifiuti/:tipo",
+        cache: false,
         views: {
             'menuContent': {
                 templateUrl: "templates/rifiuti.html",
@@ -461,6 +471,7 @@ angular.module('rifiuti', [
 
     .state('app.rifiuto', {
         url: "/rifiuto/:nome",
+        cache: false,
         views: {
             'menuContent': {
                 templateUrl: "templates/rifiuto.html",
@@ -523,6 +534,7 @@ angular.module('rifiuti', [
 
     .state('app.segnala', {
         url: "/segnala",
+        cache: false,
         views: {
             'menuContent': {
                 templateUrl: "templates/segnala.html",
@@ -544,6 +556,7 @@ angular.module('rifiuti', [
 
     .state('app.menunote', {
         url: "/menunote",
+        cache: false,
         views: {
             'menuContent': {
                 templateUrl: "templates/menunote.html",
@@ -554,6 +567,7 @@ angular.module('rifiuti', [
 
     .state('app.contatti', {
         url: "/contatti",
+        cache: false,
         views: {
             'menuContent': {
                 templateUrl: "templates/contatti.html",

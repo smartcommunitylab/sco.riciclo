@@ -28,6 +28,11 @@ angular.module('rifiuti.controllers.profilo', [])
         });
     };
 
+    $scope.updateProfileType = function() {
+        $scope.updateLocations();
+        $scope.profilo.area = {};
+    };
+
     // popola tipi di utenza e relative locations
     Profili.tipidiutenza().then(function (tipi) {
         tipi = tipi.sort(function (a, b) {
@@ -36,10 +41,10 @@ angular.module('rifiuti.controllers.profilo', [])
         $scope.tipologiaUtenza = tipi;
 
         // new profile
-        if (!$scope.id) {
-            $scope.profilo.utenza = tipi[0];
-            $scope.updateLocations();
-        } else {
+        if ($scope.id) {
+//            $scope.profilo.utenza = tipi[0];
+//            $scope.updateLocations();
+//        } else {
             // get profile
             var p = Profili.byId($scope.id);
             if (!!p) {
@@ -101,7 +106,7 @@ angular.module('rifiuti.controllers.profilo', [])
                 // not complete
                 $ionicPopup.show({
                     title: '<b class="popup-title">Attenzione !<b/>',
-                    template: 'Per completare il tuo profilo devi scegliere un nome e una località!',
+                    template: 'Per completare il tuo profilo devi scegliere un nome, tipo di utenza, e una località!',
                     scope: $scope,
                     buttons: [
                         {
@@ -199,6 +204,7 @@ angular.module('rifiuti.controllers.profilo', [])
     });
 
     $scope.openLocalitaSelector = function () {
+        if (!$scope.profilo.utenza) return;
         $scope.modal = modalLocalita;
         $scope.modal.show();
     };
@@ -206,6 +212,9 @@ angular.module('rifiuti.controllers.profilo', [])
     $scope.localitaSelected = function (item) {
         $scope.searchQuery['etichetta'] = '';
         $scope.profilo.area = item;
+        $scope.closeModal();
+    };
+    $scope.closeLocalitaSelector = function() {
         $scope.closeModal();
     };
 

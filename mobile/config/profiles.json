@@ -2,8 +2,8 @@
     "TRENTO": {
         "resource_folder": "config/instances/TRENTO",
         "widget_id" : "it.smartcommunitylab.rifiuti.trento",
-        "version": "1.0.0alpha",
-        "version_code": "2",
+        "version": "1.0.1alpha",
+        "version_code": "3",
         "app_name": "100% Riciclo - Trento"
     },
     "ROVERETO": {

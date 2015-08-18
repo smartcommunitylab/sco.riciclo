@@ -86,6 +86,9 @@ body.platform-browser .scroll-bar-fade-out {
     border: 0;
     padding: 0;
 }
+.navigation-drawer ion-list.profiles-list ion-item .row {
+    padding: 0;
+}
 /* Bar and buttons */
 
 .bar-100r {
@@ -397,6 +400,7 @@ body.platform-browser .scroll-bar-fade-out {
     padding-left: 0;
     font-size: 12px;
     line-height: 11px;
+    margin-top: 5px;
 }
 
 .puntodiraccolta .dettagli .action {
@@ -528,6 +532,7 @@ body.platform-browser .scroll-bar-fade-out {
 
 .profile .profile-types .item.item-radio .item-content {
     background-color: #eee !important;
+    white-space: normal !important;
 }
 
 .localita-modal .localita-animate-repeat.ng-enter,
@@ -674,18 +679,26 @@ body.platform-browser .scroll-bar-fade-out {
 
 .info {
     text-align: center;
-    background-color: #eeeeee;
+    background-color: #fff;
 }
+
+.info a img {
+    margin: 10px 5px;
+}
+
 
 .info .project {
     color: #63ac3d;
-    font-size: 18px;
-    margin-top: 40px;
+    font-size: 36px;
+    margin-top: 30px;
+    line-height: 36px;
 }
 
 .info .project-desc {
     padding-left: 30px;
     padding-right: 30px;
+    font-size: 16px !important;
+    line-height: 16px !important;
 }
 
 .info .version {
@@ -695,7 +708,7 @@ body.platform-browser .scroll-bar-fade-out {
 
 .info .subtitle {
     color: #63ac3d;
-    margin-top: 40px;
+    margin-top: 20px;
     font-size: 16px;
 }
 

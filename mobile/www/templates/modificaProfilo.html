@@ -28,7 +28,7 @@
         </div>
 
         <div class="profile-block profile-types">
-            <div class="profile-title">{{"Tipo di utenza" | translate}}
+            <div class="profile-title">{{"Chi sono" | translate}}
                 <!--ng-click="helpTipi()"-->
                 <a class="help" ng-click="openUtenzeModal()"><i class="icon riciclo-more_info icon-button"></i>
                 </a>
@@ -39,7 +39,7 @@
                 </div>
             </div>-->
             <div class="list" ng-if="editMode">
-                <ion-radio ng-repeat="item in tipologiaUtenza" ng-model="profilo.utenza" ng-change="updateLocations()" ng-value="item">{{item.nome}}</ion-radio>
+                <ion-radio ng-repeat="item in tipologiaUtenza" ng-model="profilo.utenza" ng-change="updateProfileType()" ng-value="item">{{item.nome}}</ion-radio>
             </div>
             <p ng-if="!editMode">{{profilo.utenza.nome | translate}}</p>
         </div>

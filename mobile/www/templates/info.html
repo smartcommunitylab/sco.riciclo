@@ -12,24 +12,23 @@
     </ion-nav-buttons>
 
     <ion-content class="info" has-bouncing="false">
-        <p class="project"><strong>{{'Progetto'|translate}}</strong>
-        </p>
+        <p class="project" ng-bind-html="'Progetto_CREDITS'|translate"></p>
         <p class="project-desc"><strong>{{'Progetto_DESC'|translate}}</strong>
         </p>
         <p class="version"><strong>{{version}}</strong>
         </p>
+
+        <a ng-click="clickLink('http://www.dolomitiambiente.it/')"><img src="img/da_logo.png" width="200">
+        </a>
+
+        <a ng-click="clickLink('http://www.comune.trento.it/')"><img src="img/logo_comune_tn.png" width="200">
+        </a>
+
         <p class="subtitle">{{'Progetto_di'|translate}}</p>
-        <a ng-click="clickLink('http://www.smartcommunitylab.it')"> <img src="img/logo_SCO.png" width="160"> </a>
-        <a ng-click="clickLink('http://www.ladurnerambiente.it')"><img src="img/ladurnerenergy.png" width="140">
-        </a>
+        <a ng-click="clickLink('http://www.comunitrentini.it')"><img src="img/consorzio_comuni_trentini.png" width="175" height="63"></a>
         <br />
-        <a ng-click="clickLink('http://www.fbk.eu')"><img style="margin-top:10px;" src="img/fbk_credits.png" width="140" height="39">
+        <a ng-click="clickLink('http://www.smartcommunitylab.it')"> <img src="img/logo_SCO.png" width="180"> </a>
+        <a ng-click="clickLink('http://www.fbk.eu')"><img style="margin-top:10px;" src="img/fbk_credits.png" width="70" height="60">
         </a>
-        <p class="subtitle">{{"Collaborazione"|translate}}</p>
-        <a ng-click="clickLink('http://www.comunitrentini.it')"><img src="img/autonomie_locali.png" width="140" height="55"></a>
-        <p class="subtitle">{{"Eventuali"|translate}}
-            <br>
-            <a class="mail" ng-click="clickLink('mailto:riciclo@smartcommunitylab.it')">riciclo@smartcommunitylab.it</a>
-        </p>
     </ion-content>
 </ion-view>

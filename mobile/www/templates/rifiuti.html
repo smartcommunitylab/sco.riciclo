@@ -24,7 +24,7 @@
             <ion-view>
                 <ion-content class="tipidirifiuto" has-bouncing="false">
                     <ion-list>
-                        <ion-item ng-repeat="item in rifiuti" ng-href="#/app/rifiuto/{{item.nome}}">
+                        <ion-item ng-repeat="item in rifiuti" ng-href="#/app/rifiuto/{{addr2id(item.nome)}}">
                             {{item.nome|translate}}
                         </ion-item>
                     </ion-list>
