@@ -24,7 +24,6 @@ public class OrarioApertura {
 	private String dalle;
 	private String alle;
 	private String eccezione;
-	private String note;
 	
 	public String getDataDa() {
 		return dataDa;
@@ -68,12 +67,6 @@ public class OrarioApertura {
 		return "(" + dataDa + "," + dataA + "," + dalle + "," + alle + "," + il + ")";
 	}
 	
-	public String getNote() {
-		return note;
-	}
-	public void setNote(String note) {
-		this.note = note;
-	}
 	@Override
 	public int hashCode() {
 		final int prime = 31;
