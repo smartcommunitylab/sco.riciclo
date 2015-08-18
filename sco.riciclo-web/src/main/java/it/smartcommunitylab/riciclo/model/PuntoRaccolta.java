@@ -108,6 +108,7 @@ public class PuntoRaccolta extends BaseObject {
 		result = prime * result + ((zona == null) ? 0 : zona.hashCode());
 		result = prime * result + ((orarioApertura == null) ? 0 : orarioApertura.hashCode());
 		result = prime * result + ((tipologiaPuntiRaccolta == null) ? 0 : tipologiaPuntiRaccolta.hashCode());
+		result = prime * result + ((note == null) ? 0 : note.hashCode());
 		return result;
 	}
 
@@ -139,6 +140,11 @@ public class PuntoRaccolta extends BaseObject {
 			if (other.tipologiaPuntiRaccolta != null)
 				return false;
 		} else if (!tipologiaPuntiRaccolta.equals(other.tipologiaPuntiRaccolta))
+			return false;
+		if (note == null) {
+			if (other.note != null)
+				return false;
+		} else if (!note.equals(other.note))
 			return false;
 		return true;
 	}

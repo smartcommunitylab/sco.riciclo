@@ -82,19 +82,19 @@ public class RifiutiConverter {
 //		categorie.setTipologiaIstituzione(new HashSet<Tipologia>());
 		categorie.setTipologiaRaccolta(new HashSet<Tipologia>());
 		
-		categorie.setTipologiaPuntiRaccolta(new HashSet());
+		categorie.setTipologiaPuntiRaccolta(new HashSet<Tipologia>());
 		for (TipologiaPuntoRaccolta tpr : rifiuti.getTipologiaPuntoRaccolta()) {
 			Tipologia cat = new Tipologia(StringUtils.capitalize(tpr.getNome().toLowerCase()).replace("Crm", "CRM").replace("Crz", "CRZ"), tpr.getInfoPuntiRaccolta(), null);
 			categorie.getTipologiaPuntiRaccolta().add(cat);
 		}
 
-		categorie.setTipologiaRifiuto(new HashSet());
+		categorie.setTipologiaRifiuto(new HashSet<Tipologia>());
 		for (TipologiaRifiuto tr : rifiuti.getTipologiaRifiuto()) {
 			Tipologia cat = new Tipologia(StringUtils.capitalize(tr.getValore().toLowerCase()), null, null);
 			categorie.getTipologiaRifiuto().add(cat);
 		}
 		
-		categorie.setTipologiaUtenza(new HashSet());
+		categorie.setTipologiaUtenza(new HashSet<Tipologia>());
 		for (TipologiaUtenza tr : rifiuti.getTipologiaUtenza()) {
 			Tipologia cat = new Tipologia(tr.getValore().toLowerCase(), null, null);
 			categorie.getTipologiaUtenza().add(cat);
@@ -266,8 +266,6 @@ public class RifiutiConverter {
 		for (PuntoRaccolta pr: firstResult) {
 			pr.setTipologiaPuntiRaccolta(StringUtils.capitalize(pr.getTipologiaPuntiRaccolta().toLowerCase()).replace("Crm", "CRM").replace("Crz", "CRZ"));
 		}
-		
-		Set<PuntoRaccolta> puntoRaccoltaSet = Sets.newHashSet(firstResult);
 		
 		Multimap<PuntoRaccolta, PuntoRaccolta> puntoRaccoltaMap = ArrayListMultimap.create();
 		for (PuntoRaccolta pr: firstResult) {
