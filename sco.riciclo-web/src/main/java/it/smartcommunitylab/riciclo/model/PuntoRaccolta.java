@@ -31,8 +31,6 @@ public class PuntoRaccolta extends BaseObject {
 
 	private Map<String, Boolean> caratteristiche;
 	
-	private String note;
-
 	public String getTipologiaPuntiRaccolta() {
 		return tipologiaPuntiRaccolta;
 	}
@@ -88,17 +86,6 @@ public class PuntoRaccolta extends BaseObject {
 	public void setCaratteristiche(Map<String, Boolean> caratteristiche) {
 		this.caratteristiche = caratteristiche;
 	}
-
-	public String getNote() {
-		return note;
-	}
-
-	public void setNote(String note) {
-		this.note = note;
-	}
-
-
-	
 
 	@Override
 	public int hashCode() {

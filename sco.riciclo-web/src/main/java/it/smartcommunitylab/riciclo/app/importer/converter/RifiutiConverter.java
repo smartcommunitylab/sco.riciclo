@@ -253,6 +253,7 @@ public class RifiutiConverter {
 				oa.setDataDa(pr.getDataDa());
 				oa.setIl(pr.getIl());
 				oa.setEccezione(pr.getEccezione());
+				oa.setNote(pr.getNote());
 				orari.add(oa);
 			}
 			if (!orari.isEmpty()) {
