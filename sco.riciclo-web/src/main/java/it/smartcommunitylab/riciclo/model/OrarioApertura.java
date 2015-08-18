@@ -16,6 +16,9 @@
 
 package it.smartcommunitylab.riciclo.model;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class OrarioApertura {
 
 	private String dataDa;
@@ -24,6 +27,7 @@ public class OrarioApertura {
 	private String dalle;
 	private String alle;
 	private String eccezione;
+	private Map<String, String> note = new HashMap<String, String>();
 	
 	public String getDataDa() {
 		return dataDa;
@@ -120,6 +124,12 @@ public class OrarioApertura {
 		} else if (!il.equals(other.il))
 			return false;
 		return true;
+	}
+	public Map<String, String> getNote() {
+		return note;
+	}
+	public void setNote(Map<String, String> note) {
+		this.note = note;
 	}	
 	
 	

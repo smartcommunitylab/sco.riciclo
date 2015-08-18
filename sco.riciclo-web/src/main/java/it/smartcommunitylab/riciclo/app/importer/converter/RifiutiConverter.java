@@ -98,7 +98,7 @@ public class RifiutiConverter {
 		
 		//TIPOLOGIAPUNTORACCOLTA
 		List<TipologiaPuntoRaccolta> puntiRaccolta = Lists.newArrayList();
-		categorie.setTipologiaPuntiRaccolta(new HashSet());
+		categorie.setTipologiaPuntiRaccolta(new HashSet<Tipologia>());
 		for (it.smartcommunitylab.riciclo.app.importer.model.TipologiaPuntoRaccolta tpr : rifiuti.getTipologiaPuntoRaccolta()) {
 			Tipologia cat = new Tipologia(StringUtils.capitalize(tpr.getNome().toLowerCase()).replace("Crm", "CRM").replace("Crz", "CRZ"), tpr.getInfoPuntiRaccolta(), null);
 			categorie.getTipologiaPuntiRaccolta().add(cat);
@@ -113,14 +113,14 @@ public class RifiutiConverter {
 		output.setTipologiaPuntiRaccolta(puntiRaccolta);
 		
 		//TIPOLOGIARIFIUTO
-		categorie.setTipologiaRifiuto(new HashSet());
+		categorie.setTipologiaRifiuto(new HashSet<Tipologia>());
 		for (TipologiaRifiuto tr : rifiuti.getTipologiaRifiuto()) {
 			Tipologia cat = new Tipologia(StringUtils.capitalize(tr.getValore().toLowerCase()), null, null);
 			categorie.getTipologiaRifiuto().add(cat);
 		}
 		
 		//TIPOLOGIAUTENZA
-		categorie.setTipologiaUtenza(new HashSet());
+		categorie.setTipologiaUtenza(new HashSet<Tipologia>());
 		for (TipologiaUtenza tr : rifiuti.getTipologiaUtenza()) {
 			Tipologia cat = new Tipologia(tr.getValore().toLowerCase(), null, null);
 			categorie.getTipologiaUtenza().add(cat);
@@ -340,7 +340,9 @@ public class RifiutiConverter {
 						logger.error("error parsing geocoding " + key);
 						continue;
 					}
-					crm.getNote().put(defaultLang, pr.getNote());
+					if(!Utils.isNull(pr.getNote())) {
+						crm.getNote().put(defaultLang, pr.getNote());	
+					}
 					
 					Map<String, Boolean> caratteristiche = Maps.newTreeMap();
 					caratteristiche.put(GETTONIERA, Boolean.parseBoolean(pr.getGettoniera()));
@@ -403,6 +405,9 @@ public class RifiutiConverter {
 				oa.setDataDa(pr.getDataDa());
 				oa.setIl(pr.getIl());
 				oa.setEccezione(pr.getEccezione());
+				if(!Utils.isNull(pr.getNote())) {
+					oa.getNote().put(defaultLang, pr.getNote());
+				}
 				orari.add(oa);
 			}
 			if(!orari.isEmpty()) {
