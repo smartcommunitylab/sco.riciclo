@@ -24,7 +24,8 @@ public class OrarioApertura {
 	private String dalle;
 	private String alle;
 	private String eccezione;
-	
+	private String note;
+
 	public String getDataDa() {
 		return dataDa;
 	}
@@ -120,6 +121,12 @@ public class OrarioApertura {
 		} else if (!il.equals(other.il))
 			return false;
 		return true;
+	}
+	public String getNote() {
+		return note;
+	}
+	public void setNote(String note) {
+		this.note = note;
 	}	
 	
 	
