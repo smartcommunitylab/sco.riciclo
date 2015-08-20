@@ -77,7 +77,7 @@ public class RifiutiValidator {
 		Set<String> aree = flattenList(rifiuti.getAree(), Area.class, "objectId");
 		Set<String> colori = flattenList(rifiuti.getColore(), Colore.class);
 		Set<String> caratteristiche = flattenList(rifiuti.getCategorie().getCaratteristicaPuntoRaccolta());
-		Set<String> istituzioni = flattenList(rifiuti.getIstituzioni(), Istituzione.class);
+		Set<String> istituzioni = flattenList(rifiuti.getIstituzioni(), Istituzione.class, "objectId");
 		
 		Set<String> gestori = flattenList(rifiuti.getGestori(), Gestore.class, "ragioneSociale");
 //		Set<String> comuni = flattenList(rifiuti.getAree(), Area.class, "comune");

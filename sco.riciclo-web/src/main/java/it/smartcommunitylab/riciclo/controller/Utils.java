@@ -28,6 +28,16 @@ public class Utils {
 		}
 	}
 	
+	public static String getString(Map<String, String> data, String lang, String defaultLang) {
+		String result = null;
+		if(data.containsKey(lang)) {
+			result = data.get(lang);
+		} else {
+			result = data.get(defaultLang);
+		}
+		return result;
+	}
+	
 	public static double[] convertLocalizzazione(String localizzazione) throws NumberFormatException {
 		//input:"45.893170,11.036281"
 		//output:[11.036281,45.893170]
@@ -36,6 +46,12 @@ public class Utils {
 		result[0] = Double.valueOf(values[1].trim());
 		result[1] = Double.valueOf(values[0].trim());
 		return result;
+	}
+	
+	public static String convertLocalizzazione(double[] geocoding) throws NumberFormatException {
+		//output:"45.893170,11.036281"
+		//input:[11.036281,45.893170]
+		return String.valueOf(geocoding[1]) + "," + String.valueOf(geocoding[0]);
 	}
 	
 	public static List<Area> findAreaByComune(String comune, String ownerId, boolean draft, RepositoryManager storage)

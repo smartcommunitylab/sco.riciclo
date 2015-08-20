@@ -75,7 +75,7 @@ public class RifiutiConfig extends WebMvcConfigurerAdapter {
 
 	@Bean
 	RepositoryManager getRepositoryManager() throws UnknownHostException, MongoException {
-		return new RepositoryManager(getDraftMongo(), getFinalMongo());
+		return new RepositoryManager(getDraftMongo(), getFinalMongo(), defaultLang);
 	}
 	
 	@Bean NotificationManager getNotificationManager() throws UnknownHostException, MongoException {

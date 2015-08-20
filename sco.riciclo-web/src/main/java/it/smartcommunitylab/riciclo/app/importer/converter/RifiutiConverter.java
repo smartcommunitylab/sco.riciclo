@@ -204,13 +204,20 @@ public class RifiutiConverter {
 		for (Istituzioni is : rifiuti.getIstituzioni()) {
 			Istituzione istituzione = new Istituzione();
 			istituzione.setOwnerId(ownerId);
-			istituzione.setObjectId(is.getNome());
+			istituzione.setObjectId(is.getNome() + " - " + is.getUfficio());
 			istituzione.setNome(is.getNome());
 			istituzione.getDescrizione().put(defaultLang, is.getDescrizione());
 			istituzione.setUfficio(is.getUfficio());
 			istituzione.getIndirizzo().put(defaultLang, is.getIndirizzo());
+			istituzione.getOrarioUfficio().put(defaultLang, is.getOrarioUfficio());
+			istituzione.setSito(is.getSito());
+			istituzione.setPec(is.getPec());
+			istituzione.setEmail(is.getEmail());
+			istituzione.setTelefono(is.getTelefono());
+			istituzione.setFax(is.getFax());
+			istituzione.setFacebook(is.getFacebook());
+			istituzione.setGeocoding(Utils.convertLocalizzazione(is.getLocalizzazione()));
 			istituzioni.add(istituzione);
-//			categorie.getTipologiaIstituzione().add(new Tipologia(is.getTipologia(), null, null));
 		}
 		output.setIstituzioni(istituzioni);
 
@@ -333,7 +340,9 @@ public class RifiutiConverter {
 					crm = new Crm();
 					crm.setObjectId(UUID.randomUUID().toString());
 					crm.setOwnerId(appId);
-					crm.getIndirizzo().put(defaultLang, pr.getZona() + " " + pr.getDettagliZona());
+					crm.getIndirizzo().put(defaultLang, pr.getZona() + " - " + pr.getDettagliZona());
+					crm.setZona(pr.getZona());
+					crm.setDettagliZona(pr.getDettagliZona());
 					try {
 						crm.setGeocoding(Utils.convertLocalizzazione(pr.getLocalizzazione()));
 					} catch (Exception e) {

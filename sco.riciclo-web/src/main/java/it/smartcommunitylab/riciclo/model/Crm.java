@@ -9,6 +9,8 @@ public class Crm extends BaseObject {
 	private String tipologiaPuntiRaccolta;
 	private Map<String, String> nome = new HashMap<String, String>();
 	private Map<String, String> indirizzo = new HashMap<String, String>();
+	private String zona;
+	private String dettagliZona;
 	private double[] geocoding;
 	private Map<String, String> note = new HashMap<String, String>();
 	private Map<String, Boolean> caratteristiche = new HashMap<String, Boolean>();
@@ -61,5 +63,17 @@ public class Crm extends BaseObject {
 	}
 	public void setTipologiaPuntiRaccolta(String tipologiaPuntiRaccolta) {
 		this.tipologiaPuntiRaccolta = tipologiaPuntiRaccolta;
+	}
+	public String getZona() {
+		return zona;
+	}
+	public void setZona(String zona) {
+		this.zona = zona;
+	}
+	public String getDettagliZona() {
+		return dettagliZona;
+	}
+	public void setDettagliZona(String dettagliZona) {
+		this.dettagliZona = dettagliZona;
 	}
 }

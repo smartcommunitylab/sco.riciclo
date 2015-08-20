@@ -62,10 +62,12 @@ public class RepositoryManager {
 
 	private MongoTemplate draftTemplate;
 	private MongoTemplate finalTemplate;
+	private String defaultLang;
 
-	public RepositoryManager(MongoTemplate draftTemplate, MongoTemplate finalTemplate) {
+	public RepositoryManager(MongoTemplate draftTemplate, MongoTemplate finalTemplate, String defaultLang) {
 		this.draftTemplate = draftTemplate;
 		this.finalTemplate = finalTemplate;
+		this.defaultLang = defaultLang;
 	}
 
 	public void save(AppDataRifiuti appDataRifiuti, String ownerId) {
@@ -237,13 +239,13 @@ public class RepositoryManager {
 	public AppDataRifiuti findRifiuti(String ownerId, boolean draft) {
 		DataSetInfo appInfo = appSetup.findAppById(ownerId);
 		if(appInfo!= null) {
-			return findRifiuti(appInfo.getComuni(), "it", ownerId, draft);
+			return findRifiuti(appInfo.getComuni(), ownerId, draft);
 		} else {
 			return new AppDataRifiuti();
 		}
 	}
 	
-	public AppDataRifiuti findRifiuti(List<String> comuni, String lang, String ownerId, boolean draft) {
+	public AppDataRifiuti findRifiuti(List<String> comuni, String ownerId, boolean draft) {
 		MongoTemplate template = draft ? draftTemplate : finalTemplate;
 		AppDataRifiuti appDataRifiuti = new AppDataRifiuti();
 		appDataRifiuti.setOwnerId(ownerId);
@@ -444,6 +446,10 @@ public class RepositoryManager {
 		update.set("lastUpdate", new Date());
 		// TODO
 		template.updateFirst(query, update, Rifiuto.class);
+	}
+
+	public String getDefaultLang() {
+		return defaultLang;
 	}
 
 }

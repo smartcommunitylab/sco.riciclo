@@ -18,6 +18,8 @@ package it.smartcommunitylab.riciclo.controller;
 
 import it.smartcommunitylab.riciclo.model.Notification;
 import it.smartcommunitylab.riciclo.model.AppDataRifiuti;
+import it.smartcommunitylab.riciclo.presentation.AppDataRifiutiUI;
+import it.smartcommunitylab.riciclo.presentation.UIConverter;
 import it.smartcommunitylab.riciclo.storage.App;
 import it.smartcommunitylab.riciclo.storage.NotificationManager;
 import it.smartcommunitylab.riciclo.storage.RepositoryManager;
@@ -99,7 +101,37 @@ public class AppDataRifiutiController {
 		if(!Utils.isNull(draftString)) {
 			draft = Boolean.valueOf(draftString);
 		}
-		return storage.findRifiuti(comuni, lang, ownerId, draft);
+		return storage.findRifiuti(comuni, ownerId, draft);
+	}
+	
+	@SuppressWarnings("unchecked")
+	@RequestMapping(method = RequestMethod.POST, value = "/rifiuti/{ownerId}/ui")
+	public AppDataRifiutiUI getDataByComuniUI(@RequestBody Map<String, Object> data, @PathVariable String ownerId,
+			HttpServletResponse response) {
+		String lang = (String) data.get("lang");
+		List<String> comuni = (List<String>) data.get("comuni");
+		String draftString = (String) data.get("draft");
+		boolean draft = false;
+		if(!Utils.isNull(draftString)) {
+			draft = Boolean.valueOf(draftString);
+		}
+		String defaultLang = storage.getDefaultLang();
+		AppDataRifiuti appData = storage.findRifiuti(comuni, ownerId, draft);
+		AppDataRifiutiUI result = new AppDataRifiutiUI();
+		result.setAppId(appData.getOwnerId());
+		result.setTipologiaProfilo(UIConverter.convertTipologiaProfilo(appData.getTipologiaProfili(), 
+				lang, defaultLang));
+		result.setAree(UIConverter.convertArea(appData.getAree(), lang, defaultLang));
+		result.setGestori(UIConverter.convertGestore(appData.getGestori(), lang, defaultLang));
+		result.setIstituzioni(UIConverter.convertIstituzione(appData.getIstituzioni(), lang, defaultLang));
+		result.setPuntiRaccolta(UIConverter.convertPuntoRaccolta(appData.getPuntiRaccolta(), appData.getCrm(), 
+				appData.getCalendariRaccolta(), lang, defaultLang));
+		result.setRiciclabolario(UIConverter.convertRiciclabolario(appData.getRiciclabolario(), appData.getRifiuti(), 
+				lang, defaultLang));
+		result.setRaccolta(UIConverter.convertRaccolta(appData.getRaccolte(), lang, defaultLang));
+		result.setColore(UIConverter.convertColore(appData.getColore(), lang, defaultLang));
+		result.setSegnalazione(UIConverter.convertSegnalazione(appData.getSegnalazioni(), lang, defaultLang));
+		return result;
 	}
 	
 	@RequestMapping(method = RequestMethod.GET, value = "/rifiuti/{className}/{ownerId}")
