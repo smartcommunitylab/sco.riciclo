@@ -65,35 +65,58 @@ public class AppDataRifiutiController {
 		return "PONG";
 	}
 
-	@RequestMapping(method = RequestMethod.GET, value = "/appDescriptor/{ownerId}")
-	public App appState(HttpServletResponse response, @PathVariable String ownerId) {
-		return storage.getAppDescriptor(ownerId);
-	}
+//	@RequestMapping(method = RequestMethod.GET, value = "/appDescriptor/{ownerId}")
+//	public App appState(HttpServletResponse response, @PathVariable String ownerId) {
+//		return storage.getAppDescriptor(ownerId);
+//	}
 
-	@RequestMapping(method = RequestMethod.GET, value = "/comuni/{ownerId}")
-	public List<String> appComuni(HttpServletResponse response, @PathVariable String ownerId) {
-		return storage.getComuniList(ownerId, false);
-	}
+//	@RequestMapping(method = RequestMethod.GET, value = "/comuni/{ownerId}")
+//	public List<String> appComuni(HttpServletResponse response, @PathVariable String ownerId) {
+//		return storage.getComuniList(ownerId, false);
+//	}
 	
-	@RequestMapping(method = RequestMethod.GET, value = "/comuni/{ownerId}/draft")
-	public List<String> appComuniDraft(HttpServletResponse response, @PathVariable String ownerId) {
-		return storage.getComuniList(ownerId, true);
-	}
+//	@RequestMapping(method = RequestMethod.GET, value = "/comuni/{ownerId}/draft")
+//	public List<String> appComuniDraft(HttpServletResponse response, @PathVariable String ownerId) {
+//		return storage.getComuniList(ownerId, true);
+//	}
 	
-	@RequestMapping(method = RequestMethod.GET, value = "/rifiuti/{ownerId}")
-	public AppDataRifiuti get(HttpServletResponse response, @PathVariable String ownerId) {
-		return storage.findRifiuti(ownerId, false);
-	}
+//	@RequestMapping(method = RequestMethod.GET, value = "/rifiuti/{ownerId}")
+//	public AppDataRifiuti get(HttpServletResponse response, @PathVariable String ownerId) {
+//		return storage.findRifiuti(ownerId, false);
+//	}
 
-	@RequestMapping(method = RequestMethod.GET, value = "/rifiuti/{ownerId}/draft")
-	public AppDataRifiuti getDraft(HttpServletResponse response, @PathVariable String ownerId) {
-		return storage.findRifiuti(ownerId, true);
-	}
+//	@RequestMapping(method = RequestMethod.GET, value = "/rifiuti/{ownerId}/draft")
+//	public AppDataRifiuti getDraft(HttpServletResponse response, @PathVariable String ownerId) {
+//		return storage.findRifiuti(ownerId, true);
+//	}
+	
+//	@RequestMapping(method = RequestMethod.GET, value = "/rifiuti/{className}/{ownerId}")
+//	public List<?> get(HttpServletResponse response, @PathVariable String className, 
+//			@PathVariable String ownerId) throws Exception {
+//		return storage.findRifiuti(className, ownerId, false);
+//	}
+
+//	@RequestMapping(method = RequestMethod.GET, value = "/rifiuti/{className}/{ownerId}/draft")
+//	public List<?> getDraft(HttpServletResponse response, @PathVariable String className, 
+//			@PathVariable String ownerId) throws Exception {
+//		return storage.findRifiuti(className, ownerId, true);
+//	}
+	
+//	@RequestMapping(method = RequestMethod.GET, value = "/notifications/{ownerId}")
+//	public @ResponseBody List<Notification> getNotificatons(@PathVariable String ownerId) throws Exception {
+//		return notificationManager.getNotifications(ownerId);
+//	}
+
+//	@RequestMapping(method = RequestMethod.POST, value = "/notifications/{ownerId}")
+//	public @ResponseBody Notification saveNotificaton(@RequestBody Notification notification, 
+//			@PathVariable String ownerId) throws Exception {
+//		return notificationManager.saveNotification(notification, ownerId);
+//	}
 	
 	@SuppressWarnings("unchecked")
 	@RequestMapping(method = RequestMethod.POST, value = "/rifiuti/{ownerId}")
-	public AppDataRifiuti getDataByComuni(@RequestBody Map<String, Object> data, @PathVariable String ownerId,
-			HttpServletResponse response) {
+	public AppDataRifiutiUI getDataByComuni(@RequestBody Map<String, Object> data, 
+			@PathVariable String ownerId, HttpServletResponse response) {
 		String lang = (String) data.get("lang");
 		List<String> comuni = (List<String>) data.get("comuni");
 		String draftString = (String) data.get("draft");
@@ -101,20 +124,53 @@ public class AppDataRifiutiController {
 		if(!Utils.isNull(draftString)) {
 			draft = Boolean.valueOf(draftString);
 		}
-		return storage.findRifiuti(comuni, ownerId, draft);
+		AppDataRifiutiUI result = getAppDataUI(ownerId, lang, comuni, draft);
+		return result;
+	}
+
+	@SuppressWarnings("unchecked")
+	@RequestMapping(method = RequestMethod.POST, value = "/zip/{ownerId}")
+	public void zip(@RequestBody Map<String, Object> data, @PathVariable String ownerId, 
+			HttpServletResponse response) throws Exception {
+		String lang = (String) data.get("lang");
+		List<String> comuni = (List<String>) data.get("comuni");
+		String draftString = (String) data.get("draft");
+		boolean draft = false;
+		if(!Utils.isNull(draftString)) {
+			draft = Boolean.valueOf(draftString);
+		}
+		AppDataRifiutiUI result = getAppDataUI(ownerId, lang, comuni, draft);
+		
+		response.setContentType("application/zip");
+		response.addHeader("Content-Disposition", "attachment; filename=\"final-" + ownerId + ".zip\"");
+		response.addHeader("Content-Transfer-Encoding", "binary");
+		ByteArrayOutputStream outputBuffer = new ByteArrayOutputStream();
+		
+		ObjectMapper mapper = new ObjectMapper();
+		mapper.configure(SerializationFeature.WRITE_NULL_MAP_VALUES, false);
+		mapper.setSerializationInclusion(Include.NON_NULL);
+		String r = mapper.writeValueAsString(result);
+		r = r.replace("\"appId\":\"" + ownerId + "\",","");
+		String r2 = new String(r.getBytes("UTF-8"));
+		
+		compress(outputBuffer, r2.getBytes(), "final-" + ownerId + ".json");
+		response.getOutputStream().write(outputBuffer.toByteArray());
+		response.getOutputStream().flush();
+		outputBuffer.close();
 	}
 	
-	@SuppressWarnings("unchecked")
-	@RequestMapping(method = RequestMethod.POST, value = "/rifiuti/{ownerId}/ui")
-	public AppDataRifiutiUI getDataByComuniUI(@RequestBody Map<String, Object> data, @PathVariable String ownerId,
-			HttpServletResponse response) {
-		String lang = (String) data.get("lang");
-		List<String> comuni = (List<String>) data.get("comuni");
-		String draftString = (String) data.get("draft");
-		boolean draft = false;
-		if(!Utils.isNull(draftString)) {
-			draft = Boolean.valueOf(draftString);
-		}
+	private void compress(final OutputStream out, byte[] b, String entryName) throws Exception {
+		ZipOutputStream zos = new ZipOutputStream(out);
+		zos.setLevel(ZipOutputStream.DEFLATED);
+
+		ZipEntry ze = new ZipEntry(entryName);
+		zos.putNextEntry(ze);
+		zos.write(b, 0, b.length);
+
+		zos.close();
+	}
+	
+	private AppDataRifiutiUI getAppDataUI(String ownerId, String lang, List<String> comuni, boolean draft) {
 		String defaultLang = storage.getDefaultLang();
 		AppDataRifiuti appData = storage.findRifiuti(comuni, ownerId, draft);
 		AppDataRifiutiUI result = new AppDataRifiutiUI();
@@ -132,79 +188,6 @@ public class AppDataRifiutiController {
 		result.setColore(UIConverter.convertColore(appData.getColore(), lang, defaultLang));
 		result.setSegnalazione(UIConverter.convertSegnalazione(appData.getSegnalazioni(), lang, defaultLang));
 		return result;
-	}
-	
-	@RequestMapping(method = RequestMethod.GET, value = "/rifiuti/{className}/{ownerId}")
-	public List<?> get(HttpServletResponse response, @PathVariable String className, @PathVariable String ownerId) throws Exception {
-		return storage.findRifiuti(className, ownerId, false);
-	}
-
-	@RequestMapping(method = RequestMethod.GET, value = "/rifiuti/{className}/{ownerId}/draft")
-	public List<?> getDraft(HttpServletResponse response, @PathVariable String className, @PathVariable String ownerId) throws Exception {
-		return storage.findRifiuti(className, ownerId, true);
-	}
-
-	@RequestMapping(method = RequestMethod.GET, value = "/notifications/{ownerId}")
-	public @ResponseBody List<Notification> getNotificatons(@PathVariable String ownerId) throws Exception {
-		return notificationManager.getNotifications(ownerId);
-	}
-
-	@RequestMapping(method = RequestMethod.POST, value = "/notifications/{ownerId}")
-	public @ResponseBody Notification saveNotificaton(@RequestBody Notification notification, @PathVariable String ownerId) throws Exception {
-		return notificationManager.saveNotification(notification, ownerId);
-	}
-
-	@RequestMapping(method = RequestMethod.GET, value = "/zip/{ownerId}")
-	public void zip(HttpServletResponse response, @PathVariable String ownerId) throws Exception {
-		response.setContentType("application/zip");
-		response.addHeader("Content-Disposition", "attachment; filename=\"final-" + ownerId + ".zip\"");
-		response.addHeader("Content-Transfer-Encoding", "binary");
-		ByteArrayOutputStream outputBuffer = new ByteArrayOutputStream();
-		
-		AppDataRifiuti rifiuti = get(response, ownerId);
-		ObjectMapper mapper = new ObjectMapper();
-		mapper.configure(SerializationFeature.WRITE_NULL_MAP_VALUES, false);
-		mapper.setSerializationInclusion(Include.NON_NULL);
-		String r = mapper.writeValueAsString(rifiuti);
-		r = r.replace("\"appId\":\"" + ownerId + "\",","");
-		String r2 = new String(r.getBytes("UTF-8"));
-		
-		compress(outputBuffer, r2.getBytes(), "final-" + ownerId + ".json");
-		response.getOutputStream().write(outputBuffer.toByteArray());
-		response.getOutputStream().flush();
-		outputBuffer.close();
-	}
-	
-	@RequestMapping(method = RequestMethod.GET, value = "/zip/{ownerId}/draft")
-	public void zipDraft(HttpServletResponse response, @PathVariable String ownerId) throws Exception {
-		response.setContentType("application/zip");
-		response.addHeader("Content-Disposition", "attachment; filename=\"draft-" + ownerId + ".zip\"");
-		response.addHeader("Content-Transfer-Encoding", "binary");
-		ByteArrayOutputStream outputBuffer = new ByteArrayOutputStream();
-		
-		AppDataRifiuti rifiuti = getDraft(response, ownerId);
-		ObjectMapper mapper = new ObjectMapper();
-		mapper.configure(SerializationFeature.WRITE_NULL_MAP_VALUES, false);
-		mapper.setSerializationInclusion(Include.NON_NULL);
-		String r = mapper.writeValueAsString(rifiuti);
-		r = r.replace("\"ownerId\":\"" + ownerId + "\",","");
-		String r2 = new String(r.getBytes("UTF-8"));
-		
-		compress(outputBuffer, r2.getBytes(), "draft-" + ownerId + ".json");
-		response.getOutputStream().write(outputBuffer.toByteArray());
-		response.getOutputStream().flush();
-		outputBuffer.close();
-	}	
-
-	void compress(final OutputStream out, byte[] b, String entryName) throws Exception {
-		ZipOutputStream zos = new ZipOutputStream(out);
-		zos.setLevel(ZipOutputStream.DEFLATED);
-
-		ZipEntry ze = new ZipEntry(entryName);
-		zos.putNextEntry(ze);
-		zos.write(b, 0, b.length);
-
-		zos.close();
 	}
 
 }

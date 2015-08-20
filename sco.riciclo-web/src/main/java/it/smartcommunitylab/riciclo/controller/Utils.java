@@ -107,16 +107,17 @@ public class Utils {
 		}
 	}
 
+	@SuppressWarnings("unchecked")
 	public static void findIstituzioni(Map<String, Area> mapArea, String ownerId, boolean draft, 
 			Map<String, Istituzione> resultMap, RepositoryManager storage) throws ClassNotFoundException {
 		for(Area area : mapArea.values()) {
-			String istituzioneId = area.getIstituzione();
+			String nome = area.getIstituzione();
 			//find Istituzione rows for specific area
-			Criteria criteriaId = new Criteria("objectId").is(istituzioneId);
-			Istituzione istituzione = (Istituzione) storage.findOneData(Istituzione.class, criteriaId, ownerId, draft) ;
+			Criteria criteriaNome = new Criteria("nome").is(nome);
+			List<Istituzione> istituzioni = (List<Istituzione>) storage.findData(Istituzione.class, criteriaNome, ownerId, draft) ;
 			//add data to result map
-			if(istituzione != null) {
-				resultMap.put(istituzioneId, istituzione);
+			for(Istituzione istituzione : istituzioni) {
+				resultMap.put(istituzione.getObjectId(), istituzione);
 			}
 		}
 	}
