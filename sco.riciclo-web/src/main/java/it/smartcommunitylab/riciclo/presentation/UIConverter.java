@@ -19,10 +19,14 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.google.common.collect.Lists;
 
 public class UIConverter {
-	
+	private static final transient Logger logger = LoggerFactory.getLogger(UIConverter.class);
+			
 	public static List<TipologiaProfiloUI> convertTipologiaProfilo(List<TipologiaProfilo> modelData, 
 			String lang, String defaultLang) {
 		List<TipologiaProfiloUI> result = Lists.newArrayList();
@@ -213,6 +217,10 @@ public class UIConverter {
 		//convert PuntoRaccolta
 		for(PuntoRaccolta raccolta : modelPuntoRaccolta) {
 			Crm crm = crmMap.get(raccolta.getCrm());
+			if(crm == null) {
+				logger.warn("CRM not found:" + raccolta);
+				continue;
+			}
 			PuntoRaccoltaUI newPR = new PuntoRaccoltaUI();
 			newPR.setAppId(raccolta.getOwnerId());
 			newPR.setTipologiaPuntiRaccolta(raccolta.getTipologiaPuntoRaccolta());
