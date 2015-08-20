@@ -311,7 +311,7 @@ angular.module('rifiuti.controllers.raccolta', [])
     $scope.pdr = punti[0];
     punti.forEach(function(punto){
       punto.orarioApertura.forEach(function(orario) {
-      var j = $scope.checkGiorni(orario.il);
+        var j = $scope.checkGiorni(orario.il);
         if (j == -1) {
           $scope.orari.push({
             giorno: orario.il.split(' '),
@@ -343,6 +343,7 @@ angular.module('rifiuti.controllers.raccolta', [])
   $scope.id = $stateParams.id;
   $scope.pdr = {};
   $scope.orari = [];
+  $scope.note = [];
   //[{giorno:"lunedì",orari:["12.00-14.00","15.30-17.30"...]}...]
 
   $scope.checkGiorni = function (item) {
@@ -361,12 +362,17 @@ angular.module('rifiuti.controllers.raccolta', [])
           $scope.orari.push({
             giorno: orario.il.split(' '),
             ecceto: orario.eccezione? orario.eccezione.split(' ') : [],
-            orari:[ orario.dalle + "-" + orario.alle ]
+            orari:[ orario.dalle + "-" + orario.alle ],
+            note: [orario.note]
           });
         } else {
           if ($scope.orari[j].orari.indexOf(orario.dalle + "-" + orario.alle) == -1) {
             $scope.orari[j].orari.push(orario.dalle + "-" + orario.alle);
+            $scope.orari[j].note.push(orario.note);
           }
+        }
+        if ($scope.note.indexOf(orario.note) == -1) {
+            $scope.note.push(orario.note);
         }
       });
     });

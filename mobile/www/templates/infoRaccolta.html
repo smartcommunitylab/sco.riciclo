@@ -15,13 +15,12 @@
         <div class="row row-center dettagli">
             <div class="col col-67">
                 <div class="row pdr-dettaglio">{{pdr.tipologiaPuntiRaccolta}}</div>
-                <div class="row pdr-specifica">{{pdr.note}}</div>
                 <!--per ora niente...-->
             </div>
         </div>
         <div ng-show="!!pdr.orarioApertura && pdr.orarioApertura.length > 0">
             <div class="subpage-title">
-                <h1 class="title">ORARIO</h1>
+                <h1 class="title">{{"ORARIO" | translate}}</h1>
             </div>
             <div class="row row-center dettagli">
                 <div class="col">
@@ -31,6 +30,10 @@
                                 <td class="col col-100" style="white-space:normal">
                                     <span ng-repeat="g in item.giorno"><strong>{{g}}</strong> </span>
                                     <span ng-if="item.ecceto.length > 0"><br/>({{"eccetto"|translate}} <span ng-repeat="e in item.ecceto"> {{e}}</span>)</span>
+                                    <div ng-if="note.length > 0">
+                                        <div class="pdr-specifica" ng-repeat="n in item.note">{{n}}</div>
+                                    </div>
+
                                 </td>
                                 <td><span ng-repeat="orario in item.orari"><span ng-if="$index>0">, </span>{{orario}}</span></td>
                             </tr>
