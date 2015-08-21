@@ -215,7 +215,6 @@ public class RepositoryManager {
 			appDescr.setTimestamp(System.currentTimeMillis());
 			template.save(appDescr);
 		}
-
 	}
 
 	private void saveAppVersion(String ownerId, long version, boolean draft) {

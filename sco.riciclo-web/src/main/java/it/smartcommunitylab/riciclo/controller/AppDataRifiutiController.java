@@ -26,6 +26,7 @@ import it.smartcommunitylab.riciclo.storage.RepositoryManager;
 
 import java.io.ByteArrayOutputStream;
 import java.io.OutputStream;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 import java.util.zip.ZipEntry;
@@ -36,6 +37,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -47,10 +50,12 @@ import org.springframework.web.bind.annotation.RestController;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
+import com.google.common.collect.Lists;
 
 @RestController
 public class AppDataRifiutiController {
-
+	private static final transient Logger logger = LoggerFactory.getLogger(AppDataRifiutiController.class);
+			
 	@Autowired
 	private RepositoryManager storage;
 	@Autowired
@@ -68,16 +73,6 @@ public class AppDataRifiutiController {
 //	@RequestMapping(method = RequestMethod.GET, value = "/appDescriptor/{ownerId}")
 //	public App appState(HttpServletResponse response, @PathVariable String ownerId) {
 //		return storage.getAppDescriptor(ownerId);
-//	}
-
-//	@RequestMapping(method = RequestMethod.GET, value = "/comuni/{ownerId}")
-//	public List<String> appComuni(HttpServletResponse response, @PathVariable String ownerId) {
-//		return storage.getComuniList(ownerId, false);
-//	}
-	
-//	@RequestMapping(method = RequestMethod.GET, value = "/comuni/{ownerId}/draft")
-//	public List<String> appComuniDraft(HttpServletResponse response, @PathVariable String ownerId) {
-//		return storage.getComuniList(ownerId, true);
 //	}
 	
 //	@RequestMapping(method = RequestMethod.GET, value = "/rifiuti/{ownerId}")
@@ -112,32 +107,53 @@ public class AppDataRifiutiController {
 //			@PathVariable String ownerId) throws Exception {
 //		return notificationManager.saveNotification(notification, ownerId);
 //	}
+
+	@RequestMapping(method = RequestMethod.GET, value = "/comuni/{ownerId}")
+	public List<String> appComuni(HttpServletResponse response, @PathVariable String ownerId) {
+		return storage.getComuniList(ownerId, false);
+	}
+
+	@RequestMapping(method = RequestMethod.GET, value = "/comuni/{ownerId}/draft")
+	public List<String> appComuniDraft(HttpServletResponse response, @PathVariable String ownerId) {
+		return storage.getComuniList(ownerId, true);
+	}
 	
-	@SuppressWarnings("unchecked")
-	@RequestMapping(method = RequestMethod.POST, value = "/rifiuti/{ownerId}")
-	public AppDataRifiutiUI getDataByComuni(@RequestBody Map<String, Object> data, 
-			@PathVariable String ownerId, HttpServletResponse response) {
-		String lang = (String) data.get("lang");
-		List<String> comuni = (List<String>) data.get("comuni");
-		String draftString = (String) data.get("draft");
+	@RequestMapping(method = RequestMethod.GET, value = "/rifiuti/{ownerId}")
+	public AppDataRifiutiUI getDataByComuni(@PathVariable String ownerId, HttpServletRequest request) {
+		List<String> comuni = Lists.newArrayList(); 
+		String lang = request.getParameter("lang");
+		String draftString = request.getParameter("draft");
 		boolean draft = false;
 		if(!Utils.isNull(draftString)) {
 			draft = Boolean.valueOf(draftString);
+		}
+		String[] comuniArray = request.getParameterValues("comune[]");
+		if(comuniArray!= null) {
+			comuni = Arrays.asList(comuniArray);
+		}
+		if(logger.isDebugEnabled()) {
+			logger.debug(String.format("%s - %s - %s", comuni.toString(), lang, draft));
 		}
 		AppDataRifiutiUI result = getAppDataUI(ownerId, lang, comuni, draft);
 		return result;
 	}
 
-	@SuppressWarnings("unchecked")
-	@RequestMapping(method = RequestMethod.POST, value = "/zip/{ownerId}")
-	public void zip(@RequestBody Map<String, Object> data, @PathVariable String ownerId, 
+	@RequestMapping(method = RequestMethod.GET, value = "/zip/{ownerId}")
+	public void zip(@PathVariable String ownerId, HttpServletRequest request, 
 			HttpServletResponse response) throws Exception {
-		String lang = (String) data.get("lang");
-		List<String> comuni = (List<String>) data.get("comuni");
-		String draftString = (String) data.get("draft");
+		List<String> comuni = Lists.newArrayList(); 
+		String lang = request.getParameter("lang");
+		String draftString = request.getParameter("draft");
 		boolean draft = false;
 		if(!Utils.isNull(draftString)) {
 			draft = Boolean.valueOf(draftString);
+		}
+		String[] comuniArray = request.getParameterValues("comune[]");
+		if(comuniArray!= null) {
+			comuni = Arrays.asList(comuniArray);
+		}
+		if(logger.isDebugEnabled()) {
+			logger.debug(String.format("%s - %s - %s", comuni.toString(), lang, draft));
 		}
 		AppDataRifiutiUI result = getAppDataUI(ownerId, lang, comuni, draft);
 		
@@ -172,7 +188,12 @@ public class AppDataRifiutiController {
 	
 	private AppDataRifiutiUI getAppDataUI(String ownerId, String lang, List<String> comuni, boolean draft) {
 		String defaultLang = storage.getDefaultLang();
-		AppDataRifiuti appData = storage.findRifiuti(comuni, ownerId, draft);
+		AppDataRifiuti appData = null;
+		if(comuni.isEmpty()) {
+			appData = storage.findRifiuti(ownerId, draft);
+		} else {
+			appData = storage.findRifiuti(comuni, ownerId, draft);
+		}
 		AppDataRifiutiUI result = new AppDataRifiutiUI();
 		result.setAppId(appData.getOwnerId());
 		result.setTipologiaProfilo(UIConverter.convertTipologiaProfilo(appData.getTipologiaProfili(), 

@@ -59,7 +59,9 @@ public class Utils {
 		Criteria criteriaISTAT = new Criteria("codiceISTAT").is(comune);
 		Area areaComune = storage.findOneData(Area.class, criteriaISTAT, ownerId, draft);
 		List<Area> areaList = new ArrayList<Area>();
-		areaList.add(areaComune);
+		if(areaComune != null) {
+			areaList.add(areaComune);
+		}
 		return areaList;
 	}
 	
@@ -173,18 +175,20 @@ public class Utils {
 			Map<String, Area> resultMap, RepositoryManager storage) throws ClassNotFoundException {
 		//find Area by codice ISTAT	
 		List<Area> areaList = findAreaByComune(comune, ownerId, draft, storage);
-		Area comuneArea = areaList.get(0);
-		Utils.findAree(areaList, ownerId, draft, resultMap, storage);
-		//find parent Area
-		String parentId = comuneArea.getParent();
-		while(!isNull(parentId)) {
-			Criteria criteriaId = new Criteria("objectId").is(parentId);
-			Area area = storage.findOneData(Area.class, criteriaId, ownerId, draft);
-			if(area != null) {
-				resultMap.put(area.getObjectId(), area);
-				parentId = area.getParent();
-			} else {
-				parentId = null;
+		if(!areaList.isEmpty()) {
+			Area comuneArea = areaList.get(0);
+			Utils.findAree(areaList, ownerId, draft, resultMap, storage);
+			//find parent Area
+			String parentId = comuneArea.getParent();
+			while(!isNull(parentId)) {
+				Criteria criteriaId = new Criteria("objectId").is(parentId);
+				Area area = storage.findOneData(Area.class, criteriaId, ownerId, draft);
+				if(area != null) {
+					resultMap.put(area.getObjectId(), area);
+					parentId = area.getParent();
+				} else {
+					parentId = null;
+				}
 			}
 		}
 	}
