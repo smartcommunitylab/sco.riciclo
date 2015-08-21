@@ -24,12 +24,16 @@ import it.smartcommunitylab.riciclo.storage.DataSetInfo;
 import it.smartcommunitylab.riciclo.storage.RepositoryManager;
 
 import java.util.ArrayList;
-import java.util.Date;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
+import javax.servlet.http.HttpServletRequest;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -43,29 +47,41 @@ import com.google.common.collect.Lists;
 
 @Controller
 public class RiciclabolarioController {
-
+	private static final transient Logger logger = LoggerFactory.getLogger(RiciclabolarioController.class);
+	
 	@Autowired
 	private RepositoryManager storage;
 	
 	@Autowired
 	private AppSetup appSetup;	
 	
+	@RequestMapping(value="/riciclabolario/{ownerId}/{draft}", method=RequestMethod.GET)
 	public @ResponseBody List<Riciclabolario> getRiciclabolario(@PathVariable String ownerId, 
-			@PathVariable Boolean draft) throws ClassNotFoundException {
-		//da appId estraggo lista comuni (codici ISTAT)
-		DataSetInfo appInfo = appSetup.findAppById(ownerId);
-		if(appInfo == null) {
-			return new ArrayList<Riciclabolario>();
+			@PathVariable Boolean draft, HttpServletRequest request) throws ClassNotFoundException {
+		List<String> comuni = Lists.newArrayList(); 
+		String[] comuniArray = request.getParameterValues("comune[]");
+		if(comuniArray!= null) {
+			comuni = Arrays.asList(comuniArray);
 		}
-		List<String> comuni = appInfo.getComuni();
+		if(comuni.isEmpty()) {
+			//da appId estraggo lista comuni (codici ISTAT)
+			DataSetInfo appInfo = appSetup.findAppById(ownerId);
+			if(appInfo == null) {
+				if(logger.isInfoEnabled()) {
+					logger.info("ownerId not found:" + ownerId);
+				}
+				return new ArrayList<Riciclabolario>();
+			}
+			comuni = appInfo.getComuni();
+		}
 		//ricerca tutti Riciclabolario che insistono su un'area appartenete al sotto-albero di ogni comune individuato
 		//map <objectId, Riciclabolario>
 		Map<String, Riciclabolario> resultMapRiciclabolario = new HashMap<String, Riciclabolario>();
 		Map<String, Area> resultMapArea  = new HashMap<String, Area>();
 		for(String comune : comuni) {
 			Utils.findAree(comune, ownerId, draft, resultMapArea, storage);
-			Utils.findRiciclabolario(resultMapArea, ownerId, draft, resultMapRiciclabolario, storage);
 		}
+		Utils.findRiciclabolario(resultMapArea, ownerId, draft, resultMapRiciclabolario, storage);
 		List<Riciclabolario> result = Lists.newArrayList(resultMapRiciclabolario.values());
 		return result;
 	}
@@ -79,13 +95,10 @@ public class RiciclabolarioController {
 		String rifiuto = (String) data.get("rifiuto");
 		List<String> tipologiaUtenzaList = (List<String>) data.get("tipologiaUtenza");
 		List<Riciclabolario> response = new ArrayList<Riciclabolario>();
-		Date actualDate = new Date();
 		for(String tipologiaUtenza : tipologiaUtenzaList) {
 			Riciclabolario riciclabolario = new Riciclabolario();
 			riciclabolario.setObjectId(UUID.randomUUID().toString());
 			riciclabolario.setOwnerId(ownerId);
-			riciclabolario.setCreationDate(actualDate);
-			riciclabolario.setLastUpdate(actualDate);
 			riciclabolario.setArea(area);
 			riciclabolario.setRifiuto(rifiuto);
 			riciclabolario.setTipologiaRifiuto(tipologiaRifiuto);

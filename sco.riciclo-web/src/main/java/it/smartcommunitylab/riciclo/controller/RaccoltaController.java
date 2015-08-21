@@ -24,12 +24,16 @@ import it.smartcommunitylab.riciclo.storage.DataSetInfo;
 import it.smartcommunitylab.riciclo.storage.RepositoryManager;
 
 import java.util.ArrayList;
-import java.util.Date;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
+import javax.servlet.http.HttpServletRequest;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -43,29 +47,41 @@ import com.google.common.collect.Lists;
 
 @Controller
 public class RaccoltaController {
-
+	private static final transient Logger logger = LoggerFactory.getLogger(RaccoltaController.class);
+	
 	@Autowired
 	private RepositoryManager storage;
 	
 	@Autowired
 	private AppSetup appSetup;	
 	
-	public @ResponseBody List<Raccolta> getRaccolte(@PathVariable String ownerId, @PathVariable Boolean draft) 
-			throws ClassNotFoundException {
-		//da appId estraggo lista comuni (codici ISTAT)
-		DataSetInfo appInfo = appSetup.findAppById(ownerId);
-		if(appInfo == null) {
-			return new ArrayList<Raccolta>();
+	@RequestMapping(value="/raccolta/{ownerId}/{draft}", method=RequestMethod.GET)
+	public @ResponseBody List<Raccolta> getRaccolte(@PathVariable String ownerId, 
+			@PathVariable Boolean draft, HttpServletRequest request) throws ClassNotFoundException {
+		List<String> comuni = Lists.newArrayList(); 
+		String[] comuniArray = request.getParameterValues("comune[]");
+		if(comuniArray!= null) {
+			comuni = Arrays.asList(comuniArray);
 		}
-		List<String> comuni = appInfo.getComuni();
+		if(comuni.isEmpty()) {
+			//da appId estraggo lista comuni (codici ISTAT)
+			DataSetInfo appInfo = appSetup.findAppById(ownerId);
+			if(appInfo == null) {
+				if(logger.isInfoEnabled()) {
+					logger.info("ownerId not found:" + ownerId);
+				}
+				return new ArrayList<Raccolta>();
+			}
+			comuni = appInfo.getComuni();
+		}
 		//ricerca tutt le Raccolte che insistono su un'area appartenete al sotto-albero di ogni comune individuato
 		//map <objectId, Raccolta>
 		Map<String, Raccolta> resultMapRaccolta = new HashMap<String, Raccolta>();
 		Map<String, Area> resultMapArea  = new HashMap<String, Area>();
 		for(String comune : comuni) {
 			Utils.findAree(comune, ownerId, draft, resultMapArea, storage);
-			Utils.findRaccolte(resultMapArea, ownerId, draft, resultMapRaccolta, storage);
 		}
+		Utils.findRaccolte(resultMapArea, ownerId, draft, resultMapRaccolta, storage);
 		List<Raccolta> result = Lists.newArrayList(resultMapRaccolta.values());
 		return result;
 	}
@@ -73,10 +89,8 @@ public class RaccoltaController {
 	@RequestMapping(value="/raccolta/{ownerId}/{draft}", method=RequestMethod.POST) 
 	public @ResponseBody Raccolta addRaccolta(@RequestBody Raccolta raccolta, 
 			@PathVariable String ownerId,	@PathVariable Boolean draft) {
-		Date actualDate = new Date();
 		raccolta.setObjectId(UUID.randomUUID().toString());
-		raccolta.setCreationDate(actualDate);
-		raccolta.setLastUpdate(actualDate);
+		raccolta.setOwnerId(ownerId);
 		storage.addRaccolta(raccolta, draft);
 		return raccolta;
 	}

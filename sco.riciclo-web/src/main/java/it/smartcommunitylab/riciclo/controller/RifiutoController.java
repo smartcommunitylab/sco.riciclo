@@ -17,12 +17,10 @@
 package it.smartcommunitylab.riciclo.controller;
 
 import it.smartcommunitylab.riciclo.exception.EntityNotFoundException;
-import it.smartcommunitylab.riciclo.model.Crm;
 import it.smartcommunitylab.riciclo.model.Rifiuto;
 import it.smartcommunitylab.riciclo.storage.AppSetup;
 import it.smartcommunitylab.riciclo.storage.RepositoryManager;
 
-import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
@@ -45,6 +43,7 @@ public class RifiutoController {
 	private AppSetup appSetup;	
 	
 	@SuppressWarnings("unchecked")
+	@RequestMapping(value="/rifiuto/{ownerId}/{draft}", method=RequestMethod.GET)
 	public @ResponseBody List<Rifiuto> getRifiuti(@PathVariable String ownerId, @PathVariable Boolean draft) 
 			throws ClassNotFoundException {
 		List<Rifiuto> result = (List<Rifiuto>) storage.findData(Rifiuto.class, null, ownerId, draft);
@@ -55,9 +54,6 @@ public class RifiutoController {
 	public @ResponseBody Rifiuto addRifiuto(@RequestBody Rifiuto rifiuto, @PathVariable String ownerId, @PathVariable Boolean draft) {
 		rifiuto.setObjectId(UUID.randomUUID().toString());
 		rifiuto.setOwnerId(ownerId);
-		Date actualDate = new Date();
-		rifiuto.setCreationDate(actualDate);
-		rifiuto.setLastUpdate(actualDate);
 		storage.addRifiuto(rifiuto, draft);
 		return rifiuto;
 	}
@@ -69,8 +65,8 @@ public class RifiutoController {
 	}
 	
 	@RequestMapping(value="/rifiuto/{ownerId}/{objectId}/{draft}", method=RequestMethod.DELETE)
-	public void deleteRifiuto(@RequestBody Crm crm, @PathVariable String ownerId, 
-			@PathVariable String objectId, @PathVariable Boolean draft) throws EntityNotFoundException {
+	public void deleteRifiuto(@PathVariable String ownerId, @PathVariable String objectId, 
+			@PathVariable Boolean draft) throws EntityNotFoundException {
 		storage.removeRifiuto(ownerId, objectId, draft);
 	}
 	

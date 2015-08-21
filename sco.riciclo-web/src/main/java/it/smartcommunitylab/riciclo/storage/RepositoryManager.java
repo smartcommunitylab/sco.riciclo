@@ -26,6 +26,7 @@ import it.smartcommunitylab.riciclo.model.Colore;
 import it.smartcommunitylab.riciclo.model.Crm;
 import it.smartcommunitylab.riciclo.model.Gestore;
 import it.smartcommunitylab.riciclo.model.Istituzione;
+import it.smartcommunitylab.riciclo.model.OrarioApertura;
 import it.smartcommunitylab.riciclo.model.PuntoRaccolta;
 import it.smartcommunitylab.riciclo.model.Raccolta;
 import it.smartcommunitylab.riciclo.model.Riciclabolario;
@@ -261,14 +262,14 @@ public class RepositoryManager {
 		try {
 			for(String comune : comuni) {
 				Utils.findAree(comune, ownerId, draft, resultMapArea, this);
-				Utils.findRaccolte(resultMapArea, ownerId, draft, resultMapRaccolta, this);
-				Utils.findGestori(resultMapArea, ownerId, draft, resultMapGestore, this);
-				Utils.findIstituzioni(resultMapArea, ownerId, draft, resultMapIstituzione, this);
-				Utils.findPuntiRaccolta(resultMapArea, ownerId, draft, resultMapPuntoRaccolta, this);
-				Utils.findCalendariRaccolta(resultMapArea, ownerId, draft, resultMapCalendarioRaccolta, this);
-				Utils.findRiciclabolario(resultMapArea, ownerId, draft, resultMapRiciclabolario, this);
-				Utils.findSegnalazioni(resultMapArea, ownerId, draft, resultMapSegnalazione, this);
 			}
+			Utils.findRaccolte(resultMapArea, ownerId, draft, resultMapRaccolta, this);
+			Utils.findGestori(resultMapArea, ownerId, draft, resultMapGestore, this);
+			Utils.findIstituzioni(resultMapArea, ownerId, draft, resultMapIstituzione, this);
+			Utils.findPuntiRaccolta(resultMapArea, ownerId, draft, resultMapPuntoRaccolta, this);
+			Utils.findCalendariRaccolta(resultMapArea, ownerId, draft, resultMapCalendarioRaccolta, this);
+			Utils.findRiciclabolario(resultMapArea, ownerId, draft, resultMapRiciclabolario, this);
+			Utils.findSegnalazioni(resultMapArea, ownerId, draft, resultMapSegnalazione, this);
 			resultMapCrm = Utils.findCrm(resultMapPuntoRaccolta, ownerId, draft, this);
 			
 			Query query = appQuery(ownerId);
@@ -290,7 +291,6 @@ public class RepositoryManager {
 		} catch (Exception e) {
 			logger.error("error in findRifiuti:" + e.getMessage(), e);
 		}
-		
 		return appDataRifiuti;
 	}
 
@@ -351,6 +351,9 @@ public class RepositoryManager {
 
 	public void addCRM(Crm crm, boolean draft) {
 		MongoTemplate template = draft ? draftTemplate : finalTemplate;
+		Date actualDate = new Date();
+		crm.setCreationDate(actualDate);
+		crm.setLastUpdate(actualDate);
 		template.save(crm);
 	}
 
@@ -363,10 +366,49 @@ public class RepositoryManager {
 		}
 		Update update = new Update();
 		update.set("lastUpdate", new Date());
-		// TODO
+		update.set("tipologiaPuntiRaccolta", crm.getTipologiaPuntiRaccolta());
+		update.set("nome", crm.getNome());
+		update.set("indirizzo", crm.getIndirizzo());
+		update.set("zona", crm.getZona());
+		update.set("dettagliZona", crm.getDettagliZona());
+		update.set("geocoding", crm.getGeocoding());
+		update.set("note", crm.getNote());
+		update.set("caratteristiche", crm.getCaratteristiche());
+		template.updateFirst(query, update, Crm.class);
+	}
+	
+	public void updateCRMAddOrario(String ownerId, String objectId, OrarioApertura orario, 
+			boolean draft) throws EntityNotFoundException {
+		MongoTemplate template = draft ? draftTemplate : finalTemplate;
+		Query query = new Query(new Criteria("ownerId").is(ownerId).and("objectId").is(objectId));
+		Crm crmDB = template.findOne(query, Crm.class);
+		if (crmDB == null) {
+			throw new EntityNotFoundException(String.format("CRM with id %s not found", objectId));
+		}
+		List<OrarioApertura> orarioApertura = crmDB.getOrarioApertura();
+		orarioApertura.add(orario);
+		Update update = new Update();
+		update.set("lastUpdate", new Date());
+		update.set("orarioApertura", orarioApertura);
 		template.updateFirst(query, update, Crm.class);
 	}
 
+	public void updateCRMRemoveOrario(String ownerId, String objectId, int position, 
+			boolean draft) throws EntityNotFoundException {
+		MongoTemplate template = draft ? draftTemplate : finalTemplate;
+		Query query = new Query(new Criteria("ownerId").is(ownerId).and("objectId").is(objectId));
+		Crm crmDB = template.findOne(query, Crm.class);
+		if (crmDB == null) {
+			throw new EntityNotFoundException(String.format("CRM with id %s not found", objectId));
+		}
+		List<OrarioApertura> orarioApertura = crmDB.getOrarioApertura();
+		orarioApertura.remove(position);
+		Update update = new Update();
+		update.set("lastUpdate", new Date());
+		update.set("orarioApertura", orarioApertura);
+		template.updateFirst(query, update, Crm.class);
+	}
+	
 	public void removeCRM(String ownerId, String objectId, boolean draft) throws EntityNotFoundException {
 		MongoTemplate template = draft ? draftTemplate : finalTemplate;
 		Query query = new Query(new Criteria("ownerId").is(ownerId).and("objectId").is(objectId));
@@ -379,6 +421,9 @@ public class RepositoryManager {
 
 	public void addRiciclabolario(Riciclabolario riciclabolario, boolean draft) {
 		MongoTemplate template = draft ? draftTemplate : finalTemplate;
+		Date actualDate = new Date();
+		riciclabolario.setCreationDate(actualDate);
+		riciclabolario.setLastUpdate(actualDate);
 		template.save(riciclabolario);
 	}
 
@@ -406,6 +451,9 @@ public class RepositoryManager {
 
 	public void addRaccolta(Raccolta raccolta, boolean draft) {
 		MongoTemplate template = draft ? draftTemplate : finalTemplate;
+		Date actualDate = new Date();
+		raccolta.setCreationDate(actualDate);
+		raccolta.setLastUpdate(actualDate);
 		template.save(raccolta);
 	}
 
@@ -421,6 +469,9 @@ public class RepositoryManager {
 
 	public void addRifiuto(Rifiuto rifiuto, boolean draft) {
 		MongoTemplate template = draft ? draftTemplate : finalTemplate;
+		Date actualDate = new Date();
+		rifiuto.setCreationDate(actualDate);
+		rifiuto.setLastUpdate(actualDate);
 		template.save(rifiuto);
 	}
 
@@ -443,7 +494,7 @@ public class RepositoryManager {
 		}
 		Update update = new Update();
 		update.set("lastUpdate", new Date());
-		// TODO
+		update.set("nome", rifiuto.getNome());
 		template.updateFirst(query, update, Rifiuto.class);
 	}
 
