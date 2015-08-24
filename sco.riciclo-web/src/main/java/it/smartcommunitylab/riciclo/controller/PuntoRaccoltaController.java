@@ -18,7 +18,7 @@ package it.smartcommunitylab.riciclo.controller;
 
 import it.smartcommunitylab.riciclo.exception.EntityNotFoundException;
 import it.smartcommunitylab.riciclo.model.Area;
-import it.smartcommunitylab.riciclo.model.Raccolta;
+import it.smartcommunitylab.riciclo.model.PuntoRaccolta;
 import it.smartcommunitylab.riciclo.storage.AppSetup;
 import it.smartcommunitylab.riciclo.storage.DataSetInfo;
 import it.smartcommunitylab.riciclo.storage.RepositoryManager;
@@ -46,8 +46,8 @@ import com.google.common.collect.Lists;
 
 
 @Controller
-public class RaccoltaController {
-	private static final transient Logger logger = LoggerFactory.getLogger(RaccoltaController.class);
+public class PuntoRaccoltaController {
+	private static final transient Logger logger = LoggerFactory.getLogger(PuntoRaccoltaController.class);
 	
 	@Autowired
 	private RepositoryManager storage;
@@ -55,8 +55,8 @@ public class RaccoltaController {
 	@Autowired
 	private AppSetup appSetup;	
 	
-	@RequestMapping(value="/raccolta/{ownerId}", method=RequestMethod.GET)
-	public @ResponseBody List<Raccolta> getRaccolte(@PathVariable String ownerId, 
+	@RequestMapping(value="/puntoraccolta/{ownerId}", method=RequestMethod.GET)
+	public @ResponseBody List<PuntoRaccolta> getPuntiRaccolta(@PathVariable String ownerId, 
 			HttpServletRequest request) throws ClassNotFoundException {
 		boolean draft = Utils.getDraft(request);
 		List<String> comuni = Lists.newArrayList(); 
@@ -71,37 +71,45 @@ public class RaccoltaController {
 				if(logger.isInfoEnabled()) {
 					logger.info("ownerId not found:" + ownerId);
 				}
-				return new ArrayList<Raccolta>();
+				return new ArrayList<PuntoRaccolta>();
 			}
 			comuni = appInfo.getComuni();
 		}
-		//ricerca tutt le Raccolte che insistono su un'area appartenete al sotto-albero di ogni comune individuato
-		//map <objectId, Raccolta>
-		Map<String, Raccolta> resultMapRaccolta = new HashMap<String, Raccolta>();
+		//ricerca tutti i PuntoRaccolta che insistono su un'area appartenete al sotto-albero di ogni comune individuato
+		//map <objectId, PuntoRaccolta>
+		Map<String, PuntoRaccolta> resultMapRaccolta = new HashMap<String, PuntoRaccolta>();
 		Map<String, Area> resultMapArea  = new HashMap<String, Area>();
 		for(String comune : comuni) {
 			Utils.findAree(comune, ownerId, draft, resultMapArea, storage);
 		}
-		Utils.findRaccolte(resultMapArea, ownerId, draft, resultMapRaccolta, storage);
-		List<Raccolta> result = Lists.newArrayList(resultMapRaccolta.values());
+		Utils.findPuntiRaccolta(resultMapArea, ownerId, draft, resultMapRaccolta, storage);
+		List<PuntoRaccolta> result = Lists.newArrayList(resultMapRaccolta.values());
 		return result;
 	}
 	
-	@RequestMapping(value="/raccolta/{ownerId}", method=RequestMethod.POST) 
-	public @ResponseBody Raccolta addRaccolta(@RequestBody Raccolta raccolta, 
+	@RequestMapping(value="/puntoraccolta/{ownerId}", method=RequestMethod.POST) 
+	public @ResponseBody PuntoRaccolta addRaccolta(@RequestBody PuntoRaccolta raccolta, 
 			@PathVariable String ownerId,	HttpServletRequest request) {
 		boolean draft = Utils.getDraft(request);
 		raccolta.setObjectId(UUID.randomUUID().toString());
 		raccolta.setOwnerId(ownerId);
-		storage.addRaccolta(raccolta, draft);
+		storage.addPuntoRaccolta(raccolta, draft);
 		return raccolta;
 	}
 	
-	@RequestMapping(value="/raccolta/{ownerId}/{objectId}", method=RequestMethod.DELETE)
-	public @ResponseBody void deleteRaccoltaById(@PathVariable String ownerId, @PathVariable String objectId, 
+	@RequestMapping(value="/puntoraccolta/{ownerId}/{objectId}", method=RequestMethod.DELETE)
+	public @ResponseBody void deletePuntoRaccoltaById(@PathVariable String ownerId, @PathVariable String objectId, 
 			HttpServletRequest request) throws EntityNotFoundException {
 		boolean draft = Utils.getDraft(request);
-		storage.removeRaccolta(ownerId, objectId, draft);
+		storage.removePuntoRaccolta(ownerId, objectId, draft);
 	}
 	
+	@RequestMapping(value="/puntoraccolta/{ownerId}", method=RequestMethod.DELETE)
+	public @ResponseBody void deletePuntoRaccolta(@RequestBody PuntoRaccolta raccolta, @PathVariable String ownerId,
+			HttpServletRequest request) throws EntityNotFoundException {
+		boolean draft = Utils.getDraft(request);
+		raccolta.setOwnerId(ownerId);
+		storage.removePuntoRaccolta(raccolta, draft);
+	}
+
 }

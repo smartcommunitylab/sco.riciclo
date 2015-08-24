@@ -55,9 +55,10 @@ public class RiciclabolarioController {
 	@Autowired
 	private AppSetup appSetup;	
 	
-	@RequestMapping(value="/riciclabolario/{ownerId}/{draft}", method=RequestMethod.GET)
+	@RequestMapping(value="/riciclabolario/{ownerId}", method=RequestMethod.GET)
 	public @ResponseBody List<Riciclabolario> getRiciclabolario(@PathVariable String ownerId, 
-			@PathVariable Boolean draft, HttpServletRequest request) throws ClassNotFoundException {
+			HttpServletRequest request) throws ClassNotFoundException {
+		boolean draft = Utils.getDraft(request);
 		List<String> comuni = Lists.newArrayList(); 
 		String[] comuniArray = request.getParameterValues("comune[]");
 		if(comuniArray!= null) {
@@ -87,9 +88,10 @@ public class RiciclabolarioController {
 	}
 	
 	@SuppressWarnings("unchecked")
-	@RequestMapping(value="/riciclabolario/{ownerId}/{draft}", method=RequestMethod.POST) 
+	@RequestMapping(value="/riciclabolario/{ownerId}", method=RequestMethod.POST) 
 	public @ResponseBody List<Riciclabolario> addRiciclabolario(@RequestBody Map<String, Object> data, 
-			@PathVariable String ownerId,	@PathVariable Boolean draft) {
+			@PathVariable String ownerId,	HttpServletRequest request) {
+		boolean draft = Utils.getDraft(request);
 		String area = (String) data.get("area");
 		String tipologiaRifiuto = (String) data.get("tipologiaRifiuto");
 		String rifiuto = (String) data.get("rifiuto");
@@ -109,15 +111,18 @@ public class RiciclabolarioController {
 		return response;
 	}
 	
-	@RequestMapping(value="/riciclabolario/{ownerId}/{objectId}/{draft}", method=RequestMethod.DELETE)
-	public void deleteRiciclabolarioById(@PathVariable String ownerId, @PathVariable String objectId, 
-			@PathVariable Boolean draft) throws EntityNotFoundException {
+	@RequestMapping(value="/riciclabolario/{ownerId}/{objectId}", method=RequestMethod.DELETE)
+	public @ResponseBody void deleteRiciclabolarioById(@PathVariable String ownerId, 
+			@PathVariable String objectId, HttpServletRequest request) throws EntityNotFoundException {
+		boolean draft = Utils.getDraft(request);
 		storage.removeRiciclabolario(ownerId, objectId, draft);
 	}
 	
-	@RequestMapping(value="/riciclabolario/{ownerId}/{draft}", method=RequestMethod.DELETE)
-	public void deleteRiciclabolario(@RequestBody Riciclabolario riciclabolario, @PathVariable String appId, 
-			@PathVariable Boolean draft) throws EntityNotFoundException {
+	@RequestMapping(value="/riciclabolario/{ownerId}", method=RequestMethod.DELETE)
+	public @ResponseBody void deleteRiciclabolario(@RequestBody Riciclabolario riciclabolario, 
+			@PathVariable String ownerId, HttpServletRequest request) throws EntityNotFoundException {
+		boolean draft = Utils.getDraft(request);
+		riciclabolario.setOwnerId(ownerId);
 		storage.removeRiciclabolario(riciclabolario, draft);
 	}
 	

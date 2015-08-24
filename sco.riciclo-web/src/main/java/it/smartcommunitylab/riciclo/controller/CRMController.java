@@ -25,6 +25,8 @@ import it.smartcommunitylab.riciclo.storage.RepositoryManager;
 import java.util.List;
 import java.util.UUID;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -44,42 +46,51 @@ public class CRMController {
 	private AppSetup appSetup;	
 	
 	@SuppressWarnings("unchecked")
-	@RequestMapping(value="/crm/{ownerId}/{draft}", method=RequestMethod.GET) 
-	public @ResponseBody List<Crm> getCRM(@PathVariable String ownerId, @PathVariable Boolean draft) 
+	@RequestMapping(value="/crm/{ownerId}", method=RequestMethod.GET) 
+	public @ResponseBody List<Crm> getCRM(@PathVariable String ownerId, HttpServletRequest request) 
 			throws ClassNotFoundException {
+		boolean draft = Utils.getDraft(request);
 		List<Crm> result = (List<Crm>) storage.findData(Crm.class, null, ownerId, draft);
 		return result;
 	}
 	
-	@RequestMapping(value="/crm/{ownerId}/{draft}", method=RequestMethod.POST) 
-	public @ResponseBody Crm addCRM(@RequestBody Crm crm, @PathVariable String ownerId, @PathVariable Boolean draft) {
+	@RequestMapping(value="/crm/{ownerId}", method=RequestMethod.POST) 
+	public @ResponseBody Crm addCRM(@RequestBody Crm crm, @PathVariable String ownerId, 
+			HttpServletRequest request) {
+		boolean draft = Utils.getDraft(request);
 		crm.setObjectId(UUID.randomUUID().toString());
 		crm.setOwnerId(ownerId);
 		storage.addCRM(crm, draft);
 		return crm;
 	}
 	
-	@RequestMapping(value="/crm/{ownerId}/{objectId}/{draft}", method=RequestMethod.PUT)
-	public void updateCRM(@RequestBody Crm crm, @PathVariable String ownerId, 
-			@PathVariable String objectId, @PathVariable Boolean draft) throws EntityNotFoundException {
+	@RequestMapping(value="/crm/{ownerId}/{objectId}", method=RequestMethod.PUT)
+	public @ResponseBody void updateCRM(@RequestBody Crm crm, @PathVariable String ownerId, 
+			@PathVariable String objectId, HttpServletRequest request) throws EntityNotFoundException {
+		boolean draft = Utils.getDraft(request);
+		crm.setObjectId(objectId);
+		crm.setOwnerId(ownerId);
 		storage.updateCRM(crm, draft);
 	}
 	
-	@RequestMapping(value="/crm/{ownerId}/{objectId}/{draft}", method=RequestMethod.DELETE)
-	public void deleteCRM(@PathVariable String ownerId,	@PathVariable String objectId, 
-			@PathVariable Boolean draft) throws EntityNotFoundException {
+	@RequestMapping(value="/crm/{ownerId}/{objectId}", method=RequestMethod.DELETE)
+	public @ResponseBody void deleteCRM(@PathVariable String ownerId,	@PathVariable String objectId, 
+			HttpServletRequest request) throws EntityNotFoundException {
+		boolean draft = Utils.getDraft(request);
 		storage.removeCRM(ownerId, objectId, draft);
 	}
 	
-	@RequestMapping(value="/crm/{ownerId}/{objectId}/orario/{draft}", method=RequestMethod.POST)
-	public void addOrarioApertura(@RequestBody OrarioApertura orario, @PathVariable String ownerId, 
-			@PathVariable String objectId, @PathVariable Boolean draft) throws ClassNotFoundException, EntityNotFoundException {
+	@RequestMapping(value="/crm/{ownerId}/{objectId}/orario", method=RequestMethod.POST)
+	public @ResponseBody void addOrarioApertura(@RequestBody OrarioApertura orario, @PathVariable String ownerId, 
+			@PathVariable String objectId, HttpServletRequest request) throws ClassNotFoundException, EntityNotFoundException {
+		boolean draft = Utils.getDraft(request);
 		storage.updateCRMAddOrario(ownerId, objectId, orario, draft);
 	}
 
-	@RequestMapping(value="/crm/{ownerId}/{objectId}/orario/{position}/{draft}", method=RequestMethod.DELETE)
-	public void deleteOrarioApertura(@PathVariable String ownerId, @PathVariable String objectId, 
-			@PathVariable int position, @PathVariable Boolean draft) throws ClassNotFoundException, EntityNotFoundException {
+	@RequestMapping(value="/crm/{ownerId}/{objectId}/orario/{position}", method=RequestMethod.DELETE)
+	public @ResponseBody void deleteOrarioApertura(@PathVariable String ownerId, @PathVariable String objectId, 
+			@PathVariable int position, HttpServletRequest request) throws ClassNotFoundException, EntityNotFoundException {
+		boolean draft = Utils.getDraft(request);
 		storage.updateCRMRemoveOrario(ownerId, objectId, position, draft);
 	}
 

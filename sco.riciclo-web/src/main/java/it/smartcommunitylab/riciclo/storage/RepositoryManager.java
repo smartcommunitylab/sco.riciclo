@@ -71,6 +71,10 @@ public class RepositoryManager {
 		this.defaultLang = defaultLang;
 	}
 
+	public String getDefaultLang() {
+		return defaultLang;
+	}
+	
 	public void save(AppDataRifiuti appDataRifiuti, String ownerId) {
 		AppState oldDraft = getAppState(ownerId, true);
 		cleanByOwnerId(ownerId, true);
@@ -348,7 +352,11 @@ public class RepositoryManager {
 	private Query appQuery(String ownerId) {
 		return new Query(new Criteria("ownerId").is(ownerId));
 	}
-
+	
+	/**
+	 * Gestione Crm
+	 */
+	
 	public void addCRM(Crm crm, boolean draft) {
 		MongoTemplate template = draft ? draftTemplate : finalTemplate;
 		Date actualDate = new Date();
@@ -418,6 +426,45 @@ public class RepositoryManager {
 		}
 		template.findAndRemove(query, Crm.class);
 	}
+	
+	/**
+	 * Gestione PuntoRaccolta
+	 */
+	
+	public void addPuntoRaccolta(PuntoRaccolta raccolta, boolean draft) {
+		MongoTemplate template = draft ? draftTemplate : finalTemplate;
+		Date actualDate = new Date();
+		raccolta.setCreationDate(actualDate);
+		raccolta.setLastUpdate(actualDate);
+		template.save(raccolta);
+	}
+	
+	public void removePuntoRaccolta(String ownerId, String objectId, boolean draft) throws EntityNotFoundException {
+		MongoTemplate template = draft ? draftTemplate : finalTemplate;
+		Query query = new Query(new Criteria("ownerId").is(ownerId).and("objectId").is(objectId));
+		PuntoRaccolta raccolta = template.findOne(query, PuntoRaccolta.class);
+		if(raccolta == null) {
+			throw new EntityNotFoundException(String.format("PuntoRaccolta with id %s not found", objectId));
+		}
+		template.findAndRemove(query, PuntoRaccolta.class);
+	}
+	
+	public void removePuntoRaccolta(PuntoRaccolta raccolta, boolean draft) throws EntityNotFoundException {
+		MongoTemplate template = draft ? draftTemplate : finalTemplate;
+		Query query = new Query(new Criteria("ownerId").is(raccolta.getOwnerId()).and("area")
+				.is(raccolta.getArea()).and("crm").is(raccolta.getCrm()).and("tipologiaPuntoRaccolta")
+				.is(raccolta.getTipologiaPuntoRaccolta()).and("tipologiaUtenza")
+				.is(raccolta.getTipologiaUtenza()));
+		PuntoRaccolta raccoltaDB = template.findOne(query, PuntoRaccolta.class);
+		if (raccoltaDB == null) {
+			throw new EntityNotFoundException(String.format("PuntoRaccolta %s not found", raccolta));
+		}
+		template.findAndRemove(query, PuntoRaccolta.class);
+	}
+
+	/**
+	 * Gestione Riciclabolario
+	 */
 
 	public void addRiciclabolario(Riciclabolario riciclabolario, boolean draft) {
 		MongoTemplate template = draft ? draftTemplate : finalTemplate;
@@ -449,6 +496,10 @@ public class RepositoryManager {
 		template.findAndRemove(query, Riciclabolario.class);
 	}
 
+	/**
+	 * Gestione Raccolta
+	 */
+	
 	public void addRaccolta(Raccolta raccolta, boolean draft) {
 		MongoTemplate template = draft ? draftTemplate : finalTemplate;
 		Date actualDate = new Date();
@@ -466,7 +517,11 @@ public class RepositoryManager {
 		}
 		template.findAndRemove(query, Raccolta.class);
 	}
-
+	
+	/**
+	 * Gestione Rifiuto
+	 */
+	
 	public void addRifiuto(Rifiuto rifiuto, boolean draft) {
 		MongoTemplate template = draft ? draftTemplate : finalTemplate;
 		Date actualDate = new Date();
@@ -497,9 +552,71 @@ public class RepositoryManager {
 		update.set("nome", rifiuto.getNome());
 		template.updateFirst(query, update, Rifiuto.class);
 	}
-
-	public String getDefaultLang() {
-		return defaultLang;
+	
+	/**
+	 * Gestione CalendarioRaccolta
+	 */
+	
+	public void addCalendarioRaccolta(CalendarioRaccolta calendario, boolean draft) {
+		MongoTemplate template = draft ? draftTemplate : finalTemplate;
+		Date actualDate = new Date();
+		calendario.setCreationDate(actualDate);
+		calendario.setLastUpdate(actualDate);
+		template.save(calendario);
+	}
+	
+	public void removeCalendarioRaccolta(String ownerId, String objectId, boolean draft) throws EntityNotFoundException {
+		MongoTemplate template = draft ? draftTemplate : finalTemplate;
+		Query query = new Query(new Criteria("ownerId").is(ownerId).and("objectId").is(objectId));
+		CalendarioRaccolta calendario = template.findOne(query, CalendarioRaccolta.class);
+		if(calendario == null) {
+			throw new EntityNotFoundException(String.format("CalendarioRaccolta with id %s not found", objectId));
+		}
+		template.findAndRemove(query, CalendarioRaccolta.class);
+	}
+	
+	public void removeCalendarioRaccolta(CalendarioRaccolta calendario, boolean draft) throws EntityNotFoundException {
+		MongoTemplate template = draft ? draftTemplate : finalTemplate;
+		Query query = new Query(new Criteria("ownerId").is(calendario.getOwnerId()).and("area")
+				.is(calendario.getArea()).and("tipologiaPuntoRaccolta").is(calendario.getTipologiaPuntoRaccolta())
+				.and("tipologiaUtenza").is(calendario.getTipologiaUtenza()));
+		CalendarioRaccolta raccoltaDB = template.findOne(query, CalendarioRaccolta.class);
+		if (raccoltaDB == null) {
+			throw new EntityNotFoundException(String.format("CalendarioRaccolta %s not found", calendario));
+		}
+		template.findAndRemove(query, CalendarioRaccolta.class);
+	}
+	
+	public void updateCalendarioRaccoltaAddOrario(String ownerId, String objectId, OrarioApertura orario, 
+			boolean draft) throws EntityNotFoundException {
+		MongoTemplate template = draft ? draftTemplate : finalTemplate;
+		Query query = new Query(new Criteria("ownerId").is(ownerId).and("objectId").is(objectId));
+		CalendarioRaccolta calendarioDB = template.findOne(query, CalendarioRaccolta.class);
+		if (calendarioDB == null) {
+			throw new EntityNotFoundException(String.format("CalendarioRaccolta with id %s not found", objectId));
+		}
+		List<OrarioApertura> orarioApertura = calendarioDB.getOrarioApertura();
+		orarioApertura.add(orario);
+		Update update = new Update();
+		update.set("lastUpdate", new Date());
+		update.set("orarioApertura", orarioApertura);
+		template.updateFirst(query, update, CalendarioRaccolta.class);
 	}
 
+	public void updateCalendarioRaccoltaRemoveOrario(String ownerId, String objectId, int position, 
+			boolean draft) throws EntityNotFoundException {
+		MongoTemplate template = draft ? draftTemplate : finalTemplate;
+		Query query = new Query(new Criteria("ownerId").is(ownerId).and("objectId").is(objectId));
+		CalendarioRaccolta calendarioDB = template.findOne(query, CalendarioRaccolta.class);
+		if (calendarioDB == null) {
+			throw new EntityNotFoundException(String.format("CRM with id %s not found", objectId));
+		}
+		List<OrarioApertura> orarioApertura = calendarioDB.getOrarioApertura();
+		orarioApertura.remove(position);
+		Update update = new Update();
+		update.set("lastUpdate", new Date());
+		update.set("orarioApertura", orarioApertura);
+		template.updateFirst(query, update, CalendarioRaccolta.class);
+	}
+	
 }

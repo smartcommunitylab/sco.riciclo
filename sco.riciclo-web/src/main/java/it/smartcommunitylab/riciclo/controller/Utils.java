@@ -16,6 +16,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.data.mongodb.core.query.Criteria;
 
 public class Utils {
@@ -52,6 +54,15 @@ public class Utils {
 		//output:"45.893170,11.036281"
 		//input:[11.036281,45.893170]
 		return String.valueOf(geocoding[1]) + "," + String.valueOf(geocoding[0]);
+	}
+	
+	public static boolean getDraft(HttpServletRequest request) {
+		String draftString = request.getParameter("draft");
+		boolean draft = false;
+		if(!Utils.isNull(draftString)) {
+			draft = Boolean.valueOf(draftString);
+		}
+		return draft;
 	}
 	
 	public static List<Area> findAreaByComune(String comune, String ownerId, boolean draft, RepositoryManager storage)

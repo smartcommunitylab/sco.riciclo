@@ -120,13 +120,9 @@ public class AppDataRifiutiController {
 	
 	@RequestMapping(method = RequestMethod.GET, value = "/rifiuti/{ownerId}")
 	public AppDataRifiutiUI getDataByComuni(@PathVariable String ownerId, HttpServletRequest request) {
-		List<String> comuni = Lists.newArrayList(); 
 		String lang = request.getParameter("lang");
-		String draftString = request.getParameter("draft");
-		boolean draft = false;
-		if(!Utils.isNull(draftString)) {
-			draft = Boolean.valueOf(draftString);
-		}
+		boolean draft = Utils.getDraft(request);
+		List<String> comuni = Lists.newArrayList(); 
 		String[] comuniArray = request.getParameterValues("comune[]");
 		if(comuniArray!= null) {
 			comuni = Arrays.asList(comuniArray);
@@ -141,13 +137,9 @@ public class AppDataRifiutiController {
 	@RequestMapping(method = RequestMethod.GET, value = "/zip/{ownerId}")
 	public void zip(@PathVariable String ownerId, HttpServletRequest request, 
 			HttpServletResponse response) throws Exception {
-		List<String> comuni = Lists.newArrayList(); 
 		String lang = request.getParameter("lang");
-		String draftString = request.getParameter("draft");
-		boolean draft = false;
-		if(!Utils.isNull(draftString)) {
-			draft = Boolean.valueOf(draftString);
-		}
+		boolean draft = Utils.getDraft(request);
+		List<String> comuni = Lists.newArrayList(); 
 		String[] comuniArray = request.getParameterValues("comune[]");
 		if(comuniArray!= null) {
 			comuni = Arrays.asList(comuniArray);
