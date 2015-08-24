@@ -1,6 +1,6 @@
 // TRENTO
 APP_ID = "TRENTO";
-DATA_VERSION = 5;
+DATA_VERSION = 7;
 API_KEY = "AIzaSyBmKVWmFzh2JHT7q1MLmQRQ7jC4AhkRBDs";
 //SEGNALA_EMAIL = "segnalazioni.rifiuti@comunitadellegiudicarie.it";
 VERSION = "1.0.1alpha";
