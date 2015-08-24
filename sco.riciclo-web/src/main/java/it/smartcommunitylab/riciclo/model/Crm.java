@@ -1,5 +1,6 @@
 package it.smartcommunitylab.riciclo.model;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -14,7 +15,7 @@ public class Crm extends BaseObject {
 	private double[] geocoding;
 	private Map<String, String> note = new HashMap<String, String>();
 	private Map<String, Boolean> caratteristiche = new HashMap<String, Boolean>();
-	private List<OrarioApertura> orarioApertura;
+	private List<OrarioApertura> orarioApertura = new ArrayList<OrarioApertura>();
 	
 	public String getObjectId() {
 		return objectId;
