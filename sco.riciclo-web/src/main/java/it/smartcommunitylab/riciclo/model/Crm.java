@@ -7,7 +7,7 @@ import java.util.Map;
 
 public class Crm extends BaseObject {
 	private String objectId;
-	private String tipologiaPuntiRaccolta;
+	private String tipologiaPuntoRaccolta;
 	private Map<String, String> nome = new HashMap<String, String>();
 	private Map<String, String> indirizzo = new HashMap<String, String>();
 	private String zona;
@@ -59,11 +59,11 @@ public class Crm extends BaseObject {
 	public void setOrarioApertura(List<OrarioApertura> orarioApertura) {
 		this.orarioApertura = orarioApertura;
 	}
-	public String getTipologiaPuntiRaccolta() {
-		return tipologiaPuntiRaccolta;
+	public String getTipologiaPuntoRaccolta() {
+		return tipologiaPuntoRaccolta;
 	}
-	public void setTipologiaPuntiRaccolta(String tipologiaPuntiRaccolta) {
-		this.tipologiaPuntiRaccolta = tipologiaPuntiRaccolta;
+	public void setTipologiaPuntoRaccolta(String tipologiaPuntoRaccolta) {
+		this.tipologiaPuntoRaccolta = tipologiaPuntoRaccolta;
 	}
 	public String getZona() {
 		return zona;

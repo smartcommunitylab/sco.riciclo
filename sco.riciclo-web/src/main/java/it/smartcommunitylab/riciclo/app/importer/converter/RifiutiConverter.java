@@ -259,6 +259,7 @@ public class RifiutiConverter {
 			rifiuto.setOwnerId(ownerId);
 			rifiuto.setObjectId(rc.getNome());
 			rifiuto.getNome().put(defaultLang, rc.getNome());
+			rifiutoDescList.add(rifiuto);
 			
 			String[] split = StringUtils.split(rc.getTipologiaUtenza().trim().toLowerCase(),";");
 			for(String tipologiaUtenza : split) {
