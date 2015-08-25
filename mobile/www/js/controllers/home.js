@@ -274,6 +274,7 @@ angular.module('rifiuti.controllers.home', [])
         $scope.daySubList = Calendar.toWeek($scope.dayList, $scope.showDate, $scope.daySubListRunningEnd);
 
         $timeout(function () {
+            $ionicScrollDelegate.scrollTop();
             $location.hash('id' + i.date.getTime());
             //window._globalscrollid = 'id' + i.date.getTime();
             $ionicScrollDelegate.anchorScroll(true);
