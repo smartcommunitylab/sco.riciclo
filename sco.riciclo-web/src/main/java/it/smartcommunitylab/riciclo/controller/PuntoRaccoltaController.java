@@ -31,6 +31,7 @@ import java.util.Map;
 import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -57,8 +58,12 @@ public class PuntoRaccoltaController {
 	
 	@RequestMapping(value="/puntoraccolta/{ownerId}", method=RequestMethod.GET)
 	public @ResponseBody List<PuntoRaccolta> getPuntiRaccolta(@PathVariable String ownerId, 
-			HttpServletRequest request) throws ClassNotFoundException {
+			HttpServletRequest request, HttpServletResponse response) throws ClassNotFoundException {
 		boolean draft = Utils.getDraft(request);
+		if(!Utils.validateAPIRequest(request, appSetup, draft, storage)) {
+			response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+			return null;
+		}
 		List<String> comuni = Lists.newArrayList(); 
 		String[] comuniArray = request.getParameterValues("comune[]");
 		if(comuniArray!= null) {
@@ -89,8 +94,12 @@ public class PuntoRaccoltaController {
 	
 	@RequestMapping(value="/puntoraccolta/{ownerId}", method=RequestMethod.POST) 
 	public @ResponseBody PuntoRaccolta addRaccolta(@RequestBody PuntoRaccolta raccolta, 
-			@PathVariable String ownerId,	HttpServletRequest request) {
+			@PathVariable String ownerId,	HttpServletRequest request, HttpServletResponse response) {
 		boolean draft = Utils.getDraft(request);
+		if(!Utils.validateAPIRequest(request, appSetup, draft, storage)) {
+			response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+			return null;
+		}
 		raccolta.setObjectId(UUID.randomUUID().toString());
 		raccolta.setOwnerId(ownerId);
 		storage.addPuntoRaccolta(raccolta, draft);
@@ -98,16 +107,26 @@ public class PuntoRaccoltaController {
 	}
 	
 	@RequestMapping(value="/puntoraccolta/{ownerId}/{objectId}", method=RequestMethod.DELETE)
-	public @ResponseBody void deletePuntoRaccoltaById(@PathVariable String ownerId, @PathVariable String objectId, 
-			HttpServletRequest request) throws EntityNotFoundException {
+	public @ResponseBody void deletePuntoRaccoltaById(@PathVariable String ownerId, 
+			@PathVariable String objectId, HttpServletRequest request,
+			HttpServletResponse response) throws EntityNotFoundException {
 		boolean draft = Utils.getDraft(request);
+		if(!Utils.validateAPIRequest(request, appSetup, draft, storage)) {
+			response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+			return;
+		}
 		storage.removePuntoRaccolta(ownerId, objectId, draft);
 	}
 	
 	@RequestMapping(value="/puntoraccolta/{ownerId}", method=RequestMethod.DELETE)
-	public @ResponseBody void deletePuntoRaccolta(@RequestBody PuntoRaccolta raccolta, @PathVariable String ownerId,
-			HttpServletRequest request) throws EntityNotFoundException {
+	public @ResponseBody void deletePuntoRaccolta(@RequestBody PuntoRaccolta raccolta, 
+			@PathVariable String ownerId,	HttpServletRequest request,
+			HttpServletResponse response) throws EntityNotFoundException {
 		boolean draft = Utils.getDraft(request);
+		if(!Utils.validateAPIRequest(request, appSetup, draft, storage)) {
+			response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+			return;
+		}
 		raccolta.setOwnerId(ownerId);
 		storage.removePuntoRaccolta(raccolta, draft);
 	}

@@ -34,6 +34,7 @@ import it.smartcommunitylab.riciclo.model.Rifiuto;
 import it.smartcommunitylab.riciclo.model.Segnalazione;
 import it.smartcommunitylab.riciclo.model.TipologiaProfilo;
 import it.smartcommunitylab.riciclo.model.TipologiaPuntoRaccolta;
+import it.smartcommunitylab.riciclo.security.Token;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -202,9 +203,10 @@ public class RepositoryManager {
 			template.save(appInfo);
 		} else {
 			Update update = new Update();
-			update.set("passowrd", appInfo.getPassword());
+			update.set("password", appInfo.getPassword());
 			update.set("modelElements", appInfo.getModelElements());
 			update.set("comuni", appInfo.getComuni());
+			update.set("token", appInfo.getToken());
 			template.updateFirst(query, update, DataSetInfo.class);
 		}
 	}
@@ -619,4 +621,10 @@ public class RepositoryManager {
 		template.updateFirst(query, update, CalendarioRaccolta.class);
 	}
 	
+	public Token findTokenByToken(String token, boolean draft) {
+		MongoTemplate template = draft ? draftTemplate : finalTemplate;
+		Query query = new Query(new Criteria("token").is(token));
+		Token result = template.findOne(query, Token.class);
+		return result;
+	}	
 }

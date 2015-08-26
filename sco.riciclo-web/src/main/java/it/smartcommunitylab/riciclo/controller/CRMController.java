@@ -26,6 +26,7 @@ import java.util.List;
 import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -47,17 +48,25 @@ public class CRMController {
 	
 	@SuppressWarnings("unchecked")
 	@RequestMapping(value="/crm/{ownerId}", method=RequestMethod.GET) 
-	public @ResponseBody List<Crm> getCRM(@PathVariable String ownerId, HttpServletRequest request) 
-			throws ClassNotFoundException {
+	public @ResponseBody List<Crm> getCRM(@PathVariable String ownerId, HttpServletRequest request,
+			HttpServletResponse response) throws ClassNotFoundException {
 		boolean draft = Utils.getDraft(request);
+		if(!Utils.validateAPIRequest(request, appSetup, draft, storage)) {
+			response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+			return null;
+		}
 		List<Crm> result = (List<Crm>) storage.findData(Crm.class, null, ownerId, draft);
 		return result;
 	}
 	
 	@RequestMapping(value="/crm/{ownerId}", method=RequestMethod.POST) 
 	public @ResponseBody Crm addCRM(@RequestBody Crm crm, @PathVariable String ownerId, 
-			HttpServletRequest request) {
+			HttpServletRequest request, HttpServletResponse response) {
 		boolean draft = Utils.getDraft(request);
+		if(!Utils.validateAPIRequest(request, appSetup, draft, storage)) {
+			response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+			return null;
+		}
 		crm.setObjectId(UUID.randomUUID().toString());
 		crm.setOwnerId(ownerId);
 		storage.addCRM(crm, draft);
@@ -65,9 +74,14 @@ public class CRMController {
 	}
 	
 	@RequestMapping(value="/crm/{ownerId}/{objectId}", method=RequestMethod.PUT)
-	public @ResponseBody void updateCRM(@RequestBody Crm crm, @PathVariable String ownerId, 
-			@PathVariable String objectId, HttpServletRequest request) throws EntityNotFoundException {
+	public @ResponseBody void updateCRM(@RequestBody Crm crm, @PathVariable String ownerId,
+			@PathVariable String objectId, HttpServletRequest request, 
+			HttpServletResponse response)	throws EntityNotFoundException {
 		boolean draft = Utils.getDraft(request);
+		if(!Utils.validateAPIRequest(request, appSetup, draft, storage)) {
+			response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+			return;
+		}
 		crm.setObjectId(objectId);
 		crm.setOwnerId(ownerId);
 		storage.updateCRM(crm, draft);
@@ -75,22 +89,36 @@ public class CRMController {
 	
 	@RequestMapping(value="/crm/{ownerId}/{objectId}", method=RequestMethod.DELETE)
 	public @ResponseBody void deleteCRM(@PathVariable String ownerId,	@PathVariable String objectId, 
-			HttpServletRequest request) throws EntityNotFoundException {
+			HttpServletRequest request, HttpServletResponse response) throws EntityNotFoundException {
 		boolean draft = Utils.getDraft(request);
+		if(!Utils.validateAPIRequest(request, appSetup, draft, storage)) {
+			response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+			return;
+		}
 		storage.removeCRM(ownerId, objectId, draft);
 	}
 	
 	@RequestMapping(value="/crm/{ownerId}/{objectId}/orario", method=RequestMethod.POST)
 	public @ResponseBody void addOrarioApertura(@RequestBody OrarioApertura orario, @PathVariable String ownerId, 
-			@PathVariable String objectId, HttpServletRequest request) throws ClassNotFoundException, EntityNotFoundException {
+			@PathVariable String objectId, HttpServletRequest request, 
+			HttpServletResponse response) throws ClassNotFoundException, EntityNotFoundException {
 		boolean draft = Utils.getDraft(request);
+		if(!Utils.validateAPIRequest(request, appSetup, draft, storage)) {
+			response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+			return;
+		}
 		storage.updateCRMAddOrario(ownerId, objectId, orario, draft);
 	}
 
 	@RequestMapping(value="/crm/{ownerId}/{objectId}/orario/{position}", method=RequestMethod.DELETE)
 	public @ResponseBody void deleteOrarioApertura(@PathVariable String ownerId, @PathVariable String objectId, 
-			@PathVariable int position, HttpServletRequest request) throws ClassNotFoundException, EntityNotFoundException {
+			@PathVariable int position, HttpServletRequest request,
+			HttpServletResponse response) throws ClassNotFoundException, EntityNotFoundException {
 		boolean draft = Utils.getDraft(request);
+		if(!Utils.validateAPIRequest(request, appSetup, draft, storage)) {
+			response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+			return;
+		}
 		storage.updateCRMRemoveOrario(ownerId, objectId, position, draft);
 	}
 

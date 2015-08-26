@@ -8,6 +8,7 @@ public class DataSetInfo implements Serializable {
 
 	private String ownerId;
 	private String password;
+	private String token;
 	private List<String> modelElements;
 	private List<String> comuni; //codice ISTAT dei comuni
 
@@ -46,6 +47,14 @@ public class DataSetInfo implements Serializable {
 
 	public void setModelElements(List<String> modelElements) {
 		this.modelElements = modelElements;
+	}
+
+	public String getToken() {
+		return token;
+	}
+
+	public void setToken(String token) {
+		this.token = token;
 	}
 
 }

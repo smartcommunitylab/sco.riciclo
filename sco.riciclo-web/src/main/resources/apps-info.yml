@@ -1,6 +1,7 @@
 apps:
   - ownerId: GIUDICARIE
     password: GIUDICARIE
+    token: a1jgUpPlWjDS4XvS
     modelElements:
     - modello
     - isole
@@ -11,13 +12,15 @@ apps:
     - 022182
     - 022183
   - ownerId: TRENTO
-    password: TRENTO      
+    password: TRENTO 
+    token: p9UsNTji7TVScy3G     
     modelElements:
     - modello
     comuni:
     - 022205
   - ownerId: ROVERETO
-    password: ROVERETO      
+    password: ROVERETO
+    token: bIjHHWrWQBJK1PIK       
     modelElements:
     - modello
     comuni:

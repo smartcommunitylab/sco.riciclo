@@ -32,6 +32,7 @@ import java.util.Map;
 import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -58,8 +59,12 @@ public class CalendarioRaccoltaController {
 	
 	@RequestMapping(value="/calraccolta/{ownerId}", method=RequestMethod.GET)
 	public @ResponseBody List<CalendarioRaccolta> getPuntiRaccolta(@PathVariable String ownerId, 
-			HttpServletRequest request) throws ClassNotFoundException {
+			HttpServletRequest request, HttpServletResponse response) throws ClassNotFoundException {
 		boolean draft = Utils.getDraft(request);
+		if(!Utils.validateAPIRequest(request, appSetup, draft, storage)) {
+			response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+			return null;
+		}
 		List<String> comuni = Lists.newArrayList(); 
 		String[] comuniArray = request.getParameterValues("comune[]");
 		if(comuniArray!= null) {
@@ -90,8 +95,12 @@ public class CalendarioRaccoltaController {
 	
 	@RequestMapping(value="/calraccolta/{ownerId}", method=RequestMethod.POST) 
 	public @ResponseBody CalendarioRaccolta addCalendario(@RequestBody CalendarioRaccolta calendario, 
-			@PathVariable String ownerId, HttpServletRequest request) {
+			@PathVariable String ownerId, HttpServletRequest request, HttpServletResponse response) {
 		boolean draft = Utils.getDraft(request);
+		if(!Utils.validateAPIRequest(request, appSetup, draft, storage)) {
+			response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+			return null;
+		}
 		calendario.setObjectId(UUID.randomUUID().toString());
 		calendario.setOwnerId(ownerId);
 		storage.addCalendarioRaccolta(calendario, draft);
@@ -99,31 +108,51 @@ public class CalendarioRaccoltaController {
 	}
 	
 	@RequestMapping(value="/calraccolta/{ownerId}/{objectId}", method=RequestMethod.DELETE)
-	public @ResponseBody void deleteCalendarioRaccoltaById(@PathVariable String ownerId, @PathVariable String objectId, 
-			HttpServletRequest request) throws EntityNotFoundException {
+	public @ResponseBody void deleteCalendarioRaccoltaById(@PathVariable String ownerId, 
+			@PathVariable String objectId, HttpServletRequest request, 
+			HttpServletResponse response) throws EntityNotFoundException {
 		boolean draft = Utils.getDraft(request);
+		if(!Utils.validateAPIRequest(request, appSetup, draft, storage)) {
+			response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+			return;
+		}
 		storage.removeCalendarioRaccolta(ownerId, objectId, draft);
 	}
 	
 	@RequestMapping(value="/calraccolta/{ownerId}", method=RequestMethod.DELETE)
-	public @ResponseBody void deleteCalendarioRaccolta(@RequestBody CalendarioRaccolta calendario, @PathVariable String ownerId,
-			HttpServletRequest request) throws EntityNotFoundException {
+	public @ResponseBody void deleteCalendarioRaccolta(@RequestBody CalendarioRaccolta calendario, 
+			@PathVariable String ownerId, HttpServletRequest request, 
+			HttpServletResponse response) throws EntityNotFoundException {
 		boolean draft = Utils.getDraft(request);
 		calendario.setOwnerId(ownerId);
+		if(!Utils.validateAPIRequest(request, appSetup, draft, storage)) {
+			response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+			return;
+		}
 		storage.removeCalendarioRaccolta(calendario, draft);
 	}
 	
 	@RequestMapping(value="/calraccolta/{ownerId}/{objectId}/orario", method=RequestMethod.POST)
-	public @ResponseBody void addOrarioApertura(@RequestBody OrarioApertura orario, @PathVariable String ownerId, 
-			@PathVariable String objectId, HttpServletRequest request) throws ClassNotFoundException, EntityNotFoundException {
+	public @ResponseBody void addOrarioApertura(@RequestBody OrarioApertura orario, 
+			@PathVariable String ownerId,	@PathVariable String objectId, HttpServletRequest request,
+			HttpServletResponse response) throws ClassNotFoundException, EntityNotFoundException {
 		boolean draft = Utils.getDraft(request);
+		if(!Utils.validateAPIRequest(request, appSetup, draft, storage)) {
+			response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+			return;
+		}
 		storage.updateCalendarioRaccoltaAddOrario(ownerId, objectId, orario, draft);
 	}
 
 	@RequestMapping(value="/calraccolta/{ownerId}/{objectId}/orario/{position}", method=RequestMethod.DELETE)
-	public @ResponseBody void deleteOrarioApertura(@PathVariable String ownerId, @PathVariable String objectId, 
-			@PathVariable int position, HttpServletRequest request) throws ClassNotFoundException, EntityNotFoundException {
+	public @ResponseBody void deleteOrarioApertura(@PathVariable String ownerId, 
+			@PathVariable String objectId, @PathVariable int position, HttpServletRequest request,
+			HttpServletResponse response) throws ClassNotFoundException, EntityNotFoundException {
 		boolean draft = Utils.getDraft(request);
+		if(!Utils.validateAPIRequest(request, appSetup, draft, storage)) {
+			response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+			return;
+		}
 		storage.updateCalendarioRaccoltaRemoveOrario(ownerId, objectId, position, draft);
 	}
 }

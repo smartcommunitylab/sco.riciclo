@@ -31,6 +31,7 @@ import java.util.Map;
 import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -57,8 +58,12 @@ public class RiciclabolarioController {
 	
 	@RequestMapping(value="/riciclabolario/{ownerId}", method=RequestMethod.GET)
 	public @ResponseBody List<Riciclabolario> getRiciclabolario(@PathVariable String ownerId, 
-			HttpServletRequest request) throws ClassNotFoundException {
+			HttpServletRequest request, HttpServletResponse response) throws ClassNotFoundException {
 		boolean draft = Utils.getDraft(request);
+		if(!Utils.validateAPIRequest(request, appSetup, draft, storage)) {
+			response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+			return null;
+		}
 		List<String> comuni = Lists.newArrayList(); 
 		String[] comuniArray = request.getParameterValues("comune[]");
 		if(comuniArray!= null) {
@@ -90,13 +95,17 @@ public class RiciclabolarioController {
 	@SuppressWarnings("unchecked")
 	@RequestMapping(value="/riciclabolario/{ownerId}", method=RequestMethod.POST) 
 	public @ResponseBody List<Riciclabolario> addRiciclabolario(@RequestBody Map<String, Object> data, 
-			@PathVariable String ownerId,	HttpServletRequest request) {
+			@PathVariable String ownerId,	HttpServletRequest request, HttpServletResponse response) {
 		boolean draft = Utils.getDraft(request);
+		if(!Utils.validateAPIRequest(request, appSetup, draft, storage)) {
+			response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+			return null;
+		}
 		String area = (String) data.get("area");
 		String tipologiaRifiuto = (String) data.get("tipologiaRifiuto");
 		String rifiuto = (String) data.get("rifiuto");
 		List<String> tipologiaUtenzaList = (List<String>) data.get("tipologiaUtenza");
-		List<Riciclabolario> response = new ArrayList<Riciclabolario>();
+		List<Riciclabolario> result = new ArrayList<Riciclabolario>();
 		for(String tipologiaUtenza : tipologiaUtenzaList) {
 			Riciclabolario riciclabolario = new Riciclabolario();
 			riciclabolario.setObjectId(UUID.randomUUID().toString());
@@ -106,22 +115,32 @@ public class RiciclabolarioController {
 			riciclabolario.setTipologiaRifiuto(tipologiaRifiuto);
 			riciclabolario.setTipologiaUtenza(tipologiaUtenza);
 			storage.addRiciclabolario(riciclabolario, draft);
-			response.add(riciclabolario);
+			result.add(riciclabolario);
 		}
-		return response;
+		return result;
 	}
 	
 	@RequestMapping(value="/riciclabolario/{ownerId}/{objectId}", method=RequestMethod.DELETE)
 	public @ResponseBody void deleteRiciclabolarioById(@PathVariable String ownerId, 
-			@PathVariable String objectId, HttpServletRequest request) throws EntityNotFoundException {
+			@PathVariable String objectId, HttpServletRequest request,
+			HttpServletResponse response) throws EntityNotFoundException {
 		boolean draft = Utils.getDraft(request);
+		if(!Utils.validateAPIRequest(request, appSetup, draft, storage)) {
+			response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+			return;
+		}
 		storage.removeRiciclabolario(ownerId, objectId, draft);
 	}
 	
 	@RequestMapping(value="/riciclabolario/{ownerId}", method=RequestMethod.DELETE)
 	public @ResponseBody void deleteRiciclabolario(@RequestBody Riciclabolario riciclabolario, 
-			@PathVariable String ownerId, HttpServletRequest request) throws EntityNotFoundException {
+			@PathVariable String ownerId, HttpServletRequest request,
+			HttpServletResponse response) throws EntityNotFoundException {
 		boolean draft = Utils.getDraft(request);
+		if(!Utils.validateAPIRequest(request, appSetup, draft, storage)) {
+			response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+			return;
+		}
 		riciclabolario.setOwnerId(ownerId);
 		storage.removeRiciclabolario(riciclabolario, draft);
 	}

@@ -31,6 +31,7 @@ import java.util.Map;
 import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -57,8 +58,12 @@ public class RaccoltaController {
 	
 	@RequestMapping(value="/raccolta/{ownerId}", method=RequestMethod.GET)
 	public @ResponseBody List<Raccolta> getRaccolte(@PathVariable String ownerId, 
-			HttpServletRequest request) throws ClassNotFoundException {
+			HttpServletRequest request, HttpServletResponse response) throws ClassNotFoundException {
 		boolean draft = Utils.getDraft(request);
+		if(!Utils.validateAPIRequest(request, appSetup, draft, storage)) {
+			response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+			return null;
+		}
 		List<String> comuni = Lists.newArrayList(); 
 		String[] comuniArray = request.getParameterValues("comune[]");
 		if(comuniArray!= null) {
@@ -88,9 +93,13 @@ public class RaccoltaController {
 	}
 	
 	@RequestMapping(value="/raccolta/{ownerId}", method=RequestMethod.POST) 
-	public @ResponseBody Raccolta addRaccolta(@RequestBody Raccolta raccolta, 
-			@PathVariable String ownerId,	HttpServletRequest request) {
+	public @ResponseBody Raccolta addRaccolta(@RequestBody Raccolta raccolta,	@PathVariable String ownerId,	
+			HttpServletRequest request, HttpServletResponse response) {
 		boolean draft = Utils.getDraft(request);
+		if(!Utils.validateAPIRequest(request, appSetup, draft, storage)) {
+			response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+			return null;
+		}
 		raccolta.setObjectId(UUID.randomUUID().toString());
 		raccolta.setOwnerId(ownerId);
 		storage.addRaccolta(raccolta, draft);
@@ -99,8 +108,12 @@ public class RaccoltaController {
 	
 	@RequestMapping(value="/raccolta/{ownerId}/{objectId}", method=RequestMethod.DELETE)
 	public @ResponseBody void deleteRaccoltaById(@PathVariable String ownerId, @PathVariable String objectId, 
-			HttpServletRequest request) throws EntityNotFoundException {
+			HttpServletRequest request, HttpServletResponse response) throws EntityNotFoundException {
 		boolean draft = Utils.getDraft(request);
+		if(!Utils.validateAPIRequest(request, appSetup, draft, storage)) {
+			response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+			return;
+		}
 		storage.removeRaccolta(ownerId, objectId, draft);
 	}
 	

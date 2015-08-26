@@ -25,6 +25,7 @@ import java.util.List;
 import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -47,17 +48,25 @@ public class RifiutoController {
 	@SuppressWarnings("unchecked")
 	@RequestMapping(value="/rifiuto/{ownerId}", method=RequestMethod.GET)
 	public @ResponseBody List<Rifiuto> getRifiuti(@PathVariable String ownerId, 
-			HttpServletRequest request) 
+			HttpServletRequest request, HttpServletResponse response) 
 			throws ClassNotFoundException {
 		boolean draft = Utils.getDraft(request);
+		if(!Utils.validateAPIRequest(request, appSetup, draft, storage)) {
+			response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+			return null;
+		}
 		List<Rifiuto> result = (List<Rifiuto>) storage.findData(Rifiuto.class, null, ownerId, draft);
 		return result;
 	}
 	
 	@RequestMapping(value="/rifiuto/{ownerId}", method=RequestMethod.POST) 
 	public @ResponseBody Rifiuto addRifiuto(@RequestBody Rifiuto rifiuto, @PathVariable String ownerId, 
-			HttpServletRequest request) {
+			HttpServletRequest request, HttpServletResponse response) {
 		boolean draft = Utils.getDraft(request);
+		if(!Utils.validateAPIRequest(request, appSetup, draft, storage)) {
+			response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+			return null;
+		}
 		rifiuto.setObjectId(UUID.randomUUID().toString());
 		rifiuto.setOwnerId(ownerId);
 		storage.addRifiuto(rifiuto, draft);
@@ -66,8 +75,13 @@ public class RifiutoController {
 	
 	@RequestMapping(value="/rifiuto/{ownerId}/{objectId}", method=RequestMethod.PUT)
 	public @ResponseBody void updateRifiuto(@RequestBody Rifiuto rifiuto, @PathVariable String ownerId, 
-			@PathVariable String objectId, HttpServletRequest request) throws EntityNotFoundException {
+			@PathVariable String objectId, HttpServletRequest request,
+			HttpServletResponse response) throws EntityNotFoundException {
 		boolean draft = Utils.getDraft(request);
+		if(!Utils.validateAPIRequest(request, appSetup, draft, storage)) {
+			response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+			return;
+		}
 		rifiuto.setObjectId(objectId);
 		rifiuto.setOwnerId(ownerId);
 		storage.updateRifiuto(rifiuto, draft);
@@ -75,8 +89,12 @@ public class RifiutoController {
 	
 	@RequestMapping(value="/rifiuto/{ownerId}/{objectId}", method=RequestMethod.DELETE)
 	public @ResponseBody void deleteRifiuto(@PathVariable String ownerId, @PathVariable String objectId, 
-			HttpServletRequest request) throws EntityNotFoundException {
+			HttpServletRequest request, HttpServletResponse response) throws EntityNotFoundException {
 		boolean draft = Utils.getDraft(request);
+		if(!Utils.validateAPIRequest(request, appSetup, draft, storage)) {
+			response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+			return;
+		}
 		storage.removeRifiuto(ownerId, objectId, draft);
 	}
 	

@@ -9,6 +9,9 @@ import it.smartcommunitylab.riciclo.model.PuntoRaccolta;
 import it.smartcommunitylab.riciclo.model.Raccolta;
 import it.smartcommunitylab.riciclo.model.Riciclabolario;
 import it.smartcommunitylab.riciclo.model.Segnalazione;
+import it.smartcommunitylab.riciclo.security.Token;
+import it.smartcommunitylab.riciclo.storage.AppSetup;
+import it.smartcommunitylab.riciclo.storage.DataSetInfo;
 import it.smartcommunitylab.riciclo.storage.RepositoryManager;
 
 import java.util.ArrayList;
@@ -16,6 +19,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.ServletRequest;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.data.mongodb.core.query.Criteria;
@@ -237,6 +241,46 @@ public class Utils {
 			}
 		}
 		return resultMapCrm;
+	}
+	
+	public static boolean validateAPIRequest(ServletRequest req, AppSetup appSetup,
+			boolean draft, RepositoryManager storage) {
+		boolean result = false;
+		HttpServletRequest request = (HttpServletRequest) req;
+		String uriPath = request.getRequestURI();
+		if (uriPath != null && !uriPath.isEmpty()) {
+			String tokenArrived = request.getHeader("X-ACCESS-TOKEN");
+			if (tokenArrived != null && !tokenArrived.isEmpty()) {
+				Token matchedToken = storage.findTokenByToken(tokenArrived, draft);
+				if (matchedToken != null) {
+					if (matchedToken.getExpiration() > 0) {
+						//token exired
+						if(matchedToken.getExpiration() < System.currentTimeMillis()) {
+							return false;
+						}
+					}
+					String ownerId = matchedToken.getName();
+					DataSetInfo app = appSetup.findAppById(ownerId);
+					//app config not found
+					if(app == null) {
+						return false;
+					}
+					//wrong API path
+					if(!uriPath.contains(ownerId)) {
+						return false;
+					}
+					// delegate resources to controller via request attribute map.
+					if (matchedToken.getResources() != null	&& !matchedToken.getResources().isEmpty()) {
+						req.setAttribute("resources",	matchedToken.getResources());
+					}
+					// check ( resources *)
+					if (matchedToken.getPaths().contains("*") || matchedToken.getPaths().contains(uriPath)) {
+						result = true;
+					}
+				}
+			}
+		}
+		return result;
 	}
 
 }
