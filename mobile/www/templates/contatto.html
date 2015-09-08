@@ -13,7 +13,7 @@
         {{contatto.descrizione}}
       </div>
     </div>
-    <a class="hidden-link" ng-click="clickLink('http://maps.google.com?daddr='+contatto.coords)" ng-if="!!contatto.indirizzo">
+    <a class="hidden-link" ng-click="clickLink('http://maps.google.com?daddr='+contatto.localizzazione)" ng-if="!!contatto.indirizzo">
       <div class="row">
         <button class="col icon button-balanced button-clear">
             <i class="riciclo-location icon-large"></i>
