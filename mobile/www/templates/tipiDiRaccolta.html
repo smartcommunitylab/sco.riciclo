@@ -24,7 +24,7 @@
                 </div>
                 <div class="row tipologiediraccolta-icons">
                     <div class="col col-10" ng-repeat="(key, item) in items">
-                        <i class="icon {{icon(item)}} icon-tipo" style="color:{{color(item)}}"></i>
+                        <i class="icon {{icon(item)}} icon-tipo" ng-style="{color: ''+color(item)+''}"></i>
                     </div>
                 </div>
             </ion-item>

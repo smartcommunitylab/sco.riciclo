@@ -44,7 +44,7 @@
                     </div>
                     <div class="row day-slots">
                         <div class="day-slot" ng-repeat="colore in day.colors">
-                            <div style="background-color:{{getColor(colore)}};"></div>
+                            <div ng-style="{'background-color': ''+getColor(colore)+''}"></div>
                         </div>
                         <div class="day-slot" ng-if="day.events.length == 0">
                             <div></div>
@@ -66,7 +66,7 @@
                         <span class="content-title">{{block.type | translate}}</span>
                         <div ng-repeat="elem in block.events" class="row content-event">
                             <div class="col-10 col-center">
-                                <i class="icon icon-large {{getIcon(elem)}}" style="color:{{getColor(elem.colore)}}"></i>
+                                <i class="icon icon-large {{getIcon(elem)}}" ng-style="{color: ''+getColor(elem.colore)+''}"></i>
                             </div>
                             <div class="col col-center event-desc">
                                 <span class="row" ng-repeat="d in elem.descr">{{d}}</span>
