@@ -1,0 +1,44 @@
+
+<nav class="navbar navbar-inverse">
+	<div class="container-fluid">
+		<div class="navbar-header">
+			<button type="button" class="navbar-toggle" data-toggle="collapse"
+				data-target="#navBar">
+				<span class="icon-bar"></span> <span class="icon-bar"></span> <span
+					class="icon-bar"></span>
+			</button>
+			<a class="navbar-brand" href="console">Riciclo Console</a>
+		</div>
+		<div class="collapse navbar-collapse" id="navBar">
+			<ul class="nav navbar-nav">
+				<li data-ng-class="{'active':selectedTab == 'menu-aree'}" 
+					data-ng-click="selectedTab = 'menu-aree'"><a href="aree">Aree</a>
+				</li>
+				<li id="menu-rifiuti" data-ng-class="{'active':selectedTab == 'menu-rifiuti'}" 
+					data-ng-click="selectedTab = 'menu-rifiuti'"><a href="rifiuti">Rifiuti</a>
+				</li>
+				<li id="menu-crm" data-ng-class="{'active':selectedTab == 'menu-crm'}" 
+					data-ng-click="selectedTab = 'menu-crm'"><a href="#">CRM</a>
+				</li>
+				<li id="menu-riciclabolario" data-ng-class="{'active':selectedTab == 'menu-riciclabolario'}" 
+					data-ng-click="selectedTab = 'menu-riciclabolario'"><a href="#">Riciclabolario</a>
+				</li>
+				<li id="menu-puntiraccolta" data-ng-class="{'active':selectedTab == 'menu-puntiraccolta'}" 
+					data-ng-click="selectedTab = 'menu-puntiraccolta'"><a href="#">Punti raccolta</a>
+				</li>
+				<li class="dropdown">
+					<a class="dropdown-toggle"
+					data-toggle="dropdown" href="#">Page 1 <span class="caret"></span></a>
+					<ul class="dropdown-menu">
+						<li><a href="#">Page 1-1</a></li>
+						<li><a href="#">Page 1-2</a></li>
+						<li><a href="#">Page 1-3</a></li>
+					</ul></li>
+			</ul>
+			<ul class="nav navbar-nav navbar-right">
+        <li><a href="#"><span class="glyphicon glyphicon-user"></span> Utente</a></li>
+        <li><a href="#"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
+     	</ul>
+		</div>
+	</div>
+</nav>

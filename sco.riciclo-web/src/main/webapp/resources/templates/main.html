@@ -4,7 +4,7 @@
 			<div class="col-md-10 col-md-offset-2 main">
 			  <div class="row">
 			     <div class="col-md-12">
-                     <h3>{{profile.appInfo.appId}}</h3>
+                     <h3>{{profile.appInfo.ownerId}}</h3>
 			         <h4>Published version: {{profile.publishState.version}}</h4>
                      <h4>Draft version: {{profile.draftState.version}}</h4>
                      <button ng-click="publishApp()" ng-show="profile.draftState.version > profile.publishState.version" type="button" class="form-group btn btn-primary">Publish</button>

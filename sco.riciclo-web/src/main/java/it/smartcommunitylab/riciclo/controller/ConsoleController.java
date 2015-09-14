@@ -65,6 +65,21 @@ public class ConsoleController {
 		return "login";
 	}		
 	
+	@RequestMapping(value = "/console")
+	public String console() {
+		return "console";
+	}		
+
+	@RequestMapping(value = "/aree")
+	public String aree() {
+		return "aree";
+	}
+	
+	@RequestMapping(value = "/rifiuti")
+	public String rifiuti() {
+		return "rifiuti";
+	}
+	
 	@RequestMapping(value = "/console/data")
 	public @ResponseBody App data() {
 		return storage.getAppDescriptor(getOwnerId());

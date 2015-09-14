@@ -121,6 +121,8 @@ public class RifiutiConfig extends WebMvcConfigurerAdapter {
 				"/resources/lib/");
 		registry.addResourceHandler("/templates/**").addResourceLocations(
 				"/resources/templates/");
+		registry.addResourceHandler("/html/**").addResourceLocations(
+				"/resources/html/");
 	}
 
 	@Bean
