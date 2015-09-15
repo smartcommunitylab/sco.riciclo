@@ -80,6 +80,11 @@ public class ConsoleController {
 		return "rifiuti";
 	}
 	
+	@RequestMapping(value = "/crm")
+	public String crm() {
+		return "crm";
+	}
+	
 	@RequestMapping(value = "/console/data")
 	public @ResponseBody App data() {
 		return storage.getAppDescriptor(getOwnerId());

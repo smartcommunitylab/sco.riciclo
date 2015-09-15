@@ -1,0 +1,17 @@
+.ui-autocomplete {
+	background-color: white;
+	width: 300px;
+	border: 1px solid lightgrey;
+	list-style-type: none;
+	padding-left: 0px;
+}
+
+.ui-menu-item.ui-state-focus {
+	background-color: lightgrey;
+}
+
+.row.list-row {
+	border-bottom: 2px solid lightgrey;
+	padding-bottom: 5px;
+	padding-top: 5px;
+}
