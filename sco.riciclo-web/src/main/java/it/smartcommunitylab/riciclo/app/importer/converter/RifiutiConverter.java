@@ -79,6 +79,7 @@ public class RifiutiConverter {
 		this.defaultLang = defaultLang;
 	}
 
+	@SuppressWarnings("unchecked")
 	public AppDataRifiuti convert(Object input, String ownerId) throws Exception {
 		it.smartcommunitylab.riciclo.app.importer.model.Rifiuti rifiuti = (it.smartcommunitylab.riciclo.app.importer.model.Rifiuti) input;
 		
@@ -341,9 +342,9 @@ public class RifiutiConverter {
 					crm = new Crm();
 					crm.setObjectId(UUID.randomUUID().toString());
 					crm.setOwnerId(appId);
-					crm.getIndirizzo().put(defaultLang, pr.getZona() + " - " + pr.getDettagliZona());
 					crm.setZona(pr.getZona());
 					crm.setDettagliZona(pr.getDettagliZona());
+					crm.setTipologiaPuntoRaccolta(tipologiaPuntoRaccolta);
 					try {
 						crm.setGeocoding(Utils.convertLocalizzazione(pr.getLocalizzazione()));
 					} catch (Exception e) {

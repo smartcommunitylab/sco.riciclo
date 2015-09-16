@@ -8,7 +8,6 @@ angular.module('crm', ['DataService']).controller('userCtrl', function($scope, $
 	$scope.draft = true;
 	
 	$scope.fId = "";
-	$scope.fName = "";
 	$scope.fAddress = "";
 	$scope.fRegion = "";
 	$scope.fRegionDetails = "";
@@ -22,8 +21,15 @@ angular.module('crm', ['DataService']).controller('userCtrl', function($scope, $
 	$scope.fGettoniera = false;
 	$scope.fLatitude = "";
 	$scope.fLongitude = "";
-	$scope.search = "";
+	$scope.fDateFrom = "";
+	$scope.fDateTo = "";
+	$scope.fHourFrom = "";
+	$scope.fHourTo = "";
+	$scope.fDateWeekDays = "";
+	$scope.fDateExceptions = "";
+	$scope.fDateNotes = "";
 	
+	$scope.search = "";
 	$scope.edit = false;
 	$scope.create = false;
 	$scope.incomplete = true;
@@ -40,8 +46,10 @@ angular.module('crm', ['DataService']).controller('userCtrl', function($scope, $
 	$scope.crmList = [
 	{objectId:1, nome:{it:"CRM1 it", en:"CRM1 en"}, indirizzo:{it:"via degli orbi1", en:"via degli orbi1"} },
 	{objectId:1, nome:{it:"CRM2 it", en:"CRM2 en"}, indirizzo:{it:"via degli orbi2", en:"via degli orbi2"} },
-	{objectId:1, nome:{it:"CRM3 it", en:"CRM3 en"}, indirizzo:{it:"via degli orbi3", en:"via degli orbi3"} },
+	{objectId:1, nome:{it:"CRM3 it", en:"CRM3 en"}, indirizzo:{it:"via degli orbi3", en:"via degli orbi3"} }
 	];
+	
+	$scope.timetableList = [];
 	
 	$scope.initData = function(profile) {
 		$scope.profile = profile;
@@ -66,8 +74,6 @@ angular.module('crm', ['DataService']).controller('userCtrl', function($scope, $
 		if($scope.edit && ($scope.fId != null)) {
 			var element = $scope.findByObjectId($scope.crmList, $scope.fId);
 			if(element != null) {
-				$scope.fName = element.nome[$scope.language];
-				$scope.fAddress = element.indirizzo[$scope.language];
 				$scope.fNote = element.note[$scope.language];
 			}
 		}
@@ -83,14 +89,13 @@ angular.module('crm', ['DataService']).controller('userCtrl', function($scope, $
 		if(element != null) {
 			$scope.incomplete = false;	
 			$scope.fId = id;
-			$scope.fName = element.nome[$scope.language];
-			$scope.fAddress = element.indirizzo[$scope.language];
 			$scope.fNote = element.note[$scope.language];
 			$scope.fRegion = element.zona;
 			$scope.fRegionDetails = element.dettagliZona;
 			$scope.fLatitude = element.geocoding[1].toString();
 			$scope.fLongitude = element.geocoding[0].toString();
 			$scope.setCaratteristiche(element);
+			$scope.timetableList = element.orarioApertura;
 			var location = new google.maps.LatLng($scope.fLatitude, $scope.fLongitude);
 			$window.marker.setPosition(location);
 			$window.map.setCenter(location);
@@ -117,8 +122,6 @@ angular.module('crm', ['DataService']).controller('userCtrl', function($scope, $
 	
 	$scope.resetForm = function() {
 		$scope.fId = "";
-		$scope.fName = "";
-		$scope.fAddress = "";
 		$scope.fNote = "";
 		$scope.fRegion = "";
 		$scope.fRegionDetails = "";
@@ -131,6 +134,7 @@ angular.module('crm', ['DataService']).controller('userCtrl', function($scope, $
 		$scope.fOrganico = false;
 		$scope.fIndumenti = false;
 		$scope.fGettoniera = false;
+		$scope.timetableList = [];
 	}
 	
 	$scope.setCaratteristiche = function(crm) {
@@ -165,8 +169,6 @@ angular.module('crm', ['DataService']).controller('userCtrl', function($scope, $
 	$scope.saveCrm = function() {
 		if($scope.create) {
 			var element = {
-				nome: {},
-				indirizzo: {},
 				note: {},
 				zona: '',
 				dettagliZona: '',
@@ -174,8 +176,6 @@ angular.module('crm', ['DataService']).controller('userCtrl', function($scope, $
 				caratteristiche: {},
 				orarioApertura: []
 			};
-			element.nome[$scope.language] = $scope.fName;
-			element.indirizzo[$scope.language] = $scope.fAddress;
 			element.note[$scope.language] = $scope.fNote;
 			element.zona = $scope.fRegion;
 			element.dettagliZona = $scope.fRegionDetails;
@@ -207,8 +207,6 @@ angular.module('crm', ['DataService']).controller('userCtrl', function($scope, $
 		if($scope.edit) {
 			var element = $scope.findByObjectId($scope.crmList, $scope.fId);
 			if(element != null) {
-				element.nome[$scope.language] = $scope.fName;
-				element.indirizzo[$scope.language] = $scope.fAddress;
 				element.note[$scope.language] = $scope.fNote;
 				element.zona = $scope.fRegion;
 				element.dettagliZona = $scope.fRegionDetails;
@@ -267,7 +265,69 @@ angular.module('crm', ['DataService']).controller('userCtrl', function($scope, $
 		}
 	}
 	
-	$scope.$watch('fName',function() {$scope.test();});
+	$scope.deleteTimetable = function(index) {
+		console.log("deleteTimetable:" + index);
+		var crm = $scope.findByObjectId($scope.crmList, $scope.fId);
+		if(crm != null) {
+			var url = "crm/" + $scope.profile.appInfo.ownerId + "/" + crm.objectId + "/orario/" + index + "?draft=" + $scope.draft;
+			$http.delete(url, {headers: {'X-ACCESS-TOKEN': $scope.profile.appInfo.token}}).then(
+			function(response) {
+				$scope.status = response.status;
+				$scope.data = response.data;
+				$scope.ok = true;
+				$scope.okMsg = "Operazione eseguita con successo";
+				$scope.timetableList.splice(index, 1);
+				console.log("deleteTimetable:" + response.status + " - " + response.data);
+			},
+			function(response) {
+				$scope.error = true;
+				$scope.errorMsg = response.status + " - " + (response.data || "Request failed");
+				$scope.status = response.status;
+			});
+		}
+	}
+	
+	$scope.addTimetable = function() {
+		console.log("addTimetable");
+		var crm = $scope.findByObjectId($scope.crmList, $scope.fId);
+		if(crm != null) {
+			var element = {
+					dataDa: '',
+					dataA: '',
+					il: '',
+					dalle: '',
+					alle: '',
+					eccezione: '',
+					note: {}
+			};
+			element.dataDa = $scope.fDateFrom;
+			element.dataA = $scope.fDateTo;
+			element.dalle = $scope.fHourFrom;
+			element.alle = $scope.fHourTo;
+			element.il = $scope.fDateWeekDays;
+			element.eccezione = $scope.fDateExceptions;
+			element.note[$scope.language] = $scope.fDateNotes;
+				
+			var url = "crm/" + $scope.profile.appInfo.ownerId + "/" + crm.objectId + "/orario?draft=" + $scope.draft;
+			$http.post(url, element, {headers: {'X-ACCESS-TOKEN': $scope.profile.appInfo.token}}).then(
+			function(response) {
+		  	$scope.status = response.status;
+		  	$scope.data = response.data;
+		  	$scope.ok = true;
+		  	$scope.okMsg = "Operazione eseguita con successo";
+		  	$scope.timetableList.push(element);
+		  	console.log("addTimetable:" + response.status + " - " + response.data);
+			},
+			function(response) {
+		  	$scope.error = true;
+		  	$scope.errorMsg = response.status + " - " + (response.data || "Request failed");
+		  	$scope.status = response.status;
+			});
+		}
+	}
+	
+	$scope.$watch('fRegion',function() {$scope.test();});
+	$scope.$watch('fRegionDetails',function() {$scope.test();});
 	
 	$scope.findByObjectId = function(array, id) {
     for (var d = 0, len = array.length; d < len; d += 1) {
@@ -288,7 +348,8 @@ angular.module('crm', ['DataService']).controller('userCtrl', function($scope, $
 	}
 	
 	$scope.test = function() {
-		if (($scope.fName == null) || ($scope.fName.length <= 3)) {
+		if (($scope.fRegion == null) || ($scope.fRegion.length <= 3) ||
+				($scope.fRegionDetails == null) || ($scope.fRegionDetails.length <= 3)) {
 	    $scope.incomplete = true;
 	  } else {
 	  	$scope.incomplete = false;

@@ -376,9 +376,6 @@ public class RepositoryManager {
 		}
 		Update update = new Update();
 		update.set("lastUpdate", new Date());
-		update.set("tipologiaPuntoRaccolta", crm.getTipologiaPuntoRaccolta());
-		update.set("nome", crm.getNome());
-		update.set("indirizzo", crm.getIndirizzo());
 		update.set("zona", crm.getZona());
 		update.set("dettagliZona", crm.getDettagliZona());
 		update.set("geocoding", crm.getGeocoding());

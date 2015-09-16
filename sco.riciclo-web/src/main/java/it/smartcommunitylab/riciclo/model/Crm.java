@@ -8,8 +8,6 @@ import java.util.Map;
 public class Crm extends BaseObject {
 	private String objectId;
 	private String tipologiaPuntoRaccolta;
-	private Map<String, String> nome = new HashMap<String, String>();
-	private Map<String, String> indirizzo = new HashMap<String, String>();
 	private String zona;
 	private String dettagliZona;
 	private double[] geocoding;
@@ -22,18 +20,6 @@ public class Crm extends BaseObject {
 	}
 	public void setObjectId(String objectId) {
 		this.objectId = objectId;
-	}
-	public Map<String, String> getNome() {
-		return nome;
-	}
-	public void setNome(Map<String, String> nome) {
-		this.nome = nome;
-	}
-	public Map<String, String> getIndirizzo() {
-		return indirizzo;
-	}
-	public void setIndirizzo(Map<String, String> indirizzo) {
-		this.indirizzo = indirizzo;
 	}
 	public double[] getGeocoding() {
 		return geocoding;

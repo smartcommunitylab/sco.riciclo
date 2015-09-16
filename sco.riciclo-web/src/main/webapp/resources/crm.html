@@ -69,16 +69,6 @@
 					<h4 data-ng-show="create">Crea:</h4>
 					<h4 data-ng-show="edit">Modifica:</h4>
 					<form role="form">
-					  <div class="form-group">
-					  	<label class="control-label">Nome ({{language}}):</label>
-				    	<input type="text" name="name" data-ng-model="fName" 
-				    	data-ng-disabled="!edit && !create" placeholder="nome">
-				   	</div>
-				   	<div class="form-group">
-				    	<label class="control-label">Indirizzo ({{language}}):</label>
-				    	<input type="text" name="indirizzo" data-ng-model="fAddress" 
-				    	data-ng-disabled="!edit && !create" placeholder="indirizzo">
-				    </div>
 				   	<div class="form-group">
 				    	<label class="control-label">Zona:</label>
 				    	<input type="text" name="zona" data-ng-model="fRegion" 
@@ -114,6 +104,10 @@
 						<button class="btn btn-default" data-ng-disabled="!edit && !create" data-ng-click="resetForm()">
 							<span class="glyphicon glyphicon-remove"></span> Cancella
 						</button>
+						<button class="btn btn-primary" data-toggle="modal" data-target="#divTimetable"
+						data-backdrop="static" data-ng-disabled="!edit">
+							<span class="glyphicon glyphicon-time"></span> Orari
+						</button>
 				  	<button class="btn btn-success" data-ng-disabled="error || incomplete"
 				  		data-ng-click="saveCrm()">
 				  		<span class="glyphicon glyphicon-save"></span> Salva
@@ -121,7 +115,84 @@
 					</form>	
 	  		</div>
 			</div>
-			
+
+			<div id="divTimetable" class="modal modal-wide fade" role="dialog">
+			  <div class="modal-dialog">
+			    <!-- Modal content-->
+			    <div class="modal-content">
+			      <div class="modal-header">
+			        <button type="button" class="close" data-dismiss="modal">&times;</button>
+			        <h4 class="modal-title">Orari</h4>
+			      </div>
+			      <div class="modal-body">
+							<div class="row" style="background-color:steelblue;">
+								<div class="col-md-1"><h4>Da</h4></div>
+								<div class="col-md-1"><h4>A</h4></div>
+								<div class="col-md-1"><h4>Dalle</h4></div>
+								<div class="col-md-1"><h4>Alle</h4></div>
+								<div class="col-md-2"><h4>Il</h4></div>
+								<div class="col-md-2"><h4>Eccezione</h4></div>
+								<div class="col-md-2"><h4>Note</h4></div>
+								<div class="col-md-2"><h4>Cancella</h4></div>
+							</div>
+			        <div class="row list-row" data-ng-repeat="timetable in timetableList">
+			        	<div class="col-md-1">
+									<span>{{timetable.dataDa}}</span>
+								</div>
+			        	<div class="col-md-1">
+									<span>{{timetable.dataA}}</span>
+								</div>
+			        	<div class="col-md-1">
+									<span>{{timetable.dalle}}</span>
+								</div>
+			        	<div class="col-md-1">
+									<span>{{timetable.alle}}</span>
+								</div>
+			        	<div class="col-md-2">
+									<span>{{timetable.il}}</span>
+								</div>
+			        	<div class="col-md-2">
+									<span>{{timetable.eccezione}}</span>
+								</div>
+			        	<div class="col-md-2">
+									<span>{{timetable.note[language]}}</span>
+								</div>
+								<div class="col-md-2">
+									<button class="btn btn-danger" data-dismiss="modal" data-ng-click="deleteTimetable($index)">
+										<span class="glyphicon glyphicon-remove"></span>  Cancella
+									</button>
+								</div>
+			        </div>
+	        		<h4>Nuovo orario</h4>
+			        <div class="row">
+			        	<label class="col-md-1">Da:</label>
+			        	<input class="col-md-2" type="text" data-ng-model="fDateFrom" placeholder="da">
+			        	<label class="col-md-1">A:</label>
+			        	<input class="col-md-2" type="text" data-ng-model="fDateTo" placeholder="a">
+			        	<label class="col-md-1">Dalle:</label>
+			        	<input class="col-md-2" type="text" data-ng-model="fHourFrom" placeholder="dalle">
+			        	<label class="col-md-1">Alle:</label>
+			        	<input class="col-md-2" type="text" data-ng-model="fHourTo" placeholder="alle">
+			        </div>
+			        <div class="row">
+			        	<label class="col-md-1">Il:</label>
+			        	<textarea class="col-md-3" rows="2" data-ng-model="fDateWeekDays" placeholder="il"></textarea>
+			        	<label class="col-md-1">Eccezione:</label>
+			        	<textarea class="col-md-3" rows="2" data-ng-model="fDateExceptions" placeholder="eccezione"></textarea>
+			        	<label class="col-md-1">Note ({{language}}):</label>
+			        	<textarea class="col-md-3" rows="2" data-ng-model="fDateNotes" placeholder="note"></textarea>
+			        </div>
+			      </div>
+			      <div class="modal-footer">
+					  	<button class="btn btn-success" data-dismiss="modal" data-ng-click="addTimetable()">
+					  		<span class="glyphicon glyphicon-save"></span> Aggiungi
+					  	</button> 
+			        <button type="button" class="btn btn-default" data-dismiss="modal">Chiudi</button>
+			      </div>
+			    </div>
+			  </div>
+			</div>
+						
 			<div class="panel panel-default">
 				<div class="panel-body">
 					<input id="address" class="form-control input-md" placeholder="Indirizzo">
@@ -183,6 +254,9 @@
 	function initializeMap() {
 		var TRENTO = new google.maps.LatLng(46.073058, 11.120620);
 		var options = {
+				disableDoubleClickZoom: true,
+				scrollwheel: false,
+				streetViewControl: false,
 		    zoom: 13,
 		    center: TRENTO,    
 		    mapTypeId: google.maps.MapTypeId.ROADMAP // ROADMAP | SATELLITE | HYBRID | TERRAIN

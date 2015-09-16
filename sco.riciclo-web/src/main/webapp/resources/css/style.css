@@ -11,7 +11,15 @@
 }
 
 .row.list-row {
-	border-bottom: 2px solid lightgrey;
+	border-bottom: 1px solid lightgrey;
 	padding-bottom: 5px;
 	padding-top: 5px;
+}
+
+.modal.modal-wide .modal-dialog {
+  width: 90%;
+}
+
+.modal-wide .modal-body {
+  overflow-y: auto;
 }

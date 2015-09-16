@@ -31,10 +31,6 @@ angular.module('DataService', []).factory('DataService',
 					return deferred.promise;
 				},
 				
-				getAddresses: function(address) {
-					
-				},
-				
 				logout : logout
 			};
 		} ]);

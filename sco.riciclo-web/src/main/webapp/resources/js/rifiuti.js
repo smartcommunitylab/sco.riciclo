@@ -1,7 +1,7 @@
-angular.module('rifiuti', []).controller('userCtrl', function($scope, $http) {
-	$http.get("console/data").success(function (response) {
-		$scope.initData(response);
-	});
+angular.module('rifiuti', ['DataService']).controller('userCtrl', function($scope, $http, DataService) {
+	DataService.getProfile().then(function(p) {
+  	$scope.initData(p);
+  });
 
 	$scope.selectedTab = "menu-rifiuti";
 	$scope.language = "it";
