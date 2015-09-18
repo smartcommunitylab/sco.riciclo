@@ -3,6 +3,7 @@ package it.smartcommunitylab.riciclo.presentation;
 import it.smartcommunitylab.riciclo.controller.Utils;
 import it.smartcommunitylab.riciclo.model.Area;
 import it.smartcommunitylab.riciclo.model.CalendarioRaccolta;
+import it.smartcommunitylab.riciclo.model.Categorie;
 import it.smartcommunitylab.riciclo.model.Colore;
 import it.smartcommunitylab.riciclo.model.Crm;
 import it.smartcommunitylab.riciclo.model.Gestore;
@@ -13,11 +14,14 @@ import it.smartcommunitylab.riciclo.model.Raccolta;
 import it.smartcommunitylab.riciclo.model.Riciclabolario;
 import it.smartcommunitylab.riciclo.model.Rifiuto;
 import it.smartcommunitylab.riciclo.model.Segnalazione;
+import it.smartcommunitylab.riciclo.model.Tipologia;
 import it.smartcommunitylab.riciclo.model.TipologiaProfilo;
 
 import java.util.HashMap;
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -283,6 +287,31 @@ public class UIConverter {
 			}
 			result = other;
 			break;
+		}
+		return result;
+	}
+
+	public static CategorieUI convertCategorie(Categorie categorie, String lang, String defaultLang) {
+		CategorieUI result = new CategorieUI();
+		result.setAppId(categorie.getOwnerId());
+		result.setCaratteristicaPuntoRaccolta(convertTipologia(categorie.getCaratteristicaPuntoRaccolta(), lang, defaultLang));
+		result.setTipologiaPuntiRaccolta(convertTipologia(categorie.getTipologiaPuntiRaccolta(), lang, defaultLang));
+		result.setTipologiaRaccolta(convertTipologia(categorie.getTipologiaRaccolta(), lang, defaultLang));
+		result.setTipologiaRifiuto(convertTipologia(categorie.getTipologiaRifiuto(), lang, defaultLang));
+		result.setTipologiaUtenza(convertTipologia(categorie.getTipologiaUtenza(), lang, defaultLang));
+		return result;
+	}
+	
+	public static Set<TipologiaUI> convertTipologia(Set<Tipologia> tipoligie, String lang, String defaultLang) {
+		Set<TipologiaUI> result = new LinkedHashSet<TipologiaUI>(); 
+		for(Tipologia tipologia : tipoligie) {
+			TipologiaUI tipologiaUI = new TipologiaUI();
+			tipologiaUI.setAppId(tipologia.getOwnerId());
+			tipologiaUI.setId(tipologia.getObjectId());
+			tipologiaUI.setNome(Utils.getString(tipologia.getNome(), lang, defaultLang));
+			tipologiaUI.setDescrizione(Utils.getString(tipologia.getDescrizione(), lang, defaultLang));
+			tipologiaUI.setIcona(tipologia.getIcona());
+			result.add(tipologiaUI);
 		}
 		return result;
 	}

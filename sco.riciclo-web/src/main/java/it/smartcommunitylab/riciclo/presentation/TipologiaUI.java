@@ -18,6 +18,7 @@ package it.smartcommunitylab.riciclo.presentation;
 
 public class TipologiaUI extends BaseObjectUI {
 
+	private String id;
 	private String nome;
 	private String descrizione;
 	private String icona;
@@ -84,6 +85,14 @@ public class TipologiaUI extends BaseObjectUI {
 		} else if (!nome.equals(other.nome))
 			return false;
 		return true;
+	}
+
+	public String getId() {
+		return id;
+	}
+
+	public void setId(String id) {
+		this.id = id;
 	}
 
 }

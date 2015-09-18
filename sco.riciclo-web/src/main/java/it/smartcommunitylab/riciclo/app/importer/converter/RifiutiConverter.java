@@ -91,7 +91,7 @@ public class RifiutiConverter {
 		Categorie categorie = new Categorie();
 		categorie.setOwnerId(ownerId);
 		
-		categorie.setCaratteristicaPuntoRaccolta(buildTipologieSet(new String[] { GETTONIERA, RESIDUO, IMB_CARTA, IMB_PL_MET, ORGANICO, IMB_VETRO, INDUMENTI }));
+		categorie.setCaratteristicaPuntoRaccolta(buildTipologieSet(new String[] { GETTONIERA, RESIDUO, IMB_CARTA, IMB_PL_MET, ORGANICO, IMB_VETRO, INDUMENTI }, defaultLang));
 
 //		categorie.setColori(new HashSet<Tipologia>());
 //		categorie.setTipologiaIstituzione(new HashSet<Tipologia>());
@@ -101,12 +101,13 @@ public class RifiutiConverter {
 		List<TipologiaPuntoRaccolta> puntiRaccolta = Lists.newArrayList();
 		categorie.setTipologiaPuntiRaccolta(new HashSet<Tipologia>());
 		for (it.smartcommunitylab.riciclo.app.importer.model.TipologiaPuntoRaccolta tpr : rifiuti.getTipologiaPuntoRaccolta()) {
-			Tipologia cat = new Tipologia(StringUtils.capitalize(tpr.getNome().toLowerCase()).replace("Crm", "CRM").replace("Crz", "CRZ"), tpr.getInfoPuntiRaccolta(), null);
+			String nome = StringUtils.capitalize(tpr.getNome().toLowerCase()).replace("Crm", "CRM").replace("Crz", "CRZ");
+			Tipologia cat = new Tipologia(nome, nome, tpr.getInfoPuntiRaccolta(), null, defaultLang);
 			categorie.getTipologiaPuntiRaccolta().add(cat);
 			
 			TipologiaPuntoRaccolta tipologiaPuntoRaccolta = new TipologiaPuntoRaccolta();
-			tipologiaPuntoRaccolta.setObjectId(cat.getNome());
-			tipologiaPuntoRaccolta.getNome().put(defaultLang, tpr.getNome());
+			tipologiaPuntoRaccolta.setObjectId(nome);
+			tipologiaPuntoRaccolta.getNome().put(defaultLang, nome);
 			tipologiaPuntoRaccolta.getInfo().put(defaultLang, tpr.getInfoPuntiRaccolta());
 			tipologiaPuntoRaccolta.setType(tpr.getTipo());
 			puntiRaccolta.add(tipologiaPuntoRaccolta);
@@ -116,14 +117,16 @@ public class RifiutiConverter {
 		//TIPOLOGIARIFIUTO
 		categorie.setTipologiaRifiuto(new HashSet<Tipologia>());
 		for (TipologiaRifiuto tr : rifiuti.getTipologiaRifiuto()) {
-			Tipologia cat = new Tipologia(StringUtils.capitalize(tr.getValore().toLowerCase()), null, null);
+			String nome = StringUtils.capitalize(tr.getValore().toLowerCase());
+			Tipologia cat = new Tipologia(nome, nome, null, null, defaultLang);
 			categorie.getTipologiaRifiuto().add(cat);
 		}
 		
 		//TIPOLOGIAUTENZA
 		categorie.setTipologiaUtenza(new HashSet<Tipologia>());
 		for (TipologiaUtenza tr : rifiuti.getTipologiaUtenza()) {
-			Tipologia cat = new Tipologia(tr.getValore().toLowerCase(), null, null);
+			String nome = tr.getValore().toLowerCase();
+			Tipologia cat = new Tipologia(nome, nome, null, null, defaultLang);
 			categorie.getTipologiaUtenza().add(cat);
 		}		
 
@@ -166,7 +169,7 @@ public class RifiutiConverter {
 				utenze = ar.getUtenze().split(";");
 			}
 			for (Tipologia ut: categorie.getTipologiaUtenza()) {
-				utenza.put(ut.getNome(), defaultValue);
+				utenza.put(ut.getObjectId(), defaultValue);
 			}
 			if (utenze != null) {
 				for (String ut : utenze) {
@@ -242,7 +245,8 @@ public class RifiutiConverter {
 
 		//TIPOLOGIARACCOLTA
 		for (TipologiaRaccolta tr : rifiuti.getTipologiaRaccolta()) {
-			categorie.getTipologiaRaccolta().add(new Tipologia(StringUtils.capitalize(tr.getValore().toLowerCase().replace("crm", "CRM").replace("crz", "CRZ")).trim(), null, null));
+			String nome = StringUtils.capitalize(tr.getValore().toLowerCase().replace("crm", "CRM").replace("crz", "CRZ")).trim();
+			categorie.getTipologiaRaccolta().add(new Tipologia(nome, nome, null, null, defaultLang));
 		}
 		
 		//PUNTIRACCOLTA
@@ -252,15 +256,21 @@ public class RifiutiConverter {
 		output.setCalendariRaccolta((List<CalendarioRaccolta>) compactPuntiRaccolta.get("calendarioRaccolta"));
 		
 		//RIFIUTI e RICICLABOLARIO
-		List<Rifiuto> rifiutoDescList = new ArrayList<Rifiuto>();
+		List<Rifiuto> rifiutoDescList = Lists.newArrayList();
+		Map<String, Rifiuto> rifiutoDescMap = new HashMap<String, Rifiuto>();
 		List<Riciclabolario> riciclabolario = Lists.newArrayList();
 		for (it.smartcommunitylab.riciclo.app.importer.model.Riciclabolario rc : 
 			(List<it.smartcommunitylab.riciclo.app.importer.model.Riciclabolario>) rifiuti.getRiciclabolario()) {
-			Rifiuto rifiuto = new Rifiuto();
-			rifiuto.setOwnerId(ownerId);
-			rifiuto.setObjectId(rc.getNome());
-			rifiuto.getNome().put(defaultLang, rc.getNome());
-			rifiutoDescList.add(rifiuto);
+			String nome = rc.getNome();
+			Rifiuto rifiuto = rifiutoDescMap.get(nome);
+			if(rifiuto == null) {
+				rifiuto = new Rifiuto();
+				rifiuto.setOwnerId(ownerId);
+				rifiuto.setObjectId(rc.getNome());
+				rifiuto.getNome().put(defaultLang, rc.getNome());
+				rifiutoDescMap.put(nome, rifiuto);
+				rifiutoDescList.add(rifiuto);
+			}
 			
 			String[] split = StringUtils.split(rc.getTipologiaUtenza().trim().toLowerCase(),";");
 			for(String tipologiaUtenza : split) {
@@ -442,10 +452,10 @@ public class RifiutiConverter {
 		return result;
 	}
 
-	private static Set<Tipologia> buildTipologieSet(String[] cat) {
+	private static Set<Tipologia> buildTipologieSet(String[] cat, String lang) {
 		Set<Tipologia> result = Sets.newHashSet();
 		for (String c : cat) {
-			Tipologia nc = new Tipologia(c, null, null);
+			Tipologia nc = new Tipologia(c, c, null, null, lang);
 			result.add(nc);
 		}
 		return result;

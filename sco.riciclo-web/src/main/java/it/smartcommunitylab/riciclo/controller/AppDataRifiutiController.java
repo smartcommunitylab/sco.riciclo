@@ -200,6 +200,7 @@ public class AppDataRifiutiController {
 		result.setRaccolta(UIConverter.convertRaccolta(appData.getRaccolte(), lang, defaultLang));
 		result.setColore(UIConverter.convertColore(appData.getColore(), lang, defaultLang));
 		result.setSegnalazione(UIConverter.convertSegnalazione(appData.getSegnalazioni(), lang, defaultLang));
+		result.setCategorie(UIConverter.convertCategorie(appData.getCategorie(), lang, defaultLang));
 		return result;
 	}
 

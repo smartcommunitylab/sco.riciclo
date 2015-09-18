@@ -75,9 +75,9 @@ public class RifiutiValidator {
 		Set<String> tipologiaRaccolta = flattenList(rifiuti.getCategorie().getTipologiaRaccolta());
 		Set<String> tipologiaRifiuto = flattenList(rifiuti.getCategorie().getTipologiaRifiuto());
 		Set<String> aree = flattenList(rifiuti.getAree(), Area.class, "objectId");
-		Set<String> colori = flattenList(rifiuti.getColore(), Colore.class);
+		Set<String> colori = flattenList(rifiuti.getColore(), Colore.class, "nome");
 		Set<String> caratteristiche = flattenList(rifiuti.getCategorie().getCaratteristicaPuntoRaccolta());
-		Set<String> istituzioni = flattenList(rifiuti.getIstituzioni(), Istituzione.class);
+		Set<String> istituzioni = flattenList(rifiuti.getIstituzioni(), Istituzione.class, "nome");
 		
 		Set<String> gestori = flattenList(rifiuti.getGestori(), Gestore.class, "ragioneSociale");
 //		Set<String> comuni = flattenList(rifiuti.getAree(), Area.class, "comune");
@@ -181,11 +181,7 @@ public class RifiutiValidator {
 	}
 	
 	protected Set<String> flattenList(Collection<?> objects) throws Exception {
-		return flattenList(objects, Tipologia.class, "nome");
-	}		
-	
-	protected Set<String> flattenList(Collection<?> objects, Class<?> clz) throws Exception {
-		return flattenList(objects, clz, "nome");
+		return flattenList(objects, Tipologia.class, "objectId");
 	}		
 	
 	protected Set<String> flattenList(Collection<?> objects, Class<?> clz, String field) throws Exception {
