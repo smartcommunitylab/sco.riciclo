@@ -41,12 +41,12 @@ angular.module('rifiuti', ['DataService']).controller('userCtrl', function($scop
 	$scope.resetError = function() {
 		$scope.error = false;
 		$scope.errorMsg = "";
-	}
+	};
 	
 	$scope.resetOk = function() {
 		$scope.ok = false;
 		$scope.okMsg = "";
-	}
+	};
 	
 	$scope.changeLanguage = function(language) {
 		$scope.language = language;
@@ -56,7 +56,7 @@ angular.module('rifiuti', ['DataService']).controller('userCtrl', function($scop
 				$scope.fName = element.nome[$scope.language];
 			}
 		}
-	} 
+	};
 	
 	$scope.editRifiuto = function(id) {
 		console.log("editRifiuto:" + id);
@@ -90,7 +90,7 @@ angular.module('rifiuti', ['DataService']).controller('userCtrl', function($scop
 		$scope.search = "";
 		$scope.incomplete = true;
 		$('html,body').animate({scrollTop:0},0);
-	}
+	};
 	
 	$scope.saveRifiuto = function() {
 		if($scope.create) {
@@ -141,7 +141,7 @@ angular.module('rifiuti', ['DataService']).controller('userCtrl', function($scop
 			  });
 			}
 		}
-	}
+	};
 	
 	$scope.deleteRifiuto = function(id) {
 		var index = $scope.findIndex($scope.rifiuti, id);
@@ -170,7 +170,7 @@ angular.module('rifiuti', ['DataService']).controller('userCtrl', function($scop
 				});			
 			}
 		}
-	}
+	};
 	
 	$scope.$watch('fName',function() {$scope.test();});
 	
@@ -181,7 +181,7 @@ angular.module('rifiuti', ['DataService']).controller('userCtrl', function($scop
       }
     }
     return null;
-	}
+	};
 	
 	$scope.findIndex = function(array, id) {
 		for (var d = 0, len = array.length; d < len; d += 1) {
@@ -190,7 +190,7 @@ angular.module('rifiuti', ['DataService']).controller('userCtrl', function($scop
 			}
 		}
 		return -1;
-	}
+	};
 	
 	$scope.test = function() {
 		if (($scope.fName == null) || ($scope.fName.length <= 3)) {

@@ -92,32 +92,18 @@ public class RiciclabolarioController {
 		return result;
 	}
 	
-	@SuppressWarnings("unchecked")
 	@RequestMapping(value="/riciclabolario/{ownerId}", method=RequestMethod.POST) 
-	public @ResponseBody List<Riciclabolario> addRiciclabolario(@RequestBody Map<String, Object> data, 
+	public @ResponseBody Riciclabolario addRiciclabolario(@RequestBody Riciclabolario riciclabolario, 
 			@PathVariable String ownerId,	HttpServletRequest request, HttpServletResponse response) {
 		boolean draft = Utils.getDraft(request);
 		if(!Utils.validateAPIRequest(request, appSetup, draft, storage)) {
 			response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
 			return null;
 		}
-		String area = (String) data.get("area");
-		String tipologiaRifiuto = (String) data.get("tipologiaRifiuto");
-		String rifiuto = (String) data.get("rifiuto");
-		List<String> tipologiaUtenzaList = (List<String>) data.get("tipologiaUtenza");
-		List<Riciclabolario> result = new ArrayList<Riciclabolario>();
-		for(String tipologiaUtenza : tipologiaUtenzaList) {
-			Riciclabolario riciclabolario = new Riciclabolario();
-			riciclabolario.setObjectId(UUID.randomUUID().toString());
-			riciclabolario.setOwnerId(ownerId);
-			riciclabolario.setArea(area);
-			riciclabolario.setRifiuto(rifiuto);
-			riciclabolario.setTipologiaRifiuto(tipologiaRifiuto);
-			riciclabolario.setTipologiaUtenza(tipologiaUtenza);
-			storage.addRiciclabolario(riciclabolario, draft);
-			result.add(riciclabolario);
-		}
-		return result;
+		riciclabolario.setObjectId(UUID.randomUUID().toString());
+		riciclabolario.setOwnerId(ownerId);
+		storage.addRiciclabolario(riciclabolario, draft);
+		return riciclabolario;
 	}
 	
 	@RequestMapping(value="/riciclabolario/{ownerId}/{objectId}", method=RequestMethod.DELETE)

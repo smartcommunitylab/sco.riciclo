@@ -23,3 +23,7 @@
 .modal-wide .modal-body {
   overflow-y: auto;
 }
+
+.typeahead.active {
+	background-color: lightgrey;
+}

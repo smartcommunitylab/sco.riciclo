@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>100% Riciclo Console</title>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="description" content="">
+	<meta name="author" content="">
+	<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular.min.js"></script>
+	<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular-sanitize.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+  <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+  <script src="lib/massautocomplete.min.js"></script>
+  <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+  <link rel="stylesheet" href="css/massautocomplete.theme.css">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body data-ng-app="riciclabolario" data-ng-controller="userCtrl">
+	<div data-ng-include="'html/navbar.html'"></div>
+
+	<div class="container-fluid">
+		<div class="well well-sm">
+			<h4>
+				Riciclabolario
+				<button type="button" class="btn btn-default btn-sm pull-right" data-ng-click="changeLanguage('en')"
+					data-ng-class="{'active':language == 'en'}">
+	   			<span class="glyphicon glyphicon-flag"></span> EN
+	 			</button>
+				<button type="button" class="btn btn-default btn-sm pull-right" data-ng-click="changeLanguage('it')"
+					data-ng-class="{'active':language == 'it'}">
+	   			<span class="glyphicon glyphicon-flag"></span> IT
+	 			</button>
+ 			</h4>
+		</div>
+		<div class="panel-group">
+		
+			<div id="error" class="alert alert-danger fade in" data-ng-show="error">
+				<a href="#" class="close" data-hide="alert" aria-label="close"
+				data-ng-click="resetError()">&times;</a>
+				{{errorMsg}}
+			</div>
+			
+			<div id="error" class="alert alert-success fade in" data-ng-show="ok">
+				<a href="#" class="close" data-hide="alert" aria-label="close"
+				data-ng-click="resetOk()">&times;</a>
+				{{okMsg}}
+			</div>
+			
+			<div class="panel panel-default">
+				<div class="panel-body">
+					<h4>Crea relazione</h4>
+					<button type="button" class="btn btn-default btn-sm pull-right" data-ng-click="draft=true"
+						data-ng-class="{'active':draft}">
+		   			<span class="glyphicon glyphicon-tags"></span> draft
+		 			</button>
+					<button type="button" class="btn btn-default btn-sm pull-right" data-ng-click="draft=false"
+						data-ng-class="{'active':!draft}">
+		   			<span class="glyphicon glyphicon-tags"></span> prod
+		 			</button>
+				</div>
+			</div>			
+						
+			<div class="panel panel-default">
+	  		<div class="panel-body">
+					<form role="form">
+					  <div class="form-group" mass-autocomplete>
+					    <label class="control-label">Tipologia Utenza:</label>
+				    	<input data-ng-model="tipologiaUtenzaSearch" mass-autocomplete-item="ac_utenza_options" 
+				    	placeholder="tipologia utenza">
+						  <button class="btn btn-default btn-sm" data-ng-click="tipologiaUtenzaSearch = ''">
+								<span class="glyphicon glyphicon-remove"></span>
+							</button>
+					  </div>
+						<div class="form-group" mass-autocomplete>
+							<label class="control-label">Area:</label>
+							<input data-ng-model="areaSearch" mass-autocomplete-item="ac_area_options" placeholder="area">
+						  <button class="btn btn-default btn-sm" data-ng-click="areaSearch = ''">
+								<span class="glyphicon glyphicon-remove"></span>
+							</button>
+						</div>
+						<div class="form-group" mass-autocomplete>
+							<label class="control-label">Tipologia Rifiuto:</label>
+							<input data-ng-model="tipologiaRifiutoSearch" mass-autocomplete-item="ac_tipologia_rifiuto_options" 
+							placeholder="tipologia rifiuto">
+						  <button class="btn btn-default btn-sm" data-ng-click="tipologiaRifiutoSearch = ''">
+								<span class="glyphicon glyphicon-remove"></span>
+							</button>
+						</div>
+						<div class="form-group" mass-autocomplete>
+							<label class="control-label">Rifiuto:</label>
+							<input data-ng-model="rifiutoSearch" mass-autocomplete-item="ac_rifiuto_options" placeholder="rifiuto">
+						  <button class="btn btn-default btn-sm" data-ng-click="rifiutoSearch = ''">
+								<span class="glyphicon glyphicon-remove"></span>
+							</button>
+						</div>
+				  	<button class="btn btn-success" data-ng-disabled="error || incomplete" data-ng-click="saveRelation()">
+				  		<span class="glyphicon glyphicon-save"></span> Salva
+				  	</button> 
+					</form>	
+	  		</div>
+			</div>	
+					
+			<div class="panel panel-default">
+				<div class="panel-body">
+					<label class="control-label">Cerca:</label>
+					<p>
+						<input type="text" data-ng-model="search">
+						<button class="btn btn-default btn-sm" data-ng-click="search = ''">
+							<span class="glyphicon glyphicon-remove"></span>
+						</button>
+					</p>
+					<div class="row" style="background-color:lavender;">
+						<div class="col-md-3"><h4>Rifiuto</h4></div>
+						<div class="col-md-3"><h4>Area</h4></div>
+						<div class="col-md-2"><h4>Tipologia Utenza</h4></div>
+						<div class="col-md-2"><h4>Tipologia Rifiuto</h4></div>
+						<div class="col-md-2"><h4>Cancella</h4></div>
+					</div>
+					<div class="row list-row" data-ng-repeat="relation in riciclabolario | filter:search ">
+						<div class="col-md-3" >
+							<span>{{getRifiutoName(relation.rifiuto)}}</span>
+						</div>
+						<div class="col-md-3">
+							<span>{{getAreaName(relation.area)}}</span>
+						</div>
+						<div class="col-md-2" >
+							<span>{{relation.tipologiaUtenza}}</span>
+						</div>
+						<div class="col-md-2" >
+							<span>{{relation.tipologiaRifiuto}}</span>
+						</div>
+						<div class="col-md-2">
+							<button class="btn btn-danger" data-ng-click="deleteRelation(relation.objectId)">
+								<span class="glyphicon glyphicon-remove"></span>  Cancella
+							</button>
+						</div>
+					</div>
+				</div>
+			</div>
+				
+		</div>
+			
+	</div>
+	
+	<script src = "js/services.js"></script>	
+	<script src = "js/riciclabolario.js"></script>
+</body>
+</html>

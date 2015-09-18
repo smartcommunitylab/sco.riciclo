@@ -43,11 +43,7 @@ angular.module('crm', ['DataService']).controller('userCtrl', function($scope, $
 	$scope.data = null;
 	$scope.status = 200;
 	
-	$scope.crmList = [
-	{objectId:1, nome:{it:"CRM1 it", en:"CRM1 en"}, indirizzo:{it:"via degli orbi1", en:"via degli orbi1"} },
-	{objectId:1, nome:{it:"CRM2 it", en:"CRM2 en"}, indirizzo:{it:"via degli orbi2", en:"via degli orbi2"} },
-	{objectId:1, nome:{it:"CRM3 it", en:"CRM3 en"}, indirizzo:{it:"via degli orbi3", en:"via degli orbi3"} }
-	];
+	$scope.crmList = [];
 	
 	$scope.timetableList = [];
 	
@@ -62,12 +58,12 @@ angular.module('crm', ['DataService']).controller('userCtrl', function($scope, $
 	$scope.resetError = function() {
 		$scope.error = false;
 		$scope.errorMsg = "";
-	}
+	};
 	
 	$scope.resetOk = function() {
 		$scope.ok = false;
 		$scope.okMsg = "";
-	}
+	};
 	
 	$scope.changeLanguage = function(language) {
 		$scope.language = language;
@@ -77,7 +73,7 @@ angular.module('crm', ['DataService']).controller('userCtrl', function($scope, $
 				$scope.fNote = element.note[$scope.language];
 			}
 		}
-	} 
+	};
 	
 	$scope.editCrm = function(id) {
 		console.log("editCrm:" + id);
@@ -118,7 +114,7 @@ angular.module('crm', ['DataService']).controller('userCtrl', function($scope, $
 		$scope.incomplete = true;
 		$scope.resetForm();
 		$('html,body').animate({scrollTop:0},0);
-	}
+	};
 	
 	$scope.resetForm = function() {
 		$scope.fId = "";
@@ -135,7 +131,7 @@ angular.module('crm', ['DataService']).controller('userCtrl', function($scope, $
 		$scope.fIndumenti = false;
 		$scope.fGettoniera = false;
 		$scope.timetableList = [];
-	}
+	};
 	
 	$scope.setCaratteristiche = function(crm) {
 		$scope.fResiduo = crm.caratteristiche['RESIDUO'];
@@ -145,7 +141,7 @@ angular.module('crm', ['DataService']).controller('userCtrl', function($scope, $
 		$scope.fOrganico = crm.caratteristiche['ORGANICO'];
 		$scope.fIndumenti = crm.caratteristiche['INDUMENTI'];
 		$scope.fGettoniera = crm.caratteristiche['GETTONIERA'];
-	}
+	};
 	
 	$scope.getCaratteristiche = function() {
 		var element = {
@@ -164,7 +160,7 @@ angular.module('crm', ['DataService']).controller('userCtrl', function($scope, $
 		element['INDUMENTI'] = $scope.fIndumenti;
 		element['GETTONIERA'] = $scope.fGettoniera;
 		return element;
-	}
+	};
 	
 	$scope.saveCrm = function() {
 		if($scope.create) {
@@ -234,7 +230,7 @@ angular.module('crm', ['DataService']).controller('userCtrl', function($scope, $
 			  });
 			}
 		}
-	}
+	};
 	
 	$scope.deleteCrm = function(id) {
 		var index = $scope.findIndex($scope.crmList, id);
@@ -263,7 +259,7 @@ angular.module('crm', ['DataService']).controller('userCtrl', function($scope, $
 				});			
 			}
 		}
-	}
+	};
 	
 	$scope.deleteTimetable = function(index) {
 		console.log("deleteTimetable:" + index);
@@ -285,7 +281,7 @@ angular.module('crm', ['DataService']).controller('userCtrl', function($scope, $
 				$scope.status = response.status;
 			});
 		}
-	}
+	};
 	
 	$scope.addTimetable = function() {
 		console.log("addTimetable");
@@ -324,7 +320,7 @@ angular.module('crm', ['DataService']).controller('userCtrl', function($scope, $
 		  	$scope.status = response.status;
 			});
 		}
-	}
+	};
 	
 	$scope.$watch('fRegion',function() {$scope.test();});
 	$scope.$watch('fRegionDetails',function() {$scope.test();});
@@ -336,7 +332,7 @@ angular.module('crm', ['DataService']).controller('userCtrl', function($scope, $
       }
     }
     return null;
-	}
+	};
 	
 	$scope.findIndex = function(array, id) {
 		for (var d = 0, len = array.length; d < len; d += 1) {
@@ -345,7 +341,7 @@ angular.module('crm', ['DataService']).controller('userCtrl', function($scope, $
 			}
 		}
 		return -1;
-	}
+	};
 	
 	$scope.test = function() {
 		if (($scope.fRegion == null) || ($scope.fRegion.length <= 3) ||

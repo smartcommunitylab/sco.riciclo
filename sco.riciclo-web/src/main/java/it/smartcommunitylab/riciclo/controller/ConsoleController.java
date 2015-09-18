@@ -85,6 +85,11 @@ public class ConsoleController {
 		return "crm";
 	}
 	
+	@RequestMapping(value = "/riciclabolario")
+	public String riciclabolario() {
+		return "riciclabolario";
+	}
+	
 	@RequestMapping(value = "/console/data")
 	public @ResponseBody App data() {
 		return storage.getAppDescriptor(getOwnerId());

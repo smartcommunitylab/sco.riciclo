@@ -56,8 +56,8 @@ public class RepositoryManager {
 	private static final transient Logger logger = LoggerFactory.getLogger(RepositoryManager.class);
 	
 	private Class<?>[] classes = { Categorie.class, Area.class, Gestore.class, Istituzione.class, PuntoRaccolta.class,
-			CalendarioRaccolta.class, Raccolta.class, Riciclabolario.class, TipologiaProfilo.class, Colore.class, 
-			Segnalazione.class, Crm.class, TipologiaPuntoRaccolta.class, Rifiuto.class };
+			CalendarioRaccolta.class, Raccolta.class, Riciclabolario.class, TipologiaProfilo.class, 
+			TipologiaPuntoRaccolta.class, Colore.class,	Segnalazione.class, Crm.class, Rifiuto.class };
 
 	@Autowired
 	private AppSetup appSetup;
@@ -83,7 +83,7 @@ public class RepositoryManager {
 
 		appDataRifiuti.getCategorie().setOwnerId(ownerId);
 		draftTemplate.save(appDataRifiuti.getCategorie());
-
+		
 		for (Area area : appDataRifiuti.getAree()) {
 			area.setOwnerId(ownerId);
 			area.setCreationDate(actualDate);
@@ -552,6 +552,48 @@ public class RepositoryManager {
 		template.updateFirst(query, update, Rifiuto.class);
 	}
 	
+	/**
+	 * Gestione Area
+	 */
+	
+	public void addArea(Area area, boolean draft) {
+		MongoTemplate template = draft ? draftTemplate : finalTemplate;
+		Date actualDate = new Date();
+		area.setCreationDate(actualDate);
+		area.setLastUpdate(actualDate);
+		template.save(area);
+	}
+	
+	public void updateArea(Area area, boolean draft) throws EntityNotFoundException {
+		MongoTemplate template = draft ? draftTemplate : finalTemplate;
+		Query query = new Query(new Criteria("ownerId").is(area.getOwnerId()).and("objectId").is(area.getObjectId()));
+		Area areaDB = template.findOne(query, Area.class);
+		if (areaDB == null) {
+			throw new EntityNotFoundException(String.format("Area with id %s not found", area.getObjectId()));
+		}
+		Update update = new Update();
+		update.set("lastUpdate", new Date());
+		update.set("nome", area.getNome());
+		update.set("descrizione", area.getDescrizione());
+		update.set("etichetta", area.getEtichetta());
+		update.set("istituzione", area.getIstituzione());
+		update.set("parent", area.getParent());
+		update.set("gestore", area.getGestore());
+		update.set("utenza", area.getUtenza());
+		update.set("codiceISTAT", area.getCodiceISTAT());
+		template.updateFirst(query, update, Area.class);
+	}
+	
+	public void removeArea(String ownerId, String objectId, boolean draft) throws EntityNotFoundException {
+		MongoTemplate template = draft ? draftTemplate : finalTemplate;
+		Query query = new Query(new Criteria("ownerId").is(ownerId).and("objectId").is(objectId));
+		Area areaDB = template.findOne(query, Area.class);
+		if (areaDB == null) {
+			throw new EntityNotFoundException(String.format("Area with id %s not found", objectId));
+		}
+		template.findAndRemove(query, Area.class);
+	}
+
 	/**
 	 * Gestione CalendarioRaccolta
 	 */
