@@ -1,11 +1,11 @@
-var puntiraccoltaApp = angular.module('puntiraccolta', ['DataService', 'ngSanitize', 'MassAutoComplete']);
+var puntiraccoltaApp = angular.module('calendariraccolta', ['DataService', 'ngSanitize', 'MassAutoComplete']);
 
 puntiraccoltaApp.controller('userCtrl', function($scope, $http, $sce, $q, DataService) {
 	DataService.getProfile().then(function(p) {
   	$scope.initData(p);
   });
 
-	$scope.selectedTab = "menu-puntiraccolta";
+	$scope.selectedTab = "menu-calendariraccolta";
 	$scope.language = "it";
 	$scope.draft = true;
 	
@@ -30,27 +30,16 @@ puntiraccoltaApp.controller('userCtrl', function($scope, $http, $sce, $q, DataSe
 	$scope.selectedTipologiaPuntoRaccolta = null;
 	$scope.tipologiaPuntoRaccoltaSearch = "";
 	
-	$scope.selectedCrm = null;
-	$scope.crmSearch = "";
-		
-	$scope.crmList = [];
 	$scope.areaList = [];
 	$scope.tipologiaUtenzaList = [];
 	$scope.tipologiaPuntoRaccoltaList = [];
-	$scope.puntoRaccoltaList = [];
+	$scope.calendarioRaccoltaList = [];
 	
-	$scope.crmNameMap = {};
 	$scope.areaNameMap = {};
 	$scope.tipologiaPuntoRaccoltaNameMap = {};
 	
 	$scope.initData = function(profile) {
 		$scope.profile = profile;
-		
-		var urlCrm = "crm/" + $scope.profile.appInfo.ownerId + "?draft=" + $scope.draft;
-		$http.get(urlCrm, {headers: {'X-ACCESS-TOKEN': $scope.profile.appInfo.token}}).success(function (response) {
-			$scope.crmList = response;
-			$scope.crmNameMap = $scope.setCrmNameMap($scope.crmList);
-		});
 		
 		var urlTipologiaUtenza = "tipologia/utenza/" + $scope.profile.appInfo.ownerId + "?draft=" + $scope.draft;
 		$http.get(urlTipologiaUtenza, {headers: {'X-ACCESS-TOKEN': $scope.profile.appInfo.token}}).success(function (response) {
@@ -69,15 +58,11 @@ puntiraccoltaApp.controller('userCtrl', function($scope, $http, $sce, $q, DataSe
 			$scope.areaNameMap = $scope.setNameMap($scope.areaList);
 		});
 		
-		var urlPuntoRaccolta = "puntoraccolta/" + $scope.profile.appInfo.ownerId + "?draft=" + $scope.draft;
-		$http.get(urlPuntoRaccolta, {headers: {'X-ACCESS-TOKEN': $scope.profile.appInfo.token}}).success(function (response) {
-			$scope.puntoRaccoltaList = response;
+		var urlCalendarioRaccolta = "calraccolta/" + $scope.profile.appInfo.ownerId + "?draft=" + $scope.draft;
+		$http.get(urlCalendarioRaccolta, {headers: {'X-ACCESS-TOKEN': $scope.profile.appInfo.token}}).success(function (response) {
+			$scope.calendarioRaccoltaList = response;
 		});
 		
-	};
-	
-	$scope.getCrmName = function(id) {
-		return $scope.crmNameMap[id];
 	};
 	
 	$scope.getAreaName = function(id) {
@@ -101,7 +86,6 @@ puntiraccoltaApp.controller('userCtrl', function($scope, $http, $sce, $q, DataSe
 	$scope.changeLanguage = function(language) {
 		$scope.language = language;
 		$scope.areaNameMap = $scope.setNameMap($scope.areaList);
-		$scope.crmNameMap = $scope.setCrmNameMap($scope.crmList);
 		$scope.tipologiaPuntoRaccoltaNameMap = $scope.setNameMap($scope.tipologiaPuntoRaccoltaList);
 	};
 	
@@ -113,17 +97,15 @@ puntiraccoltaApp.controller('userCtrl', function($scope, $http, $sce, $q, DataSe
 	
 	$scope.saveRelation = function() {
 		var element = {
-			crm: '',
 			area: '',
 			tipologiaUtenza: '',
 			tipologiaPuntoRaccolta: ''
 		};
-		element.crm = $scope.selectedCrm.objectId;
 		element.area = $scope.selectedArea.objectId;
 		element.tipologiaUtenza = $scope.selectedTipologiaUtenza.objectId;
 		element.tipologiaPuntoRaccolta = $scope.selectedTipologiaPuntoRaccolta.objectId;
 			
-		var url = "puntoraccolta/" + $scope.profile.appInfo.ownerId + "?draft=" + $scope.draft; 
+		var url = "calraccolta/" + $scope.profile.appInfo.ownerId + "?draft=" + $scope.draft; 
 		$http.post(url, element, {headers: {'X-ACCESS-TOKEN': $scope.profile.appInfo.token}}).then(
 		function(response) {
 			// this callback will be called asynchronously
@@ -132,9 +114,9 @@ puntiraccoltaApp.controller('userCtrl', function($scope, $http, $sce, $q, DataSe
 			$scope.data = response.data;
 			$scope.ok = true;
 			$scope.okMsg = "Operazione eseguita con successo";
-			$scope.puntoRaccoltaList.unshift($scope.data);
+			$scope.calendarioRaccoltaList.unshift($scope.data);
 			$scope.resetUI();
-			console.log("savePuntoRaccolta:" + response.status + " - " + response.data);
+			console.log("saveCalendarioRaccolta:" + response.status + " - " + response.data);
 		}, 
 		function(response) {
 			// called asynchronously if an error occurs
@@ -146,11 +128,11 @@ puntiraccoltaApp.controller('userCtrl', function($scope, $http, $sce, $q, DataSe
 	};
 	
 	$scope.deleteRelation = function(id) {
-		var index = $scope.findIndex($scope.puntoRaccoltaList, id);
+		var index = $scope.findIndex($scope.calendarioRaccoltaList, id);
 		if(index >= 0) {
-			var element = $scope.puntoRaccoltaList[index];
+			var element = $scope.calendarioRaccoltaList[index];
 			if(element != null) {
-				var url = "puntoraccolta/" + $scope.profile.appInfo.ownerId + "/" + element.objectId + "?draft=" + $scope.draft;
+				var url = "calraccolta/" + $scope.profile.appInfo.ownerId + "/" + element.objectId + "?draft=" + $scope.draft;
 				$http.delete(url, {headers: {'X-ACCESS-TOKEN': $scope.profile.appInfo.token}}).then(
 				function(response) {
 					// this callback will be called asynchronously
@@ -159,9 +141,9 @@ puntiraccoltaApp.controller('userCtrl', function($scope, $http, $sce, $q, DataSe
 					$scope.data = response.data;
 					$scope.ok = true;
 					$scope.okMsg = "Operazione eseguita con successo";
-					$scope.puntoRaccoltaList.splice(index, 1);
+					$scope.calendarioRaccoltaList.splice(index, 1);
 					$scope.resetUI();
-					console.log("deletePuntoRaccolta:" + response.status + " - " + response.data);
+					console.log("deleteCalendarioRaccolta:" + response.status + " - " + response.data);
 				}, 
 				function(response) {
 				  // called asynchronously if an error occurs
@@ -203,16 +185,6 @@ puntiraccoltaApp.controller('userCtrl', function($scope, $http, $sce, $q, DataSe
 		for (var d = 0, len = array.length; d < len; d += 1) {
 			var key = array[d].objectId;
 			var name = array[d].nome[$scope.language];
-			map[key] = name;
-		}
-		return map;
-	};
-	
-	$scope.setCrmNameMap = function(array) {
-		var map = {};
-		for (var d = 0, len = array.length; d < len; d += 1) {
-			var key = array[d].objectId;
-			var name = array[d].zona + " - " + array[d].dettagliZona;
 			map[key] = name;
 		}
 		return map;
@@ -284,30 +256,6 @@ puntiraccoltaApp.controller('userCtrl', function($scope, $http, $sce, $q, DataSe
 		suggest: $scope.suggestTipologiaPuntoRaccolta,
 		on_select: function (selected) {
 			$scope.selectedTipologiaPuntoRaccolta = selected.obj;
-		}
-	};
-
-	$scope.suggestCrm = function(term) {
-		var q = term.toLowerCase().trim();
-    var results = [];
-    // Find first 10 states that start with `term`.
-    for (var i = 0; i < $scope.crmList.length; i++) {
-      var crm = $scope.crmList[i];
-      if(crm != null) {
-      	var name = $scope.getCrmName(crm.objectId);
-        var result= name.search(new RegExp(q, "i"));
-        if(result >= 0) {
-        	results.push({ label: name, value: name, obj: crm });
-        }
-      }
-    }
-    return results;
-	};
-	
-	$scope.ac_crm_options = {
-		suggest: $scope.suggestCrm,
-		on_select: function (selected) {
-			$scope.selectedCrm = selected.obj;
 		}
 	};
 	

@@ -95,6 +95,11 @@ public class ConsoleController {
 		return "puntiraccolta";
 	}
 	
+	@RequestMapping(value = "/calendariraccolta")
+	public String calendariraccolta() {
+		return "calendariraccolta";
+	}
+	
 	@RequestMapping(value = "/console/data")
 	public @ResponseBody App data() {
 		return storage.getAppDescriptor(getOwnerId());

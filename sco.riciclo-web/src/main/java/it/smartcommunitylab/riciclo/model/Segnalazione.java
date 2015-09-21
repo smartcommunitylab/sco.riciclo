@@ -4,7 +4,7 @@ public class Segnalazione extends BaseObject {
 
 	private String objectId;
 	private String area;
-	private String tipologia;
+	private String tipologia; //Map
 	private String email;
 	
 	public String getArea() {
