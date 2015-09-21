@@ -1,11 +1,11 @@
-var riciclabolarioApp = angular.module('riciclabolario', ['DataService', 'ngSanitize', 'MassAutoComplete']);
+var puntiraccoltaApp = angular.module('puntiraccolta', ['DataService', 'ngSanitize', 'MassAutoComplete']);
 
-riciclabolarioApp.controller('userCtrl', function($scope, $http, $sce, $q, DataService) {
+puntiraccoltaApp.controller('userCtrl', function($scope, $http, $sce, $q, DataService) {
 	DataService.getProfile().then(function(p) {
   	$scope.initData(p);
   });
 
-	$scope.selectedTab = "menu-riciclabolario";
+	$scope.selectedTab = "menu-puntiraccolta";
 	$scope.language = "it";
 	$scope.draft = true;
 	
@@ -27,28 +27,29 @@ riciclabolarioApp.controller('userCtrl', function($scope, $http, $sce, $q, DataS
 	$scope.selectedTipologiaUtenza = null;
 	$scope.tipologiaUtenzaSearch = "";
 	
-	$scope.selectedTipologiaRifiuto = null;
-	$scope.tipologiaRifiutoSearch = "";
+	$scope.selectedTipologiaPuntoRaccolta = null;
+	$scope.tipologiaPuntoRaccoltaSearch = "";
 	
-	$scope.selectedRifiuto = null;
-	$scope.rifiutoSearch = "";
+	$scope.selectedCrm = null;
+	$scope.crmSearch = "";
 		
-	$scope.rifiutoList = [];
-	$scope.tipologiaUtenzaList = [];
-	$scope.tipologiaRifiutoList = [];
+	$scope.crmList = [];
 	$scope.areaList = [];
-	$scope.riciclabolario = [];
+	$scope.tipologiaUtenzaList = [];
+	$scope.tipologiaPuntoRaccoltaList = [];
+	$scope.puntoRaccoltaList = [];
 	
-	$scope.rifiutoNameMap = {};
+	$scope.crmNameMap = {};
 	$scope.areaNameMap = {};
+	$scope.tipologiaPuntoRaccoltaNameMap = {};
 	
 	$scope.initData = function(profile) {
 		$scope.profile = profile;
 		
-		var urlRifiuti = "rifiuto/" + $scope.profile.appInfo.ownerId + "?draft=" + $scope.draft;
-		$http.get(urlRifiuti, {headers: {'X-ACCESS-TOKEN': $scope.profile.appInfo.token}}).success(function (response) {
-			$scope.rifiutoList = response;
-			$scope.rifiutoNameMap = $scope.setNameMap($scope.rifiutoList);
+		var urlCrm = "crm/" + $scope.profile.appInfo.ownerId + "?draft=" + $scope.draft;
+		$http.get(urlCrm, {headers: {'X-ACCESS-TOKEN': $scope.profile.appInfo.token}}).success(function (response) {
+			$scope.crmList = response;
+			$scope.crmNameMap = $scope.setCrmNameMap($scope.crmList);
 		});
 		
 		var urlTipologiaUtenza = "tipologia/utenza/" + $scope.profile.appInfo.ownerId + "?draft=" + $scope.draft;
@@ -56,9 +57,10 @@ riciclabolarioApp.controller('userCtrl', function($scope, $http, $sce, $q, DataS
 			$scope.tipologiaUtenzaList = response;
 		});
 		
-		var urlTipologiaRifiuto = "tipologia/rifiuto/" + $scope.profile.appInfo.ownerId + "?draft=" + $scope.draft;
-		$http.get(urlTipologiaRifiuto, {headers: {'X-ACCESS-TOKEN': $scope.profile.appInfo.token}}).success(function (response) {
-			$scope.tipologiaRifiutoList = response;
+		var urlTipologiaPuntoRaccolta = "tipologia/puntoraccolta/" + $scope.profile.appInfo.ownerId + "?draft=" + $scope.draft;
+		$http.get(urlTipologiaPuntoRaccolta, {headers: {'X-ACCESS-TOKEN': $scope.profile.appInfo.token}}).success(function (response) {
+			$scope.tipologiaPuntoRaccoltaList = response;
+			$scope.tipologiaPuntoRaccoltaNameMap = $scope.setNameMap($scope.tipologiaPuntoRaccoltaList);
 		});
 		
 		var urlArea = "area/" + $scope.profile.appInfo.ownerId + "?draft=" + $scope.draft;
@@ -67,19 +69,23 @@ riciclabolarioApp.controller('userCtrl', function($scope, $http, $sce, $q, DataS
 			$scope.areaNameMap = $scope.setNameMap($scope.areaList);
 		});
 		
-		var urlRiciclabolario = "riciclabolario/" + $scope.profile.appInfo.ownerId + "?draft=" + $scope.draft;
-		$http.get(urlRiciclabolario, {headers: {'X-ACCESS-TOKEN': $scope.profile.appInfo.token}}).success(function (response) {
-			$scope.riciclabolario = response;
+		var urlPuntoRaccolta = "puntoraccolta/" + $scope.profile.appInfo.ownerId + "?draft=" + $scope.draft;
+		$http.get(urlPuntoRaccolta, {headers: {'X-ACCESS-TOKEN': $scope.profile.appInfo.token}}).success(function (response) {
+			$scope.puntoRaccoltaList = response;
 		});
 		
 	};
 	
-	$scope.getRifiutoName = function(id) {
-		return $scope.rifiutoNameMap[id];
+	$scope.getCrmName = function(id) {
+		return $scope.crmNameMap[id];
 	};
 	
 	$scope.getAreaName = function(id) {
 		return $scope.areaNameMap[id];
+	};
+	
+	$scope.getTipologiaPuntoRaccoltaName = function(id) {
+		return $scope.tipologiaPuntoRaccoltaNameMap[id];
 	};
 	
 	$scope.resetError = function() {
@@ -95,7 +101,8 @@ riciclabolarioApp.controller('userCtrl', function($scope, $http, $sce, $q, DataS
 	$scope.changeLanguage = function(language) {
 		$scope.language = language;
 		$scope.areaNameMap = $scope.setNameMap($scope.areaList);
-		$scope.rifiutoNameMap = $scope.setNameMap($scope.rifiutoList);
+		$scope.rifiutoNameMap = $scope.setCrmNameMap($scope.crmList);
+		$scope.tipologiaPuntoRaccoltaNameMap = $scope.setNameMap($scope.tipologiaPuntoRaccoltaList);
 	};
 	
 	$scope.resetUI = function() {
@@ -106,17 +113,17 @@ riciclabolarioApp.controller('userCtrl', function($scope, $http, $sce, $q, DataS
 	
 	$scope.saveRelation = function() {
 		var element = {
-			rifiuto: '',
+			crm: '',
 			area: '',
 			tipologiaUtenza: '',
-			tipologiaRifiuto: ''
+			tipologiaPuntoRaccolta: ''
 		};
-		element.rifiuto = $scope.selectedRifiuto.objectId;
+		element.crm = $scope.selectedCrm.objectId;
 		element.area = $scope.selectedArea.objectId;
 		element.tipologiaUtenza = $scope.selectedTipologiaUtenza.objectId;
-		element.tipologiaRifiuto = $scope.selectedTipologiaRifiuto.objectId;
+		element.tipologiaPuntoRaccolta = $scope.selectedTipologiaPuntoRaccolta.objectId;
 			
-		var url = "riciclabolario/" + $scope.profile.appInfo.ownerId + "?draft=" + $scope.draft; 
+		var url = "puntoraccolta/" + $scope.profile.appInfo.ownerId + "?draft=" + $scope.draft; 
 		$http.post(url, element, {headers: {'X-ACCESS-TOKEN': $scope.profile.appInfo.token}}).then(
 		function(response) {
 			// this callback will be called asynchronously
@@ -125,9 +132,9 @@ riciclabolarioApp.controller('userCtrl', function($scope, $http, $sce, $q, DataS
 			$scope.data = response.data;
 			$scope.ok = true;
 			$scope.okMsg = "Operazione eseguita con successo";
-			$scope.riciclabolario.unshift($scope.data);
+			$scope.puntoRaccoltaList.unshift($scope.data);
 			$scope.resetUI();
-			console.log("saveRiciclabolario:" + response.status + " - " + response.data);
+			console.log("savePuntoRaccolta:" + response.status + " - " + response.data);
 		}, 
 		function(response) {
 			// called asynchronously if an error occurs
@@ -139,11 +146,11 @@ riciclabolarioApp.controller('userCtrl', function($scope, $http, $sce, $q, DataS
 	};
 	
 	$scope.deleteRelation = function(id) {
-		var index = $scope.findIndex($scope.riciclabolario, id);
+		var index = $scope.findIndex($scope.puntoRaccoltaList, id);
 		if(index >= 0) {
-			var element = $scope.riciclabolario[index];
+			var element = $scope.puntoRaccoltaList[index];
 			if(element != null) {
-				var url = "riciclabolario/" + $scope.profile.appInfo.ownerId + "/" + element.objectId + "?draft=" + $scope.draft;
+				var url = "puntoraccolta/" + $scope.profile.appInfo.ownerId + "/" + element.objectId + "?draft=" + $scope.draft;
 				$http.delete(url, {headers: {'X-ACCESS-TOKEN': $scope.profile.appInfo.token}}).then(
 				function(response) {
 					// this callback will be called asynchronously
@@ -152,9 +159,9 @@ riciclabolarioApp.controller('userCtrl', function($scope, $http, $sce, $q, DataS
 					$scope.data = response.data;
 					$scope.ok = true;
 					$scope.okMsg = "Operazione eseguita con successo";
-					$scope.riciclabolario.splice(index, 1);
+					$scope.puntoRaccoltaList.splice(index, 1);
 					$scope.resetUI();
-					console.log("deleteRiciclabolario:" + response.status + " - " + response.data);
+					console.log("deletePuntoRaccolta:" + response.status + " - " + response.data);
 				}, 
 				function(response) {
 				  // called asynchronously if an error occurs
@@ -196,6 +203,16 @@ riciclabolarioApp.controller('userCtrl', function($scope, $http, $sce, $q, DataS
 		for (var d = 0, len = array.length; d < len; d += 1) {
 			var key = array[d].objectId;
 			var name = array[d].nome[$scope.language];
+			map[key] = name;
+		}
+		return map;
+	};
+	
+	$scope.setCrmNameMap = function(array) {
+		var map = {};
+		for (var d = 0, len = array.length; d < len; d += 1) {
+			var key = array[d].objectId;
+			var name = array[d].zona + " - " + array[d].dettagliZona;
 			map[key] = name;
 		}
 		return map;
@@ -247,49 +264,50 @@ riciclabolarioApp.controller('userCtrl', function($scope, $http, $sce, $q, DataS
 		}
 	};
 
-	$scope.suggestTipologiaRifiuto = function(term) {
+	$scope.suggestTipologiaPuntoRaccolta = function(term) {
 		var q = term.toLowerCase().trim();
     var results = [];
     // Find first 10 states that start with `term`.
-    for (var i = 0; i < $scope.tipologiaRifiutoList.length; i++) {
-      var tipologia = $scope.tipologiaRifiutoList[i];
+    for (var i = 0; i < $scope.tipologiaPuntoRaccoltaList.length; i++) {
+      var tipologia = $scope.tipologiaPuntoRaccoltaList[i];
       if(tipologia.objectId) {
-        var result= tipologia.objectId.search(new RegExp(q, "i"));
+        var result= tipologia.nome[$scope.language].search(new RegExp(q, "i"));
         if(result >= 0) {
-        	results.push({ label: tipologia.objectId, value: tipologia.objectId, obj: tipologia });
+        	results.push({ label: tipologia.nome[$scope.language], value: tipologia.nome[$scope.language], obj: tipologia });
         }
       }
     }
     return results;
 	};
 	
-	$scope.ac_tipologia_rifiuto_options = {
-		suggest: $scope.suggestTipologiaRifiuto,
+	$scope.ac_tipologia_punto_raccolta_options = {
+		suggest: $scope.suggestTipologiaPuntoRaccolta,
 		on_select: function (selected) {
-			$scope.selectedTipologiaRifiuto = selected.obj;
+			$scope.selectedTipologiaPuntoRaccolta = selected.obj;
 		}
 	};
 
-	$scope.suggestRifiuto = function(term) {
+	$scope.suggestCrm = function(term) {
 		var q = term.toLowerCase().trim();
     var results = [];
     // Find first 10 states that start with `term`.
-    for (var i = 0; i < $scope.rifiutoList.length; i++) {
-      var rifiuto = $scope.rifiutoList[i];
-      if(rifiuto.nome[$scope.language]) {
-        var result= rifiuto.nome[$scope.language].search(new RegExp(q, "i"));
+    for (var i = 0; i < $scope.crmList.length; i++) {
+      var crm = $scope.crmList[i];
+      if(crm != null) {
+      	var name = $scope.getCrmName(crm.objectId);
+        var result= name.search(new RegExp(q, "i"));
         if(result >= 0) {
-        	results.push({ label: rifiuto.nome[$scope.language], value: rifiuto.nome[$scope.language], obj: rifiuto });
+        	results.push({ label: name, value: name, obj: crm });
         }
       }
     }
     return results;
 	};
 	
-	$scope.ac_rifiuto_options = {
-		suggest: $scope.suggestRifiuto,
+	$scope.ac_crm_options = {
+		suggest: $scope.suggestCrm,
 		on_select: function (selected) {
-			$scope.selectedRifiuto = selected.obj;
+			$scope.selectedCrm = selected.obj;
 		}
 	};
 	

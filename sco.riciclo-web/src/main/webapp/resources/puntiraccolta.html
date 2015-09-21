@@ -7,33 +7,35 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta name="description" content="">
 	<meta name="author" content="">
-	<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular.min.js"></script>
-	<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular-sanitize.min.js"></script>
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-  <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
-  <script src="lib/massautocomplete.min.js"></script>
-  <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
-  <link rel="stylesheet" href="css/massautocomplete.theme.css">
-  <link rel="stylesheet" href="css/style.css">
+	<script	src="http://ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular.min.js"></script>
+	<script	src="http://ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular-sanitize.min.js"></script>
+	<script	src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+	<script	src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+	<script src="lib/massautocomplete.min.js"></script>
+	<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+	<link rel="stylesheet" href="css/massautocomplete.theme.css">
+	<link rel="stylesheet" href="css/style.css">
 </head>
-<body data-ng-app="riciclabolario" data-ng-controller="userCtrl">
+<body data-ng-app="puntiraccolta" data-ng-controller="userCtrl">
 	<div data-ng-include="'html/navbar.html'"></div>
 
 	<div class="container-fluid">
 		<div class="well well-sm">
 			<h4>
-				Riciclabolario
-				<button type="button" class="btn btn-default btn-sm pull-right" data-ng-click="changeLanguage('en')"
+				Punti Raccolta
+				<button type="button" class="btn btn-default btn-sm pull-right"
+					data-ng-click="changeLanguage('en')"
 					data-ng-class="{'active':language == 'en'}">
-	   			<span class="glyphicon glyphicon-flag"></span> EN
-	 			</button>
-				<button type="button" class="btn btn-default btn-sm pull-right" data-ng-click="changeLanguage('it')"
+					<span class="glyphicon glyphicon-flag"></span> EN
+				</button>
+				<button type="button" class="btn btn-default btn-sm pull-right"
+					data-ng-click="changeLanguage('it')"
 					data-ng-class="{'active':language == 'it'}">
-	   			<span class="glyphicon glyphicon-flag"></span> IT
-	 			</button>
- 			</h4>
+					<span class="glyphicon glyphicon-flag"></span> IT
+				</button>
+			</h4>
 		</div>
-		
+	
 		<div class="panel-group">
 		
 			<div id="error" class="alert alert-danger fade in" data-ng-show="error">
@@ -68,34 +70,37 @@
 					  <div class="form-group" mass-autocomplete>
 					    <label class="control-label">Tipologia Utenza:</label>
 				    	<input data-ng-model="tipologiaUtenzaSearch" mass-autocomplete-item="ac_utenza_options" 
-				    	placeholder="tipologia utenza">
+				    	placeholder="tipologia utenza" tabindex="1">
 						  <button class="btn btn-default btn-sm" data-ng-click="tipologiaUtenzaSearch = ''">
 								<span class="glyphicon glyphicon-remove"></span>
 							</button>
 					  </div>
 						<div class="form-group" mass-autocomplete>
 							<label class="control-label">Area:</label>
-							<input data-ng-model="areaSearch" mass-autocomplete-item="ac_area_options" placeholder="area">
+							<input data-ng-model="areaSearch" mass-autocomplete-item="ac_area_options" placeholder="area"
+							tabindex="2">
 						  <button class="btn btn-default btn-sm" data-ng-click="areaSearch = ''">
 								<span class="glyphicon glyphicon-remove"></span>
 							</button>
 						</div>
 						<div class="form-group" mass-autocomplete>
-							<label class="control-label">Tipologia Rifiuto:</label>
-							<input data-ng-model="tipologiaRifiutoSearch" mass-autocomplete-item="ac_tipologia_rifiuto_options" 
-							placeholder="tipologia rifiuto">
-						  <button class="btn btn-default btn-sm" data-ng-click="tipologiaRifiutoSearch = ''">
+							<label class="control-label">Tipologia Punto Raccolta:</label>
+							<input data-ng-model="tipologiaPuntoRaccoltaSearch" mass-autocomplete-item="ac_tipologia_punto_raccolta_options" 
+							placeholder="tipologia punto raccolta" tabindex="3">
+						  <button class="btn btn-default btn-sm" data-ng-click="tipologiaPuntoRaccoltaSearch = ''">
 								<span class="glyphicon glyphicon-remove"></span>
 							</button>
 						</div>
 						<div class="form-group" mass-autocomplete>
-							<label class="control-label">Rifiuto:</label>
-							<input data-ng-model="rifiutoSearch" mass-autocomplete-item="ac_rifiuto_options" placeholder="rifiuto">
-						  <button class="btn btn-default btn-sm" data-ng-click="rifiutoSearch = ''">
+							<label class="control-label">Crm/Isola:</label>
+							<input data-ng-model="crmSearch" mass-autocomplete-item="ac_crm_options" placeholder="crm/isola"
+							tabindex="4">
+						  <button class="btn btn-default btn-sm" data-ng-click="crmSearch = ''">
 								<span class="glyphicon glyphicon-remove"></span>
 							</button>
 						</div>
-				  	<button class="btn btn-success" data-ng-disabled="error || incomplete" data-ng-click="saveRelation()">
+				  	<button class="btn btn-success" data-ng-disabled="error || incomplete" data-ng-click="saveRelation()"
+				  	tabindex="5">
 				  		<span class="glyphicon glyphicon-save"></span> Salva
 				  	</button> 
 					</form>	
@@ -112,15 +117,15 @@
 						</button>
 					</p>
 					<div class="row" style="background-color:lavender;">
-						<div class="col-md-3"><h4>Rifiuto</h4></div>
+						<div class="col-md-3"><h4>Crm/Isola</h4></div>
 						<div class="col-md-3"><h4>Area</h4></div>
 						<div class="col-md-2"><h4>Tipologia Utenza</h4></div>
-						<div class="col-md-2"><h4>Tipologia Rifiuto</h4></div>
+						<div class="col-md-2"><h4>Tipologia Punto Raccolta</h4></div>
 						<div class="col-md-2"><h4>Cancella</h4></div>
 					</div>
-					<div class="row list-row" data-ng-repeat="relation in riciclabolario | filter:search ">
+					<div class="row list-row" data-ng-repeat="relation in puntoRaccoltaList | filter:search ">
 						<div class="col-md-3" >
-							<span>{{getRifiutoName(relation.rifiuto)}}</span>
+							<span>{{getCrmName(relation.crm)}}</span>
 						</div>
 						<div class="col-md-3">
 							<span>{{getAreaName(relation.area)}}</span>
@@ -129,7 +134,7 @@
 							<span>{{relation.tipologiaUtenza}}</span>
 						</div>
 						<div class="col-md-2" >
-							<span>{{relation.tipologiaRifiuto}}</span>
+							<span>{{getTipologiaPuntoRaccoltaName(relation.tipologiaPuntoRaccolta)}}</span>
 						</div>
 						<div class="col-md-2">
 							<button class="btn btn-danger" data-ng-click="deleteRelation(relation.objectId)">
@@ -141,10 +146,11 @@
 			</div>
 				
 		</div>
-			
-	</div>
 	
-	<script src = "js/services.js"></script>	
-	<script src = "js/riciclabolario.js"></script>
+	</div>
+
+	<script src="js/services.js"></script>
+	<script src="js/puntiraccolta.js"></script>
+
 </body>
 </html>

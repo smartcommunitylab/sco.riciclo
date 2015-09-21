@@ -90,6 +90,11 @@ public class ConsoleController {
 		return "riciclabolario";
 	}
 	
+	@RequestMapping(value = "/puntiraccolta")
+	public String puntiraccolta() {
+		return "puntiraccolta";
+	}
+	
 	@RequestMapping(value = "/console/data")
 	public @ResponseBody App data() {
 		return storage.getAppDescriptor(getOwnerId());

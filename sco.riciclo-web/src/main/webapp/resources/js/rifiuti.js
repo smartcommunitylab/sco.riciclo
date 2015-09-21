@@ -105,7 +105,7 @@ angular.module('rifiuti', ['DataService']).controller('userCtrl', function($scop
 		  	$scope.data = response.data;
 		  	$scope.ok = true;
 		  	$scope.okMsg = "Operazione eseguita con successo";
-		  	$scope.rifiuti.push($scope.data);
+		  	$scope.rifiuti.unshift($scope.data);
 		  	$scope.resetUI();
 		  	console.log("saveRifiuto:" + response.status + " - " + response.data);
 		  }, 

@@ -188,7 +188,7 @@ angular.module('crm', ['DataService']).controller('userCtrl', function($scope, $
 		  	$scope.data = response.data;
 		  	$scope.ok = true;
 		  	$scope.okMsg = "Operazione eseguita con successo";
-		  	$scope.crmList.push($scope.data);
+		  	$scope.crmList.unshift($scope.data);
 		  	$scope.resetUI();
 		  	console.log("saveCrm:" + response.status + " - " + response.data);
 		  }, 
