@@ -22,16 +22,16 @@ puntiraccoltaApp.controller('userCtrl', function($scope, $http, $sce, $q, DataSe
 	$scope.status = 200;
 	
 	$scope.selectedArea = null;
-	$scope.areaSearch = "";
+	$scope.areaSearch = {};
 	
 	$scope.selectedTipologiaUtenza = null;
-	$scope.tipologiaUtenzaSearch = "";
+	$scope.tipologiaUtenzaSearch = {};
 	
 	$scope.selectedTipologiaPuntoRaccolta = null;
-	$scope.tipologiaPuntoRaccoltaSearch = "";
+	$scope.tipologiaPuntoRaccoltaSearch = {};
 	
 	$scope.selectedCrm = null;
-	$scope.crmSearch = "";
+	$scope.crmSearch = {};
 		
 	$scope.crmList = [];
 	$scope.areaList = [];

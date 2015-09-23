@@ -69,33 +69,33 @@
 					<form role="form">
 					  <div class="form-group" mass-autocomplete>
 					    <label class="control-label">Tipologia Utenza:</label>
-				    	<input data-ng-model="tipologiaUtenzaSearch" mass-autocomplete-item="ac_utenza_options" 
+				    	<input data-ng-model="tipologiaUtenzaSearch.value" mass-autocomplete-item="ac_utenza_options" 
 				    	placeholder="tipologia utenza" tabindex="1">
-						  <button class="btn btn-default btn-sm" data-ng-click="tipologiaUtenzaSearch = ''">
+						  <button class="btn btn-default btn-sm" data-ng-click="tipologiaUtenzaSearch.value = null">
 								<span class="glyphicon glyphicon-remove"></span>
 							</button>
 					  </div>
 						<div class="form-group" mass-autocomplete>
 							<label class="control-label">Area:</label>
-							<input data-ng-model="areaSearch" mass-autocomplete-item="ac_area_options" placeholder="area"
+							<input data-ng-model="areaSearch.value" mass-autocomplete-item="ac_area_options" placeholder="area"
 							tabindex="2">
-						  <button class="btn btn-default btn-sm" data-ng-click="areaSearch = ''">
+						  <button class="btn btn-default btn-sm" data-ng-click="areaSearch.value = null">
 								<span class="glyphicon glyphicon-remove"></span>
 							</button>
 						</div>
 						<div class="form-group" mass-autocomplete>
 							<label class="control-label">Tipologia Punto Raccolta:</label>
-							<input data-ng-model="tipologiaPuntoRaccoltaSearch" mass-autocomplete-item="ac_tipologia_punto_raccolta_options" 
+							<input data-ng-model="tipologiaPuntoRaccoltaSearch.value" mass-autocomplete-item="ac_tipologia_punto_raccolta_options" 
 							placeholder="tipologia punto raccolta" tabindex="3">
-						  <button class="btn btn-default btn-sm" data-ng-click="tipologiaPuntoRaccoltaSearch = ''">
+						  <button class="btn btn-default btn-sm" data-ng-click="tipologiaPuntoRaccoltaSearch.value = null">
 								<span class="glyphicon glyphicon-remove"></span>
 							</button>
 						</div>
 						<div class="form-group" mass-autocomplete>
 							<label class="control-label">Crm/Isola:</label>
-							<input data-ng-model="crmSearch" mass-autocomplete-item="ac_crm_options" placeholder="crm/isola"
+							<input data-ng-model="crmSearch.value" mass-autocomplete-item="ac_crm_options" placeholder="crm/isola"
 							tabindex="4">
-						  <button class="btn btn-default btn-sm" data-ng-click="crmSearch = ''">
+						  <button class="btn btn-default btn-sm" data-ng-click="crmSearch.value = null">
 								<span class="glyphicon glyphicon-remove"></span>
 							</button>
 						</div>
