@@ -1,4 +1,6 @@
-angular.module('crm', ['DataService']).controller('userCtrl', function($scope, $window, $http, DataService) {
+var crmApp = angular.module('crm', ['DataService']);
+
+crmApp.controller('userCtrl', function($scope, $window, $http, DataService) {
 	DataService.getProfile().then(function(p) {
   	$scope.initData(p);
   });
@@ -12,6 +14,7 @@ angular.module('crm', ['DataService']).controller('userCtrl', function($scope, $
 	$scope.fRegion = "";
 	$scope.fRegionDetails = "";
 	$scope.fNote = "";
+	
 	$scope.fResiduo = false;
 	$scope.fImbCarta = false;
 	$scope.fImbPlasticaMettallo = false;
@@ -19,14 +22,25 @@ angular.module('crm', ['DataService']).controller('userCtrl', function($scope, $
 	$scope.fOrganico = false;
 	$scope.fIndumenti = false;
 	$scope.fGettoniera = false;
+	
 	$scope.fLatitude = "";
 	$scope.fLongitude = "";
+	
 	$scope.fDateFrom = "";
 	$scope.fDateTo = "";
 	$scope.fHourFrom = "";
 	$scope.fHourTo = "";
-	$scope.fDateWeekDays = "";
-	$scope.fDateExceptions = "";
+	
+	$scope.fDateDayOfWeek = "";
+	$scope.fDateWorkingDay = "";
+	$scope.fDateWorkingDayList = [];
+	$scope.fDateWorkingDaySelected = "";
+	
+	
+	$scope.fDateExceptionDay = "";
+	$scope.fDateExceptionDayList = [];
+	$scope.fDateExceptionDaySelected = "";
+	
 	$scope.fDateNotes = "";
 	
 	$scope.search = "";
@@ -300,8 +314,17 @@ angular.module('crm', ['DataService']).controller('userCtrl', function($scope, $
 			element.dataA = $scope.fDateTo;
 			element.dalle = $scope.fHourFrom;
 			element.alle = $scope.fHourTo;
-			element.il = $scope.fDateWeekDays;
-			element.eccezione = $scope.fDateExceptions;
+			if($scope.fDateDayOfWeek) {
+				element.il = $scope.fDateDayOfWeek + " ";
+			}
+			for(var d = 0, len = $scope.fDateWorkingDayList.length; d < len; d += 1) {
+				element.il = element.il.concat($scope.fDateWorkingDayList[d]);
+				element.il = element.il.concat(" ");
+			}
+			for(var d = 0, len = $scope.fDateExceptionDayList.length; d < len; d += 1) {
+				element.eccezione = element.eccezione.concat($scope.fDateExceptionDayList[d]);
+				element.eccezione = element.eccezione.concat(" ");
+			}
 			element.note[$scope.language] = $scope.fDateNotes;
 				
 			var url = "crm/" + $scope.profile.appInfo.ownerId + "/" + crm.objectId + "/orario?draft=" + $scope.draft;
@@ -350,5 +373,60 @@ angular.module('crm', ['DataService']).controller('userCtrl', function($scope, $
 	  } else {
 	  	$scope.incomplete = false;
 	  }
-	};	
+	};
+	
+	$scope.addWorkingDay = function() {
+		if($scope.fDateWorkingDay) {
+			$scope.fDateWorkingDayList.push($scope.fDateWorkingDay);
+			$scope.fDateWorkingDay = "";
+		}
+	};
+	
+	$scope.deleteWorkingDay = function() {
+		if($scope.fDateWorkingDaySelected) {
+			$scope.fDateWorkingDayList.splice($scope.fDateWorkingDaySelected, 1);
+			$scope.fDateWorkingDaySelected = "";
+		}
+	};
+
+	$scope.addExceptionDay = function() {
+		if($scope.fDateExceptionDay) {
+			$scope.fDateExceptionDayList.push($scope.fDateExceptionDay);
+			$scope.fDateExceptionDay = "";
+		}
+	};
+	
+	$scope.deleteExceptionDay = function() {
+		if($scope.fDateExceptionDaySelected) {
+			$scope.fDateExceptionDayList.splice($scope.fDateExceptionDaySelected, 1);
+			$scope.fDateExceptionDaySelected = "";
+		}
+	};
+
+});
+
+crmApp.directive('datepicker', function() {
+  return {
+      restrict: 'A',
+      require : 'ngModel',
+      link : function (scope, element, attrs, ngModelCtrl) {
+      	$(function(){
+      		element.datepicker("option", $.datepicker.regional['it']);
+      		element.datepicker({
+      			showOn: attrs['showon'],
+            buttonImage: "lib/jqueryui/images/calendar.gif",
+            buttonImageOnly: false,
+            buttonText: "Calendario",
+            dateFormat: attrs['dateformat'],
+            minDate: "-1Y", 
+            maxDate: "+2Y",
+            onSelect:function (date) {
+            	scope.$apply(function () {
+            		ngModelCtrl.$setViewValue(date);
+              });
+            }
+          });
+        });
+      }
+  }
 });
