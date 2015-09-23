@@ -115,7 +115,7 @@ public class UIConverter {
 			segnalazioneUI.setId(segnalazione.getObjectId());
 			segnalazioneUI.setArea(segnalazione.getArea());
 			segnalazioneUI.setEmail(segnalazione.getEmail());
-			segnalazioneUI.setTipologia(segnalazione.getTipologia());
+			segnalazioneUI.setTipologia(Utils.getString(segnalazione.getTipologia(), lang, defaultLang));
 			result.add(segnalazioneUI);
 		}
 		return result;
