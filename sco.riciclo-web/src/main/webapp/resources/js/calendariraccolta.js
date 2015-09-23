@@ -48,7 +48,12 @@ puntiraccoltaApp.controller('userCtrl', function($scope, $http, $sce, $q, DataSe
 		
 		var urlTipologiaPuntoRaccolta = "tipologia/puntoraccolta/" + $scope.profile.appInfo.ownerId + "?draft=" + $scope.draft;
 		$http.get(urlTipologiaPuntoRaccolta, {headers: {'X-ACCESS-TOKEN': $scope.profile.appInfo.token}}).success(function (response) {
-			$scope.tipologiaPuntoRaccoltaList = response;
+			for (var d = 0, len = response.length; d < len; d += 1) {
+				var element = response[d];
+				if(element.type == "PP") {
+					$scope.tipologiaPuntoRaccoltaList.push(element);
+				}
+			}
 			$scope.tipologiaPuntoRaccoltaNameMap = $scope.setNameMap($scope.tipologiaPuntoRaccoltaList);
 		});
 		
