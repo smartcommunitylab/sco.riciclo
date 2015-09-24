@@ -438,6 +438,21 @@ public class RepositoryManager {
 		template.save(raccolta);
 	}
 	
+	public void updateCalendarioRaccolta(CalendarioRaccolta calendario, boolean draft) throws EntityNotFoundException {
+		MongoTemplate template = draft ? draftTemplate : finalTemplate;
+		Query query = new Query(new Criteria("ownerId").is(calendario.getOwnerId()).and("objectId").is(calendario.getObjectId()));
+		CalendarioRaccolta calendarioDB = template.findOne(query, CalendarioRaccolta.class);
+		if (calendarioDB == null) {
+			throw new EntityNotFoundException(String.format("CalendarioRaccolta with id %s not found", calendario.getObjectId()));
+		}
+		Update update = new Update();
+		update.set("lastUpdate", new Date());
+		update.set("tipologiaPuntoRaccolta", calendario.getTipologiaPuntoRaccolta());
+		update.set("tipologiaUtenza", calendario.getTipologiaUtenza());
+		update.set("area", calendario.getArea());
+		template.updateFirst(query, update, CalendarioRaccolta.class);
+	}	
+	
 	public void removePuntoRaccolta(String ownerId, String objectId, boolean draft) throws EntityNotFoundException {
 		MongoTemplate template = draft ? draftTemplate : finalTemplate;
 		Query query = new Query(new Criteria("ownerId").is(ownerId).and("objectId").is(objectId));
@@ -665,5 +680,6 @@ public class RepositoryManager {
 		Query query = new Query(new Criteria("token").is(token));
 		Token result = template.findOne(query, Token.class);
 		return result;
-	}	
+	}
+
 }

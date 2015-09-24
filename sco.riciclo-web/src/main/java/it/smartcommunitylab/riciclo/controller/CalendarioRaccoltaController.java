@@ -107,6 +107,20 @@ public class CalendarioRaccoltaController {
 		return calendario;
 	}
 	
+	@RequestMapping(value="/calraccolta/{ownerId}/{objectId}", method=RequestMethod.PUT) 
+	public @ResponseBody void updateCalendario(@RequestBody CalendarioRaccolta calendario, 
+			@PathVariable String ownerId,	@PathVariable String objectId, HttpServletRequest request, 
+			HttpServletResponse response)	throws EntityNotFoundException {
+		boolean draft = Utils.getDraft(request);
+		if(!Utils.validateAPIRequest(request, appSetup, draft, storage)) {
+			response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+		}
+		calendario.setObjectId(objectId);
+		calendario.setOwnerId(ownerId);
+		storage.updateCalendarioRaccolta(calendario, draft);
+	}
+	
+	
 	@RequestMapping(value="/calraccolta/{ownerId}/{objectId}", method=RequestMethod.DELETE)
 	public @ResponseBody void deleteCalendarioRaccoltaById(@PathVariable String ownerId, 
 			@PathVariable String objectId, HttpServletRequest request, 

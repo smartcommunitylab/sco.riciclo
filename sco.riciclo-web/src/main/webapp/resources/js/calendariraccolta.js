@@ -163,35 +163,64 @@ puntiraccoltaApp.controller('userCtrl', function($scope, $http, $sce, $q, DataSe
 	};
 	
 	$scope.saveRelation = function() {
-		var element = {
-			area: '',
-			tipologiaUtenza: '',
-			tipologiaPuntoRaccolta: ''
-		};
-		element.area = $scope.selectedArea.objectId;
-		element.tipologiaUtenza = $scope.selectedTipologiaUtenza.objectId;
-		element.tipologiaPuntoRaccolta = $scope.selectedTipologiaPuntoRaccolta.objectId;
-			
-		var url = "calraccolta/" + $scope.profile.appInfo.ownerId + "?draft=" + $scope.draft; 
-		$http.post(url, element, {headers: {'X-ACCESS-TOKEN': $scope.profile.appInfo.token}}).then(
-		function(response) {
-			// this callback will be called asynchronously
-			// when the response is available
-			$scope.status = response.status;
-			$scope.data = response.data;
-			$scope.ok = true;
-			$scope.okMsg = "Operazione eseguita con successo";
-			$scope.calendarioRaccoltaList.unshift($scope.data);
-			$scope.resetUI();
-			console.log("saveCalendarioRaccolta:" + response.status + " - " + response.data);
-		}, 
-		function(response) {
-			// called asynchronously if an error occurs
-			// or server returns response with an error status.
-			$scope.error = true;
-			$scope.errorMsg = response.status + " - " + (response.data || "Request failed");
-			$scope.status = response.status;
-		});
+		if($scope.create) {
+			var element = {
+				area: '',
+				tipologiaUtenza: '',
+				tipologiaPuntoRaccolta: ''
+			};
+			element.area = $scope.selectedArea.objectId;
+			element.tipologiaUtenza = $scope.selectedTipologiaUtenza.objectId;
+			element.tipologiaPuntoRaccolta = $scope.selectedTipologiaPuntoRaccolta.objectId;
+				
+			var url = "calraccolta/" + $scope.profile.appInfo.ownerId + "?draft=" + $scope.draft; 
+			$http.post(url, element, {headers: {'X-ACCESS-TOKEN': $scope.profile.appInfo.token}}).then(
+			function(response) {
+				// this callback will be called asynchronously
+				// when the response is available
+				$scope.status = response.status;
+				$scope.data = response.data;
+				$scope.ok = true;
+				$scope.okMsg = "Operazione eseguita con successo";
+				$scope.calendarioRaccoltaList.unshift($scope.data);
+				$scope.resetUI();
+				console.log("saveCalendarioRaccolta:" + response.status + " - " + response.data);
+			}, 
+			function(response) {
+				// called asynchronously if an error occurs
+				// or server returns response with an error status.
+				$scope.error = true;
+				$scope.errorMsg = response.status + " - " + (response.data || "Request failed");
+				$scope.status = response.status;
+			});
+		}
+		if($scope.edit) {
+			var element = $scope.findByObjectId($scope.calendarioRaccoltaList, $scope.fId);
+			if(element != null) {
+				element.area = $scope.selectedArea.objectId;
+				element.tipologiaUtenza = $scope.selectedTipologiaUtenza.objectId;
+				element.tipologiaPuntoRaccolta = $scope.selectedTipologiaPuntoRaccolta.objectId;
+				
+				var url = "calraccolta/" + $scope.profile.appInfo.ownerId + "/" + element.objectId + "?draft=" + $scope.draft;
+				$http.put(url, element, {headers: {'X-ACCESS-TOKEN': $scope.profile.appInfo.token}}).then(
+				function(response) {
+					// this callback will be called asynchronously
+					// when the response is available
+					$scope.status = response.status;
+					$scope.data = response.data;
+					$scope.ok = true;
+					$scope.okMsg = "Operazione eseguita con successo";
+					console.log("saveCalendarioRaccolta:" + response.status + " - " + response.data);
+				}, 
+				function(response) {
+					// called asynchronously if an error occurs
+					// or server returns response with an error status.
+					$scope.error = true;
+					$scope.errorMsg = response.status + " - " + (response.data || "Request failed");
+					$scope.status = response.status;
+				});
+			}
+		}
 	};
 		
 	$scope.deleteRelation = function(id) {

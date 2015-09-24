@@ -6,10 +6,12 @@ angular.module('rifiuti', ['DataService']).controller('userCtrl', function($scop
 	$scope.selectedTab = "menu-rifiuti";
 	$scope.language = "it";
 	$scope.draft = true;
+	$scope.defaultLang = "it";
 	
 	$scope.fName = "";
 	$scope.fId = "";
 	$scope.search = "";
+	$scope.actualName = "";
 	
 	$scope.edit = false;
 	$scope.create = false;
@@ -68,6 +70,7 @@ angular.module('rifiuti', ['DataService']).controller('userCtrl', function($scop
 		if(element != null) {
 			$scope.fId = id;
 			$scope.fName = element.nome[$scope.language];
+			$scope.actualName = element.nome[$scope.defaultLang];
 			$scope.incomplete = false;	
 		}
 		$('html,body').animate({scrollTop:0},0);
@@ -88,6 +91,7 @@ angular.module('rifiuti', ['DataService']).controller('userCtrl', function($scop
 		$scope.fId = "";
 		$scope.fName = "";
 		$scope.search = "";
+		$scope.actualName = "";
 		$scope.incomplete = true;
 		$('html,body').animate({scrollTop:0},0);
 	};
