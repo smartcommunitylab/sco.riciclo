@@ -36,6 +36,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
+import org.springframework.web.servlet.View;
+import org.springframework.web.servlet.view.RedirectView;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -56,9 +58,14 @@ public class ConsoleController {
 	private ImportManager manager;
 
 	@RequestMapping(value = "/")
-	public String root() {
-		return "index";
+	public View root() {
+		return new RedirectView("console");
 	}		
+	
+	@RequestMapping(value = "/upload")
+	public String upload() {
+		return "upload";
+	}
 	
 	@RequestMapping(value = "/login")
 	public String login() {
