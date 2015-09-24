@@ -27,9 +27,9 @@ import it.smartcommunitylab.riciclo.controller.Utils;
 import it.smartcommunitylab.riciclo.model.AppDataRifiuti;
 import it.smartcommunitylab.riciclo.model.Area;
 import it.smartcommunitylab.riciclo.model.CalendarioRaccolta;
-import it.smartcommunitylab.riciclo.model.Crm;
 import it.smartcommunitylab.riciclo.model.Categorie;
 import it.smartcommunitylab.riciclo.model.Colore;
+import it.smartcommunitylab.riciclo.model.Crm;
 import it.smartcommunitylab.riciclo.model.Gestore;
 import it.smartcommunitylab.riciclo.model.Istituzione;
 import it.smartcommunitylab.riciclo.model.OrarioApertura;
@@ -42,7 +42,6 @@ import it.smartcommunitylab.riciclo.model.Tipologia;
 import it.smartcommunitylab.riciclo.model.TipologiaProfilo;
 import it.smartcommunitylab.riciclo.model.TipologiaPuntoRaccolta;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -153,11 +152,11 @@ public class RifiutiConverter {
 			area.setObjectId(ar.getNome());
 			area.setOwnerId(ownerId);
 			area.setIstituzione(ar.getIstituzione());
-			area.getNome().put(defaultLang, ar.getNome());
+			area.setNome(ar.getNome());
 			area.setParent(ar.getParent());
 			area.setGestore(ar.getGestore());
 			area.getDescrizione().put(defaultLang, ar.getDescrizione());
-			area.setEtichetta(ar.getEtichetta());
+			area.getEtichetta().put(defaultLang, ar.getEtichetta());
 			area.setCodiceISTAT(ar.getCodiceIstat());
 			
 			Map<String, Boolean> utenza = Maps.newTreeMap();

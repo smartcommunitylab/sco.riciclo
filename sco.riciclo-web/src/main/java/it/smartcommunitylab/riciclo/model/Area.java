@@ -24,11 +24,11 @@ public class Area extends BaseObject {
 
 	private String objectId;
 	private String istituzione;
-	private Map<String, String> nome = new HashMap<String, String>();
+	private String nome;
 	private String parent;
 	private String gestore;
 	private Map<String, String> descrizione = new HashMap<String, String>();
-	private String etichetta;
+	private Map<String, String> etichetta = new HashMap<String, String>();
 	private Map<String, Boolean> utenza = new HashMap<String, Boolean>();
 	private String codiceISTAT;
 
@@ -56,14 +56,6 @@ public class Area extends BaseObject {
 		this.gestore = gestore;
 	}
 
-	public String getEtichetta() {
-		return etichetta;
-	}
-
-	public void setEtichetta(String etichetta) {
-		this.etichetta = etichetta;
-	}	
-
 	public Map<String, Boolean> getUtenza() {
 		return utenza;
 	}
@@ -85,14 +77,6 @@ public class Area extends BaseObject {
 		this.objectId = objectId;
 	}
 
-	public Map<String, String> getNome() {
-		return nome;
-	}
-
-	public void setNome(Map<String, String> nome) {
-		this.nome = nome;
-	}
-
 	public Map<String, String> getDescrizione() {
 		return descrizione;
 	}
@@ -107,6 +91,22 @@ public class Area extends BaseObject {
 
 	public void setCodiceISTAT(String codiceISTAT) {
 		this.codiceISTAT = codiceISTAT;
+	}
+
+	public String getNome() {
+		return nome;
+	}
+
+	public void setNome(String nome) {
+		this.nome = nome;
+	}
+
+	public Map<String, String> getEtichetta() {
+		return etichetta;
+	}
+
+	public void setEtichetta(Map<String, String> etichetta) {
+		this.etichetta = etichetta;
 	}			
 	
 }

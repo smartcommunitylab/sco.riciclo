@@ -151,9 +151,9 @@ public class UIConverter {
 			areaUI.setParent(area.getParent());
 			areaUI.setIstituzione(area.getIstituzione());
 			areaUI.setGestore(area.getGestore());
-			areaUI.setNome(Utils.getString(area.getNome(), lang, defaultLang));
+			areaUI.setNome(area.getNome());
 			areaUI.setDescrizione(Utils.getString(area.getDescrizione(), lang, defaultLang));
-			areaUI.setEtichetta(area.getEtichetta());
+			areaUI.setEtichetta(Utils.getString(area.getEtichetta(), lang, defaultLang));
 			areaUI.setUtenza(area.getUtenza());
 			result.add(areaUI);
 		}
