@@ -64,10 +64,11 @@ angular.module('rifiuti.services.data', [])
             });
             profili.forEach(function (p) {
                 completeData.puntiRaccolta.forEach(function (pr) {
-                    var prKey = pr.tipologiaPuntiRaccolta + ' ' + pr.dettagliZona;
                     for (var i = 0; i < pr.utenzaArea.length; i++) {
                         var ua = pr.utenzaArea[i];
                         if (ua.tipologiaUtenza !== p.utenza.tipologiaUtenza) continue;
+
+                        var prKey = pr.tipologiaPuntiRaccolta + ' ' + (pr.dettagliZona ? pr.dettagliZona : ua.area);
 
                         if (Utili.belongsTo(pr, ua.area, p) && !map[prKey + ua.tipologiaUtenza]) {
                             var newPr = angular.copy(pr);

@@ -204,7 +204,7 @@ angular.module('rifiuti.controllers.profilo', [])
     });
 
     $scope.openLocalitaSelector = function () {
-        if (!$scope.profilo.utenza) return;
+        if (!$scope.profilo.utenza || !$scope.profilo.utenza.tipologiaUtenza) return;
         $scope.modal = modalLocalita;
         $scope.modal.show();
     };
