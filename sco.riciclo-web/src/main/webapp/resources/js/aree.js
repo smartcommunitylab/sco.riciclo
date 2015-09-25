@@ -34,6 +34,8 @@ areeApp.controller('userCtrl', function($scope, $http, $sce, $q, DataService) {
 	
 	$scope.tipologiaUtenzaList = [];
 	$scope.areaList = [];
+	$scope.istituzioneList = [];
+	$scope.gestoreList = [];
 	$scope.areaNameMap = {};
 	$scope.areaEtichettaMap = {};
 	$scope.tipologiaUtenzaSelected = {}; 
@@ -52,6 +54,28 @@ areeApp.controller('userCtrl', function($scope, $http, $sce, $q, DataService) {
 			$scope.areaList = response;
 			$scope.areaNameMap = $scope.setNameMap($scope.areaList);
 			$scope.areaEtichettaMap = $scope.setEtichettaMap($scope.areaList);
+		});
+		
+		var urlIstituzione = "istituzione/" + $scope.profile.appInfo.ownerId + "?draft=" + $scope.draft;
+		$http.get(urlIstituzione, {headers: {'X-ACCESS-TOKEN': $scope.profile.appInfo.token}}).success(function (response) {
+			var array = response;
+			for (var d = 0, len = array.length; d < len; d += 1) {
+				var element = array[d];
+				if($scope.istituzioneList.indexOf(element.nome) == -1) {
+					$scope.istituzioneList.push(element.nome);
+				}
+			}
+		});
+		
+		var urlGestore = "gestore/" + $scope.profile.appInfo.ownerId + "?draft=" + $scope.draft;
+		$http.get(urlGestore, {headers: {'X-ACCESS-TOKEN': $scope.profile.appInfo.token}}).success(function (response) {
+			var array = response;
+			for (var d = 0, len = array.length; d < len; d += 1) {
+				var element = array[d];
+				if($scope.gestoreList.indexOf(element.ragioneSociale) == -1) {
+					$scope.gestoreList.push(element.ragioneSociale);
+				}
+			}
 		});
 		
 	};

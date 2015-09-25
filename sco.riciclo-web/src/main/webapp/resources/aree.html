@@ -89,13 +89,19 @@
 				    </div>
 				   	<div class="form-group">
 				    	<label class="control-label">Istituzione:</label>
-				    	<input type="text" name="istituzione" data-ng-model="fIstituzione" 
-				    	data-ng-disabled="!edit && !create" placeholder="istituzione">
+				    	<select data-ng-model="fIstituzione" data-ng-disabled="!edit && !create">
+        				<option data-ng-repeat="item in istituzioneList" value="{{item}}">{{item}}</option>
+      				</select>
+				    	<!-- <input type="text" name="istituzione" data-ng-model="fIstituzione" 
+				    	data-ng-disabled="!edit && !create" placeholder="istituzione"> -->
 				    </div>
 				   	<div class="form-group">
 				    	<label class="control-label">Gestore:</label>
-				    	<input type="text" name="gestore" data-ng-model="fGestore" 
-				    	data-ng-disabled="!edit && !create" placeholder="gestore">
+				    	<select data-ng-model="fGestore" data-ng-disabled="!edit && !create">
+        				<option data-ng-repeat="item in gestoreList" value="{{item}}">{{item}}</option>
+      				</select>
+				    	<!-- <input type="text" name="gestore" data-ng-model="fGestore" 
+				    	data-ng-disabled="!edit && !create" placeholder="gestore"> -->
 				    </div>
 				   	<div class="form-group">
 				    	<label class="control-label">Codice ISTAT:</label>
