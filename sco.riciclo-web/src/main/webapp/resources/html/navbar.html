@@ -11,6 +11,9 @@
 		</div>
 		<div class="collapse navbar-collapse" id="navBar">
 			<ul class="nav navbar-nav">
+				<li data-ng-class="{'active':selectedTab == 'menu-gestori'}" 
+					data-ng-click="selectedTab = 'menu-gestori'"><a href="gestori">Gestori</a>
+				</li>
 				<li data-ng-class="{'active':selectedTab == 'menu-aree'}" 
 					data-ng-click="selectedTab = 'menu-aree'"><a href="aree">Aree</a>
 				</li>

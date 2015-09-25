@@ -92,6 +92,11 @@ public class ConsoleController {
 		return "crm";
 	}
 	
+	@RequestMapping(value = "/gestori")
+	public String gestori() {
+		return "gestori";
+	}
+	
 	@RequestMapping(value = "/riciclabolario")
 	public String riciclabolario() {
 		return "riciclabolario";
