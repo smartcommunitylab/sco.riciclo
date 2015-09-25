@@ -340,7 +340,8 @@ angular.module('rifiuti', [
         "Note": "Note",
         "NEWS": "NEWS",
         "News": "News",
-        pick_time: 'Scegli l\'orario'
+        pick_time: 'Scegli l\'orario',
+        settings_info: "Scegliendo le frazioni sotto indicate verrà inviato un avviso di notifica nelle giornate antecedenti a quelle di raccolta."
     });
     $translateProvider.preferredLanguage(current_lang);
 

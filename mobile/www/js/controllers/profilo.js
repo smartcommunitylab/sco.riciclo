@@ -234,7 +234,7 @@ angular.module('rifiuti.controllers.profilo', [])
 
     //Cleanup the modal when we're done with it!
     $scope.$on('$destroy', function () {
-        $scope.modal.remove();
+        if ($scope.modal) $scope.modal.remove();
     });
 
     // Execute action on hide modal

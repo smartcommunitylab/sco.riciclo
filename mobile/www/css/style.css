@@ -372,6 +372,9 @@ body.platform-browser .scroll-bar-fade-out {
 .tipidirifiuto ion-list ion-item a {
     background-color: #eeeeee !important;
 }
+.tipidirifiuto ion-list ion-item a {
+    white-space: normal;
+}
 /* Tipo di rifiuto */
 
 .tipodirifiuto .tipodirifiuto-icon,
@@ -635,6 +638,10 @@ body.platform-browser .scroll-bar-fade-out {
 .settings,
 .settings .item {
     background-color: #eeeeee;
+}
+
+.settings .setting-info {
+    padding: 8px 16px;
 }
 
 .settings .item {

@@ -9,6 +9,7 @@
     <ion-content class="settings padding">
 
         <ion-toggle ng-if="!isWebView" ng-model="settings.enableNotifications" toggle-class="toggle-100r" ng-change="saveSettings()">Notifiche</ion-toggle>
+        <div class="setting-info">{{'settings_info' | translate}}</div>
 
         <div class="padding-top">
             <label class="item item-input">Categorie di notifiche</label>
