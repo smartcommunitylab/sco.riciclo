@@ -681,5 +681,94 @@ public class RepositoryManager {
 		Token result = template.findOne(query, Token.class);
 		return result;
 	}
+	
+	/**
+	 * Gestione Istituzione
+	 * @param istituzione
+	 * @param draft
+	 */
+
+	public void addIstituzione(Istituzione istituzione, boolean draft) {
+		MongoTemplate template = draft ? draftTemplate : finalTemplate;
+		Date actualDate = new Date();
+		istituzione.setCreationDate(actualDate);
+		istituzione.setLastUpdate(actualDate);
+		template.save(istituzione);
+	}
+
+	public void updateIstituzione(Istituzione istituzione, boolean draft) throws EntityNotFoundException {
+		MongoTemplate template = draft ? draftTemplate : finalTemplate;
+		Query query = new Query(new Criteria("ownerId").is(istituzione.getOwnerId()).and("objectId").is(istituzione.getObjectId()));
+		Istituzione istituzioneDB = template.findOne(query, Istituzione.class);
+		if (istituzioneDB == null) {
+			throw new EntityNotFoundException(String.format("Istituzione with id %s not found", istituzione.getObjectId()));
+		}
+		Update update = new Update();
+		update.set("lastUpdate", new Date());
+		update.set("nome", istituzione.getNome());
+		update.set("descrizione", istituzione.getDescrizione());
+		update.set("indirizzo", istituzione.getIndirizzo());
+		update.set("ufficio", istituzione.getUfficio());
+		update.set("orarioUfficio", istituzione.getOrarioUfficio());
+		update.set("sito", istituzione.getSito());
+		update.set("pec", istituzione.getPec());
+		update.set("email", istituzione.getEmail());
+		update.set("telefono", istituzione.getTelefono());
+		update.set("fax", istituzione.getFax());
+		update.set("geocoding", istituzione.getGeocoding());
+		update.set("facebook", istituzione.getFacebook());
+		template.updateFirst(query, update, Istituzione.class);
+	}
+
+	public void removeIstituzione(String ownerId, String objectId, boolean draft) throws EntityNotFoundException {
+		MongoTemplate template = draft ? draftTemplate : finalTemplate;
+		Query query = new Query(new Criteria("ownerId").is(ownerId).and("objectId").is(objectId));
+		Istituzione istituzioneDB = template.findOne(query, Istituzione.class);
+		if (istituzioneDB == null) {
+			throw new EntityNotFoundException(String.format("Istituzione with id %s not found", objectId));
+		}
+		template.findAndRemove(query, Istituzione.class);
+	}
+
+	public void addGestore(Gestore gestore, boolean draft) {
+		MongoTemplate template = draft ? draftTemplate : finalTemplate;
+		Date actualDate = new Date();
+		gestore.setCreationDate(actualDate);
+		gestore.setLastUpdate(actualDate);
+		template.save(gestore);
+	}
+
+	public void updateGestore(Gestore gestore, boolean draft) throws EntityNotFoundException {
+		MongoTemplate template = draft ? draftTemplate : finalTemplate;
+		Query query = new Query(new Criteria("ownerId").is(gestore.getOwnerId()).and("objectId").is(gestore.getObjectId()));
+		Gestore gestoreDB = template.findOne(query, Gestore.class);
+		if (gestoreDB == null) {
+			throw new EntityNotFoundException(String.format("Gestore with id %s not found", gestore.getObjectId()));
+		}
+		Update update = new Update();
+		update.set("lastUpdate", new Date());
+		update.set("ragioneSociale", gestore.getRagioneSociale());
+		update.set("descrizione", gestore.getDescrizione());
+		update.set("indirizzo", gestore.getIndirizzo());
+		update.set("ufficio", gestore.getUfficio());
+		update.set("orarioUfficio", gestore.getOrarioUfficio());
+		update.set("sitoWeb", gestore.getSitoWeb());
+		update.set("email", gestore.getEmail());
+		update.set("telefono", gestore.getTelefono());
+		update.set("fax", gestore.getFax());
+		update.set("geocoding", gestore.getGeocoding());
+		update.set("facebook", gestore.getFacebook());
+		template.updateFirst(query, update, Gestore.class);		
+	}
+
+	public void removeGestore(String ownerId, String objectId, boolean draft) throws EntityNotFoundException {
+		MongoTemplate template = draft ? draftTemplate : finalTemplate;
+		Query query = new Query(new Criteria("ownerId").is(ownerId).and("objectId").is(objectId));
+		Gestore gestoreDB = template.findOne(query, Gestore.class);
+		if (gestoreDB == null) {
+			throw new EntityNotFoundException(String.format("Gestore with id %s not found", objectId));
+		}
+		template.findAndRemove(query, Gestore.class);
+	}
 
 }
