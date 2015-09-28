@@ -46,7 +46,7 @@ public class RifiutoController {
 	private AppSetup appSetup;	
 	
 	@SuppressWarnings("unchecked")
-	@RequestMapping(value="/rifiuto/{ownerId}", method=RequestMethod.GET)
+	@RequestMapping(value="api/rifiuto/{ownerId}", method=RequestMethod.GET)
 	public @ResponseBody List<Rifiuto> getRifiuti(@PathVariable String ownerId, 
 			HttpServletRequest request, HttpServletResponse response) 
 			throws ClassNotFoundException {
@@ -59,7 +59,7 @@ public class RifiutoController {
 		return result;
 	}
 	
-	@RequestMapping(value="/rifiuto/{ownerId}", method=RequestMethod.POST) 
+	@RequestMapping(value="api/rifiuto/{ownerId}", method=RequestMethod.POST) 
 	public @ResponseBody Rifiuto addRifiuto(@RequestBody Rifiuto rifiuto, @PathVariable String ownerId, 
 			HttpServletRequest request, HttpServletResponse response) {
 		boolean draft = Utils.getDraft(request);
@@ -73,7 +73,7 @@ public class RifiutoController {
 		return rifiuto;
 	}
 	
-	@RequestMapping(value="/rifiuto/{ownerId}/{objectId}", method=RequestMethod.PUT)
+	@RequestMapping(value="api/rifiuto/{ownerId}/{objectId}", method=RequestMethod.PUT)
 	public @ResponseBody void updateRifiuto(@RequestBody Rifiuto rifiuto, @PathVariable String ownerId, 
 			@PathVariable String objectId, HttpServletRequest request,
 			HttpServletResponse response) throws EntityNotFoundException {
@@ -87,7 +87,7 @@ public class RifiutoController {
 		storage.updateRifiuto(rifiuto, draft);
 	}
 	
-	@RequestMapping(value="/rifiuto/{ownerId}/{objectId}", method=RequestMethod.DELETE)
+	@RequestMapping(value="api/rifiuto/{ownerId}/{objectId}", method=RequestMethod.DELETE)
 	public @ResponseBody void deleteRifiuto(@PathVariable String ownerId, @PathVariable String objectId, 
 			HttpServletRequest request, HttpServletResponse response) throws EntityNotFoundException {
 		boolean draft = Utils.getDraft(request);

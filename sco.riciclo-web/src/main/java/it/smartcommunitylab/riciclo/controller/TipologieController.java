@@ -52,7 +52,7 @@ public class TipologieController {
 	@Autowired
 	private AppSetup appSetup;	
 	
-	@RequestMapping(value="/tipologia/utenza/{ownerId}", method=RequestMethod.GET)
+	@RequestMapping(value="api/tipologia/utenza/{ownerId}", method=RequestMethod.GET)
 	public @ResponseBody List<Tipologia> getTipologiaUtenza(@PathVariable String ownerId, 
 			HttpServletRequest request, HttpServletResponse response) 
 			throws ClassNotFoundException {
@@ -69,7 +69,7 @@ public class TipologieController {
 		return result;
 	}
 
-	@RequestMapping(value="/tipologia/utenza/{ownerId}", method=RequestMethod.POST)
+	@RequestMapping(value="api/tipologia/utenza/{ownerId}", method=RequestMethod.POST)
 	public @ResponseBody void updateTipologiaUtenza(@RequestBody List<Tipologia> tipologia,	@PathVariable String ownerId, 
 		HttpServletRequest request, HttpServletResponse response)	throws ClassNotFoundException, EntityNotFoundException {
 		boolean draft = Utils.getDraft(request);
@@ -82,7 +82,7 @@ public class TipologieController {
 	}
 	
 	@SuppressWarnings("unchecked")
-	@RequestMapping(value="/tipologia/puntoraccolta/{ownerId}", method=RequestMethod.GET)
+	@RequestMapping(value="api/tipologia/puntoraccolta/{ownerId}", method=RequestMethod.GET)
 	public @ResponseBody List<TipologiaPuntoRaccolta> getTipologiaPuntoRaccolta(@PathVariable String ownerId, 
 			HttpServletRequest request, HttpServletResponse response)	throws ClassNotFoundException {
 		boolean draft = Utils.getDraft(request);
@@ -94,7 +94,7 @@ public class TipologieController {
 		return result;
 	}
 
-	@RequestMapping(value="/tipologia/puntoraccolta/{ownerId}", method=RequestMethod.POST)
+	@RequestMapping(value="api/tipologia/puntoraccolta/{ownerId}", method=RequestMethod.POST)
 	public @ResponseBody TipologiaPuntoRaccolta addTipologiaPuntoRaccolta(@RequestBody TipologiaPuntoRaccolta data, 
 			@PathVariable String ownerId,	HttpServletRequest request, HttpServletResponse response)	{
 		boolean draft = Utils.getDraft(request);
@@ -108,7 +108,7 @@ public class TipologieController {
 		return data;
 	}
 	
-	@RequestMapping(value="/tipologia/puntoraccolta/{ownerId}/{objectId}", method=RequestMethod.PUT)
+	@RequestMapping(value="api/tipologia/puntoraccolta/{ownerId}/{objectId}", method=RequestMethod.PUT)
 	public @ResponseBody void updateTipologiaPuntoRaccolta(TipologiaPuntoRaccolta data, @PathVariable String ownerId, 
 			@PathVariable String objectId, HttpServletRequest request, HttpServletResponse response) throws EntityNotFoundException	{
 		boolean draft = Utils.getDraft(request);
@@ -121,7 +121,7 @@ public class TipologieController {
 		storage.updateTipologiaPuntoRaccolta(data, draft);
 	}
 	
-	@RequestMapping(value="/tipologia/puntoraccolta/{ownerId}/{objectId}", method=RequestMethod.DELETE)
+	@RequestMapping(value="api/tipologia/puntoraccolta/{ownerId}/{objectId}", method=RequestMethod.DELETE)
 	public @ResponseBody void deleteTipologiaPuntoRaccolta(@PathVariable String ownerId, @PathVariable String objectId, 
 			HttpServletRequest request, HttpServletResponse response) throws EntityNotFoundException	{
 		boolean draft = Utils.getDraft(request);
@@ -133,7 +133,7 @@ public class TipologieController {
 	}
 	
 	@SuppressWarnings("unchecked")
-	@RequestMapping(value="/tipologia/profilo/{ownerId}", method=RequestMethod.GET)
+	@RequestMapping(value="api/tipologia/profilo/{ownerId}", method=RequestMethod.GET)
 	public @ResponseBody List<TipologiaProfilo> getTipologiaProfilo(@PathVariable String ownerId, 
 			HttpServletRequest request, HttpServletResponse response) 
 			throws ClassNotFoundException {
@@ -146,7 +146,7 @@ public class TipologieController {
 		return result;
 	}
 
-	@RequestMapping(value="/tipologia/profilo/{ownerId}", method=RequestMethod.POST)
+	@RequestMapping(value="api/tipologia/profilo/{ownerId}", method=RequestMethod.POST)
 	public @ResponseBody TipologiaProfilo addTipologiaProfilo(@RequestBody TipologiaProfilo data, 
 			@PathVariable String ownerId,	HttpServletRequest request, HttpServletResponse response) {
 		boolean draft = Utils.getDraft(request);
@@ -160,7 +160,7 @@ public class TipologieController {
 		return data;
 	}
 	
-	@RequestMapping(value="/tipologia/profilo/{ownerId}/{objectId}", method=RequestMethod.PUT)
+	@RequestMapping(value="api/tipologia/profilo/{ownerId}/{objectId}", method=RequestMethod.PUT)
 	public @ResponseBody void updateTipologiaProfilo(@RequestBody TipologiaProfilo data, @PathVariable String ownerId,	
 			@PathVariable String objectId, HttpServletRequest request, HttpServletResponse response) throws EntityNotFoundException {
 		boolean draft = Utils.getDraft(request);
@@ -173,7 +173,7 @@ public class TipologieController {
 		storage.updateTipologiaProfilo(data, draft);
 	}
 	
-	@RequestMapping(value="/tipologia/profilo/{ownerId}/{objectId}", method=RequestMethod.DELETE)
+	@RequestMapping(value="api/tipologia/profilo/{ownerId}/{objectId}", method=RequestMethod.DELETE)
 	public @ResponseBody void deleteTipologiaProfilo(@PathVariable String ownerId, @PathVariable String objectId, 
 			HttpServletRequest request, HttpServletResponse response) throws EntityNotFoundException	{
 		boolean draft = Utils.getDraft(request);
@@ -184,7 +184,7 @@ public class TipologieController {
 		storage.removeTipologiaProfilo(ownerId, objectId, draft);
 	}
 
-	@RequestMapping(value="/tipologia/rifiuto/{ownerId}", method=RequestMethod.GET)
+	@RequestMapping(value="api/tipologia/rifiuto/{ownerId}", method=RequestMethod.GET)
 	public @ResponseBody List<Tipologia> getTipologiaRifiuto(@PathVariable String ownerId, 
 			HttpServletRequest request, HttpServletResponse response) 
 			throws ClassNotFoundException {
@@ -201,7 +201,7 @@ public class TipologieController {
 		return result;
 	}
 	
-	@RequestMapping(value="/tipologia/rifiuto/{ownerId}", method=RequestMethod.POST)
+	@RequestMapping(value="api/tipologia/rifiuto/{ownerId}", method=RequestMethod.POST)
 	public @ResponseBody void updateTipologiaRifiuto(@RequestBody List<Tipologia> tipologia,	@PathVariable String ownerId, 
 		HttpServletRequest request, HttpServletResponse response)	throws ClassNotFoundException, EntityNotFoundException {
 		boolean draft = Utils.getDraft(request);
@@ -213,7 +213,7 @@ public class TipologieController {
 		storage.updateTipologie(ownerId, data, "tipologiaRifiuto", draft);
 	}
 
-	@RequestMapping(value="/tipologia/raccolta/{ownerId}", method=RequestMethod.GET)
+	@RequestMapping(value="api/tipologia/raccolta/{ownerId}", method=RequestMethod.GET)
 	public @ResponseBody List<Tipologia> getTipologiaRaccolta(@PathVariable String ownerId, 
 			HttpServletRequest request, HttpServletResponse response) 
 			throws ClassNotFoundException {
@@ -230,7 +230,7 @@ public class TipologieController {
 		return result;
 	}
 	
-	@RequestMapping(value="/tipologia/raccolta/{ownerId}", method=RequestMethod.POST)
+	@RequestMapping(value="api/tipologia/raccolta/{ownerId}", method=RequestMethod.POST)
 	public @ResponseBody void updateTipologiaRaccolta(@RequestBody List<Tipologia> tipologia,	@PathVariable String ownerId, 
 		HttpServletRequest request, HttpServletResponse response)	throws ClassNotFoundException, EntityNotFoundException {
 		boolean draft = Utils.getDraft(request);

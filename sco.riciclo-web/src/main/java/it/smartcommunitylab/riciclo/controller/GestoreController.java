@@ -46,7 +46,7 @@ public class GestoreController {
 	private AppSetup appSetup;	
 	
 	@SuppressWarnings("unchecked")
-	@RequestMapping(value="/gestore/{ownerId}", method=RequestMethod.GET) 
+	@RequestMapping(value="api/gestore/{ownerId}", method=RequestMethod.GET) 
 	public @ResponseBody List<Gestore> getGestore(@PathVariable String ownerId, HttpServletRequest request,
 			HttpServletResponse response) throws ClassNotFoundException {
 		boolean draft = Utils.getDraft(request);
@@ -58,7 +58,7 @@ public class GestoreController {
 		return result;
 	}
 	
-	@RequestMapping(value="/gestore/{ownerId}", method=RequestMethod.POST) 
+	@RequestMapping(value="api/gestore/{ownerId}", method=RequestMethod.POST) 
 	public @ResponseBody Gestore addGestore(@RequestBody Gestore gestore, @PathVariable String ownerId, 
 			HttpServletRequest request, HttpServletResponse response) {
 		boolean draft = Utils.getDraft(request);
@@ -72,7 +72,7 @@ public class GestoreController {
 		return gestore;
 	}
 	
-	@RequestMapping(value="/gestore/{ownerId}/{objectId}", method=RequestMethod.PUT)
+	@RequestMapping(value="api/gestore/{ownerId}/{objectId}", method=RequestMethod.PUT)
 	public @ResponseBody void updateGestore(@RequestBody Gestore gestore, @PathVariable String ownerId,
 			@PathVariable String objectId, HttpServletRequest request, 
 			HttpServletResponse response)	throws EntityNotFoundException {
@@ -86,7 +86,7 @@ public class GestoreController {
 		storage.updateGestore(gestore, draft);
 	}
 	
-	@RequestMapping(value="/gestore/{ownerId}/{objectId}", method=RequestMethod.DELETE)
+	@RequestMapping(value="api/gestore/{ownerId}/{objectId}", method=RequestMethod.DELETE)
 	public @ResponseBody void deleteGestore(@PathVariable String ownerId,	@PathVariable String objectId, 
 			HttpServletRequest request, HttpServletResponse response) throws EntityNotFoundException {
 		boolean draft = Utils.getDraft(request);

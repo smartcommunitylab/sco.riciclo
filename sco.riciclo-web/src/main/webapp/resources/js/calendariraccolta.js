@@ -64,12 +64,12 @@ puntiraccoltaApp.controller('userCtrl', function($scope, $http, $sce, $q, DataSe
 	$scope.initData = function(profile) {
 		$scope.profile = profile;
 		
-		var urlTipologiaUtenza = "tipologia/utenza/" + $scope.profile.appInfo.ownerId + "?draft=" + $scope.draft;
+		var urlTipologiaUtenza = "api/tipologia/utenza/" + $scope.profile.appInfo.ownerId + "?draft=" + $scope.draft;
 		$http.get(urlTipologiaUtenza, {headers: {'X-ACCESS-TOKEN': $scope.profile.appInfo.token}}).success(function (response) {
 			$scope.tipologiaUtenzaList = response;
 		});
 		
-		var urlTipologiaPuntoRaccolta = "tipologia/puntoraccolta/" + $scope.profile.appInfo.ownerId + "?draft=" + $scope.draft;
+		var urlTipologiaPuntoRaccolta = "api/tipologia/puntoraccolta/" + $scope.profile.appInfo.ownerId + "?draft=" + $scope.draft;
 		$http.get(urlTipologiaPuntoRaccolta, {headers: {'X-ACCESS-TOKEN': $scope.profile.appInfo.token}}).success(function (response) {
 			for (var d = 0, len = response.length; d < len; d += 1) {
 				var element = response[d];
@@ -77,16 +77,16 @@ puntiraccoltaApp.controller('userCtrl', function($scope, $http, $sce, $q, DataSe
 					$scope.tipologiaPuntoRaccoltaList.push(element);
 				}
 			}
-			$scope.tipologiaPuntoRaccoltaNameMap = $scope.setNameMap($scope.tipologiaPuntoRaccoltaList);
+			$scope.tipologiaPuntoRaccoltaNameMap = $scope.setLocalNameMap($scope.tipologiaPuntoRaccoltaList);
 		});
 		
-		var urlArea = "area/" + $scope.profile.appInfo.ownerId + "?draft=" + $scope.draft;
+		var urlArea = "api/area/" + $scope.profile.appInfo.ownerId + "?draft=" + $scope.draft;
 		$http.get(urlArea, {headers: {'X-ACCESS-TOKEN': $scope.profile.appInfo.token}}).success(function (response) {
 			$scope.areaList = response;
 			$scope.areaNameMap = $scope.setNameMap($scope.areaList);
 		});
 		
-		var urlCalendarioRaccolta = "calraccolta/" + $scope.profile.appInfo.ownerId + "?draft=" + $scope.draft;
+		var urlCalendarioRaccolta = "api/calraccolta/" + $scope.profile.appInfo.ownerId + "?draft=" + $scope.draft;
 		$http.get(urlCalendarioRaccolta, {headers: {'X-ACCESS-TOKEN': $scope.profile.appInfo.token}}).success(function (response) {
 			$scope.calendarioRaccoltaList = response;
 		});
@@ -173,7 +173,7 @@ puntiraccoltaApp.controller('userCtrl', function($scope, $http, $sce, $q, DataSe
 			element.tipologiaUtenza = $scope.selectedTipologiaUtenza.objectId;
 			element.tipologiaPuntoRaccolta = $scope.selectedTipologiaPuntoRaccolta.objectId;
 				
-			var url = "calraccolta/" + $scope.profile.appInfo.ownerId + "?draft=" + $scope.draft; 
+			var url = "api/calraccolta/" + $scope.profile.appInfo.ownerId + "?draft=" + $scope.draft; 
 			$http.post(url, element, {headers: {'X-ACCESS-TOKEN': $scope.profile.appInfo.token}}).then(
 			function(response) {
 				// this callback will be called asynchronously
@@ -201,7 +201,7 @@ puntiraccoltaApp.controller('userCtrl', function($scope, $http, $sce, $q, DataSe
 				element.tipologiaUtenza = $scope.selectedTipologiaUtenza.objectId;
 				element.tipologiaPuntoRaccolta = $scope.selectedTipologiaPuntoRaccolta.objectId;
 				
-				var url = "calraccolta/" + $scope.profile.appInfo.ownerId + "/" + element.objectId + "?draft=" + $scope.draft;
+				var url = "api/calraccolta/" + $scope.profile.appInfo.ownerId + "/" + element.objectId + "?draft=" + $scope.draft;
 				$http.put(url, element, {headers: {'X-ACCESS-TOKEN': $scope.profile.appInfo.token}}).then(
 				function(response) {
 					// this callback will be called asynchronously
@@ -228,7 +228,7 @@ puntiraccoltaApp.controller('userCtrl', function($scope, $http, $sce, $q, DataSe
 		if(index >= 0) {
 			var element = $scope.calendarioRaccoltaList[index];
 			if(element != null) {
-				var url = "calraccolta/" + $scope.profile.appInfo.ownerId + "/" + element.objectId + "?draft=" + $scope.draft;
+				var url = "api/calraccolta/" + $scope.profile.appInfo.ownerId + "/" + element.objectId + "?draft=" + $scope.draft;
 				$http.delete(url, {headers: {'X-ACCESS-TOKEN': $scope.profile.appInfo.token}}).then(
 				function(response) {
 					// this callback will be called asynchronously
@@ -256,7 +256,7 @@ puntiraccoltaApp.controller('userCtrl', function($scope, $http, $sce, $q, DataSe
 		console.log("deleteTimetable:" + index);
 		var relation = $scope.findByObjectId($scope.calendarioRaccoltaList, $scope.fId);
 		if(relation != null) {
-			var url = "calraccolta/" + $scope.profile.appInfo.ownerId + "/" + relation.objectId + "/orario/" + index + "?draft=" + $scope.draft;
+			var url = "api/calraccolta/" + $scope.profile.appInfo.ownerId + "/" + relation.objectId + "/orario/" + index + "?draft=" + $scope.draft;
 			$http.delete(url, {headers: {'X-ACCESS-TOKEN': $scope.profile.appInfo.token}}).then(
 			function(response) {
 				$scope.status = response.status;
@@ -304,7 +304,7 @@ puntiraccoltaApp.controller('userCtrl', function($scope, $http, $sce, $q, DataSe
 			}
 			element.note[$scope.language] = $scope.fDateNotes;
 				
-			var url = "calraccolta/" + $scope.profile.appInfo.ownerId + "/" + relation.objectId + "/orario?draft=" + $scope.draft;
+			var url = "api/calraccolta/" + $scope.profile.appInfo.ownerId + "/" + relation.objectId + "/orario?draft=" + $scope.draft;
 			$http.post(url, element, {headers: {'X-ACCESS-TOKEN': $scope.profile.appInfo.token}}).then(
 			function(response) {
 		  	$scope.status = response.status;
@@ -382,6 +382,16 @@ puntiraccoltaApp.controller('userCtrl', function($scope, $http, $sce, $q, DataSe
 	};
 	
 	$scope.setNameMap = function(array) {
+		var map = {};
+		for (var d = 0, len = array.length; d < len; d += 1) {
+			var key = array[d].objectId;
+			var name = array[d].nome;
+			map[key] = name;
+		}
+		return map;
+	};
+	
+	$scope.setLocalNameMap = function(array) {
 		var map = {};
 		for (var d = 0, len = array.length; d < len; d += 1) {
 			var key = array[d].objectId;

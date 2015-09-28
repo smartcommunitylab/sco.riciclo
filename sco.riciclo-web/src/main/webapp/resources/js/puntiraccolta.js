@@ -46,18 +46,18 @@ puntiraccoltaApp.controller('userCtrl', function($scope, $http, $sce, $q, DataSe
 	$scope.initData = function(profile) {
 		$scope.profile = profile;
 		
-		var urlCrm = "crm/" + $scope.profile.appInfo.ownerId + "?draft=" + $scope.draft;
+		var urlCrm = "api/crm/" + $scope.profile.appInfo.ownerId + "?draft=" + $scope.draft;
 		$http.get(urlCrm, {headers: {'X-ACCESS-TOKEN': $scope.profile.appInfo.token}}).success(function (response) {
 			$scope.crmList = response;
 			$scope.crmNameMap = $scope.setCrmNameMap($scope.crmList);
 		});
 		
-		var urlTipologiaUtenza = "tipologia/utenza/" + $scope.profile.appInfo.ownerId + "?draft=" + $scope.draft;
+		var urlTipologiaUtenza = "api/tipologia/utenza/" + $scope.profile.appInfo.ownerId + "?draft=" + $scope.draft;
 		$http.get(urlTipologiaUtenza, {headers: {'X-ACCESS-TOKEN': $scope.profile.appInfo.token}}).success(function (response) {
 			$scope.tipologiaUtenzaList = response;
 		});
 		
-		var urlTipologiaPuntoRaccolta = "tipologia/puntoraccolta/" + $scope.profile.appInfo.ownerId + "?draft=" + $scope.draft;
+		var urlTipologiaPuntoRaccolta = "api/tipologia/puntoraccolta/" + $scope.profile.appInfo.ownerId + "?draft=" + $scope.draft;
 		$http.get(urlTipologiaPuntoRaccolta, {headers: {'X-ACCESS-TOKEN': $scope.profile.appInfo.token}}).success(function (response) {
 			for (var d = 0, len = response.length; d < len; d += 1) {
 				var element = response[d];
@@ -68,13 +68,13 @@ puntiraccoltaApp.controller('userCtrl', function($scope, $http, $sce, $q, DataSe
 			$scope.tipologiaPuntoRaccoltaNameMap = $scope.setNameMap($scope.tipologiaPuntoRaccoltaList);
 		});
 		
-		var urlArea = "area/" + $scope.profile.appInfo.ownerId + "?draft=" + $scope.draft;
+		var urlArea = "api/area/" + $scope.profile.appInfo.ownerId + "?draft=" + $scope.draft;
 		$http.get(urlArea, {headers: {'X-ACCESS-TOKEN': $scope.profile.appInfo.token}}).success(function (response) {
 			$scope.areaList = response;
 			$scope.areaNameMap = $scope.setNameMap($scope.areaList);
 		});
 		
-		var urlPuntoRaccolta = "puntoraccolta/" + $scope.profile.appInfo.ownerId + "?draft=" + $scope.draft;
+		var urlPuntoRaccolta = "api/puntoraccolta/" + $scope.profile.appInfo.ownerId + "?draft=" + $scope.draft;
 		$http.get(urlPuntoRaccolta, {headers: {'X-ACCESS-TOKEN': $scope.profile.appInfo.token}}).success(function (response) {
 			$scope.puntoRaccoltaList = response;
 		});
@@ -128,7 +128,7 @@ puntiraccoltaApp.controller('userCtrl', function($scope, $http, $sce, $q, DataSe
 		element.tipologiaUtenza = $scope.selectedTipologiaUtenza.objectId;
 		element.tipologiaPuntoRaccolta = $scope.selectedTipologiaPuntoRaccolta.objectId;
 			
-		var url = "puntoraccolta/" + $scope.profile.appInfo.ownerId + "?draft=" + $scope.draft; 
+		var url = "api/puntoraccolta/" + $scope.profile.appInfo.ownerId + "?draft=" + $scope.draft; 
 		$http.post(url, element, {headers: {'X-ACCESS-TOKEN': $scope.profile.appInfo.token}}).then(
 		function(response) {
 			// this callback will be called asynchronously
@@ -155,7 +155,7 @@ puntiraccoltaApp.controller('userCtrl', function($scope, $http, $sce, $q, DataSe
 		if(index >= 0) {
 			var element = $scope.puntoRaccoltaList[index];
 			if(element != null) {
-				var url = "puntoraccolta/" + $scope.profile.appInfo.ownerId + "/" + element.objectId + "?draft=" + $scope.draft;
+				var url = "api/puntoraccolta/" + $scope.profile.appInfo.ownerId + "/" + element.objectId + "?draft=" + $scope.draft;
 				$http.delete(url, {headers: {'X-ACCESS-TOKEN': $scope.profile.appInfo.token}}).then(
 				function(response) {
 					// this callback will be called asynchronously
@@ -229,10 +229,10 @@ puntiraccoltaApp.controller('userCtrl', function($scope, $http, $sce, $q, DataSe
     // Find first 10 states that start with `term`.
     for (var i = 0; i < $scope.areaList.length; i++) {
       var area = $scope.areaList[i];
-      if(area.etichetta) {
-        var result= area.etichetta.search(new RegExp(q, "i"));
+      if(area.nome) {
+        var result= area.nome.search(new RegExp(q, "i"));
         if(result >= 0) {
-        	results.push({ label: area.etichetta, value: area.etichetta, obj: area });
+        	results.push({ label: area.nome, value: area.nome, obj: area });
         }
       }
     }

@@ -45,29 +45,29 @@ riciclabolarioApp.controller('userCtrl', function($scope, $http, $sce, $q, DataS
 	$scope.initData = function(profile) {
 		$scope.profile = profile;
 		
-		var urlRifiuti = "rifiuto/" + $scope.profile.appInfo.ownerId + "?draft=" + $scope.draft;
+		var urlRifiuti = "api/rifiuto/" + $scope.profile.appInfo.ownerId + "?draft=" + $scope.draft;
 		$http.get(urlRifiuti, {headers: {'X-ACCESS-TOKEN': $scope.profile.appInfo.token}}).success(function (response) {
 			$scope.rifiutoList = response;
 			$scope.rifiutoNameMap = $scope.setNameMap($scope.rifiutoList);
 		});
 		
-		var urlTipologiaUtenza = "tipologia/utenza/" + $scope.profile.appInfo.ownerId + "?draft=" + $scope.draft;
+		var urlTipologiaUtenza = "api/tipologia/utenza/" + $scope.profile.appInfo.ownerId + "?draft=" + $scope.draft;
 		$http.get(urlTipologiaUtenza, {headers: {'X-ACCESS-TOKEN': $scope.profile.appInfo.token}}).success(function (response) {
 			$scope.tipologiaUtenzaList = response;
 		});
 		
-		var urlTipologiaRifiuto = "tipologia/rifiuto/" + $scope.profile.appInfo.ownerId + "?draft=" + $scope.draft;
+		var urlTipologiaRifiuto = "api/tipologia/rifiuto/" + $scope.profile.appInfo.ownerId + "?draft=" + $scope.draft;
 		$http.get(urlTipologiaRifiuto, {headers: {'X-ACCESS-TOKEN': $scope.profile.appInfo.token}}).success(function (response) {
 			$scope.tipologiaRifiutoList = response;
 		});
 		
-		var urlArea = "area/" + $scope.profile.appInfo.ownerId + "?draft=" + $scope.draft;
+		var urlArea = "api/area/" + $scope.profile.appInfo.ownerId + "?draft=" + $scope.draft;
 		$http.get(urlArea, {headers: {'X-ACCESS-TOKEN': $scope.profile.appInfo.token}}).success(function (response) {
 			$scope.areaList = response;
 			$scope.areaNameMap = $scope.setNameMap($scope.areaList);
 		});
 		
-		var urlRiciclabolario = "riciclabolario/" + $scope.profile.appInfo.ownerId + "?draft=" + $scope.draft;
+		var urlRiciclabolario = "api/riciclabolario/" + $scope.profile.appInfo.ownerId + "?draft=" + $scope.draft;
 		$http.get(urlRiciclabolario, {headers: {'X-ACCESS-TOKEN': $scope.profile.appInfo.token}}).success(function (response) {
 			$scope.riciclabolario = response;
 		});
@@ -116,7 +116,7 @@ riciclabolarioApp.controller('userCtrl', function($scope, $http, $sce, $q, DataS
 		element.tipologiaUtenza = $scope.selectedTipologiaUtenza.objectId;
 		element.tipologiaRifiuto = $scope.selectedTipologiaRifiuto.objectId;
 			
-		var url = "riciclabolario/" + $scope.profile.appInfo.ownerId + "?draft=" + $scope.draft; 
+		var url = "api/riciclabolario/" + $scope.profile.appInfo.ownerId + "?draft=" + $scope.draft; 
 		$http.post(url, element, {headers: {'X-ACCESS-TOKEN': $scope.profile.appInfo.token}}).then(
 		function(response) {
 			// this callback will be called asynchronously
@@ -143,7 +143,7 @@ riciclabolarioApp.controller('userCtrl', function($scope, $http, $sce, $q, DataS
 		if(index >= 0) {
 			var element = $scope.riciclabolario[index];
 			if(element != null) {
-				var url = "riciclabolario/" + $scope.profile.appInfo.ownerId + "/" + element.objectId + "?draft=" + $scope.draft;
+				var url = "api/riciclabolario/" + $scope.profile.appInfo.ownerId + "/" + element.objectId + "?draft=" + $scope.draft;
 				$http.delete(url, {headers: {'X-ACCESS-TOKEN': $scope.profile.appInfo.token}}).then(
 				function(response) {
 					// this callback will be called asynchronously
@@ -207,10 +207,10 @@ riciclabolarioApp.controller('userCtrl', function($scope, $http, $sce, $q, DataS
     // Find first 10 states that start with `term`.
     for (var i = 0; i < $scope.areaList.length; i++) {
       var area = $scope.areaList[i];
-      if(area.etichetta) {
-        var result= area.etichetta.search(new RegExp(q, "i"));
+      if(area.nome) {
+        var result= area.nome.search(new RegExp(q, "i"));
         if(result >= 0) {
-        	results.push({ label: area.etichetta, value: area.etichetta, obj: area });
+        	results.push({ label: area.nome, value: area.nome, obj: area });
         }
       }
     }

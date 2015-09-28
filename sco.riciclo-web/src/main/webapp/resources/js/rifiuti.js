@@ -34,7 +34,7 @@ angular.module('rifiuti', ['DataService']).controller('userCtrl', function($scop
 	
 	$scope.initData = function(profile) {
 		$scope.profile = profile;
-		var url = "rifiuto/" + $scope.profile.appInfo.ownerId + "?draft=" + $scope.draft;
+		var url = "api/rifiuto/" + $scope.profile.appInfo.ownerId + "?draft=" + $scope.draft;
 		$http.get(url, {headers: {'X-ACCESS-TOKEN': $scope.profile.appInfo.token}}).success(function (response) {
 			$scope.rifiuti = response;
 		});
@@ -100,7 +100,7 @@ angular.module('rifiuti', ['DataService']).controller('userCtrl', function($scop
 		if($scope.create) {
 			var element = {nome: {}};
 			element.nome[$scope.language] = $scope.fName;
-			var url = "rifiuto/" + $scope.profile.appInfo.ownerId + "?draft=" + $scope.draft; 
+			var url = "api/rifiuto/" + $scope.profile.appInfo.ownerId + "?draft=" + $scope.draft; 
 			$http.post(url, element, {headers: {'X-ACCESS-TOKEN': $scope.profile.appInfo.token}}).then(
 			function(response) {
 		    // this callback will be called asynchronously
@@ -125,7 +125,7 @@ angular.module('rifiuti', ['DataService']).controller('userCtrl', function($scop
 			var element = $scope.findByObjectId($scope.rifiuti, $scope.fId);
 			if(element != null) {
 				element.nome[$scope.language] = $scope.fName;
-				var url = "rifiuto/" + $scope.profile.appInfo.ownerId + "/" + element.objectId + "?draft=" + $scope.draft;
+				var url = "api/rifiuto/" + $scope.profile.appInfo.ownerId + "/" + element.objectId + "?draft=" + $scope.draft;
 				$http.put(url, element, {headers: {'X-ACCESS-TOKEN': $scope.profile.appInfo.token}}).then(
 				function(response) {
 			    // this callback will be called asynchronously
@@ -152,7 +152,7 @@ angular.module('rifiuti', ['DataService']).controller('userCtrl', function($scop
 		if(index >= 0) {
 			var element = $scope.rifiuti[index];
 			if(element != null) {
-				var url = "rifiuto/" + $scope.profile.appInfo.ownerId + "/" + element.objectId + "?draft=" + $scope.draft;
+				var url = "api/rifiuto/" + $scope.profile.appInfo.ownerId + "/" + element.objectId + "?draft=" + $scope.draft;
 				$http.delete(url, {headers: {'X-ACCESS-TOKEN': $scope.profile.appInfo.token}}).then(
 				function(response) {
 					// this callback will be called asynchronously

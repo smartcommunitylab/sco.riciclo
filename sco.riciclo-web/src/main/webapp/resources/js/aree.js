@@ -43,20 +43,20 @@ areeApp.controller('userCtrl', function($scope, $http, $sce, $q, DataService) {
 	$scope.initData = function(profile) {
 		$scope.profile = profile;
 		
-		var urlTipologiaUtenza = "tipologia/utenza/" + $scope.profile.appInfo.ownerId + "?draft=" + $scope.draft;
+		var urlTipologiaUtenza = "api/tipologia/utenza/" + $scope.profile.appInfo.ownerId + "?draft=" + $scope.draft;
 		$http.get(urlTipologiaUtenza, {headers: {'X-ACCESS-TOKEN': $scope.profile.appInfo.token}}).success(function (response) {
 			$scope.tipologiaUtenzaList = response;
 			$scope.resetTipologiaUtenzaSelected();
 		});
 
-		var urlArea = "area/" + $scope.profile.appInfo.ownerId + "?draft=" + $scope.draft;
+		var urlArea = "api/area/" + $scope.profile.appInfo.ownerId + "?draft=" + $scope.draft;
 		$http.get(urlArea, {headers: {'X-ACCESS-TOKEN': $scope.profile.appInfo.token}}).success(function (response) {
 			$scope.areaList = response;
 			$scope.areaNameMap = $scope.setNameMap($scope.areaList);
 			$scope.areaEtichettaMap = $scope.setEtichettaMap($scope.areaList);
 		});
 		
-		var urlIstituzione = "istituzione/" + $scope.profile.appInfo.ownerId + "?draft=" + $scope.draft;
+		var urlIstituzione = "api/istituzione/" + $scope.profile.appInfo.ownerId + "?draft=" + $scope.draft;
 		$http.get(urlIstituzione, {headers: {'X-ACCESS-TOKEN': $scope.profile.appInfo.token}}).success(function (response) {
 			var array = response;
 			for (var d = 0, len = array.length; d < len; d += 1) {
@@ -67,7 +67,7 @@ areeApp.controller('userCtrl', function($scope, $http, $sce, $q, DataService) {
 			}
 		});
 		
-		var urlGestore = "gestore/" + $scope.profile.appInfo.ownerId + "?draft=" + $scope.draft;
+		var urlGestore = "api/gestore/" + $scope.profile.appInfo.ownerId + "?draft=" + $scope.draft;
 		$http.get(urlGestore, {headers: {'X-ACCESS-TOKEN': $scope.profile.appInfo.token}}).success(function (response) {
 			var array = response;
 			for (var d = 0, len = array.length; d < len; d += 1) {
@@ -241,7 +241,7 @@ areeApp.controller('userCtrl', function($scope, $http, $sce, $q, DataService) {
 			}
 			element.utenza = $scope.getTipologiaUtenzaSelected();
 			
-			var url = "area/" + $scope.profile.appInfo.ownerId + "?draft=" + $scope.draft;
+			var url = "api/area/" + $scope.profile.appInfo.ownerId + "?draft=" + $scope.draft;
 			$http.post(url, element, {headers: {'X-ACCESS-TOKEN': $scope.profile.appInfo.token}}).then(
 			function(response) {
 		    // this callback will be called asynchronously
@@ -278,7 +278,7 @@ areeApp.controller('userCtrl', function($scope, $http, $sce, $q, DataService) {
 				}
 				element.utenza = $scope.getTipologiaUtenzaSelected();
 				
-				var url = "area/" + $scope.profile.appInfo.ownerId + "/" + element.objectId + "?draft=" + $scope.draft;
+				var url = "api/area/" + $scope.profile.appInfo.ownerId + "/" + element.objectId + "?draft=" + $scope.draft;
 				$http.put(url, element, {headers: {'X-ACCESS-TOKEN': $scope.profile.appInfo.token}}).then(
 				function(response) {
 			    // this callback will be called asynchronously
@@ -306,7 +306,7 @@ areeApp.controller('userCtrl', function($scope, $http, $sce, $q, DataService) {
 		if(index >= 0) {
 			var element = $scope.areaList[index];
 			if(element != null) {
-				var url = "area/" + $scope.profile.appInfo.ownerId + "/" + element.objectId + "?draft=" + $scope.draft;
+				var url = "api/area/" + $scope.profile.appInfo.ownerId + "/" + element.objectId + "?draft=" + $scope.draft;
 				$http.delete(url, {headers: {'X-ACCESS-TOKEN': $scope.profile.appInfo.token}}).then(
 				function(response) {
 					// this callback will be called asynchronously

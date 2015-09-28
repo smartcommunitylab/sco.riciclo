@@ -46,7 +46,7 @@ public class AreaController {
 	private AppSetup appSetup;	
 	
 	@SuppressWarnings("unchecked")
-	@RequestMapping(value="/area/{ownerId}", method=RequestMethod.GET)
+	@RequestMapping(value="api/area/{ownerId}", method=RequestMethod.GET)
 	public @ResponseBody List<Area> getAree(@PathVariable String ownerId, 
 			HttpServletRequest request, HttpServletResponse response) 
 			throws ClassNotFoundException {
@@ -59,7 +59,7 @@ public class AreaController {
 		return result;
 	}
 	
-	@RequestMapping(value="/area/{ownerId}", method=RequestMethod.POST) 
+	@RequestMapping(value="api/area/{ownerId}", method=RequestMethod.POST) 
 	public @ResponseBody Area addArea(@RequestBody Area area, @PathVariable String ownerId, 
 			HttpServletRequest request, HttpServletResponse response) {
 		boolean draft = Utils.getDraft(request);
@@ -73,7 +73,7 @@ public class AreaController {
 		return area;
 	}
 	
-	@RequestMapping(value="/area/{ownerId}/{objectId}", method=RequestMethod.PUT)
+	@RequestMapping(value="api/area/{ownerId}/{objectId}", method=RequestMethod.PUT)
 	public @ResponseBody void updateArea(@RequestBody Area area, @PathVariable String ownerId, 
 			@PathVariable String objectId, HttpServletRequest request,
 			HttpServletResponse response) throws EntityNotFoundException {
@@ -87,7 +87,7 @@ public class AreaController {
 		storage.updateArea(area, draft);
 	}
 	
-	@RequestMapping(value="/area/{ownerId}/{objectId}", method=RequestMethod.DELETE)
+	@RequestMapping(value="api/area/{ownerId}/{objectId}", method=RequestMethod.DELETE)
 	public @ResponseBody void deleteArea(@PathVariable String ownerId, @PathVariable String objectId, 
 			HttpServletRequest request, HttpServletResponse response) throws EntityNotFoundException {
 		boolean draft = Utils.getDraft(request);

@@ -56,7 +56,7 @@ public class RaccoltaController {
 	@Autowired
 	private AppSetup appSetup;	
 	
-	@RequestMapping(value="/raccolta/{ownerId}", method=RequestMethod.GET)
+	@RequestMapping(value="api/raccolta/{ownerId}", method=RequestMethod.GET)
 	public @ResponseBody List<Raccolta> getRaccolte(@PathVariable String ownerId, 
 			HttpServletRequest request, HttpServletResponse response) throws ClassNotFoundException {
 		boolean draft = Utils.getDraft(request);
@@ -92,7 +92,7 @@ public class RaccoltaController {
 		return result;
 	}
 	
-	@RequestMapping(value="/raccolta/{ownerId}", method=RequestMethod.POST) 
+	@RequestMapping(value="api/raccolta/{ownerId}", method=RequestMethod.POST) 
 	public @ResponseBody Raccolta addRaccolta(@RequestBody Raccolta raccolta,	@PathVariable String ownerId,	
 			HttpServletRequest request, HttpServletResponse response) {
 		boolean draft = Utils.getDraft(request);
@@ -106,7 +106,7 @@ public class RaccoltaController {
 		return raccolta;
 	}
 	
-	@RequestMapping(value="/raccolta/{ownerId}/{objectId}", method=RequestMethod.DELETE)
+	@RequestMapping(value="api/raccolta/{ownerId}/{objectId}", method=RequestMethod.DELETE)
 	public @ResponseBody void deleteRaccoltaById(@PathVariable String ownerId, @PathVariable String objectId, 
 			HttpServletRequest request, HttpServletResponse response) throws EntityNotFoundException {
 		boolean draft = Utils.getDraft(request);

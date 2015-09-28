@@ -56,7 +56,7 @@ public class RiciclabolarioController {
 	@Autowired
 	private AppSetup appSetup;	
 	
-	@RequestMapping(value="/riciclabolario/{ownerId}", method=RequestMethod.GET)
+	@RequestMapping(value="api/riciclabolario/{ownerId}", method=RequestMethod.GET)
 	public @ResponseBody List<Riciclabolario> getRiciclabolario(@PathVariable String ownerId, 
 			HttpServletRequest request, HttpServletResponse response) throws ClassNotFoundException {
 		boolean draft = Utils.getDraft(request);
@@ -92,7 +92,7 @@ public class RiciclabolarioController {
 		return result;
 	}
 	
-	@RequestMapping(value="/riciclabolario/{ownerId}", method=RequestMethod.POST) 
+	@RequestMapping(value="api/riciclabolario/{ownerId}", method=RequestMethod.POST) 
 	public @ResponseBody Riciclabolario addRiciclabolario(@RequestBody Riciclabolario riciclabolario, 
 			@PathVariable String ownerId,	HttpServletRequest request, HttpServletResponse response) {
 		boolean draft = Utils.getDraft(request);
@@ -106,7 +106,7 @@ public class RiciclabolarioController {
 		return riciclabolario;
 	}
 	
-	@RequestMapping(value="/riciclabolario/{ownerId}/{objectId}", method=RequestMethod.DELETE)
+	@RequestMapping(value="api/riciclabolario/{ownerId}/{objectId}", method=RequestMethod.DELETE)
 	public @ResponseBody void deleteRiciclabolarioById(@PathVariable String ownerId, 
 			@PathVariable String objectId, HttpServletRequest request,
 			HttpServletResponse response) throws EntityNotFoundException {
@@ -118,7 +118,7 @@ public class RiciclabolarioController {
 		storage.removeRiciclabolario(ownerId, objectId, draft);
 	}
 	
-	@RequestMapping(value="/riciclabolario/{ownerId}", method=RequestMethod.DELETE)
+	@RequestMapping(value="api/riciclabolario/{ownerId}", method=RequestMethod.DELETE)
 	public @ResponseBody void deleteRiciclabolario(@RequestBody Riciclabolario riciclabolario, 
 			@PathVariable String ownerId, HttpServletRequest request,
 			HttpServletResponse response) throws EntityNotFoundException {

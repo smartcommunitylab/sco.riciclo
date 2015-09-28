@@ -47,7 +47,7 @@ public class CRMController {
 	private AppSetup appSetup;	
 	
 	@SuppressWarnings("unchecked")
-	@RequestMapping(value="/crm/{ownerId}", method=RequestMethod.GET) 
+	@RequestMapping(value="api/crm/{ownerId}", method=RequestMethod.GET) 
 	public @ResponseBody List<Crm> getCRM(@PathVariable String ownerId, HttpServletRequest request,
 			HttpServletResponse response) throws ClassNotFoundException {
 		boolean draft = Utils.getDraft(request);
@@ -59,7 +59,7 @@ public class CRMController {
 		return result;
 	}
 	
-	@RequestMapping(value="/crm/{ownerId}", method=RequestMethod.POST) 
+	@RequestMapping(value="api/crm/{ownerId}", method=RequestMethod.POST) 
 	public @ResponseBody Crm addCRM(@RequestBody Crm crm, @PathVariable String ownerId, 
 			HttpServletRequest request, HttpServletResponse response) {
 		boolean draft = Utils.getDraft(request);
@@ -73,7 +73,7 @@ public class CRMController {
 		return crm;
 	}
 	
-	@RequestMapping(value="/crm/{ownerId}/{objectId}", method=RequestMethod.PUT)
+	@RequestMapping(value="api/crm/{ownerId}/{objectId}", method=RequestMethod.PUT)
 	public @ResponseBody void updateCRM(@RequestBody Crm crm, @PathVariable String ownerId,
 			@PathVariable String objectId, HttpServletRequest request, 
 			HttpServletResponse response)	throws EntityNotFoundException {
@@ -87,7 +87,7 @@ public class CRMController {
 		storage.updateCRM(crm, draft);
 	}
 	
-	@RequestMapping(value="/crm/{ownerId}/{objectId}", method=RequestMethod.DELETE)
+	@RequestMapping(value="api/crm/{ownerId}/{objectId}", method=RequestMethod.DELETE)
 	public @ResponseBody void deleteCRM(@PathVariable String ownerId,	@PathVariable String objectId, 
 			HttpServletRequest request, HttpServletResponse response) throws EntityNotFoundException {
 		boolean draft = Utils.getDraft(request);
@@ -98,7 +98,7 @@ public class CRMController {
 		storage.removeCRM(ownerId, objectId, draft);
 	}
 	
-	@RequestMapping(value="/crm/{ownerId}/{objectId}/orario", method=RequestMethod.POST)
+	@RequestMapping(value="api/crm/{ownerId}/{objectId}/orario", method=RequestMethod.POST)
 	public @ResponseBody void addOrarioApertura(@RequestBody OrarioApertura orario, @PathVariable String ownerId, 
 			@PathVariable String objectId, HttpServletRequest request, 
 			HttpServletResponse response) throws ClassNotFoundException, EntityNotFoundException {
@@ -110,7 +110,7 @@ public class CRMController {
 		storage.updateCRMAddOrario(ownerId, objectId, orario, draft);
 	}
 
-	@RequestMapping(value="/crm/{ownerId}/{objectId}/orario/{position}", method=RequestMethod.DELETE)
+	@RequestMapping(value="api/crm/{ownerId}/{objectId}/orario/{position}", method=RequestMethod.DELETE)
 	public @ResponseBody void deleteOrarioApertura(@PathVariable String ownerId, @PathVariable String objectId, 
 			@PathVariable int position, HttpServletRequest request,
 			HttpServletResponse response) throws ClassNotFoundException, EntityNotFoundException {

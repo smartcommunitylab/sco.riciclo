@@ -32,8 +32,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 				.disable()
 			.authorizeRequests()
 				.antMatchers("/", "/upload/**", "/console/**", "/aree/**", "/rifiuti/**", "/tipologia/**",
-						"/riciclabolario/**", "/puntiraccolta/**", "/calendariraccolta/**", "/istituzione/**",
-						"/gestore/**")
+						"/riciclabolario/**", "/puntiraccolta/**", "/calendariraccolta/**", "/istituzioni/**",
+						"/gestori/**")
 					.authenticated()
 				.anyRequest()
 					.permitAll();

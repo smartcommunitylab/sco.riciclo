@@ -56,7 +56,7 @@ public class PuntoRaccoltaController {
 	@Autowired
 	private AppSetup appSetup;	
 	
-	@RequestMapping(value="/puntoraccolta/{ownerId}", method=RequestMethod.GET)
+	@RequestMapping(value="api/puntoraccolta/{ownerId}", method=RequestMethod.GET)
 	public @ResponseBody List<PuntoRaccolta> getPuntiRaccolta(@PathVariable String ownerId, 
 			HttpServletRequest request, HttpServletResponse response) throws ClassNotFoundException {
 		boolean draft = Utils.getDraft(request);
@@ -92,7 +92,7 @@ public class PuntoRaccoltaController {
 		return result;
 	}
 	
-	@RequestMapping(value="/puntoraccolta/{ownerId}", method=RequestMethod.POST) 
+	@RequestMapping(value="api/puntoraccolta/{ownerId}", method=RequestMethod.POST) 
 	public @ResponseBody PuntoRaccolta addRaccolta(@RequestBody PuntoRaccolta raccolta, 
 			@PathVariable String ownerId,	HttpServletRequest request, HttpServletResponse response) {
 		boolean draft = Utils.getDraft(request);
@@ -106,7 +106,7 @@ public class PuntoRaccoltaController {
 		return raccolta;
 	}
 	
-	@RequestMapping(value="/puntoraccolta/{ownerId}/{objectId}", method=RequestMethod.DELETE)
+	@RequestMapping(value="api/puntoraccolta/{ownerId}/{objectId}", method=RequestMethod.DELETE)
 	public @ResponseBody void deletePuntoRaccoltaById(@PathVariable String ownerId, 
 			@PathVariable String objectId, HttpServletRequest request,
 			HttpServletResponse response) throws EntityNotFoundException {
@@ -118,7 +118,7 @@ public class PuntoRaccoltaController {
 		storage.removePuntoRaccolta(ownerId, objectId, draft);
 	}
 	
-	@RequestMapping(value="/puntoraccolta/{ownerId}", method=RequestMethod.DELETE)
+	@RequestMapping(value="api/puntoraccolta/{ownerId}", method=RequestMethod.DELETE)
 	public @ResponseBody void deletePuntoRaccolta(@RequestBody PuntoRaccolta raccolta, 
 			@PathVariable String ownerId,	HttpServletRequest request,
 			HttpServletResponse response) throws EntityNotFoundException {

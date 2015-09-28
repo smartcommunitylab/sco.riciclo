@@ -46,7 +46,7 @@ public class IstituzioneController {
 	private AppSetup appSetup;	
 	
 	@SuppressWarnings("unchecked")
-	@RequestMapping(value="/istituzione/{ownerId}", method=RequestMethod.GET) 
+	@RequestMapping(value="api/istituzione/{ownerId}", method=RequestMethod.GET) 
 	public @ResponseBody List<Istituzione> getIstituzione(@PathVariable String ownerId, HttpServletRequest request,
 			HttpServletResponse response) throws ClassNotFoundException {
 		boolean draft = Utils.getDraft(request);
@@ -58,7 +58,7 @@ public class IstituzioneController {
 		return result;
 	}
 	
-	@RequestMapping(value="/istituzione/{ownerId}", method=RequestMethod.POST) 
+	@RequestMapping(value="api/istituzione/{ownerId}", method=RequestMethod.POST) 
 	public @ResponseBody Istituzione addIstituzione(@RequestBody Istituzione istituzione, @PathVariable String ownerId, 
 			HttpServletRequest request, HttpServletResponse response) {
 		boolean draft = Utils.getDraft(request);
@@ -72,7 +72,7 @@ public class IstituzioneController {
 		return istituzione;
 	}
 	
-	@RequestMapping(value="/istituzione/{ownerId}/{objectId}", method=RequestMethod.PUT)
+	@RequestMapping(value="api/istituzione/{ownerId}/{objectId}", method=RequestMethod.PUT)
 	public @ResponseBody void updateIstituzione(@RequestBody Istituzione istituzione, @PathVariable String ownerId,
 			@PathVariable String objectId, HttpServletRequest request, 
 			HttpServletResponse response)	throws EntityNotFoundException {
@@ -86,7 +86,7 @@ public class IstituzioneController {
 		storage.updateIstituzione(istituzione, draft);
 	}
 	
-	@RequestMapping(value="/istituzione/{ownerId}/{objectId}", method=RequestMethod.DELETE)
+	@RequestMapping(value="api/istituzione/{ownerId}/{objectId}", method=RequestMethod.DELETE)
 	public @ResponseBody void deleteIstituzione(@PathVariable String ownerId,	@PathVariable String objectId, 
 			HttpServletRequest request, HttpServletResponse response) throws EntityNotFoundException {
 		boolean draft = Utils.getDraft(request);

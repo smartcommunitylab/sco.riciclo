@@ -42,7 +42,7 @@ gestoriApp.controller('userCtrl', function($scope, $window, $http, DataService) 
 	
 	$scope.initData = function(profile) {
 		$scope.profile = profile;
-		var url = "gestore/" + $scope.profile.appInfo.ownerId + "?draft=" + $scope.draft;
+		var url = "api/gestore/" + $scope.profile.appInfo.ownerId + "?draft=" + $scope.draft;
 		$http.get(url, {headers: {'X-ACCESS-TOKEN': $scope.profile.appInfo.token}}).success(function (response) {
 			$scope.gestoreList = response;
 		});
@@ -156,7 +156,7 @@ gestoriApp.controller('userCtrl', function($scope, $window, $http, DataService) 
 			element.geocoding[0] = parseFloat($scope.fLongitude);
 			element.geocoding[1] = parseFloat($scope.fLatitude);
 			
-			var url = "gestore/" + $scope.profile.appInfo.ownerId + "?draft=" + $scope.draft; 
+			var url = "api/gestore/" + $scope.profile.appInfo.ownerId + "?draft=" + $scope.draft; 
 			$http.post(url, element, {headers: {'X-ACCESS-TOKEN': $scope.profile.appInfo.token}}).then(
 			function(response) {
 		    // this callback will be called asynchronously
@@ -193,7 +193,7 @@ gestoriApp.controller('userCtrl', function($scope, $window, $http, DataService) 
 				element.geocoding[0] = parseFloat($scope.fLongitude);
 				element.geocoding[1] = parseFloat($scope.fLatitude);
 				
-				var url = "gestore/" + $scope.profile.appInfo.ownerId + "/" + element.objectId + "?draft=" + $scope.draft;
+				var url = "api/gestore/" + $scope.profile.appInfo.ownerId + "/" + element.objectId + "?draft=" + $scope.draft;
 				$http.put(url, element, {headers: {'X-ACCESS-TOKEN': $scope.profile.appInfo.token}}).then(
 				function(response) {
 			    // this callback will be called asynchronously
@@ -220,7 +220,7 @@ gestoriApp.controller('userCtrl', function($scope, $window, $http, DataService) 
 		if(index >= 0) {
 			var element = $scope.gestoreList[index];
 			if(element != null) {
-				var url = "gestore/" + $scope.profile.appInfo.ownerId + "/" + element.objectId + "?draft=" + $scope.draft;
+				var url = "api/gestore/" + $scope.profile.appInfo.ownerId + "/" + element.objectId + "?draft=" + $scope.draft;
 				$http.delete(url, {headers: {'X-ACCESS-TOKEN': $scope.profile.appInfo.token}}).then(
 				function(response) {
 					// this callback will be called asynchronously
