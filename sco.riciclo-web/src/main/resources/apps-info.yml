@@ -13,4 +13,8 @@ apps:
     password: ROVERETO      
     modelElements:
     - modello
+  - appId: ASIA
+    password: ASIA      
+    modelElements:
+    - modello
           
