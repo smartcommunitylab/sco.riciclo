@@ -118,7 +118,7 @@ public class AppDataRifiutiController {
 		return storage.getComuniList(ownerId, true);
 	}
 	
-	@RequestMapping(method = RequestMethod.GET, value = "/rifiuti/{ownerId}")
+	@RequestMapping(method = RequestMethod.GET, value = "/appdata/{ownerId}")
 	public AppDataRifiutiUI getDataByComuni(@PathVariable String ownerId, HttpServletRequest request) {
 		String lang = request.getParameter("lang");
 		boolean draft = Utils.getDraft(request);
@@ -196,11 +196,13 @@ public class AppDataRifiutiController {
 		result.setPuntiRaccolta(UIConverter.convertPuntoRaccolta(appData.getPuntiRaccolta(), appData.getCrm(), 
 				appData.getCalendariRaccolta(), lang, defaultLang));
 		result.setRiciclabolario(UIConverter.convertRiciclabolario(appData.getRiciclabolario(), appData.getRifiuti(), 
-				lang, defaultLang));
+		lang, defaultLang));
 		result.setRaccolta(UIConverter.convertRaccolta(appData.getRaccolte(), lang, defaultLang));
 		result.setColore(UIConverter.convertColore(appData.getColore(), lang, defaultLang));
 		result.setSegnalazione(UIConverter.convertSegnalazione(appData.getSegnalazioni(), lang, defaultLang));
 		result.setCategorie(UIConverter.convertCategorie(appData.getCategorie(), lang, defaultLang));
+		result.getCategorie().setTipologiaPuntiRaccolta(UIConverter.convertTipologiaPuntoRaccolta(appData.getTipologiaPuntiRaccolta(), 
+				lang, defaultLang));
 		return result;
 	}
 

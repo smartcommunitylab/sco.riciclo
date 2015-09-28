@@ -40,12 +40,25 @@
 				</li>
 				<li class="dropdown">
 					<a class="dropdown-toggle"
-					data-toggle="dropdown" href="#">Page 1 <span class="caret"></span></a>
+					data-toggle="dropdown" href="#">Tipologie <span class="caret"></span></a>
 					<ul class="dropdown-menu">
-						<li><a href="#">Page 1-1</a></li>
-						<li><a href="#">Page 1-2</a></li>
-						<li><a href="#">Page 1-3</a></li>
-					</ul></li>
+						<li id="menu-tipo-utenza" data-ng-class="{'active':selectedTab == 'menu-tipo-utenza'}"
+							data-ng-click="selectedTab = 'menu-tipo-utenza'"><a href="tipo-utenza">Utenza</a>
+						</li>
+						<li id="menu-tipo-profilo" data-ng-class="{'active':selectedTab == 'menu-tipo-profilo'}"
+							data-ng-click="selectedTab = 'menu-tipo-profilo'"><a href="tipo-profilo">Profilo</a>
+						</li>
+						<li id="menu-tipo-rifiuto" data-ng-class="{'active':selectedTab == 'menu-tipo-rifiuto'}"
+							data-ng-click="selectedTab = 'menu-tipo-rifiuto'"><a href="tipo-rifiuto">Rifiuto</a>
+						</li>
+						<li id="menu-tipo-raccolta" data-ng-class="{'active':selectedTab == 'menu-tipo-raccolta'}"
+							data-ng-click="selectedTab = 'menu-tipo-raccolta'"><a href="tipo-utenza">Raccolta</a>
+						</li>
+						<li id="menu-tipo-punto" data-ng-class="{'active':selectedTab == 'menu-tipo-punto'}"
+							data-ng-click="selectedTab = 'menu-tipo-punto'"><a href="tipo-punto">Punto Raccolta</a>
+						</li>
+					</ul>
+				</li>
 			</ul>
 			<ul class="nav navbar-nav navbar-right">
         <li><a href="#"><span class="glyphicon glyphicon-user"></span> {{profile.appInfo.ownerId}}</a></li>

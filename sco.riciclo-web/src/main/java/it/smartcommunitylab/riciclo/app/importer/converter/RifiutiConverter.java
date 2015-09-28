@@ -98,12 +98,8 @@ public class RifiutiConverter {
 		
 		//TIPOLOGIAPUNTORACCOLTA
 		List<TipologiaPuntoRaccolta> puntiRaccolta = Lists.newArrayList();
-		categorie.setTipologiaPuntiRaccolta(new HashSet<Tipologia>());
 		for (it.smartcommunitylab.riciclo.app.importer.model.TipologiaPuntoRaccolta tpr : rifiuti.getTipologiaPuntoRaccolta()) {
 			String nome = StringUtils.capitalize(tpr.getNome().toLowerCase()).replace("Crm", "CRM").replace("Crz", "CRZ");
-			Tipologia cat = new Tipologia(nome, nome, tpr.getInfoPuntiRaccolta(), null, defaultLang);
-			categorie.getTipologiaPuntiRaccolta().add(cat);
-			
 			TipologiaPuntoRaccolta tipologiaPuntoRaccolta = new TipologiaPuntoRaccolta();
 			tipologiaPuntoRaccolta.setObjectId(nome);
 			tipologiaPuntoRaccolta.getNome().put(defaultLang, nome);

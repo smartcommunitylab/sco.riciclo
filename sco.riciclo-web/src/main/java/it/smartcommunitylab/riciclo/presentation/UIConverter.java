@@ -16,8 +16,10 @@ import it.smartcommunitylab.riciclo.model.Rifiuto;
 import it.smartcommunitylab.riciclo.model.Segnalazione;
 import it.smartcommunitylab.riciclo.model.Tipologia;
 import it.smartcommunitylab.riciclo.model.TipologiaProfilo;
+import it.smartcommunitylab.riciclo.model.TipologiaPuntoRaccolta;
 
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
@@ -290,12 +292,25 @@ public class UIConverter {
 		}
 		return result;
 	}
+	
+	public static Set<TipologiaUI> convertTipologiaPuntoRaccolta(List<TipologiaPuntoRaccolta> modelData,
+		String lang, String defaultLang) {
+		Set<TipologiaUI> result = new HashSet<TipologiaUI>();
+		for(TipologiaPuntoRaccolta tpr : modelData) {
+			TipologiaUI tipologiaUI = new TipologiaUI();
+			tipologiaUI.setAppId(tpr.getOwnerId());
+			tipologiaUI.setId(tpr.getObjectId());
+			tipologiaUI.setNome(Utils.getString(tpr.getNome(), lang, defaultLang));
+			tipologiaUI.setDescrizione(Utils.getString(tpr.getInfo(), lang, defaultLang));
+			result.add(tipologiaUI);
+		}
+		return result;
+	}
 
 	public static CategorieUI convertCategorie(Categorie categorie, String lang, String defaultLang) {
 		CategorieUI result = new CategorieUI();
 		result.setAppId(categorie.getOwnerId());
 		result.setCaratteristicaPuntoRaccolta(convertTipologia(categorie.getCaratteristicaPuntoRaccolta(), lang, defaultLang));
-		result.setTipologiaPuntiRaccolta(convertTipologia(categorie.getTipologiaPuntiRaccolta(), lang, defaultLang));
 		result.setTipologiaRaccolta(convertTipologia(categorie.getTipologiaRaccolta(), lang, defaultLang));
 		result.setTipologiaRifiuto(convertTipologia(categorie.getTipologiaRifiuto(), lang, defaultLang));
 		result.setTipologiaUtenza(convertTipologia(categorie.getTipologiaUtenza(), lang, defaultLang));

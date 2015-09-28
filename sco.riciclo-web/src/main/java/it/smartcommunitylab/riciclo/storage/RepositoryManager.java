@@ -32,6 +32,7 @@ import it.smartcommunitylab.riciclo.model.Raccolta;
 import it.smartcommunitylab.riciclo.model.Riciclabolario;
 import it.smartcommunitylab.riciclo.model.Rifiuto;
 import it.smartcommunitylab.riciclo.model.Segnalazione;
+import it.smartcommunitylab.riciclo.model.Tipologia;
 import it.smartcommunitylab.riciclo.model.TipologiaProfilo;
 import it.smartcommunitylab.riciclo.model.TipologiaPuntoRaccolta;
 import it.smartcommunitylab.riciclo.security.Token;
@@ -41,6 +42,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -684,8 +686,6 @@ public class RepositoryManager {
 	
 	/**
 	 * Gestione Istituzione
-	 * @param istituzione
-	 * @param draft
 	 */
 
 	public void addIstituzione(Istituzione istituzione, boolean draft) {
@@ -770,5 +770,114 @@ public class RepositoryManager {
 		}
 		template.findAndRemove(query, Gestore.class);
 	}
+	
+	/**
+	 * Gestione Categorie
+	 */
+	
+//	public Tipologia addTipologiaUtenza(String ownerId, Tipologia tipologia, boolean draft) throws EntityNotFoundException {
+//		MongoTemplate template = draft ? draftTemplate : finalTemplate;
+//		Query query = new Query(new Criteria("ownerId").is(ownerId));
+//		Categorie categorieDB = template.findOne(query, Categorie.class);
+//		if (categorieDB == null) {
+//			throw new EntityNotFoundException(String.format("Categorie with ownerId %s not found", ownerId));
+//		}
+//		Date actualDate = new Date();
+//		tipologia.setCreationDate(actualDate);
+//		categorieDB.getTipologiaUtenza().add(tipologia);
+//		Update update = new Update();
+//		update.set("lastUpdate", new Date());
+//		update.set(Const.TIPOLOGIA_UTENZA, categorieDB.getTipologiaUtenza());
+//		template.updateFirst(query, update, Categorie.class);
+//		return tipologia;
+//	}
+	
+	public void updateTipologie(String ownerId, Set<Tipologia> data, String tipologia, 
+			boolean draft) throws ClassNotFoundException, EntityNotFoundException  {
+		MongoTemplate template = draft ? draftTemplate : finalTemplate;
+		Query query = new Query(new Criteria("ownerId").is(ownerId));
+		Categorie categorieDB = template.findOne(query, Categorie.class);
+		if (categorieDB == null) {
+			throw new EntityNotFoundException(String.format("Categorie with ownerId %s not found", ownerId));
+		}
+		Update update = new Update();
+		update.set("lastUpdate", new Date());
+		update.set(tipologia, data);
+		template.updateFirst(query, update, Categorie.class);
+	}
+	
+	/**
+	 * Gestione TipologiaPuntoRaccolta
+	 */
+	
+	public void addTipologiaPuntoRaccolta(TipologiaPuntoRaccolta tpr, boolean draft) {
+		MongoTemplate template = draft ? draftTemplate : finalTemplate;
+		Date actualDate = new Date();
+		tpr.setCreationDate(actualDate);
+		tpr.setLastUpdate(actualDate);
+		template.save(tpr);
+	}
+	
+	public void updateTipologiaPuntoRaccolta(TipologiaPuntoRaccolta tpr, boolean draft) throws EntityNotFoundException {
+		MongoTemplate template = draft ? draftTemplate : finalTemplate;
+		Query query = new Query(new Criteria("ownerId").is(tpr.getOwnerId()).and("objectId").is(tpr.getObjectId()));
+		TipologiaPuntoRaccolta itemDB = template.findOne(query, TipologiaPuntoRaccolta.class);
+		if (itemDB == null) {
+			throw new EntityNotFoundException(String.format("TipologiaPuntoRaccolta with id %s not found", tpr.getObjectId()));
+		}
+		Update update = new Update();
+		update.set("lastUpdate", new Date());
+		update.set("nome", tpr.getNome());
+		update.set("info", tpr.getInfo());
+		update.set("type", tpr.getType());
+		template.updateFirst(query, update, TipologiaPuntoRaccolta.class);
+	}
+	
+	public void removeTipologiaPuntoRaccolta(String ownerId, String objectId, boolean draft) throws EntityNotFoundException {
+		MongoTemplate template = draft ? draftTemplate : finalTemplate;
+		Query query = new Query(new Criteria("ownerId").is(ownerId).and("objectId").is(objectId));
+		TipologiaPuntoRaccolta itemDB = template.findOne(query, TipologiaPuntoRaccolta.class);
+		if (itemDB == null) {
+			throw new EntityNotFoundException(String.format("TipologiaPuntoRaccolta with id %s not found", objectId));
+		}
+		template.findAndRemove(query, TipologiaPuntoRaccolta.class);
+	}
+	
+	/**
+	 * Gestione TipologiaProfilo
+	 */
+	
+	public void addTipologiaProfilo(TipologiaProfilo tp, boolean draft) {
+		MongoTemplate template = draft ? draftTemplate : finalTemplate;
+		Date actualDate = new Date();
+		tp.setCreationDate(actualDate);
+		tp.setLastUpdate(actualDate);
+		template.save(tp);
+	}
+	
+	public void updateTipologiaProfilo(TipologiaProfilo tp, boolean draft) throws EntityNotFoundException {
+		MongoTemplate template = draft ? draftTemplate : finalTemplate;
+		Query query = new Query(new Criteria("ownerId").is(tp.getOwnerId()).and("objectId").is(tp.getObjectId()));
+		TipologiaProfilo itemDB = template.findOne(query, TipologiaProfilo.class);
+		if (itemDB == null) {
+			throw new EntityNotFoundException(String.format("TipologiaProfilo with id %s not found", tp.getObjectId()));
+		}
+		Update update = new Update();
+		update.set("lastUpdate", new Date());
+		update.set("nome", tp.getNome());
+		update.set("tipologiaUtenza", tp.getTipologiaUtenza());
+		update.set("descrizione", tp.getDescrizione());
+		template.updateFirst(query, update, TipologiaProfilo.class);
+	}
 
+	public void removeTipologiaProfilo(String ownerId, String objectId, boolean draft) throws EntityNotFoundException {
+		MongoTemplate template = draft ? draftTemplate : finalTemplate;
+		Query query = new Query(new Criteria("ownerId").is(ownerId).and("objectId").is(objectId));
+		TipologiaProfilo itemDB = template.findOne(query, TipologiaProfilo.class);
+		if (itemDB == null) {
+			throw new EntityNotFoundException(String.format("TipologiaProfilo with id %s not found", objectId));
+		}
+		template.findAndRemove(query, TipologiaProfilo.class);
+	}
+	
 }

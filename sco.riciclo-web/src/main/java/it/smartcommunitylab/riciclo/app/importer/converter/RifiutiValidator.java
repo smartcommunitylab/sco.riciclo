@@ -13,6 +13,7 @@ import it.smartcommunitylab.riciclo.model.Riciclabolario;
 import it.smartcommunitylab.riciclo.model.AppDataRifiuti;
 import it.smartcommunitylab.riciclo.model.Tipologia;
 import it.smartcommunitylab.riciclo.model.TipologiaProfilo;
+import it.smartcommunitylab.riciclo.model.TipologiaPuntoRaccolta;
 import it.smartcommunitylab.riciclo.model.UtenzaArea;
 import it.smartcommunitylab.riciclo.storage.DataSetInfo;
 
@@ -70,7 +71,7 @@ public class RifiutiValidator {
 		List<String> problems = Lists.newArrayList();
 
 //		Set<String> tipologiaIstituzione = flattenList(rifiuti.getCategorie().getTipologiaIstituzione());
-		Set<String> tipologiaPuntoRaccolta = flattenList(rifiuti.getCategorie().getTipologiaPuntiRaccolta());
+		Set<String> tipologiaPuntoRaccolta = flattenList(rifiuti.getTipologiaPuntiRaccolta(), TipologiaPuntoRaccolta.class, "objectId");
 		Set<String> tipologiaUtenza = flattenList(rifiuti.getCategorie().getTipologiaUtenza());
 		Set<String> tipologiaRaccolta = flattenList(rifiuti.getCategorie().getTipologiaRaccolta());
 		Set<String> tipologiaRifiuto = flattenList(rifiuti.getCategorie().getTipologiaRifiuto());

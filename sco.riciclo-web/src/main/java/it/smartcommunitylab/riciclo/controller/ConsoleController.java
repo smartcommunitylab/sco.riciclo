@@ -117,6 +117,31 @@ public class ConsoleController {
 		return "calendariraccolta";
 	}
 	
+	@RequestMapping(value = "/tipo-utenza")
+	public String tipoUtenza() {
+		return "tipo-utenza";
+	}
+	
+	@RequestMapping(value = "/tipo-profilo")
+	public String tipoProfilo() {
+		return "tipo-profilo";
+	}
+	
+	@RequestMapping(value = "/tipo-rifiuto")
+	public String tipoRifiuto() {
+		return "tipo-rifiuto";
+	}
+	
+	@RequestMapping(value = "/tipo-raccolta")
+	public String tipoRaccolta() {
+		return "tipo-raccolta";
+	}
+	
+	@RequestMapping(value = "/tipo-punto")
+	public String tipoPuntoRaccolta() {
+		return "tipo-punto";
+	}
+	
 	@RequestMapping(value = "/console/data")
 	public @ResponseBody App data() {
 		return storage.getAppDescriptor(getOwnerId());

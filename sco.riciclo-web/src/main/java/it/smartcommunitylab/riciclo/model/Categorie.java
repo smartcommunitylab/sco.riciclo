@@ -24,7 +24,7 @@ public class Categorie extends BaseObject {
 //	private Set<Tipologia> tipologiaIstituzione;
 	private Set<Tipologia> tipologiaRifiuto;
 	private Set<Tipologia> tipologiaRaccolta;
-	private Set<Tipologia> tipologiaPuntiRaccolta;
+//	private Set<Tipologia> tipologiaPuntiRaccolta;
 	private Set<Tipologia> caratteristicaPuntoRaccolta;
 	
 	public Set<Tipologia> getTipologiaUtenza() {
@@ -51,12 +51,12 @@ public class Categorie extends BaseObject {
 	public void setTipologiaRaccolta(Set<Tipologia> tipologiaRaccolta) {
 		this.tipologiaRaccolta = tipologiaRaccolta;
 	}
-	public Set<Tipologia> getTipologiaPuntiRaccolta() {
-		return tipologiaPuntiRaccolta;
-	}
-	public void setTipologiaPuntiRaccolta(Set<Tipologia> tipologiaPuntiRaccolta) {
-		this.tipologiaPuntiRaccolta = tipologiaPuntiRaccolta;
-	}
+//	public Set<Tipologia> getTipologiaPuntiRaccolta() {
+//		return tipologiaPuntiRaccolta;
+//	}
+//	public void setTipologiaPuntiRaccolta(Set<Tipologia> tipologiaPuntiRaccolta) {
+//		this.tipologiaPuntiRaccolta = tipologiaPuntiRaccolta;
+//	}
 	public Set<Tipologia> getCaratteristicaPuntoRaccolta() {
 		return caratteristicaPuntoRaccolta;
 	}
