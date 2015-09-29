@@ -106,10 +106,12 @@ angular.module('tipo-punto', ['DataService']).controller('userCtrl', function($s
 	$scope.saveTipo = function() {
 		if($scope.create) {
 			var element = {
+				objectId: '',
 				nome: {},
 				info: {},
 				type: ''
 			};
+			element.objectId = $scope.fId;
 			element.nome[$scope.language] = $scope.fNome;
 			element.info[$scope.language] = $scope.fInfo;
 			element.type = $scope.fType;
@@ -191,6 +193,7 @@ angular.module('tipo-punto', ['DataService']).controller('userCtrl', function($s
 		}
 	};
 	
+	$scope.$watch('fId',function() {$scope.test();});
 	$scope.$watch('fNome',function() {$scope.test();});
 	$scope.$watch('fType',function() {$scope.test();});
 	
@@ -213,7 +216,8 @@ angular.module('tipo-punto', ['DataService']).controller('userCtrl', function($s
 	};
 	
 	$scope.test = function() {
-		if (($scope.fNome == null) || ($scope.fNome.length <= 3) ||
+		if (($scope.fId == null) || ($scope.fId.length <= 3) ||
+				($scope.fNome == null) || ($scope.fNome.length <= 3) ||
 				($scope.fType == null)) {
 	    $scope.incomplete = true;
 	  } else {

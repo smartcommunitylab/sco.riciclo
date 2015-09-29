@@ -102,7 +102,6 @@ public class TipologieController {
 			response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
 			return null;
 		}
-		data.setObjectId(UUID.randomUUID().toString());
 		data.setOwnerId(ownerId);
 		storage.addTipologiaPuntoRaccolta(data, draft);
 		return data;
@@ -154,7 +153,6 @@ public class TipologieController {
 			response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
 			return null;
 		}
-		data.setObjectId(UUID.randomUUID().toString());
 		data.setOwnerId(ownerId);
 		storage.addTipologiaProfilo(data, draft);
 		return data;

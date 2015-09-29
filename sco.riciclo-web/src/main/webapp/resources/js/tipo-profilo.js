@@ -112,10 +112,12 @@ angular.module('tipo-profilo', ['DataService']).controller('userCtrl', function(
 	$scope.saveTipo = function() {
 		if($scope.create) {
 			var element = {
+				objectId: '',
 				nome: {},
 				descrizione: {},
 				tipologiaUtenza: ''
 			};
+			element.objectId = $scope.fId;
 			element.nome[$scope.language] = $scope.fNome;
 			element.descrizione[$scope.language] = $scope.fDescrizione;
 			element.tipologiaUtenza = $scope.selectedTipologiaUtenza.objectId;
@@ -197,6 +199,7 @@ angular.module('tipo-profilo', ['DataService']).controller('userCtrl', function(
 		}
 	};
 	
+	$scope.$watch('fId',function() {$scope.test();});
 	$scope.$watch('fNome',function() {$scope.test();});
 	$scope.$watch('selectedTipologiaUtenza',function() {$scope.test();});
 	
@@ -219,7 +222,8 @@ angular.module('tipo-profilo', ['DataService']).controller('userCtrl', function(
 	};
 	
 	$scope.test = function() {
-		if (($scope.fNome == null) || ($scope.fNome.length <= 3) ||
+		if (($scope.fId == null) || ($scope.fId.length <= 3) ||
+				($scope.fNome == null) || ($scope.fNome.length <= 3) ||
 				($scope.selectedTipologiaUtenza == null)) {
 	    $scope.incomplete = true;
 	  } else {

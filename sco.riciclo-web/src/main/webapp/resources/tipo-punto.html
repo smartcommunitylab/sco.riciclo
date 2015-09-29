@@ -66,6 +66,13 @@
 					<h4 data-ng-show="edit">Modifica ({{actualName}}):</h4>
 					<form role="form">
 					  <div class="form-group">
+					    <label class="control-label">Id:</label>
+				    	<input type="text" name="id" data-ng-model="fId" data-ng-disabled="!create" placeholder="id">
+						  <button class="btn btn-default btn-sm" data-ng-disabled="!edit && !create" data-ng-click="fId = ''">
+								<span class="glyphicon glyphicon-remove"></span>
+							</button>
+					  </div>
+					  <div class="form-group">
 					    <label class="control-label">Nome ({{language}}):</label>
 				    	<input type="text" name="name" data-ng-model="fNome" data-ng-disabled="!edit && !create" placeholder="nome">
 						  <button class="btn btn-default btn-sm" data-ng-disabled="!edit && !create" data-ng-click="fNome = ''">
@@ -108,17 +115,21 @@
 						</button>
 					</p>
 					<div class="row" style="background-color:lavender;">
-						<div class="col-md-2"><h4>Modifica</h4></div>
+						<div class="col-md-1"><h4>Modifica</h4></div>
+						<div class="col-md-2"><h4>Identificativo</h4></div>
 						<div class="col-md-2"><h4>Nome</h4></div>
 						<div class="col-md-4"><h4>Informazioni</h4></div>
 						<div class="col-md-2"><h4>Tipo</h4></div>
-						<div class="col-md-2"><h4>Cancella</h4></div>
+						<div class="col-md-1"><h4>Cancella</h4></div>
 					</div>
 					<div class="row list-row" data-ng-repeat="item in tipoPuntoRaccoltaList | filter:search ">
-						<div class="col-md-2" >
+						<div class="col-md-1" >
 							<button class="btn btn-primary" data-ng-click="editTipo(item.objectId)">
 								<span class="glyphicon glyphicon-pencil"></span>  Modifica
 							</button>
+						</div>
+						<div class="col-md-2">
+							<span>{{item.objectId}}</span>
 						</div>
 						<div class="col-md-2">
 							<span>{{item.nome[language]}}</span>
@@ -129,7 +140,7 @@
 						<div class="col-md-2">
 							<span>{{item.type}}</span>
 						</div>
-						<div class="col-md-2">
+						<div class="col-md-1">
 							<button class="btn btn-danger" data-ng-click="deleteTipo(item.objectId)">
 								<span class="glyphicon glyphicon-remove"></span>  Cancella
 							</button>
