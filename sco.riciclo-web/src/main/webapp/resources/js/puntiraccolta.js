@@ -22,14 +22,12 @@ puntiraccoltaApp.controller('userCtrl', function($scope, $http, $sce, $q, DataSe
 	$scope.status = 200;
 	
 	$scope.selectedArea = null;
-	$scope.areaSearch = {};
-	
-	$scope.selectedTipologiaPuntoRaccolta = null;
-	$scope.tipologiaPuntoRaccoltaSearch = {};
+	$scope.areaSearch = {};	
 	
 	$scope.selectedCrm = null;
 	$scope.crmSearch = {};
 		
+	$scope.selectedTipologiaPuntoRaccolta = null;
 	$scope.selectedTipologiaUtenza = null;
 	$scope.crmList = [];
 	$scope.areaList = [];
@@ -241,29 +239,6 @@ puntiraccoltaApp.controller('userCtrl', function($scope, $http, $sce, $q, DataSe
 		suggest: $scope.suggestArea,
 		on_select: function (selected) {
 			$scope.selectedArea = selected.obj;
-		}
-	};
-
-	$scope.suggestTipologiaPuntoRaccolta = function(term) {
-		var q = term.toLowerCase().trim();
-    var results = [];
-    // Find first 10 states that start with `term`.
-    for (var i = 0; i < $scope.tipologiaPuntoRaccoltaList.length; i++) {
-      var tipologia = $scope.tipologiaPuntoRaccoltaList[i];
-      if(tipologia.objectId) {
-        var result= tipologia.nome[$scope.language].search(new RegExp(q, "i"));
-        if(result >= 0) {
-        	results.push({ label: tipologia.nome[$scope.language], value: tipologia.nome[$scope.language], obj: tipologia });
-        }
-      }
-    }
-    return results;
-	};
-	
-	$scope.ac_tipologia_punto_raccolta_options = {
-		suggest: $scope.suggestTipologiaPuntoRaccolta,
-		on_select: function (selected) {
-			$scope.selectedTipologiaPuntoRaccolta = selected.obj;
 		}
 	};
 

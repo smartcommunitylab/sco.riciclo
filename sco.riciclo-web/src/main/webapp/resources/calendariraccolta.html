@@ -86,7 +86,7 @@
 						<div class="form-group" mass-autocomplete>
 							<label class="control-label">Area:</label>
 							<input data-ng-model="areaSearch.value" mass-autocomplete-item="ac_area_options" placeholder="area"
-							tabindex="1" data-ng-disabled="!edit && !create">
+							data-ng-disabled="!edit && !create">
 						  <button class="btn btn-default btn-sm" data-ng-click="areaSearch.value = null"
 						  data-ng-disabled="!edit && !create">
 								<span class="glyphicon glyphicon-remove"></span>
@@ -94,9 +94,10 @@
 						</div>
 						<div class="form-group" mass-autocomplete>
 							<label class="control-label">Tipologia Punto Raccolta:</label>
-							<input data-ng-model="tipologiaPuntoRaccoltaSearch.value" mass-autocomplete-item="ac_tipologia_punto_raccolta_options" 
-							placeholder="tipologia punto raccolta" tabindex="2" data-ng-disabled="!edit && !create">
-						  <button class="btn btn-default btn-sm" data-ng-click="tipologiaPuntoRaccoltaSearch.value = null"
+					    <select data-ng-model="selectedTipologiaPuntoRaccolta" data-ng-disabled="!edit && !create" 
+					    	data-ng-options="item.objectId for item in tipologiaPuntoRaccoltaList">
+      				</select>
+						  <button class="btn btn-default btn-sm" data-ng-click="selectedTipologiaPuntoRaccolta = null"
 						  data-ng-disabled="!edit && !create">
 								<span class="glyphicon glyphicon-remove"></span>
 							</button>

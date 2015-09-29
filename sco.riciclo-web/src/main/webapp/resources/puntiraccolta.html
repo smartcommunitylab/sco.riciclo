@@ -78,17 +78,17 @@
 					  </div>
 						<div class="form-group" mass-autocomplete>
 							<label class="control-label">Area:</label>
-							<input data-ng-model="areaSearch.value" mass-autocomplete-item="ac_area_options" placeholder="area"
-							tabindex="2">
+							<input data-ng-model="areaSearch.value" mass-autocomplete-item="ac_area_options" placeholder="area">
 						  <button class="btn btn-default btn-sm" data-ng-click="areaSearch.value = null">
 								<span class="glyphicon glyphicon-remove"></span>
 							</button>
 						</div>
-						<div class="form-group" mass-autocomplete>
+						<div class="form-group">
 							<label class="control-label">Tipologia Punto Raccolta:</label>
-							<input data-ng-model="tipologiaPuntoRaccoltaSearch.value" mass-autocomplete-item="ac_tipologia_punto_raccolta_options" 
-							placeholder="tipologia punto raccolta" tabindex="3">
-						  <button class="btn btn-default btn-sm" data-ng-click="tipologiaPuntoRaccoltaSearch.value = null">
+					    <select data-ng-model="selectedTipologiaPuntoRaccolta" 
+					    	data-ng-options="item.objectId for item in tipologiaPuntoRaccoltaList">
+      				</select>
+						  <button class="btn btn-default btn-sm" data-ng-click="selectedTipologiaPuntoRaccolta = null">
 								<span class="glyphicon glyphicon-remove"></span>
 							</button>
 						</div>

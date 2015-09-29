@@ -27,7 +27,7 @@ puntiraccoltaApp.controller('userCtrl', function($scope, $http, $sce, $q, DataSe
 	$scope.areaSearch = {};
 	
 	$scope.selectedTipologiaPuntoRaccolta =  null;
-	$scope.tipologiaPuntoRaccoltaSearch = {};
+	$scope.selectedTipologiaUtenza = null;
 	
 	$scope.areaList = [];
 	$scope.tipologiaUtenzaList = [];
@@ -35,9 +35,7 @@ puntiraccoltaApp.controller('userCtrl', function($scope, $http, $sce, $q, DataSe
 	$scope.calendarioRaccoltaList = [];
 	
 	$scope.areaNameMap = {};
-	$scope.tipologiaPuntoRaccoltaNameMap = {};
-	
-	$scope.selectedTipologiaUtenza = null;
+	$scope.tipologiaPuntoRaccoltaNameMap = {};	
 	
 	$scope.timetableList = [];
 	
@@ -130,7 +128,6 @@ puntiraccoltaApp.controller('userCtrl', function($scope, $http, $sce, $q, DataSe
 		$scope.fId = "";
 		$scope.areaSearch = {};
 		$scope.tipologiaUtenzaSearch = {};
-		$scope.tipologiaPuntoRaccoltaSearch = {};
 		$scope.selectedArea = null;
 		$scope.selectedTipologiaUtenza = null;
 		$scope.selectedTipologiaPuntoRaccolta = null;
@@ -151,7 +148,6 @@ puntiraccoltaApp.controller('userCtrl', function($scope, $http, $sce, $q, DataSe
 			$scope.selectedTipologiaUtenza = $scope.findByObjectId($scope.tipologiaUtenzaList, relation.tipologiaUtenza);
 			$scope.selectedTipologiaPuntoRaccolta = $scope.findByObjectId($scope.tipologiaPuntoRaccoltaList, relation.tipologiaPuntoRaccolta);
 			$scope.areaSearch.value = $scope.getAreaName(relation.area);
-			$scope.tipologiaPuntoRaccoltaSearch.value = $scope.getTipologiaPuntoRaccoltaName(relation.tipologiaPuntoRaccolta);
 			$scope.timetableList = relation.orarioApertura;
 			$scope.edit = true;
 			$scope.create = false;
@@ -422,30 +418,6 @@ puntiraccoltaApp.controller('userCtrl', function($scope, $http, $sce, $q, DataSe
 			$scope.selectedArea = selected.obj;
 		}
 	};	
-
-	$scope.suggestTipologiaPuntoRaccolta = function(term) {
-		var q = term.toLowerCase().trim();
-    var results = [];
-    // Find first 10 states that start with `term`.
-    for (var i = 0; i < $scope.tipologiaPuntoRaccoltaList.length; i++) {
-      var tipologia = $scope.tipologiaPuntoRaccoltaList[i];
-      if(tipologia.objectId) {
-      	var name = $scope.getTipologiaPuntoRaccoltaName(tipologia.objectId);
-        var result= name.search(new RegExp(q, "i"));
-        if(result >= 0) {
-        	results.push({ label: name, value: name, obj: tipologia });
-        }
-      }
-    }
-    return results;
-	};
-	
-	$scope.ac_tipologia_punto_raccolta_options = {
-		suggest: $scope.suggestTipologiaPuntoRaccolta,
-		on_select: function (selected) {
-			$scope.selectedTipologiaPuntoRaccolta = selected.obj;
-		}
-	};
 	
 });
 
