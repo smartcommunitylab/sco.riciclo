@@ -13,13 +13,13 @@
   <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
   <link rel="stylesheet" href="css/style.css">
 </head>
-<body data-ng-app="tipo-profilo" data-ng-controller="userCtrl">
+<body data-ng-app="tipo-punto" data-ng-controller="userCtrl">
 	<div data-ng-include="'html/navbar.html'"></div>
 
 	<div class="container-fluid">
 		<div class="well well-sm">
 			<h4>
-				Tipologia Profilo
+				Tipologia Punto Raccolta
 				<button type="button" class="btn btn-default btn-sm pull-right" data-ng-click="changeLanguage('en')"
 					data-ng-class="{'active':language == 'en'}">
 	   			<span class="glyphicon glyphicon-flag"></span> EN
@@ -73,19 +73,20 @@
 							</button>
 					  </div>
 					  <div class="form-group">
-					    <label class="control-label">Descrizione ({{language}}):</label>
-				    	<input type="text" name="descrizione" data-ng-model="fDescrizione" data-ng-disabled="!edit && !create" 
-				    	placeholder="descrizione">
-						  <button class="btn btn-default btn-sm" data-ng-disabled="!edit && !create" data-ng-click="fDescrizione = ''">
+					    <label class="control-label">Informazioni ({{language}}):</label>
+				    	<input type="text" name="info" data-ng-model="fInfo" data-ng-disabled="!edit && !create" 
+				    	placeholder="informazioni">
+						  <button class="btn btn-default btn-sm" data-ng-disabled="!edit && !create" data-ng-click="fInfo = ''">
 								<span class="glyphicon glyphicon-remove"></span>
 							</button>
 					  </div>
 					  <div class="form-group">
 					    <label class="control-label">Tipologia Utenza:</label>
-					    <select data-ng-model="selectedTipologiaUtenza" data-ng-disabled="!edit && !create"
-					    data-ng-options="item.objectId for item in tipologiaUtenzaList">
+					    <select data-ng-model="fType" data-ng-disabled="!edit && !create">
+					    	<option value="CRM">CRM / Isola</option>
+					    	<option value="PP">Porta a Porta</option>
       				</select>
-						  <button class="btn btn-default btn-sm" data-ng-disabled="!edit && !create" data-ng-click="selectedTipologiaUtenza = null">
+						  <button class="btn btn-default btn-sm" data-ng-disabled="!edit && !create" data-ng-click="fType = ''">
 								<span class="glyphicon glyphicon-remove"></span>
 							</button>
 					  </div>
@@ -109,11 +110,11 @@
 					<div class="row" style="background-color:lavender;">
 						<div class="col-md-2"><h4>Modifica</h4></div>
 						<div class="col-md-2"><h4>Nome</h4></div>
-						<div class="col-md-4"><h4>Descrizione</h4></div>
-						<div class="col-md-2"><h4>Tipologia Utenza</h4></div>
+						<div class="col-md-4"><h4>Informazioni</h4></div>
+						<div class="col-md-2"><h4>Tipo</h4></div>
 						<div class="col-md-2"><h4>Cancella</h4></div>
 					</div>
-					<div class="row list-row" data-ng-repeat="item in tipoProfiloList | filter:search ">
+					<div class="row list-row" data-ng-repeat="item in tipoPuntoRaccoltaList | filter:search ">
 						<div class="col-md-2" >
 							<button class="btn btn-primary" data-ng-click="editTipo(item.objectId)">
 								<span class="glyphicon glyphicon-pencil"></span>  Modifica
@@ -123,10 +124,10 @@
 							<span>{{item.nome[language]}}</span>
 						</div>
 						<div class="col-md-4">
-							<span>{{item.descrizione[language]}}</span>
+							<span>{{item.info[language]}}</span>
 						</div>
 						<div class="col-md-2">
-							<span>{{item.tipologiaUtenza}}</span>
+							<span>{{item.type}}</span>
 						</div>
 						<div class="col-md-2">
 							<button class="btn btn-danger" data-ng-click="deleteTipo(item.objectId)">
@@ -142,7 +143,7 @@
 	</div>
 	
 	<script src = "js/services.js"></script>	
-	<script src = "js/tipo-profilo.js"></script>
+	<script src = "js/tipo-punto.js"></script>
 
 </body>
 </html>
