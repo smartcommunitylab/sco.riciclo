@@ -1,9 +1,9 @@
-angular.module('tipo-profilo', ['DataService']).controller('userCtrl', function($scope, $http, DataService) {
+angular.module('tipo-utenza', ['DataService']).controller('userCtrl', function($scope, $http, DataService) {
 	DataService.getProfile().then(function(p) {
   	$scope.initData(p);
   });
 
-	$scope.selectedTab = "menu-tipo-profilo";
+	$scope.selectedTab = "menu-tipo-utenza";
 	$scope.language = "it";
 	$scope.draft = true;
 	$scope.defaultLang = "it";
@@ -13,7 +13,6 @@ angular.module('tipo-profilo', ['DataService']).controller('userCtrl', function(
 	$scope.fDescrizione = "";
 	$scope.search = "";
 	$scope.actualName = "";
-	$scope.selectedTipologiaUtenza = null;
 	
 	$scope.edit = false;
 	$scope.create = false;
@@ -28,20 +27,14 @@ angular.module('tipo-profilo', ['DataService']).controller('userCtrl', function(
 	$scope.data = null;
 	$scope.status = 200;
 	
-	$scope.tipoProfiloList = [];
-	$scope.tipologiaUtenzaList = [];
+	$scope.tipoUtenzaList = [];
 	
 	$scope.initData = function(profile) {
 		$scope.profile = profile;
 		
 		var urlTipologiaUtenza = "api/tipologia/utenza/" + $scope.profile.appInfo.ownerId + "?draft=" + $scope.draft;
 		$http.get(urlTipologiaUtenza, {headers: {'X-ACCESS-TOKEN': $scope.profile.appInfo.token}}).success(function (response) {
-			$scope.tipologiaUtenzaList = response;
-		});
-		
-		var url = "api/tipologia/profilo/" + $scope.profile.appInfo.ownerId + "?draft=" + $scope.draft;
-		$http.get(url, {headers: {'X-ACCESS-TOKEN': $scope.profile.appInfo.token}}).success(function (response) {
-			$scope.tipoProfiloList = response;
+			$scope.tipoUtenzaList = response;
 		});
 	};
 	
@@ -58,7 +51,7 @@ angular.module('tipo-profilo', ['DataService']).controller('userCtrl', function(
 	$scope.changeLanguage = function(language) {
 		$scope.language = language;
 		if($scope.edit && ($scope.fId != null)) {
-			var element = $scope.findByObjectId($scope.tipoProfiloList, $scope.fId);
+			var element = $scope.findByObjectId($scope.tipoUtenzaList, $scope.fId);
 			if(element != null) {
 				$scope.fNome = element.nome[$scope.language];
 				$scope.fDescrizione = element.descrizione[$scope.language];
@@ -72,13 +65,12 @@ angular.module('tipo-profilo', ['DataService']).controller('userCtrl', function(
 		//console.log("editRifiutoPos:" + index);
 		$scope.edit = true;
 		$scope.create = false;
-		var element = $scope.findByObjectId($scope.tipoProfiloList, id);
+		var element = $scope.findByObjectId($scope.tipoUtenzaList, id);
 		if(element != null) {
 			$scope.fId = id;
 			$scope.fNome = element.nome[$scope.language];
 			$scope.fDescrizione = element.descrizione[$scope.language];
 			$scope.actualName = element.nome[$scope.defaultLang];
-			$scope.selectedTipologiaUtenza = $scope.findByObjectId($scope.tipologiaUtenzaList, element.tipologiaUtenza);
 			$scope.incomplete = false;	
 		}
 		$('html,body').animate({scrollTop:0},0);
@@ -92,7 +84,6 @@ angular.module('tipo-profilo', ['DataService']).controller('userCtrl', function(
 		$scope.fNome = "";
 		$scope.fDescrizione = "";
 		$scope.actualName = "";
-		$scope.selectedTipologiaUtenza = null;
 		$scope.incomplete = true;
 	};
 	
@@ -104,7 +95,6 @@ angular.module('tipo-profilo', ['DataService']).controller('userCtrl', function(
 		$scope.fDescrizione = "";
 		$scope.search = "";
 		$scope.actualName = "";
-		$scope.selectedTipologiaUtenza = null;
 		$scope.incomplete = true;
 		$('html,body').animate({scrollTop:0},0);
 	};
@@ -112,15 +102,17 @@ angular.module('tipo-profilo', ['DataService']).controller('userCtrl', function(
 	$scope.saveTipo = function() {
 		if($scope.create) {
 			var element = {
+				objectId: '',
 				nome: {},
-				descrizione: {},
-				tipologiaUtenza: ''
+				descrizione: {}
 			};
+			element.objectId = $scope.fId;
 			element.nome[$scope.language] = $scope.fNome;
 			element.descrizione[$scope.language] = $scope.fDescrizione;
-			element.tipologiaUtenza = $scope.selectedTipologiaUtenza.objectId;
-			var url = "api/tipologia/profilo/" + $scope.profile.appInfo.ownerId + "?draft=" + $scope.draft; 
-			$http.post(url, element, {headers: {'X-ACCESS-TOKEN': $scope.profile.appInfo.token}}).then(
+			var copiedList = $scope.tipoUtenzaList.slice(0);
+			copiedList.unshift(element);
+			var url = "api/tipologia/utenza/" + $scope.profile.appInfo.ownerId + "?draft=" + $scope.draft; 
+			$http.post(url, copiedList, {headers: {'X-ACCESS-TOKEN': $scope.profile.appInfo.token}}).then(
 			function(response) {
 		    // this callback will be called asynchronously
 		    // when the response is available
@@ -128,7 +120,7 @@ angular.module('tipo-profilo', ['DataService']).controller('userCtrl', function(
 		  	$scope.data = response.data;
 		  	$scope.ok = true;
 		  	$scope.okMsg = "Operazione eseguita con successo";
-		  	$scope.tipoProfiloList.unshift($scope.data);
+		  	$scope.tipoUtenzaList = copiedList;
 		  	$scope.resetUI();
 		  	console.log("saveTipo:" + response.status + " - " + response.data);
 		  }, 
@@ -141,64 +133,65 @@ angular.module('tipo-profilo', ['DataService']).controller('userCtrl', function(
 		  });
 		}
 		if($scope.edit) {
-			var element = $scope.findByObjectId($scope.tipoProfiloList, $scope.fId);
-			if(element != null) {
-				element.nome[$scope.language] = $scope.fNome;
-				element.descrizione[$scope.language] = $scope.fDescrizione;
-				element.tipologiaUtenza = $scope.selectedTipologiaUtenza.objectId;
-				var url = "api/tipologia/profilo/" + $scope.profile.appInfo.ownerId + "/" + element.objectId + "?draft=" + $scope.draft;
-				$http.put(url, element, {headers: {'X-ACCESS-TOKEN': $scope.profile.appInfo.token}}).then(
-				function(response) {
-			    // this callback will be called asynchronously
-			    // when the response is available
-			  	$scope.status = response.status;
-			  	$scope.data = response.data;
-			  	$scope.ok = true;
-			  	$scope.okMsg = "Operazione eseguita con successo";
-			  	console.log("saveTipo:" + response.status + " - " + response.data);
-			  }, 
-			  function(response) {
-			    // called asynchronously if an error occurs
-			    // or server returns response with an error status.
-			  	$scope.error = true;
-			  	$scope.errorMsg = response.status + " - " + (response.data || "Request failed");
-			  	$scope.status = response.status;
-			  });
+			var index = $scope.findIndex($scope.tipoUtenzaList, $scope.fId);
+			if(index >= 0) {
+				var element = $scope.tipoUtenzaList[index];
+				if(element != null) {
+					element.nome[$scope.language] = $scope.fNome;
+					element.descrizione[$scope.language] = $scope.fDescrizione;
+					var url = "api/tipologia/utenza/" + $scope.profile.appInfo.ownerId + "?draft=" + $scope.draft;
+					$http.post(url, $scope.tipoUtenzaList, {headers: {'X-ACCESS-TOKEN': $scope.profile.appInfo.token}}).then(
+					function(response) {
+				    // this callback will be called asynchronously
+				    // when the response is available
+				  	$scope.status = response.status;
+				  	$scope.data = response.data;
+				  	$scope.ok = true;
+				  	$scope.okMsg = "Operazione eseguita con successo";
+				  	console.log("saveTipo:" + response.status + " - " + response.data);
+				  }, 
+				  function(response) {
+				    // called asynchronously if an error occurs
+				    // or server returns response with an error status.
+				  	$scope.error = true;
+				  	$scope.errorMsg = response.status + " - " + (response.data || "Request failed");
+				  	$scope.status = response.status;
+				  });					
+				}
 			}
 		}
 	};
 	
 	$scope.deleteTipo = function(id) {
-		var index = $scope.findIndex($scope.tipoProfiloList, id);
+		var index = $scope.findIndex($scope.tipoUtenzaList, id);
 		if(index >= 0) {
-			var element = $scope.tipoProfiloList[index];
-			if(element != null) {
-				var url = "api/tipologia/profilo/" + $scope.profile.appInfo.ownerId + "/" + element.objectId + "?draft=" + $scope.draft;
-				$http.delete(url, {headers: {'X-ACCESS-TOKEN': $scope.profile.appInfo.token}}).then(
-				function(response) {
-					// this callback will be called asynchronously
-					// when the response is available
-					$scope.status = response.status;
-					$scope.data = response.data;
-					$scope.ok = true;
-					$scope.okMsg = "Operazione eseguita con successo";
-					$scope.tipoProfiloList.splice(index, 1);
-					$scope.resetUI();
-					console.log("deleteTipo:" + response.status + " - " + response.data);
-				}, 
-				function(response) {
-				  // called asynchronously if an error occurs
-					// or server returns response with an error status.
-					$scope.error = true;
-					$scope.errorMsg = response.status + " - " + (response.data || "Request failed");
-					$scope.status = response.status;
-				});			
-			}
+			var copiedList = $scope.tipoUtenzaList.slice(0);
+			copiedList.splice(index, 1);
+			var url = "api/tipologia/utenza/" + $scope.profile.appInfo.ownerId + "?draft=" + $scope.draft;
+			$http.post(url, copiedList, {headers: {'X-ACCESS-TOKEN': $scope.profile.appInfo.token}}).then(
+			function(response) {
+				// this callback will be called asynchronously
+				// when the response is available
+				$scope.status = response.status;
+				$scope.data = response.data;
+				$scope.ok = true;
+				$scope.okMsg = "Operazione eseguita con successo";
+				$scope.tipoUtenzaList = copiedList;
+				$scope.resetUI();
+				console.log("deleteTipo:" + response.status + " - " + response.data);
+			}, 
+			function(response) {
+			  // called asynchronously if an error occurs
+				// or server returns response with an error status.
+				$scope.error = true;
+				$scope.errorMsg = response.status + " - " + (response.data || "Request failed");
+				$scope.status = response.status;
+			});			
 		}
 	};
 	
 	$scope.$watch('fNome',function() {$scope.test();});
-	$scope.$watch('selectedTipologiaUtenza',function() {$scope.test();});
+	$scope.$watch('fId',function() {$scope.test();});
 	
 	$scope.findByObjectId = function(array, id) {
     for (var d = 0, len = array.length; d < len; d += 1) {
@@ -220,7 +213,7 @@ angular.module('tipo-profilo', ['DataService']).controller('userCtrl', function(
 	
 	$scope.test = function() {
 		if (($scope.fNome == null) || ($scope.fNome.length <= 3) ||
-				($scope.selectedTipologiaUtenza == null)) {
+				($scope.fId == null) || ($scope.fId.length <= 3)) {
 	    $scope.incomplete = true;
 	  } else {
 	  	$scope.incomplete = false;

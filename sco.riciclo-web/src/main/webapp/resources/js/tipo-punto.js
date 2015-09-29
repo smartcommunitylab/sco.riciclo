@@ -61,7 +61,7 @@ angular.module('tipo-punto', ['DataService']).controller('userCtrl', function($s
 	};
 	
 	$scope.editTipo = function(id) {
-		console.log("editRifiuto:" + id);
+		console.log("editTipo:" + id);
 		//var index = $scope.findIndex($scope.rifiuti, id);
 		//console.log("editRifiutoPos:" + index);
 		$scope.edit = true;
