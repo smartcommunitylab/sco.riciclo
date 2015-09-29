@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>100% Riciclo Console</title>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="description" content="">
+	<meta name="author" content="">
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+  <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body data-ng-app="tipo-raccolta" data-ng-controller="userCtrl">
+	<div data-ng-include="'html/navbar.html'"></div>
+
+	<div class="container-fluid">
+		<div class="well well-sm">
+			<h4>
+				Tipologia Raccolta
+				<button type="button" class="btn btn-default btn-sm pull-right" data-ng-click="changeLanguage('en')"
+					data-ng-class="{'active':language == 'en'}">
+	   			<span class="glyphicon glyphicon-flag"></span> EN
+	 			</button>
+				<button type="button" class="btn btn-default btn-sm pull-right" data-ng-click="changeLanguage('it')"
+					data-ng-class="{'active':language == 'it'}">
+	   			<span class="glyphicon glyphicon-flag"></span> IT
+	 			</button>
+ 			</h4>
+		</div>
+		<div class="panel-group">
+		
+			<div id="error" class="alert alert-danger fade in" data-ng-show="error">
+				<a href="#" class="close" data-hide="alert" aria-label="close"
+				data-ng-click="resetError()">&times;</a>
+				{{errorMsg}}
+			</div>
+			
+			<div id="error" class="alert alert-success fade in" data-ng-show="ok">
+				<a href="#" class="close" data-hide="alert" aria-label="close"
+				data-ng-click="resetOk()">&times;</a>
+				{{okMsg}}
+			</div>
+			
+			<div class="panel panel-default">
+				<div class="panel-body">
+					<button class="btn btn-link" data-ng-click="newTipo()">
+						<span class="glyphicon glyphicon-grain"></span>  Crea nuovo elemento
+					</button>
+					<button type="button" class="btn btn-default btn-sm pull-right" data-ng-click="draft=true"
+						data-ng-class="{'active':draft}">
+		   			<span class="glyphicon glyphicon-tags"></span> draft
+		 			</button>
+					<button type="button" class="btn btn-default btn-sm pull-right" data-ng-click="draft=false"
+						data-ng-class="{'active':!draft}">
+		   			<span class="glyphicon glyphicon-tags"></span> prod
+		 			</button>
+				</div>
+			</div>			
+						
+			<div class="panel panel-default">
+	  		<div class="panel-body">
+					<h4 data-ng-show="create">Crea:</h4>
+					<h4 data-ng-show="edit">Modifica ({{actualName}}):</h4>
+					<form role="form">
+					  <div class="form-group">
+					    <label class="control-label">Identificativo:</label>
+				    	<input type="text" name="id" data-ng-model="fId" data-ng-disabled="!create" placeholder="id">
+						  <button class="btn btn-default btn-sm" data-ng-disabled="!create" data-ng-click="fId = ''">
+								<span class="glyphicon glyphicon-remove"></span>
+							</button>
+					  </div>
+					  <div class="form-group">
+					    <label class="control-label">Nome ({{language}}):</label>
+				    	<input type="text" name="name" data-ng-model="fNome" data-ng-disabled="!edit && !create" placeholder="nome">
+						  <button class="btn btn-default btn-sm" data-ng-disabled="!edit && !create" data-ng-click="fNome = ''">
+								<span class="glyphicon glyphicon-remove"></span>
+							</button>
+					  </div>
+					  <div class="form-group">
+					    <label class="control-label">Descrizione ({{language}}):</label>
+				    	<input type="text" name="descrizione" data-ng-model="fDescrizione" data-ng-disabled="!edit && !create" 
+				    	placeholder="descrizione">
+						  <button class="btn btn-default btn-sm" data-ng-disabled="!edit && !create" data-ng-click="fDescrizione = ''">
+								<span class="glyphicon glyphicon-remove"></span>
+							</button>
+					  </div>
+				  	<button class="btn btn-success" data-ng-disabled="error || incomplete"
+				  		data-ng-click="saveTipo()">
+				  		<span class="glyphicon glyphicon-save"></span> Salva
+				  	</button> 
+					</form>	
+	  		</div>
+			</div>	
+					
+			<div class="panel panel-default">
+				<div class="panel-body">
+					<label class="control-label">Cerca:</label>
+					<p>
+						<input type="text" data-ng-model="search">
+						<button class="btn btn-default btn-sm" data-ng-click="search = ''">
+							<span class="glyphicon glyphicon-remove"></span>
+						</button>
+					</p>
+					<div class="row" style="background-color:lavender;">
+						<div class="col-md-2"><h4>Modifica</h4></div>
+						<div class="col-md-2"><h4>Identificativo</h4></div>
+						<div class="col-md-2"><h4>Nome</h4></div>
+						<div class="col-md-4"><h4>Descrizione</h4></div>
+						<div class="col-md-2"><h4>Cancella</h4></div>
+					</div>
+					<div class="row list-row" data-ng-repeat="item in tipoRaccoltaList | filter:search ">
+						<div class="col-md-2" >
+							<button class="btn btn-primary" data-ng-click="editTipo(item.objectId)">
+								<span class="glyphicon glyphicon-pencil"></span>  Modifica
+							</button>
+						</div>
+						<div class="col-md-2">
+							<span>{{item.objectId}}</span>
+						</div>
+						<div class="col-md-2">
+							<span>{{item.nome[language]}}</span>
+						</div>
+						<div class="col-md-4">
+							<span>{{item.descrizione[language]}}</span>
+						</div>
+						<div class="col-md-2">
+							<button class="btn btn-danger" data-ng-click="deleteTipo(item.objectId)">
+								<span class="glyphicon glyphicon-remove"></span>  Cancella
+							</button>
+						</div>
+					</div>
+				</div>
+			</div>
+				
+		</div>
+			
+	</div>
+	
+	<script src = "js/services.js"></script>	
+	<script src = "js/tipo-raccolta.js"></script>
+
+</body>
+</html>
