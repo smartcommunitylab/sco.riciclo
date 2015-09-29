@@ -288,7 +288,7 @@ angular.module('rifiuti.controllers.raccolta', [])
   });
 })
 
-.controller('PuntoDiRaccoltaCtrl', function ($scope, $rootScope, $stateParams, $ionicNavBarDelegate, Raccolta) {
+.controller('PuntoDiRaccoltaCtrl', function ($scope, $rootScope, $stateParams, $ionicNavBarDelegate, Raccolta, Utili) {
 
   $scope.id = !!$stateParams.id && $stateParams.id != 'undefined' && $stateParams.id != 'null'? $rootScope.id2addr($stateParams.id) : null;
   $scope.pdr = {};
@@ -328,6 +328,7 @@ angular.module('rifiuti.controllers.raccolta', [])
     Raccolta.raccolta({ tipopunto:$scope.pdr.tipologiaPuntiRaccolta }).then(function(raccolta){
       var myRifiuti=[];
       raccolta.forEach(function(regola){
+        if (!Utili.pdrCharacteristicApplies($scope.pdr, regola.tipologiaRaccolta)) return;
         if (myRifiuti.indexOf(regola.tipologiaRaccolta)==-1) {
           myRifiuti.push(regola.tipologiaRaccolta);
         //} else { console.log('already: '+regola.tipologiaRaccolta);

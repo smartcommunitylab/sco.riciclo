@@ -76,7 +76,7 @@ angular.module('rifiuti.services.rifiuti', [])
               if (options && options.tipo && regola.tipologiaRaccolta!=options.tipo) return;
 
               if (options && options.tiporifiuto && regola.tipologiaRifiuto!=options.tiporifiuto) return;
-              if (options && options.tipirifiuto && options.tipirifiuto.indexOf(regola.tipologiaRifiuto)) return;
+              if (options && options.tipirifiuto && options.tipirifiuto.indexOf(regola.tipologiaRifiuto)==-1) return;
 
               if (options && options.tipopunto && regola.tipologiaPuntoRaccolta!=options.tipopunto) return;
               if (options && options.tipipunto && options.tipipunto.indexOf(regola.tipologiaPuntoRaccolta)==-1) return;

@@ -154,6 +154,23 @@ angular.module('rifiuti.services.utili', [])
     },
 	fullDateFormat: function(d,transf) {
 		return transf(giorniShort[d.getDay()])+ ' ' +d.getDate()+' '+transf(mesi[d.getMonth()])+' '+d.getFullYear();
-	}
+	},
+//    filterCharacteristics: function(pdr) {
+//        if (!ISOLA_MAPPING) return false;
+//        if (!pdr.caratteristiche) return false;
+//        for (var key in pdr.caratteristiche) {
+//            if (pdr.caratteristiche[key]) return true;
+//        }
+//        return false;
+//    },
+    pdrCharacteristicApplies: function(pdr, tipo) {
+        var mapping = null;
+        try {
+            mapping = ISOLA_MAPPING;
+        }catch(e) {
+        }
+        if (mapping != null && pdr.caratteristiche && !pdr.caratteristiche[mapping[tipo]]) return false;
+        return true;
+    }
   }
 })

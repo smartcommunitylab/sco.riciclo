@@ -236,11 +236,11 @@ public class RifiutiConverter {
 					Map<String, Boolean> caratteristiche = Maps.newTreeMap();
 					caratteristiche.put(GETTONIERA, Boolean.parseBoolean(pr.getGettoniera()));
 					caratteristiche.put(RESIDUO, Boolean.parseBoolean(pr.getResiduo()));
-					caratteristiche.put(IMB_CARTA, Boolean.parseBoolean(pr.getResiduo()));
-					caratteristiche.put(IMB_PL_MET, Boolean.parseBoolean(pr.getResiduo()));
-					caratteristiche.put(ORGANICO, Boolean.parseBoolean(pr.getResiduo()));
-					caratteristiche.put(IMB_VETRO, Boolean.parseBoolean(pr.getResiduo()));
-					caratteristiche.put(INDUMENTI, Boolean.parseBoolean(pr.getResiduo()));
+					caratteristiche.put(IMB_CARTA, Boolean.parseBoolean(pr.getImbCarta()));
+					caratteristiche.put(IMB_PL_MET, Boolean.parseBoolean(pr.getImbPlMet()));
+					caratteristiche.put(ORGANICO, Boolean.parseBoolean(pr.getOrganico()));
+					caratteristiche.put(IMB_VETRO, Boolean.parseBoolean(pr.getImbVetro()));
+					caratteristiche.put(INDUMENTI, Boolean.parseBoolean(pr.getIndumenti()));
 					npr.setCaratteristiche(caratteristiche);
 				}
 				if (pr.getDataDa() ==  null || pr.getDataDa().isEmpty() || pr.getDataA() ==  null || pr.getDataA().isEmpty() || pr.getIl() ==  null || pr.getIl().isEmpty()) {

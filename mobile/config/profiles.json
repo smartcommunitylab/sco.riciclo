@@ -12,6 +12,13 @@
         "version": "1.0.2",
         "version_code": "5",
         "app_name": "100% Riciclo - Rovereto"
+    },
+    "ASIA": {
+        "resource_folder": "config/instances/ASIA",
+        "widget_id" : "it.smartcommunitylab.rifiuti.asia",
+        "version": "1.0.0",
+        "version_code": "5",
+        "app_name": "100% Riciclo - A.S.I.A."
     }
 
 }

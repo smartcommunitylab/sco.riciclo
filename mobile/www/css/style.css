@@ -372,7 +372,7 @@ body.platform-browser .scroll-bar-fade-out {
 .tipidirifiuto ion-list ion-item a {
     background-color: #eeeeee !important;
 }
-.tipidirifiuto ion-list ion-item a {
+.tipidirifiuto ion-list ion-item a, .tipodiraccolta ion-list ion-item a {
     white-space: normal;
 }
 /* Tipo di rifiuto */
@@ -396,7 +396,7 @@ body.platform-browser .scroll-bar-fade-out {
 .puntodiraccolta .dettagli .pdr-dettaglio {
     padding-left: 0;
     text-decoration: bold;
-    white-space: nowrap;
+/*    white-space: nowrap;*/
 }
 
 .puntodiraccolta .dettagli .pdr-specifica {
