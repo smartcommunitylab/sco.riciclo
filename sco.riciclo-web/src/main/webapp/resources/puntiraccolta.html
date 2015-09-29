@@ -67,11 +67,12 @@
 			<div class="panel panel-default">
 	  		<div class="panel-body">
 					<form role="form">
-					  <div class="form-group" mass-autocomplete>
+					  <div class="form-group">
 					    <label class="control-label">Tipologia Utenza:</label>
-				    	<input data-ng-model="tipologiaUtenzaSearch.value" mass-autocomplete-item="ac_utenza_options" 
-				    	placeholder="tipologia utenza" tabindex="1">
-						  <button class="btn btn-default btn-sm" data-ng-click="tipologiaUtenzaSearch.value = null">
+					    <select data-ng-model="selectedTipologiaUtenza" 
+					    	data-ng-options="item.objectId for item in tipologiaUtenzaList">
+      				</select>
+						  <button class="btn btn-default btn-sm" data-ng-click="selectedTipologiaUtenza = null">
 								<span class="glyphicon glyphicon-remove"></span>
 							</button>
 					  </div>

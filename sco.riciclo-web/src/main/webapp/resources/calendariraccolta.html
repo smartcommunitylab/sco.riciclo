@@ -74,27 +74,30 @@
 					<h4 data-ng-show="create">Crea:</h4>
 					<h4 data-ng-show="edit">Modifica:</h4>
 					<form role="form">
-					  <div class="form-group" mass-autocomplete>
+					  <div class="form-group">
 					    <label class="control-label">Tipologia Utenza:</label>
-				    	<input data-ng-model="tipologiaUtenzaSearch.value" mass-autocomplete-item="ac_utenza_options" 
-				    	placeholder="tipologia utenza" tabindex="1">
-						  <button class="btn btn-default btn-sm" data-ng-click="tipologiaUtenzaSearch.value = null">
+					    <select data-ng-model="selectedTipologiaUtenza" data-ng-disabled="!edit && !create" 
+					    	data-ng-options="item.objectId for item in tipologiaUtenzaList">
+      				</select>
+						  <button class="btn btn-default btn-sm" data-ng-click="selectedTipologiaUtenza = null">
 								<span class="glyphicon glyphicon-remove"></span>
 							</button>
 					  </div>
 						<div class="form-group" mass-autocomplete>
 							<label class="control-label">Area:</label>
 							<input data-ng-model="areaSearch.value" mass-autocomplete-item="ac_area_options" placeholder="area"
-							tabindex="2">
-						  <button class="btn btn-default btn-sm" data-ng-click="areaSearch.value = null">
+							tabindex="1" data-ng-disabled="!edit && !create">
+						  <button class="btn btn-default btn-sm" data-ng-click="areaSearch.value = null"
+						  data-ng-disabled="!edit && !create">
 								<span class="glyphicon glyphicon-remove"></span>
 							</button>
 						</div>
 						<div class="form-group" mass-autocomplete>
 							<label class="control-label">Tipologia Punto Raccolta:</label>
 							<input data-ng-model="tipologiaPuntoRaccoltaSearch.value" mass-autocomplete-item="ac_tipologia_punto_raccolta_options" 
-							placeholder="tipologia punto raccolta" tabindex="3">
-						  <button class="btn btn-default btn-sm" data-ng-click="tipologiaPuntoRaccoltaSearch.value = null">
+							placeholder="tipologia punto raccolta" tabindex="2" data-ng-disabled="!edit && !create">
+						  <button class="btn btn-default btn-sm" data-ng-click="tipologiaPuntoRaccoltaSearch.value = null"
+						  data-ng-disabled="!edit && !create">
 								<span class="glyphicon glyphicon-remove"></span>
 							</button>
 						</div>
@@ -103,7 +106,7 @@
 							<span class="glyphicon glyphicon-time"></span> Orari
 						</button>
 				  	<button class="btn btn-success" data-ng-disabled="error || incomplete" 
-				  	data-ng-click="saveRelation()" tabindex="4">
+				  	data-ng-disabled="!edit && !create" data-ng-click="saveRelation()" tabindex="3">
 				  		<span class="glyphicon glyphicon-save"></span> Salva
 				  	</button> 
 					</form>	

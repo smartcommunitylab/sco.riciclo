@@ -26,9 +26,6 @@ puntiraccoltaApp.controller('userCtrl', function($scope, $http, $sce, $q, DataSe
 	$scope.selectedArea = null;
 	$scope.areaSearch = {};
 	
-	$scope.selectedTipologiaUtenza = null;
-	$scope.tipologiaUtenzaSearch = {};
-	
 	$scope.selectedTipologiaPuntoRaccolta =  null;
 	$scope.tipologiaPuntoRaccoltaSearch = {};
 	
@@ -39,6 +36,8 @@ puntiraccoltaApp.controller('userCtrl', function($scope, $http, $sce, $q, DataSe
 	
 	$scope.areaNameMap = {};
 	$scope.tipologiaPuntoRaccoltaNameMap = {};
+	
+	$scope.selectedTipologiaUtenza = null;
 	
 	$scope.timetableList = [];
 	
@@ -152,7 +151,6 @@ puntiraccoltaApp.controller('userCtrl', function($scope, $http, $sce, $q, DataSe
 			$scope.selectedTipologiaUtenza = $scope.findByObjectId($scope.tipologiaUtenzaList, relation.tipologiaUtenza);
 			$scope.selectedTipologiaPuntoRaccolta = $scope.findByObjectId($scope.tipologiaPuntoRaccoltaList, relation.tipologiaPuntoRaccolta);
 			$scope.areaSearch.value = $scope.getAreaName(relation.area);
-			$scope.tipologiaUtenzaSearch.value = $scope.getTipologiaUtenzaName(relation.tipologiaUtenza);
 			$scope.tipologiaPuntoRaccoltaSearch.value = $scope.getTipologiaPuntoRaccoltaName(relation.tipologiaPuntoRaccolta);
 			$scope.timetableList = relation.orarioApertura;
 			$scope.edit = true;
@@ -423,31 +421,7 @@ puntiraccoltaApp.controller('userCtrl', function($scope, $http, $sce, $q, DataSe
 		on_select: function (selected) {
 			$scope.selectedArea = selected.obj;
 		}
-	};
-	
-	$scope.suggestTpologiaUtenza = function(term) {
-		var q = term.toLowerCase().trim();
-    var results = [];
-    // Find first 10 states that start with `term`.
-    for (var i = 0; i < $scope.tipologiaUtenzaList.length; i++) {
-      var tipologia = $scope.tipologiaUtenzaList[i];
-      if(tipologia.objectId) {
-      	var name = $scope.getTipologiaUtenzaName(tipologia.objectId);
-        var result= name.search(new RegExp(q, "i"));
-        if(result >= 0) {
-        	results.push({ label: name, value: name, obj: tipologia });
-        }
-      }
-    }
-    return results;
-	};
-	
-	$scope.ac_utenza_options = {
-		suggest: $scope.suggestTpologiaUtenza,
-		on_select: function (selected) {
-			$scope.selectedTipologiaUtenza = selected.obj;
-		}
-	};
+	};	
 
 	$scope.suggestTipologiaPuntoRaccolta = function(term) {
 		var q = term.toLowerCase().trim();
