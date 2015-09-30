@@ -10,7 +10,9 @@
 	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular.min.js"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
-  <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+  <script src="lib/bootstrap-colorpicker-module.min.js"></script>
+  <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">  
+  <link rel="stylesheet" href="css/colorpicker.min.css">
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body data-ng-app="colori" data-ng-controller="userCtrl">
@@ -74,8 +76,9 @@
 					  </div>
 					  <div class="form-group">
 					    <label class="control-label">Codice Colore:</label>
-				    	<input type="text" name="codice" data-ng-model="fCodice" data-ng-disabled="!edit && !create" 
+				    	<input colorpicker type="text" name="codice" data-ng-model="fCodice" data-ng-disabled="!edit && !create" 
 				    	placeholder="codice colore #aabbcc">
+				    	<div class="color-picker" style="background-color:{{fCodice}}"></div>
 						  <button class="btn btn-default btn-sm" data-ng-disabled="!edit && !create" data-ng-click="fCodice = ''">
 								<span class="glyphicon glyphicon-remove"></span>
 							</button>
@@ -114,6 +117,7 @@
 						</div>
 						<div class="col-md-4">
 							<span>{{item.codice}}</span>
+							<div class="color-picker" style="background-color:{{item.codice}}"></div>
 						</div>
 						<div class="col-md-2">
 							<button class="btn btn-danger" data-ng-click="deleteColore(item.nome)">

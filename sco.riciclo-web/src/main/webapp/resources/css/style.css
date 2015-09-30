@@ -27,3 +27,9 @@
 .typeahead.active {
 	background-color: lightgrey;
 }
+
+.color-picker {
+	display: inline-block;
+	width: 1em;
+	height: 1em;
+}
