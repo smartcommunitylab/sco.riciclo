@@ -16,6 +16,10 @@
 	padding-top: 5px;
 }
 
+.row.list-header {
+	background-color: lightgrey;
+}
+
 .modal.modal-wide .modal-dialog {
   width: 90%;
 }

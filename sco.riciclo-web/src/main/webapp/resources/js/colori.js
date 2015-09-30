@@ -190,7 +190,7 @@ angular.module('colori', ['DataService', 'colorpicker.module']).controller('user
 	};
 	
 	$scope.test = function() {
-		if (($scope.fNome == null) || ($scope.fNome.length <= 3) ||
+		if (($scope.fNome == null) || ($scope.fNome.length <= 2) ||
 				($scope.fCodice == null) || ($scope.fCodice.length != 7)) {
 	    $scope.incomplete = true;
 	  } else {
