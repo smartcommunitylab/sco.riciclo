@@ -34,7 +34,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 				.antMatchers("/", "/upload/**", "/console/**", "/aree/**", "/rifiuti/**", "/tipologia/**",
 						"/riciclabolario/**", "/puntiraccolta/**", "/calendariraccolta/**", "/istituzioni/**",
 						"/gestori/**", "/tipo-utenza/**", "/tipo-profilo/**", "/tipo-rifiuto/**", 
-						"/tipo-raccolta/**", "/tipo-punto/**")
+						"/tipo-raccolta/**", "/tipo-punto/**", "/colori/**")
 					.authenticated()
 				.anyRequest()
 					.permitAll();

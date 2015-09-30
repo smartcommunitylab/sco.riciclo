@@ -97,6 +97,11 @@ public class ConsoleController {
 		return "gestori";
 	}
 	
+	@RequestMapping(value = "/colori")
+	public String colori() {
+		return "colori";
+	}
+	
 	@RequestMapping(value = "/istituzioni")
 	public String istituzioni() {
 		return "istituzioni";

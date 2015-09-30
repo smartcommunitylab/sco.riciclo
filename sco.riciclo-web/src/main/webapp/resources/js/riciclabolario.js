@@ -46,7 +46,7 @@ riciclabolarioApp.controller('userCtrl', function($scope, $http, $sce, $q, DataS
 		var urlRifiuti = "api/rifiuto/" + $scope.profile.appInfo.ownerId + "?draft=" + $scope.draft;
 		$http.get(urlRifiuti, {headers: {'X-ACCESS-TOKEN': $scope.profile.appInfo.token}}).success(function (response) {
 			$scope.rifiutoList = response;
-			$scope.rifiutoNameMap = $scope.setNameMap($scope.rifiutoList);
+			$scope.rifiutoNameMap = $scope.setLocalNameMap($scope.rifiutoList);
 		});
 		
 		var urlTipologiaUtenza = "api/tipologia/utenza/" + $scope.profile.appInfo.ownerId + "?draft=" + $scope.draft;

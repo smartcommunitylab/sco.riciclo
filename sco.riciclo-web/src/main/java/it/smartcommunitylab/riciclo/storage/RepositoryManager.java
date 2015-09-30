@@ -880,4 +880,39 @@ public class RepositoryManager {
 		template.findAndRemove(query, TipologiaProfilo.class);
 	}
 	
+	/**
+	 * Gestione Colore
+	 */
+
+	public void addColore(Colore colore, boolean draft) {
+		MongoTemplate template = draft ? draftTemplate : finalTemplate;
+		Date actualDate = new Date();
+		colore.setCreationDate(actualDate);
+		colore.setLastUpdate(actualDate);
+		template.save(colore);
+	}
+
+	public void updateColore(Colore colore, boolean draft) throws EntityNotFoundException {
+		MongoTemplate template = draft ? draftTemplate : finalTemplate;
+		Query query = new Query(new Criteria("ownerId").is(colore.getOwnerId()).and("nome").is(colore.getNome()));
+		Colore itemDB = template.findOne(query, Colore.class);
+		if (itemDB == null) {
+			throw new EntityNotFoundException(String.format("Colore with id %s not found", colore.getNome()));
+		}
+		Update update = new Update();
+		update.set("lastUpdate", new Date());
+		update.set("codice", colore.getCodice());
+		template.updateFirst(query, update, Colore.class);
+	}
+
+	public void removeColore(String ownerId, String nome, boolean draft) throws EntityNotFoundException {
+		MongoTemplate template = draft ? draftTemplate : finalTemplate;
+		Query query = new Query(new Criteria("ownerId").is(ownerId).and("nome").is(nome));
+		Colore itemDB = template.findOne(query, Colore.class);
+		if (itemDB == null) {
+			throw new EntityNotFoundException(String.format("Colore with id %s not found", nome));
+		}
+		template.findAndRemove(query, Colore.class);
+	}
+	
 }
