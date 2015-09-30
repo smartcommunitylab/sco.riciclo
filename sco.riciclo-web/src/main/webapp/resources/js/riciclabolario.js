@@ -80,6 +80,26 @@ riciclabolarioApp.controller('userCtrl', function($scope, $http, $sce, $q, DataS
 		return $scope.areaNameMap[id];
 	};
 	
+	$scope.setNameMap = function(array) {
+		var map = {};
+		for (var d = 0, len = array.length; d < len; d += 1) {
+			var key = array[d].objectId;
+			var name = array[d].nome;
+			map[key] = name;
+		}
+		return map;
+	};
+	
+	$scope.setLocalNameMap = function(array) {
+		var map = {};
+		for (var d = 0, len = array.length; d < len; d += 1) {
+			var key = array[d].objectId;
+			var name = array[d].nome[$scope.language];
+			map[key] = name;
+		}
+		return map;
+	};
+	
 	$scope.resetError = function() {
 		$scope.error = false;
 		$scope.errorMsg = "";
@@ -93,7 +113,7 @@ riciclabolarioApp.controller('userCtrl', function($scope, $http, $sce, $q, DataS
 	$scope.changeLanguage = function(language) {
 		$scope.language = language;
 		$scope.areaNameMap = $scope.setNameMap($scope.areaList);
-		$scope.rifiutoNameMap = $scope.setNameMap($scope.rifiutoList);
+		$scope.rifiutoNameMap = $scope.setLocalNameMap($scope.rifiutoList);
 	};
 	
 	$scope.resetUI = function() {
@@ -187,16 +207,6 @@ riciclabolarioApp.controller('userCtrl', function($scope, $http, $sce, $q, DataS
 			}
 		}
 		return -1;
-	};
-	
-	$scope.setNameMap = function(array) {
-		var map = {};
-		for (var d = 0, len = array.length; d < len; d += 1) {
-			var key = array[d].objectId;
-			var name = array[d].nome[$scope.language];
-			map[key] = name;
-		}
-		return map;
 	};
 	
 	$scope.suggestArea = function(term) {

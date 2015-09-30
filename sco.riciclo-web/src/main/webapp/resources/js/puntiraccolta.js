@@ -61,7 +61,7 @@ puntiraccoltaApp.controller('userCtrl', function($scope, $http, $sce, $q, DataSe
 					$scope.tipologiaPuntoRaccoltaList.push(element);
 				}
 			}
-			$scope.tipologiaPuntoRaccoltaNameMap = $scope.setNameMap($scope.tipologiaPuntoRaccoltaList);
+			$scope.tipologiaPuntoRaccoltaNameMap = $scope.setLocalNameMap($scope.tipologiaPuntoRaccoltaList);
 		});
 		
 		var urlArea = "api/area/" + $scope.profile.appInfo.ownerId + "?draft=" + $scope.draft;
@@ -89,6 +89,35 @@ puntiraccoltaApp.controller('userCtrl', function($scope, $http, $sce, $q, DataSe
 		return $scope.tipologiaPuntoRaccoltaNameMap[id];
 	};
 	
+	$scope.setNameMap = function(array) {
+		var map = {};
+		for (var d = 0, len = array.length; d < len; d += 1) {
+			var key = array[d].objectId;
+			var name = array[d].nome;
+			map[key] = name;
+		}
+		return map;
+	};
+	
+	$scope.setLocalNameMap = function(array) {
+		var map = {};
+		for (var d = 0, len = array.length; d < len; d += 1) {
+			var key = array[d].objectId;
+			var name = array[d].nome[$scope.language];
+			map[key] = name;
+		}
+		return map;
+	};
+	
+	$scope.setCrmNameMap = function(array) {
+		var map = {};
+		for (var d = 0, len = array.length; d < len; d += 1) {
+			var key = array[d].objectId;
+			var name = array[d].zona + " - " + array[d].dettagliZona;
+			map[key] = name;
+		}
+		return map;
+	};	
 	$scope.resetError = function() {
 		$scope.error = false;
 		$scope.errorMsg = "";
@@ -103,7 +132,7 @@ puntiraccoltaApp.controller('userCtrl', function($scope, $http, $sce, $q, DataSe
 		$scope.language = language;
 		$scope.areaNameMap = $scope.setNameMap($scope.areaList);
 		$scope.crmNameMap = $scope.setCrmNameMap($scope.crmList);
-		$scope.tipologiaPuntoRaccoltaNameMap = $scope.setNameMap($scope.tipologiaPuntoRaccoltaList);
+		$scope.tipologiaPuntoRaccoltaNameMap = $scope.setLocalNameMap($scope.tipologiaPuntoRaccoltaList);
 	};
 	
 	$scope.resetUI = function() {
@@ -197,26 +226,6 @@ puntiraccoltaApp.controller('userCtrl', function($scope, $http, $sce, $q, DataSe
 			}
 		}
 		return -1;
-	};
-	
-	$scope.setNameMap = function(array) {
-		var map = {};
-		for (var d = 0, len = array.length; d < len; d += 1) {
-			var key = array[d].objectId;
-			var name = array[d].nome[$scope.language];
-			map[key] = name;
-		}
-		return map;
-	};
-	
-	$scope.setCrmNameMap = function(array) {
-		var map = {};
-		for (var d = 0, len = array.length; d < len; d += 1) {
-			var key = array[d].objectId;
-			var name = array[d].zona + " - " + array[d].dettagliZona;
-			map[key] = name;
-		}
-		return map;
 	};
 	
 	$scope.suggestArea = function(term) {

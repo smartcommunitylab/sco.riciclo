@@ -1,4 +1,13 @@
 apps:
+  - ownerId: ASIA
+    password: ASIA
+    token: L2MEq8WPbTAIT134
+    modelElements:
+    - modello
+    comuni:
+    - 022003
+    - 022091
+    - 022058
   - ownerId: GIUDICARIE
     password: GIUDICARIE
     token: a1jgUpPlWjDS4XvS
