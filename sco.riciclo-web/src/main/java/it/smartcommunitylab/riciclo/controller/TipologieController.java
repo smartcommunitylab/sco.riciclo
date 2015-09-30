@@ -27,7 +27,6 @@ import it.smartcommunitylab.riciclo.storage.RepositoryManager;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
