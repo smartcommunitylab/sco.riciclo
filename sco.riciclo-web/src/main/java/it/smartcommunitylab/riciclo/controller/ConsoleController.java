@@ -117,6 +117,11 @@ public class ConsoleController {
 		return "puntiraccolta";
 	}
 	
+	@RequestMapping(value = "/raccolta")
+	public String raccolta() {
+		return "raccolta";
+	}
+	
 	@RequestMapping(value = "/calendariraccolta")
 	public String calendariraccolta() {
 		return "calendariraccolta";

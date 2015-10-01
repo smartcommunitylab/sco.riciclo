@@ -106,6 +106,20 @@ public class RaccoltaController {
 		return raccolta;
 	}
 	
+	@RequestMapping(value="api/raccolta/{ownerId}/{objectId}", method=RequestMethod.PUT) 
+	public @ResponseBody Raccolta updateRaccolta(@RequestBody Raccolta raccolta,	@PathVariable String ownerId,	
+			@PathVariable String objectId, HttpServletRequest request, HttpServletResponse response) throws EntityNotFoundException {
+		boolean draft = Utils.getDraft(request);
+		if(!Utils.validateAPIRequest(request, appSetup, draft, storage)) {
+			response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+			return null;
+		}
+		raccolta.setObjectId(objectId);
+		raccolta.setOwnerId(ownerId);
+		storage.updateRaccolta(raccolta, draft);
+		return raccolta;
+	}
+	
 	@RequestMapping(value="api/raccolta/{ownerId}/{objectId}", method=RequestMethod.DELETE)
 	public @ResponseBody void deleteRaccoltaById(@PathVariable String ownerId, @PathVariable String objectId, 
 			HttpServletRequest request, HttpServletResponse response) throws EntityNotFoundException {

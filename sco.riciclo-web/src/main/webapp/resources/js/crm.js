@@ -1,6 +1,6 @@
 var crmApp = angular.module('crm', ['DataService']);
 
-crmApp.controller('userCtrl', function($scope, $window, $http, DataService) {
+var crmCtrl = crmApp.controller('userCtrl', function($scope, $window, $http, DataService) {
 	DataService.getProfile().then(function(p) {
   	$scope.initData(p);
   });

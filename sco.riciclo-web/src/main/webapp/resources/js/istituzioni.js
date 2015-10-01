@@ -1,6 +1,6 @@
-var gestoriApp = angular.module('istituzioni', ['DataService']);
+var istituzioniApp = angular.module('istituzioni', ['DataService']);
 
-gestoriApp.controller('userCtrl', function($scope, $window, $http, DataService) {
+var istituzioniCtrl = istituzioniApp.controller('userCtrl', function($scope, $window, $http, DataService) {
 	DataService.getProfile().then(function(p) {
   	$scope.initData(p);
   });

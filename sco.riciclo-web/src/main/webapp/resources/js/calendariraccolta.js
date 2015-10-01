@@ -1,6 +1,6 @@
-var puntiraccoltaApp = angular.module('calendariraccolta', ['DataService', 'ngSanitize', 'MassAutoComplete']);
+var calendariraccoltaApp = angular.module('calendariraccolta', ['DataService', 'ngSanitize', 'MassAutoComplete']);
 
-puntiraccoltaApp.controller('userCtrl', function($scope, $http, $sce, $q, DataService) {
+var calendariraccoltaCtrl = calendariraccoltaApp.controller('userCtrl', function($scope, $http, $sce, $q, DataService) {
 	DataService.getProfile().then(function(p) {
   	$scope.initData(p);
   });

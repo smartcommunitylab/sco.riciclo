@@ -1,6 +1,6 @@
 var riciclabolarioApp = angular.module('riciclabolario', ['DataService', 'ngSanitize', 'MassAutoComplete']);
 
-riciclabolarioApp.controller('userCtrl', function($scope, $http, $sce, $q, DataService) {
+var riciclabolarioCtrl = riciclabolarioApp.controller('userCtrl', function($scope, $http, $sce, $q, DataService) {
 	DataService.getProfile().then(function(p) {
   	$scope.initData(p);
   });

@@ -1,6 +1,6 @@
 var puntiraccoltaApp = angular.module('puntiraccolta', ['DataService', 'ngSanitize', 'MassAutoComplete']);
 
-puntiraccoltaApp.controller('userCtrl', function($scope, $http, $sce, $q, DataService) {
+var puntiraccoltaCtrl = puntiraccoltaApp.controller('userCtrl', function($scope, $http, $sce, $q, DataService) {
 	DataService.getProfile().then(function(p) {
   	$scope.initData(p);
   });

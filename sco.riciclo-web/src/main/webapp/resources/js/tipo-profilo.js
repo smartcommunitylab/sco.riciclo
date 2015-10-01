@@ -1,4 +1,4 @@
-angular.module('tipo-profilo', ['DataService']).controller('userCtrl', function($scope, $http, DataService) {
+var tipoProfiloApp = angular.module('tipo-profilo', ['DataService']).controller('userCtrl', function($scope, $http, DataService) {
 	DataService.getProfile().then(function(p) {
   	$scope.initData(p);
   });

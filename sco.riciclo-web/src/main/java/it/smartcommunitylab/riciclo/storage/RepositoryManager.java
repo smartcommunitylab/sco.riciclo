@@ -523,6 +523,25 @@ public class RepositoryManager {
 		raccolta.setLastUpdate(actualDate);
 		template.save(raccolta);
 	}
+	
+	public void updateRaccolta(Raccolta raccolta, boolean draft) throws EntityNotFoundException {
+		MongoTemplate template = draft ? draftTemplate : finalTemplate;
+		Query query = new Query(new Criteria("ownerId").is(raccolta.getOwnerId()).and("objectId").is(raccolta.getObjectId()));
+		Raccolta itemDB = template.findOne(query, Raccolta.class);
+		if (itemDB == null) {
+			throw new EntityNotFoundException(String.format("Rifiuto with id %s not found", raccolta.getObjectId()));
+		}
+		Update update = new Update();
+		update.set("lastUpdate", new Date());
+		update.set("area", raccolta.getArea());
+		update.set("tipologiaUtenza", raccolta.getTipologiaUtenza());
+		update.set("tipologiaRifiuto", raccolta.getTipologiaRifiuto());
+		update.set("tipologiaPuntoRaccolta", raccolta.getTipologiaPuntoRaccolta());
+		update.set("tipologiaRaccolta", raccolta.getTipologiaRaccolta());
+		update.set("colore", raccolta.getColore());
+		update.set("infoRaccolta", raccolta.getInfoRaccolta());
+		template.updateFirst(query, update, Raccolta.class);
+	}
 
 	public void removeRaccolta(String ownerId, String objectId, boolean draft) throws EntityNotFoundException {
 		MongoTemplate template = draft ? draftTemplate : finalTemplate;

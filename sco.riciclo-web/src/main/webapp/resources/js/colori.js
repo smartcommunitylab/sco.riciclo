@@ -1,4 +1,4 @@
-angular.module('colori', ['DataService', 'colorpicker.module']).controller('userCtrl', function($scope, $http, DataService) {
+var coloriApp = angular.module('colori', ['DataService', 'colorpicker.module']).controller('userCtrl', function($scope, $http, DataService) {
 	DataService.getProfile().then(function(p) {
   	$scope.initData(p);
   });

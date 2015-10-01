@@ -1,4 +1,4 @@
-angular.module('rifiuti', ['DataService']).controller('userCtrl', function($scope, $http, DataService) {
+var rifiutiApp = angular.module('rifiuti', ['DataService']).controller('userCtrl', function($scope, $http, DataService) {
 	DataService.getProfile().then(function(p) {
   	$scope.initData(p);
   });

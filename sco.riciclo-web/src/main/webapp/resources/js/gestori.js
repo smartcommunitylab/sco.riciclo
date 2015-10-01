@@ -1,6 +1,6 @@
 var gestoriApp = angular.module('gestori', ['DataService']);
 
-gestoriApp.controller('userCtrl', function($scope, $window, $http, DataService) {
+var gestoriCtrl = gestoriApp.controller('userCtrl', function($scope, $window, $http, DataService) {
 	DataService.getProfile().then(function(p) {
   	$scope.initData(p);
   });

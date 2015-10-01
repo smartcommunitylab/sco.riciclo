@@ -1,6 +1,6 @@
 var areeApp = angular.module('aree', ['DataService', 'ngSanitize', 'MassAutoComplete']);
 
-areeApp.controller('userCtrl', function($scope, $http, $sce, $q, DataService) {
+var areeCtrl = areeApp.controller('userCtrl', function($scope, $http, $sce, $q, DataService) {
 	DataService.getProfile().then(function(p) {
   	$scope.initData(p);
   });
