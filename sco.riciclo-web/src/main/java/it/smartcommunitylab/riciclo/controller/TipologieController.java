@@ -24,6 +24,8 @@ import it.smartcommunitylab.riciclo.model.TipologiaPuntoRaccolta;
 import it.smartcommunitylab.riciclo.storage.AppSetup;
 import it.smartcommunitylab.riciclo.storage.RepositoryManager;
 
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -194,6 +196,12 @@ public class TipologieController {
 		Categorie categorie = storage.findOneData(Categorie.class, null, ownerId, draft);
 		if(categorie != null) {
 			result.addAll(categorie.getTipologiaRifiuto());
+			Collections.sort(result,	new Comparator<Tipologia>() {
+				@Override
+				public int compare(Tipologia o1, Tipologia o2) {
+					return o1.getObjectId().compareTo(o2.getObjectId());
+				}
+			});
 		}
 		return result;
 	}
@@ -223,6 +231,12 @@ public class TipologieController {
 		Categorie categorie = storage.findOneData(Categorie.class, null, ownerId, draft);
 		if(categorie != null) {
 			result.addAll(categorie.getTipologiaRaccolta());
+			Collections.sort(result,	new Comparator<Tipologia>() {
+				@Override
+				public int compare(Tipologia o1, Tipologia o2) {
+					return o1.getObjectId().compareTo(o2.getObjectId());
+				}
+			});
 		}
 		return result;
 	}

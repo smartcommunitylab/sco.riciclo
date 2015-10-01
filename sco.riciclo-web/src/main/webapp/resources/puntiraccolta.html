@@ -118,16 +118,13 @@
 						</button>
 					</p>
 					<div class="row list-header">
-						<div class="col-md-3"><h4>Crm/Isola</h4></div>
 						<div class="col-md-3"><h4>Area</h4></div>
 						<div class="col-md-2"><h4>Tipologia Utenza</h4></div>
 						<div class="col-md-2"><h4>Tipologia Punto Raccolta</h4></div>
+						<div class="col-md-3"><h4>Crm/Isola</h4></div>
 						<div class="col-md-2"><h4>Cancella</h4></div>
 					</div>
 					<div class="row list-row" data-ng-repeat="relation in puntoRaccoltaList | filter:search ">
-						<div class="col-md-3" >
-							<span>{{getCrmName(relation.crm)}}</span>
-						</div>
 						<div class="col-md-3">
 							<span>{{getAreaName(relation.area)}}</span>
 						</div>
@@ -136,6 +133,9 @@
 						</div>
 						<div class="col-md-2" >
 							<span>{{getTipologiaPuntoRaccoltaName(relation.tipologiaPuntoRaccolta)}}</span>
+						</div>
+						<div class="col-md-3" >
+							<span>{{getCrmName(relation.crm)}}</span>
 						</div>
 						<div class="col-md-2">
 							<button class="btn btn-danger" data-ng-click="deleteRelation(relation.objectId)">
