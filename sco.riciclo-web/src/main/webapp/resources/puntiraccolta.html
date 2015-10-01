@@ -22,7 +22,7 @@
 	<div class="container-fluid">
 		<div class="well well-sm">
 			<h4>
-				Punti Raccolta
+				Associa Centri-Raccolta / Isole
 				<button type="button" class="btn btn-default btn-sm pull-right"
 					data-ng-click="changeLanguage('en')"
 					data-ng-class="{'active':language == 'en'}">
@@ -132,7 +132,7 @@
 							<span>{{relation.tipologiaUtenza}}</span>
 						</div>
 						<div class="col-md-2" >
-							<span>{{getTipologiaPuntoRaccoltaName(relation.tipologiaPuntoRaccolta)}}</span>
+							<span>{{relation.tipologiaPuntoRaccolta}}</span>
 						</div>
 						<div class="col-md-3" >
 							<span>{{getCrmName(relation.crm)}}</span>
