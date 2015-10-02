@@ -1,6 +1,6 @@
 var riciclabolarioApp = angular.module('riciclabolario', ['DataService', 'ngSanitize', 'MassAutoComplete']);
 
-var riciclabolarioCtrl = riciclabolarioApp.controller('userCtrl', function($scope, $http, $sce, $q, DataService) {
+var riciclabolarioCtrl = riciclabolarioApp.controller('userCtrl', function($scope, $http, $window, DataService) {
 	DataService.getProfile().then(function(p) {
   	$scope.initData(p);
   });
@@ -11,6 +11,8 @@ var riciclabolarioCtrl = riciclabolarioApp.controller('userCtrl', function($scop
 	
 	$scope.search = "";
 	$scope.incomplete = false;
+	$scope.loadedCounter = 0;
+	$scope.loadingCall = 5;
 	
 	$scope.error = false;
 	$scope.errorMsg = "";
@@ -47,27 +49,32 @@ var riciclabolarioCtrl = riciclabolarioApp.controller('userCtrl', function($scop
 		$http.get(urlRifiuti, {headers: {'X-ACCESS-TOKEN': $scope.profile.appInfo.token}}).success(function (response) {
 			$scope.rifiutoList = response;
 			$scope.rifiutoNameMap = $scope.setLocalNameMap($scope.rifiutoList);
+			$scope.loadedCounter += 1;
 		});
 		
 		var urlTipologiaUtenza = "api/tipologia/utenza/" + $scope.profile.appInfo.ownerId + "?draft=" + $scope.draft;
 		$http.get(urlTipologiaUtenza, {headers: {'X-ACCESS-TOKEN': $scope.profile.appInfo.token}}).success(function (response) {
 			$scope.tipologiaUtenzaList = response;
+			$scope.loadedCounter += 1;
 		});
 		
 		var urlTipologiaRifiuto = "api/tipologia/rifiuto/" + $scope.profile.appInfo.ownerId + "?draft=" + $scope.draft;
 		$http.get(urlTipologiaRifiuto, {headers: {'X-ACCESS-TOKEN': $scope.profile.appInfo.token}}).success(function (response) {
 			$scope.tipologiaRifiutoList = response;
+			$scope.loadedCounter += 1;
 		});
 		
 		var urlArea = "api/area/" + $scope.profile.appInfo.ownerId + "?draft=" + $scope.draft;
 		$http.get(urlArea, {headers: {'X-ACCESS-TOKEN': $scope.profile.appInfo.token}}).success(function (response) {
 			$scope.areaList = response;
 			$scope.areaNameMap = $scope.setNameMap($scope.areaList);
+			$scope.loadedCounter += 1;
 		});
 		
 		var urlRiciclabolario = "api/riciclabolario/" + $scope.profile.appInfo.ownerId + "?draft=" + $scope.draft;
 		$http.get(urlRiciclabolario, {headers: {'X-ACCESS-TOKEN': $scope.profile.appInfo.token}}).success(function (response) {
 			$scope.riciclabolario = response;
+			$scope.loadedCounter += 1;
 		});
 		
 	};
@@ -185,7 +192,13 @@ var riciclabolarioCtrl = riciclabolarioApp.controller('userCtrl', function($scop
 		}
 	};
 	
-	//$scope.$watch('fName',function() {$scope.test();});
+	$scope.$watch('loadedCounter', function() {$scope.stopSpinner();});
+	
+	$scope.stopSpinner = function() {
+		if($scope.loadedCounter >= $scope.loadingCall) {
+			$window.spinner.stop();
+		}
+	};
 	
 	$scope.test = function() {
 		$scope.incomplete = false;
