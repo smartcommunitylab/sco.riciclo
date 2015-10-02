@@ -57,7 +57,7 @@ var puntiraccoltaCtrl = puntiraccoltaApp.controller('userCtrl', function($scope,
 		$http.get(urlTipologiaPuntoRaccolta, {headers: {'X-ACCESS-TOKEN': $scope.profile.appInfo.token}}).success(function (response) {
 			for (var d = 0, len = response.length; d < len; d += 1) {
 				var element = response[d];
-				if(element.type == "CRM") {
+				if(element.type == "CR") {
 					$scope.tipologiaPuntoRaccoltaList.push(element);
 				}
 			}

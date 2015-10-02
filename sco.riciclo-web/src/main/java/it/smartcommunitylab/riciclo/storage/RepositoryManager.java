@@ -934,4 +934,41 @@ public class RepositoryManager {
 		template.findAndRemove(query, Colore.class);
 	}
 	
+	/**
+	 * Gestione Segnalazione
+	 */
+
+	public void addSegnalazione(Segnalazione segnalazione, boolean draft) {
+		MongoTemplate template = draft ? draftTemplate : finalTemplate;
+		Date actualDate = new Date();
+		segnalazione.setCreationDate(actualDate);
+		segnalazione.setLastUpdate(actualDate);
+		template.save(segnalazione);
+	}
+
+	public void updateSegnalazione(Segnalazione segnalazione, boolean draft) throws EntityNotFoundException {
+		MongoTemplate template = draft ? draftTemplate : finalTemplate;
+		Query query = new Query(new Criteria("ownerId").is(segnalazione.getOwnerId()).and("objectId").is(segnalazione.getObjectId()));
+		Segnalazione itemDB = template.findOne(query, Segnalazione.class);
+		if (itemDB == null) {
+			throw new EntityNotFoundException(String.format("Segnalazione with id %s not found", segnalazione.getObjectId()));
+		}
+		Update update = new Update();
+		update.set("lastUpdate", new Date());
+		update.set("area", segnalazione.getArea());
+		update.set("tipologia", segnalazione.getTipologia());
+		update.set("email", segnalazione.getEmail());
+		template.updateFirst(query, update, Segnalazione.class);
+	}
+
+	public void removeSegnalazione(String ownerId, String objectId, boolean draft) throws EntityNotFoundException {
+		MongoTemplate template = draft ? draftTemplate : finalTemplate;
+		Query query = new Query(new Criteria("ownerId").is(ownerId).and("objectId").is(objectId));
+		Segnalazione itemDB = template.findOne(query, Segnalazione.class);
+		if (itemDB == null) {
+			throw new EntityNotFoundException(String.format("Segnalazione with id %s not found", objectId));
+		}
+		template.findAndRemove(query, Segnalazione.class);
+	}
+	
 }

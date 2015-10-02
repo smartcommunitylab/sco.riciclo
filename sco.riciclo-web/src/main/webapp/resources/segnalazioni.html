@@ -16,13 +16,13 @@
 	<link rel="stylesheet" href="css/massautocomplete.theme.css">
 	<link rel="stylesheet" href="css/style.css">
 </head>
-<body data-ng-app="raccolta" data-ng-controller="userCtrl">
+<body data-ng-app="segnalazioni" data-ng-controller="userCtrl">
 	<div data-ng-include="'html/navbar.html'"></div>
 
 	<div class="container-fluid">
 		<div class="well well-sm">
 			<h4>
-				Raccolta
+				Segnalazioni
 				<button type="button" class="btn btn-default btn-sm pull-right"
 					data-ng-click="changeLanguage('en')"
 					data-ng-class="{'active':language == 'en'}">
@@ -53,7 +53,7 @@
 			<div class="panel panel-default">
 				<div class="panel-body">
 					<h4>Crea relazione</h4>
-					<button class="btn btn-link" data-ng-click="newRelation()">
+					<button class="btn btn-link" data-ng-click="newItem()">
 						<span class="glyphicon glyphicon-grain"></span> Crea nuovo elemento
 					</button>
 					<button type="button" class="btn btn-default btn-sm pull-right" data-ng-click="draft=true"
@@ -72,46 +72,6 @@
 	  			<h4 data-ng-show="create">Crea:</h4>
 					<h4 data-ng-show="edit">Modifica:</h4>
 					<form role="form">
-					  <div class="form-group">
-					    <label class="control-label">Tipologia Utenza:</label>
-					    <select data-ng-model="selectedTipologiaUtenza" data-ng-disabled="!edit && !create" 
-					    	data-ng-options="item.objectId for item in tipologiaUtenzaList">
-      				</select>
-						  <button class="btn btn-default btn-sm" data-ng-click="selectedTipologiaUtenza = null"
-						  data-ng-disabled="!edit && !create">
-								<span class="glyphicon glyphicon-remove"></span>
-							</button>
-					  </div>
-					  <div class="form-group">
-					    <label class="control-label">Tipologia Rifiuto:</label>
-					    <select data-ng-model="selectedTipologiaRifiuto" data-ng-disabled="!edit && !create"
-					    	data-ng-options="item.objectId for item in tipologiaRifiutoList">
-      				</select>
-						  <button class="btn btn-default btn-sm" data-ng-click="selectedTipologiaRifiuto = null"
-						  data-ng-disabled="!edit && !create">
-								<span class="glyphicon glyphicon-remove"></span>
-							</button>
-					  </div>
-						<div class="form-group">
-							<label class="control-label">Tipologia Punto Raccolta:</label>
-					    <select data-ng-model="selectedTipologiaPuntoRaccolta" data-ng-disabled="!edit && !create" 
-					    	data-ng-options="item.objectId for item in tipologiaPuntoRaccoltaList">
-      				</select>
-						  <button class="btn btn-default btn-sm" data-ng-click="selectedTipologiaPuntoRaccolta = null"
-						  data-ng-disabled="!edit && !create">
-								<span class="glyphicon glyphicon-remove"></span>
-							</button>
-						</div>
-						<div class="form-group">
-							<label class="control-label">Tipologia Raccolta:</label>
-					    <select data-ng-model="selectedTipologiaRaccolta" data-ng-disabled="!edit && !create" 
-					    	data-ng-options="item.objectId for item in tipologiaRaccoltaList">
-      				</select>
-						  <button class="btn btn-default btn-sm" data-ng-click="selectedTipologiaRaccolta = null"
-						  data-ng-disabled="!edit && !create">
-								<span class="glyphicon glyphicon-remove"></span>
-							</button>
-						</div>
 						<div class="form-group" mass-autocomplete>
 							<label class="control-label">Area:</label>
 							<input data-ng-model="areaSearch.value" mass-autocomplete-item="ac_area_options" 
@@ -122,25 +82,24 @@
 							</button>
 						</div>
 				   	<div class="form-group">
-				    	<label class="control-label">Info ({{language}}):</label>
-				    	<input type="text" name="info" data-ng-model="infoRaccolta" 
-				    	data-ng-disabled="!edit && !create" placeholder="info">
-						  <button class="btn btn-default btn-sm" data-ng-click="infoRaccolta = ''"
+				    	<label class="control-label">Tipologia ({{language}}):</label>
+				    	<input type="text" name="tipologia" data-ng-model="tipologia" 
+				    	data-ng-disabled="!edit && !create" placeholder="tipologia">
+						  <button class="btn btn-default btn-sm" data-ng-click="tipologia = ''"
 						  data-ng-disabled="!edit && !create">
 								<span class="glyphicon glyphicon-remove"></span>
 							</button>
 				    </div>
 				   	<div class="form-group">
-				    	<label class="control-label">Colore:</label>
-					    <select data-ng-model="selectedColore" data-ng-disabled="!edit && !create"
-					    	data-ng-options="item.nome for item in coloreList">
-      				</select>
-						  <button class="btn btn-default btn-sm" data-ng-click="selectedColore = null"
+				    	<label class="control-label">Email:</label>
+				    	<input type="text" name="email" data-ng-model="email" 
+				    	data-ng-disabled="!edit && !create" placeholder="email">
+						  <button class="btn btn-default btn-sm" data-ng-click="email = ''"
 						  data-ng-disabled="!edit && !create">
 								<span class="glyphicon glyphicon-remove"></span>
 							</button>
 				    </div>
-				  	<button class="btn btn-success" data-ng-disabled="error || incomplete" data-ng-click="saveRelation()">
+				  	<button class="btn btn-success" data-ng-disabled="error || incomplete" data-ng-click="saveItem()">
 				  		<span class="glyphicon glyphicon-save"></span> Salva
 				  	</button> 
 					</form>	
@@ -158,36 +117,28 @@
 					</p>
 					<div class="row list-header">
 						<div class="col-md-1"><h4>Modifica</h4></div>
-						<div class="col-md-2"><h4>Area</h4></div>
-						<div class="col-md-2"><h4>Tipologia Utenza</h4></div>
-						<div class="col-md-2"><h4>Tipologia Rifiuto</h4></div>
-						<div class="col-md-2"><h4>Tipologia Punto Raccolta</h4></div>
-						<div class="col-md-2"><h4>Tipologia Raccolta</h4></div>
+						<div class="col-md-4"><h4>Area</h4></div>
+						<div class="col-md-3"><h4>Tipologia</h4></div>
+						<div class="col-md-3"><h4>Email</h4></div>
 						<div class="col-md-1"><h4>Cancella</h4></div>
 					</div>
-					<div class="row list-row" data-ng-repeat="relation in raccoltaList | filter:search ">
+					<div class="row list-row" data-ng-repeat="item in segnalazioneList | filter:search ">
 						<div class="col-md-1" >
-							<button class="btn btn-primary" data-ng-click="editRelation(relation.objectId)">
+							<button class="btn btn-primary" data-ng-click="editItem(item.objectId)">
 								<span class="glyphicon glyphicon-pencil"></span>  Modifica
 							</button>
 						</div>
-						<div class="col-md-2">
-							<span>{{getAreaName(relation.area)}}</span>
+						<div class="col-md-4">
+							<span>{{getAreaName(item.area)}}</span>
 						</div>
-						<div class="col-md-2" >
-							<span>{{relation.tipologiaUtenza}}</span>
+						<div class="col-md-3" >
+							<span>{{item.tipologia[language]}}</span>
 						</div>
-						<div class="col-md-2" >
-							<span>{{relation.tipologiaRifiuto}}</span>
-						</div>
-						<div class="col-md-2" >
-							<span>{{relation.tipologiaPuntoRaccolta}}</span>
-						</div>
-						<div class="col-md-2" >
-							<span>{{relation.tipologiaRaccolta}}</span>
+						<div class="col-md-3" >
+							<span>{{item.email}}</span>
 						</div>
 						<div class="col-md-1">
-							<button class="btn btn-danger" data-ng-click="deleteRelation(relation.objectId)">
+							<button class="btn btn-danger" data-ng-click="deleteItem(item.objectId)">
 								<span class="glyphicon glyphicon-remove"></span>  Cancella
 							</button>
 						</div>
@@ -200,7 +151,7 @@
 	</div>
 
 	<script src="js/services.js"></script>
-	<script src="js/raccolta.js"></script>
+	<script src="js/segnalazioni.js"></script>
 
 </body>
 </html>
