@@ -81,14 +81,15 @@
 								<span class="glyphicon glyphicon-remove"></span>
 							</button>
 						</div>
-						<div class="form-group" mass-autocomplete>
-							<label class="control-label">Tipologia Rifiuto:</label>
-							<input data-ng-model="tipologiaRifiutoSearch" mass-autocomplete-item="ac_tipologia_rifiuto_options" 
-							placeholder="tipologia rifiuto">
-						  <button class="btn btn-default btn-sm" data-ng-click="tipologiaRifiutoSearch = ''">
+					  <div class="form-group">
+					    <label class="control-label">Tipologia Rifiuto:</label>
+					    <select data-ng-model="selectedTipologiaRifiuto" 
+					    	data-ng-options="item.objectId for item in tipologiaRifiutoList">
+      				</select>
+						  <button class="btn btn-default btn-sm" data-ng-click="selectedTipologiaRifiuto = null">
 								<span class="glyphicon glyphicon-remove"></span>
 							</button>
-						</div>
+					  </div>
 						<div class="form-group" mass-autocomplete>
 							<label class="control-label">Rifiuto:</label>
 							<input data-ng-model="rifiutoSearch" mass-autocomplete-item="ac_rifiuto_options" placeholder="rifiuto">

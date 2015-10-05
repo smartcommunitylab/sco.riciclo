@@ -31,13 +31,11 @@ var riciclabolarioCtrl = riciclabolarioApp.controller('userCtrl', function($scop
 	$scope.selectedArea = null;
 	$scope.areaSearch = "";
 		
-	$scope.selectedTipologiaRifiuto = null;
-	$scope.tipologiaRifiutoSearch = "";
-	
 	$scope.selectedRifiuto = null;
 	$scope.rifiutoSearch = "";
 		
 	$scope.selectedTipologiaUtenza = null;
+	$scope.selectedTipologiaRifiuto = null;
 	$scope.rifiutoList = [];
 	$scope.tipologiaUtenzaList = [];
 	$scope.tipologiaRifiutoList = [];
@@ -267,29 +265,6 @@ var riciclabolarioCtrl = riciclabolarioApp.controller('userCtrl', function($scop
 		suggest: $scope.suggestArea,
 		on_select: function (selected) {
 			$scope.selectedArea = selected.obj;
-		}
-	};
-
-	$scope.suggestTipologiaRifiuto = function(term) {
-		var q = term.toLowerCase().trim();
-    var results = [];
-    // Find first 10 states that start with `term`.
-    for (var i = 0; i < $scope.tipologiaRifiutoList.length; i++) {
-      var tipologia = $scope.tipologiaRifiutoList[i];
-      if(tipologia.objectId) {
-        var result= tipologia.objectId.search(new RegExp(q, "i"));
-        if(result >= 0) {
-        	results.push({ label: tipologia.objectId, value: tipologia.objectId, obj: tipologia });
-        }
-      }
-    }
-    return results;
-	};
-	
-	$scope.ac_tipologia_rifiuto_options = {
-		suggest: $scope.suggestTipologiaRifiuto,
-		on_select: function (selected) {
-			$scope.selectedTipologiaRifiuto = selected.obj;
 		}
 	};
 

@@ -7,7 +7,7 @@
 				<span class="icon-bar"></span> <span class="icon-bar"></span> <span
 					class="icon-bar"></span>
 			</button>
-			<a class="navbar-brand" href="console">Riciclo Console</a>
+			<a class="navbar-brand" href="console">100% Riciclo Console</a>
 		</div>
 		<div class="collapse navbar-collapse" id="navBar">
 			<ul class="nav navbar-nav">
@@ -32,38 +32,50 @@
 						</li>
 					</ul>
 				</li>
-				<li data-ng-class="{'active':selectedTab == 'menu-colori'}" 
-					data-ng-click="selectedTab = 'menu-colori'"><a href="colori">Colori</a>
+				<li class="dropdown">
+					<a class="dropdown-toggle"
+						data-toggle="dropdown" href="#">Elenchi <span class="caret"></span></a>
+					<ul class="dropdown-menu">
+						<li data-ng-class="{'active':selectedTab == 'menu-colori'}" 
+							data-ng-click="selectedTab = 'menu-colori'"><a href="colori">Colori</a>
+						</li>
+						<li data-ng-class="{'active':selectedTab == 'menu-gestori'}" 
+							data-ng-click="selectedTab = 'menu-gestori'"><a href="gestori">Gestori</a>
+						</li>
+						<li data-ng-class="{'active':selectedTab == 'menu-istituzioni'}" 
+							data-ng-click="selectedTab = 'menu-istituzioni'"><a href="istituzioni">Istituzioni</a>
+						</li>
+						<li id="menu-rifiuti" data-ng-class="{'active':selectedTab == 'menu-segnalazioni'}" 
+							data-ng-click="selectedTab = 'menu-segnalazioni'"><a href="segnalazioni">Segnalazioni</a>
+						</li>
+						<li id="menu-rifiuti" data-ng-class="{'active':selectedTab == 'menu-rifiuti'}" 
+							data-ng-click="selectedTab = 'menu-rifiuti'"><a href="rifiuti">Rifiuti</a>
+						</li>
+						<li data-ng-class="{'active':selectedTab == 'menu-aree'}" 
+							data-ng-click="selectedTab = 'menu-aree'"><a href="aree">Aree</a>
+						</li>
+						<li id="menu-crm" data-ng-class="{'active':selectedTab == 'menu-crm'}" 
+							data-ng-click="selectedTab = 'menu-crm'"><a href="crm">Centri-Raccolta/Isole</a>
+						</li>
+					</ul>	
 				</li>
-				<li data-ng-class="{'active':selectedTab == 'menu-gestori'}" 
-					data-ng-click="selectedTab = 'menu-gestori'"><a href="gestori">Gestori</a>
-				</li>
-				<li data-ng-class="{'active':selectedTab == 'menu-istituzioni'}" 
-					data-ng-click="selectedTab = 'menu-istituzioni'"><a href="istituzioni">Istituzioni</a>
-				</li>
-				<li id="menu-rifiuti" data-ng-class="{'active':selectedTab == 'menu-segnalazioni'}" 
-					data-ng-click="selectedTab = 'menu-segnalazioni'"><a href="segnalazioni">Segnalazioni</a>
-				</li>
-				<li id="menu-rifiuti" data-ng-class="{'active':selectedTab == 'menu-rifiuti'}" 
-					data-ng-click="selectedTab = 'menu-rifiuti'"><a href="rifiuti">Rifiuti</a>
-				</li>
-				<li data-ng-class="{'active':selectedTab == 'menu-aree'}" 
-					data-ng-click="selectedTab = 'menu-aree'"><a href="aree">Aree</a>
-				</li>
-				<li id="menu-riciclabolario" data-ng-class="{'active':selectedTab == 'menu-riciclabolario'}" 
-					data-ng-click="selectedTab = 'menu-riciclabolario'"><a href="riciclabolario">Riciclabolario</a>
-				</li>
-				<li id="menu-raccolta" data-ng-class="{'active':selectedTab == 'menu-raccolta'}" 
-					data-ng-click="selectedTab = 'menu-raccolta'"><a href="raccolta">Raccolta</a>
-				</li>
-				<li id="menu-calendariraccolta" data-ng-class="{'active':selectedTab == 'menu-calendariraccolta'}" 
-					data-ng-click="selectedTab = 'menu-puntiraccolta'"><a href="calendariraccolta">Calendario Porta a Porta</a>
-				</li>
-				<li id="menu-crm" data-ng-class="{'active':selectedTab == 'menu-crm'}" 
-					data-ng-click="selectedTab = 'menu-crm'"><a href="crm">Centri-Raccolta/Isole</a>
-				</li>
-				<li id="menu-puntiraccolta" data-ng-class="{'active':selectedTab == 'menu-puntiraccolta'}" 
-					data-ng-click="selectedTab = 'menu-puntiraccolta'"><a href="puntiraccolta">Associa CR/Isole</a>
+				<li class="dropdown">
+					<a class="dropdown-toggle"
+						data-toggle="dropdown" href="#">Relazioni <span class="caret"></span></a>
+					<ul class="dropdown-menu">
+						<li id="menu-riciclabolario" data-ng-class="{'active':selectedTab == 'menu-riciclabolario'}" 
+							data-ng-click="selectedTab = 'menu-riciclabolario'"><a href="riciclabolario">Riciclabolario</a>
+						</li>
+						<li id="menu-raccolta" data-ng-class="{'active':selectedTab == 'menu-raccolta'}" 
+							data-ng-click="selectedTab = 'menu-raccolta'"><a href="raccolta">Raccolta</a>
+						</li>
+						<li id="menu-calendariraccolta" data-ng-class="{'active':selectedTab == 'menu-calendariraccolta'}" 
+							data-ng-click="selectedTab = 'menu-puntiraccolta'"><a href="calendariraccolta">Calendario Porta a Porta</a>
+						</li>
+						<li id="menu-puntiraccolta" data-ng-class="{'active':selectedTab == 'menu-puntiraccolta'}" 
+							data-ng-click="selectedTab = 'menu-puntiraccolta'"><a href="puntiraccolta">Associa CR/Isole</a>
+						</li>
+					</ul>
 				</li>
 				<li id="menu-upload" data-ng-class="{'active':selectedTab == 'menu-upload'}" 
 					data-ng-click="selectedTab = 'menu-upload'"><a href="upload">Upload File</a>
