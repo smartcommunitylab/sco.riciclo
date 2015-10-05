@@ -16,7 +16,7 @@
 
 package it.smartcommunitylab.riciclo.controller;
 
-import it.smartcommunitylab.riciclo.exception.EntityNotFoundException;
+import it.smartcommunitylab.riciclo.exception.UnauthorizedException;
 import it.smartcommunitylab.riciclo.model.Area;
 import it.smartcommunitylab.riciclo.model.PuntoRaccolta;
 import it.smartcommunitylab.riciclo.storage.AppSetup;
@@ -36,12 +36,15 @@ import javax.servlet.http.HttpServletResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.ResponseStatus;
 
 import com.google.common.collect.Lists;
 
@@ -58,11 +61,10 @@ public class PuntoRaccoltaController {
 	
 	@RequestMapping(value="api/puntoraccolta/{ownerId}", method=RequestMethod.GET)
 	public @ResponseBody List<PuntoRaccolta> getPuntiRaccolta(@PathVariable String ownerId, 
-			HttpServletRequest request, HttpServletResponse response) throws ClassNotFoundException {
+			HttpServletRequest request, HttpServletResponse response) throws Exception {
 		boolean draft = Utils.getDraft(request);
 		if(!Utils.validateAPIRequest(request, appSetup, draft, storage)) {
-			response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
-			return null;
+			throw new UnauthorizedException("Unauthorized Exception: token not valid");
 		}
 		List<String> comuni = Lists.newArrayList(); 
 		String[] comuniArray = request.getParameterValues("comune[]");
@@ -94,11 +96,11 @@ public class PuntoRaccoltaController {
 	
 	@RequestMapping(value="api/puntoraccolta/{ownerId}", method=RequestMethod.POST) 
 	public @ResponseBody PuntoRaccolta addRaccolta(@RequestBody PuntoRaccolta raccolta, 
-			@PathVariable String ownerId,	HttpServletRequest request, HttpServletResponse response) {
+			@PathVariable String ownerId,	HttpServletRequest request, 
+			HttpServletResponse response) throws Exception {
 		boolean draft = Utils.getDraft(request);
 		if(!Utils.validateAPIRequest(request, appSetup, draft, storage)) {
-			response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
-			return null;
+			throw new UnauthorizedException("Unauthorized Exception: token not valid");
 		}
 		raccolta.setObjectId(UUID.randomUUID().toString());
 		raccolta.setOwnerId(ownerId);
@@ -109,11 +111,10 @@ public class PuntoRaccoltaController {
 	@RequestMapping(value="api/puntoraccolta/{ownerId}/{objectId}", method=RequestMethod.DELETE)
 	public @ResponseBody void deletePuntoRaccoltaById(@PathVariable String ownerId, 
 			@PathVariable String objectId, HttpServletRequest request,
-			HttpServletResponse response) throws EntityNotFoundException {
+			HttpServletResponse response) throws Exception {
 		boolean draft = Utils.getDraft(request);
 		if(!Utils.validateAPIRequest(request, appSetup, draft, storage)) {
-			response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
-			return;
+			throw new UnauthorizedException("Unauthorized Exception: token not valid");
 		}
 		storage.removePuntoRaccolta(ownerId, objectId, draft);
 	}
@@ -121,14 +122,19 @@ public class PuntoRaccoltaController {
 	@RequestMapping(value="api/puntoraccolta/{ownerId}", method=RequestMethod.DELETE)
 	public @ResponseBody void deletePuntoRaccolta(@RequestBody PuntoRaccolta raccolta, 
 			@PathVariable String ownerId,	HttpServletRequest request,
-			HttpServletResponse response) throws EntityNotFoundException {
+			HttpServletResponse response) throws Exception {
 		boolean draft = Utils.getDraft(request);
 		if(!Utils.validateAPIRequest(request, appSetup, draft, storage)) {
-			response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
-			return;
+			throw new UnauthorizedException("Unauthorized Exception: token not valid");
 		}
 		raccolta.setOwnerId(ownerId);
 		storage.removePuntoRaccolta(raccolta, draft);
 	}
-
+	
+	@ExceptionHandler(Exception.class)
+	@ResponseStatus(value=HttpStatus.INTERNAL_SERVER_ERROR)
+	@ResponseBody
+	public Map<String,String> handleError(HttpServletRequest request, Exception exception) {
+		return Utils.handleError(exception);
+	}	
 }

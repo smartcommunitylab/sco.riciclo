@@ -16,24 +16,28 @@
 
 package it.smartcommunitylab.riciclo.controller;
 
-import it.smartcommunitylab.riciclo.exception.EntityNotFoundException;
+import it.smartcommunitylab.riciclo.exception.UnauthorizedException;
 import it.smartcommunitylab.riciclo.model.Area;
 import it.smartcommunitylab.riciclo.storage.AppSetup;
 import it.smartcommunitylab.riciclo.storage.RepositoryManager;
 
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.ResponseStatus;
 
 
 @Controller
@@ -48,12 +52,10 @@ public class AreaController {
 	@SuppressWarnings("unchecked")
 	@RequestMapping(value="api/area/{ownerId}", method=RequestMethod.GET)
 	public @ResponseBody List<Area> getAree(@PathVariable String ownerId, 
-			HttpServletRequest request, HttpServletResponse response) 
-			throws ClassNotFoundException {
+			HttpServletRequest request, HttpServletResponse response)	throws Exception {
 		boolean draft = Utils.getDraft(request);
 		if(!Utils.validateAPIRequest(request, appSetup, draft, storage)) {
-			response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
-			return null;
+			throw new UnauthorizedException("Unauthorized Exception: token not valid");
 		}
 		List<Area> result = (List<Area>) storage.findData(Area.class, null, ownerId, draft);
 		return result;
@@ -61,11 +63,10 @@ public class AreaController {
 	
 	@RequestMapping(value="api/area/{ownerId}", method=RequestMethod.POST) 
 	public @ResponseBody Area addArea(@RequestBody Area area, @PathVariable String ownerId, 
-			HttpServletRequest request, HttpServletResponse response) {
+			HttpServletRequest request, HttpServletResponse response) throws Exception {
 		boolean draft = Utils.getDraft(request);
 		if(!Utils.validateAPIRequest(request, appSetup, draft, storage)) {
-			response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
-			return null;
+			throw new UnauthorizedException("Unauthorized Exception: token not valid");
 		}
 		area.setObjectId(UUID.randomUUID().toString());
 		area.setOwnerId(ownerId);
@@ -76,11 +77,10 @@ public class AreaController {
 	@RequestMapping(value="api/area/{ownerId}/{objectId}", method=RequestMethod.PUT)
 	public @ResponseBody void updateArea(@RequestBody Area area, @PathVariable String ownerId, 
 			@PathVariable String objectId, HttpServletRequest request,
-			HttpServletResponse response) throws EntityNotFoundException {
+			HttpServletResponse response) throws Exception {
 		boolean draft = Utils.getDraft(request);
 		if(!Utils.validateAPIRequest(request, appSetup, draft, storage)) {
-			response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
-			return;
+			throw new UnauthorizedException("Unauthorized Exception: token not valid");
 		}
 		area.setObjectId(objectId);
 		area.setOwnerId(ownerId);
@@ -89,13 +89,18 @@ public class AreaController {
 	
 	@RequestMapping(value="api/area/{ownerId}/{objectId}", method=RequestMethod.DELETE)
 	public @ResponseBody void deleteArea(@PathVariable String ownerId, @PathVariable String objectId, 
-			HttpServletRequest request, HttpServletResponse response) throws EntityNotFoundException {
+			HttpServletRequest request, HttpServletResponse response) throws Exception {
 		boolean draft = Utils.getDraft(request);
 		if(!Utils.validateAPIRequest(request, appSetup, draft, storage)) {
-			response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
-			return;
+			throw new UnauthorizedException("Unauthorized Exception: token not valid");
 		}
 		storage.removeArea(ownerId, objectId, draft);
 	}
-	
+
+	@ExceptionHandler(Exception.class)
+	@ResponseStatus(value=HttpStatus.INTERNAL_SERVER_ERROR)
+	@ResponseBody
+	public Map<String,String> handleError(HttpServletRequest request, Exception exception) {
+		return Utils.handleError(exception);
+	}		
 }

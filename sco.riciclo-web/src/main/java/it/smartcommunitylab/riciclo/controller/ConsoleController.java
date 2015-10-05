@@ -25,15 +25,22 @@ import it.smartcommunitylab.riciclo.storage.App;
 import it.smartcommunitylab.riciclo.storage.AppSetup;
 import it.smartcommunitylab.riciclo.storage.RepositoryManager;
 
+import java.util.Map;
+
 import javax.servlet.ServletContext;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.MultiValueMap;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.View;
@@ -158,12 +165,13 @@ public class ConsoleController {
 	}
 	
 	@RequestMapping(value = "/console/data")
-	public @ResponseBody App data() {
+	public @ResponseBody App data(HttpServletRequest request,
+			HttpServletResponse response) throws Exception {
 		return storage.getAppDescriptor(getOwnerId());
 	}		
 	
 	@RequestMapping(value = "/console/publish", method=RequestMethod.PUT)
-	public @ResponseBody App publish() {
+	public @ResponseBody App publish() throws Exception {
 		String ownerId = getOwnerId();
 		storage.publish(ownerId);
 		App descr = storage.getAppDescriptor(ownerId);
@@ -194,7 +202,13 @@ public class ConsoleController {
 		AppDetails details = (AppDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		String app = details.getUsername();
 		return app;
-	}	
+	}
 	
+	@ExceptionHandler(Exception.class)
+	@ResponseStatus(value=HttpStatus.INTERNAL_SERVER_ERROR)
+	@ResponseBody
+	public Map<String,String> handleError(HttpServletRequest request, Exception exception) {
+		return Utils.handleError(exception);
+	}	
 	
 }

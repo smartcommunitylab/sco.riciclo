@@ -1,9 +1,16 @@
 var riciclabolarioApp = angular.module('riciclabolario', ['DataService', 'ngSanitize', 'MassAutoComplete']);
 
 var riciclabolarioCtrl = riciclabolarioApp.controller('userCtrl', function($scope, $http, $window, DataService) {
-	DataService.getProfile().then(function(p) {
-  	$scope.initData(p);
-  });
+	DataService.getProfile().then(
+	function(p) {
+		$scope.initData(p);
+	},
+	function(e) {
+		console.log(e);
+		$scope.error = true;
+		$scope.errorMsg = e.errorMsg;
+		$window.spinner.stop();
+	});
 
 	$scope.selectedTab = "menu-riciclabolario";
 	$scope.language = "it";

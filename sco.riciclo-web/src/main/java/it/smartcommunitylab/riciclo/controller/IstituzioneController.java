@@ -16,24 +16,28 @@
 
 package it.smartcommunitylab.riciclo.controller;
 
-import it.smartcommunitylab.riciclo.exception.EntityNotFoundException;
+import it.smartcommunitylab.riciclo.exception.UnauthorizedException;
 import it.smartcommunitylab.riciclo.model.Istituzione;
 import it.smartcommunitylab.riciclo.storage.AppSetup;
 import it.smartcommunitylab.riciclo.storage.RepositoryManager;
 
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.ResponseStatus;
 
 
 @Controller
@@ -48,11 +52,10 @@ public class IstituzioneController {
 	@SuppressWarnings("unchecked")
 	@RequestMapping(value="api/istituzione/{ownerId}", method=RequestMethod.GET) 
 	public @ResponseBody List<Istituzione> getIstituzione(@PathVariable String ownerId, HttpServletRequest request,
-			HttpServletResponse response) throws ClassNotFoundException {
+			HttpServletResponse response) throws Exception {
 		boolean draft = Utils.getDraft(request);
 		if(!Utils.validateAPIRequest(request, appSetup, draft, storage)) {
-			response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
-			return null;
+			throw new UnauthorizedException("Unauthorized Exception: token not valid");
 		}
 		List<Istituzione> result = (List<Istituzione>) storage.findData(Istituzione.class, null, ownerId, draft);
 		return result;
@@ -60,11 +63,10 @@ public class IstituzioneController {
 	
 	@RequestMapping(value="api/istituzione/{ownerId}", method=RequestMethod.POST) 
 	public @ResponseBody Istituzione addIstituzione(@RequestBody Istituzione istituzione, @PathVariable String ownerId, 
-			HttpServletRequest request, HttpServletResponse response) {
+			HttpServletRequest request, HttpServletResponse response) throws Exception {
 		boolean draft = Utils.getDraft(request);
 		if(!Utils.validateAPIRequest(request, appSetup, draft, storage)) {
-			response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
-			return null;
+			throw new UnauthorizedException("Unauthorized Exception: token not valid");
 		}
 		istituzione.setObjectId(UUID.randomUUID().toString());
 		istituzione.setOwnerId(ownerId);
@@ -75,11 +77,10 @@ public class IstituzioneController {
 	@RequestMapping(value="api/istituzione/{ownerId}/{objectId}", method=RequestMethod.PUT)
 	public @ResponseBody void updateIstituzione(@RequestBody Istituzione istituzione, @PathVariable String ownerId,
 			@PathVariable String objectId, HttpServletRequest request, 
-			HttpServletResponse response)	throws EntityNotFoundException {
+			HttpServletResponse response)	throws Exception {
 		boolean draft = Utils.getDraft(request);
 		if(!Utils.validateAPIRequest(request, appSetup, draft, storage)) {
-			response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
-			return;
+			throw new UnauthorizedException("Unauthorized Exception: token not valid");
 		}
 		istituzione.setObjectId(objectId);
 		istituzione.setOwnerId(ownerId);
@@ -88,13 +89,18 @@ public class IstituzioneController {
 	
 	@RequestMapping(value="api/istituzione/{ownerId}/{objectId}", method=RequestMethod.DELETE)
 	public @ResponseBody void deleteIstituzione(@PathVariable String ownerId,	@PathVariable String objectId, 
-			HttpServletRequest request, HttpServletResponse response) throws EntityNotFoundException {
+			HttpServletRequest request, HttpServletResponse response) throws Exception {
 		boolean draft = Utils.getDraft(request);
 		if(!Utils.validateAPIRequest(request, appSetup, draft, storage)) {
-			response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
-			return;
+			throw new UnauthorizedException("Unauthorized Exception: token not valid");
 		}
 		storage.removeIstituzione(ownerId, objectId, draft);
 	}
 	
+	@ExceptionHandler(Exception.class)
+	@ResponseStatus(value=HttpStatus.INTERNAL_SERVER_ERROR)
+	@ResponseBody
+	public Map<String,String> handleError(HttpServletRequest request, Exception exception) {
+		return Utils.handleError(exception);
+	}		
 }

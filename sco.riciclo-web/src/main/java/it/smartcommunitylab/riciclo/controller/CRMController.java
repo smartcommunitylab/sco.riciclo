@@ -16,25 +16,29 @@
 
 package it.smartcommunitylab.riciclo.controller;
 
-import it.smartcommunitylab.riciclo.exception.EntityNotFoundException;
+import it.smartcommunitylab.riciclo.exception.UnauthorizedException;
 import it.smartcommunitylab.riciclo.model.Crm;
 import it.smartcommunitylab.riciclo.model.OrarioApertura;
 import it.smartcommunitylab.riciclo.storage.AppSetup;
 import it.smartcommunitylab.riciclo.storage.RepositoryManager;
 
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.ResponseStatus;
 
 
 @Controller
@@ -49,11 +53,10 @@ public class CRMController {
 	@SuppressWarnings("unchecked")
 	@RequestMapping(value="api/crm/{ownerId}", method=RequestMethod.GET) 
 	public @ResponseBody List<Crm> getCRM(@PathVariable String ownerId, HttpServletRequest request,
-			HttpServletResponse response) throws ClassNotFoundException {
+			HttpServletResponse response) throws Exception {
 		boolean draft = Utils.getDraft(request);
 		if(!Utils.validateAPIRequest(request, appSetup, draft, storage)) {
-			response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
-			return null;
+			throw new UnauthorizedException("Unauthorized Exception: token not valid");
 		}
 		List<Crm> result = (List<Crm>) storage.findData(Crm.class, null, ownerId, draft);
 		return result;
@@ -61,11 +64,10 @@ public class CRMController {
 	
 	@RequestMapping(value="api/crm/{ownerId}", method=RequestMethod.POST) 
 	public @ResponseBody Crm addCRM(@RequestBody Crm crm, @PathVariable String ownerId, 
-			HttpServletRequest request, HttpServletResponse response) {
+			HttpServletRequest request, HttpServletResponse response) throws Exception{
 		boolean draft = Utils.getDraft(request);
 		if(!Utils.validateAPIRequest(request, appSetup, draft, storage)) {
-			response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
-			return null;
+			throw new UnauthorizedException("Unauthorized Exception: token not valid");
 		}
 		crm.setObjectId(UUID.randomUUID().toString());
 		crm.setOwnerId(ownerId);
@@ -76,11 +78,10 @@ public class CRMController {
 	@RequestMapping(value="api/crm/{ownerId}/{objectId}", method=RequestMethod.PUT)
 	public @ResponseBody void updateCRM(@RequestBody Crm crm, @PathVariable String ownerId,
 			@PathVariable String objectId, HttpServletRequest request, 
-			HttpServletResponse response)	throws EntityNotFoundException {
+			HttpServletResponse response)	throws Exception {
 		boolean draft = Utils.getDraft(request);
 		if(!Utils.validateAPIRequest(request, appSetup, draft, storage)) {
-			response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
-			return;
+			throw new UnauthorizedException("Unauthorized Exception: token not valid");
 		}
 		crm.setObjectId(objectId);
 		crm.setOwnerId(ownerId);
@@ -89,11 +90,10 @@ public class CRMController {
 	
 	@RequestMapping(value="api/crm/{ownerId}/{objectId}", method=RequestMethod.DELETE)
 	public @ResponseBody void deleteCRM(@PathVariable String ownerId,	@PathVariable String objectId, 
-			HttpServletRequest request, HttpServletResponse response) throws EntityNotFoundException {
+			HttpServletRequest request, HttpServletResponse response) throws Exception {
 		boolean draft = Utils.getDraft(request);
 		if(!Utils.validateAPIRequest(request, appSetup, draft, storage)) {
-			response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
-			return;
+			throw new UnauthorizedException("Unauthorized Exception: token not valid");
 		}
 		storage.removeCRM(ownerId, objectId, draft);
 	}
@@ -101,11 +101,10 @@ public class CRMController {
 	@RequestMapping(value="api/crm/{ownerId}/{objectId}/orario", method=RequestMethod.POST)
 	public @ResponseBody void addOrarioApertura(@RequestBody OrarioApertura orario, @PathVariable String ownerId, 
 			@PathVariable String objectId, HttpServletRequest request, 
-			HttpServletResponse response) throws ClassNotFoundException, EntityNotFoundException {
+			HttpServletResponse response) throws Exception {
 		boolean draft = Utils.getDraft(request);
 		if(!Utils.validateAPIRequest(request, appSetup, draft, storage)) {
-			response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
-			return;
+			throw new UnauthorizedException("Unauthorized Exception: token not valid");
 		}
 		storage.updateCRMAddOrario(ownerId, objectId, orario, draft);
 	}
@@ -113,13 +112,18 @@ public class CRMController {
 	@RequestMapping(value="api/crm/{ownerId}/{objectId}/orario/{position}", method=RequestMethod.DELETE)
 	public @ResponseBody void deleteOrarioApertura(@PathVariable String ownerId, @PathVariable String objectId, 
 			@PathVariable int position, HttpServletRequest request,
-			HttpServletResponse response) throws ClassNotFoundException, EntityNotFoundException {
+			HttpServletResponse response) throws Exception {
 		boolean draft = Utils.getDraft(request);
 		if(!Utils.validateAPIRequest(request, appSetup, draft, storage)) {
-			response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
-			return;
+			throw new UnauthorizedException("Unauthorized Exception: token not valid");
 		}
 		storage.updateCRMRemoveOrario(ownerId, objectId, position, draft);
 	}
-
+	
+	@ExceptionHandler(Exception.class)
+	@ResponseStatus(value=HttpStatus.INTERNAL_SERVER_ERROR)
+	@ResponseBody
+	public Map<String,String> handleError(HttpServletRequest request, Exception exception) {
+		return Utils.handleError(exception);
+	}	
 }

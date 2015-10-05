@@ -1,7 +1,14 @@
 var rifiutiApp = angular.module('rifiuti', ['DataService']).controller('userCtrl', function($scope, $http, $window, DataService) {
-	DataService.getProfile().then(function(p) {
-  	$scope.initData(p);
-  });
+	DataService.getProfile().then(
+	function(p) {
+		$scope.initData(p);
+	},
+	function(e) {
+		console.log(e);
+		$scope.error = true;
+		$scope.errorMsg = e.errorMsg;
+		$window.spinner.stop();
+	});
 
 	$scope.selectedTab = "menu-rifiuti";
 	$scope.language = "it";
@@ -31,8 +38,15 @@ var rifiutiApp = angular.module('rifiuti', ['DataService']).controller('userCtrl
 	$scope.initData = function(profile) {
 		$scope.profile = profile;
 		var url = "api/rifiuto/" + $scope.profile.appInfo.ownerId + "?draft=" + $scope.draft;
-		$http.get(url, {headers: {'X-ACCESS-TOKEN': $scope.profile.appInfo.token}}).success(function (response) {
-			$scope.rifiuti = response;
+		$http.get(url, {headers: {'X-ACCESS-TOKEN': $scope.profile.appInfo.token}}).then(
+		function (response) {
+			$scope.rifiuti = response.data;
+			$window.spinner.stop();
+		},
+		function(response) {
+			console.log(response.data);
+			$scope.error = true;
+			$scope.errorMsg = response.data.errorMsg;
 			$window.spinner.stop();
 		});
 	};
@@ -113,8 +127,9 @@ var rifiutiApp = angular.module('rifiuti', ['DataService']).controller('userCtrl
 		  function(response) {
 		    // called asynchronously if an error occurs
 		    // or server returns response with an error status.
+		  	console.log(response.data);
 		  	$scope.error = true;
-		  	$scope.errorMsg = response.status + " - " + (response.data || "Request failed");
+		  	$scope.errorMsg = response.data.errorMsg || "Request failed";
 		  	$scope.status = response.status;
 		  });
 		}
@@ -136,8 +151,9 @@ var rifiutiApp = angular.module('rifiuti', ['DataService']).controller('userCtrl
 			  function(response) {
 			    // called asynchronously if an error occurs
 			    // or server returns response with an error status.
+			  	console.log(response.data);
 			  	$scope.error = true;
-			  	$scope.errorMsg = response.status + " - " + (response.data || "Request failed");
+			  	$scope.errorMsg = response.data.errorMsg || "Request failed";
 			  	$scope.status = response.status;
 			  });
 			}
@@ -165,8 +181,9 @@ var rifiutiApp = angular.module('rifiuti', ['DataService']).controller('userCtrl
 				function(response) {
 				  // called asynchronously if an error occurs
 					// or server returns response with an error status.
+					console.log(response.data);
 					$scope.error = true;
-					$scope.errorMsg = response.status + " - " + (response.data || "Request failed");
+					$scope.errorMsg = response.data.errorMsg || "Request failed";
 					$scope.status = response.status;
 				});			
 			}

@@ -16,23 +16,27 @@
 
 package it.smartcommunitylab.riciclo.controller;
 
-import it.smartcommunitylab.riciclo.exception.EntityNotFoundException;
+import it.smartcommunitylab.riciclo.exception.UnauthorizedException;
 import it.smartcommunitylab.riciclo.model.Colore;
 import it.smartcommunitylab.riciclo.storage.AppSetup;
 import it.smartcommunitylab.riciclo.storage.RepositoryManager;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.ResponseStatus;
 
 
 @Controller
@@ -47,12 +51,10 @@ public class ColoreController {
 	@SuppressWarnings("unchecked")
 	@RequestMapping(value="api/colore/{ownerId}", method=RequestMethod.GET)
 	public @ResponseBody List<Colore> getColori(@PathVariable String ownerId, 
-			HttpServletRequest request, HttpServletResponse response) 
-			throws ClassNotFoundException {
+			HttpServletRequest request, HttpServletResponse response)	throws Exception {
 		boolean draft = Utils.getDraft(request);
 		if(!Utils.validateAPIRequest(request, appSetup, draft, storage)) {
-			response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
-			return null;
+			throw new UnauthorizedException("Unauthorized Exception: token not valid");
 		}
 		List<Colore> result = (List<Colore>) storage.findData(Colore.class, null, ownerId, draft);
 		return result;
@@ -60,11 +62,10 @@ public class ColoreController {
 	
 	@RequestMapping(value="api/colore/{ownerId}", method=RequestMethod.POST) 
 	public @ResponseBody Colore addColore(@RequestBody Colore colore, @PathVariable String ownerId, 
-			HttpServletRequest request, HttpServletResponse response) {
+			HttpServletRequest request, HttpServletResponse response) throws Exception{
 		boolean draft = Utils.getDraft(request);
 		if(!Utils.validateAPIRequest(request, appSetup, draft, storage)) {
-			response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
-			return null;
+			throw new UnauthorizedException("Unauthorized Exception: token not valid");
 		}
 		colore.setOwnerId(ownerId);
 		storage.addColore(colore, draft);
@@ -74,11 +75,10 @@ public class ColoreController {
 	@RequestMapping(value="api/colore/{ownerId}/{nome}", method=RequestMethod.PUT)
 	public @ResponseBody void updateColore(@RequestBody Colore colore, @PathVariable String ownerId, 
 			@PathVariable String nome, HttpServletRequest request,
-			HttpServletResponse response) throws EntityNotFoundException {
+			HttpServletResponse response) throws Exception {
 		boolean draft = Utils.getDraft(request);
 		if(!Utils.validateAPIRequest(request, appSetup, draft, storage)) {
-			response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
-			return;
+			throw new UnauthorizedException("Unauthorized Exception: token not valid");
 		}
 		colore.setOwnerId(ownerId);
 		colore.setNome(nome);
@@ -87,13 +87,18 @@ public class ColoreController {
 	
 	@RequestMapping(value="api/colore/{ownerId}/{nome}", method=RequestMethod.DELETE)
 	public @ResponseBody void deleteColore(@PathVariable String ownerId, @PathVariable String nome, 
-			HttpServletRequest request, HttpServletResponse response) throws EntityNotFoundException {
+			HttpServletRequest request, HttpServletResponse response) throws Exception {
 		boolean draft = Utils.getDraft(request);
 		if(!Utils.validateAPIRequest(request, appSetup, draft, storage)) {
-			response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
-			return;
+			throw new UnauthorizedException("Unauthorized Exception: token not valid");
 		}
 		storage.removeColore(ownerId, nome, draft);
 	}
 	
+	@ExceptionHandler(Exception.class)
+	@ResponseStatus(value=HttpStatus.INTERNAL_SERVER_ERROR)
+	@ResponseBody
+	public Map<String,String> handleError(HttpServletRequest request, Exception exception) {
+		return Utils.handleError(exception);
+	}		
 }

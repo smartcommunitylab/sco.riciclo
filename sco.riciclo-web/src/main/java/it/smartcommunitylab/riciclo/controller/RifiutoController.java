@@ -16,24 +16,28 @@
 
 package it.smartcommunitylab.riciclo.controller;
 
-import it.smartcommunitylab.riciclo.exception.EntityNotFoundException;
+import it.smartcommunitylab.riciclo.exception.UnauthorizedException;
 import it.smartcommunitylab.riciclo.model.Rifiuto;
 import it.smartcommunitylab.riciclo.storage.AppSetup;
 import it.smartcommunitylab.riciclo.storage.RepositoryManager;
 
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.ResponseStatus;
 
 
 @Controller
@@ -48,12 +52,10 @@ public class RifiutoController {
 	@SuppressWarnings("unchecked")
 	@RequestMapping(value="api/rifiuto/{ownerId}", method=RequestMethod.GET)
 	public @ResponseBody List<Rifiuto> getRifiuti(@PathVariable String ownerId, 
-			HttpServletRequest request, HttpServletResponse response) 
-			throws ClassNotFoundException {
+			HttpServletRequest request, HttpServletResponse response) throws Exception {
 		boolean draft = Utils.getDraft(request);
 		if(!Utils.validateAPIRequest(request, appSetup, draft, storage)) {
-			response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
-			return null;
+			throw new UnauthorizedException("Unauthorized Exception: token not valid");
 		}
 		List<Rifiuto> result = (List<Rifiuto>) storage.findData(Rifiuto.class, null, ownerId, draft);
 		return result;
@@ -61,11 +63,10 @@ public class RifiutoController {
 	
 	@RequestMapping(value="api/rifiuto/{ownerId}", method=RequestMethod.POST) 
 	public @ResponseBody Rifiuto addRifiuto(@RequestBody Rifiuto rifiuto, @PathVariable String ownerId, 
-			HttpServletRequest request, HttpServletResponse response) {
+			HttpServletRequest request, HttpServletResponse response) throws Exception {
 		boolean draft = Utils.getDraft(request);
 		if(!Utils.validateAPIRequest(request, appSetup, draft, storage)) {
-			response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
-			return null;
+			throw new UnauthorizedException("Unauthorized Exception: token not valid");
 		}
 		rifiuto.setObjectId(UUID.randomUUID().toString());
 		rifiuto.setOwnerId(ownerId);
@@ -76,11 +77,10 @@ public class RifiutoController {
 	@RequestMapping(value="api/rifiuto/{ownerId}/{objectId}", method=RequestMethod.PUT)
 	public @ResponseBody void updateRifiuto(@RequestBody Rifiuto rifiuto, @PathVariable String ownerId, 
 			@PathVariable String objectId, HttpServletRequest request,
-			HttpServletResponse response) throws EntityNotFoundException {
+			HttpServletResponse response) throws Exception {
 		boolean draft = Utils.getDraft(request);
 		if(!Utils.validateAPIRequest(request, appSetup, draft, storage)) {
-			response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
-			return;
+			throw new UnauthorizedException("Unauthorized Exception: token not valid");
 		}
 		rifiuto.setObjectId(objectId);
 		rifiuto.setOwnerId(ownerId);
@@ -89,13 +89,18 @@ public class RifiutoController {
 	
 	@RequestMapping(value="api/rifiuto/{ownerId}/{objectId}", method=RequestMethod.DELETE)
 	public @ResponseBody void deleteRifiuto(@PathVariable String ownerId, @PathVariable String objectId, 
-			HttpServletRequest request, HttpServletResponse response) throws EntityNotFoundException {
+			HttpServletRequest request, HttpServletResponse response) throws Exception {
 		boolean draft = Utils.getDraft(request);
 		if(!Utils.validateAPIRequest(request, appSetup, draft, storage)) {
-			response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
-			return;
+			throw new UnauthorizedException("Unauthorized Exception: token not valid");
 		}
 		storage.removeRifiuto(ownerId, objectId, draft);
 	}
 	
+	@ExceptionHandler(Exception.class)
+	@ResponseStatus(value=HttpStatus.INTERNAL_SERVER_ERROR)
+	@ResponseBody
+	public Map<String,String> handleError(HttpServletRequest request, Exception exception) {
+		return Utils.handleError(exception);
+	}		
 }
