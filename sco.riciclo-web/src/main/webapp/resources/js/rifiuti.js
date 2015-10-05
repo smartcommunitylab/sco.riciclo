@@ -1,4 +1,4 @@
-var rifiutiApp = angular.module('rifiuti', ['DataService']).controller('userCtrl', function($scope, $http, DataService) {
+var rifiutiApp = angular.module('rifiuti', ['DataService']).controller('userCtrl', function($scope, $http, $window, DataService) {
 	DataService.getProfile().then(function(p) {
   	$scope.initData(p);
   });
@@ -33,6 +33,7 @@ var rifiutiApp = angular.module('rifiuti', ['DataService']).controller('userCtrl
 		var url = "api/rifiuto/" + $scope.profile.appInfo.ownerId + "?draft=" + $scope.draft;
 		$http.get(url, {headers: {'X-ACCESS-TOKEN': $scope.profile.appInfo.token}}).success(function (response) {
 			$scope.rifiuti = response;
+			$window.spinner.stop();
 		});
 	};
 	

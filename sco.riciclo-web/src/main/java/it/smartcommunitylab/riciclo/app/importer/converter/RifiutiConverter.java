@@ -182,7 +182,7 @@ public class RifiutiConverter {
 		for (Gestori gs : rifiuti.getGestori()) {
 			Gestore gestore = new Gestore();
 			gestore.setOwnerId(ownerId);
-			gestore.setObjectId(gs.getRagioneSociale());
+			gestore.setObjectId(gs.getRagioneSociale() + " - " + gs.getUfficio());
 			gestore.setRagioneSociale(gs.getRagioneSociale());
 			gestore.getDescrizione().put(defaultLang, gs.getDescrizione());
 			gestore.setUfficio(gs.getUfficio());
