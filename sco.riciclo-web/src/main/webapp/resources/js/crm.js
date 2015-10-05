@@ -1,9 +1,15 @@
 var crmApp = angular.module('crm', ['DataService']);
 
 var crmCtrl = crmApp.controller('userCtrl', function($scope, $window, $http, DataService) {
-	DataService.getProfile().then(function(p) {
-  	$scope.initData(p);
-  });
+	DataService.getProfile().then(
+	function(p) {
+		$scope.initData(p);
+	},
+	function(e) {
+		console.log(e);
+		$scope.error = true;
+		$scope.errorMsg = e.errorMsg;
+	});
 
 	$scope.selectedTab = "menu-crm";
 	$scope.language = "it";
@@ -64,8 +70,14 @@ var crmCtrl = crmApp.controller('userCtrl', function($scope, $window, $http, Dat
 	$scope.initData = function(profile) {
 		$scope.profile = profile;
 		var url = "api/crm/" + $scope.profile.appInfo.ownerId + "?draft=" + $scope.draft;
-		$http.get(url, {headers: {'X-ACCESS-TOKEN': $scope.profile.appInfo.token}}).success(function (response) {
-			$scope.crmList = response;
+		$http.get(url, {headers: {'X-ACCESS-TOKEN': $scope.profile.appInfo.token}}).then(
+		function (response) {
+			$scope.crmList = response.data;
+		},
+		function(response) {
+			console.log(response.data);
+			$scope.error = true;
+			$scope.errorMsg = response.data.errorMsg;
 		});
 	};
 	
@@ -209,8 +221,9 @@ var crmCtrl = crmApp.controller('userCtrl', function($scope, $window, $http, Dat
 		  function(response) {
 		    // called asynchronously if an error occurs
 		    // or server returns response with an error status.
+		  	console.log(response.data);
 		  	$scope.error = true;
-		  	$scope.errorMsg = response.status + " - " + (response.data || "Request failed");
+		  	$scope.errorMsg = response.data.errorMsg || "Request failed";
 		  	$scope.status = response.status;
 		  });
 		}
@@ -238,8 +251,9 @@ var crmCtrl = crmApp.controller('userCtrl', function($scope, $window, $http, Dat
 			  function(response) {
 			    // called asynchronously if an error occurs
 			    // or server returns response with an error status.
+			  	console.log(response.data);
 			  	$scope.error = true;
-			  	$scope.errorMsg = response.status + " - " + (response.data || "Request failed");
+			  	$scope.errorMsg = response.data.errorMsg || "Request failed";
 			  	$scope.status = response.status;
 			  });
 			}
@@ -267,9 +281,10 @@ var crmCtrl = crmApp.controller('userCtrl', function($scope, $window, $http, Dat
 				function(response) {
 				  // called asynchronously if an error occurs
 					// or server returns response with an error status.
-					$scope.error = true;
-					$scope.errorMsg = response.status + " - " + (response.data || "Request failed");
-					$scope.status = response.status;
+			  	console.log(response.data);
+			  	$scope.error = true;
+			  	$scope.errorMsg = response.data.errorMsg || "Request failed";
+			  	$scope.status = response.status;
 				});			
 			}
 		}
@@ -290,9 +305,10 @@ var crmCtrl = crmApp.controller('userCtrl', function($scope, $window, $http, Dat
 				console.log("deleteTimetable:" + response.status + " - " + response.data);
 			},
 			function(response) {
-				$scope.error = true;
-				$scope.errorMsg = response.status + " - " + (response.data || "Request failed");
-				$scope.status = response.status;
+		  	console.log(response.data);
+		  	$scope.error = true;
+		  	$scope.errorMsg = response.data.errorMsg || "Request failed";
+		  	$scope.status = response.status;
 			});
 		}
 	};
@@ -338,8 +354,9 @@ var crmCtrl = crmApp.controller('userCtrl', function($scope, $window, $http, Dat
 		  	console.log("addTimetable:" + response.status + " - " + response.data);
 			},
 			function(response) {
+		  	console.log(response.data);
 		  	$scope.error = true;
-		  	$scope.errorMsg = response.status + " - " + (response.data || "Request failed");
+		  	$scope.errorMsg = response.data.errorMsg || "Request failed";
 		  	$scope.status = response.status;
 			});
 		}

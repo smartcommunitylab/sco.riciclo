@@ -1,10 +1,16 @@
 var calendariraccoltaApp = angular.module('calendariraccolta', ['DataService', 'ngSanitize', 'MassAutoComplete']);
 
 var calendariraccoltaCtrl = calendariraccoltaApp.controller('userCtrl', function($scope, $http, $sce, $q, DataService) {
-	DataService.getProfile().then(function(p) {
-  	$scope.initData(p);
-  });
-
+	DataService.getProfile().then(
+	function(p) {
+		$scope.initData(p);
+	},
+	function(e) {
+		console.log(e);
+		$scope.error = true;
+		$scope.errorMsg = e.errorMsg;
+	});
+	
 	$scope.selectedTab = "menu-calendariraccolta";
 	$scope.language = "it";
 	$scope.draft = true;
@@ -62,32 +68,55 @@ var calendariraccoltaCtrl = calendariraccoltaApp.controller('userCtrl', function
 		$scope.profile = profile;
 		
 		var urlTipologiaUtenza = "api/tipologia/utenza/" + $scope.profile.appInfo.ownerId + "?draft=" + $scope.draft;
-		$http.get(urlTipologiaUtenza, {headers: {'X-ACCESS-TOKEN': $scope.profile.appInfo.token}}).success(function (response) {
-			$scope.tipologiaUtenzaList = response;
+		$http.get(urlTipologiaUtenza, {headers: {'X-ACCESS-TOKEN': $scope.profile.appInfo.token}}).then(
+		function (response) {
+			$scope.tipologiaUtenzaList = response.data;
+		},
+		function(response) {
+			console.log(response.data);
+			$scope.error = true;
+			$scope.errorMsg = response.data.errorMsg;
 		});
 		
 		var urlTipologiaPuntoRaccolta = "api/tipologia/puntoraccolta/" + $scope.profile.appInfo.ownerId + "?draft=" + $scope.draft;
-		$http.get(urlTipologiaPuntoRaccolta, {headers: {'X-ACCESS-TOKEN': $scope.profile.appInfo.token}}).success(function (response) {
-			for (var d = 0, len = response.length; d < len; d += 1) {
-				var element = response[d];
+		$http.get(urlTipologiaPuntoRaccolta, {headers: {'X-ACCESS-TOKEN': $scope.profile.appInfo.token}}).then(
+		function (response) {
+			for (var d = 0, len = response.data.length; d < len; d += 1) {
+				var element = response.data[d];
 				if(element.type == "PP") {
 					$scope.tipologiaPuntoRaccoltaList.push(element);
 				}
 			}
 			$scope.tipologiaPuntoRaccoltaNameMap = $scope.setLocalNameMap($scope.tipologiaPuntoRaccoltaList);
+		},
+		function(response) {
+			console.log(response.data);
+			$scope.error = true;
+			$scope.errorMsg = response.data.errorMsg;
 		});
 		
 		var urlArea = "api/area/" + $scope.profile.appInfo.ownerId + "?draft=" + $scope.draft;
-		$http.get(urlArea, {headers: {'X-ACCESS-TOKEN': $scope.profile.appInfo.token}}).success(function (response) {
-			$scope.areaList = response;
+		$http.get(urlArea, {headers: {'X-ACCESS-TOKEN': $scope.profile.appInfo.token}}).then(
+		function (response) {
+			$scope.areaList = response.data;
 			$scope.areaNameMap = $scope.setNameMap($scope.areaList);
-		});
+		},
+		function(response) {
+			console.log(response.data);
+			$scope.error = true;
+			$scope.errorMsg = response.data.errorMsg;
+		});		
 		
 		var urlCalendarioRaccolta = "api/calraccolta/" + $scope.profile.appInfo.ownerId + "?draft=" + $scope.draft;
-		$http.get(urlCalendarioRaccolta, {headers: {'X-ACCESS-TOKEN': $scope.profile.appInfo.token}}).success(function (response) {
-			$scope.calendarioRaccoltaList = response;
+		$http.get(urlCalendarioRaccolta, {headers: {'X-ACCESS-TOKEN': $scope.profile.appInfo.token}}).then(
+		function (response) {
+			$scope.calendarioRaccoltaList = response.data;
+		},
+		function(response) {
+			console.log(response.data);
+			$scope.error = true;
+			$scope.errorMsg = response.data.errorMsg;
 		});
-		
 	};
 	
 	$scope.getAreaName = function(id) {
@@ -183,9 +212,10 @@ var calendariraccoltaCtrl = calendariraccoltaApp.controller('userCtrl', function
 			function(response) {
 				// called asynchronously if an error occurs
 				// or server returns response with an error status.
-				$scope.error = true;
-				$scope.errorMsg = response.status + " - " + (response.data || "Request failed");
-				$scope.status = response.status;
+		  	console.log(response.data);
+		  	$scope.error = true;
+		  	$scope.errorMsg = response.data.errorMsg || "Request failed";
+		  	$scope.status = response.status;
 			});
 		}
 		if($scope.edit) {
@@ -209,9 +239,10 @@ var calendariraccoltaCtrl = calendariraccoltaApp.controller('userCtrl', function
 				function(response) {
 					// called asynchronously if an error occurs
 					// or server returns response with an error status.
-					$scope.error = true;
-					$scope.errorMsg = response.status + " - " + (response.data || "Request failed");
-					$scope.status = response.status;
+			  	console.log(response.data);
+			  	$scope.error = true;
+			  	$scope.errorMsg = response.data.errorMsg || "Request failed";
+			  	$scope.status = response.status;
 				});
 			}
 		}
@@ -238,9 +269,10 @@ var calendariraccoltaCtrl = calendariraccoltaApp.controller('userCtrl', function
 				function(response) {
 				  // called asynchronously if an error occurs
 					// or server returns response with an error status.
-					$scope.error = true;
-					$scope.errorMsg = response.status + " - " + (response.data || "Request failed");
-					$scope.status = response.status;
+			  	console.log(response.data);
+			  	$scope.error = true;
+			  	$scope.errorMsg = response.data.errorMsg || "Request failed";
+			  	$scope.status = response.status;
 				});			
 			}
 		}
@@ -261,9 +293,10 @@ var calendariraccoltaCtrl = calendariraccoltaApp.controller('userCtrl', function
 				console.log("deleteTimetable:" + response.status + " - " + response.data);
 			},
 			function(response) {
-				$scope.error = true;
-				$scope.errorMsg = response.status + " - " + (response.data || "Request failed");
-				$scope.status = response.status;
+		  	console.log(response.data);
+		  	$scope.error = true;
+		  	$scope.errorMsg = response.data.errorMsg || "Request failed";
+		  	$scope.status = response.status;
 			});
 		}
 	};

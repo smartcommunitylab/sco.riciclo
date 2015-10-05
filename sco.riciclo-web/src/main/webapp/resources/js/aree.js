@@ -1,9 +1,15 @@
 var areeApp = angular.module('aree', ['DataService', 'ngSanitize', 'MassAutoComplete']);
 
 var areeCtrl = areeApp.controller('userCtrl', function($scope, $http, $sce, $q, DataService) {
-	DataService.getProfile().then(function(p) {
-  	$scope.initData(p);
-  });
+	DataService.getProfile().then(
+	function(p) {
+		$scope.initData(p);
+	},
+	function(e) {
+		console.log(e);
+		$scope.error = true;
+		$scope.errorMsg = e.errorMsg;
+	});
 	
 	$scope.selectedTab = "menu-aree";
 	$scope.language = "it";
@@ -44,40 +50,63 @@ var areeCtrl = areeApp.controller('userCtrl', function($scope, $http, $sce, $q, 
 		$scope.profile = profile;
 		
 		var urlTipologiaUtenza = "api/tipologia/utenza/" + $scope.profile.appInfo.ownerId + "?draft=" + $scope.draft;
-		$http.get(urlTipologiaUtenza, {headers: {'X-ACCESS-TOKEN': $scope.profile.appInfo.token}}).success(function (response) {
-			$scope.tipologiaUtenzaList = response;
+		$http.get(urlTipologiaUtenza, {headers: {'X-ACCESS-TOKEN': $scope.profile.appInfo.token}}).then(
+		function(response) {
+			$scope.tipologiaUtenzaList = response.data;
 			$scope.resetTipologiaUtenzaSelected();
+		},
+		function(response) {
+			console.log(response.data);
+			$scope.error = true;
+			$scope.errorMsg = response.data.errorMsg;
 		});
 
-		var urlArea = "api/area/" + $scope.profile.appInfo.ownerId + "?draft=" + $scope.draft;
-		$http.get(urlArea, {headers: {'X-ACCESS-TOKEN': $scope.profile.appInfo.token}}).success(function (response) {
-			$scope.areaList = response;
-			$scope.areaNameMap = $scope.setNameMap($scope.areaList);
-			$scope.areaEtichettaMap = $scope.setEtichettaMap($scope.areaList);
-		});
-		
 		var urlIstituzione = "api/istituzione/" + $scope.profile.appInfo.ownerId + "?draft=" + $scope.draft;
-		$http.get(urlIstituzione, {headers: {'X-ACCESS-TOKEN': $scope.profile.appInfo.token}}).success(function (response) {
-			var array = response;
+		$http.get(urlIstituzione, {headers: {'X-ACCESS-TOKEN': $scope.profile.appInfo.token}}).then(
+		function (response) {
+			var array = response.data;
 			for (var d = 0, len = array.length; d < len; d += 1) {
 				var element = array[d];
 				if($scope.istituzioneList.indexOf(element.nome) == -1) {
 					$scope.istituzioneList.push(element.nome);
 				}
 			}
+		},
+		function(response) {
+			console.log(response.data);
+			$scope.error = true;
+			$scope.errorMsg = response.data.errorMsg;
 		});
 		
 		var urlGestore = "api/gestore/" + $scope.profile.appInfo.ownerId + "?draft=" + $scope.draft;
-		$http.get(urlGestore, {headers: {'X-ACCESS-TOKEN': $scope.profile.appInfo.token}}).success(function (response) {
-			var array = response;
+		$http.get(urlGestore, {headers: {'X-ACCESS-TOKEN': $scope.profile.appInfo.token}}).then(
+		function (response) {
+			var array = response.data;
 			for (var d = 0, len = array.length; d < len; d += 1) {
 				var element = array[d];
 				if($scope.gestoreList.indexOf(element.ragioneSociale) == -1) {
 					$scope.gestoreList.push(element.ragioneSociale);
 				}
 			}
+		},
+		function(response) {
+			console.log(response.data);
+			$scope.error = true;
+			$scope.errorMsg = response.data.errorMsg;
 		});
 		
+		var urlArea = "api/area/" + $scope.profile.appInfo.ownerId + "?draft=" + $scope.draft;
+		$http.get(urlArea, {headers: {'X-ACCESS-TOKEN': $scope.profile.appInfo.token}}).then(
+		function (response) {
+			$scope.areaList = response.data;
+			$scope.areaNameMap = $scope.setNameMap($scope.areaList);
+			$scope.areaEtichettaMap = $scope.setEtichettaMap($scope.areaList);
+		},
+		function(response) {
+			console.log(response.data);
+			$scope.error = true;
+			$scope.errorMsg = response.data.errorMsg;
+		});
 	};
 	
 	$scope.getAreaName = function(id) {
@@ -257,8 +286,9 @@ var areeCtrl = areeApp.controller('userCtrl', function($scope, $http, $sce, $q, 
 		  function(response) {
 		    // called asynchronously if an error occurs
 		    // or server returns response with an error status.
+		  	console.log(response.data);
 		  	$scope.error = true;
-		  	$scope.errorMsg = response.status + " - " + (response.data || "Request failed");
+		  	$scope.errorMsg = response.data.errorMsg || "Request failed";
 		  	$scope.status = response.status;
 		  });			
 		}
@@ -293,8 +323,9 @@ var areeCtrl = areeApp.controller('userCtrl', function($scope, $http, $sce, $q, 
 			  function(response) {
 			    // called asynchronously if an error occurs
 			    // or server returns response with an error status.
+			  	console.log(response.data);
 			  	$scope.error = true;
-			  	$scope.errorMsg = response.status + " - " + (response.data || "Request failed");
+			  	$scope.errorMsg = response.data.errorMsg || "Request failed";
 			  	$scope.status = response.status;
 			  });				
 			}
@@ -322,9 +353,10 @@ var areeCtrl = areeApp.controller('userCtrl', function($scope, $http, $sce, $q, 
 				function(response) {
 				  // called asynchronously if an error occurs
 					// or server returns response with an error status.
-					$scope.error = true;
-					$scope.errorMsg = response.status + " - " + (response.data || "Request failed");
-					$scope.status = response.status;
+			  	console.log(response.data);
+			  	$scope.error = true;
+			  	$scope.errorMsg = response.data.errorMsg || "Request failed";
+			  	$scope.status = response.status;
 				});				
 			}
 		}

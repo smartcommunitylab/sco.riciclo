@@ -1,9 +1,15 @@
 var segnalazioniApp = angular.module('segnalazioni', ['DataService', 'ngSanitize', 'MassAutoComplete']);
 
 var segnalazioniCtrl = segnalazioniApp.controller('userCtrl', function($scope, $http, $sce, $q, DataService) {
-	DataService.getProfile().then(function(p) {
-  	$scope.initData(p);
-  });
+	DataService.getProfile().then(
+	function(p) {
+		$scope.initData(p);
+	},
+	function(e) {
+		console.log(e);
+		$scope.error = true;
+		$scope.errorMsg = e.errorMsg;
+	});
 
 	$scope.selectedTab = "menu-segnalazioni";
 	$scope.language = "it";
@@ -39,16 +45,27 @@ var segnalazioniCtrl = segnalazioniApp.controller('userCtrl', function($scope, $
 		$scope.profile = profile;
 
 		var urlArea = "api/area/" + $scope.profile.appInfo.ownerId + "?draft=" + $scope.draft;
-		$http.get(urlArea, {headers: {'X-ACCESS-TOKEN': $scope.profile.appInfo.token}}).success(function (response) {
-			$scope.areaList = response;
+		$http.get(urlArea, {headers: {'X-ACCESS-TOKEN': $scope.profile.appInfo.token}}).then(
+		function (response) {
+			$scope.areaList = response.data;
 			$scope.areaNameMap = $scope.setNameMap($scope.areaList);
-		});
+		},
+		function(response) {
+			console.log(response.data);
+			$scope.error = true;
+			$scope.errorMsg = response.data.errorMsg;
+		});			
 		
 		var urlSegnalazione = "api/segnalazione/" + $scope.profile.appInfo.ownerId + "?draft=" + $scope.draft;
-		$http.get(urlSegnalazione, {headers: {'X-ACCESS-TOKEN': $scope.profile.appInfo.token}}).success(function (response) {
-			$scope.segnalazioneList = response;
-		});
-		
+		$http.get(urlSegnalazione, {headers: {'X-ACCESS-TOKEN': $scope.profile.appInfo.token}}).then(
+		function (response) {
+			$scope.segnalazioneList = response.data;
+		},
+		function(response) {
+			console.log(response.data);
+			$scope.error = true;
+			$scope.errorMsg = response.data.errorMsg;
+		});			
 	};
 	
 	$scope.getAreaName = function(id) {
@@ -162,9 +179,10 @@ var segnalazioniCtrl = segnalazioniApp.controller('userCtrl', function($scope, $
 			function(response) {
 				// called asynchronously if an error occurs
 				// or server returns response with an error status.
-				$scope.error = true;
-				$scope.errorMsg = response.status + " - " + (response.data || "Request failed");
-				$scope.status = response.status;
+		  	console.log(response.data);
+		  	$scope.error = true;
+		  	$scope.errorMsg = response.data.errorMsg || "Request failed";
+		  	$scope.status = response.status;
 			});
 		}
 		if($scope.edit) {
@@ -188,9 +206,10 @@ var segnalazioniCtrl = segnalazioniApp.controller('userCtrl', function($scope, $
 				function(response) {
 					// called asynchronously if an error occurs
 					// or server returns response with an error status.
-					$scope.error = true;
-					$scope.errorMsg = response.status + " - " + (response.data || "Request failed");
-					$scope.status = response.status;
+			  	console.log(response.data);
+			  	$scope.error = true;
+			  	$scope.errorMsg = response.data.errorMsg || "Request failed";
+			  	$scope.status = response.status;
 				});
 			}
 		}
@@ -217,9 +236,10 @@ var segnalazioniCtrl = segnalazioniApp.controller('userCtrl', function($scope, $
 				function(response) {
 				  // called asynchronously if an error occurs
 					// or server returns response with an error status.
-					$scope.error = true;
-					$scope.errorMsg = response.status + " - " + (response.data || "Request failed");
-					$scope.status = response.status;
+			  	console.log(response.data);
+			  	$scope.error = true;
+			  	$scope.errorMsg = response.data.errorMsg || "Request failed";
+			  	$scope.status = response.status;
 				});			
 			}
 		}

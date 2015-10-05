@@ -51,33 +51,63 @@ var riciclabolarioCtrl = riciclabolarioApp.controller('userCtrl', function($scop
 		$scope.profile = profile;
 		
 		var urlRifiuti = "api/rifiuto/" + $scope.profile.appInfo.ownerId + "?draft=" + $scope.draft;
-		$http.get(urlRifiuti, {headers: {'X-ACCESS-TOKEN': $scope.profile.appInfo.token}}).success(function (response) {
-			$scope.rifiutoList = response;
+		$http.get(urlRifiuti, {headers: {'X-ACCESS-TOKEN': $scope.profile.appInfo.token}}).then(
+		function (response) {
+			$scope.rifiutoList = response.data;
 			$scope.rifiutoNameMap = $scope.setLocalNameMap($scope.rifiutoList);
-		});
+		},
+		function(response) {
+			console.log(response.data);
+			$scope.error = true;
+			$scope.errorMsg = response.data.errorMsg;
+		});			
 		
 		var urlTipologiaUtenza = "api/tipologia/utenza/" + $scope.profile.appInfo.ownerId + "?draft=" + $scope.draft;
-		$http.get(urlTipologiaUtenza, {headers: {'X-ACCESS-TOKEN': $scope.profile.appInfo.token}}).success(function (response) {
-			$scope.tipologiaUtenzaList = response;
-		});
+		$http.get(urlTipologiaUtenza, {headers: {'X-ACCESS-TOKEN': $scope.profile.appInfo.token}}).then(
+		function (response) {
+			$scope.tipologiaUtenzaList = response.data;
+		},
+		function(response) {
+			console.log(response.data);
+			$scope.error = true;
+			$scope.errorMsg = response.data.errorMsg;
+		});			
 		
 		var urlTipologiaRifiuto = "api/tipologia/rifiuto/" + $scope.profile.appInfo.ownerId + "?draft=" + $scope.draft;
-		$http.get(urlTipologiaRifiuto, {headers: {'X-ACCESS-TOKEN': $scope.profile.appInfo.token}}).success(function (response) {
-			$scope.tipologiaRifiutoList = response;
-		});
+		$http.get(urlTipologiaRifiuto, {headers: {'X-ACCESS-TOKEN': $scope.profile.appInfo.token}}).then(
+		function (response) {
+			$scope.tipologiaRifiutoList = response.data;
+		},
+		function(response) {
+			console.log(response.data);
+			$scope.error = true;
+			$scope.errorMsg = response.data.errorMsg;
+		});			
 		
 		var urlArea = "api/area/" + $scope.profile.appInfo.ownerId + "?draft=" + $scope.draft;
-		$http.get(urlArea, {headers: {'X-ACCESS-TOKEN': $scope.profile.appInfo.token}}).success(function (response) {
-			$scope.areaList = response;
+		$http.get(urlArea, {headers: {'X-ACCESS-TOKEN': $scope.profile.appInfo.token}}).then(
+		function (response) {
+			$scope.areaList = response.data;
 			$scope.areaNameMap = $scope.setNameMap($scope.areaList);
-		});
+		},
+		function(response) {
+			console.log(response.data);
+			$scope.error = true;
+			$scope.errorMsg = response.data.errorMsg;
+		});			
 		
 		var urlRiciclabolario = "api/riciclabolario/" + $scope.profile.appInfo.ownerId + "?draft=" + $scope.draft;
-		$http.get(urlRiciclabolario, {headers: {'X-ACCESS-TOKEN': $scope.profile.appInfo.token}}).success(function (response) {
-			$scope.riciclabolario = response;
+		$http.get(urlRiciclabolario, {headers: {'X-ACCESS-TOKEN': $scope.profile.appInfo.token}}).then(
+		function (response) {
+			$scope.riciclabolario = response.data;
 			$window.spinner.stop();
-		});
-		
+		},
+		function(response) {
+			console.log(response.data);
+			$scope.error = true;
+			$scope.errorMsg = response.data.errorMsg;
+			$window.spinner.stop();
+		});			
 	};
 	
 	$scope.getRifiutoName = function(id) {
@@ -158,9 +188,10 @@ var riciclabolarioCtrl = riciclabolarioApp.controller('userCtrl', function($scop
 		function(response) {
 			// called asynchronously if an error occurs
 			// or server returns response with an error status.
-			$scope.error = true;
-			$scope.errorMsg = response.status + " - " + (response.data || "Request failed");
-			$scope.status = response.status;
+	  	console.log(response.data);
+	  	$scope.error = true;
+	  	$scope.errorMsg = response.data.errorMsg || "Request failed";
+	  	$scope.status = response.status;
 		});
 	};
 	
@@ -185,9 +216,10 @@ var riciclabolarioCtrl = riciclabolarioApp.controller('userCtrl', function($scop
 				function(response) {
 				  // called asynchronously if an error occurs
 					// or server returns response with an error status.
-					$scope.error = true;
-					$scope.errorMsg = response.status + " - " + (response.data || "Request failed");
-					$scope.status = response.status;
+			  	console.log(response.data);
+			  	$scope.error = true;
+			  	$scope.errorMsg = response.data.errorMsg || "Request failed";
+			  	$scope.status = response.status;
 				});			
 			}
 		}

@@ -1,7 +1,13 @@
 var tipoPuntoApp = angular.module('tipo-punto', ['DataService']).controller('userCtrl', function($scope, $http, DataService) {
-	DataService.getProfile().then(function(p) {
-  	$scope.initData(p);
-  });
+	DataService.getProfile().then(
+	function(p) {
+		$scope.initData(p);
+	},
+	function(e) {
+		console.log(e);
+		$scope.error = true;
+		$scope.errorMsg = e.errorMsg;
+	});
 
 	$scope.selectedTab = "menu-tipo-punto";
 	$scope.language = "it";
@@ -34,9 +40,15 @@ var tipoPuntoApp = angular.module('tipo-punto', ['DataService']).controller('use
 		$scope.profile = profile;
 		
 		var urlTipologiaPunto = "api/tipologia/puntoraccolta/" + $scope.profile.appInfo.ownerId + "?draft=" + $scope.draft;
-		$http.get(urlTipologiaPunto, {headers: {'X-ACCESS-TOKEN': $scope.profile.appInfo.token}}).success(function (response) {
-			$scope.tipoPuntoRaccoltaList = response;
-		});
+		$http.get(urlTipologiaPunto, {headers: {'X-ACCESS-TOKEN': $scope.profile.appInfo.token}}).then(
+		function (response) {
+			$scope.tipoPuntoRaccoltaList = response.data;
+		},
+		function(response) {
+			console.log(response.data);
+			$scope.error = true;
+			$scope.errorMsg = response.data.errorMsg;
+		});			
 	};
 	
 	$scope.resetError = function() {
@@ -131,8 +143,9 @@ var tipoPuntoApp = angular.module('tipo-punto', ['DataService']).controller('use
 		  function(response) {
 		    // called asynchronously if an error occurs
 		    // or server returns response with an error status.
+		  	console.log(response.data);
 		  	$scope.error = true;
-		  	$scope.errorMsg = response.status + " - " + (response.data || "Request failed");
+		  	$scope.errorMsg = response.data.errorMsg || "Request failed";
 		  	$scope.status = response.status;
 		  });
 		}
@@ -156,8 +169,9 @@ var tipoPuntoApp = angular.module('tipo-punto', ['DataService']).controller('use
 			  function(response) {
 			    // called asynchronously if an error occurs
 			    // or server returns response with an error status.
+			  	console.log(response.data);
 			  	$scope.error = true;
-			  	$scope.errorMsg = response.status + " - " + (response.data || "Request failed");
+			  	$scope.errorMsg = response.data.errorMsg || "Request failed";
 			  	$scope.status = response.status;
 			  });
 			}
@@ -185,9 +199,10 @@ var tipoPuntoApp = angular.module('tipo-punto', ['DataService']).controller('use
 				function(response) {
 				  // called asynchronously if an error occurs
 					// or server returns response with an error status.
-					$scope.error = true;
-					$scope.errorMsg = response.status + " - " + (response.data || "Request failed");
-					$scope.status = response.status;
+			  	console.log(response.data);
+			  	$scope.error = true;
+			  	$scope.errorMsg = response.data.errorMsg || "Request failed";
+			  	$scope.status = response.status;
 				});			
 			}
 		}

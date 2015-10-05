@@ -1,8 +1,14 @@
 var coloriApp = angular.module('colori', ['DataService', 'colorpicker.module']).controller('userCtrl', function($scope, $http, DataService) {
-	DataService.getProfile().then(function(p) {
-  	$scope.initData(p);
-  });
-
+	DataService.getProfile().then(
+	function(p) {
+		$scope.initData(p);
+	},
+	function(e) {
+		console.log(e);
+		$scope.error = true;
+		$scope.errorMsg = e.errorMsg;
+	});
+	
 	$scope.selectedTab = "menu-colori";
 	$scope.language = "it";
 	$scope.draft = true;
@@ -31,9 +37,15 @@ var coloriApp = angular.module('colori', ['DataService', 'colorpicker.module']).
 		$scope.profile = profile;
 		
 		var urlColore = "api/colore/" + $scope.profile.appInfo.ownerId + "?draft=" + $scope.draft;
-		$http.get(urlColore, {headers: {'X-ACCESS-TOKEN': $scope.profile.appInfo.token}}).success(function (response) {
-			$scope.coloreList = response;
-		});
+		$http.get(urlColore, {headers: {'X-ACCESS-TOKEN': $scope.profile.appInfo.token}}).then(
+		function (response) {
+			$scope.coloreList = response.data;
+		},
+		function(response) {
+			console.log(response.data);
+			$scope.error = true;
+			$scope.errorMsg = response.data.errorMsg;
+		});		
 	};
 	
 	$scope.resetError = function() {
@@ -108,8 +120,9 @@ var coloriApp = angular.module('colori', ['DataService', 'colorpicker.module']).
 		  function(response) {
 		    // called asynchronously if an error occurs
 		    // or server returns response with an error status.
+		  	console.log(response.data);
 		  	$scope.error = true;
-		  	$scope.errorMsg = response.status + " - " + (response.data || "Request failed");
+		  	$scope.errorMsg = response.data.errorMsg || "Request failed";
 		  	$scope.status = response.status;
 		  });
 		}
@@ -131,8 +144,9 @@ var coloriApp = angular.module('colori', ['DataService', 'colorpicker.module']).
 			  function(response) {
 			    // called asynchronously if an error occurs
 			    // or server returns response with an error status.
+			  	console.log(response.data);
 			  	$scope.error = true;
-			  	$scope.errorMsg = response.status + " - " + (response.data || "Request failed");
+			  	$scope.errorMsg = response.data.errorMsg || "Request failed";
 			  	$scope.status = response.status;
 			  });	
 			}
@@ -160,9 +174,10 @@ var coloriApp = angular.module('colori', ['DataService', 'colorpicker.module']).
 				function(response) {
 				  // called asynchronously if an error occurs
 					// or server returns response with an error status.
-					$scope.error = true;
-					$scope.errorMsg = response.status + " - " + (response.data || "Request failed");
-					$scope.status = response.status;
+			  	console.log(response.data);
+			  	$scope.error = true;
+			  	$scope.errorMsg = response.data.errorMsg || "Request failed";
+			  	$scope.status = response.status;
 				});							
 			}		
 		}

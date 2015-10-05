@@ -1,8 +1,14 @@
 var tipoProfiloApp = angular.module('tipo-profilo', ['DataService']).controller('userCtrl', function($scope, $http, DataService) {
-	DataService.getProfile().then(function(p) {
-  	$scope.initData(p);
-  });
-
+	DataService.getProfile().then(
+	function(p) {
+		$scope.initData(p);
+	},
+	function(e) {
+		console.log(e);
+		$scope.error = true;
+		$scope.errorMsg = e.errorMsg;
+	});
+	
 	$scope.selectedTab = "menu-tipo-profilo";
 	$scope.language = "it";
 	$scope.draft = true;
@@ -35,14 +41,26 @@ var tipoProfiloApp = angular.module('tipo-profilo', ['DataService']).controller(
 		$scope.profile = profile;
 		
 		var urlTipologiaUtenza = "api/tipologia/utenza/" + $scope.profile.appInfo.ownerId + "?draft=" + $scope.draft;
-		$http.get(urlTipologiaUtenza, {headers: {'X-ACCESS-TOKEN': $scope.profile.appInfo.token}}).success(function (response) {
-			$scope.tipologiaUtenzaList = response;
-		});
+		$http.get(urlTipologiaUtenza, {headers: {'X-ACCESS-TOKEN': $scope.profile.appInfo.token}}).then(
+		function (response) {
+			$scope.tipologiaUtenzaList = response.data;
+		},
+		function(response) {
+			console.log(response.data);
+			$scope.error = true;
+			$scope.errorMsg = response.data.errorMsg;
+		});			
 		
 		var url = "api/tipologia/profilo/" + $scope.profile.appInfo.ownerId + "?draft=" + $scope.draft;
-		$http.get(url, {headers: {'X-ACCESS-TOKEN': $scope.profile.appInfo.token}}).success(function (response) {
-			$scope.tipoProfiloList = response;
-		});
+		$http.get(url, {headers: {'X-ACCESS-TOKEN': $scope.profile.appInfo.token}}).then(
+		function (response) {
+			$scope.tipoProfiloList = response.data;
+		},
+		function(response) {
+			console.log(response.data);
+			$scope.error = true;
+			$scope.errorMsg = response.data.errorMsg;
+		});			
 	};
 	
 	$scope.resetError = function() {
@@ -137,8 +155,9 @@ var tipoProfiloApp = angular.module('tipo-profilo', ['DataService']).controller(
 		  function(response) {
 		    // called asynchronously if an error occurs
 		    // or server returns response with an error status.
+		  	console.log(response.data);
 		  	$scope.error = true;
-		  	$scope.errorMsg = response.status + " - " + (response.data || "Request failed");
+		  	$scope.errorMsg = response.data.errorMsg || "Request failed";
 		  	$scope.status = response.status;
 		  });
 		}
@@ -162,8 +181,9 @@ var tipoProfiloApp = angular.module('tipo-profilo', ['DataService']).controller(
 			  function(response) {
 			    // called asynchronously if an error occurs
 			    // or server returns response with an error status.
+			  	console.log(response.data);
 			  	$scope.error = true;
-			  	$scope.errorMsg = response.status + " - " + (response.data || "Request failed");
+			  	$scope.errorMsg = response.data.errorMsg || "Request failed";
 			  	$scope.status = response.status;
 			  });
 			}
@@ -191,9 +211,10 @@ var tipoProfiloApp = angular.module('tipo-profilo', ['DataService']).controller(
 				function(response) {
 				  // called asynchronously if an error occurs
 					// or server returns response with an error status.
-					$scope.error = true;
-					$scope.errorMsg = response.status + " - " + (response.data || "Request failed");
-					$scope.status = response.status;
+			  	console.log(response.data);
+			  	$scope.error = true;
+			  	$scope.errorMsg = response.data.errorMsg || "Request failed";
+			  	$scope.status = response.status;
 				});			
 			}
 		}

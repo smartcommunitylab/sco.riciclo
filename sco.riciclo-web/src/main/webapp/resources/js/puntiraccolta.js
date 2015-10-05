@@ -1,9 +1,15 @@
 var puntiraccoltaApp = angular.module('puntiraccolta', ['DataService', 'ngSanitize', 'MassAutoComplete']);
 
 var puntiraccoltaCtrl = puntiraccoltaApp.controller('userCtrl', function($scope, $http, $sce, $q, DataService) {
-	DataService.getProfile().then(function(p) {
-  	$scope.initData(p);
-  });
+	DataService.getProfile().then(
+	function(p) {
+		$scope.initData(p);
+	},
+	function(e) {
+		console.log(e);
+		$scope.error = true;
+		$scope.errorMsg = e.errorMsg;
+	});
 
 	$scope.selectedTab = "menu-puntiraccolta";
 	$scope.language = "it";
@@ -43,38 +49,67 @@ var puntiraccoltaCtrl = puntiraccoltaApp.controller('userCtrl', function($scope,
 		$scope.profile = profile;
 		
 		var urlCrm = "api/crm/" + $scope.profile.appInfo.ownerId + "?draft=" + $scope.draft;
-		$http.get(urlCrm, {headers: {'X-ACCESS-TOKEN': $scope.profile.appInfo.token}}).success(function (response) {
-			$scope.crmList = response;
+		$http.get(urlCrm, {headers: {'X-ACCESS-TOKEN': $scope.profile.appInfo.token}}).then(
+		function (response) {
+			$scope.crmList = response.data;
 			$scope.crmNameMap = $scope.setCrmNameMap($scope.crmList);
-		});
+		},
+		function(response) {
+			console.log(response.data);
+			$scope.error = true;
+			$scope.errorMsg = response.data.errorMsg;
+		});			
 		
 		var urlTipologiaUtenza = "api/tipologia/utenza/" + $scope.profile.appInfo.ownerId + "?draft=" + $scope.draft;
-		$http.get(urlTipologiaUtenza, {headers: {'X-ACCESS-TOKEN': $scope.profile.appInfo.token}}).success(function (response) {
-			$scope.tipologiaUtenzaList = response;
-		});
+		$http.get(urlTipologiaUtenza, {headers: {'X-ACCESS-TOKEN': $scope.profile.appInfo.token}}).then(
+		function (response) {
+			$scope.tipologiaUtenzaList = response.data;
+		},
+		function(response) {
+			console.log(response.data);
+			$scope.error = true;
+			$scope.errorMsg = response.data.errorMsg;
+		});			
 		
 		var urlTipologiaPuntoRaccolta = "api/tipologia/puntoraccolta/" + $scope.profile.appInfo.ownerId + "?draft=" + $scope.draft;
-		$http.get(urlTipologiaPuntoRaccolta, {headers: {'X-ACCESS-TOKEN': $scope.profile.appInfo.token}}).success(function (response) {
-			for (var d = 0, len = response.length; d < len; d += 1) {
-				var element = response[d];
+		$http.get(urlTipologiaPuntoRaccolta, {headers: {'X-ACCESS-TOKEN': $scope.profile.appInfo.token}}).then(
+		function (response) {
+			for (var d = 0, len = response.data.length; d < len; d += 1) {
+				var element = response.data[d];
 				if(element.type == "CR") {
 					$scope.tipologiaPuntoRaccoltaList.push(element);
 				}
 			}
 			$scope.tipologiaPuntoRaccoltaNameMap = $scope.setLocalNameMap($scope.tipologiaPuntoRaccoltaList);
-		});
+		},
+		function(response) {
+			console.log(response.data);
+			$scope.error = true;
+			$scope.errorMsg = response.data.errorMsg;
+		});			
 		
 		var urlArea = "api/area/" + $scope.profile.appInfo.ownerId + "?draft=" + $scope.draft;
-		$http.get(urlArea, {headers: {'X-ACCESS-TOKEN': $scope.profile.appInfo.token}}).success(function (response) {
-			$scope.areaList = response;
+		$http.get(urlArea, {headers: {'X-ACCESS-TOKEN': $scope.profile.appInfo.token}}).then(
+		function (response) {
+			$scope.areaList = response.data;
 			$scope.areaNameMap = $scope.setNameMap($scope.areaList);
-		});
+		},
+		function(response) {
+			console.log(response.data);
+			$scope.error = true;
+			$scope.errorMsg = response.data.errorMsg;
+		});			
 		
 		var urlPuntoRaccolta = "api/puntoraccolta/" + $scope.profile.appInfo.ownerId + "?draft=" + $scope.draft;
-		$http.get(urlPuntoRaccolta, {headers: {'X-ACCESS-TOKEN': $scope.profile.appInfo.token}}).success(function (response) {
-			$scope.puntoRaccoltaList = response;
-		});
-		
+		$http.get(urlPuntoRaccolta, {headers: {'X-ACCESS-TOKEN': $scope.profile.appInfo.token}}).then(
+		function (response) {
+			$scope.puntoRaccoltaList = response.data;
+		},
+		function(response) {
+			console.log(response.data);
+			$scope.error = true;
+			$scope.errorMsg = response.data.errorMsg;
+		});			
 	};
 	
 	$scope.getCrmName = function(id) {
@@ -169,9 +204,10 @@ var puntiraccoltaCtrl = puntiraccoltaApp.controller('userCtrl', function($scope,
 		function(response) {
 			// called asynchronously if an error occurs
 			// or server returns response with an error status.
-			$scope.error = true;
-			$scope.errorMsg = response.status + " - " + (response.data || "Request failed");
-			$scope.status = response.status;
+	  	console.log(response.data);
+	  	$scope.error = true;
+	  	$scope.errorMsg = response.data.errorMsg || "Request failed";
+	  	$scope.status = response.status;
 		});
 	};
 	
@@ -196,9 +232,10 @@ var puntiraccoltaCtrl = puntiraccoltaApp.controller('userCtrl', function($scope,
 				function(response) {
 				  // called asynchronously if an error occurs
 					// or server returns response with an error status.
-					$scope.error = true;
-					$scope.errorMsg = response.status + " - " + (response.data || "Request failed");
-					$scope.status = response.status;
+			  	console.log(response.data);
+			  	$scope.error = true;
+			  	$scope.errorMsg = response.data.errorMsg || "Request failed";
+			  	$scope.status = response.status;
 				});			
 			}
 		}
