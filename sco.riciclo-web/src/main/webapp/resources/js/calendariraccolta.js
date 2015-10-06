@@ -454,7 +454,7 @@ var calendariraccoltaCtrl = calendariraccoltaApp.controller('userCtrl', function
 	
 });
 
-puntiraccoltaApp.directive('datepicker', function() {
+calendariraccoltaApp.directive('datepicker', function() {
   return {
     restrict: 'A',
     require : 'ngModel',

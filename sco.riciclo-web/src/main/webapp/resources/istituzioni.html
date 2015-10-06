@@ -68,68 +68,96 @@
 					<h4 data-ng-show="create">Crea:</h4>
 					<h4 data-ng-show="edit">Modifica:</h4>
 					<form role="form">
-				   	<div class="form-group">
-				    	<label class="control-label">Nome:</label>
-				    	<input type="text" name="nome" data-ng-model="fNome" 
-				    	data-ng-disabled="!edit && !create" placeholder="nome">
+				   	<div class="row form-group">
+				    	<label class="col-md-1 control-label">Nome:</label>
+				    	<div class="col-md-2">
+				    		<input class="form-control" type="text" name="nome" data-ng-model="fNome" 
+				    		data-ng-disabled="!edit && !create" placeholder="nome">
+				    	</div>
 				    </div>
-				   	<div class="form-group">
-				    	<label class="control-label">Descrizione ({{language}}):</label>
-				    	<input type="text" name="descrizione" data-ng-model="fDescrizione" 
-				    	data-ng-disabled="!edit && !create" placeholder="dettagli zona">
+				   	<div class="row form-group">
+				    	<label class="col-md-1 control-label">Descrizione ({{language}}):</label>
+				    	<div class="col-md-2">
+				    		<input class="form-control" type="text" name="descrizione" data-ng-model="fDescrizione" 
+				    		data-ng-disabled="!edit && !create" placeholder="dettagli zona">
+				    	</div>
 				    </div>
-				   	<div class="form-group">
-				    	<label class="control-label">Indirizzo ({{language}}):</label>
-				    	<input type="text" name="indirizzo" data-ng-model="fIndirizzo" 
-				    	data-ng-disabled="!edit && !create" placeholder="indirizzo">
+				   	<div class="row form-group">
+				    	<label class="col-md-1 control-label">Indirizzo ({{language}}):</label>
+				    	<div class="col-md-2">
+				    		<input class="form-control" type="text" name="indirizzo" data-ng-model="fIndirizzo" 
+				    		data-ng-disabled="!edit && !create" placeholder="indirizzo">
+				    	</div>
 				    </div>
-				   	<div class="form-group">
-				    	<label class="control-label">Ufficio:</label>
-				    	<input type="text" name="ufficio" data-ng-model="fUfficio" 
-				    	data-ng-disabled="!edit && !create" placeholder="ufficio">
+				   	<div class="row form-group">
+				    	<label class="col-md-1 control-label">Ufficio:</label>
+				    	<div class="col-md-2">
+				    		<input class="form-control" type="text" name="ufficio" data-ng-model="fUfficio" 
+				    		data-ng-disabled="!edit && !create" placeholder="ufficio">
+				    	</div>
 				    </div>
-				   	<div class="form-group">
-				    	<label class="control-label">Orario Ufficio ({{language}}):</label>
-				    	<textarea class="form-control" name="orarioUfficio" data-ng-model="fOrarioUfficio" 
-				    	data-ng-disabled="!edit && !create" placeholder="orario ufficio"></textarea>
+				   	<div class="row form-group">
+				    	<label class="col-md-1 control-label">Orario Ufficio ({{language}}):</label>
+				    	<div class="col-md-2">
+				    		<textarea class="form-control" name="orarioUfficio" data-ng-model="fOrarioUfficio" 
+				    		data-ng-disabled="!edit && !create" placeholder="orario ufficio"></textarea>
+				    	</div>
 				    </div>
-				   	<div class="form-group">
-				    	<label class="control-label">Telefono:</label>
-				    	<input type="text" name="telefono" data-ng-model="fTelefono" 
-				    	data-ng-disabled="!edit && !create" placeholder="telefono">
+				   	<div class="row form-group">
+				    	<label class="col-md-1 control-label">Telefono:</label>
+				    	<div class="col-md-2">
+				    		<input class="form-control" type="text" name="telefono" data-ng-model="fTelefono" 
+				    		data-ng-disabled="!edit && !create" placeholder="telefono">
+				    	</div>
 				    </div>
-				   	<div class="form-group">
-				    	<label class="control-label">Fax:</label>
-				    	<input type="text" name="fax" data-ng-model="fFax" 
-				    	data-ng-disabled="!edit && !create" placeholder="fax">
+				   	<div class="row form-group">
+				    	<label class="col-md-1 control-label">Fax:</label>
+				    	<div class="col-md-2">
+				    		<input class="form-control" type="text" name="fax" data-ng-model="fFax" 
+				    		data-ng-disabled="!edit && !create" placeholder="fax">
+				    	</div>
 				    </div>
-				   	<div class="form-group">
-				    	<label class="control-label">E-mail:</label>
-				    	<input type="text" name="email" data-ng-model="fEmail" 
-				    	data-ng-disabled="!edit && !create" placeholder="e-mail">
+				   	<div class="row form-group">
+				    	<label class="col-md-1 control-label">E-mail:</label>
+				    	<div class="col-md-2">
+				    		<input class="form-control" type="text" name="email" data-ng-model="fEmail" 
+				    		data-ng-disabled="!edit && !create" placeholder="e-mail">
+				    	</div>
 				    </div>
-				   	<div class="form-group">
-				    	<label class="control-label">PEC:</label>
-				    	<input type="text" name="pec" data-ng-model="fPec" 
-				    	data-ng-disabled="!edit && !create" placeholder="pec">
+				   	<div class="row form-group">
+				    	<label class="col-md-1 control-label">PEC:</label>
+				    	<div class="col-md-2">
+				    		<input class="form-control" type="text" name="pec" data-ng-model="fPec" 
+				    		data-ng-disabled="!edit && !create" placeholder="pec">
+				    	</div>
 				    </div>
-				   	<div class="form-group">
-				    	<label class="control-label">Sito web:</label>
-				    	<input type="text" name="sito" data-ng-model="fSito" 
-				    	data-ng-disabled="!edit && !create" placeholder="sito web">
+				   	<div class="row form-group">
+				    	<label class="col-md-1 control-label">Sito web:</label>
+				    	<div class="col-md-2">
+				    		<input class="form-control" type="text" name="sito" data-ng-model="fSito" 
+				    		data-ng-disabled="!edit && !create" placeholder="sito web">
+				    	</div>
 				    </div>
-				   	<div class="form-group">
-				    	<label class="control-label">Pagina Facebook:</label>
-				    	<input type="text" name="facebook" data-ng-model="fFacebook" 
-				    	data-ng-disabled="!edit && !create" placeholder="facebook">
+				   	<div class="row form-group">
+				    	<label class="col-md-1 control-label">Pagina Facebook:</label>
+				    	<div class="col-md-2">
+				    		<input class="form-control" type="text" name="facebook" data-ng-model="fFacebook" 
+				    		data-ng-disabled="!edit && !create" placeholder="facebook">
+				    	</div>
 				    </div>
-						<div class="form-group">
-							<label class="control-label">Latitudine:</label>
-	    				<input id="latitude" type="text" data-ng-model="fLatitude" placeholder="Latitudine">
+						<div class="row form-group">
+							<label class="col-md-1 control-label">Latitudine:</label>
+							<div class="col-md-2">
+	    					<input class="form-control" id="latitude" type="text" data-ng-model="fLatitude" 
+	    					placeholder="Latitudine">
+	    				</div>
 	    			</div>
-	    			<div class="form-group">
-	    				<label class="control-label">Longitudine:</label>
-	    				<input id="longitude" type="text" data-ng-model="fLongitude" placeholder="Longitudine">
+	    			<div class="row form-group">
+	    				<label class="col-md-1 control-label">Longitudine:</label>
+	    				<div class="col-md-2">
+	    					<input class="form-control" id="longitude" type="text" data-ng-model="fLongitude" 
+	    					placeholder="Longitudine">
+	    				</div>
 	    			</div>
 						<button class="btn btn-default" data-ng-disabled="!edit && !create" data-ng-click="resetForm()">
 							<span class="glyphicon glyphicon-remove"></span> Cancella

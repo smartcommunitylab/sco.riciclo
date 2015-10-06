@@ -66,13 +66,16 @@
 					<h4 data-ng-show="create">Crea:</h4>
 					<h4 data-ng-show="edit">Modifica ({{actualName}}):</h4>
 					<form role="form">
-					  <div class="form-group">
-					    <label class="control-label">Nome ({{language}}):</label>
-				    	<input type="text" name="name" data-ng-model="fName" data-ng-disabled="!edit && !create" placeholder="nome">
-						  <button class="btn btn-default btn-sm" data-ng-disabled="!edit && !create" data-ng-click="fName = ''">
-								<span class="glyphicon glyphicon-remove"></span>
-							</button>
+					  <div class="row form-group">
+					    <label class="col-md-1 control-label">Nome ({{language}}):</label>
+					    <div class="col-md-2">
+				    		<input class="form-control" type="text" name="name" data-ng-model="fName" 
+				    		data-ng-disabled="!edit && !create" placeholder="nome">
+				    	</div>
 					  </div>
+				  	<button class="btn btn-default" data-ng-click="resetForm()">
+							<span class="glyphicon glyphicon-remove"></span> Cancella
+						</button>
 				  	<button class="btn btn-success" data-ng-disabled="error || incomplete"
 				  		data-ng-click="saveRifiuto()">
 				  		<span class="glyphicon glyphicon-save"></span> Salva

@@ -176,6 +176,15 @@ var puntiraccoltaCtrl = puntiraccoltaApp.controller('userCtrl', function($scope,
 		$('html,body').animate({scrollTop:0},0);
 	};
 	
+	$scope.resetForm = function() {
+		$scope.selectedArea = null;
+		$scope.areaSearch = {};	
+		$scope.selectedCrm = null;
+		$scope.crmSearch = {};
+		$scope.selectedTipologiaPuntoRaccolta = null;
+		$scope.selectedTipologiaUtenza = null;
+	};	
+	
 	$scope.saveRelation = function() {
 		var element = {
 			crm: '',

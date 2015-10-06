@@ -102,6 +102,13 @@ var segnalazioniCtrl = segnalazioniApp.controller('userCtrl', function($scope, $
 		$scope.okMsg = "";
 	};
 	
+	$scope.resetForm = function() {
+		$scope.tipologia = "";
+		$scope.email = "";
+		$scope.selectedArea = null;
+		$scope.areaSearch.value = null;	
+	};
+	
 	$scope.changeLanguage = function(language) {
 		$scope.language = language;
 		$scope.areaNameMap = $scope.setNameMap($scope.areaList);

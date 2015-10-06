@@ -61,6 +61,10 @@ var rifiutiApp = angular.module('rifiuti', ['DataService']).controller('userCtrl
 		$scope.okMsg = "";
 	};
 	
+	$scope.resetForm = function() {
+		$scope.fName = "";
+	};
+	
 	$scope.changeLanguage = function(language) {
 		$scope.language = language;
 		if($scope.edit && ($scope.fId != null)) {

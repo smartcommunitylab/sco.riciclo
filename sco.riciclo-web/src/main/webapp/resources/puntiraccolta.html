@@ -67,41 +67,41 @@
 			<div class="panel panel-default">
 	  		<div class="panel-body">
 					<form role="form">
-					  <div class="form-group">
-					    <label class="control-label">Tipologia Utenza:</label>
-					    <select data-ng-model="selectedTipologiaUtenza" 
-					    	data-ng-options="item.objectId for item in tipologiaUtenzaList">
-      				</select>
-						  <button class="btn btn-default btn-sm" data-ng-click="selectedTipologiaUtenza = null">
-								<span class="glyphicon glyphicon-remove"></span>
-							</button>
+					  <div class="row form-group">
+					    <label class="col-md-1 control-label">Tipologia Utenza:</label>
+					    <div class="col-md-2">
+					    	<select class="form-control" data-ng-model="selectedTipologiaUtenza" 
+					    		data-ng-options="item.objectId for item in tipologiaUtenzaList">
+      					</select>
+      				</div>
 					  </div>
-						<div class="form-group" mass-autocomplete>
-							<label class="control-label">Area:</label>
-							<input data-ng-model="areaSearch.value" mass-autocomplete-item="ac_area_options" placeholder="area">
-						  <button class="btn btn-default btn-sm" data-ng-click="areaSearch.value = null">
-								<span class="glyphicon glyphicon-remove"></span>
-							</button>
+						<div class="row form-group" mass-autocomplete>
+							<label class="col-md-1 control-label">Area:</label>
+							<div class="col-md-2">
+								<input class="form-control" data-ng-model="areaSearch.value" mass-autocomplete-item="ac_area_options" 
+								placeholder="area">
+							</div>
 						</div>
-						<div class="form-group">
-							<label class="control-label">Tipologia Punto Raccolta:</label>
-					    <select data-ng-model="selectedTipologiaPuntoRaccolta" 
-					    	data-ng-options="item.objectId for item in tipologiaPuntoRaccoltaList">
-      				</select>
-						  <button class="btn btn-default btn-sm" data-ng-click="selectedTipologiaPuntoRaccolta = null">
-								<span class="glyphicon glyphicon-remove"></span>
-							</button>
+						<div class="row form-group">
+							<label class="col-md-1 control-label">Tipologia Punto Raccolta:</label>
+							<div class="col-md-2">
+					    	<select class="form-control" data-ng-model="selectedTipologiaPuntoRaccolta" 
+					    		data-ng-options="item.objectId for item in tipologiaPuntoRaccoltaList">
+      					</select>
+      				</div>
 						</div>
-						<div class="form-group" mass-autocomplete>
-							<label class="control-label">Crm/Isola:</label>
-							<input data-ng-model="crmSearch.value" mass-autocomplete-item="ac_crm_options" placeholder="crm/isola"
-							tabindex="4">
-						  <button class="btn btn-default btn-sm" data-ng-click="crmSearch.value = null">
-								<span class="glyphicon glyphicon-remove"></span>
-							</button>
+						<div class="row form-group" mass-autocomplete>
+							<label class="col-md-1 control-label">Crm/Isola:</label>
+							<div class="col-md-2">
+								<input class="form-control" data-ng-model="crmSearch.value" mass-autocomplete-item="ac_crm_options" 
+								placeholder="crm/isola">
+							</div>
 						</div>
-				  	<button class="btn btn-success" data-ng-disabled="error || incomplete" data-ng-click="saveRelation()"
-				  	tabindex="5">
+				  	<button class="btn btn-default" data-ng-click="resetForm()">
+							<span class="glyphicon glyphicon-remove"></span> Cancella
+						</button>
+				  	<button class="btn btn-success" data-ng-disabled="error || incomplete" 
+				  	data-ng-click="saveRelation()">
 				  		<span class="glyphicon glyphicon-save"></span> Salva
 				  	</button> 
 					</form>	

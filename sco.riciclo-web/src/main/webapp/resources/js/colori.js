@@ -58,6 +58,13 @@ var coloriApp = angular.module('colori', ['DataService', 'colorpicker.module']).
 		$scope.okMsg = "";
 	};
 	
+	$scope.resetForm = function() {
+		$scope.fCodice = "";
+		if($scope.create) {
+			$scope.fNome = "";
+		}
+	};
+	
 	$scope.changeLanguage = function(language) {
 		$scope.language = language;
 	};

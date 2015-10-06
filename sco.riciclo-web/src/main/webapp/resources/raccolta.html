@@ -72,74 +72,63 @@
 	  			<h4 data-ng-show="create">Crea:</h4>
 					<h4 data-ng-show="edit">Modifica:</h4>
 					<form role="form">
-					  <div class="form-group">
-					    <label class="control-label">Tipologia Utenza:</label>
-					    <select data-ng-model="selectedTipologiaUtenza" data-ng-disabled="!edit && !create" 
-					    	data-ng-options="item.objectId for item in tipologiaUtenzaList">
-      				</select>
-						  <button class="btn btn-default btn-sm" data-ng-click="selectedTipologiaUtenza = null"
-						  data-ng-disabled="!edit && !create">
-								<span class="glyphicon glyphicon-remove"></span>
-							</button>
+					  <div class="row form-group">
+					    <label class="col-md-1 control-label">Tipologia Utenza:</label>
+					    <div class="col-md-2">
+					    	<select class="form-control" data-ng-model="selectedTipologiaUtenza" data-ng-disabled="!edit && !create" 
+					    		data-ng-options="item.objectId for item in tipologiaUtenzaList">
+      					</select>
+      				</div>
 					  </div>
-					  <div class="form-group">
-					    <label class="control-label">Tipologia Rifiuto:</label>
-					    <select data-ng-model="selectedTipologiaRifiuto" data-ng-disabled="!edit && !create"
-					    	data-ng-options="item.objectId for item in tipologiaRifiutoList">
-      				</select>
-						  <button class="btn btn-default btn-sm" data-ng-click="selectedTipologiaRifiuto = null"
-						  data-ng-disabled="!edit && !create">
-								<span class="glyphicon glyphicon-remove"></span>
-							</button>
+					  <div class="row form-group">
+					    <label class="col-md-1 control-label">Tipologia Rifiuto:</label>
+					    <div class="col-md-2">
+					    	<select class="form-control" data-ng-model="selectedTipologiaRifiuto" data-ng-disabled="!edit && !create"
+					    		data-ng-options="item.objectId for item in tipologiaRifiutoList">
+      					</select>
+      				</div>
 					  </div>
-						<div class="form-group">
-							<label class="control-label">Tipologia Punto Raccolta:</label>
-					    <select data-ng-model="selectedTipologiaPuntoRaccolta" data-ng-disabled="!edit && !create" 
-					    	data-ng-options="item.objectId for item in tipologiaPuntoRaccoltaList">
-      				</select>
-						  <button class="btn btn-default btn-sm" data-ng-click="selectedTipologiaPuntoRaccolta = null"
-						  data-ng-disabled="!edit && !create">
-								<span class="glyphicon glyphicon-remove"></span>
-							</button>
+						<div class="row form-group">
+							<label class="col-md-1 control-label">Tipologia Punto Raccolta:</label>
+							<div class="col-md-2">
+					    	<select class="form-control" data-ng-model="selectedTipologiaPuntoRaccolta" data-ng-disabled="!edit && !create" 
+					    		data-ng-options="item.objectId for item in tipologiaPuntoRaccoltaList">
+      					</select>
+      				</div>
 						</div>
-						<div class="form-group">
-							<label class="control-label">Tipologia Raccolta:</label>
-					    <select data-ng-model="selectedTipologiaRaccolta" data-ng-disabled="!edit && !create" 
-					    	data-ng-options="item.objectId for item in tipologiaRaccoltaList">
-      				</select>
-						  <button class="btn btn-default btn-sm" data-ng-click="selectedTipologiaRaccolta = null"
-						  data-ng-disabled="!edit && !create">
-								<span class="glyphicon glyphicon-remove"></span>
-							</button>
+						<div class="row form-group">
+							<label class="col-md-1 control-label">Tipologia Raccolta:</label>
+							<div class="col-md-2">
+					    	<select class="form-control" data-ng-model="selectedTipologiaRaccolta" data-ng-disabled="!edit && !create" 
+					    		data-ng-options="item.objectId for item in tipologiaRaccoltaList">
+      					</select>
+      				</div>
 						</div>
-						<div class="form-group" mass-autocomplete>
-							<label class="control-label">Area:</label>
-							<input data-ng-model="areaSearch.value" mass-autocomplete-item="ac_area_options" 
-							data-ng-disabled="!edit && !create" placeholder="area">
-						  <button class="btn btn-default btn-sm" data-ng-click="areaSearch.value = null"
-						  data-ng-disabled="!edit && !create">
-								<span class="glyphicon glyphicon-remove"></span>
-							</button>
+						<div class="row form-group" mass-autocomplete>
+							<label class="col-md-1 control-label">Area:</label>
+							<div class="col-md-2">
+								<input class="form-control" data-ng-model="areaSearch.value" mass-autocomplete-item="ac_area_options" 
+								data-ng-disabled="!edit && !create" placeholder="area">
+							</div>
 						</div>
-				   	<div class="form-group">
-				    	<label class="control-label">Info ({{language}}):</label>
-				    	<input type="text" name="info" data-ng-model="infoRaccolta" 
-				    	data-ng-disabled="!edit && !create" placeholder="info">
-						  <button class="btn btn-default btn-sm" data-ng-click="infoRaccolta = ''"
-						  data-ng-disabled="!edit && !create">
-								<span class="glyphicon glyphicon-remove"></span>
-							</button>
+				   	<div class="row form-group">
+				    	<label class="col-md-1 control-label">Info ({{language}}):</label>
+				    	<div class="col-md-2">
+				    		<input class="form-control" type="text" name="info" data-ng-model="infoRaccolta" 
+				    		data-ng-disabled="!edit && !create" placeholder="info">
+				    	</div>
 				    </div>
-				   	<div class="form-group">
-				    	<label class="control-label">Colore:</label>
-					    <select data-ng-model="selectedColore" data-ng-disabled="!edit && !create"
-					    	data-ng-options="item.nome for item in coloreList">
-      				</select>
-						  <button class="btn btn-default btn-sm" data-ng-click="selectedColore = null"
-						  data-ng-disabled="!edit && !create">
-								<span class="glyphicon glyphicon-remove"></span>
-							</button>
+				   	<div class="row form-group">
+				    	<label class="col-md-1 control-label">Colore:</label>
+				    	<div class="col-md-2">
+					    	<select class="form-control" data-ng-model="selectedColore" data-ng-disabled="!edit && !create"
+					    		data-ng-options="item.nome for item in coloreList">
+      					</select>
+      				</div>
 				    </div>
+				  	<button class="btn btn-default" data-ng-click="resetForm()">
+							<span class="glyphicon glyphicon-remove"></span> Cancella
+						</button>
 				  	<button class="btn btn-success" data-ng-disabled="error || incomplete" data-ng-click="saveRelation()">
 				  		<span class="glyphicon glyphicon-save"></span> Salva
 				  	</button> 

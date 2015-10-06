@@ -67,22 +67,24 @@
 					<h4 data-ng-show="create">Crea:</h4>
 					<h4 data-ng-show="edit">Modifica:</h4>
 					<form role="form">
-					  <div class="form-group">
-					    <label class="control-label">Nome:</label>
-				    	<input type="text" name="nome" data-ng-model="fNome" data-ng-disabled="!create" placeholder="nome">
-						  <button class="btn btn-default btn-sm" data-ng-disabled="!create" data-ng-click="fNome = ''">
-								<span class="glyphicon glyphicon-remove"></span>
-							</button>
+					  <div class="row form-group">
+					    <label class="col-md-1 control-label">Nome:</label>
+					    <div class="col-md-2">
+				    		<input class="form-control" type="text" name="nome" data-ng-model="fNome" 
+				    		data-ng-disabled="!create" placeholder="nome">
+				    	</div>
 					  </div>
-					  <div class="form-group">
-					    <label class="control-label">Codice Colore:</label>
-				    	<input colorpicker type="text" name="codice" data-ng-model="fCodice" data-ng-disabled="!edit && !create" 
-				    	placeholder="codice colore #aabbcc">
-				    	<div class="color-picker" style="background-color:{{fCodice}}"></div>
-						  <button class="btn btn-default btn-sm" data-ng-disabled="!edit && !create" data-ng-click="fCodice = ''">
-								<span class="glyphicon glyphicon-remove"></span>
-							</button>
+					  <div class="row form-group">
+					    <label class="col-md-1 control-label">Codice Colore:</label>
+					    <div class="col-md-2">
+				    		<input class="form-control" colorpicker type="text" name="codice" data-ng-model="fCodice" 
+				    		data-ng-disabled="!edit && !create"	placeholder="codice colore #aabbcc">
+				    	</div>
+			    		<div class="col-md-1 color-picker" style="background-color:{{fCodice}}"></div>
 					  </div>
+				  	<button class="btn btn-default" data-ng-click="resetForm()">
+							<span class="glyphicon glyphicon-remove"></span> Cancella
+						</button>
 				  	<button class="btn btn-success" data-ng-disabled="error || incomplete"
 				  		data-ng-click="saveColore()">
 				  		<span class="glyphicon glyphicon-save"></span> Salva

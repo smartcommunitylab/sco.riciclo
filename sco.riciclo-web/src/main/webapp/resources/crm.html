@@ -69,20 +69,26 @@
 					<h4 data-ng-show="create">Crea:</h4>
 					<h4 data-ng-show="edit">Modifica:</h4>
 					<form role="form">
-				   	<div class="form-group">
-				    	<label class="control-label">Zona:</label>
-				    	<input type="text" name="zona" data-ng-model="fRegion" 
-				    	data-ng-disabled="!edit && !create" placeholder="zona">
+				   	<div class="row form-group">
+				    	<label class="col-md-1 control-label">Zona:</label>
+				    	<div class="col-md-2">
+				    		<input class="form-control" type="text" name="zona" data-ng-model="fRegion" 
+				    		data-ng-disabled="!edit && !create" placeholder="zona">
+				    	</div>
 				    </div>
-				   	<div class="form-group">
-				    	<label class="control-label">Dettagli Zona:</label>
-				    	<input type="text" name="zonaDett" data-ng-model="fRegionDetails" 
-				    	data-ng-disabled="!edit && !create" placeholder="dettagli zona">
+				   	<div class="row form-group">
+				    	<label class="col-md-1 control-label">Dettagli Zona:</label>
+				    	<div class="col-md-2">
+				    		<input class="form-control" type="text" name="zonaDett" data-ng-model="fRegionDetails" 
+				    		data-ng-disabled="!edit && !create" placeholder="dettagli zona">
+				    	</div>
 				    </div>
-				   	<div class="form-group">
-				    	<label class="control-label">Note ({{language}}):</label>
-				    	<input type="text" name="note" data-ng-model="fNote" 
-				    	data-ng-disabled="!edit && !create" placeholder="note">
+				   	<div class="row form-group">
+				    	<label class="col-md-1 control-label">Note ({{language}}):</label>
+				    	<div class="col-md-2">
+				    		<input class="form-control" type="text" name="note" data-ng-model="fNote" 
+				    		data-ng-disabled="!edit && !create" placeholder="note">
+				    	</div>
 				    </div>
 				    <div class="checkbox">
 							<label class="checkbox-inline"><input type="checkbox" data-ng-model="fResiduo">Residuo</label>
@@ -93,13 +99,19 @@
 							<label class="checkbox-inline"><input type="checkbox" data-ng-model="fIndumenti">Indumenti</label>
 				    	<label class="checkbox-inline"><input type="checkbox" data-ng-model="fGettoniera">Gettoniera</label>
 						</div>
-						<div class="form-group">
-							<label class="control-label">Latitudine:</label>
-	    				<input id="latitude" type="text" data-ng-model="fLatitude" placeholder="Latitudine">
+						<div class="row form-group">
+							<label class="col-md-1 control-label">Latitudine:</label>
+							<div class="col-md-2">
+	    					<input class="form-control" id="latitude" type="text" data-ng-model="fLatitude" 
+	    					placeholder="Latitudine">
+	    				</div>
 	    			</div>
-	    			<div class="form-group">
-	    				<label class="control-label">Longitudine:</label>
-	    				<input id="longitude" type="text" data-ng-model="fLongitude" placeholder="Longitudine">
+	    			<div class="row form-group">
+	    				<label class="col-md-1 control-label">Longitudine:</label>
+	    				<div class="col-md-2">
+	    					<input class="form-control" id="longitude" type="text" data-ng-model="fLongitude" 
+	    					placeholder="Longitudine">
+	    				</div>
 	    			</div>
 						<button class="btn btn-default" data-ng-disabled="!edit && !create" data-ng-click="resetForm()">
 							<span class="glyphicon glyphicon-remove"></span> Cancella
@@ -166,29 +178,37 @@
 	        		<h4>Nuovo orario</h4>
 			        <div>
 			        	<form name="newDate">
-			        		<div class="form-group">
-					        	<label>Da:</label>
-					        	<input type="text" name="dateFrom" data-ng-model="fDateFrom" required datepicker data-showon="both" 
-					        	data-dateformat="yy-mm-dd" placeholder="da" />
-					        	<span class="label label-warning" data-ng-show="!newDate.dateFrom.$valid">Campo richiesto</span>
+			        		<div class="row form-group">
+					        	<label class="col-md-1 control-label">Da:</label>
+					        	<div class="col-md-2">
+					        		<input type="text" name="dateFrom" data-ng-model="fDateFrom" required datepicker data-showon="both" 
+					        		data-dateformat="yy-mm-dd" placeholder="da" />
+					        		<span class="label label-warning" data-ng-show="!newDate.dateFrom.$valid">Campo richiesto</span>
+					        	</div>
 			        		</div>
-			        		<div class="form-group">
-				        		<label>A:</label>
-				        		<input type="text" name="dateTo" data-ng-model="fDateTo" required datepicker data-showon="both" 
-				        		data-dateformat="yy-mm-dd" placeholder="a">
-				        		<span class="label label-warning" data-ng-show="!newDate.dateTo.$valid">Campo richiesto</span>
+			        		<div class="row form-group">
+				        		<label class="col-md-1 control-label">A:</label>
+				        		<div class="col-md-2">
+				        			<input type="text" name="dateTo" data-ng-model="fDateTo" required datepicker data-showon="both" 
+				        			data-dateformat="yy-mm-dd" placeholder="a">
+				        			<span class="label label-warning" data-ng-show="!newDate.dateTo.$valid">Campo richiesto</span>
+				        		</div>
 				        	</div>
-				        	<div class="form-group">
-				        		<label>Dalle (HH:MM):</label>
-				        		<input type="text" name="hourFrom" data-ng-model="fHourFrom" placeholder="dalle (HH:MM)" 
-				        		data-ng-pattern="/([0-1][0-9]|2[0-3]):[0-5][0-9]/">
-				        		<span class="label label-warning" data-ng-show="!newDate.hourFrom.$valid">Verifica il campo</span>
+				        	<div class="row form-group">
+				        		<label class="col-md-1 control-label">Dalle (HH:MM):</label>
+				        		<div class="col-md-2">
+				        			<input type="text" name="hourFrom" data-ng-model="fHourFrom" placeholder="dalle (HH:MM)" 
+				        			data-ng-pattern="/([0-1][0-9]|2[0-3]):[0-5][0-9]/">
+				        			<span class="label label-warning" data-ng-show="!newDate.hourFrom.$valid">Verifica il campo</span>
+				        		</div>
 	    						</div>
-	    						<div class="form-group">
-				        		<label>Alle (HH:MM):</label>
-				        		<input type="text" name="hourTo" data-ng-model="fHourTo" placeholder="alle (HH:MM)"
-				        		data-ng-pattern="/([0-1][0-9]|2[0-3]):[0-5][0-9]/">
-				        		<span class="label label-warning" data-ng-show="!newDate.hourTo.$valid">Verifica il campo</span>
+	    						<div class="row form-group">
+				        		<label class="col-md-1 control-label">Alle (HH:MM):</label>
+				        		<div class="col-md-2">
+				        			<input type="text" name="hourTo" data-ng-model="fHourTo" placeholder="alle (HH:MM)"
+				        			data-ng-pattern="/([0-1][0-9]|2[0-3]):[0-5][0-9]/">
+				        			<span class="label label-warning" data-ng-show="!newDate.hourTo.$valid">Verifica il campo</span>
+				        		</div>
 				        	</div>
 			        	</form>
 			        </div>
