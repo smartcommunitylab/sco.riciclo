@@ -65,38 +65,39 @@
 					<h4 data-ng-show="create">Crea:</h4>
 					<h4 data-ng-show="edit">Modifica ({{actualName}}):</h4>
 					<form role="form">
-					  <div class="form-group">
-					    <label class="control-label">Id:</label>
-				    	<input type="text" name="id" data-ng-model="fId" data-ng-disabled="!create" placeholder="id">
-						  <button class="btn btn-default btn-sm" data-ng-disabled="!edit && !create" data-ng-click="fId = ''">
-								<span class="glyphicon glyphicon-remove"></span>
-							</button>
+					  <div class="row form-group">
+					    <label class="col-md-1 control-label">Id:</label>
+					    <div class="col-md-2">
+				    		<input class="form-control" type="text" name="id" data-ng-model="fId" 
+				    		data-ng-disabled="!create" placeholder="id">
+				    	</div>
 					  </div>
-					  <div class="form-group">
-					    <label class="control-label">Nome ({{language}}):</label>
-				    	<input type="text" name="name" data-ng-model="fNome" data-ng-disabled="!edit && !create" placeholder="nome">
-						  <button class="btn btn-default btn-sm" data-ng-disabled="!edit && !create" data-ng-click="fNome = ''">
-								<span class="glyphicon glyphicon-remove"></span>
-							</button>
+					  <div class="row form-group">
+					    <label class="col-md-1 control-label">Nome ({{language}}):</label>
+					    <div class="col-md-2">
+				    		<input class="form-control" type="text" name="name" data-ng-model="fNome" 
+				    		data-ng-disabled="!edit && !create" placeholder="nome">
+				    	</div>
 					  </div>
-					  <div class="form-group">
-					    <label class="control-label">Informazioni ({{language}}):</label>
-				    	<input type="text" name="info" data-ng-model="fInfo" data-ng-disabled="!edit && !create" 
-				    	placeholder="informazioni">
-						  <button class="btn btn-default btn-sm" data-ng-disabled="!edit && !create" data-ng-click="fInfo = ''">
-								<span class="glyphicon glyphicon-remove"></span>
-							</button>
+					  <div class="row form-group">
+					    <label class="col-md-1 control-label">Informazioni ({{language}}):</label>
+					    <div class="col-md-2">
+				    		<input class="form-control" type="text" name="info" data-ng-model="fInfo" 
+				    		data-ng-disabled="!edit && !create" placeholder="informazioni">
+				    	</div>
 					  </div>
-					  <div class="form-group">
-					    <label class="control-label">Tipologia:</label>
-					    <select data-ng-model="fType" data-ng-disabled="!edit && !create">
-					    	<option value="CR">Centro-Raccolta / Isola</option>
-					    	<option value="PP">Porta a Porta</option>
-      				</select>
-						  <button class="btn btn-default btn-sm" data-ng-disabled="!edit && !create" data-ng-click="fType = ''">
-								<span class="glyphicon glyphicon-remove"></span>
-							</button>
+					  <div class="row form-group">
+					    <label class="col-md-1 control-label">Tipologia:</label>
+					    <div class="col-md-2">
+					    	<select class="form-control" data-ng-model="fType" data-ng-disabled="!edit && !create">
+					    		<option value="CR">Centro-Raccolta / Isola</option>
+					    		<option value="PP">Porta a Porta</option>
+      					</select>
+      				</div>
 					  </div>
+				  	<button class="btn btn-default" data-ng-click="resetForm()">
+							<span class="glyphicon glyphicon-remove"></span> Cancella
+						</button>
 				  	<button class="btn btn-success" data-ng-disabled="error || incomplete"
 				  		data-ng-click="saveTipo()">
 				  		<span class="glyphicon glyphicon-save"></span> Salva

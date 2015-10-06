@@ -73,6 +73,15 @@ var tipoProfiloApp = angular.module('tipo-profilo', ['DataService']).controller(
 		$scope.okMsg = "";
 	};
 	
+	$scope.resetForm = function() {
+		$scope.fNome = "";
+		$scope.fDescrizione = "";
+		$scope.selectedTipologiaUtenza = null;
+		if($scope.create) {
+			$scope.fId = "";
+		}
+	};
+	
 	$scope.changeLanguage = function(language) {
 		$scope.language = language;
 		if($scope.edit && ($scope.fId != null)) {

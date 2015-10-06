@@ -61,6 +61,15 @@ var tipoPuntoApp = angular.module('tipo-punto', ['DataService']).controller('use
 		$scope.okMsg = "";
 	};
 	
+	$scope.resetForm = function() {
+		$scope.fNome = "";
+		$scope.fInfo = "";
+		$scope.fType = "";
+		if($scope.create) {
+			$scope.fId = "";
+		}
+	};
+	
 	$scope.changeLanguage = function(language) {
 		$scope.language = language;
 		if($scope.edit && ($scope.fId != null)) {

@@ -65,37 +65,38 @@
 					<h4 data-ng-show="create">Crea:</h4>
 					<h4 data-ng-show="edit">Modifica ({{actualName}}):</h4>
 					<form role="form">
-					  <div class="form-group">
-					    <label class="control-label">Id:</label>
-				    	<input type="text" name="id" data-ng-model="fId" data-ng-disabled="!create" placeholder="id">
-						  <button class="btn btn-default btn-sm" data-ng-disabled="!edit && !create" data-ng-click="fId = ''">
-								<span class="glyphicon glyphicon-remove"></span>
-							</button>
+					  <div class="row form-group">
+					    <label class="col-md-1 control-label">Id:</label>
+					    <div class="col-md-2">
+				    		<input class="form-control" type="text" name="id" data-ng-model="fId" 
+				    		data-ng-disabled="!create" placeholder="id">
+				    	</div>
 					  </div>
-					  <div class="form-group">
-					    <label class="control-label">Nome ({{language}}):</label>
-				    	<input type="text" name="name" data-ng-model="fNome" data-ng-disabled="!edit && !create" placeholder="nome">
-						  <button class="btn btn-default btn-sm" data-ng-disabled="!edit && !create" data-ng-click="fNome = ''">
-								<span class="glyphicon glyphicon-remove"></span>
-							</button>
+					  <div class="row form-group">
+					    <label class="col-md-1 control-label">Nome ({{language}}):</label>
+					    <div class="col-md-2">
+				    		<input class="form-control" type="text" name="name" data-ng-model="fNome" 
+				    		data-ng-disabled="!edit && !create" placeholder="nome">
+				    	</div>
 					  </div>
-					  <div class="form-group">
-					    <label class="control-label">Descrizione ({{language}}):</label>
-				    	<input type="text" name="descrizione" data-ng-model="fDescrizione" data-ng-disabled="!edit && !create" 
-				    	placeholder="descrizione">
-						  <button class="btn btn-default btn-sm" data-ng-disabled="!edit && !create" data-ng-click="fDescrizione = ''">
-								<span class="glyphicon glyphicon-remove"></span>
-							</button>
+					  <div class="row form-group">
+					    <label class="col-md-1 control-label">Descrizione ({{language}}):</label>
+					    <div class="col-md-2">
+				    		<input class="form-control" type="text" name="descrizione" data-ng-model="fDescrizione" 
+				    		data-ng-disabled="!edit && !create" placeholder="descrizione">
+				    	</div>
 					  </div>
-					  <div class="form-group">
-					    <label class="control-label">Tipologia Utenza:</label>
-					    <select data-ng-model="selectedTipologiaUtenza" data-ng-disabled="!edit && !create"
-					    data-ng-options="item.objectId for item in tipologiaUtenzaList">
-      				</select>
-						  <button class="btn btn-default btn-sm" data-ng-disabled="!edit && !create" data-ng-click="selectedTipologiaUtenza = null">
-								<span class="glyphicon glyphicon-remove"></span>
-							</button>
+					  <div class="row form-group">
+					    <label class="col-md-1 control-label">Tipologia Utenza:</label>
+					    <div class="col-md-2">
+					    	<select class="form-control" data-ng-model="selectedTipologiaUtenza" data-ng-disabled="!edit && !create"	
+					    	data-ng-options="item.objectId for item in tipologiaUtenzaList">
+      					</select>
+      				</div>
 					  </div>
+				  	<button class="btn btn-default" data-ng-click="resetForm()">
+							<span class="glyphicon glyphicon-remove"></span> Cancella
+						</button>
 				  	<button class="btn btn-success" data-ng-disabled="error || incomplete"
 				  		data-ng-click="saveTipo()">
 				  		<span class="glyphicon glyphicon-save"></span> Salva

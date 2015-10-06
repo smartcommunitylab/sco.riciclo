@@ -60,6 +60,14 @@ angular.module('tipo-rifiuto', ['DataService']).controller('userCtrl', function(
 		$scope.okMsg = "";
 	};
 	
+	$scope.resetForm = function() {
+		$scope.fNome = "";
+		$scope.fDescrizione = "";
+		if($scope.create) {
+			$scope.fId = "";
+		}
+	};
+	
 	$scope.changeLanguage = function(language) {
 		$scope.language = language;
 		if($scope.edit && ($scope.fId != null)) {

@@ -29,10 +29,10 @@ var riciclabolarioCtrl = riciclabolarioApp.controller('userCtrl', function($scop
 	$scope.status = 200;
 	
 	$scope.selectedArea = null;
-	$scope.areaSearch = "";
+	$scope.areaSearch = {};
 		
 	$scope.selectedRifiuto = null;
-	$scope.rifiutoSearch = "";
+	$scope.rifiutoSearch = {};
 		
 	$scope.selectedTipologiaUtenza = null;
 	$scope.selectedTipologiaRifiuto = null;
@@ -157,6 +157,15 @@ var riciclabolarioCtrl = riciclabolarioApp.controller('userCtrl', function($scop
 		$scope.incomplete = false;
 		$('html,body').animate({scrollTop:0},0);
 	};
+	
+	$scope.resetForm = function() {
+		$scope.selectedTipologiaUtenza = null;
+		$scope.selectedTipologiaRifiuto = null;
+		$scope.selectedArea = null;
+		$scope.selectedRifiuto = null;
+		$scope.rifiutoSearch.value = null;
+		$scope.areaSearch.value = null;
+	}
 	
 	$scope.saveRelation = function() {
 		var element = {
