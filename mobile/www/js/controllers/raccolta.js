@@ -231,18 +231,42 @@ angular.module('rifiuti.controllers.raccolta', [])
       $scope.rifiuti=rifiuti;
     });
 
-    Raccolta.raccolta({ tipipunto:tipipunto, tipirifiuto:tipirifiuto }).then(function(raccolta){
-      raccolta.forEach(function(item){
-        Raccolta.puntiraccolta({ tipo:item.tipologiaPuntoRaccolta }).then(function(punti){
-          item['punti']=punti;
+    var raccoltaMap = {};
+    raccolta.forEach(function(item){
+        if (raccoltaMap[item.tipologiaPuntoRaccolta] != null) {
+            raccoltaMap[item.tipologiaPuntoRaccolta].infoRaccolta = '';
+//            raccoltaMap[item.tipologiaPuntoRaccolta].tipologiaRifiuto += ', ' + item.tipologiaRifiuto;
+            return;
+        }
+        var newItem = angular.copy(item);
+        raccoltaMap[item.tipologiaPuntoRaccolta] = newItem;
+
+        Raccolta.puntiraccolta({ tipo:newItem.tipologiaPuntoRaccolta }).then(function(punti){
+          newItem['punti']=punti;
         });
-      });
-      if (raccolta.length == 1) raccolta[0].aperto = true;
-      else {
-          Raccolta.sortRaccolta(raccolta);
-      }
-      $scope.raccolta=raccolta;
     });
+    var raccoltaList = [];
+    for (var tpr in raccoltaMap) {
+        raccoltaList.push(raccoltaMap[tpr]);
+    }
+
+    if (raccoltaList.length == 1) raccoltaList[0].aperto = true;
+    else Raccolta.sortRaccolta(raccoltaList);
+    $scope.raccolta=raccoltaList;
+
+//    Raccolta.raccolta({ tipipunto:tipipunto, tipirifiuto:tipirifiuto }).then(function(raccolta){
+//      var raccoltaMap = {};
+//      raccolta.forEach(function(item){
+//        Raccolta.puntiraccolta({ tipo:item.tipologiaPuntoRaccolta }).then(function(punti){
+//          item['punti']=punti;
+//        });
+//      });
+//      if (raccolta.length == 1) raccolta[0].aperto = true;
+//      else {
+//          Raccolta.sortRaccolta(raccolta);
+//      }
+//      $scope.raccolta=raccolta;
+//    });
   });
 })
 
