@@ -128,14 +128,14 @@ angular.module('rifiuti.services.calendar', [])
 
             var start = 0, end = 0;
             if ((first.getDate() - date.getDay() +1) >= 1) {
-                first = first.getDate() - date.getDay() + 1;
-                end = first + 6;
+                start = first.getDate() - date.getDay() + 1;
+                end = start + 6;
             } else {
                 end = 6 + first.getDate() - date.getDay() +1;
-                first = 1;
+                start = 1;
             }
 			if (runningEnd && end < runningEnd) end = runningEnd;
-            for(var i = first-1; i < fullList.length && i < end; i++) {
+            for(var i = start-1; i < fullList.length && i < end; i++) {
                 list.push(fullList[i]);
             }
             return list;
