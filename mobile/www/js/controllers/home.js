@@ -273,12 +273,12 @@ angular.module('rifiuti.controllers.home', [])
         $scope.showDate = i.date;
         $scope.daySubList = Calendar.toWeek($scope.dayList, $scope.showDate, $scope.daySubListRunningEnd);
 
-//        $timeout(function () {
+        $timeout(function () {
             $ionicScrollDelegate.scrollTop();
             $location.hash('id' + i.date.getTime());
             $ionicScrollDelegate.anchorScroll(true);
             $rootScope.loadingHide();
-//        }, 200);
+        }, 200);
 
         $scope.calendarView = !$scope.calendarView;
         $scope.updateIMG2();
