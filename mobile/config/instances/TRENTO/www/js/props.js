@@ -1,9 +1,9 @@
 // TRENTO
 APP_ID = "TRENTO";
-DATA_VERSION = 7;
+DATA_VERSION = 10;
 API_KEY = "AIzaSyBmKVWmFzh2JHT7q1MLmQRQ7jC4AhkRBDs";
 //SEGNALA_EMAIL = "segnalazioni.rifiuti@comunitadellegiudicarie.it";
-VERSION = "1.0.1";
+VERSION = "1.0.2";
 APP_NAME="100% Riciclo - Trento";
 APP_NAME_CREDITS = "100% Riciclo<br/>TRENTO";
 ICON_COLOR_MAP = {'ARANCIONE': 'orange', 'AZZURRO': 'lightblue', 'BLU': 'blue', 'GIALLO': 'yellow', 'MARRONE': 'brown', 'ROSSO': 'red', 'VERDE CHIARO': 'lightgreen', 'VERDE': 'green', 'VERDE SCURO': 'darkgreen', 'VIOLA':'purple'};

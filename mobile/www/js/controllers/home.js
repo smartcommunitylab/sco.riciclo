@@ -263,7 +263,13 @@ angular.module('rifiuti.controllers.home', [])
     $scope.switchView = function () {
         $scope.calendarView = !$scope.calendarView;
         $scope.updateIMG2();
-        $ionicScrollDelegate.scrollTop();
+        if ($scope.calendarView) {
+            $scope.doScroll = function() {
+                $ionicScrollDelegate.scrollTop();
+            }
+        } else {
+                $ionicScrollDelegate.scrollTop();
+        }
     }
 
     $scope.selectDay = function (i) {
@@ -271,14 +277,19 @@ angular.module('rifiuti.controllers.home', [])
         $rootScope.loadingShow();
         $scope.currListItem = i;
         $scope.showDate = i.date;
-        $scope.daySubList = Calendar.toWeek($scope.dayList, $scope.showDate, $scope.daySubListRunningEnd);
 
-        $timeout(function () {
-            $ionicScrollDelegate.scrollTop();
+        $scope.doScroll = function() {
             $location.hash('id' + i.date.getTime());
             $ionicScrollDelegate.anchorScroll(true);
-            $rootScope.loadingHide();
-        }, 200);
+        };
+        $scope.daySubList = Calendar.toWeek($scope.dayList, $scope.showDate, $scope.daySubListRunningEnd);
+        $rootScope.loadingHide();
+
+//        $timeout(function () {
+//            $ionicScrollDelegate.scrollTop();
+//            $location.hash('id' + i.date.getTime());
+//            $ionicScrollDelegate.anchorScroll(true);
+//        }, 200);
 
         $scope.calendarView = !$scope.calendarView;
         $scope.updateIMG2();
@@ -312,19 +323,21 @@ angular.module('rifiuti.controllers.home', [])
         //return;
 
         if ($scope.calendarView == true) {
-            var time = 0;
-            var i = 0;
-            while (i < $scope.dayList.length && time < $scope.currDate.getTime()) {
-                time = $scope.dayList[i++].date.getTime();
-            }
-            if (i - 2 >= 0 && i - 2 <= $scope.dayList.length) {
-                $location.hash('id' + $scope.dayList[i - 2].date.getTime());
-                $scope.currListItem = $scope.dayList[i - 2];
-                //window._globalscrollid = 'id' + $scope.currListItem.date.getTime();
-                $ionicScrollDelegate.anchorScroll(true);
-            } else {
-                $ionicScrollDelegate.scrollTop();
-            }
+            $scope.doScroll = function() {
+                var time = 0;
+                var i = 0;
+                while (i < $scope.dayList.length && time < $scope.currDate.getTime()) {
+                    time = $scope.dayList[i++].date.getTime();
+                }
+                if (i - 2 >= 0 && i - 2 <= $scope.dayList.length) {
+                    $location.hash('id' + $scope.dayList[i - 2].date.getTime());
+                    $scope.currListItem = $scope.dayList[i - 2];
+                    //window._globalscrollid = 'id' + $scope.currListItem.date.getTime();
+                    $ionicScrollDelegate.anchorScroll(true);
+                } else {
+                    $ionicScrollDelegate.scrollTop();
+                }
+            };
         }
     };
 
@@ -342,7 +355,7 @@ angular.module('rifiuti.controllers.home', [])
 
                 $scope.loaded = true;
                 if (gotoday) {
-                    $timeout(scrollToday, 200);
+                    scrollToday();
                 }
             });
         } else {

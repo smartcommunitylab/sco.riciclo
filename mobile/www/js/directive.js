@@ -89,4 +89,15 @@ angular.module('rifiuti.directives', [])
             });
         }
     }
+})
+
+.directive('agendaList', function ($timeout) {
+    return {
+      link: function (scope, elem, attrs, ctrl) {
+        if (scope.doScroll) {
+            $timeout(scope.doScroll, 0);
+            scope.doScroll = null;
+        }
+      }
+    }
 });
