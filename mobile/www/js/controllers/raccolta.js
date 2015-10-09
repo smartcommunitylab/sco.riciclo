@@ -75,11 +75,8 @@ angular.module('rifiuti.controllers.raccolta', [])
 
   $scope.map = {
     control: {},
-    center: {
-      latitude: 46.0,
-      longitude: 11.0
-    },
-    zoom: 8,
+    center: CENTER,
+    zoom: ZOOM,
     pan: false,
     draggable: 'true',
     options: {
@@ -168,9 +165,10 @@ angular.module('rifiuti.controllers.raccolta', [])
         control: {},
         models: points,
         coords: 'self',
-        fit: true,
+        fit: false,
         icon: 'icon',
-        doCluster: points.length > 10
+        doCluster: points.length > 10,
+        clusterOptions: {minimumClusterSize : 5}
       };
       if (list.length == 1) {
         list[0].aperto = true;

@@ -13,3 +13,9 @@ CUSTOM_PAP = [];
 FEED_URL = "http://www.asvo.it/feed/";
 EXT_URL = "http://www.asvo.it";
 IF_HIDDEN_FIELDS = false;
+
+ZOOM = 12;
+CENTER = {
+      latitude: 45.890612,
+      longitude: 11.039560
+};

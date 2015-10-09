@@ -23,3 +23,9 @@ ISOLA_MAPPING = {
     'Vetro':'IMB_VETRO',
     'Indumenti':'INDUMENTI'
 };
+
+ZOOM = 12;
+CENTER = {
+      latitude: 46.073712,
+      longitude: 11.121835
+};
