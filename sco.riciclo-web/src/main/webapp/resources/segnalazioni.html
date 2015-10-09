@@ -78,6 +78,7 @@
 								<input class="form-control" data-ng-model="areaSearch.value" mass-autocomplete-item="ac_area_options" 
 								data-ng-disabled="!edit && !create" placeholder="area">
 							</div>
+							<label class="col-md-1 control-label">(campo obbligatorio)</label>
 						</div>
 				   	<div class="row form-group">
 				    	<label class="col-md-1 control-label">Tipologia ({{language}}):</label>
@@ -85,13 +86,15 @@
 				    		<input class="form-control" type="text" name="tipologia" data-ng-model="tipologia" 
 				    		data-ng-disabled="!edit && !create" placeholder="tipologia">
 				    	</div>
+				    	<label class="col-md-1 control-label">(campo obbligatorio)</label>
 				    </div>
 				   	<div class="row form-group">
 				    	<label class="col-md-1 control-label">Email:</label>
 				    	<div class="col-md-2">
 				    		<input class="form-control" type="text" name="email" data-ng-model="email" 
-				    		data-ng-disabled="!edit && !create" placeholder="email">
+				    		data-ng-disabled="!edit && !create" placeholder="test@dominio.it">
 				    	</div>
+				    	<label class="col-md-1 control-label">(campo obbligatorio)</label>
 				    </div>
 				  	<button class="btn btn-default" data-ng-click="resetForm()">
 							<span class="glyphicon glyphicon-remove"></span> Cancella

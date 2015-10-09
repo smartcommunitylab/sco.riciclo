@@ -240,9 +240,9 @@ var tipoPuntoApp = angular.module('tipo-punto', ['DataService']).controller('use
 	};
 	
 	$scope.test = function() {
-		if (($scope.fId == null) || ($scope.fId.length <= 3) ||
-				($scope.fNome == null) || ($scope.fNome.length <= 3) ||
-				($scope.fType == null)) {
+		if (($scope.fId == null) || ($scope.fId.length < 3) ||
+				($scope.fNome == null) || ($scope.fNome.length < 3) ||
+				($scope.fType == null) || ($scope.fType.length == 0)) {
 	    $scope.incomplete = true;
 	  } else {
 	  	$scope.incomplete = false;

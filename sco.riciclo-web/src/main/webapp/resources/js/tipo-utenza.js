@@ -213,7 +213,6 @@ angular.module('tipo-utenza', ['DataService']).controller('userCtrl', function($
 		}
 	};
 	
-	$scope.$watch('fNome',function() {$scope.test();});
 	$scope.$watch('fId',function() {$scope.test();});
 	
 	$scope.findByObjectId = function(array, id) {
@@ -235,8 +234,7 @@ angular.module('tipo-utenza', ['DataService']).controller('userCtrl', function($
 	};
 	
 	$scope.test = function() {
-		if (($scope.fNome == null) || ($scope.fNome.length <= 3) ||
-				($scope.fId == null) || ($scope.fId.length <= 3)) {
+		if (($scope.fId == null) || ($scope.fId.length <= 3)) {
 	    $scope.incomplete = true;
 	  } else {
 	  	$scope.incomplete = false;

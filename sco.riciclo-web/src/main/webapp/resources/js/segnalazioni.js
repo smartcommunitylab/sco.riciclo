@@ -257,8 +257,8 @@ var segnalazioniCtrl = segnalazioniApp.controller('userCtrl', function($scope, $
 	$scope.$watch('tipologia',function() {$scope.test();});
 	
 	$scope.test = function() {
-		if(($scope.selectedArea == null) || ($scope.email == null) || ($scope.email.length <= 3) ||
-				($scope.tipologia == null) || ($scope.tipologia.length <= 3)) {
+		if(($scope.selectedArea == null) || ($scope.email == null) || ($scope.email.length < 3) ||
+				($scope.tipologia == null) || ($scope.tipologia.length < 3)) {
 			$scope.incomplete = true
 		} else {
 			$scope.incomplete = false;	

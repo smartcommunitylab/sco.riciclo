@@ -74,6 +74,7 @@
 				    		<input class="form-control" type="text" name="ragioneSociale" data-ng-model="fRagioneSociale" 
 				    		data-ng-disabled="!edit && !create" placeholder="ragione sociale">
 				    	</div>
+				    	<label class="col-md-1 control-label">(campo obbligatorio)</label>
 				    </div>
 				   	<div class="row form-group">
 				    	<label class="col-md-1 control-label">Descrizione ({{language}}):</label>
@@ -81,6 +82,7 @@
 				    		<input class="form-control" type="text" name="descrizione" data-ng-model="fDescrizione" 
 				    		data-ng-disabled="!edit && !create" placeholder="dettagli zona">
 				    	</div>
+				    	<label class="col-md-1 control-label">(campo obbligatorio)</label>
 				    </div>
 				   	<div class="row form-group">
 				    	<label class="col-md-1 control-label">Indirizzo ({{language}}):</label>
@@ -107,28 +109,28 @@
 				    	<label class="col-md-1 control-label">Telefono:</label>
 				    	<div class="col-md-2">
 				    		<input class="form-control" type="text" name="telefono" data-ng-model="fTelefono" 
-				    		data-ng-disabled="!edit && !create" placeholder="telefono">
+				    		data-ng-disabled="!edit && !create" placeholder="telefono xxxx/yyyyyy">
 				    	</div>
 				    </div>
 				   	<div class="row form-group">
 				    	<label class="col-md-1 control-label">Fax:</label>
 				    	<div class="col-md-2">
 				    		<input class="form-control" type="text" name="fax" data-ng-model="fFax" 
-				    		data-ng-disabled="!edit && !create" placeholder="fax">
+				    		data-ng-disabled="!edit && !create" placeholder="fax xxxx/yyyyyy">
 				    	</div>
 				    </div>
 				   	<div class="row form-group">
 				    	<label class="col-md-1 control-label">E-mail:</label>
 				    	<div class="col-md-2">
 				    		<input class="form-control" type="text" name="email" data-ng-model="fEmail" 
-				    		data-ng-disabled="!edit && !create" placeholder="e-mail">
+				    		data-ng-disabled="!edit && !create" placeholder="test@dominio.it">
 				    	</div>
 				    </div>
 				   	<div class="row form-group">
 				    	<label class="col-md-1 control-label">Sito web:</label>
 				    	<div class="col-md-2">
 				    		<input class="form-control" type="text" name="sito" data-ng-model="fsitoWeb" 
-				    		data-ng-disabled="!edit && !create" placeholder="sito web">
+				    		data-ng-disabled="!edit && !create" placeholder="http://www.test.it">
 				    	</div>
 				    </div>
 				   	<div class="row form-group">
@@ -142,14 +144,14 @@
 							<label class="col-md-1 control-label">Latitudine:</label>
 							<div class="col-md-2">
 	    					<input class="form-control" id="latitude" type="text" 
-	    					data-ng-model="fLatitude" placeholder="Latitudine">
+	    					data-ng-model="fLatitude" placeholder="Latitudine" readonly>
 	    				</div>
 	    			</div>
 	    			<div class="row form-group">
 	    				<label class="col-md-1 control-label">Longitudine:</label>
 	    				<div class="col-md-2">
 	    					<input class="form-control" id="longitude" type="text" 
-	    					data-ng-model="fLongitude" placeholder="Longitudine">
+	    					data-ng-model="fLongitude" placeholder="Longitudine" readonly>
 	    				</div>
 	    			</div>
 						<button class="btn btn-default" data-ng-disabled="!edit && !create" data-ng-click="resetForm()">

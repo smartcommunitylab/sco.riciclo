@@ -235,8 +235,8 @@ angular.module('tipo-raccolta', ['DataService']).controller('userCtrl', function
 	};
 	
 	$scope.test = function() {
-		if (($scope.fNome == null) || ($scope.fNome.length <= 3) ||
-				($scope.fId == null) || ($scope.fId.length <= 3)) {
+		if (($scope.fNome == null) || ($scope.fNome.length < 3) ||
+				($scope.fId == null) || ($scope.fId.length < 3)) {
 	    $scope.incomplete = true;
 	  } else {
 	  	$scope.incomplete = false;

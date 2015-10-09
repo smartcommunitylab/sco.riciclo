@@ -193,6 +193,16 @@ var areeCtrl = areeApp.controller('userCtrl', function($scope, $http, $sce, $q, 
 		}
 	};
 	
+	$scope.checkTipologiaUtenzaSelected = function() {
+		for(d = 0, len = $scope.tipologiaUtenzaList.length; d < len; d += 1) {
+			var tipologia = $scope.tipologiaUtenzaList[d];
+			if($scope.tipologiaUtenzaSelected[tipologia.objectId]) {
+				return true;
+			}
+		}
+		return false;
+	};
+	
 	$scope.resetUI = function() {
 		$scope.edit = false;
 		$scope.create = false;
@@ -386,9 +396,15 @@ var areeCtrl = areeApp.controller('userCtrl', function($scope, $http, $sce, $q, 
 	};
 	
 	$scope.$watch('fNome',function() {$scope.test();});
+	$scope.$watch('fIstituzione',function() {$scope.test();});
+	$scope.$watch('fGestore',function() {$scope.test();});
+	$scope.$watch('tipologiaUtenzaSelected',function() {$scope.test();}, true);
 	
 	$scope.test = function() {
-		if (($scope.fNome == null) || ($scope.fNome.length <= 3)) {
+		if (($scope.fNome == null) || ($scope.fNome.length < 3) || 
+				($scope.fIstituzione == null) || ($scope.fIstituzione.length < 3) ||
+				($scope.fGestore == null) || ($scope.fGestore.length < 3) ||
+				!$scope.checkTipologiaUtenzaSelected()) {
 	    $scope.incomplete = true;
 	  } else {
 	  	$scope.incomplete = false;

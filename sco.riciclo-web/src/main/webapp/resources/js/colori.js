@@ -212,7 +212,7 @@ var coloriApp = angular.module('colori', ['DataService', 'colorpicker.module']).
 	};
 	
 	$scope.test = function() {
-		if (($scope.fNome == null) || ($scope.fNome.length <= 2) ||
+		if (($scope.fNome == null) || ($scope.fNome.length < 3) ||
 				($scope.fCodice == null) || ($scope.fCodice.length != 7)) {
 	    $scope.incomplete = true;
 	  } else {

@@ -260,6 +260,7 @@ var gestoriCtrl = gestoriApp.controller('userCtrl', function($scope, $window, $h
 	};
 	
 	$scope.$watch('fRagioneSociale',function() {$scope.test();});
+	$scope.$watch('fDescrizione',function() {$scope.test();});
 	
 	$scope.findByObjectId = function(array, id) {
     for (var d = 0, len = array.length; d < len; d += 1) {
@@ -280,7 +281,8 @@ var gestoriCtrl = gestoriApp.controller('userCtrl', function($scope, $window, $h
 	};
 	
 	$scope.test = function() {
-		if (($scope.fRagioneSociale == null) || ($scope.fRagioneSociale.length <= 3)) {
+		if (($scope.fRagioneSociale == null) || ($scope.fRagioneSociale.length < 3) ||
+				($scope.fDescrizione == null) || ($scope.fDescrizione.length < 3)) {
 	    $scope.incomplete = true;
 	  } else {
 	  	$scope.incomplete = false;

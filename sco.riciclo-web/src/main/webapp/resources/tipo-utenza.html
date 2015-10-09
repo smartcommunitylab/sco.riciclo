@@ -63,27 +63,13 @@
 			<div class="panel panel-default">
 	  		<div class="panel-body">
 					<h4 data-ng-show="create">Crea:</h4>
-					<h4 data-ng-show="edit">Modifica ({{actualName}}):</h4>
+					<h4 data-ng-show="edit">Modifica:</h4>
 					<form role="form">
 					  <div class="row form-group">
 					    <label class="col-md-1 control-label">Identificativo:</label>
 					    <div class="col-md-2">
 				    		<input class="form-control" type="text" name="id" data-ng-model="fId" 
 				    		data-ng-disabled="!create" placeholder="id">
-				    	</div>
-					  </div>
-					  <div class="row form-group">
-					    <label class="col-md-1 control-label">Nome ({{language}}):</label>
-					    <div class="col-md-2">
-				    		<input class="form-control" type="text" name="name" data-ng-model="fNome" 
-				    		data-ng-disabled="!edit && !create" placeholder="nome">
-				    	</div>
-					  </div>
-					  <div class="row form-group">
-					    <label class="col-md-1 control-label">Descrizione ({{language}}):</label>
-					    <div class="col-md-2">
-				    		<input class="form-control" type="text" name="descrizione" data-ng-model="fDescrizione" 
-				    		data-ng-disabled="!edit && !create" placeholder="descrizione">
 				    	</div>
 					  </div>
 				  	<button class="btn btn-default" data-ng-click="resetForm()">
@@ -107,26 +93,12 @@
 						</button>
 					</p>
 					<div class="row list-header">
-						<div class="col-md-2"><h4>Modifica</h4></div>
-						<div class="col-md-2"><h4>Identificativo</h4></div>
-						<div class="col-md-2"><h4>Nome</h4></div>
-						<div class="col-md-4"><h4>Descrizione</h4></div>
+						<div class="col-md-10"><h4>Identificativo</h4></div>
 						<div class="col-md-2"><h4>Cancella</h4></div>
 					</div>
 					<div class="row list-row" data-ng-repeat="item in tipoUtenzaList | filter:search ">
-						<div class="col-md-2" >
-							<button class="btn btn-primary" data-ng-click="editTipo(item.objectId)">
-								<span class="glyphicon glyphicon-pencil"></span>  Modifica
-							</button>
-						</div>
-						<div class="col-md-2">
+						<div class="col-md-10">
 							<span>{{item.objectId}}</span>
-						</div>
-						<div class="col-md-2">
-							<span>{{item.nome[language]}}</span>
-						</div>
-						<div class="col-md-4">
-							<span>{{item.descrizione[language]}}</span>
 						</div>
 						<div class="col-md-2">
 							<button class="btn btn-danger" data-ng-click="deleteTipo(item.objectId)">

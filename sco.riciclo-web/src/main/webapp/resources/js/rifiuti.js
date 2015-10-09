@@ -215,7 +215,7 @@ var rifiutiApp = angular.module('rifiuti', ['DataService']).controller('userCtrl
 	};
 	
 	$scope.test = function() {
-		if (($scope.fName == null) || ($scope.fName.length <= 3)) {
+		if (($scope.fName == null) || ($scope.fName.length < 3)) {
 	    $scope.incomplete = true;
 	  } else {
 	  	$scope.incomplete = false;

@@ -144,7 +144,6 @@ var tipoProfiloApp = angular.module('tipo-profilo', ['DataService']).controller(
 				descrizione: {},
 				tipologiaUtenza: ''
 			};
-			element.objectId = $scope.fId;
 			element.nome[$scope.language] = $scope.fNome;
 			element.descrizione[$scope.language] = $scope.fDescrizione;
 			element.tipologiaUtenza = $scope.selectedTipologiaUtenza.objectId;
@@ -229,8 +228,8 @@ var tipoProfiloApp = angular.module('tipo-profilo', ['DataService']).controller(
 		}
 	};
 	
-	$scope.$watch('fId',function() {$scope.test();});
 	$scope.$watch('fNome',function() {$scope.test();});
+	$scope.$watch('fDescrizione',function() {$scope.test();});
 	$scope.$watch('selectedTipologiaUtenza',function() {$scope.test();});
 	
 	$scope.findByObjectId = function(array, id) {
@@ -252,8 +251,8 @@ var tipoProfiloApp = angular.module('tipo-profilo', ['DataService']).controller(
 	};
 	
 	$scope.test = function() {
-		if (($scope.fId == null) || ($scope.fId.length <= 3) ||
-				($scope.fNome == null) || ($scope.fNome.length <= 3) ||
+		if (($scope.fNome == null) || ($scope.fNome.length < 3) ||
+				($scope.fDescrizione == null) || ($scope.fDescrizione.length < 3) ||
 				($scope.selectedTipologiaUtenza == null)) {
 	    $scope.incomplete = true;
 	  } else {

@@ -75,6 +75,7 @@
 				    		<input class="form-control" type="text" name="zona" data-ng-model="fRegion" 
 				    		data-ng-disabled="!edit && !create" placeholder="zona">
 				    	</div>
+				    	<label class="col-md-1 control-label">(campo obbligatorio)</label>
 				    </div>
 				   	<div class="row form-group">
 				    	<label class="col-md-1 control-label">Dettagli Zona:</label>
@@ -82,6 +83,7 @@
 				    		<input class="form-control" type="text" name="zonaDett" data-ng-model="fRegionDetails" 
 				    		data-ng-disabled="!edit && !create" placeholder="dettagli zona">
 				    	</div>
+				    	<label class="col-md-1 control-label">(campo obbligatorio)</label>
 				    </div>
 				   	<div class="row form-group">
 				    	<label class="col-md-1 control-label">Note ({{language}}):</label>
@@ -103,14 +105,14 @@
 							<label class="col-md-1 control-label">Latitudine:</label>
 							<div class="col-md-2">
 	    					<input class="form-control" id="latitude" type="text" data-ng-model="fLatitude" 
-	    					placeholder="Latitudine">
+	    					placeholder="Latitudine" readonly>
 	    				</div>
 	    			</div>
 	    			<div class="row form-group">
 	    				<label class="col-md-1 control-label">Longitudine:</label>
 	    				<div class="col-md-2">
 	    					<input class="form-control" id="longitude" type="text" data-ng-model="fLongitude" 
-	    					placeholder="Longitudine">
+	    					placeholder="Longitudine" readonly>
 	    				</div>
 	    			</div>
 						<button class="btn btn-default" data-ng-disabled="!edit && !create" data-ng-click="resetForm()">

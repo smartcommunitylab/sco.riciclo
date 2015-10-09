@@ -71,6 +71,7 @@
 				    		<input class="form-control" type="text" name="id" data-ng-model="fId" 
 				    		data-ng-disabled="!create" placeholder="id">
 				    	</div>
+				    	<label class="col-md-1 control-label">(campo obbligatorio)</label>
 					  </div>
 					  <div class="row form-group">
 					    <label class="col-md-1 control-label">Nome ({{language}}):</label>
@@ -78,6 +79,7 @@
 				    		<input class="form-control" type="text" name="name" data-ng-model="fNome" 
 				    		data-ng-disabled="!edit && !create" placeholder="nome">
 				    	</div>
+				    	<label class="col-md-1 control-label">(campo obbligatorio)</label>
 					  </div>
 					  <div class="row form-group">
 					    <label class="col-md-1 control-label">Informazioni ({{language}}):</label>
@@ -94,6 +96,7 @@
 					    		<option value="PP">Porta a Porta</option>
       					</select>
       				</div>
+      				<label class="col-md-1 control-label">(campo obbligatorio)</label>
 					  </div>
 				  	<button class="btn btn-default" data-ng-click="resetForm()">
 							<span class="glyphicon glyphicon-remove"></span> Cancella

@@ -73,6 +73,7 @@
 				    		<input class="form-control" type="text" name="nome" data-ng-model="fNome" 
 				    		data-ng-disabled="!create" placeholder="nome">
 				    	</div>
+				    	<label class="col-md-1 control-label">(campo obbligatorio)</label>
 					  </div>
 					  <div class="row form-group">
 					    <label class="col-md-1 control-label">Codice Colore:</label>
@@ -80,6 +81,7 @@
 				    		<input class="form-control" colorpicker type="text" name="codice" data-ng-model="fCodice" 
 				    		data-ng-disabled="!edit && !create"	placeholder="codice colore #aabbcc">
 				    	</div>
+				    	<label class="col-md-1 control-label">(campo obbligatorio)</label>
 			    		<div class="col-md-1 color-picker" style="background-color:{{fCodice}}"></div>
 					  </div>
 				  	<button class="btn btn-default" data-ng-click="resetForm()">

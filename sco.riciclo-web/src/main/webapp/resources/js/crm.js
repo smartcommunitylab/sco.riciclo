@@ -384,8 +384,8 @@ var crmCtrl = crmApp.controller('userCtrl', function($scope, $window, $http, Dat
 	};
 	
 	$scope.test = function() {
-		if (($scope.fRegion == null) || ($scope.fRegion.length <= 3) ||
-				($scope.fRegionDetails == null) || ($scope.fRegionDetails.length <= 3)) {
+		if (($scope.fRegion == null) || ($scope.fRegion.length < 3) ||
+				($scope.fRegionDetails == null) || ($scope.fRegionDetails.length < 3)) {
 	    $scope.incomplete = true;
 	  } else {
 	  	$scope.incomplete = false;

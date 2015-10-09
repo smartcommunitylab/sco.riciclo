@@ -266,6 +266,7 @@ var istituzioniCtrl = istituzioniApp.controller('userCtrl', function($scope, $wi
 	};
 	
 	$scope.$watch('fNome',function() {$scope.test();});
+	$scope.$watch('fDescrizione',function() {$scope.test();});
 	
 	$scope.findByObjectId = function(array, id) {
     for (var d = 0, len = array.length; d < len; d += 1) {
@@ -286,7 +287,8 @@ var istituzioniCtrl = istituzioniApp.controller('userCtrl', function($scope, $wi
 	};
 	
 	$scope.test = function() {
-		if (($scope.fNome == null) || ($scope.fNome.length <= 3)) {
+		if (($scope.fNome == null) || ($scope.fNome.length < 3) ||
+				($scope.fDescrizione == null) || ($scope.fDescrizione.length < 3)) {
 	    $scope.incomplete = true;
 	  } else {
 	  	$scope.incomplete = false;
