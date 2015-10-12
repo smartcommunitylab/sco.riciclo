@@ -126,7 +126,12 @@ angular.module('tipo-rifiuto', ['DataService']).controller('userCtrl', function(
 				nome: {},
 				descrizione: {}
 			};
-			element.objectId = $scope.fId;
+			element.objectId = $scope.fId.trim();
+			if(!$scope.isIdUnique($scope.tipoRifiutoList, element.objectId)) {
+		  	$scope.error = true;
+		  	$scope.errorMsg = "Identificativo non univoco";
+		  	return;
+			}
 			element.nome[$scope.language] = $scope.fNome;
 			element.descrizione[$scope.language] = $scope.fDescrizione;
 			var copiedList = $scope.tipoRifiutoList.slice(0);
@@ -211,10 +216,7 @@ angular.module('tipo-rifiuto', ['DataService']).controller('userCtrl', function(
 		  	$scope.status = response.status;
 			});			
 		}
-	};
-	
-	$scope.$watch('fNome',function() {$scope.test();});
-	$scope.$watch('fId',function() {$scope.test();});
+	};	
 	
 	$scope.findByObjectId = function(array, id) {
     for (var d = 0, len = array.length; d < len; d += 1) {
@@ -233,6 +235,18 @@ angular.module('tipo-rifiuto', ['DataService']).controller('userCtrl', function(
 		}
 		return -1;
 	};
+	
+	$scope.isIdUnique = function(array, id) {
+		for (var d = 0, len = array.length; d < len; d += 1) {
+			if(array[d].objectId === id) {
+				return false;
+			}
+		}
+		return true;
+	}
+	
+	$scope.$watch('fNome',function() {$scope.test();});
+	$scope.$watch('fId',function() {$scope.test();});
 	
 	$scope.test = function() {
 		if (($scope.fNome == null) || ($scope.fNome.length < 3) ||

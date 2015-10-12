@@ -132,7 +132,12 @@ var tipoPuntoApp = angular.module('tipo-punto', ['DataService']).controller('use
 				info: {},
 				type: ''
 			};
-			element.objectId = $scope.fId;
+			element.objectId = $scope.fId.trim();
+			if(!$scope.isIdUnique($scope.tipoPuntoRaccoltaList, element.objectId)) {
+		  	$scope.error = true;
+		  	$scope.errorMsg = "Identificativo non univoco";
+		  	return;
+			}
 			element.nome[$scope.language] = $scope.fNome;
 			element.info[$scope.language] = $scope.fInfo;
 			element.type = $scope.fType;
@@ -216,11 +221,7 @@ var tipoPuntoApp = angular.module('tipo-punto', ['DataService']).controller('use
 			}
 		}
 	};
-	
-	$scope.$watch('fId',function() {$scope.test();});
-	$scope.$watch('fNome',function() {$scope.test();});
-	$scope.$watch('fType',function() {$scope.test();});
-	
+		
 	$scope.findByObjectId = function(array, id) {
     for (var d = 0, len = array.length; d < len; d += 1) {
       if (array[d].objectId === id) {
@@ -238,6 +239,19 @@ var tipoPuntoApp = angular.module('tipo-punto', ['DataService']).controller('use
 		}
 		return -1;
 	};
+	
+	$scope.isIdUnique = function(array, id) {
+		for (var d = 0, len = array.length; d < len; d += 1) {
+			if(array[d].objectId === id) {
+				return false;
+			}
+		}
+		return true;
+	}
+	
+	$scope.$watch('fId',function() {$scope.test();});
+	$scope.$watch('fNome',function() {$scope.test();});
+	$scope.$watch('fType',function() {$scope.test();});
 	
 	$scope.test = function() {
 		if (($scope.fId == null) || ($scope.fId.length < 3) ||

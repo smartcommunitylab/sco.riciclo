@@ -257,6 +257,15 @@ var areeCtrl = areeApp.controller('userCtrl', function($scope, $http, $sce, $q, 
 		$('html,body').animate({scrollTop:0},0);
 	};
 	
+	$scope.isNomeUnique = function(array, nome) {
+		for (var d = 0, len = array.length; d < len; d += 1) {
+			if(array[d].nome === nome) {
+				return false;
+			}
+		}
+		return true;
+	}
+	
 	$scope.saveArea = function() {
 		if($scope.create) {
 			var element = {
@@ -269,7 +278,12 @@ var areeCtrl = areeApp.controller('userCtrl', function($scope, $http, $sce, $q, 
 				parent: '',
 				utenza: {}
 			};
-			element.nome = $scope.fNome;
+			element.nome = $scope.fNome.trim();
+			if(!$scope.isNomeUnique($scope.areaList, element.nome)) {
+		  	$scope.error = true;
+		  	$scope.errorMsg = "Nome non univoco";
+		  	return;
+			}
 			element.descrizione[$scope.language] = $scope.fDescrizione;
 			element.etichetta[$scope.language] = $scope.fEtichetta;
 			element.istituzione = $scope.fIstituzione;

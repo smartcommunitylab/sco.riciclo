@@ -109,7 +109,12 @@ var coloriApp = angular.module('colori', ['DataService', 'colorpicker.module']).
 				nome: '',
 				codice: ''
 			};
-			element.nome = $scope.fNome;
+			element.nome = $scope.fNome.trim();
+			if(!$scope.isNomeUnique($scope.coloreList, element.nome)) {
+		  	$scope.error = true;
+		  	$scope.errorMsg = "Nome non univoco";
+		  	return;
+			}
 			element.codice = $scope.fCodice;
 			var url = "api/colore/" + $scope.profile.appInfo.ownerId + "?draft=" + $scope.draft; 
 			$http.post(url, element, {headers: {'X-ACCESS-TOKEN': $scope.profile.appInfo.token}}).then(
@@ -189,10 +194,7 @@ var coloriApp = angular.module('colori', ['DataService', 'colorpicker.module']).
 			}		
 		}
 	};
-	
-	$scope.$watch('fNome',function() {$scope.test();});
-	$scope.$watch('fCodice',function() {$scope.test();});
-	
+		
 	$scope.findById = function(array, id) {
     for (var d = 0, len = array.length; d < len; d += 1) {
       if (array[d].nome === id) {
@@ -210,6 +212,18 @@ var coloriApp = angular.module('colori', ['DataService', 'colorpicker.module']).
 		}
 		return -1;
 	};
+	
+	$scope.isNomeUnique = function(array, nome) {
+		for (var d = 0, len = array.length; d < len; d += 1) {
+			if(array[d].nome === nome) {
+				return false;
+			}
+		}
+		return true;
+	}
+	
+	$scope.$watch('fNome',function() {$scope.test();});
+	$scope.$watch('fCodice',function() {$scope.test();});
 	
 	$scope.test = function() {
 		if (($scope.fNome == null) || ($scope.fNome.length < 3) ||
