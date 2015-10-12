@@ -134,7 +134,7 @@ public class UIConverter {
 		for(Riciclabolario riciclabolario : modelData) {
 			RiciclabolarioUI riciclabolarioUI = new RiciclabolarioUI();
 			riciclabolarioUI.setAppId(riciclabolario.getOwnerId());
-			riciclabolarioUI.setNome(nomeRifiutoMap.get(riciclabolario.getObjectId()));
+			riciclabolarioUI.setNome(nomeRifiutoMap.get(riciclabolario.getRifiuto()));
 			riciclabolarioUI.setArea(riciclabolario.getArea());
 			riciclabolarioUI.setTipologiaRifiuto(riciclabolario.getTipologiaRifiuto());
 			riciclabolarioUI.setTipologiaUtenza(riciclabolario.getTipologiaUtenza());
