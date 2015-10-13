@@ -15,39 +15,44 @@ angular.module('rifiuti.controllers.raccolta', [])
   };
   
   $scope.rifiuti = [];
+  $scope.tipiDiRifiuti = [];
 
   var init = function() {
     if ($scope.selectedProfile) {
       Raccolta.rifiuti().then(function(data){
         $scope.rifiuti = data;
-        Raccolta.immagini().then(function(){
-          var tipologieMap = {};
-          var results=[], row=[], counter=-1;
-          for (var i = 0; i < $scope.rifiuti.length; i++) {
-              var tipologia = $scope.rifiuti[i].tipologiaRifiuto;
-              if (!(tipologia in tipologieMap)) tipologieMap[tipologia] = {label:tipologia, img:$scope.immagini[tipologia]};
-          }
-          var tipologieArray = [];
-          for (var t in tipologieMap) {
-            tipologieArray.push(tipologieMap[t]);
-          }
-          tipologieArray = tipologieArray.sort(function(a,b) {return a.label.localeCompare(b.label);});
+          Raccolta.tipiDiRifiuti().then(function(data){
+            $scope.tipiDiRifiuti = data;
+              Raccolta.immagini().then(function(){
+              var tipologieMap = {};
+              var results=[], row=[], counter=-1;
+              for (var i = 0; i < $scope.rifiuti.length; i++) {
+                  var tipologiaId = $scope.rifiuti[i].tipologiaRifiuto;
+                  var tipologiaLabel = $scope.tipiDiRifiuti[tipologiaId].nome;
+                  if (!(tipologiaId in tipologieMap)) tipologieMap[tipologiaId] = {label:tipologiaLabel, img:$scope.immagini[tipologiaId]};
+              }
+              var tipologieArray = [];
+              for (var t in tipologieMap) {
+                tipologieArray.push(tipologieMap[t]);
+              }
+              tipologieArray = tipologieArray.sort(function(a,b) {return a.label.localeCompare(b.label);});
 
-          for (var i=0; i<tipologieArray.length; i++) {
-            counter++;
-            if (counter==3) {
-              counter=0;
-              results.push(row);
-              row=[];
-            }
-            row.push(tipologieArray[i]);
-          };
-          if (row.length>0) results.push(row);
-          $scope.tipologie=results;
+              for (var i=0; i<tipologieArray.length; i++) {
+                counter++;
+                if (counter==3) {
+                  counter=0;
+                  results.push(row);
+                  row=[];
+                }
+                row.push(tipologieArray[i]);
+              };
+              if (row.length>0) results.push(row);
+              $scope.tipologie=results;
+            });
         });
-      });
-    }
-  };
+    });
+  }
+};
   
   $rootScope.$watch('selectedProfile',function(a,b) {
     if (b == null || a.id != b.id) {

@@ -266,6 +266,16 @@ angular.module('rifiuti.services.rifiuti', [])
         return imgs;
       });
     },
+    tipiDiRifiuti: function() {
+      return DataManager.get('data/db/tipologiaRifiuto.json').then(function (results) {
+        var tipiRifiutiArr={};
+        results.data.forEach(function(tipoRifiuto,ii,dbRifiuto){
+          tipiRifiutiArr[tipoRifiuto.id]=tipoRifiuto;
+        });
+        $rootScope.tipiDiRifiuti=tipiRifiutiArr;
+        return tipiRifiutiArr;
+      });
+    },
     sortRaccolta: function(raccolta) {
             raccolta.sort(function(a,b){
             var aPaP = Utili.isPaP(a.tipologiaPuntoRaccolta);
