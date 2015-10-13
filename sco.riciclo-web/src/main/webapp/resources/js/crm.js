@@ -13,6 +13,7 @@ var crmCtrl = crmApp.controller('userCtrl', function($scope, $window, $http, Dat
 
 	$scope.selectedTab = "menu-crm";
 	$scope.language = "it";
+	$scope.defaultLang = "it";
 	$scope.draft = true;
 	
 	$scope.fId = "";
@@ -103,6 +104,23 @@ var crmCtrl = crmApp.controller('userCtrl', function($scope, $window, $http, Dat
 			}
 		}
 	};
+	
+	$scope.getModalHeaderClass = function() {
+		if($scope.view) {
+			return "view";
+		}
+		if($scope.edit) {
+			return "edit";
+		}
+		if($scope.create) {
+			return "create";
+		}
+	}
+	
+	$scope.getActualName = function() {
+		var name = $scope.fRegion + ", " + $scope.fRegionDetails;
+		return name;
+	}
 	
 	$scope.updateCrm = function() {		
 		$scope.edit = true;
