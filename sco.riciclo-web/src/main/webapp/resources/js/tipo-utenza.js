@@ -22,6 +22,7 @@ angular.module('tipo-utenza', ['DataService']).controller('userCtrl', function($
 	
 	$scope.edit = false;
 	$scope.create = false;
+	$scope.view = false;
 	$scope.incomplete = true;
 	
 	$scope.error = false;
@@ -79,11 +80,15 @@ angular.module('tipo-utenza', ['DataService']).controller('userCtrl', function($
 		}
 	};
 	
-	$scope.editTipo = function(id) {
+	$scope.editTipo = function(id, modify) {
 		console.log("editTipo:" + id);
-		//var index = $scope.findIndex($scope.rifiuti, id);
-		//console.log("editRifiutoPos:" + index);
-		$scope.edit = true;
+		if(modify) {
+			$scope.edit = true;
+			$scope.view = false;
+		} else {
+			$scope.edit = false;
+			$scope.view = true;
+		}
 		$scope.create = false;
 		var element = $scope.findByObjectId($scope.tipoUtenzaList, id);
 		if(element != null) {
@@ -93,13 +98,14 @@ angular.module('tipo-utenza', ['DataService']).controller('userCtrl', function($
 			$scope.actualName = element.nome[$scope.defaultLang];
 			$scope.incomplete = false;	
 		}
-		$('html,body').animate({scrollTop:0},0);
+		//$('html,body').animate({scrollTop:0},0);
 	};
 	
 	$scope.newTipo = function() {
 		console.log("newTipo");
 		$scope.edit = false;
 		$scope.create = true;
+		$scope.view = false;
 		$scope.fId = "";
 		$scope.fNome = "";
 		$scope.fDescrizione = "";
@@ -110,6 +116,7 @@ angular.module('tipo-utenza', ['DataService']).controller('userCtrl', function($
 	$scope.resetUI = function() {
 		$scope.edit = false;
 		$scope.create = false;
+		$scope.view = false;
 		$scope.fId = "";
 		$scope.fNome = "";
 		$scope.fDescrizione = "";
@@ -248,7 +255,7 @@ angular.module('tipo-utenza', ['DataService']).controller('userCtrl', function($
 	$scope.$watch('fId',function() {$scope.test();});
 	
 	$scope.test = function() {
-		if (($scope.fId == null) || ($scope.fId.length <= 3)) {
+		if (($scope.fId == null) || ($scope.fId.length < 3)) {
 	    $scope.incomplete = true;
 	  } else {
 	  	$scope.incomplete = false;

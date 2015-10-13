@@ -26,8 +26,9 @@ public class TipologiaUI extends BaseObjectUI {
 	public TipologiaUI() {
 	}
 
-	public TipologiaUI(String nome, String descrizione, String icona) {
+	public TipologiaUI(String id, String nome, String descrizione, String icona) {
 		super();
+		this.id = id;
 		this.nome = nome;
 		this.descrizione = descrizione;
 		this.icona = icona;
@@ -66,7 +67,7 @@ public class TipologiaUI extends BaseObjectUI {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((nome == null) ? 0 : nome.hashCode());
+		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		return result;
 	}
 
@@ -79,10 +80,10 @@ public class TipologiaUI extends BaseObjectUI {
 		if (getClass() != obj.getClass())
 			return false;
 		TipologiaUI other = (TipologiaUI) obj;
-		if (nome == null) {
-			if (other.nome != null)
+		if (id == null) {
+			if (other.id != null)
 				return false;
-		} else if (!nome.equals(other.nome))
+		} else if (!id.equals(other.id))
 			return false;
 		return true;
 	}

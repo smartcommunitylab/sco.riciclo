@@ -297,11 +297,12 @@ public class UIConverter {
 		String lang, String defaultLang) {
 		Set<TipologiaUI> result = new HashSet<TipologiaUI>();
 		for(TipologiaPuntoRaccolta tpr : modelData) {
-			TipologiaUI tipologiaUI = new TipologiaUI();
+			TipologiaExtUI tipologiaUI = new TipologiaExtUI();
 			tipologiaUI.setAppId(tpr.getOwnerId());
 			tipologiaUI.setId(tpr.getObjectId());
 			tipologiaUI.setNome(Utils.getString(tpr.getNome(), lang, defaultLang));
 			tipologiaUI.setDescrizione(Utils.getString(tpr.getInfo(), lang, defaultLang));
+			tipologiaUI.setType(tpr.getType());
 			result.add(tipologiaUI);
 		}
 		return result;
@@ -310,18 +311,22 @@ public class UIConverter {
 	public static CategorieUI convertCategorie(Categorie categorie, String lang, String defaultLang) {
 		CategorieUI result = new CategorieUI();
 		result.setAppId(categorie.getOwnerId());
-		result.setCaratteristicaPuntoRaccolta(convertTipologia(categorie.getCaratteristicaPuntoRaccolta(), lang, defaultLang));
-		result.setTipologiaRaccolta(convertTipologia(categorie.getTipologiaRaccolta(), lang, defaultLang));
-		result.setTipologiaRifiuto(convertTipologia(categorie.getTipologiaRifiuto(), lang, defaultLang));
-		result.setTipologiaUtenza(convertTipologia(categorie.getTipologiaUtenza(), lang, defaultLang));
+		result.setCaratteristicaPuntoRaccolta(convertTipologia(categorie.getCaratteristicaPuntoRaccolta(), categorie.getOwnerId(), 
+				lang, defaultLang));
+		result.setTipologiaRaccolta(convertTipologia(categorie.getTipologiaRaccolta(), categorie.getOwnerId(), 
+				lang, defaultLang));
+		result.setTipologiaRifiuto(convertTipologia(categorie.getTipologiaRifiuto(), categorie.getOwnerId(), 
+				lang, defaultLang));
+		result.setTipologiaUtenza(convertTipologia(categorie.getTipologiaUtenza(), categorie.getOwnerId(),
+				lang, defaultLang));
 		return result;
 	}
 	
-	public static Set<TipologiaUI> convertTipologia(Set<Tipologia> tipoligie, String lang, String defaultLang) {
+	public static Set<TipologiaUI> convertTipologia(Set<Tipologia> tipoligie, String ownerId, String lang, String defaultLang) {
 		Set<TipologiaUI> result = new LinkedHashSet<TipologiaUI>(); 
 		for(Tipologia tipologia : tipoligie) {
 			TipologiaUI tipologiaUI = new TipologiaUI();
-			tipologiaUI.setAppId(tipologia.getOwnerId());
+			tipologiaUI.setAppId(ownerId);
 			tipologiaUI.setId(tipologia.getObjectId());
 			tipologiaUI.setNome(Utils.getString(tipologia.getNome(), lang, defaultLang));
 			tipologiaUI.setDescrizione(Utils.getString(tipologia.getDescrizione(), lang, defaultLang));

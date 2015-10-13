@@ -17,11 +17,13 @@ angular.module('tipo-rifiuto', ['DataService']).controller('userCtrl', function(
 	$scope.fId = "";
 	$scope.fNome = "";
 	$scope.fDescrizione = "";
+	$scope.fIcona = "";
 	$scope.search = "";
 	$scope.actualName = "";
 	
 	$scope.edit = false;
 	$scope.create = false;
+	$scope.view = false;
 	$scope.incomplete = true;
 	
 	$scope.error = false;
@@ -63,6 +65,7 @@ angular.module('tipo-rifiuto', ['DataService']).controller('userCtrl', function(
 	$scope.resetForm = function() {
 		$scope.fNome = "";
 		$scope.fDescrizione = "";
+		$scope.fIcona = "";
 		if($scope.create) {
 			$scope.fId = "";
 		}
@@ -79,17 +82,27 @@ angular.module('tipo-rifiuto', ['DataService']).controller('userCtrl', function(
 		}
 	};
 	
-	$scope.editTipo = function(id) {
-		console.log("editTipo:" + id);
-		//var index = $scope.findIndex($scope.rifiuti, id);
-		//console.log("editRifiutoPos:" + index);
+	$scope.updateTipo = function() {		
 		$scope.edit = true;
+		$scope.view = false;
+	}
+	
+	$scope.editTipo = function(id, modify) {
+		console.log("editTipo:" + id);
+		if(modify) {
+			$scope.edit = true;
+			$scope.view = false;
+		} else {
+			$scope.edit = false;
+			$scope.view = true;
+		}
 		$scope.create = false;
 		var element = $scope.findByObjectId($scope.tipoRifiutoList, id);
 		if(element != null) {
 			$scope.fId = id;
 			$scope.fNome = element.nome[$scope.language];
 			$scope.fDescrizione = element.descrizione[$scope.language];
+			$scope.fIcona = element.icona;
 			$scope.actualName = element.nome[$scope.defaultLang];
 			$scope.incomplete = false;	
 		}
@@ -100,9 +113,11 @@ angular.module('tipo-rifiuto', ['DataService']).controller('userCtrl', function(
 		console.log("newTipo");
 		$scope.edit = false;
 		$scope.create = true;
+		$scope.view = false;
 		$scope.fId = "";
 		$scope.fNome = "";
 		$scope.fDescrizione = "";
+		$scope.fIcona = "";
 		$scope.actualName = "";
 		$scope.incomplete = true;
 	};
@@ -110,9 +125,11 @@ angular.module('tipo-rifiuto', ['DataService']).controller('userCtrl', function(
 	$scope.resetUI = function() {
 		$scope.edit = false;
 		$scope.create = false;
+		$scope.view = false;
 		$scope.fId = "";
 		$scope.fNome = "";
 		$scope.fDescrizione = "";
+		$scope.fIcona = "";
 		$scope.search = "";
 		$scope.actualName = "";
 		$scope.incomplete = true;
@@ -124,7 +141,8 @@ angular.module('tipo-rifiuto', ['DataService']).controller('userCtrl', function(
 			var element = {
 				objectId: '',
 				nome: {},
-				descrizione: {}
+				descrizione: {},
+				icona: ''
 			};
 			element.objectId = $scope.fId.trim();
 			if(!$scope.isIdUnique($scope.tipoRifiutoList, element.objectId)) {
@@ -134,6 +152,7 @@ angular.module('tipo-rifiuto', ['DataService']).controller('userCtrl', function(
 			}
 			element.nome[$scope.language] = $scope.fNome;
 			element.descrizione[$scope.language] = $scope.fDescrizione;
+			element.icona = $scope.fIcona;
 			var copiedList = $scope.tipoRifiutoList.slice(0);
 			copiedList.unshift(element);
 			var url = "api/tipologia/rifiuto/" + $scope.profile.appInfo.ownerId + "?draft=" + $scope.draft; 
@@ -165,6 +184,7 @@ angular.module('tipo-rifiuto', ['DataService']).controller('userCtrl', function(
 				if(element != null) {
 					element.nome[$scope.language] = $scope.fNome;
 					element.descrizione[$scope.language] = $scope.fDescrizione;
+					element.icona = $scope.fIcona;
 					var url = "api/tipologia/rifiuto/" + $scope.profile.appInfo.ownerId + "?draft=" + $scope.draft;
 					$http.post(url, $scope.tipoRifiutoList, {headers: {'X-ACCESS-TOKEN': $scope.profile.appInfo.token}}).then(
 					function(response) {
@@ -246,11 +266,13 @@ angular.module('tipo-rifiuto', ['DataService']).controller('userCtrl', function(
 	}
 	
 	$scope.$watch('fNome',function() {$scope.test();});
-	$scope.$watch('fId',function() {$scope.test();});
+	$scope.$watch('fId',function() {$scope.test();});$scope.fIcona
+	$scope.$watch('fIcona',function() {$scope.test();});
 	
 	$scope.test = function() {
 		if (($scope.fNome == null) || ($scope.fNome.length < 3) ||
-				($scope.fId == null) || ($scope.fId.length < 3)) {
+				($scope.fId == null) || ($scope.fId.length < 3) || 
+				($scope.fIcona == null) || ($scope.fIcona.length == 0)) {
 	    $scope.incomplete = true;
 	  } else {
 	  	$scope.incomplete = false;
