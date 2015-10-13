@@ -19,6 +19,8 @@ var calendariraccoltaCtrl = calendariraccoltaApp.controller('userCtrl', function
 	$scope.create = false;
 	$scope.search = "";
 	$scope.incomplete = true;
+	$scope.timetableIncomplete = true;
+	$scope.timetableError = false;
 	
 	$scope.error = false;
 	$scope.errorMsg = "";
@@ -348,6 +350,21 @@ var calendariraccoltaCtrl = calendariraccoltaApp.controller('userCtrl', function
 			});
 		}
 	};
+	
+	$scope.$watch('fDateFrom',function() {$scope.timetableTest();});
+	$scope.$watch('fDateTo',function() {$scope.timetableTest();});
+	$scope.$watch('fDateDayOfWeek',function() {$scope.timetableTest();});
+	$scope.$watch('fDateWorkingDayList',function() {$scope.timetableTest();}, true);
+	
+	$scope.timetableTest = function() {
+		if(($scope.fDateFrom == null) || ($scope.fDateTo == null) ||
+			((($scope.fDateDayOfWeek == null) || ($scope.fDateDayOfWeek == "")) 
+			&& ($scope.fDateWorkingDayList.length == 0))) {
+			$scope.timetableIncomplete = true;
+		} else {
+			$scope.timetableIncomplete = false;
+		}
+	}
 
 	$scope.addWorkingDay = function() {
 		if($scope.fDateWorkingDay) {

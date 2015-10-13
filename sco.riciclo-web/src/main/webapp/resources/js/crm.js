@@ -52,7 +52,10 @@ var crmCtrl = crmApp.controller('userCtrl', function($scope, $window, $http, Dat
 	$scope.search = "";
 	$scope.edit = false;
 	$scope.create = false;
+	$scope.view = false;
 	$scope.incomplete = true;
+	$scope.timetableIncomplete = true;
+	$scope.timetableError = false;
 	
 	$scope.error = false;
 	$scope.errorMsg = "";
@@ -101,11 +104,22 @@ var crmCtrl = crmApp.controller('userCtrl', function($scope, $window, $http, Dat
 		}
 	};
 	
-	$scope.editCrm = function(id) {
+	$scope.updateCrm = function() {		
+		$scope.edit = true;
+		$scope.view = false;
+	}
+	
+	$scope.editCrm = function(id, modify) {
 		console.log("editCrm:" + id);
 		//var index = $scope.findIndex($scope.crmList, id);
 		//console.log("editRifiutoPos:" + index);
-		$scope.edit = true;
+		if(modify) {
+			$scope.edit = true;
+			$scope.view = false;
+		} else {
+			$scope.edit = false;
+			$scope.view = true;
+		}
 		$scope.create = false;
 		var element = $scope.findByObjectId($scope.crmList, id);
 		if(element != null) {
@@ -122,13 +136,13 @@ var crmCtrl = crmApp.controller('userCtrl', function($scope, $window, $http, Dat
 			$window.marker.setPosition(location);
 			$window.map.setCenter(location);
 		}
-		$('html,body').animate({scrollTop:0},0);
 	};
 	
 	$scope.newCrm = function() {
 		console.log("newCrm");
 		$scope.edit = false;
 		$scope.create = true;
+		$scope.view = false;
 		$scope.incomplete = true;
 		$scope.resetForm();
 	};
@@ -136,6 +150,7 @@ var crmCtrl = crmApp.controller('userCtrl', function($scope, $window, $http, Dat
 	$scope.resetUI = function() {
 		$scope.edit = false;
 		$scope.create = false;
+		$scope.view = false;
 		$scope.search = "";
 		$scope.incomplete = true;
 		$scope.resetForm();
@@ -362,9 +377,6 @@ var crmCtrl = crmApp.controller('userCtrl', function($scope, $window, $http, Dat
 		}
 	};
 	
-	$scope.$watch('fRegion',function() {$scope.test();});
-	$scope.$watch('fRegionDetails',function() {$scope.test();});
-	
 	$scope.findByObjectId = function(array, id) {
     for (var d = 0, len = array.length; d < len; d += 1) {
       if (array[d].objectId === id) {
@@ -383,6 +395,9 @@ var crmCtrl = crmApp.controller('userCtrl', function($scope, $window, $http, Dat
 		return -1;
 	};
 	
+	$scope.$watch('fRegion',function() {$scope.test();});
+	$scope.$watch('fRegionDetails',function() {$scope.test();});
+	
 	$scope.test = function() {
 		if (($scope.fRegion == null) || ($scope.fRegion.length < 3) ||
 				($scope.fRegionDetails == null) || ($scope.fRegionDetails.length < 3)) {
@@ -391,6 +406,21 @@ var crmCtrl = crmApp.controller('userCtrl', function($scope, $window, $http, Dat
 	  	$scope.incomplete = false;
 	  }
 	};
+	
+	$scope.$watch('fDateFrom',function() {$scope.timetableTest();});
+	$scope.$watch('fDateTo',function() {$scope.timetableTest();});
+	$scope.$watch('fDateDayOfWeek',function() {$scope.timetableTest();});
+	$scope.$watch('fDateWorkingDayList',function() {$scope.timetableTest();}, true);
+	
+	$scope.timetableTest = function() {
+		if(($scope.fDateFrom == null) || ($scope.fDateTo == null) ||
+			((($scope.fDateDayOfWeek == null) || ($scope.fDateDayOfWeek == "")) 
+			&& ($scope.fDateWorkingDayList.length == 0))) {
+			$scope.timetableIncomplete = true;
+		} else {
+			$scope.timetableIncomplete = false;
+		}
+	}
 	
 	$scope.addWorkingDay = function() {
 		if($scope.fDateWorkingDay) {

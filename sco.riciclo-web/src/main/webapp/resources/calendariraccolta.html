@@ -253,7 +253,8 @@
 			        </div>
 			      </div>
 			      <div class="modal-footer">
-					  	<button class="btn btn-success" data-dismiss="modal" data-ng-click="addTimetable()">
+					  	<button class="btn btn-success" data-dismiss="modal" data-ng-click="addTimetable()"
+					  	data-ng-disabled="timetableError || timetableIncomplete">
 					  		<span class="glyphicon glyphicon-save"></span> Aggiungi
 					  	</button> 
 			        <button type="button" class="btn btn-default" data-dismiss="modal">Chiudi</button>

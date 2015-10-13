@@ -4,6 +4,7 @@
 	border: 1px solid lightgrey;
 	list-style-type: none;
 	padding-left: 0px;
+	z-index: 2150000000 !important;
 }
 
 .ui-menu-item.ui-state-focus {

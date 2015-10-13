@@ -48,8 +48,12 @@
 				{{okMsg}}
 			</div>
 			
-			<div class="panel panel-default">
+			<!-- <div class="panel panel-default">
 				<div class="panel-body">
+						<button class="btn btn-link" data-toggle="modal" data-target="#divForm"
+						data-backdrop="static" data-ng-click="newCrm()">
+							<span class="glyphicon glyphicon-grain"></span> Crea nuovo elemento
+						</button>
 					<button class="btn btn-link" data-ng-click="newCrm()">
 						<span class="glyphicon glyphicon-grain"></span> Crea nuovo elemento
 					</button>
@@ -62,74 +66,99 @@
 		   			<span class="glyphicon glyphicon-tags"></span> prod
 		 			</button>
 				</div>
-			</div>			
+			</div> -->		
 						
-			<div class="panel panel-default">
-	  		<div class="panel-body">
-					<h4 data-ng-show="create">Crea:</h4>
-					<h4 data-ng-show="edit">Modifica:</h4>
-					<form role="form">
-				   	<div class="row form-group">
-				    	<label class="col-md-1 control-label">Zona:</label>
-				    	<div class="col-md-2">
-				    		<input class="form-control" type="text" name="zona" data-ng-model="fRegion" 
-				    		data-ng-disabled="!edit && !create" placeholder="zona">
-				    	</div>
-				    	<label class="col-md-1 control-label">(campo obbligatorio)</label>
-				    </div>
-				   	<div class="row form-group">
-				    	<label class="col-md-1 control-label">Dettagli Zona:</label>
-				    	<div class="col-md-2">
-				    		<input class="form-control" type="text" name="zonaDett" data-ng-model="fRegionDetails" 
-				    		data-ng-disabled="!edit && !create" placeholder="dettagli zona">
-				    	</div>
-				    	<label class="col-md-1 control-label">(campo obbligatorio)</label>
-				    </div>
-				   	<div class="row form-group">
-				    	<label class="col-md-1 control-label">Note ({{language}}):</label>
-				    	<div class="col-md-2">
-				    		<input class="form-control" type="text" name="note" data-ng-model="fNote" 
-				    		data-ng-disabled="!edit && !create" placeholder="note">
-				    	</div>
-				    </div>
-				    <div class="checkbox">
-							<label class="checkbox-inline"><input type="checkbox" data-ng-model="fResiduo">Residuo</label>
-							<label class="checkbox-inline"><input type="checkbox" data-ng-model="fImbCarta">Imballaggio Carta</label>
-							<label class="checkbox-inline"><input type="checkbox" data-ng-model="fImbPlasticaMettallo">Imballaggio Plastica e Metallo</label>
-							<label class="checkbox-inline"><input type="checkbox" data-ng-model="fImbVetro">Imballaggio Vetro</label>
-							<label class="checkbox-inline"><input type="checkbox" data-ng-model="fOrganico">Organico</label>
-							<label class="checkbox-inline"><input type="checkbox" data-ng-model="fIndumenti">Indumenti</label>
-				    	<label class="checkbox-inline"><input type="checkbox" data-ng-model="fGettoniera">Gettoniera</label>
-						</div>
-						<div class="row form-group">
-							<label class="col-md-1 control-label">Latitudine:</label>
-							<div class="col-md-2">
-	    					<input class="form-control" id="latitude" type="text" data-ng-model="fLatitude" 
-	    					placeholder="Latitudine" readonly>
-	    				</div>
-	    			</div>
-	    			<div class="row form-group">
-	    				<label class="col-md-1 control-label">Longitudine:</label>
-	    				<div class="col-md-2">
-	    					<input class="form-control" id="longitude" type="text" data-ng-model="fLongitude" 
-	    					placeholder="Longitudine" readonly>
-	    				</div>
-	    			</div>
-						<button class="btn btn-default" data-ng-disabled="!edit && !create" data-ng-click="resetForm()">
-							<span class="glyphicon glyphicon-remove"></span> Cancella
-						</button>
-						<button class="btn btn-primary" data-toggle="modal" data-target="#divTimetable"
-						data-backdrop="static" data-ng-disabled="!edit">
-							<span class="glyphicon glyphicon-time"></span> Orari
-						</button>
-				  	<button class="btn btn-success" data-ng-disabled="error || incomplete"
-				  		data-ng-click="saveCrm()">
-				  		<span class="glyphicon glyphicon-save"></span> Salva
-				  	</button> 
-					</form>	
-	  		</div>
+			<div id="divForm" class="modal modal-wide fade" role="dialog">
+				<div class="modal-dialog">
+					<div class="modal-content">
+			      <div class="modal-header">
+			        <button type="button" class="close" data-dismiss="modal">&times;</button>
+							<h4 data-ng-show="create">Crea</h4>
+							<h4 data-ng-show="edit && !view">Modifica</h4>
+							<h4 data-ng-show="view">Dettagli</h4>
+			      </div>
+			      <div class="modal-body">
+							<div class="panel panel-default">
+								<div class="panel-body">
+									<form role="form">
+								   	<div class="row form-group">
+								    	<label class="col-md-1 control-label">Zona:</label>
+								    	<div class="col-md-2">
+								    		<input class="form-control" type="text" name="zona" data-ng-model="fRegion" 
+								    		data-ng-disabled="!edit && !create" placeholder="zona">
+								    	</div>
+								    	<label class="col-md-1 control-label">(campo obbligatorio)</label>
+								    </div>
+								   	<div class="row form-group">
+								    	<label class="col-md-1 control-label">Dettagli Zona:</label>
+								    	<div class="col-md-2">
+								    		<input class="form-control" type="text" name="zonaDett" data-ng-model="fRegionDetails" 
+								    		data-ng-disabled="!edit && !create" placeholder="dettagli zona">
+								    	</div>
+								    	<label class="col-md-1 control-label">(campo obbligatorio)</label>
+								    </div>
+								   	<div class="row form-group">
+								    	<label class="col-md-1 control-label">Note ({{language}}):</label>
+								    	<div class="col-md-2">
+								    		<input class="form-control" type="text" name="note" data-ng-model="fNote" 
+								    		data-ng-disabled="!edit && !create" placeholder="note">
+								    	</div>
+								    </div>
+								    <div class="checkbox">
+											<label class="checkbox-inline"><input type="checkbox" data-ng-model="fResiduo"
+											data-ng-disabled="!edit && !create">Residuo</label>
+											<label class="checkbox-inline"><input type="checkbox" data-ng-model="fImbCarta"
+											data-ng-disabled="!edit && !create">Imballaggio Carta</label>
+											<label class="checkbox-inline"><input type="checkbox" data-ng-model="fImbPlasticaMettallo"
+											data-ng-disabled="!edit && !create">Imballaggio Plastica e Metallo</label>
+											<label class="checkbox-inline"><input type="checkbox" data-ng-model="fImbVetro"
+											data-ng-disabled="!edit && !create">Imballaggio Vetro</label>
+											<label class="checkbox-inline"><input type="checkbox" data-ng-model="fOrganico"
+											data-ng-disabled="!edit && !create">Organico</label>
+											<label class="checkbox-inline"><input type="checkbox" data-ng-model="fIndumenti"
+											data-ng-disabled="!edit && !create">Indumenti</label>
+								    	<label class="checkbox-inline"><input type="checkbox" data-ng-model="fGettoniera"
+								    	data-ng-disabled="!edit && !create">Gettoniera</label>
+										</div>
+										<div class="row form-group">
+											<label class="col-md-1 control-label">Latitudine:</label>
+											<div class="col-md-2">
+					    					<input class="form-control" id="latitude" type="text" data-ng-model="fLatitude" 
+					    					placeholder="Latitudine" readonly>
+					    				</div>
+					    			</div>
+					    			<div class="row form-group">
+					    				<label class="col-md-1 control-label">Longitudine:</label>
+					    				<div class="col-md-2">
+					    					<input class="form-control" id="longitude" type="text" data-ng-model="fLongitude" 
+					    					placeholder="Longitudine" readonly>
+					    				</div>
+					    			</div>
+										<input id="address" class="form-control input-md" placeholder="Indirizzo">
+										<p><div id="map_canvas" style="width:100%; height:450px"></div></p>
+									</form>
+								</div>
+							</div>				
+			      </div>
+			      <div class="modal-footer">
+							<button class="btn btn-default" data-ng-disabled="!edit && !create" 
+							data-ng-click="resetForm()" title="Reset">Reset
+								<!-- <span class="glyphicon glyphicon-remove"> Reset</span> -->
+							</button>
+					  	<button class="btn btn-primary" data-ng-disabled="!view"
+					  		data-ng-click="updateCrm()">Modifica
+					  		<!-- <span class="glyphicon glyphicon-pencil"> Modifica</span> -->
+					  	</button> 
+					  	<button class="btn btn-success" data-ng-disabled="error || incomplete"
+					  		data-dismiss="modal" data-ng-click="saveCrm()">Salva
+					  		<!-- <span class="glyphicon glyphicon-save"> Salva</span> -->
+					  	</button> 
+			        <button type="button" class="btn btn-default" data-dismiss="modal" title="Chiudi">Chiudi</button>
+			      </div>			      
+					</div>
+				</div>
 			</div>
-
+			
 			<div id="divTimetable" class="modal modal-wide fade" role="dialog">
 			  <div class="modal-dialog">
 			    <!-- Modal content-->
@@ -147,7 +176,7 @@
 								<div class="col-md-2"><h4>Il</h4></div>
 								<div class="col-md-2"><h4>Eccezione</h4></div>
 								<div class="col-md-2"><h4>Note</h4></div>
-								<div class="col-md-2"><h4>Cancella</h4></div>
+								<div class="col-md-2"><h4></h4></div>
 							</div>
 			        <div class="row list-row" data-ng-repeat="timetable in timetableList">
 			        	<div class="col-md-1">
@@ -162,7 +191,7 @@
 			        	<div class="col-md-1">
 									<span>{{timetable.alle}}</span>
 								</div>
-			        	<div class="col-md-2">
+			        	<div class="col-md-3">
 									<span>{{timetable.il}}</span>
 								</div>
 			        	<div class="col-md-2">
@@ -171,9 +200,10 @@
 			        	<div class="col-md-2">
 									<span>{{timetable.note[language]}}</span>
 								</div>
-								<div class="col-md-2">
-									<button class="btn btn-danger" data-dismiss="modal" data-ng-click="deleteTimetable($index)">
-										<span class="glyphicon glyphicon-remove"></span>  Cancella
+								<div class="col-md-1">
+									<button class="btn btn-danger" data-dismiss="modal" title="Cancella" 
+									data-ng-click="deleteTimetable($index)">
+										<span class="glyphicon glyphicon-trash"></span>
 									</button>
 								</div>
 			        </div>
@@ -270,7 +300,8 @@
 			        </div>
 			      </div>
 			      <div class="modal-footer">
-					  	<button class="btn btn-success" data-dismiss="modal" data-ng-click="addTimetable()">
+					  	<button class="btn btn-success" data-dismiss="modal" data-ng-click="addTimetable()"
+					  	data-ng-disabled="timetableError || timetableIncomplete">
 					  		<span class="glyphicon glyphicon-save"></span> Aggiungi
 					  	</button> 
 			        <button type="button" class="btn btn-default" data-dismiss="modal">Chiudi</button>
@@ -278,44 +309,49 @@
 			    </div>
 			  </div>
 			</div>
-						
+											
 			<div class="panel panel-default">
 				<div class="panel-body">
-					<input id="address" class="form-control input-md" placeholder="Indirizzo">
-					<p><div id="map_canvas" style="width:100%; height:450px"></div></p>
-   			</div>					
-			</div>				
-					
-			<div class="panel panel-default">
-				<div class="panel-body">
-					<label class="control-label">Cerca:</label>
-					<p>
-						<input type="text" data-ng-model="search">
-						<button class="btn btn-default btn-sm" data-ng-click="search = ''">
-							<span class="glyphicon glyphicon-remove"></span>
+					<div class="row list-search">
+						<button class="col-md-2 btn btn-primary" data-toggle="modal" data-target="#divForm"
+						data-backdrop="static" data-ng-click="newCrm()" title="Crea">
+							CREA NUOVO ELEMENTO
 						</button>
-					</p>
+						<div class="col-md-4">
+							<label control-label">Cerca:</label>
+							<input type="text" data-ng-model="search">
+							<button class="colbtn btn-default btn-sm" data-ng-click="search = ''">
+								<span class="glyphicon glyphicon-remove"></span>
+							</button>
+							</div>
+					</div>
 					<div class="row list-header">
-						<div class="col-md-2"><h4>Modifica</h4></div>
-						<div class="col-md-4"><h4>Zona</h4></div>
-						<div class="col-md-4"><h4>Dettagli zona</h4></div>
-						<div class="col-md-2"><h4>Cancella</h4></div>
+						<div class="col-md-5"><h4>Zona</h4></div>
+						<div class="col-md-5"><h4>Dettagli zona</h4></div>
+						<div class="col-md-2"><h4></h4></div>
 					</div>
 					<div class="row list-row" data-ng-repeat="crm in crmList | filter:search ">
-						<div class="col-md-2" >
-							<button class="btn btn-primary" data-ng-click="editCrm(crm.objectId)">
-								<span class="glyphicon glyphicon-pencil"></span>  Modifica
-							</button>
-						</div>
-						<div class="col-md-4">
+						<div class="col-md-5">
 							<span>{{crm.zona}}</span>
 						</div>
-						<div class="col-md-4">
+						<div class="col-md-5">
 							<span>{{crm.dettagliZona}}</span>
 						</div>
 						<div class="col-md-2">
-							<button class="btn btn-danger" data-ng-click="deleteCrm(crm.objectId)">
-								<span class="glyphicon glyphicon-remove"></span>  Cancella
+							<button class="btn btn-primary" data-toggle="modal" data-target="#divForm"
+							data-backdrop="static" data-ng-click="editCrm(crm.objectId, false)" title="Vedi">
+								<span class="glyphicon glyphicon-eye-open"></span>
+							</button>
+							<button class="btn btn-primary" data-toggle="modal" data-target="#divForm"
+							data-backdrop="static" data-ng-click="editCrm(crm.objectId, true)" title="Modifica">
+								<span class="glyphicon glyphicon-pencil"></span>
+							</button>
+							<button class="btn btn-danger" data-ng-click="deleteCrm(crm.objectId)" title="Cancella">
+								<span class="glyphicon glyphicon-trash"></span>
+							</button>
+							<button class="btn btn-primary" data-toggle="modal" data-target="#divTimetable"
+							data-backdrop="static" data-ng-click="editCrm(crm.objectId, true)" title="Orari">
+								<span class="glyphicon glyphicon-time"></span>
 							</button>
 						</div>
 					</div>
@@ -343,6 +379,10 @@
 				disableDoubleClickZoom: true,
 				scrollwheel: false,
 				streetViewControl: false,
+				mapTypeControlOptions: {
+					style:google.maps.MapTypeControlStyle.DROPDOWN_MENU,
+					position: google.maps.ControlPosition.LEFT_TOP
+				},
 		    zoom: 13,
 		    center: TRENTO,    
 		    mapTypeId: google.maps.MapTypeId.ROADMAP // ROADMAP | SATELLITE | HYBRID | TERRAIN
@@ -354,11 +394,29 @@
 	    draggable: true
 	  });
 	}
+	
+	//google.maps.event.addDomListener(window, "resize", resizingMap());
+	
+	function resizeMap() {
+	   if(typeof map =="undefined") return;
+	   setTimeout( function(){resizingMap();} , 200);
+	};
 
+	function resizingMap() {
+	   if(typeof map =="undefined") return;
+	   var center = map.getCenter();
+	   google.maps.event.trigger(map, "resize");
+	   map.setCenter(center); 
+	};	
+
+	$("#divForm").on("shown.bs.modal", function() {
+  	resizeMap();
+  });
+  
 	$(document).ready(function() { 
     
 	  initializeMap();
-					  
+	  
 	  $(function() {
 	    $("#address").autocomplete({
 	      //This uses the geocoder to fetch the address values
@@ -392,7 +450,7 @@
 	      }
 	    });
 	  });
-		
+	  
 	  //Add a listener to the marker for reverse geocoding
 	  google.maps.event.addListener(marker, 'drag', function() {
 	    geocoder.geocode({'latLng': marker.getPosition()}, function(results, status) {
