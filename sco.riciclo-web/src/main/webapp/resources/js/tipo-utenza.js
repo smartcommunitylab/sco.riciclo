@@ -14,6 +14,7 @@ angular.module('tipo-utenza', ['DataService']).controller('userCtrl', function($
 	$scope.language = "it";
 	$scope.draft = true;
 	$scope.defaultLang = "it";
+	$scope.itemToDelete = "";
 	
 	$scope.fId = "";
 	$scope.fNome = "";
@@ -65,9 +66,17 @@ angular.module('tipo-utenza', ['DataService']).controller('userCtrl', function($
 	$scope.resetForm = function() {
 		$scope.fNome = "";
 		$scope.fDescrizione = "";
-		if($scope.create) {
-			$scope.fId = "";
-		}
+		$scope.itemToDelete = "";
+		$scope.fId = "";
+	};
+	
+	$scope.setItemToDelete = function(id) {
+		$scope.itemToDelete = id;
+	};
+	
+	$scope.getActualName = function() {
+		var name = $scope.fId;
+		return name;
 	};
 	
 	$scope.changeLanguage = function(language) {
@@ -197,8 +206,8 @@ angular.module('tipo-utenza', ['DataService']).controller('userCtrl', function($
 		}
 	};
 	
-	$scope.deleteTipo = function(id) {
-		var index = $scope.findIndex($scope.tipoUtenzaList, id);
+	$scope.deleteTipo = function() {
+		var index = $scope.findIndex($scope.tipoUtenzaList, $scope.itemToDelete);
 		if(index >= 0) {
 			var copiedList = $scope.tipoUtenzaList.slice(0);
 			copiedList.splice(index, 1);

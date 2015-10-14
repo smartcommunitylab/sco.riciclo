@@ -111,8 +111,9 @@ public class TipologieController {
 	}
 	
 	@RequestMapping(value="api/tipologia/puntoraccolta/{ownerId}/{objectId}", method=RequestMethod.PUT)
-	public @ResponseBody void updateTipologiaPuntoRaccolta(TipologiaPuntoRaccolta data, @PathVariable String ownerId, 
-			@PathVariable String objectId, HttpServletRequest request, HttpServletResponse response) throws Exception	{
+	public @ResponseBody void updateTipologiaPuntoRaccolta(@RequestBody TipologiaPuntoRaccolta data, 
+			@PathVariable String ownerId, @PathVariable String objectId, HttpServletRequest request, 
+			HttpServletResponse response) throws Exception	{
 		boolean draft = Utils.getDraft(request);
 		if(!Utils.validateAPIRequest(request, appSetup, draft, storage)) {
 			throw new UnauthorizedException("Unauthorized Exception: token not valid");
