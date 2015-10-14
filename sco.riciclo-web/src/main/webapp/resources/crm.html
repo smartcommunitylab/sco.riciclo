@@ -22,9 +22,8 @@
 
 	<div class="container-fluid">
 		<div class="list-title">
-			<h4>Elenchi Centri-Raccolta / Isole</h4>
+			<h4>Elenchi CENTRI-RACCOLTA / ISOLE</h4>
 		</div>
-		
 		
 			<div id="error" class="alert alert-danger fade in" data-ng-show="error">
 				<a href="#" class="close" data-hide="alert" aria-label="close"
@@ -51,7 +50,7 @@
 			      	<p class="text-danger pull-right">I campi contrassegnati con il simbolo  
 			      	<span class="glyphicon glyphicon-asterisk"></span> sono obbligatori</p>
 							<form role="form">
-						   	<div class="row form-group" data-ng-show="edit">
+						   	<div class="row form-group" data-ng-show="view || edit">
 						   		<label class="col-md-1 control-label">Lingua:</label>
 						   		<div class="col-md-2">
 										<button type="button" class="btn btn-default" data-ng-click="changeLanguage('it')"
@@ -68,17 +67,17 @@
 						    	<label class="col-md-1 control-label">Zona:</label>
 						    	<div class="col-md-2">
 						    		<input class="form-control" type="text" name="zona" data-ng-model="fRegion" 
-						    		data-ng-disabled="!edit && !create" placeholder="zona">
+						    		data-ng-disabled="view || (language != defaultLang)" placeholder="zona">
 						    	</div>
-						    	<span class="glyphicon glyphicon-asterisk"></span>
+						    	<span class="text-danger glyphicon glyphicon-asterisk"></span>
 						    </div>
 						   	<div class="row form-group">
 						    	<label class="col-md-1 control-label">Dettagli Zona:</label>
 						    	<div class="col-md-2">
 						    		<input class="form-control" type="text" name="zonaDett" data-ng-model="fRegionDetails" 
-						    		data-ng-disabled="!edit && !create" placeholder="dettagli zona">
+						    		data-ng-disabled="view || (language != defaultLang)" placeholder="dettagli zona">
 						    	</div>
-						    	<span class="glyphicon glyphicon-asterisk"></span>
+						    	<span class="text-danger glyphicon glyphicon-asterisk"></span>
 						    </div>
 						   	<div class="row form-group">
 						    	<label class="col-md-1 control-label">Note:</label>
@@ -140,6 +139,24 @@
 				</div>
 			</div>
 			
+			<div id="divDeleteItemAlert" class="modal fade" role="dialog">
+				<div class="modal-dialog modal-sm">
+					<div class="modal-content">
+						<div class="modal-body">
+							<p>Sei sicuro di voler eliminare l'oggetto?</p>
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-default" data-dismiss="modal"
+							data-target="#divDeleteItemAlert">Annulla</button>
+							<button class="btn btn-danger" data-dismiss="modal" 
+							data-target="#divDeleteItemAlert" data-ng-click="deleteCrm()">
+							Elimina
+							</button>
+						</div>
+					</div>
+				</div>
+			</div>	
+						
 			<div id="divTimetable" class="modal modal-wide fade" role="dialog">
 			  <div class="modal-dialog">
 			    <!-- Modal content-->
@@ -149,6 +166,19 @@
 			        <h4 class="modal-title">IMPOSTA ORARI {{getActualName()}}</h4>
 			      </div>
 			      <div class="modal-body">
+			      
+							<div id="error" class="alert alert-danger fade in" data-ng-show="error">
+								<a href="#" class="close" data-hide="alert" aria-label="close"
+								data-ng-click="resetError()">&times;</a>
+								{{errorMsg}}
+							</div>
+			
+							<div id="error" class="alert alert-success fade in" data-ng-show="ok">
+								<a href="#" class="close" data-hide="alert" aria-label="close"
+								data-ng-click="resetOk()">&times;</a>
+								{{okMsg}}
+							</div>
+			      
 			      	<p class="text-danger pull-right">I campi contrassegnati con il simbolo  
 			      	<span class="glyphicon glyphicon-asterisk"></span> sono obbligatori</p>
 			        <div>
@@ -158,15 +188,15 @@
 					        	<div class="col-md-2">
 					        		<input type="text" name="dateFrom" data-ng-model="fDateFrom" required datepicker data-showon="both" 
 					        		data-dateformat="yy-mm-dd" placeholder="da" />
-					        		<span class="glyphicon glyphicon-asterisk"></span>
-					        		<span class="label label-warning" data-ng-show="!newDate.dateFrom.$valid">Campo richiesto</span>
+					        		<span class="text-danger glyphicon glyphicon-asterisk"></span>
+					        		<!-- <span class="label label-warning" data-ng-show="!newDate.dateFrom.$valid">Campo richiesto</span> -->
 					        	</div>
 					        	<label class="col-md-1 control-label">A:</label>
 				        		<div class="col-md-2">
 				        			<input type="text" name="dateTo" data-ng-model="fDateTo" required datepicker data-showon="both" 
 				        			data-dateformat="yy-mm-dd" placeholder="a">
-				        			<span class="glyphicon glyphicon-asterisk"></span>
-				        			<span class="label label-warning" data-ng-show="!newDate.dateTo.$valid">Campo richiesto</span>
+				        			<span class="text-danger glyphicon glyphicon-asterisk"></span>
+				        			<!-- <span class="label label-warning" data-ng-show="!newDate.dateTo.$valid">Campo richiesto</span> -->
 				        		</div>
 			        		</div>
 				        	<div class="row form-group">
@@ -202,44 +232,101 @@
 						    	</form>
 								</div>
 								<label class="control-label">Inserisci le date specifiche:</label>
-								<div class="form-group">
-									<input type="text" data-ng-model="fDateWorkingDay" datepicker 
-									data-showon="both" data-dateformat="yy-mm-dd"/>
-									<button class="btn btn-link" data-ng-click="addWorkingDay()"
-									data-ng-disabled="!fDateWorkingDay">
-										<span class="glyphicon glyphicon-plus"></span>
-									</button>
-									<button class="btn btn-link" data-ng-click="deleteWorkingDay()"
-									data-ng-disabled="!fDateWorkingDaySelected">
-										<span class="glyphicon glyphicon-minus"></span>
-									</button>
-								</div>	
-								<select multiple class="form-control" data-ng-model="fDateWorkingDaySelected">
-									<option data-ng-repeat="item in fDateWorkingDayList track by $index" value="$index">{{item}}</option>
-								</select>
+								<form>
+									<div class="row form-group">
+										<label class="col-md-1 control-label">Data:</label>
+										<div class="col-md-3">
+											<input type="text" data-ng-model="fDateWorkingDay" datepicker 
+											data-showon="both" data-dateformat="yy-mm-dd"/>
+											<button class="btn btn-link" data-ng-click="addWorkingDay()"
+											data-ng-disabled="!fDateWorkingDay">
+												<span class="glyphicon glyphicon-plus"></span>
+											</button>
+											<button class="btn btn-link" data-ng-click="deleteWorkingDay()"
+											data-ng-disabled="!fDateWorkingDaySelected">
+												<span class="glyphicon glyphicon-minus"></span>
+											</button>
+										</div>
+									</div>
+									<div class="row form-group">
+										<div class="col-md-4">
+											<select multiple class="form-control" data-ng-model="fDateWorkingDaySelected">
+												<option data-ng-repeat="item in fDateWorkingDayList track by $index" value="$index">{{item}}</option>
+											</select>
+										</div>
+									</div>	
+								</form>
 			        </div>
 			        <div>
 			        	<label>Aggiungi eccezioni:</label>
-			        	<div class="form-group">
-									<input type="text" data-ng-model="fDateExceptionDay" datepicker 
-									data-showon="both" data-dateformat="yy-mm-dd"/>
-									<button class="btn btn-link" data-ng-click="addExceptionDay()"
-									data-ng-disabled="!fDateExceptionDay">
-										<span class="glyphicon glyphicon-plus"></span>
-									</button>
-									<button class="btn btn-link" data-ng-click="deleteExceptionDay()"
-									data-ng-disabled="!fDateExceptionDaySelected">
-										<span class="glyphicon glyphicon-minus"></span>
-									</button>
-			        	</div>
-								<select multiple class="form-control" data-ng-model="fDateExceptionDaySelected">
-									<option data-ng-repeat="item in fDateExceptionDayList track by $index" value="$index">{{item}}</option>
-								</select>
+			        	<form>
+				        	<div class="row form-group">
+				        		<label class="col-md-1 control-label">Data:</label>
+				        		<div class="col-md-3"> 
+											<input type="text" data-ng-model="fDateExceptionDay" datepicker 
+											data-showon="both" data-dateformat="yy-mm-dd"/>
+											<button class="btn btn-link" data-ng-click="addExceptionDay()"
+											data-ng-disabled="!fDateExceptionDay">
+												<span class="glyphicon glyphicon-plus"></span>
+											</button>
+											<button class="btn btn-link" data-ng-click="deleteExceptionDay()"
+											data-ng-disabled="!fDateExceptionDaySelected">
+												<span class="glyphicon glyphicon-minus"></span>
+											</button>
+				        		</div>
+				        	</div>
+				        	<div class="row form-group">
+				        		<div class="col-md-4">
+											<select multiple class="form-control" data-ng-model="fDateExceptionDaySelected">
+												<option data-ng-repeat="item in fDateExceptionDayList track by $index" value="$index">{{item}}</option>
+											</select>
+										</div>
+				        	</div>
+			        	</form>
 			        </div>
-			        <div class="form-group">
-			        	<label>Note:</label>
-			        	<textarea class="form-control" rows="2" data-ng-model="fDateNotes" placeholder="note"></textarea>
-			        </div>
+			        <form>
+				        <div class="row form-group">
+						   		<label class="col-md-1 control-label">Note:</label>
+									<div class="col-md-2">
+										<button type="button" class="btn btn-default" data-ng-click="changeLanguage('it')"
+											data-ng-class="{'active':language == 'it'}">
+							   			IT
+							 			</button>
+										<button type="button" class="btn btn-default" data-ng-click="changeLanguage('en')"
+											data-ng-class="{'active':language == 'en'}">
+							   			EN
+							 			</button>
+									</div>
+									<div class="col-md-1">
+										<button class="btn btn-success" data-ng-click="setNote()">
+											Salva Nota
+										</button>
+									</div>
+									<label class="col-md-3 control-label">Note IT</label>
+									<label class="col-md-3 control-label">Note EN</label>
+				        </div>
+				        <div class="row form-group">
+				        	<div class="col-md-3">
+				        		<textarea class="form-control" rows="2" data-ng-model="fDateNotes" placeholder="note"></textarea>
+				        	</div>
+				        	<div class="col-md-1"></div>
+				        	<div class="col-md-3">
+				        		{{timetableDateNotes['it']}}
+				        	</div>
+				        	<div class="col-md-3">
+				        		{{timetableDateNotes['en']}}
+				        	</div>
+				        </div>
+			        </form>
+							<div class="row">
+								<div class="col-md-2">
+									<button type="button" class="btn btn-default" data-dismiss="modal">Annulla</button>
+							  	<button class="btn btn-warning" data-ng-click="addTimetable()"
+							  	data-ng-disabled="timetableError || timetableIncomplete">
+							  		Aggiungi orario
+							  	</button> 
+								</div>
+							</div>
 							<div class="row list-header-timetable">
 								<div class="col-md-1"><h4>Da</h4></div>
 								<div class="col-md-1"><h4>A</h4></div>
@@ -273,30 +360,41 @@
 									<span>{{timetable.note[language]}}</span>
 								</div>
 								<div class="col-md-1">
-									<button class="btn btn-danger" data-dismiss="modal" title="Cancella" 
-									data-ng-click="deleteTimetable($index)">
+									<button class="btn btn-danger" data-toggle="modal" data-target="#divDeleteTimetableAlert"
+									data-backdrop="static" data-ng-click="setItemToDelete($index)" title="Cancella">
 										<span class="glyphicon glyphicon-trash"></span>
 									</button>
 								</div>
 			        </div>			        
 			      </div>
-			      <div class="modal-footer">
-					  	<button class="btn btn-success" data-dismiss="modal" data-ng-click="addTimetable()"
-					  	data-ng-disabled="timetableError || timetableIncomplete">
-					  		<span class="glyphicon glyphicon-save"></span> Aggiungi
-					  	</button> 
-			        <button type="button" class="btn btn-default" data-dismiss="modal">Chiudi</button>
-			      </div>
 			    </div>
 			  </div>
 			</div>
+			
+			<div id="divDeleteTimetableAlert" class="modal fade" role="dialog">
+				<div class="modal-dialog modal-sm">
+					<div class="modal-content">
+						<div class="modal-body">
+							<p>Vuoi veramente eliminare l'orario?</p>
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-default" data-dismiss="modal" 
+							data-target="#divDeleteTimetableAlert">Annulla</button>
+							<button class="btn btn-danger" data-dismiss="modal" 
+							data-target="#divDeleteTimetableAlert" data-ng-click="deleteTimetable()">
+							Elimina
+							</button>
+						</div>
+					</div>
+				</div>
+			</div>
 											
-		<div class="list-create">
-			<button class="btn btn-success" data-toggle="modal" data-target="#divForm"
-				data-backdrop="static" data-ng-click="newCrm()" title="Crea">
-					CREA NUOVO ELEMENTO
-			</button>
-		</div>
+			<div class="list-create">
+				<button class="btn btn-success" data-toggle="modal" data-target="#divForm"
+					data-backdrop="static" data-ng-click="newCrm()" title="Crea">
+						CREA NUOVO ELEMENTO
+				</button>
+			</div>
 		
 		<hr>
 		
@@ -322,8 +420,7 @@
 		<div class="row list-header">
 			<div class="col-md-3"><h4>Zona</h4></div>
 			<div class="col-md-4"><h4>Dettagli zona</h4></div>
-			<div class="col-md-2"><h4>Note</h4></div>
-			<div class="col-md-1"><h4>Lingua</h4></div>
+			<div class="col-md-3"><h4>Note</h4></div>
 			<div class="col-md-2"><h4></h4></div>
 		</div>
 		<div class="row list-row" data-ng-repeat="crm in crmList | filter:search ">
@@ -333,11 +430,8 @@
 			<div class="col-md-4">
 				<span>{{crm.dettagliZona}}</span>
 			</div>
-			<div class="col-md-2">
+			<div class="col-md-3">
 				<span>{{crm.note[language]}}</span>
-			</div>
-			<div class="col-md-1">
-				<span></span>
 			</div>
 			<div class="col-md-2">
 				<button class="btn btn-info" data-toggle="modal" data-target="#divForm"
@@ -348,7 +442,8 @@
 				data-backdrop="static" data-ng-click="editCrm(crm.objectId, true)" title="Modifica">
 					<span class="glyphicon glyphicon-pencil"></span>
 				</button>
-				<button class="btn btn-danger" data-ng-click="deleteCrm(crm.objectId)" title="Cancella">
+				<button class="btn btn-danger" data-toggle="modal" data-target="#divDeleteItemAlert" 
+				data-backdrop="static" data-ng-click="setItemToDelete(crm.objectId)" title="Cancella">
 					<span class="glyphicon glyphicon-trash"></span>
 				</button>
 				<button class="btn btn-warning" data-toggle="modal" data-target="#divTimetable"

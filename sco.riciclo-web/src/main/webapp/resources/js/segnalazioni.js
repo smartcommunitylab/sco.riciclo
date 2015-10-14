@@ -11,6 +11,7 @@ var segnalazioniCtrl = segnalazioniApp.controller('userCtrl', function($scope, $
 		$scope.errorMsg = e.errorMsg;
 	});
 
+	$scope.selectedMenu = "elenchi";
 	$scope.selectedTab = "menu-segnalazioni";
 	$scope.language = "it";
 	$scope.draft = true;

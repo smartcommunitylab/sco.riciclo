@@ -9,6 +9,7 @@ var coloriApp = angular.module('colori', ['DataService', 'colorpicker.module']).
 		$scope.errorMsg = e.errorMsg;
 	});
 	
+	$scope.selectedMenu = "elenchi";
 	$scope.selectedTab = "menu-colori";
 	$scope.language = "it";
 	$scope.draft = true;

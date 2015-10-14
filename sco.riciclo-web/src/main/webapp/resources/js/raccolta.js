@@ -11,6 +11,7 @@ var raccoltaCtrl = raccoltaApp.controller('userCtrl', function($scope, $http, $s
 		$scope.errorMsg = e.errorMsg;
 	});
 
+	$scope.selectedMenu = "relazioni";
 	$scope.selectedTab = "menu-raccolta";
 	$scope.language = "it";
 	$scope.draft = true;

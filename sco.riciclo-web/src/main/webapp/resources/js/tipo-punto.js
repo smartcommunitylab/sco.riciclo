@@ -9,6 +9,7 @@ var tipoPuntoApp = angular.module('tipo-punto', ['DataService']).controller('use
 		$scope.errorMsg = e.errorMsg;
 	});
 
+	$scope.selectedMenu = "tipologie";
 	$scope.selectedTab = "menu-tipo-punto";
 	$scope.language = "it";
 	$scope.draft = true;

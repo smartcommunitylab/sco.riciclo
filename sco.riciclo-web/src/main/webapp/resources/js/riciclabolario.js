@@ -12,6 +12,7 @@ var riciclabolarioCtrl = riciclabolarioApp.controller('userCtrl', function($scop
 		$window.spinner.stop();
 	});
 
+	$scope.selectedMenu = "relazioni";
 	$scope.selectedTab = "menu-riciclabolario";
 	$scope.language = "it";
 	$scope.draft = true;

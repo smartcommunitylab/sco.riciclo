@@ -9,6 +9,7 @@ angular.module('tipo-rifiuto', ['DataService']).controller('userCtrl', function(
 		$scope.errorMsg = e.errorMsg;
 	});
 	
+	$scope.selectedMenu = "tipologie";
 	$scope.selectedTab = "menu-tipo-rifiuto";
 	$scope.language = "it";
 	$scope.draft = true;

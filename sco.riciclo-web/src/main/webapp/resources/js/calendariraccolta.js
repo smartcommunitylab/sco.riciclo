@@ -11,12 +11,14 @@ var calendariraccoltaCtrl = calendariraccoltaApp.controller('userCtrl', function
 		$scope.errorMsg = e.errorMsg;
 	});
 	
+	$scope.selectedMenu = "relazioni";
 	$scope.selectedTab = "menu-calendariraccolta";
 	$scope.language = "it";
 	$scope.draft = true;
 	
 	$scope.edit = false;
 	$scope.create = false;
+	$scope.view = false;
 	$scope.search = "";
 	$scope.incomplete = true;
 	$scope.timetableIncomplete = true;
@@ -59,12 +61,14 @@ var calendariraccoltaCtrl = calendariraccoltaApp.controller('userCtrl', function
 	$scope.fDateWorkingDayList = [];
 	$scope.fDateWorkingDaySelected = "";
 	
-	
 	$scope.fDateExceptionDay = "";
 	$scope.fDateExceptionDayList = [];
 	$scope.fDateExceptionDaySelected = "";
 	
 	$scope.fDateNotes = "";
+	$scope.timetableDateNotes = {};
+	
+	$scope.itemToDelete = "";
 	
 	$scope.initData = function(profile) {
 		$scope.profile = profile;
@@ -133,6 +137,10 @@ var calendariraccoltaCtrl = calendariraccoltaApp.controller('userCtrl', function
 		return id;
 	}
 	
+	$scope.setItemToDelete = function(id) {
+		$scope.itemToDelete = id;
+	};
+	
 	$scope.resetError = function() {
 		$scope.error = false;
 		$scope.errorMsg = "";
@@ -162,16 +170,47 @@ var calendariraccoltaCtrl = calendariraccoltaApp.controller('userCtrl', function
 		$scope.selectedArea = null;
 		$scope.selectedTipologiaUtenza = null;
 		$scope.selectedTipologiaPuntoRaccolta = null;
+		$scope.itemToDelete = "";
+	};
+	
+	$scope.getModalHeaderClass = function() {
+		if($scope.view) {
+			return "view";
+		}
+		if($scope.edit) {
+			return "edit";
+		}
+		if($scope.create) {
+			return "create";
+		}
+	};
+	
+	$scope.getActualName = function() {
+		var name = getAreaName($scope.fId);
+		return name;
+	};
+	
+	$scope.setNote = function() {
+		$scope.timetableDateNotes[$scope.language] = $scope.fDateNotes;
 	};
 	
 	$scope.newRelation = function() {
 		$scope.edit = false;
 		$scope.create = true;
+		$scope.view = false;
 		$scope.incomplete = true;
 		$scope.resetForm();
 	};
 	
 	$scope.editRelation = function(id) {
+		if(modify) {
+			$scope.edit = true;
+			$scope.view = false;
+		} else {
+			$scope.edit = false;
+			$scope.view = true;
+		}
+		$scope.create = false;
 		var relation = $scope.findByObjectId($scope.calendarioRaccoltaList, id);
 		if(relation != null) {
 			$scope.fId = id;
@@ -180,8 +219,6 @@ var calendariraccoltaCtrl = calendariraccoltaApp.controller('userCtrl', function
 			$scope.selectedTipologiaPuntoRaccolta = $scope.findByObjectId($scope.tipologiaPuntoRaccoltaList, relation.tipologiaPuntoRaccolta);
 			$scope.areaSearch.value = $scope.getAreaName(relation.area);
 			$scope.timetableList = relation.orarioApertura;
-			$scope.edit = true;
-			$scope.create = false;
 			$scope.incomplete = false;
 		}
 		$('html,body').animate({scrollTop:0},0);
@@ -250,7 +287,8 @@ var calendariraccoltaCtrl = calendariraccoltaApp.controller('userCtrl', function
 		}
 	};
 		
-	$scope.deleteRelation = function(id) {
+	$scope.deleteRelation = function() {
+		var id = $scope.itemToDelete;
 		var index = $scope.findIndex($scope.calendarioRaccoltaList, id);
 		if(index >= 0) {
 			var element = $scope.calendarioRaccoltaList[index];
@@ -480,7 +518,7 @@ calendariraccoltaApp.directive('datepicker', function() {
     		element.datepicker("option", $.datepicker.regional['it']);
     		element.datepicker({
     			showOn: attrs['showon'],
-          buttonImage: "lib/jqueryui/images/calendar.gif",
+          buttonImage: "lib/jqueryui/images/ic_calendar.png",
           buttonImageOnly: false,
           buttonText: "Calendario",
           dateFormat: attrs['dateformat'],

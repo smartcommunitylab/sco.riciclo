@@ -11,6 +11,7 @@ var puntiraccoltaCtrl = puntiraccoltaApp.controller('userCtrl', function($scope,
 		$scope.errorMsg = e.errorMsg;
 	});
 
+	$scope.selectedMenu = "relazioni";
 	$scope.selectedTab = "menu-puntiraccolta";
 	$scope.language = "it";
 	$scope.draft = true;

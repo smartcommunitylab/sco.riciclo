@@ -9,6 +9,7 @@ var tipoProfiloApp = angular.module('tipo-profilo', ['DataService']).controller(
 		$scope.errorMsg = e.errorMsg;
 	});
 	
+	$scope.selectedMenu = "tipologie";
 	$scope.selectedTab = "menu-tipo-profilo";
 	$scope.language = "it";
 	$scope.draft = true;

@@ -11,6 +11,7 @@ var gestoriCtrl = gestoriApp.controller('userCtrl', function($scope, $window, $h
 		$scope.errorMsg = e.errorMsg;
 	});
 
+	$scope.selectedMenu = "elenchi";
 	$scope.selectedTab = "menu-gestori";
 	$scope.language = "it";
 	$scope.draft = true;

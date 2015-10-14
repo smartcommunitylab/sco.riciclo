@@ -9,6 +9,7 @@ angular.module('tipo-raccolta', ['DataService']).controller('userCtrl', function
 		$scope.errorMsg = e.errorMsg;
 	});
 	
+	$scope.selectedMenu = "tipologie";
 	$scope.selectedTab = "menu-tipo-raccolta";
 	$scope.language = "it";
 	$scope.draft = true;

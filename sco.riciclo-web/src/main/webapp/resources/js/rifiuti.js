@@ -9,7 +9,8 @@ var rifiutiApp = angular.module('rifiuti', ['DataService']).controller('userCtrl
 		$scope.errorMsg = e.errorMsg;
 		$window.spinner.stop();
 	});
-
+	
+	$scope.selectedMenu = "elenchi";
 	$scope.selectedTab = "menu-rifiuti";
 	$scope.language = "it";
 	$scope.draft = true;

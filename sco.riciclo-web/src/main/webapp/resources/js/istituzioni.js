@@ -10,7 +10,8 @@ var istituzioniCtrl = istituzioniApp.controller('userCtrl', function($scope, $wi
 		$scope.error = true;
 		$scope.errorMsg = e.errorMsg;
 	});
-
+	
+	$scope.selectedMenu = "elenchi";
 	$scope.selectedTab = "menu-istituzioni";
 	$scope.language = "it";
 	$scope.draft = true;

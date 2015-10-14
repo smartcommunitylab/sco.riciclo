@@ -11,6 +11,7 @@ var areeCtrl = areeApp.controller('userCtrl', function($scope, $http, $sce, $q, 
 		$scope.errorMsg = e.errorMsg;
 	});
 	
+	$scope.selectedMenu = "elenchi";
 	$scope.selectedTab = "menu-aree";
 	$scope.language = "it";
 	$scope.draft = true;

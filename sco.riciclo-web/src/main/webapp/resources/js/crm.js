@@ -11,6 +11,7 @@ var crmCtrl = crmApp.controller('userCtrl', function($scope, $window, $http, Dat
 		$scope.errorMsg = e.errorMsg;
 	});
 
+	$scope.selectedMenu = "elenchi";
 	$scope.selectedTab = "menu-crm";
 	$scope.language = "it";
 	$scope.defaultLang = "it";
@@ -49,6 +50,9 @@ var crmCtrl = crmApp.controller('userCtrl', function($scope, $window, $http, Dat
 	$scope.fDateExceptionDaySelected = "";
 	
 	$scope.fDateNotes = "";
+	$scope.timetableDateNotes = {};
+	
+	$scope.itemToDelete = "";
 	
 	$scope.search = "";
 	$scope.edit = false;
@@ -97,7 +101,7 @@ var crmCtrl = crmApp.controller('userCtrl', function($scope, $window, $http, Dat
 	
 	$scope.changeLanguage = function(language) {
 		$scope.language = language;
-		if($scope.edit && ($scope.fId != null)) {
+		if($scope.fId != null) {
 			var element = $scope.findByObjectId($scope.crmList, $scope.fId);
 			if(element != null) {
 				$scope.fNote = element.note[$scope.language];
@@ -115,17 +119,16 @@ var crmCtrl = crmApp.controller('userCtrl', function($scope, $window, $http, Dat
 		if($scope.create) {
 			return "create";
 		}
-	}
+	};
 	
 	$scope.getActualName = function() {
 		var name = $scope.fRegion + ", " + $scope.fRegionDetails;
 		return name;
-	}
+	};
 	
-	$scope.updateCrm = function() {		
-		$scope.edit = true;
-		$scope.view = false;
-	}
+	$scope.setNote = function() {
+		$scope.timetableDateNotes[$scope.language] = $scope.fDateNotes;
+	};
 	
 	$scope.editCrm = function(id, modify) {
 		console.log("editCrm:" + id);
@@ -162,6 +165,7 @@ var crmCtrl = crmApp.controller('userCtrl', function($scope, $window, $http, Dat
 		$scope.create = true;
 		$scope.view = false;
 		$scope.incomplete = true;
+		$scope.language = "it";
 		$scope.resetForm();
 	};
 	
@@ -190,6 +194,7 @@ var crmCtrl = crmApp.controller('userCtrl', function($scope, $window, $http, Dat
 		$scope.fIndumenti = false;
 		$scope.fGettoniera = false;
 		$scope.timetableList = [];
+		$scope.itemToDelete = "";
 	};
 	
 	$scope.setCaratteristiche = function(crm) {
@@ -293,8 +298,12 @@ var crmCtrl = crmApp.controller('userCtrl', function($scope, $window, $http, Dat
 		}
 	};
 	
-	$scope.deleteCrm = function(id) {
-		var index = $scope.findIndex($scope.crmList, id);
+	$scope.setItemToDelete = function(id) {
+		$scope.itemToDelete = id;
+	};
+	
+	$scope.deleteCrm = function() {
+		var index = $scope.findIndex($scope.crmList, $scope.itemToDelete);
 		if(index >= 0) {
 			var element = $scope.crmList[index];
 			if(element != null) {
@@ -323,7 +332,8 @@ var crmCtrl = crmApp.controller('userCtrl', function($scope, $window, $http, Dat
 		}
 	};
 	
-	$scope.deleteTimetable = function(index) {
+	$scope.deleteTimetable = function() {
+		var index = $scope.itemToDelete;
 		console.log("deleteTimetable:" + index);
 		var crm = $scope.findByObjectId($scope.crmList, $scope.fId);
 		if(crm != null) {
@@ -374,8 +384,9 @@ var crmCtrl = crmApp.controller('userCtrl', function($scope, $window, $http, Dat
 				element.eccezione = element.eccezione.concat($scope.fDateExceptionDayList[d]);
 				element.eccezione = element.eccezione.concat(" ");
 			}
-			element.note[$scope.language] = $scope.fDateNotes;
-				
+			element.note['it'] = $scope.timetableDateNotes['it'];
+			element.note['en'] = $scope.timetableDateNotes['en'];
+			
 			var url = "api/crm/" + $scope.profile.appInfo.ownerId + "/" + crm.objectId + "/orario?draft=" + $scope.draft;
 			$http.post(url, element, {headers: {'X-ACCESS-TOKEN': $scope.profile.appInfo.token}}).then(
 			function(response) {
@@ -479,7 +490,7 @@ crmApp.directive('datepicker', function() {
       		element.datepicker("option", $.datepicker.regional['it']);
       		element.datepicker({
       			showOn: attrs['showon'],
-            buttonImage: "lib/jqueryui/images/calendar.gif",
+            buttonImage: "lib/jqueryui/images/ic_calendar.png",
             buttonImageOnly: false,
             buttonText: "Calendario",
             dateFormat: attrs['dateformat'],
