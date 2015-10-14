@@ -51,6 +51,10 @@
 	background-color: #639B3D;
 }
 
+.ac-container .ac-menu {
+	z-index: 2150000000 !important;
+}
+
 .ui-autocomplete {
 	background-color: white;
 	width: 300px;

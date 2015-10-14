@@ -1,6 +1,6 @@
-var calendariraccoltaApp = angular.module('calendariraccolta', ['DataService', 'ngSanitize', 'MassAutoComplete']);
+var calendariraccoltaApp = angular.module('calendariraccolta', ['DataService']);
 
-var calendariraccoltaCtrl = calendariraccoltaApp.controller('userCtrl', function($scope, $http, $sce, $q, DataService) {
+var calendariraccoltaCtrl = calendariraccoltaApp.controller('userCtrl', function($scope, $http, DataService) {
 	DataService.getProfile().then(
 	function(p) {
 		$scope.initData(p);
@@ -14,6 +14,7 @@ var calendariraccoltaCtrl = calendariraccoltaApp.controller('userCtrl', function
 	$scope.selectedMenu = "relazioni";
 	$scope.selectedTab = "menu-calendariraccolta";
 	$scope.language = "it";
+	$scope.defaultLang = "it";
 	$scope.draft = true;
 	
 	$scope.edit = false;
@@ -34,8 +35,6 @@ var calendariraccoltaCtrl = calendariraccoltaApp.controller('userCtrl', function
 	$scope.status = 200;
 	
 	$scope.selectedArea = null;
-	$scope.areaSearch = {};
-	
 	$scope.selectedTipologiaPuntoRaccolta =  null;
 	$scope.selectedTipologiaUtenza = null;
 	
@@ -154,7 +153,7 @@ var calendariraccoltaCtrl = calendariraccoltaApp.controller('userCtrl', function
 	$scope.changeLanguage = function(language) {
 		$scope.language = language;
 		$scope.areaNameMap = $scope.setNameMap($scope.areaList);
-		$scope.tipologiaPuntoRaccoltaNameMap = $scope.setNameMap($scope.tipologiaPuntoRaccoltaList);
+		$scope.tipologiaPuntoRaccoltaNameMap = $scope.setLocalNameMap($scope.tipologiaPuntoRaccoltaList);
 	};
 	
 	$scope.resetUI = function() {
@@ -165,7 +164,6 @@ var calendariraccoltaCtrl = calendariraccoltaApp.controller('userCtrl', function
 	
 	$scope.resetForm = function() {
 		$scope.fId = "";
-		$scope.areaSearch = {};
 		$scope.tipologiaUtenzaSearch = {};
 		$scope.selectedArea = null;
 		$scope.selectedTipologiaUtenza = null;
@@ -186,7 +184,7 @@ var calendariraccoltaCtrl = calendariraccoltaApp.controller('userCtrl', function
 	};
 	
 	$scope.getActualName = function() {
-		var name = getAreaName($scope.fId);
+		var name = $scope.getAreaName($scope.fId);
 		return name;
 	};
 	
@@ -202,7 +200,7 @@ var calendariraccoltaCtrl = calendariraccoltaApp.controller('userCtrl', function
 		$scope.resetForm();
 	};
 	
-	$scope.editRelation = function(id) {
+	$scope.editRelation = function(id, modify) {
 		if(modify) {
 			$scope.edit = true;
 			$scope.view = false;
@@ -217,7 +215,6 @@ var calendariraccoltaCtrl = calendariraccoltaApp.controller('userCtrl', function
 			$scope.selectedArea = $scope.findByObjectId($scope.areaList, relation.area);
 			$scope.selectedTipologiaUtenza = $scope.findByObjectId($scope.tipologiaUtenzaList, relation.tipologiaUtenza);
 			$scope.selectedTipologiaPuntoRaccolta = $scope.findByObjectId($scope.tipologiaPuntoRaccoltaList, relation.tipologiaPuntoRaccolta);
-			$scope.areaSearch.value = $scope.getAreaName(relation.area);
 			$scope.timetableList = relation.orarioApertura;
 			$scope.incomplete = false;
 		}
@@ -319,6 +316,7 @@ var calendariraccoltaCtrl = calendariraccoltaApp.controller('userCtrl', function
 	};
 	
 	$scope.deleteTimetable = function(index) {
+		var index = $scope.itemToDelete;
 		console.log("deleteTimetable:" + index);
 		var relation = $scope.findByObjectId($scope.calendarioRaccoltaList, $scope.fId);
 		if(relation != null) {
@@ -369,7 +367,8 @@ var calendariraccoltaCtrl = calendariraccoltaApp.controller('userCtrl', function
 				element.eccezione = element.eccezione.concat($scope.fDateExceptionDayList[d]);
 				element.eccezione = element.eccezione.concat(" ");
 			}
-			element.note[$scope.language] = $scope.fDateNotes;
+			element.note['it'] = $scope.timetableDateNotes['it'];
+			element.note['en'] = $scope.timetableDateNotes['en'];
 				
 			var url = "api/calraccolta/" + $scope.profile.appInfo.ownerId + "/" + relation.objectId + "/orario?draft=" + $scope.draft;
 			$http.post(url, element, {headers: {'X-ACCESS-TOKEN': $scope.profile.appInfo.token}}).then(
@@ -482,30 +481,6 @@ var calendariraccoltaCtrl = calendariraccoltaApp.controller('userCtrl', function
 		}
 		return map;
 	};
-	
-	$scope.suggestArea = function(term) {
-		var q = term.toLowerCase().trim();
-    var results = [];
-    // Find first 10 states that start with `term`.
-    for (var i = 0; i < $scope.areaList.length; i++) {
-      var area = $scope.areaList[i];
-      if(area.objectId) {
-      	var name = $scope.getAreaName(area.objectId);
-        var result= name.search(new RegExp(q, "i"));
-        if(result >= 0) {
-        	results.push({ label: name, value: name, obj: area });
-        }
-      }
-    }
-    return results;
-	};
-	
-	$scope.ac_area_options = {
-		suggest: $scope.suggestArea,
-		on_select: function (selected) {
-			$scope.selectedArea = selected.obj;
-		}
-	};	
 	
 });
 
