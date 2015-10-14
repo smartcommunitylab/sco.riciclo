@@ -260,7 +260,7 @@ angular.module('rifiuti.services.data', [])
                 .success(function (data) {
                     var version = extractVersion(data);
                     if (version) {
-                        doWithVersion(deferred, version, true);
+                        doWithVersion(deferred, version, false);
                     } else {
                         doWithVersion(deferred, DATA_VERSION);
                     }
