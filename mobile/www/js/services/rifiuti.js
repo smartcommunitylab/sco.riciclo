@@ -178,7 +178,7 @@ angular.module('rifiuti.services.rifiuti', [])
         var filtered = [];
         for (var i = 0; i < data.length; i++) {
           if (profilo.aree.indexOf(data[i].area)>=0 &&
-              Utili.isPaP(data[i].tipologiaPuntiRaccolta) &&
+              Utili.isPaP(data[i].tipoPuntoRaccolta) &&
               (!profilo.settings.papTypes || profilo.settings.papTypes[data[i].tipologiaPuntiRaccolta]))
           {
             filtered.push({
@@ -278,8 +278,8 @@ angular.module('rifiuti.services.rifiuti', [])
     },
     sortRaccolta: function(raccolta) {
             raccolta.sort(function(a,b){
-            var aPaP = Utili.isPaP(a.tipologiaPuntoRaccolta);
-            var bPaP = Utili.isPaP(b.tipologiaPuntoRaccolta);
+            var aPaP = Utili.isPaP(a.tipoPuntoRaccolta);
+            var bPaP = Utili.isPaP(b.tipoPuntoRaccolta);
             if (aPaP && !bPaP) return -1;
             if (bPaP && !aPaP) return 1;
             return a.tipologiaPuntoRaccolta.localeCompare(b.tipologiaPuntoRaccolta);

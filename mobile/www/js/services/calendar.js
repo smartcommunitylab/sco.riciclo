@@ -15,25 +15,25 @@ angular.module('rifiuti.services.calendar', [])
         hour = calItem.dalle +'-'+calItem.alle;
       }
 
-      if (Utili.isPaP(puntoDiRaccolta.tipologiaPuntiRaccolta)) {
+      if (Utili.isPaP(puntoDiRaccolta.tipoPuntoRaccolta)) {
         key = 'Porta a porta'; t = key;
-        var descr = puntoDiRaccolta.tipologiaPuntiRaccolta;
+        var descr = puntoDiRaccolta.tipoPuntoRaccolta.nome;
         if (descr.indexOf(key) == 0) descr = descr.substr(key.length+1);
         proto = {
-          tipologiaPuntiRaccolta: puntoDiRaccolta.tipologiaPuntiRaccolta,
+          tipologiaPuntiRaccolta: puntoDiRaccolta.tipoPuntoRaccolta.nome,
           colore: puntoDiRaccolta.colore,
           descr : [descr, hour]
         };
       } else  {
-        key = puntoDiRaccolta.tipologiaPuntiRaccolta + puntoDiRaccolta.dettagliZona;
-        t = puntoDiRaccolta.tipologiaPuntiRaccolta;
+        key = puntoDiRaccolta.tipoPuntoRaccolta.nome + puntoDiRaccolta.dettagliZona;
+        t = puntoDiRaccolta.tipoPuntoRaccolta.nome;
         if (!!cell.events[key] && cell.events[key].events.length > 0) {
           proto = cell.events[key].events[0];
           proto.descr[proto.descr.length-1] += ', ' + hour;
           cell.events[key].events = [];
         } else {
           proto = {
-            tipologiaPuntiRaccolta: puntoDiRaccolta.tipologiaPuntiRaccolta,
+            tipologiaPuntiRaccolta: puntoDiRaccolta.tipoPuntoRaccolta.nome,
             colore: puntoDiRaccolta.colore,
             descr : [puntoDiRaccolta.dettagliZona, calItem.dalle +'-'+calItem.alle]
           };

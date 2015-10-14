@@ -206,7 +206,7 @@ angular.module('rifiuti.services.profili', [])
         var data = DataManager.getSync('raccolta');
         var res = [];
         for (var i = 0; i < data.length; i++) {
-            if (!!data[i].tipologiaPuntoRaccolta && Utili.isPaP(data[i].tipologiaPuntoRaccolta) &&
+            if (!!data[i].tipologiaPuntoRaccolta && Utili.isPaP(data[i].tipoPuntoRaccolta) &&
                 data[i].tipologiaUtenza == p.utenza.tipologiaUtenza && p.aree.indexOf(data[i].area) >= 0) {
                 if (res.indexOf(data[i].tipologiaPuntoRaccolta) < 0) res.push(data[i].tipologiaPuntoRaccolta);
             }

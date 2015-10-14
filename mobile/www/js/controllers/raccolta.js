@@ -135,6 +135,7 @@ angular.module('rifiuti.controllers.raccolta', [])
     }
     list.push({
       aperto: false,
+      tipoPuntoRaccolta: item.tipoPuntoRaccolta,
       tipologiaPuntoRaccolta: item.tipologiaPuntiRaccolta,
       icon: Utili.icon(item.tipologiaPuntiRaccolta),
       locs: [item]
@@ -282,6 +283,7 @@ angular.module('rifiuti.controllers.raccolta', [])
     raccolta.forEach(function(item){
       Raccolta.puntiraccolta({ tipo:item.tipologiaPuntoRaccolta }).then(function(punti){
         item['punti']=punti;
+        if (!!punti[0]) {item['tipoPuntoRaccolta']=punti[0].tipoPuntoRaccolta;}
       });
     });
     if (raccolta.length == 1) raccolta[0].aperto = true;

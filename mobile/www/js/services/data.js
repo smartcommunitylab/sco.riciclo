@@ -32,13 +32,24 @@ angular.module('rifiuti.services.data', [])
                 colorMap[key][r.area] = r.colore;
             });
 
+            var tipologiePuntiRaccolta = {};
+            data.categorie.tipologiaPuntiRaccolta.forEach(function (tpr) {
+                tipologiePuntiRaccolta[tpr.id] = tpr;
+            });
+
             var prMap = {};
             var prCalMap = {};
+            var newPuntiRaccolta = {};
             data.puntiRaccolta.forEach(function (pr) {
                 for (var i = 0; i < pr.utenzaArea.length; i++) {
                     var ua = pr.utenzaArea[i];
                     ua.colore = colorMap[ua.tipologiaUtenza + '--' + pr.tipologiaPuntiRaccolta];
                 }
+
+                pr.tipoPuntoRaccolta = tipologiePuntiRaccolta[pr.tipologiaPuntiRaccolta];
+            });
+            data.raccolta.forEach(function (racc) {
+                racc.tipoPuntoRaccolta = tipologiePuntiRaccolta[racc.tipologiaPuntoRaccolta];
             });
             return data;
         }
