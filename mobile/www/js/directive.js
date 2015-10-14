@@ -94,7 +94,7 @@ angular.module('rifiuti.directives', [])
 .directive('agendaList', function ($timeout) {
     return {
       link: function (scope, elem, attrs, ctrl) {
-        if (scope.doScroll) {
+        if (scope.doScroll && scope.$index == scope.daySubList.length-1) {
             $timeout(scope.doScroll, 0);
             scope.doScroll = null;
         }

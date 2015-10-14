@@ -318,7 +318,7 @@ angular.module('rifiuti.controllers.home', [])
         return array;
     };
 
-    var scrollToday = function () {
+    var scrollToday = function (apply) {
         // TODO
         //return;
 
@@ -338,6 +338,9 @@ angular.module('rifiuti.controllers.home', [])
                     $ionicScrollDelegate.scrollTop();
                 }
             };
+            if (apply) {
+              $scope.doScroll();
+            }
         }
     };
 
@@ -361,7 +364,7 @@ angular.module('rifiuti.controllers.home', [])
         } else {
             $scope.daySubList = Calendar.toWeek($scope.dayList, $scope.showDate, $scope.daySubListRunningEnd);
             if (gotoday) {
-                scrollToday();
+                scrollToday(true);
             }
         }
     };

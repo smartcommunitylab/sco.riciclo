@@ -285,6 +285,12 @@ angular.module('rifiuti', [
             Profili.updateNotifications();
         }
 
+
+        document.addEventListener("deviceready", function () {
+          //console.log('removing splashscreen...');
+          //giving another couple of seconds to ui to complete css&font elements redraw (on android)
+          setTimeout(function(){ navigator.splashscreen.hide(); },1500);
+        });
     });
 
     window.addEventListener('filePluginIsReady', function () {
