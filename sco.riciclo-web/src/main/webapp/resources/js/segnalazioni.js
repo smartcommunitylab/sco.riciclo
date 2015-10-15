@@ -1,6 +1,6 @@
-var segnalazioniApp = angular.module('segnalazioni', ['DataService', 'ngSanitize', 'MassAutoComplete']);
+var segnalazioniApp = angular.module('segnalazioni', ['DataService']);
 
-var segnalazioniCtrl = segnalazioniApp.controller('userCtrl', function($scope, $http, $sce, $q, DataService) {
+var segnalazioniCtrl = segnalazioniApp.controller('userCtrl', function($scope, $http, DataService) {
 	DataService.getProfile().then(
 	function(p) {
 		$scope.initData(p);
@@ -15,9 +15,12 @@ var segnalazioniCtrl = segnalazioniApp.controller('userCtrl', function($scope, $
 	$scope.selectedTab = "menu-segnalazioni";
 	$scope.language = "it";
 	$scope.draft = true;
+	$scope.defaultLang = "it";
+	$scope.itemToDelete = "";
 	
 	$scope.edit = false;
 	$scope.create = false;
+	$scope.view = false;
 	$scope.search = "";
 	$scope.incomplete = false;
 	
@@ -110,10 +113,30 @@ var segnalazioniCtrl = segnalazioniApp.controller('userCtrl', function($scope, $
 		$scope.areaSearch.value = null;	
 	};
 	
+	$scope.getModalHeaderClass = function() {
+		if($scope.view) {
+			return "view";
+		}
+		if($scope.edit) {
+			return "edit";
+		}
+		if($scope.create) {
+			return "create";
+		}
+	};
+	
+	$scope.setItemToDelete = function(id) {
+		$scope.itemToDelete = id;
+	};
+	
+	$scope.getActualName = function() {
+		return $scope.tipologia[$scope.defaultLang];
+	};
+	
 	$scope.changeLanguage = function(language) {
 		$scope.language = language;
 		$scope.areaNameMap = $scope.setNameMap($scope.areaList);
-		if($scope.edit && ($scope.id != null)) {
+		if($scope.id != null) {
 			var element = $scope.findByObjectId($scope.segnalazioneList, $scope.id);
 			if(element != null) {
 				$scope.tipologia = element.tipologia[$scope.language];
@@ -136,16 +159,27 @@ var segnalazioniCtrl = segnalazioniApp.controller('userCtrl', function($scope, $
 		$scope.selectedArea = null;
 		$scope.tipologia = "";
 		$scope.email = "";
+		$scope.itemToDelete = "";
 	};
 	
 	$scope.newItem = function() {
 		$scope.edit = false;
 		$scope.create = true;
 		$scope.incomplete = true;
+		$scope.itemToDelete = "";
+		$scope.language = "it";
 		$scope.resetForm();
 	};
 	
-	$scope.editItem = function(id) {
+	$scope.editItem = function(id, modify) {
+		if(modify) {
+			$scope.edit = true;
+			$scope.view = false;
+		} else {
+			$scope.edit = false;
+			$scope.view = true;
+		}
+		$scope.create = false;
 		var element = $scope.findByObjectId($scope.segnalazioneList, id);
 		if(element != null) {
 			$scope.id = id;
@@ -153,8 +187,6 @@ var segnalazioniCtrl = segnalazioniApp.controller('userCtrl', function($scope, $
 			$scope.areaSearch.value = $scope.getAreaName(element.area);
 			$scope.tipologia = element.tipologia[$scope.language];
 			$scope.email = element.email;
-			$scope.edit = true;
-			$scope.create = false;
 			$scope.incomplete = false;
 		}
 		$('html,body').animate({scrollTop:0},0);
@@ -223,8 +255,8 @@ var segnalazioniCtrl = segnalazioniApp.controller('userCtrl', function($scope, $
 		}
 	};
 	
-	$scope.deleteItem = function(id) {
-		var index = $scope.findIndex($scope.segnalazioneList, id);
+	$scope.deleteItem = function() {
+		var index = $scope.findIndex($scope.segnalazioneList, $scope.itemToDelete);
 		if(index >= 0) {
 			var element = $scope.segnalazioneList[index];
 			if(element != null) {
@@ -291,29 +323,6 @@ var segnalazioniCtrl = segnalazioniApp.controller('userCtrl', function($scope, $
 			}
 		}
 		return -1;
-	};
-	
-	$scope.suggestArea = function(term) {
-		var q = term.toLowerCase().trim();
-    var results = [];
-    // Find first 10 states that start with `term`.
-    for (var i = 0; i < $scope.areaList.length; i++) {
-      var area = $scope.areaList[i];
-      if(area.nome) {
-        var result= area.nome.search(new RegExp(q, "i"));
-        if(result >= 0) {
-        	results.push({ label: area.nome, value: area.nome, obj: area });
-        }
-      }
-    }
-    return results;
-	};
-	
-	$scope.ac_area_options = {
-		suggest: $scope.suggestArea,
-		on_select: function (selected) {
-			$scope.selectedArea = selected.obj;
-		}
 	};
 	
 });
