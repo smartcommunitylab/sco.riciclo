@@ -146,6 +146,7 @@ var tipoProfiloApp = angular.module('tipo-profilo', ['DataService']).controller(
 		$scope.actualName = "";
 		$scope.selectedTipologiaUtenza = null;
 		$scope.incomplete = true;
+		$scope.itemToDelete = "";
 		$scope.language = "it";
 	};
 	
@@ -159,6 +160,7 @@ var tipoProfiloApp = angular.module('tipo-profilo', ['DataService']).controller(
 		$scope.actualName = "";
 		$scope.selectedTipologiaUtenza = null;
 		$scope.incomplete = true;
+		$scope.itemToDelete = "";
 		$('html,body').animate({scrollTop:0},0);
 	};
 	

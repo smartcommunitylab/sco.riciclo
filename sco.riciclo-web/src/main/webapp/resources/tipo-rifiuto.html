@@ -17,20 +17,10 @@
 	<div data-ng-include="'html/navbar.html'"></div>
 
 	<div class="container-fluid">
-		<div class="well well-sm">
-			<h4>
-				Tipologia Rifiuto
-				<button type="button" class="btn btn-default btn-sm pull-right" data-ng-click="changeLanguage('en')"
-					data-ng-class="{'active':language == 'en'}">
-	   			<span class="glyphicon glyphicon-flag"></span> EN
-	 			</button>
-				<button type="button" class="btn btn-default btn-sm pull-right" data-ng-click="changeLanguage('it')"
-					data-ng-class="{'active':language == 'it'}">
-	   			<span class="glyphicon glyphicon-flag"></span> IT
-	 			</button>
- 			</h4>
+	
+		<div class="list-title">
+			<h4>Tipologie TIPOLOGIA RIFIUTO</h4>
 		</div>
-		<div class="panel-group">
 		
 			<div id="error" class="alert alert-danger fade in" data-ng-show="error">
 				<a href="#" class="close" data-hide="alert" aria-label="close"
@@ -43,139 +33,177 @@
 				data-ng-click="resetOk()">&times;</a>
 				{{okMsg}}
 			</div>
-
+						
 			<div id="divForm" class="modal modal-wide fade" role="dialog">
 				<div class="modal-dialog">
 					<div class="modal-content">
-			      <div class="modal-header">
+			      <div class="modal-header" data-ng-class="getModalHeaderClass()">
 			        <button type="button" class="close" data-dismiss="modal">&times;</button>
-							<h4 data-ng-show="create">Crea</h4>
-							<h4 data-ng-show="edit && !view">Modifica</h4>
-							<h4 data-ng-show="view">Dettagli</h4>
+							<h4 data-ng-show="create">CREA nuova Tipologia Rifiuto</h4>
+							<h4 data-ng-show="edit && !view">MODIFICA {{getActualName()}}</h4>
+							<h4 data-ng-show="view">VEDI {{getActualName()}}</h4>
 			      </div>
 			      <div class="modal-body">
-							<div class="panel panel-default">
-								<div class="panel-body">
-									<form role="form">
-									  <div class="row form-group">
-									    <label class="col-md-1 control-label">Identificativo:</label>
-									    <div class="col-md-2">
-								    		<input class="form-control" type="text" name="id" data-ng-model="fId" 
-								    		data-ng-disabled="!create" placeholder="id">
-								    	</div>
-								    	<label class="col-md-1 control-label">(campo obbligatorio)</label>
-									  </div>
-									  <div class="row form-group">
-									    <label class="col-md-1 control-label">Nome ({{language}}):</label>
-									    <div class="col-md-2">
-								    		<input class="form-control" type="text" name="name" data-ng-model="fNome" 
-								    		data-ng-disabled="!edit && !create" placeholder="nome">
-								    	</div>
-								    	<label class="col-md-1 control-label">(campo obbligatorio)</label>
-									  </div>
-									  <div class="row form-group">
-									    <label class="col-md-1 control-label">Icona:</label>
-									    <div class="col-md-2">
-									    	<select class="form-control" data-ng-model="fIcona" data-ng-disabled="!edit && !create">
-									    		<option value="Accumulatori">Accumulatori</option>
-									    		<option value="Carta">Carta</option>
-									    		<option value="Cartone">Cartone</option>
-									    		<option value="Cartoni per bevande">Cartoni per bevande</option>
-									    		<option value="Cartucce toner esaurite">Cartucce toner esaurite</option>
-									    		<option value="Imballaggi in metallo">Imballaggi in metallo</option>
-									    		<option value="Imballaggi in plastica">Imballaggi in plastica</option>
-									    		<option value="Imballaggi in vetro">Imballaggi in vetro</option>
-									    		<option value="Indumenti usati">Indumenti usati</option>
-									    		<option value="Inerti">Inerti</option>
-									    		<option value="Ingombranti">Ingombranti</option>
-									    		<option value="Legno">Legno</option>
-									    		<option value="Medicinali scaduti">Medicinali scaduti</option>
-									    		<option value="Oggetti in metallo">Oggetti in metallo</option>
-									    		<option value="Oggetti in plastica">Oggetti in plastica</option>
-									    		<option value="Oggetti in vetro">Oggetti in vetro</option>
-									    		<option value="Olio vegetale">Olio vegetale</option>
-									    		<option value="Olio minerale">Olio minerale</option>
-									    		<option value="Organico">Organico</option>
-									    		<option value="Pericolosi">Pericolosi</option>
-									    		<option value="Pile">Pile</option>
-									    		<option value="Pneumatici">Pneumatici</option>
-									    		<option value="Raee">Raee</option>
-									    		<option value="Residuo">Residuo</option>
-									    		<option value="Verde e ramaglie">Verde e ramaglie</option>
-									    		<option value="Siringhe">Siringhe</option>
-									    		<option value="Rifiuti particolari">Rifiuti particolari</option>
-									    		<option value="Rifiuti speciali">Rifiuti speciali</option>
-				      					</select>
-				      				</div>
-				      				<label class="col-md-1 control-label">(campo obbligatorio)</label>
-									  </div>									  									  
-									</form>
-								</div>
-							</div>				
+			      	<p class="text-danger pull-right">I campi contrassegnati con il simbolo  
+			      	<span class="glyphicon glyphicon-asterisk"></span> sono obbligatori</p>
+							<form role="form">
+						   	<div class="row form-group" data-ng-show="view || edit">
+						   		<label class="col-md-1 control-label">Lingua:</label>
+						   		<div class="col-md-2">
+										<button type="button" class="btn btn-default" data-ng-click="changeLanguage('it')"
+											data-ng-class="{'active':language == 'it'}">
+							   			IT
+							 			</button>
+										<button type="button" class="btn btn-default" data-ng-click="changeLanguage('en')"
+											data-ng-class="{'active':language == 'en'}">
+							   			EN
+							 			</button>
+						   		</div>
+						   	</div>
+							  <div class="row form-group">
+							    <label class="col-md-1 control-label">Identificativo:</label>
+							    <div class="col-md-2">
+						    		<input class="form-control" type="text" name="id" data-ng-model="fId" 
+						    		data-ng-disabled="!create" placeholder="id">
+						    	</div>
+						    	<span class="text-danger glyphicon glyphicon-asterisk"></span>
+							  </div>
+							  <div class="row form-group">
+							    <label class="col-md-1 control-label">Nome:</label>
+							    <div class="col-md-2">
+						    		<input class="form-control" type="text" name="name" data-ng-model="fNome" 
+						    		data-ng-disabled="!edit && !create" placeholder="nome">
+						    	</div>
+						    	<span class="text-danger glyphicon glyphicon-asterisk"></span>
+							  </div>
+							  <div class="row form-group">
+							    <label class="col-md-1 control-label">Icona:</label>
+							    <div class="col-md-2">
+							    	<select class="form-control" data-ng-model="fIcona" 
+							    	data-ng-disabled="view || (language != defaultLang)">
+							    		<option value="Accumulatori">Accumulatori</option>
+							    		<option value="Carta">Carta</option>
+							    		<option value="Cartone">Cartone</option>
+							    		<option value="Cartoni per bevande">Cartoni per bevande</option>
+							    		<option value="Cartucce toner esaurite">Cartucce toner esaurite</option>
+							    		<option value="Imballaggi in metallo">Imballaggi in metallo</option>
+							    		<option value="Imballaggi in plastica">Imballaggi in plastica</option>
+							    		<option value="Imballaggi in vetro">Imballaggi in vetro</option>
+							    		<option value="Indumenti usati">Indumenti usati</option>
+							    		<option value="Inerti">Inerti</option>
+							    		<option value="Ingombranti">Ingombranti</option>
+							    		<option value="Legno">Legno</option>
+							    		<option value="Medicinali scaduti">Medicinali scaduti</option>
+							    		<option value="Oggetti in metallo">Oggetti in metallo</option>
+							    		<option value="Oggetti in plastica">Oggetti in plastica</option>
+							    		<option value="Oggetti in vetro">Oggetti in vetro</option>
+							    		<option value="Olio vegetale">Olio vegetale</option>
+							    		<option value="Olio minerale">Olio minerale</option>
+							    		<option value="Organico">Organico</option>
+							    		<option value="Pericolosi">Pericolosi</option>
+							    		<option value="Pile">Pile</option>
+							    		<option value="Pneumatici">Pneumatici</option>
+							    		<option value="Raee">Raee</option>
+							    		<option value="Residuo">Residuo</option>
+							    		<option value="Verde e ramaglie">Verde e ramaglie</option>
+							    		<option value="Siringhe">Siringhe</option>
+							    		<option value="Rifiuti particolari">Rifiuti particolari</option>
+							    		<option value="Rifiuti speciali">Rifiuti speciali</option>
+		      					</select>
+		      				</div>
+		      				<span class="text-danger glyphicon glyphicon-asterisk"></span>
+							  </div>									  									  
+							</form>		
 			      </div>
 			      <div class="modal-footer">
-							<button class="btn btn-default" data-ng-disabled="!edit && !create" 
-							data-ng-click="resetForm()" title="Reset">Reset
-								<!-- <span class="glyphicon glyphicon-remove"> Reset</span> -->
-							</button>
-					  	<button class="btn btn-primary" data-ng-disabled="!view"
-					  		data-ng-click="updateTipo()">Modifica
-					  		<!-- <span class="glyphicon glyphicon-pencil"> Modifica</span> -->
+			        <button type="button" class="btn btn-default" data-dismiss="modal">Annulla</button>
+					  	<button class="btn btn-primary" data-ng-disabled="view || error || incomplete"
+					  		data-ng-show="edit" data-dismiss="modal" data-ng-click="saveTipo()">Modifica
 					  	</button> 
 					  	<button class="btn btn-success" data-ng-disabled="view || error || incomplete"
-					  		data-dismiss="modal" data-ng-click="saveTipo()">Salva
-					  		<!-- <span class="glyphicon glyphicon-save"> Salva</span> -->
+					  		data-ng-show="create" data-dismiss="modal" data-ng-click="saveTipo()">Crea
 					  	</button> 
-			        <button type="button" class="btn btn-default" data-dismiss="modal" title="Chiudi">Chiudi</button>
 			      </div>			      
 					</div>
 				</div>
-			</div>								
-					
-			<div class="panel panel-default">
-				<div class="panel-body">
-					<div class="row list-search">
-						<button class="col-md-2 btn btn-primary" data-toggle="modal" data-target="#divForm"
-						data-backdrop="static" data-ng-click="newTipo()" title="Crea">
-							CREA NUOVO ELEMENTO
-						</button>
-						<div class="col-md-4">
-							<label control-label">Cerca:</label>
-							<input type="text" data-ng-model="search">
-							<button class="colbtn btn-default btn-sm" data-ng-click="search = ''">
-								<span class="glyphicon glyphicon-remove"></span>
-							</button>
+			</div>
+			
+			<div id="divDeleteItemAlert" class="modal fade" role="dialog">
+				<div class="modal-dialog modal-sm">
+					<div class="modal-content">
+						<div class="modal-body">
+							<p>Sei sicuro di voler eliminare l'oggetto?</p>
 						</div>
-					</div>
-					<div class="row list-header">
-						<div class="col-md-3"><h4>Identificativo</h4></div>
-						<div class="col-md-7"><h4>Nome</h4></div>
-						<div class="col-md-2"><h4></h4></div>
-					</div>
-					<div class="row list-row" data-ng-repeat="item in tipoRifiutoList | filter:search ">
-						<div class="col-md-3">
-							<span>{{item.objectId}}</span>
-						</div>
-						<div class="col-md-7">
-							<span>{{item.nome[language]}}</span>
-						</div>
-						<div class="col-md-2">
-							<button class="btn btn-primary" data-toggle="modal" data-target="#divForm"
-							data-backdrop="static" data-ng-click="editTipo(item.objectId, false)" title="Vedi">
-								<span class="glyphicon glyphicon-eye-open"></span>
-							</button>
-							<button class="btn btn-primary" data-toggle="modal" data-target="#divForm"
-							data-backdrop="static" data-ng-click="editTipo(item.objectId, true)" title="Modifica">
-								<span class="glyphicon glyphicon-pencil"></span>
-							</button>
-							<button class="btn btn-danger" data-ng-click="deleteTipo(item.objectId)" title="Cancella">
-								<span class="glyphicon glyphicon-trash"></span>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-default" data-dismiss="modal"
+							data-target="#divDeleteItemAlert">Annulla</button>
+							<button class="btn btn-danger" data-dismiss="modal" 
+							data-target="#divDeleteItemAlert" data-ng-click="deleteTipo()">
+							Elimina
 							</button>
 						</div>
 					</div>
 				</div>
 			</div>
-				
+											
+			<div class="list-create">
+				<button class="btn btn-success" data-toggle="modal" data-target="#divForm"
+					data-backdrop="static" data-ng-click="newTipo()" title="Crea">
+						CREA NUOVO ELEMENTO
+				</button>
+			</div>
+		
+		<hr>
+		
+		<div class="row list-search">
+			<div class="col-md-2">
+				<span class="glyphicon glyphicon-search"></span>
+				<label control-label">Cerca:</label>
+				<input type="text" data-ng-model="search">
+			</div>
+			<div class="col-md-2">
+				<span class="glyphicon glyphicon-eye-open"></span> Visualizza
+				<button type="button" class="btn btn-default" data-ng-click="changeLanguage('it')"
+					data-ng-class="{'active':language == 'it'}">
+	   			IT
+	 			</button>
+				<button type="button" class="btn btn-default" data-ng-click="changeLanguage('en')"
+					data-ng-class="{'active':language == 'en'}">
+	   			EN
+	 			</button>
+			</div>
+		</div>
+		
+		<div class="row list-header">
+			<div class="col-md-3"><h4>Identificativo</h4></div>
+			<div class="col-md-5"><h4>Nome</h4></div>
+			<div class="col-md-2"><h4>Icona</h4></div>
+			<div class="col-md-2"><h4></h4></div>
+		</div>
+		<div class="row list-row" data-ng-repeat="item in tipoRifiutoList | filter:search">
+			<div class="col-md-3">
+				<span>{{item.objectId}}</span>
+			</div>
+			<div class="col-md-5">
+				<span>{{item.nome[language]}}</span>
+			</div>
+			<div class="col-md-2">
+				<span>{{item.icona}}</span>
+			</div>
+			<div class="col-md-2">
+				<button class="btn btn-info" data-toggle="modal" data-target="#divForm"
+				data-backdrop="static" data-ng-click="editTipo(item.objectId, false)" title="Vedi">
+					<span class="glyphicon glyphicon-eye-open"></span>
+				</button>
+				<button class="btn btn-primary" data-toggle="modal" data-target="#divForm"
+				data-backdrop="static" data-ng-click="editTipo(item.objectId, true)" title="Modifica">
+					<span class="glyphicon glyphicon-pencil"></span>
+				</button>
+				<button class="btn btn-danger" data-toggle="modal" data-target="#divDeleteItemAlert" 
+				data-backdrop="static" data-ng-click="setItemToDelete(item.objectId)" title="Cancella">
+					<span class="glyphicon glyphicon-trash"></span>
+				</button>
+			</div>
 		</div>
 			
 	</div>
