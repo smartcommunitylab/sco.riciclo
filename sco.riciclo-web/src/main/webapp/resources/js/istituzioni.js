@@ -15,6 +15,8 @@ var istituzioniCtrl = istituzioniApp.controller('userCtrl', function($scope, $wi
 	$scope.selectedTab = "menu-istituzioni";
 	$scope.language = "it";
 	$scope.draft = true;
+	$scope.defaultLang = "it";
+	$scope.itemToDelete = "";
 	
 	$scope.fId = "";
 	$scope.fNome = "";
@@ -35,6 +37,7 @@ var istituzioniCtrl = istituzioniApp.controller('userCtrl', function($scope, $wi
 	$scope.search = "";
 	$scope.edit = false;
 	$scope.create = false;
+	$scope.view = false;
 	$scope.incomplete = true;
 	
 	$scope.error = false;
@@ -72,9 +75,29 @@ var istituzioniCtrl = istituzioniApp.controller('userCtrl', function($scope, $wi
 		$scope.okMsg = "";
 	};
 	
+	$scope.getModalHeaderClass = function() {
+		if($scope.view) {
+			return "view";
+		}
+		if($scope.edit) {
+			return "edit";
+		}
+		if($scope.create) {
+			return "create";
+		}
+	};
+	
+	$scope.setItemToDelete = function(id) {
+		$scope.itemToDelete = id;
+	};
+	
+	$scope.getActualName = function() {
+		return $scope.fNome;
+	};
+	
 	$scope.changeLanguage = function(language) {
 		$scope.language = language;
-		if($scope.edit && ($scope.fId != null)) {
+		if($scope.fId != null) {
 			var element = $scope.findByObjectId($scope.istituzioneList, $scope.fId);
 			if(element != null) {
 				$scope.fDescrizione = element.descrizione[$scope.language];
@@ -84,9 +107,15 @@ var istituzioniCtrl = istituzioniApp.controller('userCtrl', function($scope, $wi
 		}
 	};
 	
-	$scope.editGestore = function(id) {
+	$scope.editGestore = function(id, modify) {
 		console.log("editIstituzione:" + id);
-		$scope.edit = true;
+		if(modify) {
+			$scope.edit = true;
+			$scope.view = false;
+		} else {
+			$scope.edit = false;
+			$scope.view = true;
+		}
 		$scope.create = false;
 		var element = $scope.findByObjectId($scope.istituzioneList, id);
 		if(element != null) {
@@ -117,6 +146,8 @@ var istituzioniCtrl = istituzioniApp.controller('userCtrl', function($scope, $wi
 		$scope.edit = false;
 		$scope.create = true;
 		$scope.incomplete = true;
+		$scope.itemToDelete = "";
+		$scope.language = "it";
 		$scope.resetForm();
 	};
 	
@@ -126,6 +157,7 @@ var istituzioniCtrl = istituzioniApp.controller('userCtrl', function($scope, $wi
 		$scope.search = "";
 		$scope.incomplete = true;
 		$scope.resetForm();
+		$scope.itemToDelete = "";
 		$('html,body').animate({scrollTop:0},0);
 	};
 	
@@ -236,8 +268,8 @@ var istituzioniCtrl = istituzioniApp.controller('userCtrl', function($scope, $wi
 		}
 	};
 	
-	$scope.deleteGestore = function(id) {
-		var index = $scope.findIndex($scope.istituzioneList, id);
+	$scope.deleteGestore = function() {
+		var index = $scope.findIndex($scope.istituzioneList, $scope.itemToDelete);
 		if(index >= 0) {
 			var element = $scope.istituzioneList[index];
 			if(element != null) {
