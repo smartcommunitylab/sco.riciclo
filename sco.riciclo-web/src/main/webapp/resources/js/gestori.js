@@ -15,6 +15,8 @@ var gestoriCtrl = gestoriApp.controller('userCtrl', function($scope, $window, $h
 	$scope.selectedTab = "menu-gestori";
 	$scope.language = "it";
 	$scope.draft = true;
+	$scope.defaultLang = "it";
+	$scope.itemToDelete = "";
 	
 	$scope.fId = "";
 	$scope.fRagioneSociale = "";
@@ -34,6 +36,7 @@ var gestoriCtrl = gestoriApp.controller('userCtrl', function($scope, $window, $h
 	$scope.search = "";
 	$scope.edit = false;
 	$scope.create = false;
+	$scope.view = false;
 	$scope.incomplete = true;
 	
 	$scope.error = false;
@@ -71,9 +74,29 @@ var gestoriCtrl = gestoriApp.controller('userCtrl', function($scope, $window, $h
 		$scope.okMsg = "";
 	};
 	
+	$scope.getModalHeaderClass = function() {
+		if($scope.view) {
+			return "view";
+		}
+		if($scope.edit) {
+			return "edit";
+		}
+		if($scope.create) {
+			return "create";
+		}
+	};
+	
+	$scope.setItemToDelete = function(id) {
+		$scope.itemToDelete = id;
+	};
+	
+	$scope.getActualName = function() {
+		return $scope.fRagioneSociale;
+	};
+	
 	$scope.changeLanguage = function(language) {
 		$scope.language = language;
-		if($scope.edit && ($scope.fId != null)) {
+		if($scope.fId != null) {
 			var element = $scope.findByObjectId($scope.gestoreList, $scope.fId);
 			if(element != null) {
 				$scope.fDescrizione = element.descrizione[$scope.language];
@@ -83,9 +106,15 @@ var gestoriCtrl = gestoriApp.controller('userCtrl', function($scope, $window, $h
 		}
 	};
 	
-	$scope.editGestore = function(id) {
+	$scope.editGestore = function(id, modify) {
 		console.log("editGestore:" + id);
-		$scope.edit = true;
+		if(modify) {
+			$scope.edit = true;
+			$scope.view = false;
+		} else {
+			$scope.edit = false;
+			$scope.view = true;
+		}
 		$scope.create = false;
 		var element = $scope.findByObjectId($scope.gestoreList, id);
 		if(element != null) {
@@ -115,6 +144,8 @@ var gestoriCtrl = gestoriApp.controller('userCtrl', function($scope, $window, $h
 		$scope.edit = false;
 		$scope.create = true;
 		$scope.incomplete = true;
+		$scope.itemToDelete = "";
+		$scope.language = "it";
 		$scope.resetForm();
 	};
 	
@@ -230,8 +261,8 @@ var gestoriCtrl = gestoriApp.controller('userCtrl', function($scope, $window, $h
 		}
 	};
 	
-	$scope.deleteGestore = function(id) {
-		var index = $scope.findIndex($scope.gestoreList, id);
+	$scope.deleteGestore = function() {
+		var index = $scope.findIndex($scope.gestoreList, $scope.itemToDelete);
 		if(index >= 0) {
 			var element = $scope.gestoreList[index];
 			if(element != null) {
@@ -259,6 +290,15 @@ var gestoriCtrl = gestoriApp.controller('userCtrl', function($scope, $window, $h
 			}
 		}
 	};
+	
+	$scope.isIdUnique = function(array, id) {
+		for (var d = 0, len = array.length; d < len; d += 1) {
+			if(array[d].objectId === id) {
+				return false;
+			}
+		}
+		return true;
+	}
 	
 	$scope.$watch('fRagioneSociale',function() {$scope.test();});
 	$scope.$watch('fDescrizione',function() {$scope.test();});

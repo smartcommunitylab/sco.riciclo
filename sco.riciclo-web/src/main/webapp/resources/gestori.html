@@ -20,20 +20,10 @@
 	<div data-ng-include="'html/navbar.html'"></div>
 
 	<div class="container-fluid">
-		<div class="well well-sm">
-			<h4>
-				Gestore
-				<button type="button" class="btn btn-default btn-sm pull-right" data-ng-click="changeLanguage('en')"
-					data-ng-class="{'active':language == 'en'}">
-	   			<span class="glyphicon glyphicon-flag"></span> EN
-	 			</button>
-				<button type="button" class="btn btn-default btn-sm pull-right" data-ng-click="changeLanguage('it')"
-					data-ng-class="{'active':language == 'it'}">
-	   			<span class="glyphicon glyphicon-flag"></span> IT
-	 			</button>
- 			</h4>
+	
+		<div class="list-title">
+			<h4>Elenchi GESTORE</h4>
 		</div>
-		<div class="panel-group">
 		
 			<div id="error" class="alert alert-danger fade in" data-ng-show="error">
 				<a href="#" class="close" data-hide="alert" aria-label="close"
@@ -41,177 +31,228 @@
 				{{errorMsg}}
 			</div>
 			
-			<div id="error" class="alert alert-success fade in" data-ng-show="ok">
+			<div id="ok" class="alert alert-success fade in" data-ng-show="ok">
 				<a href="#" class="close" data-hide="alert" aria-label="close"
 				data-ng-click="resetOk()">&times;</a>
 				{{okMsg}}
 			</div>
-			
-			<div class="panel panel-default">
-				<div class="panel-body">
-					<button class="btn btn-link" data-ng-click="newGestore()">
-						<span class="glyphicon glyphicon-grain"></span> Crea nuovo elemento
-					</button>
-					<button type="button" class="btn btn-default btn-sm pull-right" data-ng-click="draft=true"
-						data-ng-class="{'active':draft}">
-		   			<span class="glyphicon glyphicon-tags"></span> draft
-		 			</button>
-					<button type="button" class="btn btn-default btn-sm pull-right" data-ng-click="draft=false"
-						data-ng-class="{'active':!draft}">
-		   			<span class="glyphicon glyphicon-tags"></span> prod
-		 			</button>
-				</div>
-			</div>			
 						
-			<div class="panel panel-default">
-	  		<div class="panel-body">
-					<h4 data-ng-show="create">Crea:</h4>
-					<h4 data-ng-show="edit">Modifica:</h4>
-					<form role="form">
-				   	<div class="row form-group">
-				    	<label class="col-md-1 control-label">Ragione Sociale:</label>
-				    	<div class="col-md-2">
-				    		<input class="form-control" type="text" name="ragioneSociale" data-ng-model="fRagioneSociale" 
-				    		data-ng-disabled="!edit && !create" placeholder="ragione sociale">
-				    	</div>
-				    	<label class="col-md-1 control-label">(campo obbligatorio)</label>
-				    </div>
-				   	<div class="row form-group">
-				    	<label class="col-md-1 control-label">Descrizione ({{language}}):</label>
-				    	<div class="col-md-2">
-				    		<input class="form-control" type="text" name="descrizione" data-ng-model="fDescrizione" 
-				    		data-ng-disabled="!edit && !create" placeholder="dettagli zona">
-				    	</div>
-				    	<label class="col-md-1 control-label">(campo obbligatorio)</label>
-				    </div>
-				   	<div class="row form-group">
-				    	<label class="col-md-1 control-label">Indirizzo ({{language}}):</label>
-				    	<div class="col-md-2">
-				    		<input class="form-control" type="text" name="indirizzo" data-ng-model="fIndirizzo" 
-				    		data-ng-disabled="!edit && !create" placeholder="indirizzo">
-				    	</div>
-				    </div>
-				   	<div class="row form-group">
-				    	<label class="col-md-1 control-label">Ufficio:</label>
-				    	<div class="col-md-2">
-				    		<input class="form-control" type="text" name="ufficio" data-ng-model="fUfficio" 
-				    		data-ng-disabled="!edit && !create" placeholder="ufficio">
-				    	</div>
-				    </div>
-				   	<div class="row form-group">
-				    	<label class="col-md-1 control-label">Orario Ufficio ({{language}}):</label>
-				    	<div class="col-md-2">
-				    		<textarea class="form-control" name="orarioUfficio" data-ng-model="fOrarioUfficio" 
-				    		data-ng-disabled="!edit && !create" placeholder="orario ufficio"></textarea>
-				    	</div>
-				    </div>
-				   	<div class="row form-group">
-				    	<label class="col-md-1 control-label">Telefono:</label>
-				    	<div class="col-md-2">
-				    		<input class="form-control" type="text" name="telefono" data-ng-model="fTelefono" 
-				    		data-ng-disabled="!edit && !create" placeholder="telefono xxxx/yyyyyy">
-				    	</div>
-				    </div>
-				   	<div class="row form-group">
-				    	<label class="col-md-1 control-label">Fax:</label>
-				    	<div class="col-md-2">
-				    		<input class="form-control" type="text" name="fax" data-ng-model="fFax" 
-				    		data-ng-disabled="!edit && !create" placeholder="fax xxxx/yyyyyy">
-				    	</div>
-				    </div>
-				   	<div class="row form-group">
-				    	<label class="col-md-1 control-label">E-mail:</label>
-				    	<div class="col-md-2">
-				    		<input class="form-control" type="text" name="email" data-ng-model="fEmail" 
-				    		data-ng-disabled="!edit && !create" placeholder="test@dominio.it">
-				    	</div>
-				    </div>
-				   	<div class="row form-group">
-				    	<label class="col-md-1 control-label">Sito web:</label>
-				    	<div class="col-md-2">
-				    		<input class="form-control" type="text" name="sito" data-ng-model="fsitoWeb" 
-				    		data-ng-disabled="!edit && !create" placeholder="http://www.test.it">
-				    	</div>
-				    </div>
-				   	<div class="row form-group">
-				    	<label class="col-md-1 control-label">Pagina Facebook:</label>
-				    	<div class="col-md-2">
-				    		<input class="form-control" type="text" name="facebook" data-ng-model="fFacebook" 
-				    		data-ng-disabled="!edit && !create" placeholder="facebook">
-				    	</div>
-				    </div>
-						<div class="row form-group">
-							<label class="col-md-1 control-label">Latitudine:</label>
-							<div class="col-md-2">
-	    					<input class="form-control" id="latitude" type="text" 
-	    					data-ng-model="fLatitude" placeholder="Latitudine" readonly>
-	    				</div>
-	    			</div>
-	    			<div class="row form-group">
-	    				<label class="col-md-1 control-label">Longitudine:</label>
-	    				<div class="col-md-2">
-	    					<input class="form-control" id="longitude" type="text" 
-	    					data-ng-model="fLongitude" placeholder="Longitudine" readonly>
-	    				</div>
-	    			</div>
-						<button class="btn btn-default" data-ng-disabled="!edit && !create" data-ng-click="resetForm()">
-							<span class="glyphicon glyphicon-remove"></span> Cancella
-						</button>
-				  	<button class="btn btn-success" data-ng-disabled="error || incomplete"
-				  		data-ng-click="saveGestore()">
-				  		<span class="glyphicon glyphicon-save"></span> Salva
-				  	</button> 
-					</form>	
-	  		</div>
-			</div>
-
-			<div class="panel panel-default">
-				<div class="panel-body">
-					<input id="address" class="form-control input-md" placeholder="Indirizzo">
-					<p><div id="map_canvas" style="width:100%; height:450px"></div></p>
-   			</div>					
-			</div>				
-					
-			<div class="panel panel-default">
-				<div class="panel-body">
-					<label class="control-label">Cerca:</label>
-					<p>
-						<input type="text" data-ng-model="search">
-						<button class="btn btn-default btn-sm" data-ng-click="search = ''">
-							<span class="glyphicon glyphicon-remove"></span>
-						</button>
-					</p>
-					<div class="row list-header">
-						<div class="col-md-1"><h4>Modifica</h4></div>
-						<div class="col-md-3"><h4>Ragione Sociale</h4></div>
-						<div class="col-md-3"><h4>Ufficio</h4></div>
-						<div class="col-md-4"><h4>Descrizione</h4></div>
-						<div class="col-md-1"><h4>Cancella</h4></div>
+			<div id="divForm" class="modal modal-wide fade" role="dialog">
+				<div class="modal-dialog">
+					<div class="modal-content">
+			      <div class="modal-header" data-ng-class="getModalHeaderClass()">
+			        <button type="button" class="close" data-dismiss="modal">&times;</button>
+							<h4 data-ng-show="create">CREA nuovo Gestore</h4>
+							<h4 data-ng-show="edit && !view">MODIFICA {{getActualName()}}</h4>
+							<h4 data-ng-show="view">VEDI {{getActualName()}}</h4>
+			      </div>
+			      <div class="modal-body">
+							<div id="errorForm" class="alert alert-danger fade in" data-ng-show="error">
+								<a href="#" class="close" data-hide="alert" aria-label="close"
+								data-ng-click="resetError()">&times;</a>
+								{{errorMsg}}
+							</div>
+			      	<p class="text-danger pull-right">I campi contrassegnati con il simbolo  
+			      	<span class="glyphicon glyphicon-asterisk"></span> sono obbligatori</p>
+							<form role="form">
+						   	<div class="row form-group" data-ng-show="view || edit">
+						   		<label class="col-md-1 control-label">Lingua:</label>
+						   		<div class="col-md-2">
+										<button type="button" class="btn btn-default" data-ng-click="changeLanguage('it')"
+											data-ng-class="{'active':language == 'it'}">
+							   			IT
+							 			</button>
+										<button type="button" class="btn btn-default" data-ng-click="changeLanguage('en')"
+											data-ng-class="{'active':language == 'en'}">
+							   			EN
+							 			</button>
+						   		</div>
+						   	</div>
+						   	<div class="row form-group">
+						    	<label class="col-md-1 control-label">Ragione Sociale:</label>
+						    	<div class="col-md-2">
+						    		<input class="form-control" type="text" name="ragioneSociale" data-ng-model="fRagioneSociale" 
+						    		data-ng-disabled="view || (language != defaultLang)" placeholder="ragione sociale">
+						    	</div>
+						    	<span class="text-danger glyphicon glyphicon-asterisk"></span>
+						    </div>
+						   	<div class="row form-group">
+						    	<label class="col-md-1 control-label">Descrizione:</label>
+						    	<div class="col-md-2">
+						    		<input class="form-control" type="text" name="descrizione" data-ng-model="fDescrizione" 
+						    		data-ng-disabled="!edit && !create" placeholder="descrizione">
+						    	</div>
+						    	<span class="text-danger glyphicon glyphicon-asterisk"></span>
+						    </div>
+						   	<div class="row form-group">
+						    	<label class="col-md-1 control-label">Indirizzo:</label>
+						    	<div class="col-md-2">
+						    		<input class="form-control" type="text" name="indirizzo" data-ng-model="fIndirizzo" 
+						    		data-ng-disabled="!edit && !create" placeholder="indirizzo">
+						    	</div>
+						    </div>
+						   	<div class="row form-group">
+						    	<label class="col-md-1 control-label">Ufficio:</label>
+						    	<div class="col-md-2">
+						    		<input class="form-control" type="text" name="ufficio" data-ng-model="fUfficio" 
+						    		data-ng-disabled="view || (language != defaultLang)" placeholder="ufficio">
+						    	</div>
+						    </div>
+						   	<div class="row form-group">
+						    	<label class="col-md-1 control-label">Orario Ufficio:</label>
+						    	<div class="col-md-2">
+						    		<textarea class="form-control" name="orarioUfficio" data-ng-model="fOrarioUfficio" 
+						    		data-ng-disabled="!edit && !create" placeholder="orario ufficio"></textarea>
+						    	</div>
+						    </div>
+						   	<div class="row form-group">
+						    	<label class="col-md-1 control-label">Telefono:</label>
+						    	<div class="col-md-2">
+						    		<input class="form-control" type="text" name="telefono" data-ng-model="fTelefono" 
+						    		data-ng-disabled="view || (language != defaultLang)" placeholder="telefono xxxx/yyyyyy">
+						    	</div>
+						    </div>
+						   	<div class="row form-group">
+						    	<label class="col-md-1 control-label">Fax:</label>
+						    	<div class="col-md-2">
+						    		<input class="form-control" type="text" name="fax" data-ng-model="fFax" 
+						    		data-ng-disabled="view || (language != defaultLang)" placeholder="fax xxxx/yyyyyy">
+						    	</div>
+						    </div>
+						   	<div class="row form-group">
+						    	<label class="col-md-1 control-label">E-mail:</label>
+						    	<div class="col-md-2">
+						    		<input class="form-control" type="text" name="email" data-ng-model="fEmail" 
+						    		data-ng-disabled="view || (language != defaultLang)" placeholder="test@dominio.it">
+						    	</div>
+						    </div>
+						   	<div class="row form-group">
+						    	<label class="col-md-1 control-label">Sito web:</label>
+						    	<div class="col-md-2">
+						    		<input class="form-control" type="text" name="sito" data-ng-model="fsitoWeb" 
+						    		data-ng-disabled="view || (language != defaultLang)" placeholder="http://www.test.it">
+						    	</div>
+						    </div>
+						   	<div class="row form-group">
+						    	<label class="col-md-1 control-label">Pagina Facebook:</label>
+						    	<div class="col-md-2">
+						    		<input class="form-control" type="text" name="facebook" data-ng-model="fFacebook" 
+						    		data-ng-disabled="view || (language != defaultLang)" placeholder="facebook">
+						    	</div>
+						    </div>						   	
+			    			<div class="row form-group">
+			    				<label class="col-md-1 control-label">Indirizzo:</label>
+			    				<div class="col-md-5">
+			    					<input id="address" class="form-control input-md" 
+			    					data-ng-disabled="view || (language != defaultLang)"
+			    					placeholder="Indirizzo">
+			    				</div>
+			    			</div>
+								<div class="row form-group">
+									<label class="col-md-1 control-label">Latitudine:</label>
+									<div class="col-md-2">
+			    					<input class="form-control" id="latitude" type="text" data-ng-model="fLatitude" 
+			    					placeholder="Latitudine" readonly>
+			    				</div>
+			    				<label class="col-md-1 control-label">Longitudine:</label>
+			    				<div class="col-md-2">
+			    					<input class="form-control" id="longitude" type="text" data-ng-model="fLongitude" 
+			    					placeholder="Longitudine" readonly>
+			    				</div>
+								</div>
+								<p class="pull-right">Definisci una posizione inserendo l'indirizzo e trascina poi il puntatore sulla mappa</p>
+								<p><div id="map_canvas" style="width:100%; height:450px"></div></p>						   	
+							</form>		
+			      </div>
+			      <div class="modal-footer">
+			        <button type="button" class="btn btn-default" data-dismiss="modal">Annulla</button>
+					  	<button class="btn btn-primary" data-ng-disabled="view || error || incomplete"
+					  		data-ng-show="edit" data-dismiss="modal" data-ng-click="saveGestore()">Modifica
+					  	</button> 
+					  	<button class="btn btn-success" data-ng-disabled="view || error || incomplete"
+					  		data-ng-show="create" data-dismiss="modal" data-ng-click="saveGestore()">Crea
+					  	</button> 
+			      </div>			      
 					</div>
-					<div class="row list-row" data-ng-repeat="item in gestoreList | filter:search ">
-						<div class="col-md-1" >
-							<button class="btn btn-primary" data-ng-click="editGestore(item.objectId)">
-								<span class="glyphicon glyphicon-pencil"></span>  Modifica
-							</button>
+				</div>
+			</div>
+			
+			<div id="divDeleteItemAlert" class="modal fade" role="dialog">
+				<div class="modal-dialog modal-sm">
+					<div class="modal-content">
+						<div class="modal-body">
+							<p>Sei sicuro di voler eliminare l'oggetto?</p>
 						</div>
-						<div class="col-md-3">
-							<span>{{item.ragioneSociale}}</span>
-						</div>
-						<div class="col-md-3">
-							<span>{{item.ufficio}}</span>
-						</div>
-						<div class="col-md-4">
-							<span>{{item.descrizione[language]}}</span>
-						</div>
-						<div class="col-md-1">
-							<button class="btn btn-danger" data-ng-click="deleteGestore(item.objectId)">
-								<span class="glyphicon glyphicon-remove"></span>  Cancella
+						<div class="modal-footer">
+							<button type="button" class="btn btn-default" data-dismiss="modal"
+							data-target="#divDeleteItemAlert">Annulla</button>
+							<button class="btn btn-danger" data-dismiss="modal" 
+							data-target="#divDeleteItemAlert" data-ng-click="deleteGestore()">
+							Elimina
 							</button>
 						</div>
 					</div>
 				</div>
 			</div>
-				
+											
+			<div class="list-create">
+				<button class="btn btn-success" data-toggle="modal" data-target="#divForm"
+					data-backdrop="static" data-ng-click="newGestore()" title="Crea">
+						CREA NUOVO ELEMENTO
+				</button>
+			</div>
+		
+		<hr>
+		
+		<div class="row list-search">
+			<div class="col-md-2">
+				<span class="glyphicon glyphicon-search"></span>
+				<label control-label">Cerca:</label>
+				<input type="text" data-ng-model="search">
+			</div>
+			<div class="col-md-2">
+				<span class="glyphicon glyphicon-eye-open"></span> Visualizza
+				<button type="button" class="btn btn-default" data-ng-click="changeLanguage('it')"
+					data-ng-class="{'active':language == 'it'}">
+	   			IT
+	 			</button>
+				<button type="button" class="btn btn-default" data-ng-click="changeLanguage('en')"
+					data-ng-class="{'active':language == 'en'}">
+	   			EN
+	 			</button>
+			</div>
+		</div>
+		
+		<div class="row list-header">
+			<div class="col-md-3"><h4>Ragione Sociale</h4></div>
+			<div class="col-md-3"><h4>Ufficio</h4></div>
+			<div class="col-md-4"><h4>Descrizione</h4></div>
+			<div class="col-md-2"><h4></h4></div>
+		</div>
+		<div class="row list-row" data-ng-repeat="item in gestoreList | filter:search">
+			<div class="col-md-3">
+				<span>{{item.ragioneSociale}}</span>
+			</div>
+			<div class="col-md-3">
+				<span>{{item.ufficio}}</span>
+			</div>
+			<div class="col-md-4">
+				<span>{{item.descrizione[language]}}</span>
+			</div>
+			<div class="col-md-2">
+				<button class="btn btn-info" data-toggle="modal" data-target="#divForm"
+				data-backdrop="static" data-ng-click="editGestore(item.objectId, false)" title="Vedi">
+					<span class="glyphicon glyphicon-eye-open"></span>
+				</button>
+				<button class="btn btn-primary" data-toggle="modal" data-target="#divForm"
+				data-backdrop="static" data-ng-click="editGestore(item.objectId, true)" title="Modifica">
+					<span class="glyphicon glyphicon-pencil"></span>
+				</button>
+				<button class="btn btn-danger" data-toggle="modal" data-target="#divDeleteItemAlert" 
+				data-backdrop="static" data-ng-click="setItemToDelete(item.objectId)" title="Cancella">
+					<span class="glyphicon glyphicon-trash"></span>
+				</button>
+			</div>
 		</div>
 			
 	</div>
@@ -233,6 +274,10 @@
 				disableDoubleClickZoom: true,
 				scrollwheel: false,
 				streetViewControl: false,
+				mapTypeControlOptions: {
+					style:google.maps.MapTypeControlStyle.DROPDOWN_MENU,
+					position: google.maps.ControlPosition.LEFT_TOP
+				},
 		    zoom: 13,
 		    center: TRENTO,    
 		    mapTypeId: google.maps.MapTypeId.ROADMAP // ROADMAP | SATELLITE | HYBRID | TERRAIN
@@ -244,11 +289,29 @@
 	    draggable: true
 	  });
 	}
+	
+	//google.maps.event.addDomListener(window, "resize", resizingMap());
+	
+	function resizeMap() {
+	   if(typeof map =="undefined") return;
+	   setTimeout( function(){resizingMap();} , 200);
+	};
 
+	function resizingMap() {
+	   if(typeof map =="undefined") return;
+	   var center = map.getCenter();
+	   google.maps.event.trigger(map, "resize");
+	   map.setCenter(center); 
+	};	
+
+	$("#divForm").on("shown.bs.modal", function() {
+  	resizeMap();
+  });
+  
 	$(document).ready(function() { 
     
 	  initializeMap();
-					  
+	  
 	  $(function() {
 	    $("#address").autocomplete({
 	      //This uses the geocoder to fetch the address values
@@ -282,7 +345,7 @@
 	      }
 	    });
 	  });
-		
+	  
 	  //Add a listener to the marker for reverse geocoding
 	  google.maps.event.addListener(marker, 'drag', function() {
 	    geocoder.geocode({'latLng': marker.getPosition()}, function(results, status) {
