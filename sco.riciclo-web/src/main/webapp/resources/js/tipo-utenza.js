@@ -68,6 +68,7 @@ angular.module('tipo-utenza', ['DataService']).controller('userCtrl', function($
 		$scope.fDescrizione = "";
 		$scope.itemToDelete = "";
 		$scope.fId = "";
+		$scope.itemToDelete = "";
 	};
 	
 	$scope.setItemToDelete = function(id) {
@@ -81,7 +82,7 @@ angular.module('tipo-utenza', ['DataService']).controller('userCtrl', function($
 	
 	$scope.changeLanguage = function(language) {
 		$scope.language = language;
-		if($scope.edit && ($scope.fId != null)) {
+		if($scope.fId != null) {
 			var element = $scope.findByObjectId($scope.tipoUtenzaList, $scope.fId);
 			if(element != null) {
 				$scope.fNome = element.nome[$scope.language];
@@ -120,7 +121,9 @@ angular.module('tipo-utenza', ['DataService']).controller('userCtrl', function($
 		$scope.fNome = "";
 		$scope.fDescrizione = "";
 		$scope.actualName = "";
+		$scope.itemToDelete = "";
 		$scope.incomplete = true;
+		$scope.language = "it";
 	};
 	
 	$scope.resetUI = function() {
@@ -133,6 +136,7 @@ angular.module('tipo-utenza', ['DataService']).controller('userCtrl', function($
 		$scope.search = "";
 		$scope.actualName = "";
 		$scope.incomplete = true;
+		$scope.itemToDelete = "";
 		$('html,body').animate({scrollTop:0},0);
 	};
 	

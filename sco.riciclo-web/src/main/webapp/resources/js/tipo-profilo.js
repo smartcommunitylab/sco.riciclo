@@ -14,6 +14,7 @@ var tipoProfiloApp = angular.module('tipo-profilo', ['DataService']).controller(
 	$scope.language = "it";
 	$scope.draft = true;
 	$scope.defaultLang = "it";
+	$scope.itemToDelete = "";
 	
 	$scope.fId = "";
 	$scope.fNome = "";
@@ -24,6 +25,7 @@ var tipoProfiloApp = angular.module('tipo-profilo', ['DataService']).controller(
 	
 	$scope.edit = false;
 	$scope.create = false;
+	$scope.view = false;
 	$scope.incomplete = true;
 	
 	$scope.error = false;
@@ -74,18 +76,36 @@ var tipoProfiloApp = angular.module('tipo-profilo', ['DataService']).controller(
 		$scope.okMsg = "";
 	};
 	
+	$scope.getModalHeaderClass = function() {
+		if($scope.view) {
+			return "view";
+		}
+		if($scope.edit) {
+			return "edit";
+		}
+		if($scope.create) {
+			return "create";
+		}
+	};
+	
 	$scope.resetForm = function() {
+		$scope.fId = "";
 		$scope.fNome = "";
 		$scope.fDescrizione = "";
 		$scope.selectedTipologiaUtenza = null;
-		if($scope.create) {
-			$scope.fId = "";
-		}
+	};
+	
+	$scope.setItemToDelete = function(id) {
+		$scope.itemToDelete = id;
+	};
+	
+	$scope.getActualName = function() {
+		return $scope.actualName;
 	};
 	
 	$scope.changeLanguage = function(language) {
 		$scope.language = language;
-		if($scope.edit && ($scope.fId != null)) {
+		if($scope.fId != null) {
 			var element = $scope.findByObjectId($scope.tipoProfiloList, $scope.fId);
 			if(element != null) {
 				$scope.fNome = element.nome[$scope.language];
@@ -94,11 +114,15 @@ var tipoProfiloApp = angular.module('tipo-profilo', ['DataService']).controller(
 		}
 	};
 	
-	$scope.editTipo = function(id) {
+	$scope.editTipo = function(id, modify) {
 		console.log("editTipo:" + id);
-		//var index = $scope.findIndex($scope.rifiuti, id);
-		//console.log("editRifiutoPos:" + index);
-		$scope.edit = true;
+		if(modify) {
+			$scope.edit = true;
+			$scope.view = false;
+		} else {
+			$scope.edit = false;
+			$scope.view = true;
+		}
 		$scope.create = false;
 		var element = $scope.findByObjectId($scope.tipoProfiloList, id);
 		if(element != null) {
@@ -122,6 +146,7 @@ var tipoProfiloApp = angular.module('tipo-profilo', ['DataService']).controller(
 		$scope.actualName = "";
 		$scope.selectedTipologiaUtenza = null;
 		$scope.incomplete = true;
+		$scope.language = "it";
 	};
 	
 	$scope.resetUI = function() {
@@ -199,8 +224,8 @@ var tipoProfiloApp = angular.module('tipo-profilo', ['DataService']).controller(
 		}
 	};
 	
-	$scope.deleteTipo = function(id) {
-		var index = $scope.findIndex($scope.tipoProfiloList, id);
+	$scope.deleteTipo = function() {
+		var index = $scope.findIndex($scope.tipoProfiloList, $scope.itemToDelete);
 		if(index >= 0) {
 			var element = $scope.tipoProfiloList[index];
 			if(element != null) {
