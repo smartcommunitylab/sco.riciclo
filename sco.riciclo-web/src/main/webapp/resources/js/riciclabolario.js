@@ -1,4 +1,4 @@
-var riciclabolarioApp = angular.module('riciclabolario', ['DataService', 'ngSanitize', 'MassAutoComplete']);
+var riciclabolarioApp = angular.module('riciclabolario', ['DataService']);
 
 var riciclabolarioCtrl = riciclabolarioApp.controller('userCtrl', function($scope, $http, $window, DataService) {
 	DataService.getProfile().then(
@@ -16,7 +16,12 @@ var riciclabolarioCtrl = riciclabolarioApp.controller('userCtrl', function($scop
 	$scope.selectedTab = "menu-riciclabolario";
 	$scope.language = "it";
 	$scope.draft = true;
+	$scope.defaultLang = "it";
+	$scope.itemToDelete = "";
 	
+	$scope.edit = false;
+	$scope.create = false;
+	$scope.view = false;
 	$scope.search = "";
 	$scope.incomplete = false;
 	
@@ -30,11 +35,7 @@ var riciclabolarioCtrl = riciclabolarioApp.controller('userCtrl', function($scop
 	$scope.status = 200;
 	
 	$scope.selectedArea = null;
-	$scope.areaSearch = {};
-		
 	$scope.selectedRifiuto = null;
-	$scope.rifiutoSearch = {};
-		
 	$scope.selectedTipologiaUtenza = null;
 	$scope.selectedTipologiaRifiuto = null;
 	$scope.rifiutoList = [];
@@ -147,6 +148,22 @@ var riciclabolarioCtrl = riciclabolarioApp.controller('userCtrl', function($scop
 		$scope.okMsg = "";
 	};
 	
+	$scope.getModalHeaderClass = function() {
+		if($scope.view) {
+			return "view";
+		}
+		if($scope.edit) {
+			return "edit";
+		}
+		if($scope.create) {
+			return "create";
+		}
+	};
+	
+	$scope.setItemToDelete = function(id) {
+		$scope.itemToDelete = id;
+	};
+	
 	$scope.changeLanguage = function(language) {
 		$scope.language = language;
 		$scope.areaNameMap = $scope.setNameMap($scope.areaList);
@@ -164,11 +181,18 @@ var riciclabolarioCtrl = riciclabolarioApp.controller('userCtrl', function($scop
 		$scope.selectedTipologiaRifiuto = null;
 		$scope.selectedArea = null;
 		$scope.selectedRifiuto = null;
-		$scope.rifiutoSearch.value = null;
-		$scope.areaSearch.value = null;
 	}
 	
-	$scope.saveRelation = function() {
+	$scope.newItem = function() {
+		$scope.edit = false;
+		$scope.create = true;
+		$scope.incomplete = true;
+		$scope.itemToDelete = "";
+		$scope.language = "it";
+		$scope.resetForm();
+	};
+	
+	$scope.saveItem = function() {
 		var element = {
 			rifiuto: '',
 			area: '',
@@ -203,8 +227,8 @@ var riciclabolarioCtrl = riciclabolarioApp.controller('userCtrl', function($scop
 		});
 	};
 	
-	$scope.deleteRelation = function(id) {
-		var index = $scope.findIndex($scope.riciclabolario, id);
+	$scope.deleteItem = function() {
+		var index = $scope.findIndex($scope.riciclabolario, $scope.itemToDelete);
 		if(index >= 0) {
 			var element = $scope.riciclabolario[index];
 			if(element != null) {
@@ -233,8 +257,21 @@ var riciclabolarioCtrl = riciclabolarioApp.controller('userCtrl', function($scop
 		}
 	};
 	
+	$scope.$watch('selectedArea',function() {$scope.test();}, true);
+	$scope.$watch('selectedRifiuto',function() {$scope.test();}, true);
+	$scope.$watch('selectedTipologiaUtenza',function() {$scope.test();}, true);
+	$scope.$watch('selectedTipologiaRifiuto',function() {$scope.test();}, true);
+	
 	$scope.test = function() {
-		$scope.incomplete = false;
+		if(($scope.selectedTipologiaUtenza == null) ||
+		($scope.selectedTipologiaRifiuto == null) ||
+		($scope.selectedArea == null) ||
+		($scope.selectedRifiuto == null)) {
+			$scope.incomplete = true;
+		} else {
+			$scope.incomplete = false;
+		} 
+		
 	};
 	
 	$scope.findByObjectId = function(array, id) {
@@ -253,52 +290,6 @@ var riciclabolarioCtrl = riciclabolarioApp.controller('userCtrl', function($scop
 			}
 		}
 		return -1;
-	};
-	
-	$scope.suggestArea = function(term) {
-		var q = term.toLowerCase().trim();
-    var results = [];
-    // Find first 10 states that start with `term`.
-    for (var i = 0; i < $scope.areaList.length; i++) {
-      var area = $scope.areaList[i];
-      if(area.nome) {
-        var result= area.nome.search(new RegExp(q, "i"));
-        if(result >= 0) {
-        	results.push({ label: area.nome, value: area.nome, obj: area });
-        }
-      }
-    }
-    return results;
-	};
-	
-	$scope.ac_area_options = {
-		suggest: $scope.suggestArea,
-		on_select: function (selected) {
-			$scope.selectedArea = selected.obj;
-		}
-	};
-
-	$scope.suggestRifiuto = function(term) {
-		var q = term.toLowerCase().trim();
-    var results = [];
-    // Find first 10 states that start with `term`.
-    for (var i = 0; i < $scope.rifiutoList.length; i++) {
-      var rifiuto = $scope.rifiutoList[i];
-      if(rifiuto.nome[$scope.language]) {
-        var result= rifiuto.nome[$scope.language].search(new RegExp(q, "i"));
-        if(result >= 0) {
-        	results.push({ label: rifiuto.nome[$scope.language], value: rifiuto.nome[$scope.language], obj: rifiuto });
-        }
-      }
-    }
-    return results;
-	};
-	
-	$scope.ac_rifiuto_options = {
-		suggest: $scope.suggestRifiuto,
-		on_select: function (selected) {
-			$scope.selectedRifiuto = selected.obj;
-		}
 	};
 	
 });
