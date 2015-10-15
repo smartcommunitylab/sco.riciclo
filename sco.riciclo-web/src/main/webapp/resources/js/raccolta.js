@@ -1,6 +1,6 @@
-var raccoltaApp = angular.module('raccolta', ['DataService', 'ngSanitize', 'MassAutoComplete']);
+var raccoltaApp = angular.module('raccolta', ['DataService']);
 
-var raccoltaCtrl = raccoltaApp.controller('userCtrl', function($scope, $http, $sce, $q, DataService) {
+var raccoltaCtrl = raccoltaApp.controller('userCtrl', function($scope, $http, $q, DataService) {
 	DataService.getProfile().then(
 	function(p) {
 		$scope.initData(p);
@@ -15,9 +15,12 @@ var raccoltaCtrl = raccoltaApp.controller('userCtrl', function($scope, $http, $s
 	$scope.selectedTab = "menu-raccolta";
 	$scope.language = "it";
 	$scope.draft = true;
+	$scope.defaultLang = "it";
+	$scope.itemToDelete = "";
 	
 	$scope.edit = false;
 	$scope.create = false;
+	$scope.view = false;
 	$scope.search = "";
 	$scope.incomplete = false;
 	
@@ -31,8 +34,6 @@ var raccoltaCtrl = raccoltaApp.controller('userCtrl', function($scope, $http, $s
 	$scope.status = 200;
 	
 	$scope.selectedArea = null;
-	$scope.areaSearch = {};	
-	
 	$scope.selectedTipologiaUtenza = null;
 	$scope.selectedTipologiaPuntoRaccolta = null;
 	$scope.selectedTipologiaRaccolta = null;
@@ -173,10 +174,30 @@ var raccoltaCtrl = raccoltaApp.controller('userCtrl', function($scope, $http, $s
 		$scope.okMsg = "";
 	};
 	
+	$scope.getModalHeaderClass = function() {
+		if($scope.view) {
+			return "view";
+		}
+		if($scope.edit) {
+			return "edit";
+		}
+		if($scope.create) {
+			return "create";
+		}
+	};
+	
+	$scope.setItemToDelete = function(id) {
+		$scope.itemToDelete = id;
+	};
+	
+	$scope.getActualName = function() {
+		return "";
+	};
+	
 	$scope.changeLanguage = function(language) {
 		$scope.language = language;
 		$scope.areaNameMap = $scope.setNameMap($scope.areaList);
-		if($scope.edit && ($scope.id != null)) {
+		if($scope.id != null) {
 			var element = $scope.findByObjectId($scope.raccoltaList, $scope.id);
 			if(element != null) {
 				$scope.infoRaccolta = element.infoRaccolta[$scope.language];
@@ -197,19 +218,30 @@ var raccoltaCtrl = raccoltaApp.controller('userCtrl', function($scope, $http, $s
 		$scope.selectedTipologiaRaccolta = null;
 		$scope.selectedTipologiaRifiuto = null;
 		$scope.selectedColore = null;
-		$scope.areaSearch = {};
 		$scope.selectedArea = null;
 		$scope.infoRaccolta = "";
+		$scope.itemToDelete = "";
 	};
 	
-	$scope.newRelation = function() {
+	$scope.newItem = function() {
 		$scope.edit = false;
 		$scope.create = true;
+		$scope.view = false;
 		$scope.incomplete = true;
+		$scope.itemToDelete = "";
+		$scope.language = "it";
 		$scope.resetForm();
 	};
 	
-	$scope.editRelation = function(id) {
+	$scope.editItem = function(id, modify) {
+		if(modify) {
+			$scope.edit = true;
+			$scope.view = false;
+		} else {
+			$scope.edit = false;
+			$scope.view = true;
+		}
+		$scope.create = false;
 		var relation = $scope.findByObjectId($scope.raccoltaList, id);
 		if(relation != null) {
 			$scope.id = id;
@@ -219,16 +251,13 @@ var raccoltaCtrl = raccoltaApp.controller('userCtrl', function($scope, $http, $s
 			$scope.selectedTipologiaRifiuto = $scope.findByObjectId($scope.tipologiaRifiutoList, relation.tipologiaRifiuto);
 			$scope.selectedColore = $scope.findByNome($scope.coloreList, relation.colore);
 			$scope.selectedArea = $scope.findByObjectId($scope.areaList, relation.area);
-			$scope.areaSearch.value = $scope.getAreaName(relation.area);
 			$scope.infoRaccolta = relation.infoRaccolta[$scope.language];
-			$scope.edit = true;
-			$scope.create = false;
 			$scope.incomplete = false;
 		}
 		$('html,body').animate({scrollTop:0},0);
 	};
 	
-	$scope.saveRelation = function() {
+	$scope.saveItem = function() {
 		if($scope.create) {
 			var element = {
 				area: '',
@@ -303,8 +332,8 @@ var raccoltaCtrl = raccoltaApp.controller('userCtrl', function($scope, $http, $s
 		}
 	};
 	
-	$scope.deleteRelation = function(id) {
-		var index = $scope.findIndex($scope.raccoltaList, id);
+	$scope.deleteItem = function() {
+		var index = $scope.findIndex($scope.raccoltaList, $scope.itemToDelete);
 		if(index >= 0) {
 			var element = $scope.raccoltaList[index];
 			if(element != null) {
@@ -333,11 +362,11 @@ var raccoltaCtrl = raccoltaApp.controller('userCtrl', function($scope, $http, $s
 		}
 	};
 	
-	$scope.$watch('selectedArea',function() {$scope.test();});
-	$scope.$watch('selectedTipologiaUtenza',function() {$scope.test();});
-	$scope.$watch('selectedTipologiaPuntoRaccolta',function() {$scope.test();});
-	$scope.$watch('selectedTipologiaRaccolta',function() {$scope.test();});
-	$scope.$watch('selectedTipologiaRifiuto',function() {$scope.test();});
+	$scope.$watch('selectedArea',function() {$scope.test();}, true);
+	$scope.$watch('selectedTipologiaUtenza',function() {$scope.test();}, true);
+	$scope.$watch('selectedTipologiaPuntoRaccolta',function() {$scope.test();}, true);
+	$scope.$watch('selectedTipologiaRaccolta',function() {$scope.test();}, true);
+	$scope.$watch('selectedTipologiaRifiuto',function() {$scope.test();}, true);
 	
 	$scope.test = function() {
 		if(($scope.selectedArea == null) || ($scope.selectedTipologiaUtenza == null) ||
@@ -374,29 +403,6 @@ var raccoltaCtrl = raccoltaApp.controller('userCtrl', function($scope, $http, $s
 			}
 		}
 		return -1;
-	};
-	
-	$scope.suggestArea = function(term) {
-		var q = term.toLowerCase().trim();
-    var results = [];
-    // Find first 10 states that start with `term`.
-    for (var i = 0; i < $scope.areaList.length; i++) {
-      var area = $scope.areaList[i];
-      if(area.nome) {
-        var result= area.nome.search(new RegExp(q, "i"));
-        if(result >= 0) {
-        	results.push({ label: area.nome, value: area.nome, obj: area });
-        }
-      }
-    }
-    return results;
-	};
-	
-	$scope.ac_area_options = {
-		suggest: $scope.suggestArea,
-		on_select: function (selected) {
-			$scope.selectedArea = selected.obj;
-		}
 	};
 	
 });
