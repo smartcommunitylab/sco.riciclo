@@ -130,7 +130,7 @@ var segnalazioniCtrl = segnalazioniApp.controller('userCtrl', function($scope, $
 	};
 	
 	$scope.getActualName = function() {
-		return $scope.tipologia[$scope.defaultLang];
+		return $scope.tipologia;
 	};
 	
 	$scope.changeLanguage = function(language) {

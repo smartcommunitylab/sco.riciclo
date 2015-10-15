@@ -90,7 +90,7 @@ var coloriApp = angular.module('colori', ['DataService', 'colorpicker.module']).
 		$scope.language = language;
 	};
 	
-	$scope.editColore = function(id, modify) {
+	$scope.editItem = function(id, modify) {
 		console.log("editColore:" + id);
 		if(modify) {
 			$scope.edit = true;
@@ -110,7 +110,7 @@ var coloriApp = angular.module('colori', ['DataService', 'colorpicker.module']).
 		$('html,body').animate({scrollTop:0},0);
 	};
 	
-	$scope.newColore = function() {
+	$scope.newItem = function() {
 		console.log("newColore");
 		$scope.edit = false;
 		$scope.create = true;
@@ -132,7 +132,7 @@ var coloriApp = angular.module('colori', ['DataService', 'colorpicker.module']).
 		$('html,body').animate({scrollTop:0},0);
 	};
 	
-	$scope.saveColore = function() {
+	$scope.saveItem = function() {
 		if($scope.create) {
 			var element = {
 				nome: '',
@@ -194,7 +194,7 @@ var coloriApp = angular.module('colori', ['DataService', 'colorpicker.module']).
 		}
 	};
 	
-	$scope.deleteColore = function() {
+	$scope.deleteItem = function() {
 		var index = $scope.findIndex($scope.coloreList, $scope.itemToDelete);
 		if(index >= 0) {
 			var element = $scope.coloreList[index];

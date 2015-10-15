@@ -167,10 +167,10 @@
 			      <div class="modal-footer">
 			        <button type="button" class="btn btn-default" data-dismiss="modal">Annulla</button>
 					  	<button class="btn btn-primary" data-ng-disabled="view || error || incomplete"
-					  		data-ng-show="edit" data-dismiss="modal" data-ng-click="saveGestore()">Modifica
+					  		data-ng-show="edit" data-dismiss="modal" data-ng-click="saveItem()">Modifica
 					  	</button> 
 					  	<button class="btn btn-success" data-ng-disabled="view || error || incomplete"
-					  		data-ng-show="create" data-dismiss="modal" data-ng-click="saveGestore()">Crea
+					  		data-ng-show="create" data-dismiss="modal" data-ng-click="saveItem()">Crea
 					  	</button> 
 			      </div>			      
 					</div>
@@ -187,7 +187,7 @@
 							<button type="button" class="btn btn-default" data-dismiss="modal"
 							data-target="#divDeleteItemAlert">Annulla</button>
 							<button class="btn btn-danger" data-dismiss="modal" 
-							data-target="#divDeleteItemAlert" data-ng-click="deleteGestore()">
+							data-target="#divDeleteItemAlert" data-ng-click="deleteItem()">
 							Elimina
 							</button>
 						</div>
@@ -197,7 +197,7 @@
 											
 			<div class="list-create">
 				<button class="btn btn-success" data-toggle="modal" data-target="#divForm"
-					data-backdrop="static" data-ng-click="newGestore()" title="Crea">
+					data-backdrop="static" data-ng-click="newItem()" title="Crea">
 						CREA NUOVO ELEMENTO
 				</button>
 			</div>
@@ -241,11 +241,11 @@
 			</div>
 			<div class="col-md-2">
 				<button class="btn btn-info" data-toggle="modal" data-target="#divForm"
-				data-backdrop="static" data-ng-click="editGestore(item.objectId, false)" title="Vedi">
+				data-backdrop="static" data-ng-click="editItem(item.objectId, false)" title="Vedi">
 					<span class="glyphicon glyphicon-eye-open"></span>
 				</button>
 				<button class="btn btn-primary" data-toggle="modal" data-target="#divForm"
-				data-backdrop="static" data-ng-click="editGestore(item.objectId, true)" title="Modifica">
+				data-backdrop="static" data-ng-click="editItem(item.objectId, true)" title="Modifica">
 					<span class="glyphicon glyphicon-pencil"></span>
 				</button>
 				<button class="btn btn-danger" data-toggle="modal" data-target="#divDeleteItemAlert" 

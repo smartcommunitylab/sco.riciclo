@@ -107,7 +107,7 @@ var istituzioniCtrl = istituzioniApp.controller('userCtrl', function($scope, $wi
 		}
 	};
 	
-	$scope.editGestore = function(id, modify) {
+	$scope.editItem = function(id, modify) {
 		console.log("editIstituzione:" + id);
 		if(modify) {
 			$scope.edit = true;
@@ -141,7 +141,7 @@ var istituzioniCtrl = istituzioniApp.controller('userCtrl', function($scope, $wi
 		$('html,body').animate({scrollTop:0},0);
 	};
 	
-	$scope.newGestore = function() {
+	$scope.newItem = function() {
 		console.log("newGestore");
 		$scope.edit = false;
 		$scope.create = true;
@@ -176,7 +176,7 @@ var istituzioniCtrl = istituzioniApp.controller('userCtrl', function($scope, $wi
 		$scope.fFacebook = "";
 	};
 	
-	$scope.saveGestore = function() {
+	$scope.saveItem = function() {
 		if($scope.create) {
 			var element = {
 				nome: '',
@@ -268,7 +268,7 @@ var istituzioniCtrl = istituzioniApp.controller('userCtrl', function($scope, $wi
 		}
 	};
 	
-	$scope.deleteGestore = function() {
+	$scope.deleteItem = function() {
 		var index = $scope.findIndex($scope.istituzioneList, $scope.itemToDelete);
 		if(index >= 0) {
 			var element = $scope.istituzioneList[index];

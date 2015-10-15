@@ -106,7 +106,7 @@ var gestoriCtrl = gestoriApp.controller('userCtrl', function($scope, $window, $h
 		}
 	};
 	
-	$scope.editGestore = function(id, modify) {
+	$scope.editItem = function(id, modify) {
 		console.log("editGestore:" + id);
 		if(modify) {
 			$scope.edit = true;
@@ -139,7 +139,7 @@ var gestoriCtrl = gestoriApp.controller('userCtrl', function($scope, $window, $h
 		$('html,body').animate({scrollTop:0},0);
 	};
 	
-	$scope.newGestore = function() {
+	$scope.newItem = function() {
 		console.log("newGestore");
 		$scope.edit = false;
 		$scope.create = true;
@@ -172,7 +172,7 @@ var gestoriCtrl = gestoriApp.controller('userCtrl', function($scope, $window, $h
 		$scope.fFacebook = "";
 	};
 	
-	$scope.saveGestore = function() {
+	$scope.saveItem = function() {
 		if($scope.create) {
 			var element = {
 				ragioneSociale: '',
@@ -261,7 +261,7 @@ var gestoriCtrl = gestoriApp.controller('userCtrl', function($scope, $window, $h
 		}
 	};
 	
-	$scope.deleteGestore = function() {
+	$scope.deleteItem = function() {
 		var index = $scope.findIndex($scope.gestoreList, $scope.itemToDelete);
 		if(index >= 0) {
 			var element = $scope.gestoreList[index];

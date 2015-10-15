@@ -15,6 +15,7 @@ var rifiutiApp = angular.module('rifiuti', ['DataService']).controller('userCtrl
 	$scope.language = "it";
 	$scope.draft = true;
 	$scope.defaultLang = "it";
+	$scope.itemToDelete = "";
 	
 	$scope.fName = "";
 	$scope.fId = "";
@@ -23,6 +24,7 @@ var rifiutiApp = angular.module('rifiuti', ['DataService']).controller('userCtrl
 	
 	$scope.edit = false;
 	$scope.create = false;
+	$scope.view = false;
 	$scope.incomplete = true;
 	
 	$scope.error = false;
@@ -66,9 +68,29 @@ var rifiutiApp = angular.module('rifiuti', ['DataService']).controller('userCtrl
 		$scope.fName = "";
 	};
 	
+	$scope.getModalHeaderClass = function() {
+		if($scope.view) {
+			return "view";
+		}
+		if($scope.edit) {
+			return "edit";
+		}
+		if($scope.create) {
+			return "create";
+		}
+	};
+	
+	$scope.setItemToDelete = function(id) {
+		$scope.itemToDelete = id;
+	};
+	
+	$scope.getActualName = function() {
+		return $scope.actualName;
+	};
+	
 	$scope.changeLanguage = function(language) {
 		$scope.language = language;
-		if($scope.edit && ($scope.fId != null)) {
+		if($scope.fId != null) {
 			var element = $scope.findByObjectId($scope.rifiuti, $scope.fId);
 			if(element != null) {
 				$scope.fName = element.nome[$scope.language];
@@ -76,11 +98,15 @@ var rifiutiApp = angular.module('rifiuti', ['DataService']).controller('userCtrl
 		}
 	};
 	
-	$scope.editRifiuto = function(id) {
+	$scope.editItem = function(id, modify) {
 		console.log("editRifiuto:" + id);
-		//var index = $scope.findIndex($scope.rifiuti, id);
-		//console.log("editRifiutoPos:" + index);
-		$scope.edit = true;
+		if(modify) {
+			$scope.edit = true;
+			$scope.view = false;
+		} else {
+			$scope.edit = false;
+			$scope.view = true;
+		}
 		$scope.create = false;
 		var element = $scope.findByObjectId($scope.rifiuti, id);
 		if(element != null) {
@@ -92,13 +118,15 @@ var rifiutiApp = angular.module('rifiuti', ['DataService']).controller('userCtrl
 		$('html,body').animate({scrollTop:0},0);
 	};
 	
-	$scope.newRifiuto = function() {
+	$scope.newItem = function() {
 		console.log("newRifiuto");
 		$scope.edit = false;
 		$scope.create = true;
 		$scope.fId = "";
 		$scope.fName = "";
 		$scope.incomplete = true;
+		$scope.itemToDelete = "";
+		$scope.language = "it";
 	};
 	
 	$scope.resetUI = function() {
@@ -109,10 +137,11 @@ var rifiutiApp = angular.module('rifiuti', ['DataService']).controller('userCtrl
 		$scope.search = "";
 		$scope.actualName = "";
 		$scope.incomplete = true;
+		$scope.itemToDelete = "";
 		$('html,body').animate({scrollTop:0},0);
 	};
 	
-	$scope.saveRifiuto = function() {
+	$scope.saveItem = function() {
 		if($scope.create) {
 			var element = {nome: {}};
 			element.nome[$scope.language] = $scope.fName;
@@ -165,8 +194,8 @@ var rifiutiApp = angular.module('rifiuti', ['DataService']).controller('userCtrl
 		}
 	};
 	
-	$scope.deleteRifiuto = function(id) {
-		var index = $scope.findIndex($scope.rifiuti, id);
+	$scope.deleteItem = function() {
+		var index = $scope.findIndex($scope.rifiuti, $scope.itemToDelete);
 		if(index >= 0) {
 			var element = $scope.rifiuti[index];
 			if(element != null) {
