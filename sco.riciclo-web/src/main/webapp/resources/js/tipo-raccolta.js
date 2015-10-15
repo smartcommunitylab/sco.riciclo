@@ -14,6 +14,7 @@ angular.module('tipo-raccolta', ['DataService']).controller('userCtrl', function
 	$scope.language = "it";
 	$scope.draft = true;
 	$scope.defaultLang = "it";
+	$scope.itemToDelete = "";
 	
 	$scope.fId = "";
 	$scope.fNome = "";
@@ -69,9 +70,29 @@ angular.module('tipo-raccolta', ['DataService']).controller('userCtrl', function
 		}
 	};
 	
+	$scope.getModalHeaderClass = function() {
+		if($scope.view) {
+			return "view";
+		}
+		if($scope.edit) {
+			return "edit";
+		}
+		if($scope.create) {
+			return "create";
+		}
+	};
+	
+	$scope.setItemToDelete = function(id) {
+		$scope.itemToDelete = id;
+	};
+	
+	$scope.getActualName = function() {
+		return $scope.actualName;
+	};
+	
 	$scope.changeLanguage = function(language) {
 		$scope.language = language;
-		if($scope.edit && ($scope.fId != null)) {
+		if($scope.fId != null) {
 			var element = $scope.findByObjectId($scope.tipoRaccoltaList, $scope.fId);
 			if(element != null) {
 				$scope.fNome = element.nome[$scope.language];
@@ -80,11 +101,15 @@ angular.module('tipo-raccolta', ['DataService']).controller('userCtrl', function
 		}
 	};
 	
-	$scope.editTipo = function(id) {
+	$scope.editTipo = function(id, modify) {
 		console.log("editTipo:" + id);
-		//var index = $scope.findIndex($scope.rifiuti, id);
-		//console.log("editRifiutoPos:" + index);
-		$scope.edit = true;
+		if(modify) {
+			$scope.edit = true;
+			$scope.view = false;
+		} else {
+			$scope.edit = false;
+			$scope.view = true;
+		}
 		$scope.create = false;
 		var element = $scope.findByObjectId($scope.tipoRaccoltaList, id);
 		if(element != null) {
@@ -106,6 +131,8 @@ angular.module('tipo-raccolta', ['DataService']).controller('userCtrl', function
 		$scope.fDescrizione = "";
 		$scope.actualName = "";
 		$scope.incomplete = true;
+		$scope.itemToDelete = "";
+		$scope.language = "it";
 	};
 	
 	$scope.resetUI = function() {
@@ -117,6 +144,7 @@ angular.module('tipo-raccolta', ['DataService']).controller('userCtrl', function
 		$scope.search = "";
 		$scope.actualName = "";
 		$scope.incomplete = true;
+		$scope.itemToDelete = "";
 		$('html,body').animate({scrollTop:0},0);
 	};
 	
@@ -190,8 +218,8 @@ angular.module('tipo-raccolta', ['DataService']).controller('userCtrl', function
 		}
 	};
 	
-	$scope.deleteTipo = function(id) {
-		var index = $scope.findIndex($scope.tipoRaccoltaList, id);
+	$scope.deleteTipo = function() {
+		var index = $scope.findIndex($scope.tipoRaccoltaList, $scope.itemToDelete);
 		if(index >= 0) {
 			var copiedList = $scope.tipoRaccoltaList.slice(0);
 			copiedList.splice(index, 1);

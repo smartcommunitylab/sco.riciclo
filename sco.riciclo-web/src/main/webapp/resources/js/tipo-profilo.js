@@ -76,6 +76,13 @@ var tipoProfiloApp = angular.module('tipo-profilo', ['DataService']).controller(
 		$scope.okMsg = "";
 	};
 	
+	$scope.resetForm = function() {
+		$scope.fId = "";
+		$scope.fNome = "";
+		$scope.fDescrizione = "";
+		$scope.selectedTipologiaUtenza = null;
+	};
+	
 	$scope.getModalHeaderClass = function() {
 		if($scope.view) {
 			return "view";
@@ -86,13 +93,6 @@ var tipoProfiloApp = angular.module('tipo-profilo', ['DataService']).controller(
 		if($scope.create) {
 			return "create";
 		}
-	};
-	
-	$scope.resetForm = function() {
-		$scope.fId = "";
-		$scope.fNome = "";
-		$scope.fDescrizione = "";
-		$scope.selectedTipologiaUtenza = null;
 	};
 	
 	$scope.setItemToDelete = function(id) {

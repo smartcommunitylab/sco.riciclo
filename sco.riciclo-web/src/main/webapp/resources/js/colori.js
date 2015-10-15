@@ -14,6 +14,7 @@ var coloriApp = angular.module('colori', ['DataService', 'colorpicker.module']).
 	$scope.language = "it";
 	$scope.draft = true;
 	$scope.defaultLang = "it";
+	$scope.itemToDelete = "";
 	
 	$scope.fNome = "";
 	$scope.fCodice = "";
@@ -21,6 +22,7 @@ var coloriApp = angular.module('colori', ['DataService', 'colorpicker.module']).
 	
 	$scope.edit = false;
 	$scope.create = false;
+	$scope.view = false;
 	$scope.incomplete = true;
 	
 	$scope.error = false;
@@ -60,22 +62,45 @@ var coloriApp = angular.module('colori', ['DataService', 'colorpicker.module']).
 	};
 	
 	$scope.resetForm = function() {
+		$scope.fNome = "";
 		$scope.fCodice = "";
-		if($scope.create) {
-			$scope.fNome = "";
+	};
+	
+	$scope.getModalHeaderClass = function() {
+		if($scope.view) {
+			return "view";
 		}
+		if($scope.edit) {
+			return "edit";
+		}
+		if($scope.create) {
+			return "create";
+		}
+	};
+	
+	$scope.setItemToDelete = function(id) {
+		$scope.itemToDelete = id;
+	};
+	
+	$scope.getActualName = function() {
+		return $scope.fNome;
 	};
 	
 	$scope.changeLanguage = function(language) {
 		$scope.language = language;
 	};
 	
-	$scope.editColore = function(id) {
+	$scope.editColore = function(id, modify) {
 		console.log("editColore:" + id);
-		//var index = $scope.findIndex($scope.rifiuti, id);
-		//console.log("editRifiutoPos:" + index);
-		$scope.edit = true;
+		if(modify) {
+			$scope.edit = true;
+			$scope.view = false;
+		} else {
+			$scope.edit = false;
+			$scope.view = true;
+		}
 		$scope.create = false;
+		$scope.language = "it";
 		var element = $scope.findById($scope.coloreList, id);
 		if(element != null) {
 			$scope.fNome = element.nome;
@@ -92,6 +117,8 @@ var coloriApp = angular.module('colori', ['DataService', 'colorpicker.module']).
 		$scope.fNome = "";
 		$scope.fCodice = "";
 		$scope.incomplete = true;
+		$scope.itemToDelete = "";
+		$scope.language = "it";
 	};
 	
 	$scope.resetUI = function() {
@@ -101,6 +128,7 @@ var coloriApp = angular.module('colori', ['DataService', 'colorpicker.module']).
 		$scope.fCodice = "";
 		$scope.search = "";
 		$scope.incomplete = true;
+		$scope.itemToDelete = "";
 		$('html,body').animate({scrollTop:0},0);
 	};
 	
@@ -166,8 +194,8 @@ var coloriApp = angular.module('colori', ['DataService', 'colorpicker.module']).
 		}
 	};
 	
-	$scope.deleteColore = function(id) {
-		var index = $scope.findIndex($scope.coloreList, id);
+	$scope.deleteColore = function() {
+		var index = $scope.findIndex($scope.coloreList, $scope.itemToDelete);
 		if(index >= 0) {
 			var element = $scope.coloreList[index];
 			if(element != null) {

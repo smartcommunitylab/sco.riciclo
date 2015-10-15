@@ -14,6 +14,7 @@ var tipoPuntoApp = angular.module('tipo-punto', ['DataService']).controller('use
 	$scope.language = "it";
 	$scope.draft = true;
 	$scope.defaultLang = "it";
+	$scope.itemToDelete = "";
 	
 	$scope.fId = "";
 	$scope.fNome = "";
@@ -24,6 +25,7 @@ var tipoPuntoApp = angular.module('tipo-punto', ['DataService']).controller('use
 	
 	$scope.edit = false;
 	$scope.create = false;
+	$scope.view = false;
 	$scope.incomplete = true;
 	
 	$scope.error = false;
@@ -71,9 +73,29 @@ var tipoPuntoApp = angular.module('tipo-punto', ['DataService']).controller('use
 		}
 	};
 	
+	$scope.getModalHeaderClass = function() {
+		if($scope.view) {
+			return "view";
+		}
+		if($scope.edit) {
+			return "edit";
+		}
+		if($scope.create) {
+			return "create";
+		}
+	};
+	
+	$scope.setItemToDelete = function(id) {
+		$scope.itemToDelete = id;
+	};
+	
+	$scope.getActualName = function() {
+		return $scope.actualName;
+	};
+	
 	$scope.changeLanguage = function(language) {
 		$scope.language = language;
-		if($scope.edit && ($scope.fId != null)) {
+		if($scope.fId != null) {
 			var element = $scope.findByObjectId($scope.tipoPuntoRaccoltaList, $scope.fId);
 			if(element != null) {
 				$scope.fNome = element.nome[$scope.language];
@@ -82,11 +104,15 @@ var tipoPuntoApp = angular.module('tipo-punto', ['DataService']).controller('use
 		}
 	};
 	
-	$scope.editTipo = function(id) {
+	$scope.editTipo = function(id, modify) {
 		console.log("editTipo:" + id);
-		//var index = $scope.findIndex($scope.rifiuti, id);
-		//console.log("editRifiutoPos:" + index);
-		$scope.edit = true;
+		if(modify) {
+			$scope.edit = true;
+			$scope.view = false;
+		} else {
+			$scope.edit = false;
+			$scope.view = true;
+		}
 		$scope.create = false;
 		var element = $scope.findByObjectId($scope.tipoPuntoRaccoltaList, id);
 		if(element != null) {
@@ -110,6 +136,8 @@ var tipoPuntoApp = angular.module('tipo-punto', ['DataService']).controller('use
 		$scope.fType = "";
 		$scope.actualName = "";
 		$scope.incomplete = true;
+		$scope.itemToDelete = "";
+		$scope.language = "it";
 	};
 	
 	$scope.resetUI = function() {
@@ -122,6 +150,7 @@ var tipoPuntoApp = angular.module('tipo-punto', ['DataService']).controller('use
 		$scope.search = "";
 		$scope.actualName = "";
 		$scope.incomplete = true;
+		$scope.itemToDelete = "";
 		$('html,body').animate({scrollTop:0},0);
 	};
 	
@@ -193,8 +222,8 @@ var tipoPuntoApp = angular.module('tipo-punto', ['DataService']).controller('use
 		}
 	};
 	
-	$scope.deleteTipo = function(id) {
-		var index = $scope.findIndex($scope.tipoPuntoRaccoltaList, id);
+	$scope.deleteTipo = function() {
+		var index = $scope.findIndex($scope.tipoPuntoRaccoltaList, $scope.itemToDelete);
 		if(index >= 0) {
 			var element = $scope.tipoPuntoRaccoltaList[index];
 			if(element != null) {
