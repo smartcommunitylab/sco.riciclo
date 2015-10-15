@@ -1,6 +1,6 @@
-var areeApp = angular.module('aree', ['DataService', 'ngSanitize', 'MassAutoComplete']);
+var areeApp = angular.module('aree', ['DataService']);
 
-var areeCtrl = areeApp.controller('userCtrl', function($scope, $http, $sce, $q, DataService) {
+var areeCtrl = areeApp.controller('userCtrl', function($scope, $http, $q, DataService) {
 	DataService.getProfile().then(
 	function(p) {
 		$scope.initData(p);
@@ -15,6 +15,8 @@ var areeCtrl = areeApp.controller('userCtrl', function($scope, $http, $sce, $q, 
 	$scope.selectedTab = "menu-aree";
 	$scope.language = "it";
 	$scope.draft = true;
+	$scope.defaultLang = "it";
+	$scope.itemToDelete = "";
 	
 	$scope.fId = "";
 	$scope.fNome = "";
@@ -24,6 +26,9 @@ var areeCtrl = areeApp.controller('userCtrl', function($scope, $http, $sce, $q, 
 	$scope.fGestore = "";
 	$scope.fcodiceISTAT = "";
 	
+	$scope.edit = false;
+	$scope.create = false;
+	$scope.view = false;
 	$scope.search = "";
 	$scope.incomplete = false;
 	
@@ -37,8 +42,6 @@ var areeCtrl = areeApp.controller('userCtrl', function($scope, $http, $sce, $q, 
 	$scope.status = 200;
 	
 	$scope.selectedParentArea = null;
-	$scope.areaSearch = {};
-	
 	$scope.tipologiaUtenzaList = [];
 	$scope.areaList = [];
 	$scope.istituzioneList = [];
@@ -138,9 +141,46 @@ var areeCtrl = areeApp.controller('userCtrl', function($scope, $http, $sce, $q, 
 		return map;
 	};
 	
+	$scope.resetError = function() {
+		$scope.error = false;
+		$scope.errorMsg = "";
+	};
+	
+	$scope.resetOk = function() {
+		$scope.ok = false;
+		$scope.okMsg = "";
+	};
+	
+	$scope.getModalHeaderClass = function() {
+		if($scope.view) {
+			return "view";
+		}
+		if($scope.edit) {
+			return "edit";
+		}
+		if($scope.create) {
+			return "create";
+		}
+	};
+	
+	$scope.setItemToDelete = function(id) {
+		$scope.itemToDelete = id;
+	};
+	
+	$scope.getActualName = function() {
+		return $scope.fNome;
+	};
+	
 	$scope.changeLanguage = function(language) {
 		$scope.language = language;
 		$scope.areaEtichettaMap = $scope.setEtichettaMap($scope.areaList);
+		if($scope.fId != null) {
+			var element = $scope.findByObjectId($scope.areaList, $scope.fId);
+			if(element != null) {
+				$scope.fDescrizione = element.descrizione[$scope.language];
+				$scope.fEtichetta = element.etichetta[$scope.language];	
+			}
+		}		
 	};
 	
 	$scope.findByObjectId = function(array, id) {
@@ -207,6 +247,7 @@ var areeCtrl = areeApp.controller('userCtrl', function($scope, $http, $sce, $q, 
 	$scope.resetUI = function() {
 		$scope.edit = false;
 		$scope.create = false;
+		$scope.view = false;
 		$scope.search = "";
 		$scope.incomplete = true;
 		$scope.resetForm();
@@ -220,28 +261,37 @@ var areeCtrl = areeApp.controller('userCtrl', function($scope, $http, $sce, $q, 
 		$scope.fIstituzione = "";
 		$scope.fGestore = "";
 		$scope.fcodiceISTAT = "";
+		$scope.itemToDelete = "";
 		$scope.selectedParentArea = null;
-		$scope.areaSearch = {};
 		$scope.resetTipologiaUtenzaSelected();
   	$scope.areaNameMap = $scope.setNameMap($scope.areaList);
   	$scope.areaEtichettaMap = $scope.setEtichettaMap($scope.areaList);
 	}
 	
-	$scope.newArea = function() {
+	$scope.newItem = function() {
 		$scope.incomplete = true;	
 		$scope.edit = false;
 		$scope.create = true;
+		$scope.view = false;
 		$scope.fId = "";
+		$scope.itemToDelete = "";
+		$scope.language = "it";
 		$scope.resetForm();
 	}
 	
-	$scope.editArea = function(id) {
+	$scope.editItem = function(id, modify) {
 		console.log("editArea:" + id);
+		if(modify) {
+			$scope.edit = true;
+			$scope.view = false;
+		} else {
+			$scope.edit = false;
+			$scope.view = true;
+		}
+		$scope.create = false;
 		var area = $scope.findByObjectId($scope.areaList, id);
 		if(area != null) {
 			$scope.incomplete = false;	
-			$scope.edit = true;
-			$scope.create = false;
 			$scope.fId = id;
 			$scope.fNome = area.nome;
 			$scope.fDescrizione = area.descrizione[$scope.language];
@@ -252,7 +302,6 @@ var areeCtrl = areeApp.controller('userCtrl', function($scope, $http, $sce, $q, 
 			$scope.tipologiaUtenzaSelected = $scope.setTipologiaUtenzaSelected(area);
 			if(area.parent) {
 				$scope.selectedParentArea = $scope.findByObjectId($scope.areaList, area.parent);
-				$scope.areaSearch.value = $scope.getAreaName(area.parent);
 			}
 		}
 		$('html,body').animate({scrollTop:0},0);
@@ -267,7 +316,7 @@ var areeCtrl = areeApp.controller('userCtrl', function($scope, $http, $sce, $q, 
 		return true;
 	}
 	
-	$scope.saveArea = function() {
+	$scope.saveItem = function() {
 		if($scope.create) {
 			var element = {
 				nome: '',
@@ -357,8 +406,8 @@ var areeCtrl = areeApp.controller('userCtrl', function($scope, $http, $sce, $q, 
 		}
 	};
 	
-	$scope.deleteArea = function(id) {
-		var index = $scope.findIndex($scope.areaList, id);
+	$scope.deleteItem = function() {
+		var index = $scope.findIndex($scope.areaList, $scope.itemToDelete);
 		if(index >= 0) {
 			var element = $scope.areaList[index];
 			if(element != null) {
@@ -386,29 +435,6 @@ var areeCtrl = areeApp.controller('userCtrl', function($scope, $http, $sce, $q, 
 			}
 		}
 	};
-
-	$scope.suggestArea = function(term) {
-		var q = term.toLowerCase().trim();
-    var results = [];
-    // Find first 10 states that start with `term`.
-    for (var i = 0; i < $scope.areaList.length; i++) {
-      var area = $scope.areaList[i];
-      if(area.nome) {
-        var result= area.nome.search(new RegExp(q, "i"));
-        if(result >= 0) {
-        	results.push({ label: area.nome, value: area.nome, obj: area });
-        }
-      }
-    }
-    return results;
-	};
-	
-	$scope.ac_area_options = {
-		suggest: $scope.suggestArea,
-		on_select: function (selected) {
-			$scope.selectedParentArea = selected.obj;
-		}
-	};
 	
 	$scope.$watch('fNome',function() {$scope.test();});
 	$scope.$watch('fIstituzione',function() {$scope.test();});
@@ -425,15 +451,17 @@ var areeCtrl = areeApp.controller('userCtrl', function($scope, $http, $sce, $q, 
 	  	$scope.incomplete = false;
 	  }
 	};
-	
-	$scope.resetError = function() {
-		$scope.error = false;
-		$scope.errorMsg = "";
-	};
-	
-	$scope.resetOk = function() {
-		$scope.ok = false;
-		$scope.okMsg = "";
-	};
-	
+		
+});
+
+areeApp.directive('myModal', function() {
+  return {
+    restrict: 'A',
+    link: function(scope, element, attr) {
+      scope.formDismiss = function() {
+      	$(element).modal('hide');
+      	$('html,body').animate({scrollTop:0},0);
+      };
+    }
+  } 
 });

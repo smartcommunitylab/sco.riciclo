@@ -21,23 +21,9 @@
 
 	<div class="container-fluid">
 	
-		<div class="well well-sm">
-			<h4>
-				Aree
-				<button type="button" class="btn btn-default btn-sm pull-right"
-					data-ng-click="changeLanguage('en')"
-					data-ng-class="{'active':language == 'en'}">
-					<span class="glyphicon glyphicon-flag"></span> EN
-				</button>
-				<button type="button" class="btn btn-default btn-sm pull-right"
-					data-ng-click="changeLanguage('it')"
-					data-ng-class="{'active':language == 'it'}">
-					<span class="glyphicon glyphicon-flag"></span> IT
-				</button>
-			</h4>
+		<div class="list-title">
+			<h4>Elenchi AREE</h4>
 		</div>
-		
-		<div class="panel-group">
 		
 			<div id="error" class="alert alert-danger fade in" data-ng-show="error">
 				<a href="#" class="close" data-hide="alert" aria-label="close"
@@ -45,152 +31,207 @@
 				{{errorMsg}}
 			</div>
 			
-			<div id="error" class="alert alert-success fade in" data-ng-show="ok">
+			<div id="ok" class="alert alert-success fade in" data-ng-show="ok">
 				<a href="#" class="close" data-hide="alert" aria-label="close"
 				data-ng-click="resetOk()">&times;</a>
 				{{okMsg}}
 			</div>
-			
-			<div class="panel panel-default">
-				<div class="panel-body">
-					<button class="btn btn-link" data-ng-click="newArea()">
-						<span class="glyphicon glyphicon-grain"></span> Crea nuovo elemento
-					</button>
-					<button type="button" class="btn btn-default btn-sm pull-right" data-ng-click="draft=true"
-						data-ng-class="{'active':draft}">
-		   			<span class="glyphicon glyphicon-tags"></span> draft
-		 			</button>
-					<button type="button" class="btn btn-default btn-sm pull-right" data-ng-click="draft=false"
-						data-ng-class="{'active':!draft}">
-		   			<span class="glyphicon glyphicon-tags"></span> prod
-		 			</button>
-				</div>
-			</div>
-			
-			<div class="panel panel-default">
-	  		<div class="panel-body">
-					<h4 data-ng-show="create">Crea:</h4>
-					<h4 data-ng-show="edit">Modifica:</h4>
-					<form role="form">
-				   	<div class="row form-group">
-				    	<label class="col-md-1 control-label">Nome:</label>
-				    	<div class="col-md-2">
-				    		<input class="form-control" type="text" name="nome" data-ng-model="fNome" 
-				    		data-ng-disabled="!edit && !create" placeholder="nome">
-				    	</div>
-				    	<label class="col-md-1 control-label">(campo obbligatorio)</label>
-				    </div>
-				   	<div class="row form-group">
-				    	<label class="col-md-1 control-label">Descrizione ({{language}}):</label>
-				    	<div class="col-md-2">
-				    		<input class="form-control" type="text" name="descrizione" data-ng-model="fDescrizione" 
-				    		data-ng-disabled="!edit && !create" placeholder="descrizione">
-				    	</div>
-				    </div>
-				   	<div class="row form-group">
-				    	<label class="col-md-1 control-label">Etichetta ({{language}}):</label>
-				    	<div class="col-md-2">
-				    		<input class="form-control" type="text" name="etichetta" data-ng-model="fEtichetta" 
-				    		data-ng-disabled="!edit && !create" placeholder="etichetta">
-				    	</div>
-				    </div>
-				   	<div class="row form-group">
-				    	<label class="col-md-1 control-label">Istituzione:</label>
-				    	<div class="col-md-2">
-				    		<select class="form-control" data-ng-model="fIstituzione" data-ng-disabled="!edit && !create">
-        					<option data-ng-repeat="item in istituzioneList" value="{{item}}">{{item}}</option>
-      					</select>
-      				</div>
-      				<label class="col-md-1 control-label">(campo obbligatorio)</label>
-				    </div>
-				   	<div class="row form-group">
-				    	<label class="col-md-1 control-label">Gestore:</label>
-				    	<div class="col-md-2">
-				    		<select class="form-control" data-ng-model="fGestore" data-ng-disabled="!edit && !create">
-        					<option data-ng-repeat="item in gestoreList" value="{{item}}">{{item}}</option>
-      					</select>
-      				</div>
-      				<label class="col-md-1 control-label">(campo obbligatorio)</label>
-				    </div>
-				   	<div class="row form-group">
-				    	<label class="col-md-1 control-label">Codice ISTAT:</label>
-				    	<div class="col-md-2">
-				    		<input class="form-control" type="text" name="codiceISTAT" data-ng-model="fcodiceISTAT" 
-				    		data-ng-disabled="!edit && !create" placeholder="codiceISTAT (022xxx)">
-				    	</div>
-				    </div>
-						<div class="row form-group" mass-autocomplete>
-							<label class="col-md-1 control-label">Parent Area:</label>
-							<div class="col-md-2">
-								<input class="form-control" data-ng-model="areaSearch.value" mass-autocomplete-item="ac_area_options" 
-								placeholder="area" data-ng-disabled="!edit && !create">
-							</div>
-						</div>
-				    <div class="checkbox">
-							<label class="checkbox-inline" 
-							data-ng-repeat="(tipologiaUtente, enabled) in tipologiaUtenzaSelected">
-								<input type="checkbox" data-ng-model="tipologiaUtenzaSelected[tipologiaUtente]">
-								{{tipologiaUtente}}
-							</label>
-							<label>(campo obbligatorio)</label>
-						</div>
-						<button class="btn btn-default" data-ng-disabled="!edit && !create" data-ng-click="resetForm()">
-							<span class="glyphicon glyphicon-remove"></span> Cancella
-						</button>
-				  	<button class="btn btn-success" data-ng-disabled="error || incomplete"
-				  		data-ng-click="saveArea()">
-				  		<span class="glyphicon glyphicon-save"></span> Salva
-				  	</button> 
-					</form>	
-	  		</div>
-			</div>
 						
-			<div class="panel panel-default">
-				<div class="panel-body">
-					<label class="control-label">Cerca:</label>
-					<p>
-						<input type="text" data-ng-model="search">
-						<button class="btn btn-default btn-sm" data-ng-click="search = ''">
-							<span class="glyphicon glyphicon-remove"></span>
-						</button>
-					</p>
-					<div class="row list-header">
-						<div class="col-md-1"><h4>Modifica</h4></div>
-						<div class="col-md-3"><h4>Nome</h4></div>
-						<div class="col-md-3"><h4>Etichetta</h4></div>
-						<div class="col-md-3"><h4>Parent</h4></div>
-						<div class="col-md-1"><h4>Codice ISTAT</h4></div>
-						<div class="col-md-1"><h4>Cancella</h4></div>
+			<div id="divForm" class="modal modal-wide fade" role="dialog">
+				<div class="modal-dialog">
+					<div class="modal-content">
+			      <div class="modal-header" data-ng-class="getModalHeaderClass()">
+			        <button type="button" class="close" data-dismiss="modal">&times;</button>
+							<h4 data-ng-show="create">CREA nuova Area</h4>
+							<h4 data-ng-show="edit && !view">MODIFICA {{getActualName()}}</h4>
+							<h4 data-ng-show="view">VEDI {{getActualName()}}</h4>
+			      </div>
+			      <div class="modal-body">
+							<div id="errorForm" class="alert alert-danger fade in" data-ng-show="error">
+								<a href="#" class="close" data-hide="alert" aria-label="close"
+								data-ng-click="resetError()">&times;</a>
+								{{errorMsg}}
+							</div>
+			      	<p class="text-danger pull-right">I campi contrassegnati con il simbolo  
+			      	<span class="glyphicon glyphicon-asterisk"></span> sono obbligatori</p>
+							<form role="form">
+						   	<div class="row form-group" data-ng-show="view || edit">
+						   		<label class="col-md-1 control-label">Lingua:</label>
+						   		<div class="col-md-2">
+										<button type="button" class="btn btn-default" data-ng-click="changeLanguage('it')"
+											data-ng-class="{'active':language == 'it'}">
+							   			IT
+							 			</button>
+										<button type="button" class="btn btn-default" data-ng-click="changeLanguage('en')"
+											data-ng-class="{'active':language == 'en'}">
+							   			EN
+							 			</button>
+						   		</div>
+						   	</div>
+						   	<div class="row form-group">
+						    	<label class="col-md-1 control-label">Nome:</label>
+						    	<div class="col-md-2">
+						    		<input class="form-control" type="text" name="nome" data-ng-model="fNome" 
+						    		data-ng-disabled="view || (language != defaultLang)" placeholder="nome">
+						    	</div>
+						    	<span class="text-danger glyphicon glyphicon-asterisk"></span>
+						    </div>
+						   	<div class="row form-group">
+						    	<label class="col-md-1 control-label">Descrizione:</label>
+						    	<div class="col-md-2">
+						    		<input class="form-control" type="text" name="descrizione" data-ng-model="fDescrizione" 
+						    		data-ng-disabled="!edit && !create" placeholder="descrizione">
+						    	</div>
+						    </div>
+						   	<div class="row form-group">
+						    	<label class="col-md-1 control-label">Etichetta:</label>
+						    	<div class="col-md-2">
+						    		<input class="form-control" type="text" name="etichetta" data-ng-model="fEtichetta" 
+						    		data-ng-disabled="!edit && !create" placeholder="etichetta">
+						    	</div>
+						    </div>
+						   	<div class="row form-group">
+						    	<label class="col-md-1 control-label">Istituzione:</label>
+						    	<div class="col-md-2">
+						    		<select class="form-control" data-ng-model="fIstituzione" 
+						    		data-ng-disabled="view || (language != defaultLang)">
+		        					<option data-ng-repeat="item in istituzioneList" value="{{item}}">{{item}}</option>
+		      					</select>
+		      				</div>
+		      				<span class="text-danger glyphicon glyphicon-asterisk"></span>
+						    </div>
+						   	<div class="row form-group">
+						    	<label class="col-md-1 control-label">Gestore:</label>
+						    	<div class="col-md-2">
+						    		<select class="form-control" data-ng-model="fGestore" 
+						    		data-ng-disabled="view || (language != defaultLang)">
+		        					<option data-ng-repeat="item in gestoreList" value="{{item}}">{{item}}</option>
+		      					</select>
+		      				</div>
+		      				<span class="text-danger glyphicon glyphicon-asterisk"></span>
+						    </div>
+						   	<div class="row form-group">
+						    	<label class="col-md-1 control-label">Codice ISTAT:</label>
+						    	<div class="col-md-2">
+						    		<input class="form-control" type="text" name="codiceISTAT" data-ng-model="fcodiceISTAT" 
+						    		data-ng-disabled="view || (language != defaultLang)" placeholder="codiceISTAT (022xxx)">
+						    	</div>
+						    </div>
+								<div class="row form-group">
+									<label class="col-md-1 control-label">Parent Area:</label>
+									<div class="col-md-2">
+					    			<select class="form-control" data-ng-model="selectedParentArea" 
+					    			data-ng-disabled="view || (language != defaultLang)"
+					    			data-ng-options="item.nome for item in areaList">
+      							</select>
+									</div>
+								</div>
+						    <div class="checkbox">
+									<label class="checkbox-inline" 
+									data-ng-repeat="(tipologiaUtente, enabled) in tipologiaUtenzaSelected">
+										<input type="checkbox" data-ng-model="tipologiaUtenzaSelected[tipologiaUtente]"
+										data-ng-disabled="view || (language != defaultLang)">
+										{{tipologiaUtente}}
+									</label>
+									<span class="text-danger glyphicon glyphicon-asterisk"></span>
+								</div>
+							</form>		
+			      </div>
+			      <div class="modal-footer">
+			        <button type="button" class="btn btn-default" data-dismiss="modal">Annulla</button>
+					  	<button class="btn btn-primary" data-ng-disabled="view || error || incomplete"
+					  		data-ng-show="edit" data-dismiss="modal" data-ng-click="saveItem()">Modifica
+					  	</button> 
+					  	<button class="btn btn-success" data-ng-disabled="view || error || incomplete"
+					  		data-ng-show="create" data-dismiss="modal" data-ng-click="saveItem()">Crea
+					  	</button> 
+			      </div>			      
 					</div>
-					<div class="row list-row" data-ng-repeat="area in areaList | filter:search ">
-						<div class="col-md-1" >
-							<button class="btn btn-primary" data-ng-click="editArea(area.objectId)">
-								<span class="glyphicon glyphicon-pencil"></span>  Modifica
-							</button>
+				</div>
+			</div>
+			
+			<div id="divDeleteItemAlert" class="modal fade" role="dialog">
+				<div class="modal-dialog modal-sm">
+					<div class="modal-content">
+						<div class="modal-body">
+							<p>Sei sicuro di voler eliminare l'oggetto?</p>
 						</div>
-						<div class="col-md-3">
-							<span>{{area.nome}}</span>
-						</div>
-						<div class="col-md-3" >
-							<span>{{getAreaEtichetta(area.objectId)}}</span>
-						</div>
-						<div class="col-md-3" >
-							<span>{{getAreaName(area.parent)}}</span>
-						</div>
-						<div class="col-md-1" >
-							<span>{{area.codiceISTAT}}</span>
-						</div>
-						<div class="col-md-1">
-							<button class="btn btn-danger" data-ng-click="deleteArea(area.objectId)">
-								<span class="glyphicon glyphicon-remove"></span>  Cancella
+						<div class="modal-footer">
+							<button type="button" class="btn btn-default" data-dismiss="modal"
+							data-target="#divDeleteItemAlert">Annulla</button>
+							<button class="btn btn-danger" data-dismiss="modal" 
+							data-target="#divDeleteItemAlert" data-ng-click="deleteItem()">
+							Elimina
 							</button>
 						</div>
 					</div>
 				</div>
-			</div>			
-				
-		</div>	
-	
+			</div>
+											
+			<div class="list-create">
+				<button class="btn btn-success" data-toggle="modal" data-target="#divForm"
+					data-backdrop="static" data-ng-click="newItem()" title="Crea">
+						CREA NUOVO ELEMENTO
+				</button>
+			</div>
+		
+		<hr>
+		
+		<div class="row list-search">
+			<div class="col-md-2">
+				<span class="glyphicon glyphicon-search"></span>
+				<label control-label">Cerca:</label>
+				<input type="text" data-ng-model="search">
+			</div>
+			<div class="col-md-2">
+				<span class="glyphicon glyphicon-eye-open"></span> Visualizza
+				<button type="button" class="btn btn-default" data-ng-click="changeLanguage('it')"
+					data-ng-class="{'active':language == 'it'}">
+	   			IT
+	 			</button>
+				<button type="button" class="btn btn-default" data-ng-click="changeLanguage('en')"
+					data-ng-class="{'active':language == 'en'}">
+	   			EN
+	 			</button>
+			</div>
+		</div>
+		
+		<div class="row list-header">
+			<div class="col-md-3"><h4>Nome</h4></div>
+			<div class="col-md-3"><h4>Etichetta</h4></div>
+			<div class="col-md-3"><h4>Parent Area</h4></div>
+			<div class="col-md-1"><h4>Codice ISTAT</h4></div>
+			<div class="col-md-2"><h4></h4></div>
+		</div>
+		<div class="row list-row" data-ng-repeat="item in areaList | filter:search">
+			<div class="col-md-3">
+				<span>{{item.nome}}</span>
+			</div>
+			<div class="col-md-3" >
+				<span>{{getAreaEtichetta(item.objectId)}}</span>
+			</div>
+			<div class="col-md-3" >
+				<span>{{getAreaName(item.parent)}}</span>
+			</div>
+			<div class="col-md-1" >
+				<span>{{item.codiceISTAT}}</span>
+			</div>
+			<div class="col-md-2">
+				<button class="btn btn-info" data-toggle="modal" data-target="#divForm"
+				data-backdrop="static" data-ng-click="editItem(item.objectId, false)" title="Vedi">
+					<span class="glyphicon glyphicon-eye-open"></span>
+				</button>
+				<button class="btn btn-primary" data-toggle="modal" data-target="#divForm"
+				data-backdrop="static" data-ng-click="editItem(item.objectId, true)" title="Modifica">
+					<span class="glyphicon glyphicon-pencil"></span>
+				</button>
+				<button class="btn btn-danger" data-toggle="modal" data-target="#divDeleteItemAlert" 
+				data-backdrop="static" data-ng-click="setItemToDelete(item.objectId)" title="Cancella">
+					<span class="glyphicon glyphicon-trash"></span>
+				</button>
+			</div>
+		</div>
+			
 	</div>
 	
 	<script src="js/services.js"></script>
