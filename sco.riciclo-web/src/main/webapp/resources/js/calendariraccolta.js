@@ -192,7 +192,7 @@ var calendariraccoltaCtrl = calendariraccoltaApp.controller('userCtrl', function
 		$scope.timetableDateNotes[$scope.language] = $scope.fDateNotes;
 	};
 	
-	$scope.newRelation = function() {
+	$scope.newItem = function() {
 		$scope.edit = false;
 		$scope.create = true;
 		$scope.view = false;
@@ -200,7 +200,7 @@ var calendariraccoltaCtrl = calendariraccoltaApp.controller('userCtrl', function
 		$scope.resetForm();
 	};
 	
-	$scope.editRelation = function(id, modify) {
+	$scope.editItem = function(id, modify) {
 		if(modify) {
 			$scope.edit = true;
 			$scope.view = false;
@@ -221,7 +221,7 @@ var calendariraccoltaCtrl = calendariraccoltaApp.controller('userCtrl', function
 		$('html,body').animate({scrollTop:0},0);
 	};
 	
-	$scope.saveRelation = function() {
+	$scope.saveItem = function() {
 		if($scope.create) {
 			var element = {
 				area: '',
@@ -284,7 +284,7 @@ var calendariraccoltaCtrl = calendariraccoltaApp.controller('userCtrl', function
 		}
 	};
 		
-	$scope.deleteRelation = function() {
+	$scope.deleteItem = function() {
 		var id = $scope.itemToDelete;
 		var index = $scope.findIndex($scope.calendarioRaccoltaList, id);
 		if(index >= 0) {

@@ -1,6 +1,6 @@
-var puntiraccoltaApp = angular.module('puntiraccolta', ['DataService', 'ngSanitize', 'MassAutoComplete']);
+var puntiraccoltaApp = angular.module('puntiraccolta', ['DataService']);
 
-var puntiraccoltaCtrl = puntiraccoltaApp.controller('userCtrl', function($scope, $http, $sce, $q, DataService) {
+var puntiraccoltaCtrl = puntiraccoltaApp.controller('userCtrl', function($scope, $http, $q, DataService) {
 	DataService.getProfile().then(
 	function(p) {
 		$scope.initData(p);
@@ -15,7 +15,12 @@ var puntiraccoltaCtrl = puntiraccoltaApp.controller('userCtrl', function($scope,
 	$scope.selectedTab = "menu-puntiraccolta";
 	$scope.language = "it";
 	$scope.draft = true;
+	$scope.defaultLang = "it";
+	$scope.itemToDelete = "";
 	
+	$scope.edit = false;
+	$scope.create = false;
+	$scope.view = false;
 	$scope.search = "";
 	$scope.incomplete = false;
 	
@@ -29,11 +34,7 @@ var puntiraccoltaCtrl = puntiraccoltaApp.controller('userCtrl', function($scope,
 	$scope.status = 200;
 	
 	$scope.selectedArea = null;
-	$scope.areaSearch = {};	
-	
 	$scope.selectedCrm = null;
-	$scope.crmSearch = {};
-		
 	$scope.selectedTipologiaPuntoRaccolta = null;
 	$scope.selectedTipologiaUtenza = null;
 	$scope.crmList = [];
@@ -164,6 +165,26 @@ var puntiraccoltaCtrl = puntiraccoltaApp.controller('userCtrl', function($scope,
 		$scope.okMsg = "";
 	};
 	
+	$scope.getModalHeaderClass = function() {
+		if($scope.view) {
+			return "view";
+		}
+		if($scope.edit) {
+			return "edit";
+		}
+		if($scope.create) {
+			return "create";
+		}
+	};
+	
+	$scope.setItemToDelete = function(id) {
+		$scope.itemToDelete = id;
+	};
+	
+	$scope.getActualName = function() {
+		return "";
+	};
+	
 	$scope.changeLanguage = function(language) {
 		$scope.language = language;
 		$scope.areaNameMap = $scope.setNameMap($scope.areaList);
@@ -179,14 +200,21 @@ var puntiraccoltaCtrl = puntiraccoltaApp.controller('userCtrl', function($scope,
 	
 	$scope.resetForm = function() {
 		$scope.selectedArea = null;
-		$scope.areaSearch = {};	
 		$scope.selectedCrm = null;
-		$scope.crmSearch = {};
 		$scope.selectedTipologiaPuntoRaccolta = null;
 		$scope.selectedTipologiaUtenza = null;
-	};	
+	};
 	
-	$scope.saveRelation = function() {
+	$scope.newItem = function() {
+		$scope.edit = false;
+		$scope.create = true;
+		$scope.incomplete = true;
+		$scope.itemToDelete = "";
+		$scope.language = "it";
+		$scope.resetForm();
+	};
+
+	$scope.saveItem = function() {
 		var element = {
 			crm: '',
 			area: '',
@@ -221,8 +249,8 @@ var puntiraccoltaCtrl = puntiraccoltaApp.controller('userCtrl', function($scope,
 		});
 	};
 	
-	$scope.deleteRelation = function(id) {
-		var index = $scope.findIndex($scope.puntoRaccoltaList, id);
+	$scope.deleteItem = function() {
+		var index = $scope.findIndex($scope.puntoRaccoltaList, $scope.itemToDelete);
 		if(index >= 0) {
 			var element = $scope.puntoRaccoltaList[index];
 			if(element != null) {
@@ -251,10 +279,20 @@ var puntiraccoltaCtrl = puntiraccoltaApp.controller('userCtrl', function($scope,
 		}
 	};
 	
-	//$scope.$watch('fName',function() {$scope.test();});
-	
+	$scope.$watch('selectedArea',function() {$scope.test();}, true);
+	$scope.$watch('selectedCrm',function() {$scope.test();}, true);
+	$scope.$watch('selectedTipologiaPuntoRaccolta',function() {$scope.test();}, true);
+	$scope.$watch('selectedTipologiaUtenza',function() {$scope.test();}, true);
+
 	$scope.test = function() {
-		$scope.incomplete = false;
+		if(($scope.selectedArea == null) ||
+		($scope.selectedCrm == null) ||
+		($scope.selectedTipologiaPuntoRaccolta == null) ||
+		($scope.selectedTipologiaUtenza == null)) {
+			$scope.incomplete = true;
+		} else {
+			$scope.incomplete = false;
+		}
 	};
 	
 	$scope.findByObjectId = function(array, id) {
@@ -273,53 +311,6 @@ var puntiraccoltaCtrl = puntiraccoltaApp.controller('userCtrl', function($scope,
 			}
 		}
 		return -1;
-	};
-	
-	$scope.suggestArea = function(term) {
-		var q = term.toLowerCase().trim();
-    var results = [];
-    // Find first 10 states that start with `term`.
-    for (var i = 0; i < $scope.areaList.length; i++) {
-      var area = $scope.areaList[i];
-      if(area.nome) {
-        var result= area.nome.search(new RegExp(q, "i"));
-        if(result >= 0) {
-        	results.push({ label: area.nome, value: area.nome, obj: area });
-        }
-      }
-    }
-    return results;
-	};
-	
-	$scope.ac_area_options = {
-		suggest: $scope.suggestArea,
-		on_select: function (selected) {
-			$scope.selectedArea = selected.obj;
-		}
-	};
-
-	$scope.suggestCrm = function(term) {
-		var q = term.toLowerCase().trim();
-    var results = [];
-    // Find first 10 states that start with `term`.
-    for (var i = 0; i < $scope.crmList.length; i++) {
-      var crm = $scope.crmList[i];
-      if(crm != null) {
-      	var name = $scope.getCrmName(crm.objectId);
-        var result= name.search(new RegExp(q, "i"));
-        if(result >= 0) {
-        	results.push({ label: name, value: name, obj: crm });
-        }
-      }
-    }
-    return results;
-	};
-	
-	$scope.ac_crm_options = {
-		suggest: $scope.suggestCrm,
-		on_select: function (selected) {
-			$scope.selectedCrm = selected.obj;
-		}
 	};
 	
 });
