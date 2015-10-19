@@ -79,8 +79,8 @@
 						   	<div class="row form-group">
 						    	<label class="col-md-1 control-label">Descrizione:</label>
 						    	<div class="col-md-2">
-						    		<input class="form-control" type="text" name="descrizione" data-ng-model="fDescrizione" 
-						    		data-ng-disabled="!edit && !create" placeholder="descrizione">
+						    		<textarea class="form-control" name="descrizione" data-ng-model="fDescrizione" 
+						    		data-ng-disabled="!edit && !create" placeholder="descrizione"></textarea>
 						    	</div>
 						    </div>
 						   	<div class="row form-group">
@@ -236,6 +236,14 @@
 	
 	<script src="js/services.js"></script>
 	<script src = "js/aree.js"></script>
-
+	
+	<script type='text/javascript'>
+		$("#divForm").on("hidden.bs.modal", function() {
+			//var isOk = angular.element($("#outer")).scope();
+			window.setTimeout(function() {
+				$('html,body').animate({scrollTop:0},0);
+			}, 250);
+	  });
+	</script>
 </body>
 </html>

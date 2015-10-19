@@ -22,6 +22,8 @@ import it.smartcommunitylab.riciclo.model.OrarioApertura;
 import it.smartcommunitylab.riciclo.storage.AppSetup;
 import it.smartcommunitylab.riciclo.storage.RepositoryManager;
 
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
@@ -59,6 +61,14 @@ public class CRMController {
 			throw new UnauthorizedException("Unauthorized Exception: token not valid");
 		}
 		List<Crm> result = (List<Crm>) storage.findData(Crm.class, null, ownerId, draft);
+		Collections.sort(result, new Comparator<Crm>() {
+			@Override
+			public int compare(Crm o1, Crm o2) {
+				String s1 = o1.getZona() + " - " + o1.getDettagliZona();
+				String s2 = o2.getZona() + " - " + o2.getDettagliZona();
+				return s1.compareTo(s2);
+			}
+		});
 		return result;
 	}
 	

@@ -21,6 +21,8 @@ import it.smartcommunitylab.riciclo.model.Area;
 import it.smartcommunitylab.riciclo.storage.AppSetup;
 import it.smartcommunitylab.riciclo.storage.RepositoryManager;
 
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
@@ -58,6 +60,12 @@ public class AreaController {
 			throw new UnauthorizedException("Unauthorized Exception: token not valid");
 		}
 		List<Area> result = (List<Area>) storage.findData(Area.class, null, ownerId, draft);
+		Collections.sort(result,	new Comparator<Area>() {
+			@Override
+			public int compare(Area o1, Area o2) {
+				return o1.getNome().compareTo(o2.getNome());
+			}
+		});
 		return result;
 	}
 	
