@@ -55,6 +55,7 @@
 			      	<p class="text-danger pull-right">I campi contrassegnati con il simbolo  
 			      	<span class="glyphicon glyphicon-asterisk"></span> sono obbligatori</p>
 							<form role="form">
+								<input type="text" id="scrollOnTop" data-ng-model="scrollTop" hidden="true">
 						   	<div class="row form-group" data-ng-show="view || edit">
 						   		<label class="col-md-1 control-label">Lingua:</label>
 						   		<div class="col-md-2">
@@ -239,10 +240,12 @@
 	
 	<script type='text/javascript'>
 		$("#divForm").on("hidden.bs.modal", function() {
-			//var isOk = angular.element($("#outer")).scope();
-			window.setTimeout(function() {
-				$('html,body').animate({scrollTop:0},0);
-			}, 250);
+			var isScrollNeeded = $('#scrollOnTop').val();
+			if(isScrollNeeded == "true") {
+				window.setTimeout(function() {
+					$('html,body').animate({scrollTop:0},0);
+				}, 250);
+			}
 	  });
 	</script>
 </body>

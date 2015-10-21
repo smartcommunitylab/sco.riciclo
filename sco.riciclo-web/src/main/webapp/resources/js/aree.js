@@ -17,6 +17,7 @@ var areeCtrl = areeApp.controller('userCtrl', function($scope, $http, $q, DataSe
 	$scope.draft = true;
 	$scope.defaultLang = "it";
 	$scope.itemToDelete = "";
+	$scope.scrollTop = false;
 	
 	$scope.fId = "";
 	$scope.fNome = "";
@@ -144,11 +145,13 @@ var areeCtrl = areeApp.controller('userCtrl', function($scope, $http, $q, DataSe
 	$scope.resetError = function() {
 		$scope.error = false;
 		$scope.errorMsg = "";
+		$scope.scrollTop = false;
 	};
 	
 	$scope.resetOk = function() {
 		$scope.ok = false;
 		$scope.okMsg = "";
+		$scope.scrollTop = false;
 	};
 	
 	$scope.getModalHeaderClass = function() {
@@ -392,6 +395,7 @@ var areeCtrl = areeApp.controller('userCtrl', function($scope, $http, $q, DataSe
 			  	$scope.ok = true;
 			  	$scope.okMsg = "Operazione eseguita con successo";
 			  	$scope.resetUI();
+			  	$scope.scrollTop = true;
 			  	console.log("saveArea:" + response.status + " - " + response.data);
 			  }, 
 			  function(response) {
