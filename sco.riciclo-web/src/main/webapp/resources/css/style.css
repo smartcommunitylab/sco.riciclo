@@ -130,8 +130,9 @@
 
 .color-picker {
 	display: inline-block;
-	width: 1em;
+	width: 2em;
 	height: 1em;
+	vertical-align: middle;
 }
 
 .modal-header.create {
