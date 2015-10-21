@@ -85,6 +85,8 @@ angular.module('rifiuti.services.rifiuti', [])
                   regola.tipologiaUtenza==$rootScope.selectedProfile.utenza.tipologiaUtenza) {
                 var icona = Utili.iconFromRegola(regola);
                 if (icona) regola['icon'] = icona;
+                var tipoRaccolta = DataManager.getCategoriaById('tipologiaRaccolta', regola.tipologiaRaccolta);
+                regola['tipoRaccolta'] = tipoRaccolta;
                 myRaccolta.push(regola);
               }
             });
@@ -220,21 +222,28 @@ angular.module('rifiuti.services.rifiuti', [])
       DataManager.get('data/db/raccolta.json').then(function (results) {
         var data=results.data;
         var res = {};
-        for (var i =0; i < data.length; i++) {
-          if (data[i].tipologiaUtenza == utenza && aree.indexOf(data[i].area)>=0 && !!data[i].tipologiaRaccolta) {
-            var list = res[data[i].tipologiaRaccolta];
-            if (!list) {
-              list = {};
-              res[data[i].tipologiaRaccolta] = list;
+        //for (var i =0; i < data.length; i++) {
+        data.forEach(function (item) {
+
+            if (item.tipologiaUtenza == utenza && aree.indexOf(item.area)>=0 && !!item.tipologiaRaccolta) {
+                var tipoRaccolta = DataManager.getCategoriaById('tipologiaRaccolta', item.tipologiaRaccolta)
+
+                var list = res[tipoRaccolta.id];
+                if (!list) {
+                  list = {};
+                  res[tipoRaccolta.id] = list;
+                  list['nome'] = tipoRaccolta.nome;
+                }
+                list[item.tipologiaPuntoRaccolta+'_'+item.colore] = {
+                  tipologiaPuntoRaccolta: item.tipologiaPuntoRaccolta,
+                  colore: item.colore
+                };
             }
-            list[data[i].tipologiaPuntoRaccolta+'_'+data[i].colore] = {
-              tipologiaPuntoRaccolta: data[i].tipologiaPuntoRaccolta,
-              colore: data[i].colore
-            };
-          }
-        }
-        deferred.resolve(res);  
+        })
+
+        deferred.resolve(res);
       });
+
       return deferred.promise;    
     },
     segnalazioni: function(aree) {

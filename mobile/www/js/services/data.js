@@ -14,6 +14,7 @@ angular.module('rifiuti.services.data', [])
     var completeData = null;
     var profili = null;
     var profileData = null;
+    var categorieMap = null;
 
     var errorHandler = function (e) {
         console.log(e);
@@ -67,6 +68,40 @@ angular.module('rifiuti.services.data', [])
         profileData.riciclabolario = completeData.riciclabolario;
         profileData.categorie = completeData.categorie;
         profileData.segnalazione = completeData.segnalazione;
+
+        categorieMap = {};
+        if(profileData.categorie){
+            var utenzaMap = {};
+            tipoUtenza = profileData.categorie.tipologiaUtenza;
+            tipoUtenza.forEach(function (utenza){
+                utenzaMap[utenza.id] = utenza;
+            })
+            categorieMap['tipologiaUtenza'] = utenzaMap;
+
+            var rifiutoMap = {};
+            tipoRifiuto = profileData.categorie.tipologiaRifiuto;
+            tipoRifiuto.forEach(function (rifiuto){
+                rifiutoMap[rifiuto.id] = rifiuto;
+            })
+            categorieMap['tipologiaRifiuto'] = rifiutoMap;
+
+            var tipoRaccoltaMap = {};
+            tipoRaccolta = profileData.categorie.tipologiaRaccolta;
+            tipoRaccolta.forEach(function (raccolta){
+                tipoRaccoltaMap[raccolta.id] = raccolta;
+            })
+            categorieMap['tipologiaRaccolta'] = tipoRaccoltaMap;
+
+            var puntiRaccoltaMap = {};
+            tipoPuntiRaccolta = profileData.categorie.tipologiaPuntiRaccolta;
+            tipoPuntiRaccolta.forEach(function (punto){
+                puntiRaccoltaMap[punto.id] = punto;
+            })
+            categorieMap['tipologiaPuntiRaccolta'] = puntiRaccoltaMap;
+        }
+
+        localStorage.categorieMap = JSON.stringify(categorieMap);
+
         if (profili) {
             var map = {};
             profili.forEach(function (p) {
@@ -116,6 +151,8 @@ angular.module('rifiuti.services.data', [])
                 //        }
             });
         }
+
+
         localStorage.profileData = JSON.stringify(profileData);
     };
 
@@ -206,6 +243,22 @@ angular.module('rifiuti.services.data', [])
             deferred.resolve({
                 data: profileData.segnalazione
             });
+        } else if (url === 'data/db/tipologiaUtenza.json') {
+            deferred.resolve({
+                data: profileData.categorie.tipologiaUtenza
+            });
+        } else if (url === 'data/db/tipologiaRifiuto.json') {
+            deferred.resolve({
+                data: profileData.categorie.tipologiaRifiuto
+            });
+        } else if (url === 'data/db/tipologiaRaccolta.json') {
+            deferred.resolve({
+                data: profileData.categorie.tipologiaRaccolta
+            });
+        } else if (url === 'data/db/categoria/tipologiaPuntiRaccolta.json') {
+            deferred.resolve({
+                data: profileData.categorie.tipologiaPuntiRaccolta
+            });
         } else {
             console.log('USING OLD FILE! ' + url);
             $http.get(url).then(function (results) {
@@ -215,6 +268,37 @@ angular.module('rifiuti.services.data', [])
 
         return deferred.promise;
     };
+
+    var getCategoriaById = function (categoria, id) {
+       if (categorieMap == null) {
+            if (localStorage.categorieMap) {
+                categorieMap = JSON.parse(localStorage.categorieMap);
+            }
+        }
+
+       var mapToInspect = {};
+       var dataUrl = null;
+       if (categoria === 'tipologiaUtenza') {
+           mapToInspect = categorieMap.tipologiaUtenza;
+        } else if (categoria === 'tipologiaRifiuto') {
+           mapToInspect = categorieMap.tipologiaRifiuto;
+        } else if (categoria === 'tipologiaRaccolta') {
+           mapToInspect = categorieMap.tipologiaRaccolta;
+        } else if (categoria === 'tipologiaPuntiRaccolta') {
+           mapToInspect = categorieMap.tipologiaPuntiRaccolta;
+        }
+
+        var returnItem = null;
+        for (key in mapToInspect) {
+            var item = mapToInspect[key];
+            if(item.id == id){
+                returnItem = item;
+            }
+        }
+
+        return returnItem;
+    }
+
 
     var getDataURL = function (remote) {
         if (remote) {
@@ -260,6 +344,7 @@ angular.module('rifiuti.services.data', [])
 
     return {
         get: get,
+        getCategoriaById: getCategoriaById,
         updateProfiles: function (newProfiles) {
             profili = newProfiles;
             updateProfileData();

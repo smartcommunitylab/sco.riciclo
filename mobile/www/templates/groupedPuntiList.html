@@ -7,12 +7,12 @@
             <div class="col col-80">
                 <div class="row expandable-list-item-title">
                     <div class="col">
-                        {{item.tipologiaPuntoRaccolta|translate}}
+                        {{item.tipoPuntoRaccolta.nome|translate}}
                     </div>
                 </div>
                 <div class="row expandable-list-item-subtitle">
                     <div class="col">
-                        {{item.tipologiaRaccolta|translate}}
+                        {{item.tipoRaccolta.nome|translate}}
                     </div>
                 </div>
                 <div class="row expandable-list-item-desc">
@@ -39,7 +39,7 @@
             <a ng-if="!punto.dettagliZona && !punto.zona" ng-repeat="punto in item.punti" class="hidden-link expandable-list-item-content" ng-href="#/app/infoRaccolta/{{item.tipologiaPuntoRaccolta}}">
                 <div class="row">
                     <div class="col col-100">
-                        {{item.tipologiaPuntoRaccolta|translate}}
+                        {{item.tipoPuntoRaccolta.nome|translate}}
                     </div>
                 </div>
             </a>

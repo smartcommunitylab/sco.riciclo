@@ -14,6 +14,12 @@ EXT_URL = "http://www.asvo.it";
 IF_HIDDEN_FIELDS = false;
 CUSTOM_PAP = [];
 
+ZOOM = 12;
+CENTER = {
+      latitude: 46.070130,
+      longitude: 11.119759
+};
+
 // PORTOGRUARO
 //APP_ID = "PORTOGRUARO";
 //DATA_VERSION = 1;

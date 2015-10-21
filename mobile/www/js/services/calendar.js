@@ -16,7 +16,7 @@ angular.module('rifiuti.services.calendar', [])
       }
 
       if (Utili.isPaP(puntoDiRaccolta.tipoPuntoRaccolta)) {
-        key = 'Porta a porta'; t = key;
+        key = 'Porta u porta'; t = key;
         var descr = puntoDiRaccolta.tipoPuntoRaccolta.nome;
         if (descr.indexOf(key) == 0) descr = descr.substr(key.length+1);
         proto = {

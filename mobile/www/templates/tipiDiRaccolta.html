@@ -19,7 +19,7 @@
             <ion-item ng-repeat="(tipo,items) in tipi" ng-href="#/app/raccolta/{{tipo}}">
                 <div class="row tipologiediraccolta-title">
                     <div class="col">
-                        {{tipo | translate}}
+                        {{items.nome | translate}}
                     </div>
                 </div>
                 <div class="row tipologiediraccolta-icons">
