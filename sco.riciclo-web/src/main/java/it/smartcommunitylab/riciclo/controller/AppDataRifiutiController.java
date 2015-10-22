@@ -70,11 +70,6 @@ public class AppDataRifiutiController {
 		return "PONG";
 	}
 
-//	@RequestMapping(method = RequestMethod.GET, value = "/appDescriptor/{ownerId}")
-//	public App appState(HttpServletResponse response, @PathVariable String ownerId) {
-//		return storage.getAppDescriptor(ownerId);
-//	}
-	
 //	@RequestMapping(method = RequestMethod.GET, value = "/rifiuti/{ownerId}")
 //	public AppDataRifiuti get(HttpServletResponse response, @PathVariable String ownerId) {
 //		return storage.findRifiuti(ownerId, false);
@@ -108,6 +103,14 @@ public class AppDataRifiutiController {
 //		return notificationManager.saveNotification(notification, ownerId);
 //	}
 
+	@RequestMapping(method = RequestMethod.GET, value = "/appDescriptor/{ownerId}")
+	public App appState(HttpServletResponse response, @PathVariable String ownerId) {
+		App app = storage.getAppDescriptor(ownerId);
+		app.getAppInfo().setPassword("*****");
+		app.getAppInfo().setToken("*****");
+		return app;
+	}
+	
 	@RequestMapping(method = RequestMethod.GET, value = "/comuni/{ownerId}")
 	public List<String> appComuni(HttpServletResponse response, @PathVariable String ownerId) {
 		return storage.getComuniList(ownerId, false);
