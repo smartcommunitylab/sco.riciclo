@@ -281,6 +281,15 @@ angular.module('rifiuti.services.data', [])
         localStorage.globalSettings = JSON.stringify($rootScope.globalSettings);
     };
 
+    var saveDraft = function () {
+        localStorage.globalSettings = JSON.stringify($rootScope.globalSettings);
+
+        //var deferred = $q.defer();
+        process(getDataURL(true));
+
+        localStorage.globalSettings = JSON.stringify($rootScope.globalSettings);
+    };
+
     var getCategoriaById = function (categoria, id) {
        if (categorieMap == null) {
             if (localStorage.categorieMap) {
@@ -314,7 +323,7 @@ angular.module('rifiuti.services.data', [])
 
     var getDataURL = function (remote) {
         if (remote) {
-            if (USE_DRAFT) {
+            if (getDraftEnabled()) {
                 //return ENDPOINT_URL + '/draft/' + APP_ID + '/zip';
                 return ENDPOINT_URL + '/zip/' + APP_ID + '?lang=' + getSelectedLang() + '&draft=true' + getComuniString();
             } else {
@@ -331,6 +340,14 @@ angular.module('rifiuti.services.data', [])
             return $rootScope.globalSettings.selectedLang;
         }else{
             return LANG[0];
+        }
+    }
+
+    var getDraftEnabled = function(){
+        if($rootScope.globalSettings.draftEnabled){
+            return $rootScope.globalSettings.draftEnabled;
+        }else{
+            return USE_DRAFT;
         }
     }
 
@@ -379,6 +396,8 @@ angular.module('rifiuti.services.data', [])
         getCategoriaById: getCategoriaById,
         saveLang: saveLang,
         getSelectedLang: getSelectedLang,
+        saveDraft: saveDraft,
+        getDraftEnabled: getDraftEnabled,
         updateProfiles: function (newProfiles) {
             profili = newProfiles;
             updateProfileData();

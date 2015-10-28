@@ -11,15 +11,17 @@
         <div class="padding-top" ng-if="globalSettings.isMoreThanOneLang">
             <label class="item item-input">{{ "Scelta Lingua" | translate }}</label>
 
-            <ion-radio ng-repeat="lang in supportedLangTypes" ng-model="globalSettings.selectedLang" ng-change="saveLang()"  ng-value="lang">{{ lang }}</ion-radio>
+            <ion-radio ng-repeat="lang in supportedLangTypes" ng-model="globalSettings.selectedLang" ng-change="saveLang()"  ng-value="lang" on-swipe-down="saveAll()">{{ lang }}</ion-radio>
         </div>
+
+        <ion-toggle ng-if="isEnabledDraftToggle" toggle-class="toggle-100r" ng-model="globalSettings.draftEnabled" ng-change="saveDraft()">Draft Enabled</ion-toggle>
 
         <ion-toggle ng-if="!isWebView" ng-model="settings.enableNotifications" toggle-class="toggle-100r" ng-change="saveSettings()">Notifiche</ion-toggle>
         <div class="setting-info">{{'settings_info' | translate}}</div>
 
         <div class="padding-top">
             <label class="item item-input">Categorie di notifiche</label>
-            <ion-checkbox ng-class="{'checkbox-100r': !!settings.enableNotifications, 'checkbox-light': !settings.enableNotifications}" ng-repeat="pap in papTypes" ng-model="settings.papTypes[pap]" ng-change="saveSettings()" ng-disabled="!settings.enableNotifications">
+            <ion-checkbox ng-class="{'checkbox-100r': !!settings.enableNotifications, 'checkbox-light': !settings.enableNotifications}" ng-repeat="pap in papTypes" ng-model="settings.papTypes[pap]" ng-change="saveSettings(pap)" ng-disabled="!settings.enableNotifications">
                 {{pap}}
             </ion-checkbox>
         </div>

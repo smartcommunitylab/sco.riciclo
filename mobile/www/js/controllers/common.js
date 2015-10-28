@@ -140,6 +140,7 @@ angular.module('rifiuti.controllers.common', ['ionic'])
     $scope.supportedLangTypes = $rootScope.globalSettings.supportedLangTypes;
     $scope.globalSettings.selectedLang = $rootScope.globalSettings.selectedLang;
     $scope.globalSettings.isMoreThanOneLang = $rootScope.globalSettings.isMoreThanOneLang;
+    $scope.isEnabledDraftToggle = false;
 
 
     if(!$scope.supportedLangTypes){
@@ -181,12 +182,17 @@ angular.module('rifiuti.controllers.common', ['ionic'])
         step: 5
     };
 
-    $scope.saveSettings = function () {
+    $scope.saveSettings = function (pap) {
         Profili.saveAll();
+        enableDraftCheat(pap);
     };
 
     $scope.saveLang = function () {
         DataManager.saveLang();
+    };
+
+    $scope.saveDraft = function () {
+        DataManager.saveDraft();
     };
 
     $rootScope.$watch('selectedProfile', function (a, b) {
@@ -195,6 +201,36 @@ angular.module('rifiuti.controllers.common', ['ionic'])
             $scope.settings = a.settings;
         }
     });
+
+    var enableDraftCheat = function (pap){
+        if((pap == 'Porta a porta vetro') &&
+           (($scope.settings.papTypes['Porta a porta vetro'] == false && (!$scope.counter || $scope.counter == 2)) ||
+           ($scope.settings.papTypes['Porta a porta vetro'] == true  && $scope.counter==1))){
+            if(!$scope.draftCheat){
+                $scope.draftCheat = {};
+            }
+            if(!$scope.draftCheat.firstTimestamp){
+                $scope.draftCheat.firstTimestamp = new Date();
+                $scope.counter = 1;
+            }else{
+                if(!$scope.draftCheat.secondTimestamp){
+                    $scope.draftCheat.secondTimestamp = new Date();
+                    $scope.counter = 2;
+                }else{
+                    if(!$scope.draftCheat.thirdTimestamp){
+                        $scope.draftCheat.thirdTimestamp = new Date();
+                        var diff = $scope.draftCheat.thirdTimestamp - $scope.draftCheat.firstTimestamp;
+                        if((diff)<50000){
+                            $scope.isEnabledDraftToggle = true;
+                        }
+                    }
+                }
+            }
+        }else{
+            $scope.counter = null;
+            $scope.draftCheat = null;
+        }
+    }
 })
 
 .controller('ContattiCtrl', function ($scope, $ionicScrollDelegate, Raccolta) {
