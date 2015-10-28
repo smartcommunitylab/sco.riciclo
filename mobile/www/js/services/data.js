@@ -1,13 +1,16 @@
 angular.module('rifiuti.services.data', [])
 
-.factory('DataManager', function ($http, $q, Utili) {
-    var ENDPOINT_URL = 'https://tn.smartcommunitylab.it/riciclo';
+.factory('DataManager', function ($http, $q, Utili, $rootScope) {
+    //var ENDPOINT_URL = 'https://tn.smartcommunitylab.it/riciclo';
+    var ENDPOINT_URL = 'http://localhost:8001/riciclo';
     // TODO handle
-    var USE_DRAFT = false;
+    //var USE_DRAFT = true;
 
     var LOCAL_DATA_URL = 'data/data.zip';
     var VERSION_URL = ENDPOINT_URL + '/appDescriptor/' + APP_ID;
 
+    //var LANG = 'IT';
+    //var COMUNI_LIST = ['022003','022034'];
 
     var dataURL = LOCAL_DATA_URL;
 
@@ -269,6 +272,15 @@ angular.module('rifiuti.services.data', [])
         return deferred.promise;
     };
 
+    var saveLang = function () {
+        localStorage.globalSettings = JSON.stringify($rootScope.globalSettings);
+
+        //var deferred = $q.defer();
+        process(getDataURL(true));
+
+        localStorage.globalSettings = JSON.stringify($rootScope.globalSettings);
+    };
+
     var getCategoriaById = function (categoria, id) {
        if (categorieMap == null) {
             if (localStorage.categorieMap) {
@@ -303,13 +315,33 @@ angular.module('rifiuti.services.data', [])
     var getDataURL = function (remote) {
         if (remote) {
             if (USE_DRAFT) {
-                return ENDPOINT_URL + '/draft/' + APP_ID + '/zip';
+                //return ENDPOINT_URL + '/draft/' + APP_ID + '/zip';
+                return ENDPOINT_URL + '/zip/' + APP_ID + '?lang=' + getSelectedLang() + '&draft=true' + getComuniString();
             } else {
-                return ENDPOINT_URL + '/zip/' + APP_ID;
+                //http://localhost:8000/riciclo/zip/TRENTO?lang=it&draft=true&comune[]=022205
+                return ENDPOINT_URL + '/zip/' + APP_ID + '?lang=' + getSelectedLang() + '&draft=false' + getComuniString();
             }
         } else {
             return LOCAL_DATA_URL;
         }
+    }
+
+    var getSelectedLang = function(){
+        if($rootScope.globalSettings.selectedLang){
+            return $rootScope.globalSettings.selectedLang;
+        }else{
+            return LANG[0];
+        }
+    }
+
+    var getComuniString = function(){
+        var comuniString = '';
+
+        for (var i = 0; i < COMUNI_LIST.length; i++) {
+            comuniString += '&comune[]='+COMUNI_LIST[i];
+        }
+
+        return comuniString;
     }
 
     var doWithVersion = function (deferred, v, remote) {
@@ -345,6 +377,8 @@ angular.module('rifiuti.services.data', [])
     return {
         get: get,
         getCategoriaById: getCategoriaById,
+        saveLang: saveLang,
+        getSelectedLang: getSelectedLang,
         updateProfiles: function (newProfiles) {
             profili = newProfiles;
             updateProfileData();
@@ -356,7 +390,7 @@ angular.module('rifiuti.services.data', [])
                 .success(function (data) {
                     var version = extractVersion(data);
                     if (version) {
-                        doWithVersion(deferred, version, false);
+                        doWithVersion(deferred, version, true);
                     } else {
                         doWithVersion(deferred, DATA_VERSION);
                     }

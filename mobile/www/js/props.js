@@ -1,9 +1,9 @@
 // TRENTO
 APP_ID = "TRENTO";
-DATA_VERSION = 5;
+DATA_VERSION = 11;
 API_KEY = "AIzaSyBmKVWmFzh2JHT7q1MLmQRQ7jC4AhkRBDs";
 //SEGNALA_EMAIL = "segnalazioni.rifiuti@comunitadellegiudicarie.it";
-VERSION = "1.0.1alpha";
+VERSION = "1.0.3";
 APP_NAME="100% Riciclo - Trento";
 APP_NAME_CREDITS = "100% Riciclo<br/>TRENTO";
 ICON_COLOR_MAP = {'ARANCIONE': 'orange', 'AZZURRO': 'lightblue', 'BLU': 'blue', 'GIALLO': 'yellow', 'MARRONE': 'brown', 'ROSSO': 'red', 'VERDE CHIARO': 'lightgreen', 'VERDE': 'green', 'VERDE SCURO': 'darkgreen', 'VIOLA':'purple'};
@@ -14,10 +14,15 @@ EXT_URL = "http://www.asvo.it";
 IF_HIDDEN_FIELDS = false;
 CUSTOM_PAP = [];
 
+USE_DRAFT = true;
+LANG = ['it','en'];
+COMUNI_LIST = ['022205','022003','022034'];
+
+
 ZOOM = 12;
 CENTER = {
-      latitude: 46.070130,
-      longitude: 11.119759
+      latitude: 45.890612,
+      longitude: 11.039560
 };
 
 // PORTOGRUARO

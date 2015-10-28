@@ -127,13 +127,54 @@ angular.module('rifiuti.controllers.common', ['ionic'])
 
 })
 
-.controller('SettingsCtrl', function ($scope, $rootScope, $ionicScrollDelegate, Raccolta, Profili) {
+.controller('SettingsCtrl', function ($scope, $rootScope, $ionicScrollDelegate, Raccolta, Profili, DataManager) {
     /*$scope.mainScrollResize = function () {
         $ionicScrollDelegate.$getByHandle('mainScroll').resize();
     }*/
 
     $scope.papTypes = $rootScope.selectedProfile.PaP;
     $scope.settings = $rootScope.selectedProfile.settings;
+    $scope.globalSettings = $rootScope.globalSettings;
+    //$scope.supportedLangTypes = $rootScope.selectedProfile.settings.supportedLangTypes;
+    //$scope.settings.selectedLang = $rootScope.selectedProfile.settings.selectedLang;
+    $scope.supportedLangTypes = $rootScope.globalSettings.supportedLangTypes;
+    $scope.globalSettings.selectedLang = $rootScope.globalSettings.selectedLang;
+    $scope.globalSettings.isMoreThanOneLang = $rootScope.globalSettings.isMoreThanOneLang;
+
+
+    if(!$scope.supportedLangTypes){
+       $scope.supportedLangTypes = [];
+
+       for (var i = 0; i < LANG.length; i++) {
+           $scope.supportedLangTypes[i] = LANG[i] ;
+        }
+    };
+
+
+    if(!$scope.globalSettings.selectedLang){
+        $scope.globalSettings.selectedLang = {};
+
+        if ($scope.supportedLangTypes.length > 1){
+          $scope.globalSettings.isMoreThanOneLang = true;
+          $rootScope.globalSettings.isMoreThanOneLang = true;
+          var foundLang = false;
+          for (var i = 0; i < $scope.supportedLangTypes.length; i++) {
+            if ($rootScope.globalSettings.phoneLanguage == $scope.supportedLangTypes[i]){
+                $scope.globalSettings.selectedLang = $scope.supportedLangTypes[i];
+                foundLang = true;
+                return;
+            }
+          }
+          if(!foundLang){
+            $scope.globalSettings.selectedLang = LANG[0];
+          }
+        }else{
+            $scope.globalSettings.selectedLang = LANG[0];
+            $scope.globalSettings.isMoreThanOneLang = false;
+            $rootScope.globalSettings.isMoreThanOneLang = false;
+        }
+    }
+
 
     $scope.timepickerSlots = {
         format: 24,
@@ -142,6 +183,10 @@ angular.module('rifiuti.controllers.common', ['ionic'])
 
     $scope.saveSettings = function () {
         Profili.saveAll();
+    };
+
+    $scope.saveLang = function () {
+        DataManager.saveLang();
     };
 
     $rootScope.$watch('selectedProfile', function (a, b) {

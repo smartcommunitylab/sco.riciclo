@@ -261,6 +261,14 @@ angular.module('rifiuti', [
         $rootScope.platform = ionic.Platform;
         $rootScope.backButtonStyle = $ionicConfig.backButton.icon();
 
+        if(localStorage.globalSettings){
+            $rootScope.globalSettings = JSON.parse(localStorage.globalSettings);
+        }else{
+            $rootScope.globalSettings = {};
+        }
+        $rootScope.globalSettings.phoneLanguage = navigator.language;
+        //$rootScope.supportedLangTypes = LANG;
+
         // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
         // for form inputs)
         if (window.cordova && window.cordova.plugins.Keyboard) {

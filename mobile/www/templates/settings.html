@@ -8,6 +8,12 @@
 
     <ion-content class="settings padding">
 
+        <div class="padding-top" ng-if="globalSettings.isMoreThanOneLang">
+            <label class="item item-input">{{ "Scelta Lingua" | translate }}</label>
+
+            <ion-radio ng-repeat="lang in supportedLangTypes" ng-model="globalSettings.selectedLang" ng-change="saveLang()"  ng-value="lang">{{ lang }}</ion-radio>
+        </div>
+
         <ion-toggle ng-if="!isWebView" ng-model="settings.enableNotifications" toggle-class="toggle-100r" ng-change="saveSettings()">Notifiche</ion-toggle>
         <div class="setting-info">{{'settings_info' | translate}}</div>
 
