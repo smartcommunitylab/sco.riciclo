@@ -45,7 +45,7 @@ angular.module('rifiuti.controllers.home', [])
     };
 
     $rootScope.showTutorial = false;
-    var stringTutorial = localStorage.getItem("tutorial");
+    var stringTutorial = DataManager.getTutorial();
 
     if (stringTutorial == "false" || !!$rootScope.promptedToProfile) {
         $rootScope.showTutorial = false;
@@ -54,7 +54,7 @@ angular.module('rifiuti.controllers.home', [])
     }
 
     $scope.stopTutorial = function () {
-        localStorage.setItem("tutorial", "false");
+        DataManager.saveTutorial("false");
     };
 
     $scope.show = function () {

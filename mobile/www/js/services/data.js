@@ -12,6 +12,15 @@ angular.module('rifiuti.services.data', [])
     //var LANG = 'IT';
     //var COMUNI_LIST = ['022003','022034'];
 
+    var completeDataPrefix = APP_ID+"_completeData";
+    var categorieMapPrefix = APP_ID+"_categorieMap";
+    var globalSettingsPrefix = APP_ID+"_globalSettings";
+    var profileDataPrefix = APP_ID+"_profileData";
+    var profilesPrefix = APP_ID+"_profiles";
+    var selectedProfileIdPrefix = APP_ID+"_selectedProfileId";
+    var tutorialPrefix = APP_ID+"_tutorial";
+    var versionPrefix = APP_ID+"_version";
+
     var dataURL = LOCAL_DATA_URL;
 
     var completeData = null;
@@ -61,7 +70,7 @@ angular.module('rifiuti.services.data', [])
     var updateProfileData = function () {
         profileData = {};
         if (completeData == null) {
-            completeData = JSON.parse(localStorage.completeData);
+            completeData = JSON.parse(localStorage[completeDataPrefix]);
         }
         profileData.aree = completeData.aree;
         profileData.gestori = completeData.gestori;
@@ -103,7 +112,7 @@ angular.module('rifiuti.services.data', [])
             categorieMap['tipologiaPuntiRaccolta'] = puntiRaccoltaMap;
         }
 
-        localStorage.categorieMap = JSON.stringify(categorieMap);
+        localStorage[categorieMapPrefix] = JSON.stringify(categorieMap);
 
         if (profili) {
             var map = {};
@@ -156,7 +165,7 @@ angular.module('rifiuti.services.data', [])
         }
 
 
-        localStorage.profileData = JSON.stringify(profileData);
+        localStorage[profileDataPrefix] = JSON.stringify(profileData);
     };
 
     var process = function (url) {
@@ -173,7 +182,7 @@ angular.module('rifiuti.services.data', [])
                 var str = jsons[0].asText();
                 var rifiutiObj = angular.fromJson(str.trim());
                 completeData = preprocess(rifiutiObj);
-                localStorage.completeData = JSON.stringify(completeData);
+                localStorage[completeDataPrefix] = JSON.stringify(completeData);
                 updateProfileData();
                 deferred.resolve(true);
             }
@@ -184,8 +193,8 @@ angular.module('rifiuti.services.data', [])
     var get = function (url) {
         var deferred = $q.defer();
         if (profileData == null) {
-            if (localStorage.profileData) {
-                profileData = JSON.parse(localStorage.profileData);
+            if (localStorage[profileDataPrefix]) {
+                profileData = JSON.parse(localStorage[profileDataPrefix]);
             } else if (dataURL) {
                 process(dataURL).then(function (res) {
                     get(url).then(function (results) {
@@ -273,27 +282,63 @@ angular.module('rifiuti.services.data', [])
     };
 
     var saveLang = function () {
-        localStorage.globalSettings = JSON.stringify($rootScope.globalSettings);
+        localStorage[globalSettingsPrefix] = JSON.stringify($rootScope.globalSettings);
 
         //var deferred = $q.defer();
         process(getDataURL(true));
 
-        localStorage.globalSettings = JSON.stringify($rootScope.globalSettings);
+        localStorage[globalSettingsPrefix] = JSON.stringify($rootScope.globalSettings);
     };
 
     var saveDraft = function () {
-        localStorage.globalSettings = JSON.stringify($rootScope.globalSettings);
+        localStorage[globalSettingsPrefix] = JSON.stringify($rootScope.globalSettings);
 
         //var deferred = $q.defer();
         process(getDataURL(true));
 
-        localStorage.globalSettings = JSON.stringify($rootScope.globalSettings);
+        localStorage[globalSettingsPrefix] = JSON.stringify($rootScope.globalSettings);
     };
+
+    var getGlobalSettings = function () {
+        if ($rootScope.globalSettings){
+            return $rootScope.globalSettings;
+        }else{
+            if(localStorage[globalSettingsPrefix]){
+                return JSON.parse(localStorage[globalSettingsPrefix]);
+            }
+
+            return null;
+        }
+    }
+
+    var getProfiles = function () {
+        if (localStorage[profilesPrefix]){
+            return JSON.parse(localStorage[profilesPrefix]);
+        }
+
+        return null;
+    }
+
+    var saveProfiles = function(profiles){
+        localStorage.profiles = JSON.stringify(profiles);
+    }
+
+    var getTutorial = function () {
+        if (localStorage[tutorialPrefix]){
+            return localStorage.getItem(tutorialPrefix);
+        }
+
+        return null;
+    }
+
+    var saveTutorial = function (saveData){
+        localStorage.setItem(tutorialPrefix, "false");
+    }
 
     var getCategoriaById = function (categoria, id) {
        if (categorieMap == null) {
-            if (localStorage.categorieMap) {
-                categorieMap = JSON.parse(localStorage.categorieMap);
+            if (localStorage[categorieMapPrefix]) {
+                categorieMap = JSON.parse(localStorage[categorieMapPrefix]);
             }
         }
 
@@ -364,7 +409,7 @@ angular.module('rifiuti.services.data', [])
     var doWithVersion = function (deferred, v, remote) {
         var storedVersion = null;
         if (localStorage) {
-            storedVersion = localStorage.version;
+            storedVersion = localStorage[versionPrefix];
         } else {
             storedVersion = v;
         }
@@ -377,7 +422,7 @@ angular.module('rifiuti.services.data', [])
 
         process(getDataURL(remote)).then(function (result) {
             if (result) {
-                localStorage.version = v
+                localStorage[versionPrefix] = v
             };
             deferred.resolve(true);
         });
@@ -398,6 +443,10 @@ angular.module('rifiuti.services.data', [])
         getSelectedLang: getSelectedLang,
         saveDraft: saveDraft,
         getDraftEnabled: getDraftEnabled,
+        getGlobalSettings: getGlobalSettings,
+        getProfiles: getProfiles,
+        saveProfiles: saveProfiles,
+        getTutorial: getTutorial,
         updateProfiles: function (newProfiles) {
             profili = newProfiles;
             updateProfileData();

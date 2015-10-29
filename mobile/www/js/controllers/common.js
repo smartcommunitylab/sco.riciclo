@@ -22,8 +22,9 @@ angular.module('rifiuti.controllers.common', ['ionic'])
         return Raccolta.hasSegnalazioni();
     };
 
+    var profiles = DataManager.getProfiles();
     //localStorage.removeItem('profiles');
-    if (!localStorage.profiles || localStorage.profiles.length == 0) {
+    if (!profiles || profiles.length == 0) {
         $rootScope.promptedToProfile = true;
         $location.path("app/aggProfilo");
         DataManager.checkVersion($rootScope.profili).then(function () {
@@ -141,7 +142,7 @@ angular.module('rifiuti.controllers.common', ['ionic'])
     $scope.globalSettings.selectedLang = $rootScope.globalSettings.selectedLang;
     $scope.globalSettings.isMoreThanOneLang = $rootScope.globalSettings.isMoreThanOneLang;
     $scope.isEnabledDraftToggle = false;
-
+    $scope.globalSettings.draftEnabled = $rootScope.globalSettings.draftEnabled;
 
     if(!$scope.supportedLangTypes){
        $scope.supportedLangTypes = [];
@@ -163,7 +164,7 @@ angular.module('rifiuti.controllers.common', ['ionic'])
             if ($rootScope.globalSettings.phoneLanguage == $scope.supportedLangTypes[i]){
                 $scope.globalSettings.selectedLang = $scope.supportedLangTypes[i];
                 foundLang = true;
-                return;
+                break;
             }
           }
           if(!foundLang){
@@ -176,6 +177,9 @@ angular.module('rifiuti.controllers.common', ['ionic'])
         }
     }
 
+    if($scope.globalSettings.draftEnabled === undefined){
+        $scope.globalSettings.draftEnabled = USE_DRAFT;
+    }
 
     $scope.timepickerSlots = {
         format: 24,
