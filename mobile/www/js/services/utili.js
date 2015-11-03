@@ -133,15 +133,15 @@ angular.module('rifiuti.services.utili', [])
 //      var icona = iconType(tipologia);
 //      return (!!icona?'img/ic_'+icona+'_'+this.getRGBColor(colore)+'.png':null);
 //    },
-    icon: function(tipologia,colorById) {
-      var icona = iconType(tipologia);
+    icon: function(icona,colorById) {
+      //var icona = iconType(tipologia);
       if (colorById=='white') {
         return icona + '-outline';
       }
       return icona;
     },
-    poiIcon: function(tipologia, colore) {
-      var icona = iconType(tipologia);
+    poiIcon: function(icona, colore) {
+      //var icona = iconType(tipologia);
       return (!!icona?'img/ic_poi_'+icona+'.png':null);
     },
     belongsTo: function(pr, area, profile) {

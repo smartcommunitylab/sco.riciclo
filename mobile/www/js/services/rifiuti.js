@@ -83,7 +83,8 @@ angular.module('rifiuti.services.rifiuti', [])
 
               if ($rootScope.selectedProfile.aree.indexOf(regola.area)!=-1 &&
                   regola.tipologiaUtenza==$rootScope.selectedProfile.utenza.tipologiaUtenza) {
-                var icona = Utili.iconFromRegola(regola);
+                var iconaById = DataManager.getIconById(regola.tipologiaPuntoRaccolta);
+                var icona = Utili.icon(iconaById);
                 if (icona) regola['icon'] = icona;
                 var tipoRaccolta = DataManager.getCategoriaById('tipologiaRaccolta', regola.tipologiaRaccolta);
                 regola['tipoRaccolta'] = tipoRaccolta;

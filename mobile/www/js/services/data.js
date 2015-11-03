@@ -358,6 +358,17 @@ angular.module('rifiuti.services.data', [])
       return 'grey';
     }
 
+    var getIconById = function(tipologia){
+      var tipoPuntoRaccolta = getCategoriaById('tipologiaPuntiRaccolta',tipologia);
+
+      if(!!tipoPuntoRaccolta && tipoPuntoRaccolta['icona']){
+        return tipoPuntoRaccolta['icona'];
+      }
+
+      if (tipologia in ICON_POINT_MAP) return ICON_POINT_MAP[tipologia];
+      return null;
+    }
+
     var saveIsDevMode = function(isDevMode){
         $rootScope.isDevMode = isDevMode;
         localStorage[isDevModePrefix] = JSON.stringify(isDevMode);
@@ -491,6 +502,7 @@ angular.module('rifiuti.services.data', [])
         getIsDevMode: getIsDevMode,
         saveIsDevMode: saveIsDevMode,
         getColorById: getColorById,
+        getIconById: getIconById,
         updateProfiles: function (newProfiles) {
             profili = newProfiles;
             updateProfileData();

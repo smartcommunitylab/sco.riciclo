@@ -65,7 +65,7 @@ angular.module('rifiuti.controllers.raccolta', [])
   
 })
   
-.controller('PDRCtrl', function ($scope, $rootScope, $timeout, Raccolta, $location, $stateParams, Utili) {
+.controller('PDRCtrl', function ($scope, $rootScope, $timeout, Raccolta, $location, $stateParams, Utili, DataManager) {
 
   $scope.profile = null;
   
@@ -134,11 +134,14 @@ angular.module('rifiuti.controllers.raccolta', [])
         return;
       }
     }
+
+    var icona = DataManager.getIconById(item.tipologiaPuntiRaccolta);
+
     list.push({
       aperto: false,
       tipoPuntoRaccolta: item.tipoPuntoRaccolta,
       tipologiaPuntoRaccolta: item.tipologiaPuntiRaccolta,
-      icon: Utili.icon(item.tipologiaPuntiRaccolta),
+      icon: Utili.icon(icona),
       locs: [item]
     });
   };
@@ -155,8 +158,9 @@ angular.module('rifiuti.controllers.raccolta', [])
       var list = [];
       punti.forEach(function(punto){
         if (!!punto.dettagliZona && ($scope.id == null || punto.dettagliZona == $scope.id)) {
-          var icon = {
-            url: Utili.poiIcon(punto.tipologiaPuntiRaccolta),
+        var icona = DataManager.getIconById(punto.tipologiaPuntiRaccolta);
+        var icon = {
+            url: Utili.poiIcon(icona),
             scaledSize: new google.maps.Size(45, 45)
           };
           points.push({
@@ -203,7 +207,9 @@ angular.module('rifiuti.controllers.raccolta', [])
 .controller('TDRCtrl', function ($scope, $rootScope, DataManager, Raccolta, Utili) {
   $scope.icon = function(item) {
     var colorById = DataManager.getColorById(item.colore);
-    return Utili.icon(item.tipologiaPuntoRaccolta,colorById);
+    var icona = DataManager.getIconById(item.tipologiaPuntoRaccolta);
+
+    return Utili.icon(icona,colorById);
   };
 
   

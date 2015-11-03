@@ -248,7 +248,7 @@ angular.module('rifiuti.controllers.home', [])
     };
 })
 
-.controller('calendarioCtrl', function ($scope, $rootScope, $ionicScrollDelegate, $location, Calendar, Utili, $timeout, $filter, $document) {
+.controller('calendarioCtrl', function ($scope, $rootScope, $ionicScrollDelegate, $location, Calendar, Utili, $timeout, $filter, $document, DataManager) {
     $scope.calendarView = false;
 
 	$location.hash = function(val) {
@@ -412,8 +412,10 @@ angular.module('rifiuti.controllers.home', [])
     };
 
     $scope.getIcon = function (item) {
-        var colorById = DataManager.getColorById(colorString);
-        return Utili.icon(item.tipologiaPuntiRaccolta, colorById);
+        var colorById = DataManager.getColorById(item.colore);
+        //var tipoPuntoRaccolta = DataManager.getCategoriaById('tipologiaPuntiRaccolta',item.tipologiaPuntiRaccolta);
+        var icona = DataManager.getIconById(item.tipologiaPuntiRaccolta);
+        return Utili.icon(icona, colorById);
     }
 
     $scope.goToToday = function () {
