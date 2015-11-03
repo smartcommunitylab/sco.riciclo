@@ -202,7 +202,8 @@ angular.module('rifiuti.controllers.raccolta', [])
 
 .controller('TDRCtrl', function ($scope, $rootScope, DataManager, Raccolta, Utili) {
   $scope.icon = function(item) {
-    return Utili.icon(item.tipologiaPuntoRaccolta,item.colore);
+    var colorById = DataManager.getColorById(item.colore);
+    return Utili.icon(item.tipologiaPuntoRaccolta,colorById);
   };
 
   

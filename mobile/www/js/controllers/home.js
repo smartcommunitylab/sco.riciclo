@@ -406,11 +406,14 @@ angular.module('rifiuti.controllers.home', [])
     };
 
     $scope.getColor = function (colorString) {
-        return Utili.getRGBColor(colorString);
+        var colorById = DataManager.getColorById(colorString);
+        return Utili.getRGBColor(colorById);
+        //return Utili.getRGBColor(colorString);
     };
 
     $scope.getIcon = function (item) {
-        return Utili.icon(item.tipologiaPuntiRaccolta, item.colore);
+        var colorById = DataManager.getColorById(colorString);
+        return Utili.icon(item.tipologiaPuntiRaccolta, colorById);
     }
 
     $scope.goToToday = function () {

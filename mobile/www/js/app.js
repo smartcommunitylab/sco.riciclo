@@ -160,7 +160,8 @@ angular.module('rifiuti', [
    };
 
     $rootScope.color = function(item) {
-        return Utili.getRGBColor(item.colore);
+        var colorById = DataManager.getColorById(item.colore);
+        return Utili.getRGBColor(colorById);
     }
 
     $rootScope.addr2id = function(addr) {

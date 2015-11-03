@@ -119,8 +119,8 @@ angular.module('rifiuti.services.utili', [])
       cal.dates = calToDates(min,max, cal.il, cal.eccezione);
     }, 
 
-    getRGBColor: function(colore) {
-        var c = rgbColor(colore);
+    getRGBColor: function(rgbColor) {
+        var c = rgbColor;
         if (c == 'white') {
             return 'grey';
         }
@@ -133,9 +133,9 @@ angular.module('rifiuti.services.utili', [])
 //      var icona = iconType(tipologia);
 //      return (!!icona?'img/ic_'+icona+'_'+this.getRGBColor(colore)+'.png':null);
 //    },
-    icon: function(tipologia,colore) {
+    icon: function(tipologia,colorById) {
       var icona = iconType(tipologia);
-      if (rgbColor(colore)=='white') {
+      if (colorById=='white') {
         return icona + '-outline';
       }
       return icona;

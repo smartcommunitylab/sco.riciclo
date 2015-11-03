@@ -21,6 +21,7 @@ angular.module('rifiuti.services.data', [])
     var tutorialPrefix = APP_ID+"_tutorial";
     var versionPrefix = APP_ID+"_version";
     var isDevModePrefix = APP_ID+"_isDevMode";
+    var colorCodeMapPrefix = APP_ID+"_colorCodeMap";
 
     var dataURL = LOCAL_DATA_URL;
 
@@ -28,6 +29,7 @@ angular.module('rifiuti.services.data', [])
     var profili = null;
     var profileData = null;
     var categorieMap = null;
+    var colorCodeMap = null;
 
     var errorHandler = function (e) {
         console.log(e);
@@ -83,6 +85,13 @@ angular.module('rifiuti.services.data', [])
         profileData.segnalazione = completeData.segnalazione;
 
         $rootScope.isDevMode = getIsDevMode();
+
+        colorCodeMap = {};
+        completeData.colore.forEach(function (colorCode) {
+            colorCodeMap[colorCode.nome] = colorCode.codice;
+        });
+
+        localStorage[colorCodeMapPrefix] = JSON.stringify(colorCodeMap);
 
         categorieMap = {};
         if(profileData.categorie){
@@ -339,6 +348,16 @@ angular.module('rifiuti.services.data', [])
         return $rootScope.isDevMode;
     }
 
+    var getColorById = function(colore){
+
+      if(colorCodeMap[colore]){
+        return colorCodeMap[colore];
+      }
+
+      if (colore in ICON_COLOR_MAP) return ICON_COLOR_MAP[colore];
+      return 'grey';
+    }
+
     var saveIsDevMode = function(isDevMode){
         $rootScope.isDevMode = isDevMode;
         localStorage[isDevModePrefix] = JSON.stringify(isDevMode);
@@ -471,6 +490,7 @@ angular.module('rifiuti.services.data', [])
         saveTutorial: saveTutorial,
         getIsDevMode: getIsDevMode,
         saveIsDevMode: saveIsDevMode,
+        getColorById: getColorById,
         updateProfiles: function (newProfiles) {
             profili = newProfiles;
             updateProfileData();
