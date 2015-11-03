@@ -105,13 +105,13 @@
 							    <div class="col-md-2">
 							    	<select class="form-control" data-ng-model="fIcona" 
 							    	data-ng-disabled="view || (language != defaultLang)">
-							    		<option value="Porta a Porta">Porta a Porta</option>
-							    		<option value="Isola Ecologica">Isola Ecologica</option>
-							    		<option value="Centro Raccolta Materiali">Centro Raccolta Materiali</option>
-							    		<option value="Centro Raccolta di Zona">Centro Raccolta di Zona</option>
-							    		<option value="Farmacia">Farmacia</option>
-							    		<option value="Rivenditore">Rivenditore</option>
-							    		<option value="Furgone">Furgone</option>
+							    		<option value="riciclo-porta_a_porta">Porta a Porta</option>
+							    		<option value="riciclo-isola_ecologica">Isola Ecologica</option>
+							    		<option value="riciclo-crm">Centro Raccolta Materiali</option>
+							    		<option value="riciclo-crz">Centro Raccolta di Zona</option>
+							    		<option value="riciclo-farmacia">Farmacia</option>
+							    		<option value="riciclo-rivenditore">Rivenditore</option>
+							    		<option value="riciclo-furgone">Furgone</option>
 		      					</select>
 		      				</div>
 		      				<span class="text-danger glyphicon glyphicon-asterisk"></span>
@@ -199,7 +199,7 @@
 				<span>{{item.type}}</span>
 			</div>
 			<div class="col-md-1">
-				<span>{{item.icona}}</span>
+				<span>{{getIconeName(item.icona)}}</span>
 			</div>
 			<div class="col-md-2">
 				<button class="btn btn-info" data-toggle="modal" data-target="#divForm"

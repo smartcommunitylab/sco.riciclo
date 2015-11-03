@@ -299,5 +299,29 @@ var tipoPuntoApp = angular.module('tipo-punto', ['DataService']).controller('use
 	  } else {
 	  	$scope.incomplete = false;
 	  }
-	};	
+	};
+	
+	$scope.getIconeName = function(id) {
+		if(id == "riciclo-porta_a_porta") {
+			return "Porta a Porta";
+		}
+		if(id == "riciclo-isola_ecologica") {
+			return "Isola Ecologica";
+		}
+		if(id == "riciclo-crm") {
+			return "Centro Raccolta Materiali";
+		}
+		if(id == "riciclo-crz") {
+			return "Centro Raccolta di Zona";
+		}
+		if(id == "riciclo-farmacia") {
+			return "Farmacia";
+		}
+		if(id == "riciclo-rivenditore") {
+			return "Rivenditore";
+		}
+		if(id == "riciclo-furgone") {
+			return "Furgone";
+		}
+	}
 });
