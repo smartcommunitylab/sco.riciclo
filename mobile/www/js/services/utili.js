@@ -52,7 +52,7 @@ angular.module('rifiuti.services.utili', [])
   var calToDates = function(da, a, il, ecc) {
     if (!il) return [];
 
-    var arr = il.split(' ');
+    var arr = il.trim().split(' ');
     var dates = [];  
     var eccDates = calToDates(da, a, ecc, null);
     for (var i = 0; i < arr.length; i++) {

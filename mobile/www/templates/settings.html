@@ -14,7 +14,7 @@
             <ion-radio ng-repeat="lang in supportedLangTypes" ng-model="globalSettings.selectedLang" ng-change="saveLang()"  ng-value="lang" on-swipe-down="saveAll()">{{ lang }}</ion-radio>
         </div>
 
-        <ion-toggle ng-if="isEnabledDraftToggle" toggle-class="toggle-100r" ng-model="globalSettings.draftEnabled" ng-change="saveDraft()">Draft Enabled</ion-toggle>
+        <ion-toggle ng-if="isDevMode" toggle-class="toggle-100r" ng-model="globalSettings.draftEnabled" ng-change="saveDraft()">{{'Modalità Dati Draft' | translate}}</ion-toggle>
 
         <ion-toggle ng-if="!isWebView" ng-model="settings.enableNotifications" toggle-class="toggle-100r" ng-change="saveSettings()">Notifiche</ion-toggle>
         <div class="setting-info">{{'settings_info' | translate}}</div>

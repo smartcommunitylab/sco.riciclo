@@ -40,7 +40,35 @@ angular.module('rifiuti.controllers.common', ['ionic'])
     }
 })
 
-.controller('InfoCtrl', function ($scope) {})
+.controller('InfoCtrl', function ($scope, $rootScope, DataManager, $ionicPopup) {
+
+    $scope.enableDevModCounter = 0;
+    var devModeLabel = 'disabilitata';
+    $scope.enableIsDevMod = function () {
+        $scope.enableDevModCounter++;
+        if($scope.enableDevModCounter>=5){
+            DataManager.saveIsDevMode(!$rootScope.isDevMode);
+
+            if($rootScope.isDevMode){
+                devModeLabel = 'abilitata';
+            }else{
+                devModeLabel = 'disabilitata';
+            }
+
+            var popup = $ionicPopup.show({
+                        title: '<b class="popup-title">Modalità Dev<b/>',
+                        template: 'La modalità dev è '+devModeLabel,
+                        buttons: [
+                            {
+                                text: 'OK'
+                            }
+                        ]
+            });
+
+            $scope.enableDevModCounter = 0;
+        }
+    }
+})
 
 .controller('SegnalaCtrl', function ($scope, $rootScope, $cordovaCamera, Raccolta) {
 
@@ -188,7 +216,6 @@ angular.module('rifiuti.controllers.common', ['ionic'])
 
     $scope.saveSettings = function (pap) {
         Profili.saveAll();
-        enableDraftCheat(pap);
     };
 
     $scope.saveLang = function () {
@@ -206,35 +233,35 @@ angular.module('rifiuti.controllers.common', ['ionic'])
         }
     });
 
-    var enableDraftCheat = function (pap){
-        if((pap == 'Porta a porta vetro') &&
-           (($scope.settings.papTypes['Porta a porta vetro'] == false && (!$scope.counter || $scope.counter == 2)) ||
-           ($scope.settings.papTypes['Porta a porta vetro'] == true  && $scope.counter==1))){
-            if(!$scope.draftCheat){
-                $scope.draftCheat = {};
-            }
-            if(!$scope.draftCheat.firstTimestamp){
-                $scope.draftCheat.firstTimestamp = new Date();
-                $scope.counter = 1;
-            }else{
-                if(!$scope.draftCheat.secondTimestamp){
-                    $scope.draftCheat.secondTimestamp = new Date();
-                    $scope.counter = 2;
-                }else{
-                    if(!$scope.draftCheat.thirdTimestamp){
-                        $scope.draftCheat.thirdTimestamp = new Date();
-                        var diff = $scope.draftCheat.thirdTimestamp - $scope.draftCheat.firstTimestamp;
-                        if((diff)<50000){
-                            $scope.isEnabledDraftToggle = true;
-                        }
-                    }
-                }
-            }
-        }else{
-            $scope.counter = null;
-            $scope.draftCheat = null;
-        }
-    }
+    //var enableDraftCheat = function (pap){
+    //    if((pap == 'Porta a porta vetro') &&
+    //       (($scope.settings.papTypes['Porta a porta vetro'] == false && (!$scope.counter || $scope.counter == 2)) ||
+    //       ($scope.settings.papTypes['Porta a porta vetro'] == true  && $scope.counter==1))){
+    //        if(!$scope.draftCheat){
+    //            $scope.draftCheat = {};
+    //        }
+    //        if(!$scope.draftCheat.firstTimestamp){
+    //            $scope.draftCheat.firstTimestamp = new Date();
+    //            $scope.counter = 1;
+    //        }else{
+    //            if(!$scope.draftCheat.secondTimestamp){
+    //                $scope.draftCheat.secondTimestamp = new Date();
+    //                $scope.counter = 2;
+    //            }else{
+    //                if(!$scope.draftCheat.thirdTimestamp){
+    //                    $scope.draftCheat.thirdTimestamp = new Date();
+    //                    var diff = $scope.draftCheat.thirdTimestamp - $scope.draftCheat.firstTimestamp;
+    //                    if((diff)<50000){
+    //                        $scope.isEnabledDraftToggle = true;
+    //                    }
+    //                }
+    //            }
+    //        }
+    //    }else{
+    //        $scope.counter = null;
+    //        $scope.draftCheat = null;
+    //    }
+    //}
 })
 
 .controller('ContattiCtrl', function ($scope, $ionicScrollDelegate, Raccolta) {

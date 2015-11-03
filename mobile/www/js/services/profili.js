@@ -171,7 +171,7 @@ angular.module('rifiuti.services.profili', [])
     var treeWalkUp = function (tree, parentName, key, results) {
         if (!parentName || parentName == "") return;
         tree.forEach(function (node) {
-            if (node['nome'] == parentName && results.indexOf(node[key]) < 0) {
+            if (node['id'] == parentName && results.indexOf(node[key]) < 0) {
                 //var utenzaOK = node.utenza[$rootScope.selectedProfile.utenza.tipologiaUtenza];
                 //if (utenzaOK) {
                 results.push(node[key]);
@@ -187,14 +187,14 @@ angular.module('rifiuti.services.profili', [])
         var myIstituzioni = [];
         var areeList = DataManager.getSync('aree');
         areeList.forEach(function (area, ai, dbAree) {
-            if (area.nome == p.area.nome) {
+            if (area.id == p.area.id) {
                 var utenzaOK = area.utenza[p.utenza.tipologiaUtenza];
                 if (utenzaOK) {
-                    myAree.push(area.nome);
+                    myAree.push(area.id);
                     myIstituzioni.push(area.istituzione);
                     myGestori.push(area.gestore);
                 }
-                treeWalkUp(dbAree, area.parent, 'nome', myAree);
+                treeWalkUp(dbAree, area.parent, 'id', myAree);
                 treeWalkUp(dbAree, area.parent, 'istituzione', myIstituzioni);
                 treeWalkUp(dbAree, area.parent, 'gestore', myGestori);
             }

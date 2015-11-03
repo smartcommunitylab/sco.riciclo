@@ -20,6 +20,7 @@ angular.module('rifiuti.services.data', [])
     var selectedProfileIdPrefix = APP_ID+"_selectedProfileId";
     var tutorialPrefix = APP_ID+"_tutorial";
     var versionPrefix = APP_ID+"_version";
+    var isDevModePrefix = APP_ID+"_isDevMode";
 
     var dataURL = LOCAL_DATA_URL;
 
@@ -80,6 +81,8 @@ angular.module('rifiuti.services.data', [])
         profileData.riciclabolario = completeData.riciclabolario;
         profileData.categorie = completeData.categorie;
         profileData.segnalazione = completeData.segnalazione;
+
+        $rootScope.isDevMode = getIsDevMode();
 
         categorieMap = {};
         if(profileData.categorie){
@@ -320,7 +323,25 @@ angular.module('rifiuti.services.data', [])
     }
 
     var saveProfiles = function(profiles){
-        localStorage.profiles = JSON.stringify(profiles);
+        localStorage[profilesPrefix] = JSON.stringify(profiles);
+    }
+
+    var getIsDevMode = function () {
+        if ($rootScope.isDevMode==null){
+            if(localStorage[isDevModePrefix]!=null){
+                $rootScope.isDevMode = JSON.parse(localStorage[isDevModePrefix]);
+                return JSON.parse(localStorage[isDevModePrefix]);
+            }
+
+            $rootScope.isDevMode = false;
+        }
+
+        return $rootScope.isDevMode;
+    }
+
+    var saveIsDevMode = function(isDevMode){
+        $rootScope.isDevMode = isDevMode;
+        localStorage[isDevModePrefix] = JSON.stringify(isDevMode);
     }
 
     var getTutorial = function () {
@@ -447,6 +468,9 @@ angular.module('rifiuti.services.data', [])
         getProfiles: getProfiles,
         saveProfiles: saveProfiles,
         getTutorial: getTutorial,
+        saveTutorial: saveTutorial,
+        getIsDevMode: getIsDevMode,
+        saveIsDevMode: saveIsDevMode,
         updateProfiles: function (newProfiles) {
             profili = newProfiles;
             updateProfileData();
