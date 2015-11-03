@@ -848,6 +848,7 @@ public class RepositoryManager {
 		update.set("lastUpdate", new Date());
 		update.set("nome", tpr.getNome());
 		update.set("info", tpr.getInfo());
+		update.set("icona", tpr.getIcona());
 		update.set("type", tpr.getType());
 		template.updateFirst(query, update, TipologiaPuntoRaccolta.class);
 	}

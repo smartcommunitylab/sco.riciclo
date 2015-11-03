@@ -34,4 +34,11 @@ apps:
     - modello
     comuni:
     - 022161
+  - ownerId: RIAPP
+    password: RIAPP
+    token: LvnSc8pA83dfX7mX       
+    modelElements:
+    - modello
+    comuni:
+    - 093004
           

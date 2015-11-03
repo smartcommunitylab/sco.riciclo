@@ -302,6 +302,7 @@ public class UIConverter {
 			tipologiaUI.setId(tpr.getObjectId());
 			tipologiaUI.setNome(Utils.getString(tpr.getNome(), lang, defaultLang));
 			tipologiaUI.setDescrizione(Utils.getString(tpr.getInfo(), lang, defaultLang));
+			tipologiaUI.setIcona(tpr.getIcona());
 			tipologiaUI.setType(tpr.getType());
 			result.add(tipologiaUI);
 		}

@@ -100,6 +100,22 @@
 		      				</div>
 		      				<span class="text-danger glyphicon glyphicon-asterisk"></span>
 							  </div>						   						   								
+							  <div class="row form-group">
+							    <label class="col-md-1 control-label">Icona:</label>
+							    <div class="col-md-2">
+							    	<select class="form-control" data-ng-model="fIcona" 
+							    	data-ng-disabled="view || (language != defaultLang)">
+							    		<option value="Porta a Porta">Porta a Porta</option>
+							    		<option value="Isola Ecologica">Isola Ecologica</option>
+							    		<option value="Centro Raccolta Materiali">Centro Raccolta Materiali</option>
+							    		<option value="Centro Raccolta di Zona">Centro Raccolta di Zona</option>
+							    		<option value="Farmacia">Farmacia</option>
+							    		<option value="Rivenditore">Rivenditore</option>
+							    		<option value="Furgone">Furgone</option>
+		      					</select>
+		      				</div>
+		      				<span class="text-danger glyphicon glyphicon-asterisk"></span>
+							  </div>
 							</form>		
 			      </div>
 			      <div class="modal-footer">
@@ -165,7 +181,8 @@
 			<div class="col-md-2"><h4>Identificativo</h4></div>
 			<div class="col-md-2"><h4>Nome</h4></div>
 			<div class="col-md-4"><h4>Informazioni</h4></div>
-			<div class="col-md-2"><h4>Tipo</h4></div>
+			<div class="col-md-1"><h4>Tipo</h4></div>
+			<div class="col-md-1"><h4>Icona</h4></div>
 			<div class="col-md-2"><h4></h4></div>
 		</div>
 		<div class="row list-row" data-ng-repeat="item in tipoPuntoRaccoltaList | filter:search">
@@ -178,8 +195,11 @@
 			<div class="col-md-4">
 				<span>{{item.info[language]}}</span>
 			</div>
-			<div class="col-md-2">
+			<div class="col-md-1">
 				<span>{{item.type}}</span>
+			</div>
+			<div class="col-md-1">
+				<span>{{item.icona}}</span>
 			</div>
 			<div class="col-md-2">
 				<button class="btn btn-info" data-toggle="modal" data-target="#divForm"

@@ -20,6 +20,7 @@ var tipoPuntoApp = angular.module('tipo-punto', ['DataService']).controller('use
 	$scope.fNome = "";
 	$scope.fInfo = "";
 	$scope.fType = "";
+	$scope.fIcona = "";
 	$scope.search = "";
 	$scope.actualName = "";
 	
@@ -65,12 +66,11 @@ var tipoPuntoApp = angular.module('tipo-punto', ['DataService']).controller('use
 	};
 	
 	$scope.resetForm = function() {
+		$scope.fId = "";
 		$scope.fNome = "";
 		$scope.fInfo = "";
 		$scope.fType = "";
-		if($scope.create) {
-			$scope.fId = "";
-		}
+		$scope.fIcona = "";
 	};
 	
 	$scope.getModalHeaderClass = function() {
@@ -119,6 +119,7 @@ var tipoPuntoApp = angular.module('tipo-punto', ['DataService']).controller('use
 			$scope.fId = id;
 			$scope.fNome = element.nome[$scope.language];
 			$scope.fInfo = element.info[$scope.language];
+			$scope.fIcona = element.icona;
 			$scope.fType = element.type;
 			$scope.actualName = element.nome[$scope.defaultLang];
 			$scope.incomplete = false;	
@@ -134,6 +135,7 @@ var tipoPuntoApp = angular.module('tipo-punto', ['DataService']).controller('use
 		$scope.fNome = "";
 		$scope.fInfo = "";
 		$scope.fType = "";
+		$scope.fIcona = "";
 		$scope.actualName = "";
 		$scope.incomplete = true;
 		$scope.itemToDelete = "";
@@ -147,6 +149,7 @@ var tipoPuntoApp = angular.module('tipo-punto', ['DataService']).controller('use
 		$scope.fNome = "";
 		$scope.fInfo = "";
 		$scope.fType = "";
+		$scope.fIcona = "";
 		$scope.search = "";
 		$scope.actualName = "";
 		$scope.incomplete = true;
@@ -160,6 +163,7 @@ var tipoPuntoApp = angular.module('tipo-punto', ['DataService']).controller('use
 				objectId: '',
 				nome: {},
 				info: {},
+				icona: '',
 				type: ''
 			};
 			element.objectId = $scope.fId.trim();
@@ -170,6 +174,7 @@ var tipoPuntoApp = angular.module('tipo-punto', ['DataService']).controller('use
 			}
 			element.nome[$scope.language] = $scope.fNome;
 			element.info[$scope.language] = $scope.fInfo;
+			element.icona = $scope.fIcona;
 			element.type = $scope.fType;
 			var url = "api/tipologia/puntoraccolta/" + $scope.profile.appInfo.ownerId + "?draft=" + $scope.draft; 
 			$http.post(url, element, {headers: {'X-ACCESS-TOKEN': $scope.profile.appInfo.token}}).then(
@@ -198,6 +203,7 @@ var tipoPuntoApp = angular.module('tipo-punto', ['DataService']).controller('use
 			if(element != null) {
 				element.nome[$scope.language] = $scope.fNome;
 				element.info[$scope.language] = $scope.fInfo;
+				element.icona = $scope.fIcona;
 				element.type = $scope.fType;
 				var url = "api/tipologia/puntoraccolta/" + $scope.profile.appInfo.ownerId + "/" + element.objectId + "?draft=" + $scope.draft;
 				$http.put(url, element, {headers: {'X-ACCESS-TOKEN': $scope.profile.appInfo.token}}).then(
@@ -282,11 +288,13 @@ var tipoPuntoApp = angular.module('tipo-punto', ['DataService']).controller('use
 	$scope.$watch('fId',function() {$scope.test();});
 	$scope.$watch('fNome',function() {$scope.test();});
 	$scope.$watch('fType',function() {$scope.test();});
+	$scope.$watch('fIcona',function() {$scope.test();});
 	
 	$scope.test = function() {
 		if (($scope.fId == null) || ($scope.fId.length < 3) ||
 				($scope.fNome == null) || ($scope.fNome.length < 3) ||
-				($scope.fType == null) || ($scope.fType.length == 0)) {
+				($scope.fType == null) || ($scope.fType.length == 0) ||
+				($scope.fIcona == null) || ($scope.fIcona.length == 0)) {
 	    $scope.incomplete = true;
 	  } else {
 	  	$scope.incomplete = false;

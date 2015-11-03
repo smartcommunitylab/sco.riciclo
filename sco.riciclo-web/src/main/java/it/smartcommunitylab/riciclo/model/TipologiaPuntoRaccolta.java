@@ -8,6 +8,7 @@ public class TipologiaPuntoRaccolta extends BaseObject {
 	private Map<String, String> nome = new HashMap<String, String>();
 	private Map<String, String> info = new HashMap<String, String>();
 	private String type;
+	private String icona;
 	
 	public String getObjectId() {
 		return objectId;
@@ -32,6 +33,12 @@ public class TipologiaPuntoRaccolta extends BaseObject {
 	}
 	public void setType(String type) {
 		this.type = type;
+	}
+	public String getIcona() {
+		return icona;
+	}
+	public void setIcona(String icona) {
+		this.icona = icona;
 	}
 
 }

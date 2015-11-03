@@ -272,7 +272,7 @@ angular.module('tipo-rifiuto', ['DataService']).controller('userCtrl', function(
 	}
 	
 	$scope.$watch('fNome',function() {$scope.test();});
-	$scope.$watch('fId',function() {$scope.test();});$scope.fIcona
+	$scope.$watch('fId',function() {$scope.test();});
 	$scope.$watch('fIcona',function() {$scope.test();});
 	
 	$scope.test = function() {
