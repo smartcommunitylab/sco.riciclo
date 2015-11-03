@@ -44,7 +44,6 @@ var crmCtrl = crmApp.controller('userCtrl', function($scope, $window, $http, Dat
 	$scope.fDateWorkingDayList = [];
 	$scope.fDateWorkingDaySelected = "";
 	
-	
 	$scope.fDateExceptionDay = "";
 	$scope.fDateExceptionDayList = [];
 	$scope.fDateExceptionDaySelected = "";
@@ -142,6 +141,7 @@ var crmCtrl = crmApp.controller('userCtrl', function($scope, $window, $http, Dat
 			$scope.view = true;
 		}
 		$scope.create = false;
+		$scope.fAddress = "";
 		var element = $scope.findByObjectId($scope.crmList, id);
 		if(element != null) {
 			$scope.incomplete = false;	
@@ -184,6 +184,7 @@ var crmCtrl = crmApp.controller('userCtrl', function($scope, $window, $http, Dat
 		$scope.fNote = "";
 		$scope.fRegion = "";
 		$scope.fRegionDetails = "";
+		$scope.fAddress = "";
 		//$scope.fLatitude = "";
 		//$scope.fLongitude = "";
 		$scope.fResiduo = false;

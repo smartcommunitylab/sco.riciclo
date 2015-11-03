@@ -19,6 +19,7 @@ var gestoriCtrl = gestoriApp.controller('userCtrl', function($scope, $window, $h
 	$scope.itemToDelete = "";
 	
 	$scope.fId = "";
+	$scope.fAddress = "";
 	$scope.fRagioneSociale = "";
 	$scope.fDescrizione = "";
 	$scope.fUfficio = "";
@@ -116,6 +117,7 @@ var gestoriCtrl = gestoriApp.controller('userCtrl', function($scope, $window, $h
 			$scope.view = true;
 		}
 		$scope.create = false;
+		$scope.fAddress = "";
 		var element = $scope.findByObjectId($scope.gestoreList, id);
 		if(element != null) {
 			$scope.incomplete = false;	
@@ -160,6 +162,7 @@ var gestoriCtrl = gestoriApp.controller('userCtrl', function($scope, $window, $h
 	
 	$scope.resetForm = function() {
 		$scope.fId = "";
+		$scope.fAddress = "";
 		$scope.fRagioneSociale = "";
 		$scope.fDescrizione = "";
 		$scope.fUfficio = "";
