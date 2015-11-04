@@ -452,7 +452,7 @@ angular.module('rifiuti.services.data', [])
     }
 
     var getDraftEnabled = function(){
-        if($rootScope.globalSettings.draftEnabled){
+        if($rootScope.globalSettings.draftEnabled!=null){
             return $rootScope.globalSettings.draftEnabled;
         }else{
             return USE_DRAFT;
