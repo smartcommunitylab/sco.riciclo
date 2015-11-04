@@ -349,14 +349,26 @@ angular.module('rifiuti.services.data', [])
     }
 
     var getColorById = function(colore){
+      var localColorCodeMap = {};
+      if(!!colorCodeMap){
+        localColorCodeMap = colorCodeMap;
+      }else{
+        if(localStorage[colorCodeMapPrefix]){
+          colorCodeMap = JSON.parse(localStorage[colorCodeMapPrefix]);
+          localColorCodeMap = colorCodeMap;
+        }else{
+            return 'grey';
+        }
+      }
 
-      if(colorCodeMap[colore]){
-        return colorCodeMap[colore];
+      if(localColorCodeMap[colore]){
+        return localColorCodeMap[colore];
       }
 
       if (colore in ICON_COLOR_MAP) return ICON_COLOR_MAP[colore];
       return 'grey';
     }
+
 
     var getIconById = function(tipologia){
       var tipoPuntoRaccolta = getCategoriaById('tipologiaPuntiRaccolta',tipologia);
