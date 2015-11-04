@@ -312,7 +312,16 @@ public class RepositoryManager {
 		AppState draft = getAppState(ownerId, true);
 		AppState published = getAppState(ownerId, false);
 		App app = new App();
-		app.setAppInfo(appSetup.findAppById(ownerId));
+		DataSetInfo appInfo = appSetup.findAppById(ownerId);
+		DataSetInfo newAppInfo = new DataSetInfo();
+		if(appInfo!= null) {
+			newAppInfo.setOwnerId(ownerId);
+			newAppInfo.setPassword(appInfo.getPassword());
+			newAppInfo.setToken(appInfo.getToken());
+			newAppInfo.setComuni(new ArrayList<String>(appInfo.getComuni()));
+			newAppInfo.setModelElements(new ArrayList<String>(appInfo.getModelElements()));
+		}
+		app.setAppInfo(newAppInfo);
 		app.setDraftState(draft);
 		app.setPublishState(published);
 		return app;
