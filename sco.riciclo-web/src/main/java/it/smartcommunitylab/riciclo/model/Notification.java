@@ -6,8 +6,8 @@ import java.util.Map;
 public class Notification {
 
 	private String id;
-	private String appId;
-	
+	private String ownerId;
+
 	private String userId;
 	private String userEmail;
 	private String message;
@@ -49,10 +49,10 @@ public class Notification {
 	public void setId(String id) {
 		this.id = id;
 	}
-	public String getAppId() {
-		return appId;
+	public String getOwnerId() {
+		return ownerId;
 	}
-	public void setAppId(String appId) {
-		this.appId = appId;
+	public void setOwnerId(String ownerId) {
+		this.ownerId = ownerId;
 	}
 }

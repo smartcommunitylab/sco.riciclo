@@ -1,20 +1,43 @@
 apps:
-  - appId: GIUDICARIE
+  - ownerId: ASIA
+    password: ASIA
+    token: L2MEq8WPbTAIT134
+    modelElements:
+    - modello
+    comuni:
+    - 022003
+    - 022091
+    - 022058
+  - ownerId: GIUDICARIE
     password: GIUDICARIE
+    token: a1jgUpPlWjDS4XvS
     modelElements:
     - modello
     - isole
     - crm
-  - appId: TRENTO
-    password: TRENTO      
+    comuni:
+    - 022017
+    - 022083
+    - 022182
+    - 022183
+  - ownerId: TRENTO
+    password: TRENTO
+    token: p9UsNTji7TVScy3G
     modelElements:
     - modello
-  - appId: ROVERETO
-    password: ROVERETO      
+    comuni:
+    - 022205
+  - ownerId: ROVERETO
+    password: ROVERETO
+    token: bIjHHWrWQBJK1PIK
     modelElements:
     - modello
-  - appId: ASIA
-    password: ASIA      
+    comuni:
+    - 022161
+  - ownerId: RIAPP
+    password: RIAPP
+    token: LvnSc8pA83dfX7mX
     modelElements:
     - modello
-          
+    comuni:
+    - 093004

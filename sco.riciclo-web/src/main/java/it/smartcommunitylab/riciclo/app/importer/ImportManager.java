@@ -3,8 +3,8 @@ package it.smartcommunitylab.riciclo.app.importer;
 import it.smartcommunitylab.riciclo.app.importer.converter.DataImporter;
 import it.smartcommunitylab.riciclo.app.importer.converter.RifiutiConverter;
 import it.smartcommunitylab.riciclo.app.importer.converter.RifiutiValidator;
-import it.smartcommunitylab.riciclo.model.Rifiuti;
-import it.smartcommunitylab.riciclo.storage.AppInfo;
+import it.smartcommunitylab.riciclo.model.AppDataRifiuti;
+import it.smartcommunitylab.riciclo.storage.DataSetInfo;
 import it.smartcommunitylab.riciclo.storage.RepositoryManager;
 
 import java.io.InputStream;
@@ -24,21 +24,21 @@ public class ImportManager {
 
 	@Autowired
 	private RifiutiConverter converter;
-	
+
 	@Autowired
-	private RifiutiValidator validator;	
+	private RifiutiValidator validator;
 
 	@Autowired
 	private RepositoryManager storage;
 
-	public void uploadFiles(FileList fileList, AppInfo appInfo) throws ImportError {
+	public void uploadFiles(FileList fileList, DataSetInfo appInfo) throws ImportError {
 		try {
 			InputStream xlsIs = null;
 			InputStream isoleIs = null;
 			InputStream crmIs = null;
 
 			validator.validateInput(appInfo, fileList);
-			
+
 			xlsIs = fileList.getModel().getInputStream();
 			if (fileList.getIsole() != null) {
 				isoleIs = fileList.getIsole().getInputStream();
@@ -54,13 +54,13 @@ public class ImportManager {
 					System.err.println(error);
 				}
 				throw new ImportError(validationResult);
-			}			
-			
-			Rifiuti convertedRifiuti = converter.convert(rifiuti, appInfo.getAppId());
+			}
+
+			AppDataRifiuti convertedRifiuti = converter.convert(rifiuti, appInfo.getOwnerId());
 			validationResult = validator.validate(convertedRifiuti);
 
 			if (validationResult.isEmpty()) {
-				storage.save(convertedRifiuti, appInfo.getAppId());
+				storage.save(convertedRifiuti, appInfo.getOwnerId());
 			} else {
 				throw new ImportError(validationResult);
 			}

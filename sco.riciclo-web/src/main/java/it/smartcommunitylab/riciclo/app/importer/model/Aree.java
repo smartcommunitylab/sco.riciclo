@@ -32,6 +32,7 @@ public class Aree {
 	private String etichetta;
 	@NotEmpty
 	private String utenze;
+	private String codiceIstat;
 	
 	public String getIstituzione() {
 		return istituzione;
@@ -87,6 +88,14 @@ public class Aree {
 
 	public void setUtenze(String utenze) {
 		this.utenze = utenze;
+	}
+
+	public String getCodiceIstat() {
+		return codiceIstat;
+	}
+
+	public void setCodiceIstat(String codiceIstat) {
+		this.codiceIstat = codiceIstat;
 	}
 	
 }

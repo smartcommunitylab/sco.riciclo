@@ -16,99 +16,23 @@
 
 package it.smartcommunitylab.riciclo.model;
 
-import java.util.List;
-import java.util.Map;
 
 public class PuntoRaccolta extends BaseObject {
 
-	private String tipologiaPuntiRaccolta;
-	private List<UtenzaArea> utenzaArea;
-	private String localizzazione;
-	private String zona;
-	private String dettagliZona;
-
-	private List<OrarioApertura> orarioApertura;
-
-	private Map<String, Boolean> caratteristiche;
-	
-	private String note;
-
-	public String getTipologiaPuntiRaccolta() {
-		return tipologiaPuntiRaccolta;
-	}
-
-	public void setTipologiaPuntiRaccolta(String tipologiaPuntiRaccolta) {
-		this.tipologiaPuntiRaccolta = tipologiaPuntiRaccolta;
-	}
-
-	public List<UtenzaArea> getUtenzaArea() {
-		return utenzaArea;
-	}
-
-	public void setUtenzaArea(List<UtenzaArea> utenzaArea) {
-		this.utenzaArea = utenzaArea;
-	}
-
-	public String getLocalizzazione() {
-		return localizzazione;
-	}
-
-	public void setLocalizzazione(String localizzazione) {
-		this.localizzazione = localizzazione;
-	}
-
-	public String getZona() {
-		return zona;
-	}
-
-	public void setZona(String indirizzo) {
-		this.zona = indirizzo;
-	}
-
-	public String getDettagliZona() {
-		return dettagliZona;
-	}
-
-	public void setDettagliZona(String dettaglioIndirizzo) {
-		this.dettagliZona = dettaglioIndirizzo;
-	}
-
-	public List<OrarioApertura> getOrarioApertura() {
-		return orarioApertura;
-	}
-
-	public void setOrarioApertura(List<OrarioApertura> orarioApertura) {
-		this.orarioApertura = orarioApertura;
-	}
-
-	public Map<String, Boolean> getCaratteristiche() {
-		return caratteristiche;
-	}
-
-	public void setCaratteristiche(Map<String, Boolean> caratteristiche) {
-		this.caratteristiche = caratteristiche;
-	}
-
-	public String getNote() {
-		return note;
-	}
-
-	public void setNote(String note) {
-		this.note = note;
-	}
-
-
-	
+	private String objectId;
+	private String tipologiaPuntoRaccolta;
+	private String tipologiaUtenza;
+	private String area;
+	private String crm;
 
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((dettagliZona == null) ? 0 : dettagliZona.hashCode());
-		result = prime * result + ((zona == null) ? 0 : zona.hashCode());
-		result = prime * result + ((orarioApertura == null) ? 0 : orarioApertura.hashCode());
-		result = prime * result + ((tipologiaPuntiRaccolta == null) ? 0 : tipologiaPuntiRaccolta.hashCode());
-		result = prime * result + ((note == null) ? 0 : note.hashCode());
+		result = prime * result + ((crm == null) ? 0 : crm.hashCode());
+		result = prime * result + ((area == null) ? 0 : area.hashCode());
+		result = prime * result + ((tipologiaUtenza == null) ? 0 : tipologiaUtenza.hashCode());
+		result = prime * result + ((tipologiaPuntoRaccolta == null) ? 0 : tipologiaPuntoRaccolta.hashCode());
 		return result;
 	}
 
@@ -121,37 +45,76 @@ public class PuntoRaccolta extends BaseObject {
 		if (getClass() != obj.getClass())
 			return false;
 		PuntoRaccolta other = (PuntoRaccolta) obj;
-		if (dettagliZona == null) {
-			if (other.dettagliZona != null)
+		if (crm == null) {
+			if (other.crm != null)
 				return false;
-		} else if (!dettagliZona.equals(other.dettagliZona))
+		} else if (!crm.equals(other.crm)) {
 			return false;
-		if (zona == null) {
-			if (other.zona != null)
+		}
+		if (area == null) {
+			if (other.area != null)
 				return false;
-		} else if (!zona.equals(other.zona))
+		} else if (!area.equals(other.area)) {
 			return false;
-		if (orarioApertura == null) {
-			if (other.orarioApertura != null)
+		}
+		if (tipologiaUtenza == null) {
+			if (other.tipologiaUtenza != null)
 				return false;
-		} else if (!orarioApertura.equals(other.orarioApertura))
+		} else if (!tipologiaUtenza.equals(other.tipologiaUtenza)) {
 			return false;
-		if (tipologiaPuntiRaccolta == null) {
-			if (other.tipologiaPuntiRaccolta != null)
+		}
+		if (tipologiaPuntoRaccolta == null) {
+			if (other.tipologiaPuntoRaccolta != null)
 				return false;
-		} else if (!tipologiaPuntiRaccolta.equals(other.tipologiaPuntiRaccolta))
+		} else if (!tipologiaPuntoRaccolta.equals(other.tipologiaPuntoRaccolta)) {
 			return false;
-		if (note == null) {
-			if (other.note != null)
-				return false;
-		} else if (!note.equals(other.note))
-			return false;
+		}
 		return true;
 	}
 
 	@Override
 	public String toString() {
-		return "PuntoRaccolta [" + utenzaArea + "," + tipologiaPuntiRaccolta + "," + zona + "," + dettagliZona + "->" + orarioApertura + "]";
+		return "PuntoRaccolta [" + tipologiaUtenza + "," + tipologiaPuntoRaccolta + "," + area + "," + crm + "]";
+	}
+
+	public String getTipologiaPuntoRaccolta() {
+		return tipologiaPuntoRaccolta;
+	}
+
+	public void setTipologiaPuntoRaccolta(String tipologiaPuntoRaccolta) {
+		this.tipologiaPuntoRaccolta = tipologiaPuntoRaccolta;
+	}
+
+	public String getTipologiaUtenza() {
+		return tipologiaUtenza;
+	}
+
+	public void setTipologiaUtenza(String tipologiaUtenza) {
+		this.tipologiaUtenza = tipologiaUtenza;
+	}
+
+	public String getArea() {
+		return area;
+	}
+
+	public void setArea(String area) {
+		this.area = area;
+	}
+
+	public String getCrm() {
+		return crm;
+	}
+
+	public void setCrm(String crm) {
+		this.crm = crm;
+	}
+
+	public String getObjectId() {
+		return objectId;
+	}
+
+	public void setObjectId(String objectId) {
+		this.objectId = objectId;
 	}
 
 }

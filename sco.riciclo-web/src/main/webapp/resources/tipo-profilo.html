@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>100% Riciclo Console</title>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="description" content="">
+	<meta name="author" content="">
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="icon" href="lib/jqueryui/images/favicon.png" type="image/x-icon" />
+</head>
+<body data-ng-app="tipo-profilo" data-ng-controller="userCtrl">
+	<div data-ng-include="'html/navbar.html'"></div>
+
+	<div class="container-fluid">
+
+		<div class="list-title">
+			<h4>Tipologie TIPOLOGIA PROFILO</h4>
+		</div>
+
+			<div id="error" class="alert alert-danger fade in" data-ng-show="error">
+				<a href="#" class="close" data-hide="alert" aria-label="close"
+				data-ng-click="resetError()">&times;</a>
+				{{errorMsg}}
+			</div>
+
+			<div id="ok" class="alert alert-success fade in" data-ng-show="ok">
+				<a href="#" class="close" data-hide="alert" aria-label="close"
+				data-ng-click="resetOk()">&times;</a>
+				{{okMsg}}
+			</div>
+
+			<div id="divForm" class="modal modal-wide fade" role="dialog">
+				<div class="modal-dialog">
+					<div class="modal-content">
+			      <div class="modal-header" data-ng-class="getModalHeaderClass()">
+			        <button type="button" class="close" data-dismiss="modal">&times;</button>
+							<h4 data-ng-show="create">CREA nuovo Tipologia Profilo</h4>
+							<h4 data-ng-show="edit && !view">MODIFICA {{getActualName()}}</h4>
+							<h4 data-ng-show="view">VEDI {{getActualName()}}</h4>
+			      </div>
+			      <div class="modal-body">
+							<div id="errorForm" class="alert alert-danger fade in" data-ng-show="error">
+								<a href="#" class="close" data-hide="alert" aria-label="close"
+								data-ng-click="resetError()">&times;</a>
+								{{errorMsg}}
+							</div>
+			      	<p class="text-danger pull-right">I campi contrassegnati con il simbolo
+			      	<span class="glyphicon glyphicon-asterisk"></span> sono obbligatori</p>
+							<form role="form">
+						   	<div class="row form-group" data-ng-show="view || edit">
+						   		<label class="col-md-1 control-label">Lingua:</label>
+						   		<div class="col-md-2">
+										<button type="button" class="btn btn-default" data-ng-click="changeLanguage('it')"
+											data-ng-class="{'active':language == 'it'}">
+							   			IT
+							 			</button>
+										<button type="button" class="btn btn-default" data-ng-click="changeLanguage('en')"
+											data-ng-class="{'active':language == 'en'}">
+							   			EN
+							 			</button>
+						   		</div>
+						   	</div>
+							  <div class="row form-group">
+							    <label class="col-md-1 control-label">Nome:</label>
+							    <div class="col-md-2">
+						    		<input class="form-control" type="text" name="name" data-ng-model="fNome"
+						    		data-ng-disabled="!edit && !create" placeholder="nome">
+						    	</div>
+						    	<span class="text-danger glyphicon glyphicon-asterisk"></span>
+							  </div>
+							  <div class="row form-group">
+							    <label class="col-md-1 control-label">Descrizione:</label>
+							    <div class="col-md-2">
+						    		<textarea rows="2" class="form-control" name="descrizione" data-ng-model="fDescrizione"
+						    		data-ng-disabled="!edit && !create" placeholder="descrizione"></textarea>
+						    	</div>
+						    	<span class="text-danger glyphicon glyphicon-asterisk"></span>
+							  </div>
+							  <div class="row form-group">
+							    <label class="col-md-1 control-label">Tipologia Utenza:</label>
+							    <div class="col-md-2">
+							    	<select class="form-control" data-ng-model="selectedTipologiaUtenza"
+							    	data-ng-disabled="view || (language != defaultLang)"
+							    	data-ng-options="item.objectId for item in tipologiaUtenzaList">
+		      					</select>
+		      				</div>
+		      				<span class="text-danger glyphicon glyphicon-asterisk"></span>
+							  </div>
+							</form>
+			      </div>
+			      <div class="modal-footer">
+			        <button type="button" class="btn btn-default" data-dismiss="modal">Annulla</button>
+					  	<button class="btn btn-primary" data-ng-disabled="view || error || incomplete"
+					  		data-ng-show="edit" data-dismiss="modal" data-ng-click="saveTipo()">Modifica
+					  	</button>
+					  	<button class="btn btn-success" data-ng-disabled="view || error || incomplete"
+					  		data-ng-show="create" data-dismiss="modal" data-ng-click="saveTipo()">Crea
+					  	</button>
+			      </div>
+					</div>
+				</div>
+			</div>
+
+			<div id="divDeleteItemAlert" class="modal fade" role="dialog">
+				<div class="modal-dialog modal-sm">
+					<div class="modal-content">
+						<div class="modal-body">
+							<p>Sei sicuro di voler eliminare l'oggetto?</p>
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-default" data-dismiss="modal"
+							data-target="#divDeleteItemAlert">Annulla</button>
+							<button class="btn btn-danger" data-dismiss="modal"
+							data-target="#divDeleteItemAlert" data-ng-click="deleteTipo()">
+							Elimina
+							</button>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div class="list-create">
+				<button class="btn btn-success" data-toggle="modal" data-target="#divForm"
+					data-backdrop="static" data-ng-click="newTipo()" title="Crea">
+						CREA NUOVO ELEMENTO
+				</button>
+			</div>
+
+		<hr>
+
+		<div class="row list-search">
+			<div class="col-md-2">
+				<span class="glyphicon glyphicon-search"></span>
+				<label control-label">Cerca:</label>
+				<input type="text" data-ng-model="search">
+			</div>
+			<div class="col-md-2">
+				<span class="glyphicon glyphicon-eye-open"></span> Visualizza
+				<button type="button" class="btn btn-default" data-ng-click="changeLanguage('it')"
+					data-ng-class="{'active':language == 'it'}">
+	   			IT
+	 			</button>
+				<button type="button" class="btn btn-default" data-ng-click="changeLanguage('en')"
+					data-ng-class="{'active':language == 'en'}">
+	   			EN
+	 			</button>
+			</div>
+		</div>
+
+		<div class="row list-header">
+			<div class="col-md-3"><h4>Nome</h4></div>
+			<div class="col-md-5"><h4>Descrizione</h4></div>
+			<div class="col-md-2"><h4>Tipologia Utenza</h4></div>
+			<div class="col-md-2"><h4></h4></div>
+		</div>
+		<div class="row list-row" data-ng-repeat="item in tipoProfiloList | filter:search">
+			<div class="col-md-3">
+				<span>{{item.nome[language]}}</span>
+			</div>
+			<div class="col-md-5">
+				<span>{{item.descrizione[language]}}</span>
+			</div>
+			<div class="col-md-2">
+				<span>{{item.tipologiaUtenza}}</span>
+			</div>
+			<div class="col-md-2">
+				<button class="btn btn-info" data-toggle="modal" data-target="#divForm"
+				data-backdrop="static" data-ng-click="editTipo(item.objectId, false)" title="Vedi">
+					<span class="glyphicon glyphicon-eye-open"></span>
+				</button>
+				<button class="btn btn-primary" data-toggle="modal" data-target="#divForm"
+				data-backdrop="static" data-ng-click="editTipo(item.objectId, true)" title="Modifica">
+					<span class="glyphicon glyphicon-pencil"></span>
+				</button>
+				<button class="btn btn-danger" data-toggle="modal" data-target="#divDeleteItemAlert"
+				data-backdrop="static" data-ng-click="setItemToDelete(item.objectId)" title="Cancella">
+					<span class="glyphicon glyphicon-trash"></span>
+				</button>
+			</div>
+		</div>
+
+	</div>
+
+	<script src = "js/services.js"></script>
+	<script src = "js/tipo-profilo.js"></script>
+
+</body>
+</html>

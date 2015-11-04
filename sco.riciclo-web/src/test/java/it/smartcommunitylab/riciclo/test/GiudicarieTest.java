@@ -21,10 +21,10 @@ import it.smartcommunitylab.riciclo.app.importer.ImportConstants;
 import it.smartcommunitylab.riciclo.app.importer.ImportError;
 import it.smartcommunitylab.riciclo.app.importer.ImportManager;
 import it.smartcommunitylab.riciclo.config.RifiutiConfig;
-import it.smartcommunitylab.riciclo.model.Rifiuti;
+import it.smartcommunitylab.riciclo.model.AppDataRifiuti;
 import it.smartcommunitylab.riciclo.security.AppDetails;
 import it.smartcommunitylab.riciclo.storage.App;
-import it.smartcommunitylab.riciclo.storage.AppInfo;
+import it.smartcommunitylab.riciclo.storage.DataSetInfo;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -74,8 +74,8 @@ public class GiudicarieTest {
 
 	@Test
 	public void testUpload() throws Exception {
-		AppInfo credentials = new AppInfo();
-		credentials.setAppId(APP_ID);
+		DataSetInfo credentials = new DataSetInfo();
+		credentials.setOwnerId(APP_ID);
 		credentials.setPassword(APP_ID);
 		credentials.setModelElements(Arrays.asList(ImportConstants.MODEL,
 				ImportConstants.CRM, ImportConstants.ISOLE));
@@ -84,22 +84,22 @@ public class GiudicarieTest {
 		TestingAuthenticationToken auth = new TestingAuthenticationToken(
 				details, null);
 		SecurityContextHolder.getContext().setAuthentication(auth);
-		
+
 		mocker = MockMvcBuilders.webAppContextSetup(wac).build();
 		ObjectMapper mapper = new ObjectMapper();
-		
+
 		ResultActions result;
 		MvcResult res;
-		
+
 		result = mocker.perform(MockMvcRequestBuilders.get("/appDescriptor/" + APP_ID).accept(MediaType.APPLICATION_JSON));
 		res = result.andExpect(MockMvcResultMatchers.status().is(200)).andReturn();
-		App appDescriptor = mapper.readValue(res.getResponse().getContentAsString(), App.class);		
-		
+		App appDescriptor = mapper.readValue(res.getResponse().getContentAsString(), App.class);
+
 		System.out.println(appDescriptor);
-		
-		Long version = appDescriptor.getPublishState().getVersion();		
-		
-		
+
+		Long version = appDescriptor.getPublishState().getVersion();
+
+
 		ImportManager manager = wac.getBean(ImportManager.class);
 		FileList fileList = readFiles();
 		ImportError error = null;
@@ -115,23 +115,23 @@ public class GiudicarieTest {
 				MediaType.APPLICATION_JSON));
 		res = result
 				.andExpect(MockMvcResultMatchers.status().is(200)).andReturn();
-		Rifiuti rifiuti = mapper.readValue(res.getResponse()
-				.getContentAsString(), Rifiuti.class);
-		Assert.assertEquals(APP_ID, rifiuti.getAppId());
+		AppDataRifiuti rifiuti = mapper.readValue(res.getResponse()
+				.getContentAsString(), AppDataRifiuti.class);
+		Assert.assertEquals(APP_ID, rifiuti.getOwnerId());
 		Assert.assertNotNull(rifiuti.getAree());
 		Assert.assertNotNull(rifiuti.getGestori());
 		Assert.assertNotNull(rifiuti.getIstituzioni());
 		Assert.assertNotNull(rifiuti.getPuntiRaccolta());
-		Assert.assertNotNull(rifiuti.getRaccolta());
+		Assert.assertNotNull(rifiuti.getRaccolte());
 		Assert.assertNotNull(rifiuti.getRiciclabolario());
 		Assert.assertFalse(rifiuti.getAree().isEmpty());
 		Assert.assertFalse(rifiuti.getGestori().isEmpty());
 		Assert.assertFalse(rifiuti.getIstituzioni().isEmpty());
 		Assert.assertFalse(rifiuti.getPuntiRaccolta().isEmpty());
-		Assert.assertFalse(rifiuti.getRaccolta().isEmpty());
+		Assert.assertFalse(rifiuti.getRaccolte().isEmpty());
 		Assert.assertFalse(rifiuti.getRiciclabolario().isEmpty());
 		Assert.assertFalse(rifiuti.getColore().isEmpty());
-		Assert.assertFalse(rifiuti.getSegnalazione().isEmpty());
+		Assert.assertFalse(rifiuti.getSegnalazioni().isEmpty());
 
 		// result = mocker.perform(MockMvcRequestBuilders.put("/publish/" +
 		// APP_ID).accept(MediaType.APPLICATION_JSON));
@@ -144,21 +144,21 @@ public class GiudicarieTest {
 		res = result.andExpect(MockMvcResultMatchers.status().is(200))
 				.andReturn();
 		rifiuti = mapper.readValue(res.getResponse().getContentAsString(),
-				Rifiuti.class);
-		Assert.assertEquals(APP_ID, rifiuti.getAppId());
+				AppDataRifiuti.class);
+		Assert.assertEquals(APP_ID, rifiuti.getOwnerId());
 		Assert.assertNotNull(rifiuti.getAree());
 		Assert.assertNotNull(rifiuti.getGestori());
 		Assert.assertNotNull(rifiuti.getIstituzioni());
 		Assert.assertNotNull(rifiuti.getPuntiRaccolta());
-		Assert.assertNotNull(rifiuti.getRaccolta());
+		Assert.assertNotNull(rifiuti.getRaccolte());
 		Assert.assertNotNull(rifiuti.getRiciclabolario());
 		Assert.assertFalse(rifiuti.getAree().isEmpty());
 		Assert.assertFalse(rifiuti.getGestori().isEmpty());
 		Assert.assertFalse(rifiuti.getIstituzioni().isEmpty());
 		Assert.assertFalse(rifiuti.getPuntiRaccolta().isEmpty());
-		Assert.assertFalse(rifiuti.getRaccolta().isEmpty());
+		Assert.assertFalse(rifiuti.getRaccolte().isEmpty());
 		Assert.assertFalse(rifiuti.getRiciclabolario().isEmpty());
-		
+
 		// result = mocker.perform(MockMvcRequestBuilders.post("/publish/" +
 		// APP_ID).accept(MediaType.APPLICATION_JSON));
 		result = mocker.perform(MockMvcRequestBuilders.put("/console/publish/")
@@ -172,8 +172,8 @@ public class GiudicarieTest {
 		appDescriptor = mapper.readValue(
 				res.getResponse().getContentAsString(), App.class);
 		System.out.println(appDescriptor);
-		
-		
+
+
 //		ValidatorFactory validatorFactory = Validation.buildDefaultValidatorFactory();
 //		Validator validator = validatorFactory.getValidator();
 //		GenericApplicationContext appCtx = new GenericApplicationContext();
@@ -187,9 +187,9 @@ public class GiudicarieTest {
 //
 //		for (Colore colore: rifiuti.getColore()) {
 //			BindException errors = new BindException(colore, "target");
-//			bv.validate(colore, errors);	
+//			bv.validate(colore, errors);
 //		}
-		
+
 		Assert.assertEquals((version + 1), (long) appDescriptor.getPublishState().getVersion());
 
 	}

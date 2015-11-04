@@ -25,17 +25,26 @@ import it.smartcommunitylab.riciclo.storage.App;
 import it.smartcommunitylab.riciclo.storage.AppSetup;
 import it.smartcommunitylab.riciclo.storage.RepositoryManager;
 
+import java.util.Map;
+
 import javax.servlet.ServletContext;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.MultiValueMap;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
+import org.springframework.web.servlet.View;
+import org.springframework.web.servlet.view.RedirectView;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -56,25 +65,116 @@ public class ConsoleController {
 	private ImportManager manager;
 
 	@RequestMapping(value = "/")
-	public String root() {
-		return "index";
+	public View root() {
+		return new RedirectView("console");
 	}		
 	
+	@RequestMapping(value = "/upload")
+	public String upload() {
+		return "upload";
+	}
+
 	@RequestMapping(value = "/login")
 	public String login() {
 		return "login";
 	}		
 	
+	@RequestMapping(value = "/console")
+	public String console() {
+		return "console";
+	}
+
+	@RequestMapping(value = "/aree")
+	public String aree() {
+		return "aree";
+	}
+
+	@RequestMapping(value = "/rifiuti")
+	public String rifiuti() {
+		return "rifiuti";
+	}
+
+	@RequestMapping(value = "/crm")
+	public String crm() {
+		return "crm";
+	}
+
+	@RequestMapping(value = "/gestori")
+	public String gestori() {
+		return "gestori";
+	}
+
+	@RequestMapping(value = "/colori")
+	public String colori() {
+		return "colori";
+	}
+
+	@RequestMapping(value = "/istituzioni")
+	public String istituzioni() {
+		return "istituzioni";
+	}
+
+	@RequestMapping(value = "/segnalazioni")
+	public String segnalazioni() {
+		return "segnalazioni";
+	}
+
+	@RequestMapping(value = "/riciclabolario")
+	public String riciclabolario() {
+		return "riciclabolario";
+	}
+
+	@RequestMapping(value = "/puntiraccolta")
+	public String puntiraccolta() {
+		return "puntiraccolta";
+	}
+
+	@RequestMapping(value = "/raccolta")
+	public String raccolta() {
+		return "raccolta";
+	}
+
+	@RequestMapping(value = "/calendariraccolta")
+	public String calendariraccolta() {
+		return "calendariraccolta";
+	}
+
+	@RequestMapping(value = "/tipo-utenza")
+	public String tipoUtenza() {
+		return "tipo-utenza";
+	}
+
+	@RequestMapping(value = "/tipo-profilo")
+	public String tipoProfilo() {
+		return "tipo-profilo";
+	}
+
+	@RequestMapping(value = "/tipo-rifiuto")
+	public String tipoRifiuto() {
+		return "tipo-rifiuto";
+	}
+
+	@RequestMapping(value = "/tipo-raccolta")
+	public String tipoRaccolta() {
+		return "tipo-raccolta";
+	}
+
+	@RequestMapping(value = "/tipo-punto")
+	public String tipoPuntoRaccolta() {
+		return "tipo-punto";
+	}
+
 	@RequestMapping(value = "/console/data")
-	public @ResponseBody App data() {
-		return storage.getAppDescriptor(getAppId());
+	public @ResponseBody App data(HttpServletRequest request,
+			HttpServletResponse response) throws Exception {
+		return storage.getAppDescriptor(getOwnerId());
 	}		
 	
 	@RequestMapping(value = "/console/publish", method=RequestMethod.PUT)
-	public @ResponseBody App publish() {
-		String appId = getAppId();
-		storage.publish(appId);
-		App descr = storage.getAppDescriptor(appId);
+	public @ResponseBody App publish() throws Exception {
+		String ownerId = getOwnerId();
+		storage.publish(ownerId);
+		App descr = storage.getAppDescriptor(ownerId);
 		return descr;
 	}	
 	
@@ -89,20 +189,26 @@ public class ConsoleController {
 			if (ImportConstants.MODEL.equals(key)) fileList.setModel(multiFileMap.getFirst(key));
 		}
 		try {
-			String appId = getAppId();
-			manager.uploadFiles(fileList, storage.getAppDescriptor(appId).getAppInfo());
-			res = new ObjectMapper().writeValueAsString(storage.getAppDescriptor(appId));
+			String ownerId = getOwnerId();
+			manager.uploadFiles(fileList, storage.getAppDescriptor(ownerId).getAppInfo());
+			res = new ObjectMapper().writeValueAsString(storage.getAppDescriptor(ownerId));
 		} catch (ImportError e) {
 			res = new ObjectMapper().writeValueAsString(e);
 		}
 		return res;
 	}
 	
-	private String getAppId() {
+	private String getOwnerId() {
 		AppDetails details = (AppDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		String app = details.getUsername();
 		return app;
-	}	
+	}
 	
+	@ExceptionHandler(Exception.class)
+	@ResponseStatus(value=HttpStatus.INTERNAL_SERVER_ERROR)
+	@ResponseBody
+	public Map<String,String> handleError(HttpServletRequest request, Exception exception) {
+		return Utils.handleError(exception);
+	}
 	
 }

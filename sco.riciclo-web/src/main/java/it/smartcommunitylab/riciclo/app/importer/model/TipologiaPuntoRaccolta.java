@@ -23,7 +23,9 @@ public class TipologiaPuntoRaccolta {
 	@NotEmpty
 	private String nome;
 	private String infoPuntiRaccolta;
-	
+	@NotEmpty
+	private String tipo;
+
 	public String getNome() {
 		return nome;
 	}
@@ -36,9 +38,11 @@ public class TipologiaPuntoRaccolta {
 	public void setInfoPuntiRaccolta(String infoPuntiRaccolta) {
 		this.infoPuntiRaccolta = infoPuntiRaccolta;
 	}
-
-
-	
-	
+	public String getTipo() {
+		return tipo;
+	}
+	public void setTipo(String tipo) {
+		this.tipo = tipo;
+	}
 
 }

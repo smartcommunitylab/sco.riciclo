@@ -19,19 +19,11 @@ package it.smartcommunitylab.riciclo.model;
 
 public class Riciclabolario extends BaseObject {
 
-	private String nome;
-	
+	private String objectId;
+	private String rifiuto;
 	private String area;
 	private String tipologiaUtenza;
 	private String tipologiaRifiuto;
-
-	public String getNome() {
-		return nome;
-	}
-
-	public void setNome(String nome) {
-		this.nome = nome;
-	}
 
 	public String getArea() {
 		return area;
@@ -59,7 +51,23 @@ public class Riciclabolario extends BaseObject {
 	
 	@Override
 	public String toString() {
-		return "Riciclabolario [" + nome + "," + area + "," + tipologiaUtenza + "," + tipologiaRifiuto + "]";
+		return "Riciclabolario [" + rifiuto + "," + area + "," + tipologiaUtenza + "," + tipologiaRifiuto + "]";
+	}
+
+	public String getObjectId() {
+		return objectId;
+	}
+
+	public void setObjectId(String objectId) {
+		this.objectId = objectId;
+	}
+
+	public String getRifiuto() {
+		return rifiuto;
+	}
+
+	public void setRifiuto(String rifiuto) {
+		this.rifiuto = rifiuto;
 	}		
 	
 	

@@ -16,36 +16,25 @@
 
 package it.smartcommunitylab.riciclo.model;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class Tipologia extends BaseObject {
 
-	private String nome;
-	private String descrizione;
+	private String objectId;
+	private Map<String, String> nome = new HashMap<String, String>();;
+	private Map<String, String> descrizione = new HashMap<String, String>();
 	private String icona;
 
 	public Tipologia() {
 	}
 
-	public Tipologia(String nome, String descrizione, String icona) {
+	public Tipologia(String id, String nome, String descrizione, String icona, String lang) {
 		super();
-		this.nome = nome;
-		this.descrizione = descrizione;
+		this.objectId = id;
+		this.nome.put(lang, nome);
+		this.descrizione.put(lang, descrizione);
 		this.icona = icona;
-	}
-
-	public String getNome() {
-		return nome;
-	}
-
-	public void setNome(String nome) {
-		this.nome = nome;
-	}
-
-	public String getDescrizione() {
-		return descrizione;
-	}
-
-	public void setDescrizione(String descrizione) {
-		this.descrizione = descrizione;
 	}
 
 	public String getIcona() {
@@ -78,12 +67,36 @@ public class Tipologia extends BaseObject {
 		if (getClass() != obj.getClass())
 			return false;
 		Tipologia other = (Tipologia) obj;
-		if (nome == null) {
-			if (other.nome != null)
+		if (objectId == null) {
+			if (other.objectId != null)
 				return false;
-		} else if (!nome.equals(other.nome))
+		} else if (!objectId.equals(other.objectId))
 			return false;
 		return true;
+	}
+
+	public String getObjectId() {
+		return objectId;
+	}
+
+	public void setObjectId(String objectId) {
+		this.objectId = objectId;
+	}
+
+	public Map<String, String> getNome() {
+		return nome;
+	}
+
+	public void setNome(Map<String, String> nome) {
+		this.nome = nome;
+	}
+
+	public Map<String, String> getDescrizione() {
+		return descrizione;
+	}
+
+	public void setDescrizione(Map<String, String> descrizione) {
+		this.descrizione = descrizione;
 	}
 
 }

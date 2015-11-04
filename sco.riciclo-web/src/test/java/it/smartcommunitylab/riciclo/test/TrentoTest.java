@@ -21,10 +21,10 @@ import it.smartcommunitylab.riciclo.app.importer.ImportConstants;
 import it.smartcommunitylab.riciclo.app.importer.ImportError;
 import it.smartcommunitylab.riciclo.app.importer.ImportManager;
 import it.smartcommunitylab.riciclo.config.RifiutiConfig;
-import it.smartcommunitylab.riciclo.model.Rifiuti;
+import it.smartcommunitylab.riciclo.model.AppDataRifiuti;
 import it.smartcommunitylab.riciclo.security.AppDetails;
 import it.smartcommunitylab.riciclo.storage.App;
-import it.smartcommunitylab.riciclo.storage.AppInfo;
+import it.smartcommunitylab.riciclo.storage.DataSetInfo;
 import it.smartcommunitylab.riciclo.storage.RepositoryManager;
 
 import java.io.IOException;
@@ -62,48 +62,48 @@ public class TrentoTest {
 	private static final String EXCEL_MODELLO_CONCETTUALE_XLS = "trento/ExcelModelloConcettuale_V1.xls";
 
 	private final static String APP_ID = "TRENTO";
-	
+
 	@Autowired
 	private WebApplicationContext wac;
-	
+
 	@Autowired
-	private RepositoryManager storage;	
+	private RepositoryManager storage;
 
 	private MockMvc mocker;
-	
+
 	@Before
 	public void setup() {
-    }	
-	
+    }
+
 	@Test
 	public void testUpload() throws Exception {
-		AppInfo credentials = new AppInfo();
-		credentials.setAppId(APP_ID);
-		credentials.setPassword(APP_ID);	
+		DataSetInfo credentials = new DataSetInfo();
+		credentials.setOwnerId(APP_ID);
+		credentials.setPassword(APP_ID);
 		credentials.setModelElements(Arrays.asList(ImportConstants.MODEL));
 		AppDetails details = new AppDetails(credentials);
 		details.setApp(credentials);
 		TestingAuthenticationToken auth = new TestingAuthenticationToken(details, null);
 		SecurityContextHolder.getContext().setAuthentication(auth);
-		
+
 		mocker = MockMvcBuilders.webAppContextSetup(wac).build();
 		ObjectMapper mapper = new ObjectMapper();
-		
+
 		ResultActions result;
 		MvcResult res;
-		
+
 		result = mocker.perform(MockMvcRequestBuilders.get("/appDescriptor/" + APP_ID).accept(MediaType.APPLICATION_JSON));
 		res = result.andExpect(MockMvcResultMatchers.status().is(200)).andReturn();
-		App appDescriptor = mapper.readValue(res.getResponse().getContentAsString(), App.class);		
-		
+		App appDescriptor = mapper.readValue(res.getResponse().getContentAsString(), App.class);
+
 		System.out.println(appDescriptor);
-		
-		Long version = appDescriptor.getPublishState().getVersion();		
-		
+
+		Long version = appDescriptor.getPublishState().getVersion();
+
 		ImportManager manager = wac.getBean(ImportManager.class);
-		
+
 		FileList fileList = readFiles();
-		
+
 		ImportError error = null;
 		try {
 			manager.uploadFiles(fileList, credentials);
@@ -111,76 +111,76 @@ public class TrentoTest {
 			e.printStackTrace();
 			error = e;
 		}
-		
+
 		Assert.assertNull(error);
 
 		result = mocker.perform(MockMvcRequestBuilders.get("/rifiuti/" + APP_ID + "/draft").accept(MediaType.APPLICATION_JSON));
 		res = result.andExpect(MockMvcResultMatchers.status().is(200)).andReturn();
-		Rifiuti rifiuti = mapper.readValue(res.getResponse().getContentAsString(), Rifiuti.class);
-		Assert.assertEquals(APP_ID, rifiuti.getAppId());
-		
+		AppDataRifiuti rifiuti = mapper.readValue(res.getResponse().getContentAsString(), AppDataRifiuti.class);
+		Assert.assertEquals(APP_ID, rifiuti.getOwnerId());
+
 		Assert.assertNotNull(rifiuti.getAree());
 		Assert.assertNotNull(rifiuti.getGestori());
 		Assert.assertNotNull(rifiuti.getIstituzioni());
 		Assert.assertNotNull(rifiuti.getPuntiRaccolta());
-		Assert.assertNotNull(rifiuti.getRaccolta());
+		Assert.assertNotNull(rifiuti.getRaccolte());
 		Assert.assertNotNull(rifiuti.getRiciclabolario());
-		
+
 		Assert.assertFalse(rifiuti.getAree().isEmpty());
 		Assert.assertFalse(rifiuti.getGestori().isEmpty());
 		Assert.assertFalse(rifiuti.getIstituzioni().isEmpty());
 		Assert.assertFalse(rifiuti.getPuntiRaccolta().isEmpty());
-		Assert.assertFalse(rifiuti.getRaccolta().isEmpty());
-		Assert.assertFalse(rifiuti.getRiciclabolario().isEmpty());		
+		Assert.assertFalse(rifiuti.getRaccolte().isEmpty());
+		Assert.assertFalse(rifiuti.getRiciclabolario().isEmpty());
 
 		result = mocker.perform(MockMvcRequestBuilders.put("/console/publish/").accept(MediaType.APPLICATION_JSON));
 		res = result.andExpect(MockMvcResultMatchers.status().is(200)).andReturn();
-		
+
 		result = mocker.perform(MockMvcRequestBuilders.get("/rifiuti/" + APP_ID).accept(MediaType.APPLICATION_JSON));
 		res = result.andExpect(MockMvcResultMatchers.status().is(200)).andReturn();
-		rifiuti = mapper.readValue(res.getResponse().getContentAsString(), Rifiuti.class);
-		Assert.assertEquals(APP_ID, rifiuti.getAppId());
-		
+		rifiuti = mapper.readValue(res.getResponse().getContentAsString(), AppDataRifiuti.class);
+		Assert.assertEquals(APP_ID, rifiuti.getOwnerId());
+
 		Assert.assertNotNull(rifiuti.getAree());
 		Assert.assertNotNull(rifiuti.getGestori());
 		Assert.assertNotNull(rifiuti.getIstituzioni());
 		Assert.assertNotNull(rifiuti.getPuntiRaccolta());
-		Assert.assertNotNull(rifiuti.getRaccolta());
+		Assert.assertNotNull(rifiuti.getRaccolte());
 		Assert.assertNotNull(rifiuti.getRiciclabolario());
-		
+
 		Assert.assertFalse(rifiuti.getAree().isEmpty());
 		Assert.assertFalse(rifiuti.getGestori().isEmpty());
 		Assert.assertFalse(rifiuti.getIstituzioni().isEmpty());
 		Assert.assertFalse(rifiuti.getPuntiRaccolta().isEmpty());
-		Assert.assertFalse(rifiuti.getRaccolta().isEmpty());
-		Assert.assertFalse(rifiuti.getRiciclabolario().isEmpty());		
-		
-	
-		
+		Assert.assertFalse(rifiuti.getRaccolte().isEmpty());
+		Assert.assertFalse(rifiuti.getRiciclabolario().isEmpty());
+
+
+
 		result = mocker.perform(MockMvcRequestBuilders.put("/console/publish/").accept(MediaType.APPLICATION_JSON));
 		res = result.andExpect(MockMvcResultMatchers.status().is(200)).andReturn();
-		
+
 		result = mocker.perform(MockMvcRequestBuilders.get("/appDescriptor/" + APP_ID).accept(MediaType.APPLICATION_JSON));
 		res = result.andExpect(MockMvcResultMatchers.status().is(200)).andReturn();
 		appDescriptor = mapper.readValue(res.getResponse().getContentAsString(), App.class);
-		
+
 		System.out.println(appDescriptor);
-		
+
 		Assert.assertEquals((version + 1), (long)appDescriptor.getPublishState().getVersion());
-		
+
 	}
-	
+
 	private FileList readFiles() throws IOException {
 		FileList fileList = new FileList();
 		InputStream xlsIs = Thread.currentThread().getContextClassLoader().getResourceAsStream(EXCEL_MODELLO_CONCETTUALE_XLS);
-		
+
 		MockMultipartFile xlsFile = new MockMultipartFile(EXCEL_MODELLO_CONCETTUALE_XLS, xlsIs);
-		
+
 		fileList.setModel(xlsFile);
-		
+
 		return fileList;
 	}
-	
 
-	
+
+
 }

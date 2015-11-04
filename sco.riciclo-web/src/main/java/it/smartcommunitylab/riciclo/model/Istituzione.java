@@ -16,22 +16,26 @@
 
 package it.smartcommunitylab.riciclo.model;
 
+import java.util.HashMap;
+import java.util.Map;
+
 
 public class Istituzione extends BaseObject {
 
+	private String objectId;
 	private String nome;
-	private String descrizione;
+	private Map<String, String> descrizione = new HashMap<String, String>();
 	private String ufficio;
-	private String indirizzo;
-	private String orarioUfficio;
+	private Map<String, String> indirizzo = new HashMap<String, String>();
+	private Map<String, String> orarioUfficio = new HashMap<String, String>();
 	private String sito;
 	private String pec;
 	private String email;
 	private String telefono;
 	private String fax;
-	private String localizzazione;
-	private String facebook;	
-	
+	private double[] geocoding;
+	private String facebook;
+
 	public String getNome() {
 		return nome;
 	}
@@ -43,27 +47,6 @@ public class Istituzione extends BaseObject {
 	}
 	public void setUfficio(String ufficio) {
 		this.ufficio = ufficio;
-	}
-	public String getIndirizzo() {
-		return indirizzo;
-	}
-	public void setIndirizzo(String indirizzo) {
-		this.indirizzo = indirizzo;
-	}
-	public String getDescrizione() {
-		return descrizione;
-	}
-	public void setDescrizione(String descrizione) {
-		this.descrizione = descrizione;
-	}
-	public String getSito() {
-		return sito;
-	}
-	public String getOrarioUfficio() {
-		return orarioUfficio;
-	}
-	public void setOrarioUfficio(String orarioUfficio) {
-		this.orarioUfficio = orarioUfficio;
 	}
 	public void setSito(String sitoIstituzionale) {
 		this.sito = sitoIstituzionale;
@@ -92,23 +75,50 @@ public class Istituzione extends BaseObject {
 	public void setFax(String fax) {
 		this.fax = fax;
 	}
-	public String getLocalizzazione() {
-		return localizzazione;
-	}
-	public void setLocalizzazione(String localizzazione) {
-		this.localizzazione = localizzazione;
-	}
 	public String getFacebook() {
 		return facebook;
 	}
 	public void setFacebook(String facebook) {
 		this.facebook = facebook;
-	}		
-	
+	}
+
 	@Override
 	public String toString() {
 		return "Istituzione [" + nome + "]";
 	}
-	
+	public String getObjectId() {
+		return objectId;
+	}
+	public void setObjectId(String objectId) {
+		this.objectId = objectId;
+	}
+	public Map<String, String> getDescrizione() {
+		return descrizione;
+	}
+	public void setDescrizione(Map<String, String> descrizione) {
+		this.descrizione = descrizione;
+	}
+	public Map<String, String> getIndirizzo() {
+		return indirizzo;
+	}
+	public void setIndirizzo(Map<String, String> indirizzo) {
+		this.indirizzo = indirizzo;
+	}
+	public Map<String, String> getOrarioUfficio() {
+		return orarioUfficio;
+	}
+	public void setOrarioUfficio(Map<String, String> orarioUfficio) {
+		this.orarioUfficio = orarioUfficio;
+	}
+	public String getSito() {
+		return sito;
+	}
+	public double[] getGeocoding() {
+		return geocoding;
+	}
+	public void setGeocoding(double[] geocoding) {
+		this.geocoding = geocoding;
+	}
+
 
 }

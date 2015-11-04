@@ -19,11 +19,11 @@ consoleApp.run([ '$rootScope', '$q', '$modal', '$location', 'DataService',
 consoleApp.config(['$routeProvider',
   function($routeProvider) {
     $routeProvider.
-      when('/home', {
+      when('/upload', {
         templateUrl: 'templates/main.html',
         controller: 'MainCtrl'
       }).
       otherwise({
-        redirectTo: '/home'
+        redirectTo: '/upload'
       });
   }]);

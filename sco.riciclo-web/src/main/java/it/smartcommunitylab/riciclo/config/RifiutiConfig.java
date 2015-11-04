@@ -56,6 +56,10 @@ public class RifiutiConfig extends WebMvcConfigurerAdapter {
 	@Value("${db.final}")
 	private String finalDB;
 
+	@Autowired
+	@Value("${defaultLang}")
+	private String defaultLang;
+
 	public RifiutiConfig() {
 	}
 
@@ -71,7 +75,7 @@ public class RifiutiConfig extends WebMvcConfigurerAdapter {
 
 	@Bean
 	RepositoryManager getRepositoryManager() throws UnknownHostException, MongoException {
-		return new RepositoryManager(getDraftMongo(), getFinalMongo());
+		return new RepositoryManager(getDraftMongo(), getFinalMongo(), defaultLang);
 	}
 	
 	@Bean NotificationManager getNotificationManager() throws UnknownHostException, MongoException {
@@ -85,7 +89,7 @@ public class RifiutiConfig extends WebMvcConfigurerAdapter {
 
 	@Bean
 	RifiutiConverter getRifiutiConverter() {
-		return new RifiutiConverter();
+		return new RifiutiConverter(defaultLang);
 	}
 	
 	@Bean
@@ -117,6 +121,10 @@ public class RifiutiConfig extends WebMvcConfigurerAdapter {
 				"/resources/lib/");
 		registry.addResourceHandler("/templates/**").addResourceLocations(
 				"/resources/templates/");
+		registry.addResourceHandler("/html/**").addResourceLocations(
+				"/resources/html/");
+		registry.addResourceHandler("/file/**").addResourceLocations(
+				"/resources/file/");
 	}
 
 	@Bean

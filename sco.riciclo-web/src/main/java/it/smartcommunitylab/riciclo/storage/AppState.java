@@ -18,7 +18,7 @@ package it.smartcommunitylab.riciclo.storage;
 
 public class AppState {
 
-	private String appId;
+	private String ownerId;
 	private Long version;
 	private Long timestamp;
 	
@@ -34,15 +34,15 @@ public class AppState {
 	public void setTimestamp(Long timestamp) {
 		this.timestamp = timestamp;
 	}
-	public String getAppId() {
-		return appId;
+	public String getOwnerId() {
+		return ownerId;
 	}
-	public void setAppId(String appId) {
-		this.appId = appId;
+	public void setOwenId(String ownerId) {
+		this.ownerId = ownerId;
 	}
 	@Override
 	public String toString() {
-		return getAppId() + "." + version;
+		return getOwnerId() + "." + version;
 	}
 	
 	

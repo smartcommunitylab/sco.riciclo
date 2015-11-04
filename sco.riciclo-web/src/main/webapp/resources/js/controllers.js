@@ -2,6 +2,7 @@ var consoleControllers = angular.module('consoleControllers', [])
 
 .controller('MainCtrl', ['$scope', '$rootScope', '$location', 'DataService', 
   function ($scope, $rootScope, $location, DataService) {
+		$scope.selectedTab = "menu-upload";
     DataService.getProfile().then(function(p){
     	$scope.profile = p;
     });
@@ -41,4 +42,3 @@ var consoleControllers = angular.module('consoleControllers', [])
     };
   
   }]);
-  

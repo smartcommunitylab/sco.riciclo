@@ -16,36 +16,53 @@
 
 package it.smartcommunitylab.riciclo.model;
 
+import java.util.HashMap;
+import java.util.Map;
+
 
 public class TipologiaProfilo extends BaseObject {
 
-	private String nome;
+	private String objectId;
+	private Map<String, String> nome = new HashMap<String, String>();;
 	private String tipologiaUtenza;
-	private String descrizione;
-	
-	public String getNome() {
-		return nome;
-	}
-	public void setNome(String profilo) {
-		this.nome = profilo;
-	}
-	public String getTipologiaUtenza() {
-		return tipologiaUtenza;
-	}
-	public void setTipologiaUtenza(String tipologiaUtenza) {
-		this.tipologiaUtenza = tipologiaUtenza;
-	}
-	public String getDescrizione() {
-		return descrizione;
-	}
-	public void setDescrizione(String descrizione) {
-		this.descrizione = descrizione;
-	}
-	
+	private Map<String, String> descrizione = new HashMap<String, String>();;
+
 	@Override
 	public String toString() {
 		return "Profilo [" + nome + "," + tipologiaUtenza + "]";
-	}	
-	
+	}
+
+	public Map<String, String> getNome() {
+		return nome;
+	}
+
+	public void setNome(Map<String, String> nome) {
+		this.nome = nome;
+	}
+
+	public String getTipologiaUtenza() {
+		return tipologiaUtenza;
+	}
+
+	public void setTipologiaUtenza(String tipologiaUtenza) {
+		this.tipologiaUtenza = tipologiaUtenza;
+	}
+
+	public Map<String, String> getDescrizione() {
+		return descrizione;
+	}
+
+	public void setDescrizione(Map<String, String> descrizione) {
+		this.descrizione = descrizione;
+	}
+
+	public String getObjectId() {
+		return objectId;
+	}
+
+	public void setObjectId(String objectId) {
+		this.objectId = objectId;
+	}
+
 
 }

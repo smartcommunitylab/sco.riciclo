@@ -16,18 +16,22 @@
 
 package it.smartcommunitylab.riciclo.model;
 
+import java.util.HashMap;
+import java.util.Map;
+
 
 public class Raccolta extends BaseObject {
+	private String objectId;
 
 	private String area;
 	private String tipologiaUtenza;
-	
+
 	private String tipologiaRifiuto;
 	private String tipologiaPuntoRaccolta;
-	
+
 	private String tipologiaRaccolta;
 	private String colore;
-	private String infoRaccolta;
+	private Map<String, String> infoRaccolta = new HashMap<String, String>();
 
 	public String getArea() {
 		return area;
@@ -77,17 +81,25 @@ public class Raccolta extends BaseObject {
 		this.colore = colore;
 	}
 
-	public String getInfoRaccolta() {
-		return infoRaccolta;
-	}
-
-	public void setInfoRaccolta(String infoRaccolta) {
-		this.infoRaccolta = infoRaccolta;
-	}	
-	
 	@Override
 	public String toString() {
 		return "Raccolta [" + area + "," + tipologiaUtenza + "," + tipologiaRifiuto + "," + tipologiaPuntoRaccolta + "," + tipologiaRaccolta + "," + colore + "]";
-	}	
-	
+	}
+
+	public String getObjectId() {
+		return objectId;
+	}
+
+	public void setObjectId(String objectId) {
+		this.objectId = objectId;
+	}
+
+	public Map<String, String> getInfoRaccolta() {
+		return infoRaccolta;
+	}
+
+	public void setInfoRaccolta(Map<String, String> infoRaccolta) {
+		this.infoRaccolta = infoRaccolta;
+	}
+
 }
