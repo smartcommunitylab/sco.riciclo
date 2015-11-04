@@ -1,19 +1,35 @@
 angular.module('rifiuti.services.data', [])
 
-.factory('DataManager', function ($http, $q, Utili) {
-    var ENDPOINT_URL = 'https://tn.smartcommunitylab.it/riciclo';
+.factory('DataManager', function ($http, $q, Utili, $rootScope) {
+    //var ENDPOINT_URL = 'https://tn.smartcommunitylab.it/riciclo';
+    var ENDPOINT_URL = 'http://localhost:8001/riciclo';
     // TODO handle
-    var USE_DRAFT = false;
+    //var USE_DRAFT = true;
 
     var LOCAL_DATA_URL = 'data/data.zip';
     var VERSION_URL = ENDPOINT_URL + '/appDescriptor/' + APP_ID;
 
+    //var LANG = 'IT';
+    //var COMUNI_LIST = ['022003','022034'];
+
+    var completeDataPrefix = APP_ID+"_completeData";
+    var categorieMapPrefix = APP_ID+"_categorieMap";
+    var globalSettingsPrefix = APP_ID+"_globalSettings";
+    var profileDataPrefix = APP_ID+"_profileData";
+    var profilesPrefix = APP_ID+"_profiles";
+    var selectedProfileIdPrefix = APP_ID+"_selectedProfileId";
+    var tutorialPrefix = APP_ID+"_tutorial";
+    var versionPrefix = APP_ID+"_version";
+    var isDevModePrefix = APP_ID+"_isDevMode";
+    var colorCodeMapPrefix = APP_ID+"_colorCodeMap";
 
     var dataURL = LOCAL_DATA_URL;
 
     var completeData = null;
     var profili = null;
     var profileData = null;
+    var categorieMap = null;
+    var colorCodeMap = null;
 
     var errorHandler = function (e) {
         console.log(e);
@@ -32,13 +48,24 @@ angular.module('rifiuti.services.data', [])
                 colorMap[key][r.area] = r.colore;
             });
 
+            var tipologiePuntiRaccolta = {};
+            data.categorie.tipologiaPuntiRaccolta.forEach(function (tpr) {
+                tipologiePuntiRaccolta[tpr.id] = tpr;
+            });
+
             var prMap = {};
             var prCalMap = {};
+            var newPuntiRaccolta = {};
             data.puntiRaccolta.forEach(function (pr) {
                 for (var i = 0; i < pr.utenzaArea.length; i++) {
                     var ua = pr.utenzaArea[i];
                     ua.colore = colorMap[ua.tipologiaUtenza + '--' + pr.tipologiaPuntiRaccolta];
                 }
+
+                pr.tipoPuntoRaccolta = tipologiePuntiRaccolta[pr.tipologiaPuntiRaccolta];
+            });
+            data.raccolta.forEach(function (racc) {
+                racc.tipoPuntoRaccolta = tipologiePuntiRaccolta[racc.tipologiaPuntoRaccolta];
             });
             return data;
         }
@@ -46,7 +73,7 @@ angular.module('rifiuti.services.data', [])
     var updateProfileData = function () {
         profileData = {};
         if (completeData == null) {
-            completeData = JSON.parse(localStorage.completeData);
+            completeData = JSON.parse(localStorage[completeDataPrefix]);
         }
         profileData.aree = completeData.aree;
         profileData.gestori = completeData.gestori;
@@ -56,6 +83,49 @@ angular.module('rifiuti.services.data', [])
         profileData.riciclabolario = completeData.riciclabolario;
         profileData.categorie = completeData.categorie;
         profileData.segnalazione = completeData.segnalazione;
+
+        $rootScope.isDevMode = getIsDevMode();
+
+        colorCodeMap = {};
+        completeData.colore.forEach(function (colorCode) {
+            colorCodeMap[colorCode.nome] = colorCode.codice;
+        });
+
+        localStorage[colorCodeMapPrefix] = JSON.stringify(colorCodeMap);
+
+        categorieMap = {};
+        if(profileData.categorie){
+            var utenzaMap = {};
+            tipoUtenza = profileData.categorie.tipologiaUtenza;
+            tipoUtenza.forEach(function (utenza){
+                utenzaMap[utenza.id] = utenza;
+            })
+            categorieMap['tipologiaUtenza'] = utenzaMap;
+
+            var rifiutoMap = {};
+            tipoRifiuto = profileData.categorie.tipologiaRifiuto;
+            tipoRifiuto.forEach(function (rifiuto){
+                rifiutoMap[rifiuto.id] = rifiuto;
+            })
+            categorieMap['tipologiaRifiuto'] = rifiutoMap;
+
+            var tipoRaccoltaMap = {};
+            tipoRaccolta = profileData.categorie.tipologiaRaccolta;
+            tipoRaccolta.forEach(function (raccolta){
+                tipoRaccoltaMap[raccolta.id] = raccolta;
+            })
+            categorieMap['tipologiaRaccolta'] = tipoRaccoltaMap;
+
+            var puntiRaccoltaMap = {};
+            tipoPuntiRaccolta = profileData.categorie.tipologiaPuntiRaccolta;
+            tipoPuntiRaccolta.forEach(function (punto){
+                puntiRaccoltaMap[punto.id] = punto;
+            })
+            categorieMap['tipologiaPuntiRaccolta'] = puntiRaccoltaMap;
+        }
+
+        localStorage[categorieMapPrefix] = JSON.stringify(categorieMap);
+
         if (profili) {
             var map = {};
             profili.forEach(function (p) {
@@ -105,7 +175,9 @@ angular.module('rifiuti.services.data', [])
                 //        }
             });
         }
-        localStorage.profileData = JSON.stringify(profileData);
+
+
+        localStorage[profileDataPrefix] = JSON.stringify(profileData);
     };
 
     var process = function (url) {
@@ -122,7 +194,7 @@ angular.module('rifiuti.services.data', [])
                 var str = jsons[0].asText();
                 var rifiutiObj = angular.fromJson(str.trim());
                 completeData = preprocess(rifiutiObj);
-                localStorage.completeData = JSON.stringify(completeData);
+                localStorage[completeDataPrefix] = JSON.stringify(completeData);
                 updateProfileData();
                 deferred.resolve(true);
             }
@@ -133,8 +205,8 @@ angular.module('rifiuti.services.data', [])
     var get = function (url) {
         var deferred = $q.defer();
         if (profileData == null) {
-            if (localStorage.profileData) {
-                profileData = JSON.parse(localStorage.profileData);
+            if (localStorage[profileDataPrefix]) {
+                profileData = JSON.parse(localStorage[profileDataPrefix]);
             } else if (dataURL) {
                 process(dataURL).then(function (res) {
                     get(url).then(function (results) {
@@ -195,6 +267,22 @@ angular.module('rifiuti.services.data', [])
             deferred.resolve({
                 data: profileData.segnalazione
             });
+        } else if (url === 'data/db/tipologiaUtenza.json') {
+            deferred.resolve({
+                data: profileData.categorie.tipologiaUtenza
+            });
+        } else if (url === 'data/db/tipologiaRifiuto.json') {
+            deferred.resolve({
+                data: profileData.categorie.tipologiaRifiuto
+            });
+        } else if (url === 'data/db/tipologiaRaccolta.json') {
+            deferred.resolve({
+                data: profileData.categorie.tipologiaRaccolta
+            });
+        } else if (url === 'data/db/categoria/tipologiaPuntiRaccolta.json') {
+            deferred.resolve({
+                data: profileData.categorie.tipologiaPuntiRaccolta
+            });
         } else {
             console.log('USING OLD FILE! ' + url);
             $http.get(url).then(function (results) {
@@ -205,22 +293,186 @@ angular.module('rifiuti.services.data', [])
         return deferred.promise;
     };
 
+    var saveLang = function () {
+        localStorage[globalSettingsPrefix] = JSON.stringify($rootScope.globalSettings);
+
+        //var deferred = $q.defer();
+        process(getDataURL(true));
+
+        localStorage[globalSettingsPrefix] = JSON.stringify($rootScope.globalSettings);
+    };
+
+    var saveDraft = function () {
+        localStorage[globalSettingsPrefix] = JSON.stringify($rootScope.globalSettings);
+
+        //var deferred = $q.defer();
+        process(getDataURL(true));
+
+        localStorage[globalSettingsPrefix] = JSON.stringify($rootScope.globalSettings);
+    };
+
+    var getGlobalSettings = function () {
+        if ($rootScope.globalSettings){
+            return $rootScope.globalSettings;
+        }else{
+            if(localStorage[globalSettingsPrefix]){
+                return JSON.parse(localStorage[globalSettingsPrefix]);
+            }
+
+            return null;
+        }
+    }
+
+    var getProfiles = function () {
+        if (localStorage[profilesPrefix]){
+            return JSON.parse(localStorage[profilesPrefix]);
+        }
+
+        return null;
+    }
+
+    var saveProfiles = function(profiles){
+        localStorage[profilesPrefix] = JSON.stringify(profiles);
+    }
+
+    var getIsDevMode = function () {
+        if ($rootScope.isDevMode==null){
+            if(localStorage[isDevModePrefix]!=null){
+                $rootScope.isDevMode = JSON.parse(localStorage[isDevModePrefix]);
+                return JSON.parse(localStorage[isDevModePrefix]);
+            }
+
+            $rootScope.isDevMode = false;
+        }
+
+        return $rootScope.isDevMode;
+    }
+
+    var getColorById = function(colore){
+      var localColorCodeMap = {};
+      if(!!colorCodeMap){
+        localColorCodeMap = colorCodeMap;
+      }else{
+        if(localStorage[colorCodeMapPrefix]){
+          colorCodeMap = JSON.parse(localStorage[colorCodeMapPrefix]);
+          localColorCodeMap = colorCodeMap;
+        }else{
+            return 'grey';
+        }
+      }
+
+      if(localColorCodeMap[colore]){
+        return localColorCodeMap[colore];
+      }
+
+      if (colore in ICON_COLOR_MAP) return ICON_COLOR_MAP[colore];
+      return 'grey';
+    }
+
+
+    var getIconById = function(tipologia){
+      var tipoPuntoRaccolta = getCategoriaById('tipologiaPuntiRaccolta',tipologia);
+
+      if(!!tipoPuntoRaccolta && tipoPuntoRaccolta['icona']){
+        return tipoPuntoRaccolta['icona'];
+      }
+
+      if (tipologia in ICON_POINT_MAP) return ICON_POINT_MAP[tipologia];
+      return null;
+    }
+
+    var saveIsDevMode = function(isDevMode){
+        $rootScope.isDevMode = isDevMode;
+        localStorage[isDevModePrefix] = JSON.stringify(isDevMode);
+    }
+
+    var getTutorial = function () {
+        if (localStorage[tutorialPrefix]){
+            return localStorage.getItem(tutorialPrefix);
+        }
+
+        return null;
+    }
+
+    var saveTutorial = function (saveData){
+        localStorage.setItem(tutorialPrefix, "false");
+    }
+
+    var getCategoriaById = function (categoria, id) {
+       if (categorieMap == null) {
+            if (localStorage[categorieMapPrefix]) {
+                categorieMap = JSON.parse(localStorage[categorieMapPrefix]);
+            }
+        }
+
+       var mapToInspect = {};
+       var dataUrl = null;
+       if (categoria === 'tipologiaUtenza') {
+           mapToInspect = categorieMap.tipologiaUtenza;
+        } else if (categoria === 'tipologiaRifiuto') {
+           mapToInspect = categorieMap.tipologiaRifiuto;
+        } else if (categoria === 'tipologiaRaccolta') {
+           mapToInspect = categorieMap.tipologiaRaccolta;
+        } else if (categoria === 'tipologiaPuntiRaccolta') {
+           mapToInspect = categorieMap.tipologiaPuntiRaccolta;
+        }
+
+        var returnItem = null;
+        for (key in mapToInspect) {
+            var item = mapToInspect[key];
+            if(item.id == id){
+                returnItem = item;
+            }
+        }
+
+        return returnItem;
+    }
+
+
     var getDataURL = function (remote) {
         if (remote) {
-            if (USE_DRAFT) {
-                return ENDPOINT_URL + '/draft/' + APP_ID + '/zip';
+            if (getDraftEnabled()) {
+                //return ENDPOINT_URL + '/draft/' + APP_ID + '/zip';
+                return ENDPOINT_URL + '/zip/' + APP_ID + '?lang=' + getSelectedLang() + '&draft=true' + getComuniString();
             } else {
-                return ENDPOINT_URL + '/zip/' + APP_ID;
+                //http://localhost:8000/riciclo/zip/TRENTO?lang=it&draft=true&comune[]=022205
+                return ENDPOINT_URL + '/zip/' + APP_ID + '?lang=' + getSelectedLang() + '&draft=false' + getComuniString();
             }
         } else {
             return LOCAL_DATA_URL;
         }
     }
 
+    var getSelectedLang = function(){
+        if($rootScope.globalSettings.selectedLang){
+            return $rootScope.globalSettings.selectedLang;
+        }else{
+            return LANG[0];
+        }
+    }
+
+    var getDraftEnabled = function(){
+        if($rootScope.globalSettings.draftEnabled!=null){
+            return $rootScope.globalSettings.draftEnabled;
+        }else{
+            return USE_DRAFT;
+        }
+    }
+
+    var getComuniString = function(){
+        var comuniString = '';
+
+        for (var i = 0; i < COMUNI_LIST.length; i++) {
+            comuniString += '&comune[]='+COMUNI_LIST[i];
+        }
+
+        return comuniString;
+    }
+
     var doWithVersion = function (deferred, v, remote) {
         var storedVersion = null;
         if (localStorage) {
-            storedVersion = localStorage.version;
+            storedVersion = localStorage[versionPrefix];
         } else {
             storedVersion = v;
         }
@@ -233,7 +485,7 @@ angular.module('rifiuti.services.data', [])
 
         process(getDataURL(remote)).then(function (result) {
             if (result) {
-                localStorage.version = v
+                localStorage[versionPrefix] = v
             };
             deferred.resolve(true);
         });
@@ -249,6 +501,20 @@ angular.module('rifiuti.services.data', [])
 
     return {
         get: get,
+        getCategoriaById: getCategoriaById,
+        saveLang: saveLang,
+        getSelectedLang: getSelectedLang,
+        saveDraft: saveDraft,
+        getDraftEnabled: getDraftEnabled,
+        getGlobalSettings: getGlobalSettings,
+        getProfiles: getProfiles,
+        saveProfiles: saveProfiles,
+        getTutorial: getTutorial,
+        saveTutorial: saveTutorial,
+        getIsDevMode: getIsDevMode,
+        saveIsDevMode: saveIsDevMode,
+        getColorById: getColorById,
+        getIconById: getIconById,
         updateProfiles: function (newProfiles) {
             profili = newProfiles;
             updateProfileData();

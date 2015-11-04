@@ -2,6 +2,9 @@ angular.module('rifiuti.services.profili', [])
 
 .factory('Profili', function (DataManager, $rootScope, Raccolta, Calendar, Utili) {
     var ProfiliFactory = {};
+    var profilesPrefix = APP_ID+"_profiles";
+    var selectedProfileIdPrefix = APP_ID+"_selectedProfileId";
+    var notesPrefix = APP_ID+"_notes";
 
     var toMessage = function (typemap) {
         var lines = [];
@@ -87,7 +90,7 @@ angular.module('rifiuti.services.profili', [])
             buildPaP(p);
             buildSettings(p);
         });
-        localStorage.profiles = JSON.stringify($rootScope.profili);
+        localStorage[profilesPrefix] = JSON.stringify($rootScope.profili);
 
         // update
         ProfiliFactory.read();
@@ -119,14 +122,14 @@ angular.module('rifiuti.services.profili', [])
     };
 
     ProfiliFactory.read = function () {
-        if (localStorage.profiles) {
-            if (localStorage.profiles.charAt(0) == '[') {
-                $rootScope.profili = JSON.parse(localStorage.profiles);
+        if (localStorage[profilesPrefix]) {
+            if (localStorage[profilesPrefix].charAt(0) == '[') {
+                $rootScope.profili = JSON.parse(localStorage[profilesPrefix]);
                 $rootScope.profili.forEach(function (profile) {
                     profile.image = "img/rifiuti_btn_radio_off_holo_dark.png";
                 });
             } else {
-                localStorage.removeItem('profiles');
+                localStorage.removeItem(profilesPrefix);
             }
         }
     };
@@ -140,7 +143,7 @@ angular.module('rifiuti.services.profili', [])
         if (profileIndex != -1) {
             $rootScope.profili[profileIndex].image = "img/rifiuti_btn_radio_on_holo_dark.png";
             $rootScope.selectedProfile = $rootScope.profili[profileIndex];
-            localStorage.selectedProfileId = $rootScope.selectedProfile.id;
+            localStorage[selectedProfileIdPrefix] = $rootScope.selectedProfile.id;
             Raccolta.aree().then(function (myAree) {
                 //console.log('selectedProfile: '+JSON.stringify($rootScope.selectedProfile.name));
             });
@@ -155,20 +158,20 @@ angular.module('rifiuti.services.profili', [])
     };
 
     var readNotes = function () {
-        var notes = localStorage.notes;
-        if (!!notes && notes.charAt(0) == '{') notes = JSON.parse(localStorage.notes);
+        var notes = localStorage[notesPrefix];
+        if (!!notes && notes.charAt(0) == '{') notes = JSON.parse(localStorage[notesPrefix]);
         else notes = {};
         return notes;
     };
 
     var saveNotes = function (notes) {
-        localStorage.notes = JSON.stringify(notes);
+        localStorage[notesPrefix] = JSON.stringify(notes);
     }
 
     var treeWalkUp = function (tree, parentName, key, results) {
         if (!parentName || parentName == "") return;
         tree.forEach(function (node) {
-            if (node['nome'] == parentName && results.indexOf(node[key]) < 0) {
+            if (node['id'] == parentName && results.indexOf(node[key]) < 0) {
                 //var utenzaOK = node.utenza[$rootScope.selectedProfile.utenza.tipologiaUtenza];
                 //if (utenzaOK) {
                 results.push(node[key]);
@@ -184,14 +187,14 @@ angular.module('rifiuti.services.profili', [])
         var myIstituzioni = [];
         var areeList = DataManager.getSync('aree');
         areeList.forEach(function (area, ai, dbAree) {
-            if (area.nome == p.area.nome) {
+            if (area.id == p.area.id) {
                 var utenzaOK = area.utenza[p.utenza.tipologiaUtenza];
                 if (utenzaOK) {
-                    myAree.push(area.nome);
+                    myAree.push(area.id);
                     myIstituzioni.push(area.istituzione);
                     myGestori.push(area.gestore);
                 }
-                treeWalkUp(dbAree, area.parent, 'nome', myAree);
+                treeWalkUp(dbAree, area.parent, 'id', myAree);
                 treeWalkUp(dbAree, area.parent, 'istituzione', myIstituzioni);
                 treeWalkUp(dbAree, area.parent, 'gestore', myGestori);
             }
@@ -206,7 +209,7 @@ angular.module('rifiuti.services.profili', [])
         var data = DataManager.getSync('raccolta');
         var res = [];
         for (var i = 0; i < data.length; i++) {
-            if (!!data[i].tipologiaPuntoRaccolta && Utili.isPaP(data[i].tipologiaPuntoRaccolta) &&
+            if (!!data[i].tipologiaPuntoRaccolta && Utili.isPaP(data[i].tipoPuntoRaccolta) &&
                 data[i].tipologiaUtenza == p.utenza.tipologiaUtenza && p.aree.indexOf(data[i].area) >= 0) {
                 if (res.indexOf(data[i].tipologiaPuntoRaccolta) < 0) res.push(data[i].tipologiaPuntoRaccolta);
             }
@@ -274,7 +277,7 @@ angular.module('rifiuti.services.profili', [])
     };
 
     ProfiliFactory.saveAll = function () {
-        localStorage.profiles = JSON.stringify($rootScope.profili);
+        localStorage[profilesPrefix] = JSON.stringify($rootScope.profili);
         ProfiliFactory.updateNotifications();
     };
 
@@ -286,27 +289,27 @@ angular.module('rifiuti.services.profili', [])
     };
 
     ProfiliFactory.selectedProfileIndex = function () {
-        return indexof(localStorage.selectedProfileId);
+        return indexof(localStorage[selectedProfileIdPrefix]);
     };
 
     /*NOTES*/
     ProfiliFactory.getNotes = function () {
-        return readNotes()[localStorage.selectedProfileId];
+        return readNotes()[localStorage[selectedProfileIdPrefix]];
     };
 
     ProfiliFactory.addNote = function (txt) {
         var allNotes = readNotes();
-        var notes = allNotes[localStorage.selectedProfileId];
+        var notes = allNotes[localStorage[selectedProfileIdPrefix]];
         if (!notes) notes = [];
         notes.push(txt);
-        allNotes[localStorage.selectedProfileId] = notes;
+        allNotes[localStorage[selectedProfileIdPrefix]] = notes;
         saveNotes(allNotes);
         return notes;
     };
 
     ProfiliFactory.updateNote = function (idx, txt) {
         var allNotes = readNotes();
-        var notes = allNotes[localStorage.selectedProfileId];
+        var notes = allNotes[localStorage[selectedProfileIdPrefix]];
         if (!notes && !!notes[idx]) {
             return null
         };
@@ -317,14 +320,14 @@ angular.module('rifiuti.services.profili', [])
 
     ProfiliFactory.deleteNotes = function (idx) {
         var allNotes = readNotes();
-        var notes = allNotes[localStorage.selectedProfileId];
+        var notes = allNotes[localStorage[selectedProfileIdPrefix]];
         var newNotes = [];
         for (var i = 0; i < notes.length; i++) {
             if (idx.indexOf(i) < 0) {
                 newNotes.push(notes[i])
             };
         }
-        allNotes[localStorage.selectedProfileId] = newNotes;
+        allNotes[localStorage[selectedProfileIdPrefix]] = newNotes;
         saveNotes(allNotes);
         return newNotes;
     };

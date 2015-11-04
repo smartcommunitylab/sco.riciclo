@@ -83,8 +83,11 @@ angular.module('rifiuti.services.rifiuti', [])
 
               if ($rootScope.selectedProfile.aree.indexOf(regola.area)!=-1 &&
                   regola.tipologiaUtenza==$rootScope.selectedProfile.utenza.tipologiaUtenza) {
-                var icona = Utili.iconFromRegola(regola);
+                var iconaById = DataManager.getIconById(regola.tipologiaPuntoRaccolta);
+                var icona = Utili.icon(iconaById);
                 if (icona) regola['icon'] = icona;
+                var tipoRaccolta = DataManager.getCategoriaById('tipologiaRaccolta', regola.tipologiaRaccolta);
+                regola['tipoRaccolta'] = tipoRaccolta;
                 myRaccolta.push(regola);
               }
             });
@@ -178,7 +181,7 @@ angular.module('rifiuti.services.rifiuti', [])
         var filtered = [];
         for (var i = 0; i < data.length; i++) {
           if (profilo.aree.indexOf(data[i].area)>=0 &&
-              Utili.isPaP(data[i].tipologiaPuntiRaccolta) &&
+              Utili.isPaP(data[i].tipoPuntoRaccolta) &&
               (!profilo.settings.papTypes || profilo.settings.papTypes[data[i].tipologiaPuntiRaccolta]))
           {
             filtered.push({
@@ -220,21 +223,28 @@ angular.module('rifiuti.services.rifiuti', [])
       DataManager.get('data/db/raccolta.json').then(function (results) {
         var data=results.data;
         var res = {};
-        for (var i =0; i < data.length; i++) {
-          if (data[i].tipologiaUtenza == utenza && aree.indexOf(data[i].area)>=0 && !!data[i].tipologiaRaccolta) {
-            var list = res[data[i].tipologiaRaccolta];
-            if (!list) {
-              list = {};
-              res[data[i].tipologiaRaccolta] = list;
+        //for (var i =0; i < data.length; i++) {
+        data.forEach(function (item) {
+
+            if (item.tipologiaUtenza == utenza && aree.indexOf(item.area)>=0 && !!item.tipologiaRaccolta) {
+                var tipoRaccolta = DataManager.getCategoriaById('tipologiaRaccolta', item.tipologiaRaccolta)
+
+                var list = res[tipoRaccolta.id];
+                if (!list) {
+                  list = {};
+                  res[tipoRaccolta.id] = list;
+                  list['nome'] = tipoRaccolta.nome;
+                }
+                list[item.tipologiaPuntoRaccolta+'_'+item.colore] = {
+                  tipologiaPuntoRaccolta: item.tipologiaPuntoRaccolta,
+                  colore: item.colore
+                };
             }
-            list[data[i].tipologiaPuntoRaccolta+'_'+data[i].colore] = {
-              tipologiaPuntoRaccolta: data[i].tipologiaPuntoRaccolta,
-              colore: data[i].colore
-            };
-          }
-        }
-        deferred.resolve(res);  
+        })
+
+        deferred.resolve(res);
       });
+
       return deferred.promise;    
     },
     segnalazioni: function(aree) {
@@ -266,10 +276,20 @@ angular.module('rifiuti.services.rifiuti', [])
         return imgs;
       });
     },
+    tipiDiRifiuti: function() {
+      return DataManager.get('data/db/tipologiaRifiuto.json').then(function (results) {
+        var tipiRifiutiArr={};
+        results.data.forEach(function(tipoRifiuto,ii,dbRifiuto){
+          tipiRifiutiArr[tipoRifiuto.id]=tipoRifiuto;
+        });
+        $rootScope.tipiDiRifiuti=tipiRifiutiArr;
+        return tipiRifiutiArr;
+      });
+    },
     sortRaccolta: function(raccolta) {
             raccolta.sort(function(a,b){
-            var aPaP = Utili.isPaP(a.tipologiaPuntoRaccolta);
-            var bPaP = Utili.isPaP(b.tipologiaPuntoRaccolta);
+            var aPaP = Utili.isPaP(a.tipoPuntoRaccolta);
+            var bPaP = Utili.isPaP(b.tipoPuntoRaccolta);
             if (aPaP && !bPaP) return -1;
             if (bPaP && !aPaP) return 1;
             return a.tipologiaPuntoRaccolta.localeCompare(b.tipologiaPuntoRaccolta);

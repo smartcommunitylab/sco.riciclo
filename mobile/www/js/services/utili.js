@@ -52,7 +52,7 @@ angular.module('rifiuti.services.utili', [])
   var calToDates = function(da, a, il, ecc) {
     if (!il) return [];
 
-    var arr = il.split(' ');
+    var arr = il.trim().split(' ');
     var dates = [];  
     var eccDates = calToDates(da, a, ecc, null);
     for (var i = 0; i < arr.length; i++) {
@@ -119,8 +119,8 @@ angular.module('rifiuti.services.utili', [])
       cal.dates = calToDates(min,max, cal.il, cal.eccezione);
     }, 
 
-    getRGBColor: function(colore) {
-        var c = rgbColor(colore);
+    getRGBColor: function(rgbColor) {
+        var c = rgbColor;
         if (c == 'white') {
             return 'grey';
         }
@@ -133,15 +133,15 @@ angular.module('rifiuti.services.utili', [])
 //      var icona = iconType(tipologia);
 //      return (!!icona?'img/ic_'+icona+'_'+this.getRGBColor(colore)+'.png':null);
 //    },
-    icon: function(tipologia,colore) {
-      var icona = iconType(tipologia);
-      if (rgbColor(colore)=='white') {
+    icon: function(icona,colorById) {
+      //var icona = iconType(tipologia);
+      if (colorById=='white') {
         return icona + '-outline';
       }
       return icona;
     },
-    poiIcon: function(tipologia, colore) {
-      var icona = iconType(tipologia);
+    poiIcon: function(icona, colore) {
+      //var icona = iconType(tipologia);
       return (!!icona?'img/ic_poi_'+icona+'.png':null);
     },
     belongsTo: function(pr, area, profile) {
@@ -149,9 +149,10 @@ angular.module('rifiuti.services.utili', [])
           //&& (pr.tipologiaPuntiRaccolta=='CRM' || pr.tipologiaPuntiRaccolta=='CRZ' || !pr.zona || profile.comuni.indexOf(pr.zona)!=-1)
         ;
     },
-    isPaP: function(tipologia) {
-      return !!tipologia && (tipologia.toLowerCase().indexOf('porta a porta') == 0 || !!CUSTOM_PAP && CUSTOM_PAP.indexOf(tipologia) >= 0);
+    isPaP: function(tipoPuntoRaccolta) {
+      return !!tipoPuntoRaccolta && !!tipoPuntoRaccolta.type && (tipoPuntoRaccolta.type == 'PP' || !!CUSTOM_PAP && CUSTOM_PAP.indexOf(tipoPuntoRaccolta.type) >= 0);
     },
+      //return !!tipologia && (tipologia.toLowerCase().indexOf('porta a porta') == 0 || !!CUSTOM_PAP && CUSTOM_PAP.indexOf(tipologia) >= 0);
 	fullDateFormat: function(d,transf) {
 		return transf(giorniShort[d.getDay()])+ ' ' +d.getDate()+' '+transf(mesi[d.getMonth()])+' '+d.getFullYear();
 	},

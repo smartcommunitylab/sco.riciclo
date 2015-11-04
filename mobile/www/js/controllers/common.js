@@ -22,8 +22,9 @@ angular.module('rifiuti.controllers.common', ['ionic'])
         return Raccolta.hasSegnalazioni();
     };
 
+    var profiles = DataManager.getProfiles();
     //localStorage.removeItem('profiles');
-    if (!localStorage.profiles || localStorage.profiles.length == 0) {
+    if (!profiles || profiles.length == 0) {
         $rootScope.promptedToProfile = true;
         $location.path("app/aggProfilo");
         DataManager.checkVersion($rootScope.profili).then(function () {
@@ -39,7 +40,35 @@ angular.module('rifiuti.controllers.common', ['ionic'])
     }
 })
 
-.controller('InfoCtrl', function ($scope) {})
+.controller('InfoCtrl', function ($scope, $rootScope, DataManager, $ionicPopup) {
+
+    $scope.enableDevModCounter = 0;
+    var devModeLabel = 'disabilitata';
+    $scope.enableIsDevMod = function () {
+        $scope.enableDevModCounter++;
+        if($scope.enableDevModCounter>=5){
+            DataManager.saveIsDevMode(!$rootScope.isDevMode);
+
+            if($rootScope.isDevMode){
+                devModeLabel = 'abilitata';
+            }else{
+                devModeLabel = 'disabilitata';
+            }
+
+            var popup = $ionicPopup.show({
+                        title: '<b class="popup-title">Modalità Dev<b/>',
+                        template: 'La modalità dev è '+devModeLabel,
+                        buttons: [
+                            {
+                                text: 'OK'
+                            }
+                        ]
+            });
+
+            $scope.enableDevModCounter = 0;
+        }
+    }
+})
 
 .controller('SegnalaCtrl', function ($scope, $rootScope, $cordovaCamera, Raccolta) {
 
@@ -127,21 +156,74 @@ angular.module('rifiuti.controllers.common', ['ionic'])
 
 })
 
-.controller('SettingsCtrl', function ($scope, $rootScope, $ionicScrollDelegate, Raccolta, Profili) {
+.controller('SettingsCtrl', function ($scope, $rootScope, $ionicScrollDelegate, Raccolta, Profili, DataManager) {
     /*$scope.mainScrollResize = function () {
         $ionicScrollDelegate.$getByHandle('mainScroll').resize();
     }*/
 
     $scope.papTypes = $rootScope.selectedProfile.PaP;
     $scope.settings = $rootScope.selectedProfile.settings;
+    $scope.globalSettings = $rootScope.globalSettings;
+    //$scope.supportedLangTypes = $rootScope.selectedProfile.settings.supportedLangTypes;
+    //$scope.settings.selectedLang = $rootScope.selectedProfile.settings.selectedLang;
+    $scope.supportedLangTypes = $rootScope.globalSettings.supportedLangTypes;
+    $scope.globalSettings.selectedLang = $rootScope.globalSettings.selectedLang;
+    $scope.globalSettings.isMoreThanOneLang = $rootScope.globalSettings.isMoreThanOneLang;
+    $scope.isEnabledDraftToggle = false;
+    $scope.globalSettings.draftEnabled = $rootScope.globalSettings.draftEnabled;
+
+    if(!$scope.supportedLangTypes){
+       $scope.supportedLangTypes = [];
+
+       for (var i = 0; i < LANG.length; i++) {
+           $scope.supportedLangTypes[i] = LANG[i] ;
+        }
+    };
+
+
+    if(!$scope.globalSettings.selectedLang){
+        $scope.globalSettings.selectedLang = {};
+
+        if ($scope.supportedLangTypes.length > 1){
+          $scope.globalSettings.isMoreThanOneLang = true;
+          $rootScope.globalSettings.isMoreThanOneLang = true;
+          var foundLang = false;
+          for (var i = 0; i < $scope.supportedLangTypes.length; i++) {
+            if ($rootScope.globalSettings.phoneLanguage == $scope.supportedLangTypes[i]){
+                $scope.globalSettings.selectedLang = $scope.supportedLangTypes[i];
+                foundLang = true;
+                break;
+            }
+          }
+          if(!foundLang){
+            $scope.globalSettings.selectedLang = LANG[0];
+          }
+        }else{
+            $scope.globalSettings.selectedLang = LANG[0];
+            $scope.globalSettings.isMoreThanOneLang = false;
+            $rootScope.globalSettings.isMoreThanOneLang = false;
+        }
+    }
+
+    if($scope.globalSettings.draftEnabled === undefined){
+        $scope.globalSettings.draftEnabled = USE_DRAFT;
+    }
 
     $scope.timepickerSlots = {
         format: 24,
         step: 5
     };
 
-    $scope.saveSettings = function () {
+    $scope.saveSettings = function (pap) {
         Profili.saveAll();
+    };
+
+    $scope.saveLang = function () {
+        DataManager.saveLang();
+    };
+
+    $scope.saveDraft = function () {
+        DataManager.saveDraft();
     };
 
     $rootScope.$watch('selectedProfile', function (a, b) {
@@ -150,6 +232,36 @@ angular.module('rifiuti.controllers.common', ['ionic'])
             $scope.settings = a.settings;
         }
     });
+
+    //var enableDraftCheat = function (pap){
+    //    if((pap == 'Porta a porta vetro') &&
+    //       (($scope.settings.papTypes['Porta a porta vetro'] == false && (!$scope.counter || $scope.counter == 2)) ||
+    //       ($scope.settings.papTypes['Porta a porta vetro'] == true  && $scope.counter==1))){
+    //        if(!$scope.draftCheat){
+    //            $scope.draftCheat = {};
+    //        }
+    //        if(!$scope.draftCheat.firstTimestamp){
+    //            $scope.draftCheat.firstTimestamp = new Date();
+    //            $scope.counter = 1;
+    //        }else{
+    //            if(!$scope.draftCheat.secondTimestamp){
+    //                $scope.draftCheat.secondTimestamp = new Date();
+    //                $scope.counter = 2;
+    //            }else{
+    //                if(!$scope.draftCheat.thirdTimestamp){
+    //                    $scope.draftCheat.thirdTimestamp = new Date();
+    //                    var diff = $scope.draftCheat.thirdTimestamp - $scope.draftCheat.firstTimestamp;
+    //                    if((diff)<50000){
+    //                        $scope.isEnabledDraftToggle = true;
+    //                    }
+    //                }
+    //            }
+    //        }
+    //    }else{
+    //        $scope.counter = null;
+    //        $scope.draftCheat = null;
+    //    }
+    //}
 })
 
 .controller('ContattiCtrl', function ($scope, $ionicScrollDelegate, Raccolta) {

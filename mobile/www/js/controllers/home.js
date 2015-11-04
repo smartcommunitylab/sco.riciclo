@@ -45,7 +45,7 @@ angular.module('rifiuti.controllers.home', [])
     };
 
     $rootScope.showTutorial = false;
-    var stringTutorial = localStorage.getItem("tutorial");
+    var stringTutorial = DataManager.getTutorial();
 
     if (stringTutorial == "false" || !!$rootScope.promptedToProfile) {
         $rootScope.showTutorial = false;
@@ -54,7 +54,7 @@ angular.module('rifiuti.controllers.home', [])
     }
 
     $scope.stopTutorial = function () {
-        localStorage.setItem("tutorial", "false");
+        DataManager.saveTutorial("false");
     };
 
     $scope.show = function () {
@@ -248,7 +248,7 @@ angular.module('rifiuti.controllers.home', [])
     };
 })
 
-.controller('calendarioCtrl', function ($scope, $rootScope, $ionicScrollDelegate, $location, Calendar, Utili, $timeout, $filter, $document) {
+.controller('calendarioCtrl', function ($scope, $rootScope, $ionicScrollDelegate, $location, Calendar, Utili, $timeout, $filter, $document, DataManager) {
     $scope.calendarView = false;
 
 	$location.hash = function(val) {
@@ -409,11 +409,16 @@ angular.module('rifiuti.controllers.home', [])
     };
 
     $scope.getColor = function (colorString) {
-        return Utili.getRGBColor(colorString);
+        var colorById = DataManager.getColorById(colorString);
+        return Utili.getRGBColor(colorById);
+        //return Utili.getRGBColor(colorString);
     };
 
     $scope.getIcon = function (item) {
-        return Utili.icon(item.tipologiaPuntiRaccolta, item.colore);
+        var colorById = DataManager.getColorById(item.colore);
+        //var tipoPuntoRaccolta = DataManager.getCategoriaById('tipologiaPuntiRaccolta',item.tipologiaPuntiRaccolta);
+        var icona = DataManager.getIconById(item.tipologiaPuntiRaccolta);
+        return Utili.icon(icona, colorById);
     }
 
     $scope.goToToday = function () {

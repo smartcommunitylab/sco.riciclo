@@ -2,7 +2,7 @@
     <ion-nav-title>
         <div class="nav-title">
             <div class="nav-title-main">{{"Info raccolta"|translate}}</div>
-            <div class="nav-title-sub">{{pdr.tipologiaPuntiRaccolta}} {{pdr.zona}}</div>
+            <div class="nav-title-sub">{{pdr.tipoPuntoRaccolta.nome}} {{pdr.zona}}</div>
         </div>
     </ion-nav-title>
 
@@ -14,7 +14,7 @@
         </div>
         <div class="row row-center dettagli">
             <div class="col col-67">
-                <div class="row pdr-dettaglio">{{pdr.tipologiaPuntiRaccolta}}</div>
+                <div class="row pdr-dettaglio">{{pdr.tipoPuntoRaccolta.nome}}</div>
                 <!--per ora niente...-->
             </div>
         </div>
@@ -47,8 +47,8 @@
             <h1 class="title">{{"TIPOLOGIE DI RACCOLTA"|translate}}</h1>
         </div>
         <ion-list class="tipologie">
-            <ion-item ng-repeat="rifiuto in rifiuti" href="#/app/raccolta/{{rifiuto}}">
-                {{rifiuto|translate}}
+            <ion-item ng-repeat="rifiuto in rifiuti" href="#/app/raccolta/{{rifiuto.id}}">
+                {{rifiuto.nome|translate}}
             </ion-item>
         </ion-list>
     </ion-content>

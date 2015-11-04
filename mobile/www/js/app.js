@@ -134,7 +134,7 @@ angular.module('rifiuti', [
     $ionicConfigProvider.backButton.text('');
 })
 
-.run(function ($ionicPlatform, $rootScope, $ionicNavBarDelegate, $ionicHistory, $translate, $ionicPopup, $filter, $state, Profili, Utili, GeoLocate, $cordovaSplashscreen, $ionicLoading, $ionicConfig) {
+.run(function ($ionicPlatform, $rootScope, $ionicNavBarDelegate, $ionicHistory, $translate, $ionicPopup, $filter, $state, Profili, Utili, GeoLocate, $cordovaSplashscreen, $ionicLoading, $ionicConfig, DataManager) {
     $rootScope.version = VERSION;
 
     $rootScope.isWebView = ionic.Platform.isWebView();
@@ -160,7 +160,8 @@ angular.module('rifiuti', [
    };
 
     $rootScope.color = function(item) {
-        return Utili.getRGBColor(item.colore);
+        var colorById = DataManager.getColorById(item.colore);
+        return Utili.getRGBColor(colorById);
     }
 
     $rootScope.addr2id = function(addr) {
@@ -261,6 +262,15 @@ angular.module('rifiuti', [
         $rootScope.platform = ionic.Platform;
         $rootScope.backButtonStyle = $ionicConfig.backButton.icon();
 
+        if(DataManager.getGlobalSettings()){
+            $rootScope.globalSettings = DataManager.getGlobalSettings();
+        }else{
+            $rootScope.globalSettings = {};
+        }
+
+        $rootScope.globalSettings.phoneLanguage = navigator.language;
+        //$rootScope.supportedLangTypes = LANG;
+
         // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
         // for form inputs)
         if (window.cordova && window.cordova.plugins.Keyboard) {
@@ -281,7 +291,8 @@ angular.module('rifiuti', [
             }, null);
         }
 
-        if (localStorage.profiles && localStorage.profiles.length > 0) {
+        var profiles = DataManager.getProfiles();
+        if (profiles && profiles.length > 0) {
             Profili.updateNotifications();
         }
 
