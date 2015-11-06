@@ -1,8 +1,6 @@
 angular.module('rifiuti.services.data', [])
 
-.factory('DataManager', function ($http, $q, Utili, $rootScope) {
-    //var ENDPOINT_URL = 'https://tn.smartcommunitylab.it/riciclo';
-    var ENDPOINT_URL = 'http://localhost:8001/riciclo';
+.factory('DataManager', function ($http, $q, Utili, $rootScope, LoaderService, ConnectionErrorService) {
     // TODO handle
     //var USE_DRAFT = true;
 
@@ -184,6 +182,8 @@ angular.module('rifiuti.services.data', [])
         var deferred = $q.defer();
         JSZipUtils.getBinaryContent(url, function (err, data) {
             if (err) {
+                $rootScope.serverError = true;
+                ConnectionErrorService.show();
                 deferred.reject(false); // or handle err
             }
             var zip = new JSZip(data);
@@ -198,6 +198,8 @@ angular.module('rifiuti.services.data', [])
                 updateProfileData();
                 deferred.resolve(true);
             }
+
+            LoaderService.hide();
         });
         return deferred.promise;
     };
@@ -294,22 +296,47 @@ angular.module('rifiuti.services.data', [])
     };
 
     var saveLang = function () {
-        localStorage[globalSettingsPrefix] = JSON.stringify($rootScope.globalSettings);
+        var deferred = $q.defer();
 
-        //var deferred = $q.defer();
-        process(getDataURL(true));
+        process(getDataURL(true)).then(function (result) {
+            if(result){
+                localStorage[globalSettingsPrefix] = JSON.stringify($rootScope.globalSettings);
+            }
 
-        localStorage[globalSettingsPrefix] = JSON.stringify($rootScope.globalSettings);
+            deferred.resolve(result);
+        },
+        function (result) {
+            deferred.resolve(result);
+        });
+
+        return deferred.promise;
     };
 
     var saveDraft = function () {
-        localStorage[globalSettingsPrefix] = JSON.stringify($rootScope.globalSettings);
+        var deferred = $q.defer();
 
-        //var deferred = $q.defer();
-        process(getDataURL(true));
+        process(getDataURL(true)).then(function (result) {
+            if(result){
+                localStorage[globalSettingsPrefix] = JSON.stringify($rootScope.globalSettings);
+            }
 
-        localStorage[globalSettingsPrefix] = JSON.stringify($rootScope.globalSettings);
+            deferred.resolve(result);
+        },
+        function (result) {
+            deferred.resolve(result);
+        });
+
+        return deferred.promise;
     };
+
+    var saveGlobalSettings = function () {
+        if ($rootScope.globalSettings){
+            localStorage[globalSettingsPrefix] = JSON.stringify($rootScope.globalSettings);
+            return true
+        }
+
+        return false;
+    }
 
     var getGlobalSettings = function () {
         if ($rootScope.globalSettings){
@@ -507,6 +534,7 @@ angular.module('rifiuti.services.data', [])
         saveDraft: saveDraft,
         getDraftEnabled: getDraftEnabled,
         getGlobalSettings: getGlobalSettings,
+        saveGlobalSettings: saveGlobalSettings,
         getProfiles: getProfiles,
         saveProfiles: saveProfiles,
         getTutorial: getTutorial,

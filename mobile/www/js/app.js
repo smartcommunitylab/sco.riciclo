@@ -264,12 +264,36 @@ angular.module('rifiuti', [
 
         if(DataManager.getGlobalSettings()){
             $rootScope.globalSettings = DataManager.getGlobalSettings();
+            $rootScope.globalSettings.phoneLanguage = navigator.language;
         }else{
             $rootScope.globalSettings = {};
+
+            $rootScope.globalSettings.selectedLang = {};
+            $rootScope.globalSettings.phoneLanguage = navigator.language;
+
+            if (LANG.length > 1){
+                $rootScope.globalSettings.isMoreThanOneLang = true;
+
+                var foundLang = false;
+                for (var i = 0; i < LANG.length; i++) {
+                    if ($rootScope.globalSettings.phoneLanguage == LANG[i]){
+                        $rootScope.globalSettings.selectedLang = LANG[i];
+                        foundLang = true;
+                        break;
+                    }
+                }
+                if(!foundLang){
+                    $rootScope.globalSettings.selectedLang = LANG[0];
+                }
+            }else{
+                $rootScope.globalSettings.selectedLang = LANG[0];
+                $scope.globalSettings.isMoreThanOneLang = false;
+            }
+
+            DataManager.saveGlobalSettings();
         }
 
-        $rootScope.globalSettings.phoneLanguage = navigator.language;
-        //$rootScope.supportedLangTypes = LANG;
+        $translate.use($rootScope.globalSettings.selectedLang);
 
         // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
         // for form inputs)
@@ -283,13 +307,18 @@ angular.module('rifiuti', [
 
         if (typeof navigator.globalization !== "undefined") {
             navigator.globalization.getPreferredLanguage(function (language) {
-                $translate.use((language.value).split("-")[0]).then(function (data) {
-                    console.log("SUCCESS -> " + data);
-                }, function (error) {
-                    console.log("ERROR -> " + error);
-                });
+                if(!$rootScope.globalSettings.getSelectedLang){
+                    $translate.use((language.value).split("-")[0]).then(function (data) {
+                        console.log("SUCCESS -> " + data);
+                    }, function (error) {
+                        console.log("ERROR -> " + error);
+                    });
+                }else{
+                    $translate.use($rootScope.globalSettings.getSelectedLang);
+                }
             }, null);
         }
+
 
         var profiles = DataManager.getProfiles();
         if (profiles && profiles.length > 0) {
@@ -367,6 +396,9 @@ angular.module('rifiuti', [
     var lang = navigator.language.split("-");
     var current_lang = (lang[0]);
     //alert( "current_lang: " + current_lang );
+
+    $translateProvider.translations("en", {
+        hello_message: "hallo"});
 
     $translateProvider.translations("it", {
         hello_message: "ciao",
