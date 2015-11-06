@@ -9,6 +9,51 @@ angular.module('rifiuti.services.utili', [])
     };
 })
 
+.factory('ConnectionErrorService', function($ionicPopup) {
+  return {
+    show : function() {
+        var popup = $ionicPopup.show({
+            title: '<b class="popup-title">Modalità Dev<b/>',
+            template: 'La connessione con il server non è disponibile',
+            buttons: [
+                {
+                    text: 'OK'
+                }
+            ]
+        });
+     }
+   }
+})
+
+.factory('LoaderService', function($rootScope, $ionicLoading) {
+  return {
+        show : function() {
+
+            $rootScope.loading = $ionicLoading.show({
+
+              // The text to display in the loading indicator
+              content: '<i class="icon ion-looping"></i> Loading',
+
+              // The animation to use
+              animation: 'fade-in',
+
+              // Will a dark overlay or backdrop cover the entire view
+              showBackdrop: true,
+
+              // The maximum width of the loading indicator
+              // Text will be wrapped if longer than maxWidth
+              maxWidth: 200,
+
+              // The delay in showing the indicator
+              showDelay: 10
+            });
+        },
+
+        hide : function(){
+            $rootScope.loading.hide();
+        }
+    }
+})
 
 .factory('Utili', function () {
   var mesi = ["Gennaio", "Febbraio", "Marzo", "Aprile", "Maggio", "Giugno", "Luglio", "Agosto", "Settembre", "Ottobre", "Novembre", "Dicembre"];
