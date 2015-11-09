@@ -148,8 +148,8 @@ angular.module('rifiuti', [
 
     $rootScope.showAlert = function(link) {
         var alertPopup = $ionicPopup.alert({
-            title: 'Attenzione!',
-            template: 'Non disponibile nella versione Web',
+            title: $filter('translate')('warning'),
+            template: $filter('translate')('web_version_availability'),
             buttons: [
             {
                 text: 'OK',
@@ -394,80 +394,12 @@ angular.module('rifiuti', [
 .config(function ($stateProvider, $urlRouterProvider, $translateProvider) {
 
     var lang = navigator.language.split("-");
-    var current_lang = (lang[0]);
+    var current_lang = ("en");
     //alert( "current_lang: " + current_lang );
 
-    $translateProvider.translations("en", {
-        hello_message: "hallo"});
+    $translateProvider.translations("en", ENGLISH_VERSION);
 
-    $translateProvider.translations("it", {
-        hello_message: "ciao",
-        goodbye_message: "arrivederci",
-        exitapp_template: "Sei sicuro di uscire dall'app?",
-        what_remember: "Cosa vuoi ricordare?",
-        save: "Salva",
-        cancel: "Annulla",
-        set: 'Imposta',
-        exitapp_ok: "OK",
-        LUN: "LUN",
-        MAR: "MAR",
-        MER: "MER",
-        GIO: "GIO",
-        VEN: "VEN",
-        SAB: "SAB",
-        DOM: "DOM",
-        lun: "lunedì",
-        mar: "martedì",
-        mer: "mercoledì",
-        gio: "giovedì",
-        ven: "venerdì",
-        sab: "sabato",
-        dom: "domenica",
-        Gennaio: "gennaio",
-        Febbraio: "febbraio",
-        Marzo: "marzo",
-        Aprile: "aprile",
-        Maggio: "maggio",
-        Giugno: "giugno",
-        Luglio: "luglio",
-        Agosto: "agosto",
-        Settembre: "settembre",
-        Ottobre: "ottobre",
-        Novembre: "novembre",
-        Dicembre: "dicembre",
-        Tocca: "Tocca + per aggiungere una nota",
-        empty_elem: "Nessun elemento da visualizzare",
-        'ad esempio': "Ad esempio:",
-        Invia: "Invia una email per segnalare un problema direttamente all'ente che si occupa della gestione dei rifiuti. Puoi allegare una foto e le coordinate GPS della tua posizione.",
-        Progetto: '"' + APP_NAME + '"',
-        Progetto_CREDITS: APP_NAME_CREDITS,
-        Progetto_DESC: 'Guida alla raccolta differenziata nel tuo Comune',
-        Progetto_di: 'Realizzato da:',
-        Collaborazione: "In collaborazione con:",
-        Eventuali: "Per informazioni:",
-        TutorialUno: "Questo tutorial ti illustrerà il funzionamento della app. Per sapere dove buttare uno specifico rifiuto, scrivine il nome qui e premi sulla lente d'ingrandimento.",
-        TutorialDue: "Scopri quali rifiuti appartengono ad una determinata categoria e scopri dove devono essere conferiti",
-        TutorialTre: "Aggiungi delle note personali o dei promemoria legati alla gestione dei rifiuti (e.g. pagamento della bolletta, oggetti da portare al CRM, etc)",
-        TutorialNews: "Tieniti informato delle novità della raccolta nel tuo comune",
-        TutorialQuattro: "Tieni sotto controllo le scadenze della raccolta porta a porta e aggiungi delle note personali.",
-        TutorialCinque: "Premi qui per aprire il menù laterale e scoprire ulteriori funzionalità",
-        TTUno: "Benvenuto!",
-        TTDue: "Tipologie di rifiuto",
-        TTTre: "Note",
-        TTNews: "News",
-        TTQuattro: "Calendario",
-        TTCinque: "Menù laterale",
-        Selezionare: "Seleziona Località",
-        help_utenze: "Tipi di utenza",
-        "Le mie note": "Le mie note",
-        "Impostazioni": "Impostazioni",
-        "NOTE": "NOTE",
-        "Note": "Note",
-        "NEWS": "NEWS",
-        "News": "News",
-        pick_time: 'Scegli l\'orario',
-        settings_info: "Scegliendo le frazioni sotto indicate verrà inviato un avviso di notifica nelle giornate antecedenti a quelle di raccolta."
-    });
+    $translateProvider.translations("it", ITALIAN_VERSION);
     $translateProvider.preferredLanguage(current_lang);
 
     //debug only

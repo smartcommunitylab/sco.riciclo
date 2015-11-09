@@ -13,9 +13,11 @@ FEED_URL = "http://www.asvo.it/feed/";
 EXT_URL = "http://www.asvo.it";
 IF_HIDDEN_FIELDS = false;
 CUSTOM_PAP = [];
+//ENDPOINT_URL = 'https://tn.smartcommunitylab.it/riciclo';
+ENDPOINT_URL = 'http://localhost:8001/riciclo';
 
 USE_DRAFT = true;
-LANG = ['it','en'];
+LANG = ['en','it'];
 COMUNI_LIST = ['022205','022003','022034'];
 
 
@@ -24,6 +26,7 @@ CENTER = {
       latitude: 45.890612,
       longitude: 11.039560
 };
+
 
 // PORTOGRUARO
 //APP_ID = "PORTOGRUARO";

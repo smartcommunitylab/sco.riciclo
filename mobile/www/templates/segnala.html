@@ -1,24 +1,24 @@
 <ion-view>
     <ion-nav-title>
         <div class="nav-title">
-            <div class="nav-title-main">{{"Segnalazione" | translate}}</div>
+            <div class="nav-title-main">{{"reporting" | translate}}</div>
             <div class="nav-title-sub">{{selectedProfile.name}}</div>
         </div>
     </ion-nav-title>
 
     <ion-content class="segnala padding">
         <div class="segnala-desc">
-            {{'Invia' | translate}}
+            {{'submit' | translate}}
         </div>
         <div ng-if="tipiSegnalazioni.length > 1">
-            <div class="segnala-desc">{{'Scegli una categoria:' | translate}}</div>
+            <div class="segnala-desc">{{'category_choice' | translate}}</div>
             <div class="list">
                 <ion-radio ng-repeat="item in tipiSegnalazioni" ng-model="signal.selectedTipoSegnalazione" ng-value="item">{{item.tipologia}}</ion-radio>
             </div>
         </div>
         <div class="item item-input-inset segnala-text-input">
             <label class="item-input-wrapper">
-                <input type="text" ng-model="msg.text" placeholder="{{'Inserisci qui il testo della segnalazione' | translate}}" />
+                <input type="text" ng-model="msg.text" placeholder="{{'insert_report_text' | translate}}" />
             </label>
         </div>
 
@@ -29,7 +29,7 @@
             <button class="button-clear">
                 <i class="icon riciclo-camera icon-button"></i>
             </button>
-            <div class="col">{{'Scatta una foto' | translate}}</div>
+            <div class="col">{{'take_picture' | translate}}</div>
         </div>
         <div ng-if="(!isPopUp && !isHiddenFields)" ng-show="imgURI !== undefined" class="row segnala-image">
             <img ng-show="imgURI !== undefined" ng-src="{{imgURI}}">
@@ -39,21 +39,21 @@
             <button class="button-clear">
                 <i class="icon riciclo-camera icon-button"></i>
             </button>
-            <div class="col">{{'Scatta una foto' | translate}}</div>
+            <div class="col">{{'take_picture' | translate}}</div>
         </div>
         <div ng-if="isPopUp" ng-show="imgURI !== undefined" class="row segnala-image">
             <img ng-show="imgURI !== undefined" ng-src="{{imgURI}}">
         </div>
 
         <ion-checkbox class="checkbox-100r segnala-position" ng-model="attachPosition">
-            {{'Allega la tua posizione' | translate}}
+            {{'attach_your_position' | translate}}
         </ion-checkbox>
 
     </ion-content>
 
     <div class="bar bar-footer">
         <button class="button button-balanced button-block segnala-send" ng-click="sendEmail()">
-            <a>{{'Segnala!' | translate }}</a>
+            <a>{{'submit_report' | translate }}</a>
         </button>
     </div>
 </ion-view>

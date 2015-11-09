@@ -1,4 +1,4 @@
-<ion-view title="{{'Profili'  |  translate}}">
+<ion-view title="{{'profiles'  |  translate}}">
     <ion-nav-buttons side="left">
         <button ng-click="back()" class="button back-button buttons  button-clear header-item" ng-if="!profili || profili.length == 0">
             <i class="icon" ng-class="backButtonStyle"></i>
@@ -18,7 +18,7 @@
 
     <ion-content class="profile" has-bouncing="false">
         <div class="profile-block profile-name">
-            <div class="profile-title">{{"Nome utente" | translate}}</div>
+            <div class="profile-title">{{"user_name" | translate}}</div>
             <div class="item item-input-inset" ng-if="editMode">
                 <label class="item-input-wrapper">
                     <input type="text" ng-model="profilo.name" placeholder="Nome del profilo" />
@@ -28,7 +28,7 @@
         </div>
 
         <div class="profile-block profile-types">
-            <div class="profile-title">{{"Chi sono" | translate}}
+            <div class="profile-title">{{"user_type" | translate}}
                 <!--ng-click="helpTipi()"-->
                 <a class="help" ng-click="openUtenzeModal()"><i class="icon riciclo-more_info icon-button"></i>
                 </a>
@@ -45,7 +45,7 @@
         </div>
 
         <div class="profile-block profile-where">
-            <div class="profile-title">{{"Località" | translate}}</div>
+            <div class="profile-title">{{"location" | translate}}</div>
             <button class="button button-100r-select button-block icon-right ion-arrow-down-b" ng-click="openLocalitaSelector()" ng-if="editMode">
                 <span ng-if="!!profilo.area">{{profilo.area.etichetta}}</span>
                 <span ng-if="!!!profilo.area.nome">{{"Selezionare" | translate}}</span>

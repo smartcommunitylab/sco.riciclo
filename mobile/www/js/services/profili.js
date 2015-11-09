@@ -54,7 +54,7 @@ angular.module('rifiuti.services.profili', [])
                                             if (!(dStr in daymap)) {
                                                 daymap[dStr] = {
                                                     id: Math.floor(targetDate.getTime() / 1000),
-                                                    title: 'Domani a ' + n.comune,
+                                                    title: $filter("translate")("tomorrow_at") + n.comune,
                                                     text: {},
                                                     // smallIcon: 'res://icon.png',
                                                     // autoCancel: true,

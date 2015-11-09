@@ -16,7 +16,7 @@
         <div class="list list-inset home-searchbar">
             <div class="item item-input-inset">
                 <label class="item-input-wrapper">
-                    <input type="search" ng-init="searchQuery = ''" ng-model="searchQuery" placeholder="{{'Che rifiuto vuoi buttare?' | translate}}">
+                    <input type="search" ng-init="searchQuery = ''" ng-model="searchQuery" placeholder="{{'what_to_throw' | translate}}">
                 </label>
                 <button id="searchButton" class="button button-small button-clear" ng-class="{'ion-search button-balanced': searchQuery.length == 0, 'ion-close button-stable': searchQuery.length > 0}" ng-click="searchQuery = ''"></button>
             </div>

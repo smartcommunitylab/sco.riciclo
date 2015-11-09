@@ -47,7 +47,7 @@
                         <div class="col col-15">
                             <i class="icon riciclo-punti_di_raccolta icon-menu"></i>
                         </div>
-                        <div class="col">{{"Punti di raccolta" | translate}}</div>
+                        <div class="col">{{"collection_locations" | translate}}</div>
                     </div>
                 </ion-item>
                 <ion-item nav-clear menu-close href="#/app/tipiDiRaccolta">
@@ -55,7 +55,7 @@
                         <div class="col col-15">
                             <i class="icon riciclo-tipi_raccolta icon-menu"></i>
                         </div>
-                        <div class="col">{{"Tipi di raccolta" | translate}}</div>
+                        <div class="col">{{"collection_types" | translate}}</div>
                     </div>
                 </ion-item>
                 <ion-item nav-clear menu-close href="#/app/menunote" ng-if="showNews()">
@@ -71,7 +71,7 @@
                         <div class="col col-15 ">
                             <i class="icon riciclo-segnala icon-menu"></i>
                         </div>
-                        <div class="col">{{"Segnala" | translate}}</div>
+                        <div class="col">{{"report" | translate}}</div>
                     </div>
                 </ion-item>
                 <ion-item nav-clear menu-close ng-click="checkSettings()" href="#/app/settings" ng-if="!isHiddenFields && ((!!selectedProfile.PaP && selectedProfile.PaP.length > 0) || isDevMode || (LANG.length > 0))">
@@ -87,7 +87,7 @@
                         <div class="col col-15 ">
                             <i class="icon riciclo-contatti icon-menu"></i>
                         </div>
-                        <div class="col">{{"Contatti" | translate}}</div>
+                        <div class="col">{{"contacts" | translate}}</div>
                     </div>
                 </ion-item>
                 <ion-item nav-clear menu-close href="#/app/home/tipidirifiuti" ng-click="showTutorial()">
@@ -95,7 +95,7 @@
                         <div class="col col-15 ">
                             <i class="icon riciclo-tutorial icon-menu"></i>
                         </div>
-                        <div class="col">{{"Tutorial" | translate}}</div>
+                        <div class="col">{{"tutorial" | translate}}</div>
                     </div>
                 </ion-item>
                 <ion-item nav-clear menu-close href="#/app/info">
@@ -111,7 +111,7 @@
                         <div class="col col-15 ">
                             <i class="icon riciclo-gestione_profili icon-menu"></i>
                         </div>
-                        <div class="col">{{"Gestione profili" | translate}}</div>
+                        <div class="col">{{"profiles_management" | translate}}</div>
                     </div>
                 </ion-item>
             </ion-list>

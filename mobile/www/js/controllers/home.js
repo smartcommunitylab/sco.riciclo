@@ -174,15 +174,15 @@ angular.module('rifiuti.controllers.home', [])
 
     var popupDelete = function () {
         return {
-            template: "Confermi l'eleminazione della nota?",
-            title: 'Avviso',
+            template: $filter('translate')('delete_confirmation'),
+            title: $filter('translate')('alert'),
             scope: $scope,
             buttons: [
                 {
                     text: 'Cancel'
                 },
                 {
-                    text: 'Conferma',
+                    text: $filter('translate')('confirm'),
                     onTap: function (e) {
                         return true;
                     }

@@ -40,7 +40,7 @@ angular.module('rifiuti.controllers.common', ['ionic'])
     }
 })
 
-.controller('InfoCtrl', function ($scope, $rootScope, DataManager, $ionicPopup) {
+.controller('InfoCtrl', function ($scope, $rootScope, DataManager, $ionicPopup, $filter) {
 
     $scope.enableDevModCounter = 0;
     var devModeLabel = 'disabilitata';
@@ -50,14 +50,14 @@ angular.module('rifiuti.controllers.common', ['ionic'])
             DataManager.saveIsDevMode(!$rootScope.isDevMode);
 
             if($rootScope.isDevMode){
-                devModeLabel = 'abilitata';
+                devModeLabel = 'enabled';
             }else{
-                devModeLabel = 'disabilitata';
+                devModeLabel = 'disabled';
             }
 
             var popup = $ionicPopup.show({
-                        title: '<b class="popup-title">Modalità Dev<b/>',
-                        template: 'La modalità dev è '+devModeLabel,
+                        title: '<b class="popup-title">' + $filter('translate')('dev_mode') + '</b>',
+                        template: $filter('translate')('dev_mode_txt')+''+$filter('translate')(devModeLabel),
                         buttons: [
                             {
                                 text: 'OK'

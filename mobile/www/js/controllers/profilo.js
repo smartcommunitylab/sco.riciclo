@@ -91,8 +91,8 @@ angular.module('rifiuti.controllers.profilo', [])
                 if (newProfile == null) {
                     // error: already exists
                     var popup = $ionicPopup.show({
-                        title: '<b class="popup-title">Attenzione !<b/>',
-                        template: 'Il nome del profilo è già in uso!',
+                        title: '<b class="popup-title">'+$filter("translate")("warning")+'<b/>',
+                        template: $filter("translate")("profile_name_already_used"),
                         buttons: [
                             {
                                 text: 'OK'
@@ -105,7 +105,7 @@ angular.module('rifiuti.controllers.profilo', [])
             } else {
                 // not complete
                 $ionicPopup.show({
-                    title: '<b class="popup-title">Attenzione !<b/>',
+                    title: '<b class="popup-title">'+$filter("translate")("warning")+'<b/>',
                     template: 'Per completare il tuo profilo devi scegliere un nome, tipo di utenza, e una località!',
                     scope: $scope,
                     buttons: [
@@ -126,7 +126,7 @@ angular.module('rifiuti.controllers.profilo', [])
             scope: $scope,
             buttons: [
                 {
-                    text: 'Chiudi'
+                    text: $filter("translate")("close")
                 }
             ]
         });
@@ -141,7 +141,7 @@ angular.module('rifiuti.controllers.profilo', [])
             scope: $scope,
             buttons: [
                 {
-                    text: 'Chiudi'
+                    text: $filter("translate")("close")
                 }
             ]
         });
@@ -151,8 +151,8 @@ angular.module('rifiuti.controllers.profilo', [])
     $scope.click = function () {
         if ($scope.isCurrentProfile) {
             var popup = $ionicPopup.show({
-                title: '<b class="popup-title">Avviso<b/>',
-                template: 'Non è possibile cancellare il profilo in uso.',
+                title: '<b class="popup-title">'+$filter("translate")("alert")+'<b/>',
+                template: $filter("translate")("cannot_delete_profile_in_use"),
                 scope: $scope,
                 buttons: [
                     {
@@ -164,8 +164,8 @@ angular.module('rifiuti.controllers.profilo', [])
         }
 
         var popup = $ionicPopup.show({
-            title: '<b class="popup-title">Avviso<b/>',
-            template: 'Premendo OK cancellerai definitivamente questo profilo. Confermi?',
+            title: '<b class="popup-title">'+$filter("translate")("alert")+'<b/>',
+            template: $filter("translate")("push_ok_to_delete"),
             //TODO: le note dovrebbero essere legate al profilo??? ora non lo sono!
             //      template: 'Premendo OK cancellerai definitivamente questo profilo, incluse tutte le eventuali note personali. Confermi?',
             scope: $scope,

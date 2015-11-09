@@ -1,7 +1,7 @@
 <ion-view>
     <ion-nav-title>
         <div class="nav-title">
-            <div class="nav-title-main">{{"Punto di raccolta"|translate}}</div>
+            <div class="nav-title-main">{{"collection_location"|translate}}</div>
             <div class="nav-title-sub">{{pdr.tipologiaPuntiRaccolta}} {{pdr.zona}}</div>
         </div>
     </ion-nav-title>
@@ -9,7 +9,7 @@
     <ion-content class="puntodiraccolta" has-bouncing="false">
         <!-- DETTAGLI -->
         <div class="subpage-title">
-            <h1>{{"DETTAGLI"|translate}}</h1>
+            <h1>{{"details"|translate}}</h1>
         </div>
         <div class="row row-center dettagli">
             <div class="col col-67">
@@ -28,7 +28,7 @@
         </div>
         <div ng-show="!!pdr.orarioApertura && pdr.orarioApertura.length > 0">
             <div class="subpage-title">
-                <h1 class="title">{{"ORARIO"|translate}}</h1>
+                <h1 class="title">{{"schedule"|translate}}</h1>
             </div>
             <div class="row row-center dettagli">
                 <div class="col">
@@ -36,8 +36,8 @@
                         <table>
                             <tr ng-repeat="item in orari">
                                 <td class="col col-100" style="white-space:normal">
-                                    <span ng-repeat="g in item.giorno"><strong>{{g}}</strong> </span>
-                                    <span ng-if="item.ecceto.length > 0"><br/>({{"eccetto"|translate}} <span ng-repeat="e in item.ecceto"> {{e}}</span>)</span>
+                                    <span ng-repeat="g in item.giorno"><strong>{{g | translate}}</strong> </span>
+                                    <span ng-if="item.ecceto.length > 0"><br/>({{"eccetto"|translate}} <span ng-repeat="e in item.ecceto"> {{e | translate}}</span>)</span>
                                 </td>
                                 <td><span ng-repeat="orario in item.orari"><span ng-if="$index>0">, </span>{{orario}}</span></td>
                             </tr>
@@ -48,7 +48,7 @@
         </div>
         <!-- TIPOLOGIE DI RACCOLTA -->
         <div class="subpage-title">
-            <h1 class="title">{{"TIPOLOGIE DI RACCOLTA"|translate}}</h1>
+            <h1 class="title">{{"collection_typology"|translate}}</h1>
         </div>
         <ion-list class="tipologie">
             <ion-item ng-repeat="rifiuto in rifiuti" href="#/app/raccolta/{{rifiuto.id}}">

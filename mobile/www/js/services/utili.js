@@ -13,8 +13,8 @@ angular.module('rifiuti.services.utili', [])
   return {
     show : function() {
         var popup = $ionicPopup.show({
-            title: '<b class="popup-title">Modalità Dev<b/>',
-            template: 'La connessione con il server non è disponibile',
+            title: '<b class="popup-title">'+$filter("translate")("dev_mode")+'<b/>',
+            template: $filter("translate")("connection_error"),
             buttons: [
                 {
                     text: 'OK'
