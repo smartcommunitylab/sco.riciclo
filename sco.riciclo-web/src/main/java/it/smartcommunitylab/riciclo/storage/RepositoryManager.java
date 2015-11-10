@@ -220,7 +220,11 @@ public class RepositoryManager {
 		if (app == null) {
 			AppState appDescr = new AppState();
 			appDescr.setOwenId(ownerId);
-			appDescr.setVersion(0L);
+			if(draft) {
+				appDescr.setVersion(1L);
+			} else {
+				appDescr.setVersion(0L);	
+			}
 			appDescr.setTimestamp(System.currentTimeMillis());
 			template.save(appDescr);
 		}
