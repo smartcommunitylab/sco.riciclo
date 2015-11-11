@@ -1,4 +1,5 @@
 ITALIAN_VERSION = {
+        porta_a_porta: "Porta a Porta",
         connection_error: "La connessione con il server non è disponibile",
         tomorrow_at: "Domani a ",
         push_ok_to_delete: "Premendo OK cancellerai definitivamente questo profilo. Confermi?",
@@ -127,6 +128,7 @@ ITALIAN_VERSION = {
 };
 
 ENGLISH_VERSION = {
+        porta_a_porta: "Curbside Collection",
         connection_error: "The connection to the server is unavailable",
         tomorrow_at: "Tomorrow at ",
         push_ok_to_delete: "tap OK to permanently erase this profile . Confirm?",
