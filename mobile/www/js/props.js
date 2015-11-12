@@ -15,6 +15,7 @@ IF_HIDDEN_FIELDS = false;
 CUSTOM_PAP = [];
 //ENDPOINT_URL = 'https://tn.smartcommunitylab.it/riciclo';
 ENDPOINT_URL = 'http://localhost:8001/riciclo';
+PORTA_A_PORTA_LABEL = 'porta_a_porta';
 
 USE_DRAFT = true;
 LANG = ['en','it'];

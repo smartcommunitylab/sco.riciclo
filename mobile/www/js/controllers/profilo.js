@@ -85,7 +85,7 @@ angular.module('rifiuti.controllers.profilo', [])
                     // create
                     newProfile = Profili.add($scope.profilo.name, $scope.profilo.utenza, $scope.profilo.area);
                     $scope.back();
-                    return;
+                    //return;
                 }
 
                 if (newProfile == null) {
