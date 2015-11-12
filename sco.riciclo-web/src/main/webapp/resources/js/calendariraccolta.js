@@ -123,6 +123,23 @@ var calendariraccoltaCtrl = calendariraccoltaApp.controller('userCtrl', function
 			$scope.errorMsg = response.data.errorMsg;
 		});
 	};
+	
+	$scope.doSearch = function(item) {
+		var q = $scope.search.toLowerCase();
+		var text = $scope.getAreaName(item.area).toLowerCase();
+		if(text.indexOf(q) != -1) {
+			return true;
+		}
+		text = $scope.getTipologiaUtenzaName(item.tipologiaUtenza).toLowerCase();
+		if(text.indexOf(q) != -1) {
+			return true;
+		}
+		text = $scope.getTipologiaPuntoRaccoltaName(item.tipologiaPuntoRaccolta).toLowerCase();
+		if(text.indexOf(q) != -1) {
+			return true;
+		}
+		return false;
+	};
 
 	$scope.getAreaName = function(id) {
 		return $scope.areaNameMap[id];

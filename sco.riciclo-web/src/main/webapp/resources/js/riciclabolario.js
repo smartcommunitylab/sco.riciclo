@@ -109,6 +109,27 @@ var riciclabolarioCtrl = riciclabolarioApp.controller('userCtrl', function($scop
 			$window.spinner.stop();
 		});
 	};
+	
+	$scope.doSearch = function(item) {
+		var q = $scope.search.toLowerCase();
+		var text = $scope.getAreaName(item.area).toLowerCase();
+		if(text.indexOf(q) != -1) {
+			return true;
+		}
+		text = item.tipologiaUtenza.toLowerCase();
+		if(text.indexOf(q) != -1) {
+			return true;
+		}
+		text = item.tipologiaRifiuto.toLowerCase();
+		if(text.indexOf(q) != -1) {
+			return true;
+		}
+		text = $scope.getRifiutoName(item.rifiuto).toLowerCase();
+		if(text.indexOf(q) != -1) {
+			return true;
+		}
+		return false;
+	};
 
 	$scope.getRifiutoName = function(id) {
 		return $scope.rifiutoNameMap[id];

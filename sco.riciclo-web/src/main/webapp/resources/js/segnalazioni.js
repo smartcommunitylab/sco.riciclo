@@ -71,6 +71,23 @@ var segnalazioniCtrl = segnalazioniApp.controller('userCtrl', function($scope, $
 			$scope.errorMsg = response.data.errorMsg;
 		});
 	};
+	
+	$scope.doSearch = function(item) {
+		var q = $scope.search.toLowerCase();
+		var text = $scope.getAreaName(item.area).toLowerCase();
+		if(text.indexOf(q) != -1) {
+			return true;
+		}
+		text = item.tipologia[$scope.language].toLowerCase();
+		if(text.indexOf(q) != -1) {
+			return true;
+		}
+		text = item.email.toLowerCase();
+		if(text.indexOf(q) != -1) {
+			return true;
+		}
+		return false;
+	};
 
 	$scope.getAreaName = function(id) {
 		return $scope.areaNameMap[id];

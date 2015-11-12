@@ -113,6 +113,27 @@ var puntiraccoltaCtrl = puntiraccoltaApp.controller('userCtrl', function($scope,
 			$scope.errorMsg = response.data.errorMsg;
 		});
 	};
+	
+	$scope.doSearch = function(item) {
+		var q = $scope.search.toLowerCase();
+		var text = $scope.getAreaName(item.area).toLowerCase();
+		if(text.indexOf(q) != -1) {
+			return true;
+		}
+		text = item.tipologiaUtenza.toLowerCase();
+		if(text.indexOf(q) != -1) {
+			return true;
+		}
+		text = item.tipologiaPuntoRaccolta.toLowerCase();
+		if(text.indexOf(q) != -1) {
+			return true;
+		}
+		text = $scope.getCrmName(item.crm).toLowerCase();
+		if(text.indexOf(q) != -1) {
+			return true;
+		}
+		return false;
+	};
 
 	$scope.getCrmName = function(id) {
 		return $scope.crmNameMap[id];

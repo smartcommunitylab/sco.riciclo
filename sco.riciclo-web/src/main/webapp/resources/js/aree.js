@@ -113,6 +113,27 @@ var areeCtrl = areeApp.controller('userCtrl', function($scope, $http, $q, DataSe
 			$scope.errorMsg = response.data.errorMsg;
 		});
 	};
+	
+	$scope.doSearch = function(item) {
+		var q = $scope.search.toLowerCase();
+		var text = $scope.getAreaName(item.parent).toLowerCase();
+		if(text.indexOf(q) != -1) {
+			return true;
+		}
+		text = item.nome.toLowerCase();
+		if(text.indexOf(q) != -1) {
+			return true;
+		}
+		text = item.codiceISTAT.toLowerCase();
+		if(text.indexOf(q) != -1) {
+			return true;
+		}
+		text = $scope.getAreaEtichetta(item.objectId).toLowerCase();
+		if(text.indexOf(q) != -1) {
+			return true;
+		}
+		return false;
+	};
 
 	$scope.getAreaName = function(id) {
 		return $scope.areaNameMap[id];

@@ -382,31 +382,31 @@
 			<div class="col-md-3"><h4>Tipologia Punto Raccolta</h4></div>
 			<div class="col-md-2"><h4></h4></div>
 		</div>
-		<div class="row list-row" data-ng-repeat="relation in calendarioRaccoltaList | filter:search">
+		<div class="row list-row" data-ng-repeat="item in calendarioRaccoltaList | filter:doSearch">
 			<div class="col-md-3">
-				<span>{{getAreaName(relation.area)}}</span>
+				<span>{{getAreaName(item.area)}}</span>
 			</div>
 			<div class="col-md-4">
-				<span>{{getTipologiaUtenzaName(relation.tipologiaUtenza)}}</span>
+				<span>{{getTipologiaUtenzaName(item.tipologiaUtenza)}}</span>
 			</div>
 			<div class="col-md-3">
-				<span>{{getTipologiaPuntoRaccoltaName(relation.tipologiaPuntoRaccolta)}}</span>
+				<span>{{getTipologiaPuntoRaccoltaName(item.tipologiaPuntoRaccolta)}}</span>
 			</div>
 			<div class="col-md-2">
 				<button class="btn btn-info" data-toggle="modal" data-target="#divForm"
-				data-backdrop="static" data-ng-click="editItem(relation.objectId, false)" title="Vedi">
+				data-backdrop="static" data-ng-click="editItem(item.objectId, false)" title="Vedi">
 					<span class="glyphicon glyphicon-eye-open"></span>
 				</button>
 				<button class="btn btn-primary" data-toggle="modal" data-target="#divForm"
-				data-backdrop="static" data-ng-click="editItem(relation.objectId, true)" title="Modifica">
+				data-backdrop="static" data-ng-click="editItem(item.objectId, true)" title="Modifica">
 					<span class="glyphicon glyphicon-pencil"></span>
 				</button>
 				<button class="btn btn-danger" data-toggle="modal" data-target="#divDeleteItemAlert"
-				data-backdrop="static" data-ng-click="setItemToDelete(relation.objectId)" title="Cancella">
+				data-backdrop="static" data-ng-click="setItemToDelete(item.objectId)" title="Cancella">
 					<span class="glyphicon glyphicon-trash"></span>
 				</button>
 				<button class="btn btn-warning" data-toggle="modal" data-target="#divTimetable"
-				data-backdrop="static" data-ng-click="editItem(relation.objectId, true)" title="Orari">
+				data-backdrop="static" data-ng-click="editItem(item.objectId, true)" title="Orari">
 					<span class="glyphicon glyphicon-time"></span>
 				</button>
 			</div>
