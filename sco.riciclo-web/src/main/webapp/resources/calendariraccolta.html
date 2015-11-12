@@ -161,14 +161,14 @@
 				        	<div class="row form-group">
 				        		<label class="col-md-1 control-label">Dalle (HH:MM):</label>
 				        		<div class="col-md-2">
-				        			<input type="text" name="hourFrom" data-ng-model="fHourFrom" placeholder="dalle (HH:MM)"
-				        			data-ng-pattern="/([0-1][0-9]|2[0-3]):[0-5][0-9]/">
+				        			<input type="text" name="hourFrom" data-ng-model="fHourFrom" placeholder="HH:MM"
+				        			data-ng-pattern="/^([0-1][0-9]|2[0-3]):[0-5][0-9]$/">
 				        			<span class="label label-warning" data-ng-show="!newDate.hourFrom.$valid">Verifica il campo</span>
 				        		</div>
 				        		<label class="col-md-1 control-label">Alle (HH:MM):</label>
 				        		<div class="col-md-2">
-				        			<input type="text" name="hourTo" data-ng-model="fHourTo" placeholder="alle (HH:MM)"
-				        			data-ng-pattern="/([0-1][0-9]|2[0-3]):[0-5][0-9]/">
+				        			<input type="text" name="hourTo" data-ng-model="fHourTo" placeholder="HH:MM"
+				        			data-ng-pattern="/^([0-1][0-9]|2[0-3]):[0-5][0-9]$/">
 				        			<span class="label label-warning" data-ng-show="!newDate.hourTo.$valid">Verifica il campo</span>
 				        		</div>
 	    						</div>
