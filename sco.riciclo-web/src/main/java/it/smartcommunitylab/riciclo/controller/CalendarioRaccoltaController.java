@@ -17,16 +17,11 @@
 package it.smartcommunitylab.riciclo.controller;
 
 import it.smartcommunitylab.riciclo.exception.UnauthorizedException;
-import it.smartcommunitylab.riciclo.model.Area;
 import it.smartcommunitylab.riciclo.model.CalendarioRaccolta;
 import it.smartcommunitylab.riciclo.model.OrarioApertura;
 import it.smartcommunitylab.riciclo.storage.AppSetup;
-import it.smartcommunitylab.riciclo.storage.DataSetInfo;
 import it.smartcommunitylab.riciclo.storage.RepositoryManager;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
@@ -47,8 +42,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
-import com.google.common.collect.Lists;
-
 
 @Controller
 public class CalendarioRaccoltaController {
@@ -60,6 +53,7 @@ public class CalendarioRaccoltaController {
 	@Autowired
 	private AppSetup appSetup;
 
+	@SuppressWarnings("unchecked")
 	@RequestMapping(value="api/calraccolta/{ownerId}", method=RequestMethod.GET)
 	public @ResponseBody List<CalendarioRaccolta> getPuntiRaccolta(@PathVariable String ownerId,
 			HttpServletRequest request, HttpServletResponse response) throws Exception {
@@ -67,6 +61,12 @@ public class CalendarioRaccoltaController {
 		if(!Utils.validateAPIRequest(request, appSetup, draft, storage)) {
 			throw new UnauthorizedException("Unauthorized Exception: token not valid");
 		}
+		List<CalendarioRaccolta> result = (List<CalendarioRaccolta>) storage.findData(CalendarioRaccolta.class, null, ownerId, draft);
+		if(logger.isDebugEnabled()) {
+			logger.debug(String.format("result[%s]:%s", ownerId, result.size()));
+		}
+		return result;
+		/*
 		List<String> comuni = Lists.newArrayList();
 		String[] comuniArray = request.getParameterValues("comune[]");
 		if(comuniArray!= null) {
@@ -93,6 +93,7 @@ public class CalendarioRaccoltaController {
 		Utils.findCalendariRaccolta(resultMapArea, ownerId, draft, resultMapCalendario, storage);
 		List<CalendarioRaccolta> result = Lists.newArrayList(resultMapCalendario.values());
 		return result;
+		*/
 	}
 
 	@RequestMapping(value="api/calraccolta/{ownerId}", method=RequestMethod.POST)

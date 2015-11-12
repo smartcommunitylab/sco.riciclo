@@ -59,6 +59,7 @@ public class RaccoltaController {
 	@Autowired
 	private AppSetup appSetup;
 
+	@SuppressWarnings("unchecked")
 	@RequestMapping(value="api/raccolta/{ownerId}", method=RequestMethod.GET)
 	public @ResponseBody List<Raccolta> getRaccolte(@PathVariable String ownerId,
 			HttpServletRequest request, HttpServletResponse response) throws Exception {
@@ -66,6 +67,9 @@ public class RaccoltaController {
 		if(!Utils.validateAPIRequest(request, appSetup, draft, storage)) {
 			throw new UnauthorizedException("Unauthorized Exception: token not valid");
 		}
+		List<Raccolta> result = (List<Raccolta>) storage.findData(Raccolta.class, null, ownerId, draft);
+		return result;
+		/*
 		List<String> comuni = Lists.newArrayList();
 		String[] comuniArray = request.getParameterValues("comune[]");
 		if(comuniArray!= null) {
@@ -92,6 +96,7 @@ public class RaccoltaController {
 		Utils.findRaccolte(resultMapArea, ownerId, draft, resultMapRaccolta, storage);
 		List<Raccolta> result = Lists.newArrayList(resultMapRaccolta.values());
 		return result;
+		*/
 	}
 
 	@RequestMapping(value="api/raccolta/{ownerId}", method=RequestMethod.POST)

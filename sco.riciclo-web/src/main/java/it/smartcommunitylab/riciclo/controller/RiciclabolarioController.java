@@ -17,15 +17,10 @@
 package it.smartcommunitylab.riciclo.controller;
 
 import it.smartcommunitylab.riciclo.exception.UnauthorizedException;
-import it.smartcommunitylab.riciclo.model.Area;
 import it.smartcommunitylab.riciclo.model.Riciclabolario;
 import it.smartcommunitylab.riciclo.storage.AppSetup;
-import it.smartcommunitylab.riciclo.storage.DataSetInfo;
 import it.smartcommunitylab.riciclo.storage.RepositoryManager;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
@@ -46,8 +41,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
-import com.google.common.collect.Lists;
-
 
 @Controller
 public class RiciclabolarioController {
@@ -59,6 +52,7 @@ public class RiciclabolarioController {
 	@Autowired
 	private AppSetup appSetup;
 
+	@SuppressWarnings("unchecked")
 	@RequestMapping(value="api/riciclabolario/{ownerId}", method=RequestMethod.GET)
 	public @ResponseBody List<Riciclabolario> getRiciclabolario(@PathVariable String ownerId,
 			HttpServletRequest request, HttpServletResponse response) throws Exception {
@@ -66,6 +60,12 @@ public class RiciclabolarioController {
 		if(!Utils.validateAPIRequest(request, appSetup, draft, storage)) {
 			throw new UnauthorizedException("Unauthorized Exception: token not valid");
 		}
+		List<Riciclabolario> result = (List<Riciclabolario>) storage.findData(Riciclabolario.class, null, ownerId, draft);
+		if(logger.isDebugEnabled()) {
+			logger.debug(String.format("result[%s]:%s", ownerId, result.size()));
+		}
+		return result;
+		/*
 		List<String> comuni = Lists.newArrayList();
 		String[] comuniArray = request.getParameterValues("comune[]");
 		if(comuniArray!= null) {
@@ -92,6 +92,7 @@ public class RiciclabolarioController {
 		Utils.findRiciclabolario(resultMapArea, ownerId, draft, resultMapRiciclabolario, storage);
 		List<Riciclabolario> result = Lists.newArrayList(resultMapRiciclabolario.values());
 		return result;
+		*/
 	}
 
 	@RequestMapping(value="api/riciclabolario/{ownerId}", method=RequestMethod.POST)
