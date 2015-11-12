@@ -161,11 +161,24 @@ angular.module('rifiuti.controllers.common', ['ionic'])
         $ionicScrollDelegate.$getByHandle('mainScroll').resize();
     }*/
 
+    var getTipologiaPuntiLabel = function (papTypes) {
+        var papLabel = {};
+
+        for (var i = 0; i < papTypes.length; i++) {
+           var label = DataManager.getCategoriaById('tipologiaPuntiRaccolta',papTypes[i]);
+           papLabel[papTypes[i]] = label.nome;
+        }
+
+        return papLabel;
+    }
+
     $scope.papTypes = $rootScope.selectedProfile.PaP;
     $scope.settings = $rootScope.selectedProfile.settings;
     $scope.globalSettings = $rootScope.globalSettings;
     $scope.supportedLangTypes = $rootScope.globalSettings.supportedLangTypes;
     $scope.globalSettings = $rootScope.globalSettings;
+
+    $scope.papLabel = getTipologiaPuntiLabel($scope.papTypes);
 
     if(!$scope.supportedLangTypes){
        $scope.supportedLangTypes = [];
@@ -201,6 +214,7 @@ angular.module('rifiuti.controllers.common', ['ionic'])
             }else{
                 $scope.langRollBack = $rootScope.globalSettings.selectedLang;
                 $translate.use($scope.langRollBack);
+                $scope.papLabel = getTipologiaPuntiLabel($scope.papTypes);
             }
         });
 

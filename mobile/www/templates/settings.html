@@ -22,7 +22,7 @@
         <div class="padding-top">
             <label class="item item-input">{{'notifications_categories' | translate}}</label>
             <ion-checkbox ng-class="{'checkbox-100r': !!settings.enableNotifications, 'checkbox-light': !settings.enableNotifications}" ng-repeat="pap in papTypes" ng-model="settings.papTypes[pap]" ng-change="saveSettings()" ng-disabled="!settings.enableNotifications">
-                {{pap}}
+                {{papLabel[pap]}}
             </ion-checkbox>
         </div>
 
