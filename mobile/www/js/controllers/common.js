@@ -164,12 +164,8 @@ angular.module('rifiuti.controllers.common', ['ionic'])
     $scope.papTypes = $rootScope.selectedProfile.PaP;
     $scope.settings = $rootScope.selectedProfile.settings;
     $scope.globalSettings = $rootScope.globalSettings;
-    //$scope.supportedLangTypes = $rootScope.selectedProfile.settings.supportedLangTypes;
-    //$scope.settings.selectedLang = $rootScope.selectedProfile.settings.selectedLang;
     $scope.supportedLangTypes = $rootScope.globalSettings.supportedLangTypes;
     $scope.globalSettings = $rootScope.globalSettings;
-    //$scope.globalSettings.isMoreThanOneLang = $rootScope.globalSettings.isMoreThanOneLang;
-    //$scope.globalSettings.draftEnabled = $rootScope.globalSettings.draftEnabled;
 
     if(!$scope.supportedLangTypes){
        $scope.supportedLangTypes = [];
@@ -178,31 +174,6 @@ angular.module('rifiuti.controllers.common', ['ionic'])
            $scope.supportedLangTypes[i] = LANG[i] ;
         }
     };
-
-
-   //if(!$scope.globalSettings.selectedLang){
-   //    $scope.globalSettings.selectedLang = {};
-
-   //    if ($scope.supportedLangTypes.length > 1){
-   //      $scope.globalSettings.isMoreThanOneLang = true;
-   //      $rootScope.globalSettings.isMoreThanOneLang = true;
-   //      var foundLang = false;
-   //      for (var i = 0; i < $scope.supportedLangTypes.length; i++) {
-   //        if ($rootScope.globalSettings.phoneLanguage == $scope.supportedLangTypes[i]){
-   //            $scope.globalSettings.selectedLang = $scope.supportedLangTypes[i];
-   //            foundLang = true;
-   //            break;
-   //        }
-   //      }
-   //      if(!foundLang){
-   //        $scope.globalSettings.selectedLang = LANG[0];
-   //      }
-   //    }else{
-   //        $scope.globalSettings.selectedLang = LANG[0];
-   //        $scope.globalSettings.isMoreThanOneLang = false;
-   //        $rootScope.globalSettings.isMoreThanOneLang = false;
-   //    }
-   //}
 
     $scope.langRollBack = $scope.globalSettings.selectedLang;
 
@@ -214,13 +185,12 @@ angular.module('rifiuti.controllers.common', ['ionic'])
 
     $scope.timepickerSlots = {
         format: 24,
-        step: 5
+        step: 5,
     };
 
-    $scope.saveSettings = function (pap) {
+    $scope.saveSettings = function () {
         Profili.saveAll();
     };
-
 
     $scope.saveLang = function () {
         LoaderService.show();
@@ -247,6 +217,14 @@ angular.module('rifiuti.controllers.common', ['ionic'])
             }
         });
     };
+
+
+    $scope.$watch('settings.notificationsTime', function(newValue, oldValue) {
+        if(!!newValue && (newValue!=oldValue)){
+            Profili.saveAll();
+        }
+    });
+
 
     $rootScope.$watch('selectedProfile', function (a, b) {
         if (b == null || a.id != b.id) {

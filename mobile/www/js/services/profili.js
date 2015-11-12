@@ -1,6 +1,6 @@
 angular.module('rifiuti.services.profili', [])
 
-.factory('Profili', function (DataManager, $rootScope, Raccolta, Calendar, Utili) {
+.factory('Profili', function (DataManager, $rootScope, $filter, Raccolta, Calendar, Utili) {
     var ProfiliFactory = {};
     var profilesPrefix = APP_ID+"_profiles";
     var selectedProfileIdPrefix = APP_ID+"_selectedProfileId";

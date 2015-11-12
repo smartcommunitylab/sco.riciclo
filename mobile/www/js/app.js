@@ -287,7 +287,7 @@ angular.module('rifiuti', [
                 }
             }else{
                 $rootScope.globalSettings.selectedLang = LANG[0];
-                $scope.globalSettings.isMoreThanOneLang = false;
+                $rootScope.globalSettings.isMoreThanOneLang = false;
             }
 
             DataManager.saveGlobalSettings();
@@ -394,7 +394,7 @@ angular.module('rifiuti', [
 .config(function ($stateProvider, $urlRouterProvider, $translateProvider) {
 
     var lang = navigator.language.split("-");
-    var current_lang = ("en");
+    var current_lang = (lang[0]);
     //alert( "current_lang: " + current_lang );
 
     $translateProvider.translations("en", ENGLISH_VERSION);
