@@ -215,6 +215,7 @@ angular.module('rifiuti.controllers.common', ['ionic'])
                 $scope.langRollBack = $rootScope.globalSettings.selectedLang;
                 $translate.use($scope.langRollBack);
                 $scope.papLabel = getTipologiaPuntiLabel($scope.papTypes);
+                Profili.saveLang();
             }
         });
 

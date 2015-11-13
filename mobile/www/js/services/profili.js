@@ -134,6 +134,18 @@ angular.module('rifiuti.services.profili', [])
         }
     };
 
+    ProfiliFactory.saveLang = function () {
+
+        $rootScope.profili.forEach(function (profile) {
+            var area = DataManager.getProfilesAreaById(profile.area.id);
+            var utenza = DataManager.getProfileTypeById(profile.utenza.id);
+
+            profile.area = area;
+            profile.utenza = utenza;
+        });
+
+    };
+
     ProfiliFactory.select = function (profileIndex) {
         if (!!$rootScope.selectedProfile) {
             var p = ProfiliFactory.byId($rootScope.selectedProfile.id);

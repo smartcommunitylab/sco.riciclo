@@ -14,18 +14,20 @@ EXT_URL = "http://www.asvo.it";
 IF_HIDDEN_FIELDS = false;
 CUSTOM_PAP = [];
 //ENDPOINT_URL = 'https://tn.smartcommunitylab.it/riciclo';
-ENDPOINT_URL = 'http://localhost:8001/riciclo';
+//ENDPOINT_URL = 'http://localhost:8001/riciclo';
+ENDPOINT_URL = 'https://dev.smartcommunitylab.it/riciclo2';
 PORTA_A_PORTA_LABEL = 'porta_a_porta';
 
 USE_DRAFT = true;
-LANG = ['en','it'];
+LANG = ['it','en'];
+//COMUNI_LIST = ['022205','022003','022034'];
 COMUNI_LIST = ['022205','022003','022034'];
 
 
 ZOOM = 12;
 CENTER = {
-      latitude: 45.890612,
-      longitude: 11.039560
+      latitude: 46.067359,
+      longitude: 11.121430
 };
 
 

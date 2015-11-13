@@ -12,6 +12,8 @@ angular.module('rifiuti.services.data', [])
 
     var completeDataPrefix = APP_ID+"_completeData";
     var categorieMapPrefix = APP_ID+"_categorieMap";
+    var areeMapPrefix = APP_ID+"_areeMap";
+    var tipoProfiloMapPrefix = APP_ID+"_tipoProfiloMap";
     var globalSettingsPrefix = APP_ID+"_globalSettings";
     var profileDataPrefix = APP_ID+"_profileData";
     var profilesPrefix = APP_ID+"_profiles";
@@ -28,6 +30,8 @@ angular.module('rifiuti.services.data', [])
     var profileData = null;
     var categorieMap = null;
     var colorCodeMap = null;
+    var areeMap = null;
+    var tipoProfiloMap = null;
 
     var errorHandler = function (e) {
         console.log(e);
@@ -90,6 +94,22 @@ angular.module('rifiuti.services.data', [])
         });
 
         localStorage[colorCodeMapPrefix] = JSON.stringify(colorCodeMap);
+
+        areeMap = {};
+        if(profileData.aree){
+            profileData.aree.forEach(function (area){
+                areeMap[area.id] = area;
+            })
+        }
+        localStorage[areeMapPrefix] = JSON.stringify(areeMap);
+
+        tipoProfiloMap = {};
+        if(profileData.tipologiaProfilo){
+            profileData.tipologiaProfilo.forEach(function (tipoProfilo){
+                tipoProfiloMap[tipoProfilo.id] = tipoProfilo;
+            })
+        }
+        localStorage[tipoProfiloMapPrefix] = JSON.stringify(tipoProfiloMap);
 
         categorieMap = {};
         if(profileData.categorie){
@@ -156,21 +176,6 @@ angular.module('rifiuti.services.data', [])
                         }
                     }
                 });
-                //        completeData['puntiRaccolta_'+p.utenza.tipologiaUtenza].forEach(function(pr) {
-                //          if (Utili.belongsTo(pr,p) && profileData['puntiRaccolta_'+p.utenza.tipologiaUtenza].indexOf(pr) == -1) {
-                //            if (pr.orarioApertura) pr.orarioApertura.forEach(function(cal){Utili.expandOrarioApertura(cal)});
-                //            profileData['puntiRaccolta_'+p.utenza.tipologiaUtenza].push(pr);
-                //          }
-                //        });
-                //        if (completeData['puntiRaccoltaCalendar_'+p.utenza.tipologiaUtenza]) {
-                //          completeData['puntiRaccoltaCalendar_'+p.utenza.tipologiaUtenza].forEach(function(pr) {
-                //            if (Utili.belongsTo(pr,p) && profileData['puntiRaccoltaCalendar_'+p.utenza.tipologiaUtenza].indexOf(pr) == -1)
-                //            {
-                //              if (pr.orarioApertura) pr.orarioApertura.forEach(function(cal){Utili.expandOrarioApertura(cal)});
-                //              profileData['puntiRaccoltaCalendar_'+p.utenza.tipologiaUtenza].push(pr);
-                //            }
-                //          });
-                //        }
             });
         }
 
@@ -455,6 +460,41 @@ angular.module('rifiuti.services.data', [])
         return returnItem;
     }
 
+    //var saveProfiliByNewLang(){
+    //    var profiles = getProfiles();
+    //    $rootScope.profili.forEach(function (profilo){
+    //
+    //
+    //    })
+    //}
+
+    var getProfilesAreaById = function(areaId){
+       if (areeMap == null) {
+            if (localStorage[areeMapPrefix]) {
+                areeMap = JSON.parse(localStorage[areeMapPrefix]);
+            }
+        }
+
+        if (areeMap[areaId]){
+            return areeMap[areaId];
+        }
+
+        return null;
+    }
+
+    var getProfileTypeById = function(profiloId){
+       if (tipoProfiloMap == null) {
+            if (localStorage[tipoProfiloMapPrefix]) {
+                tipoProfiloMap = JSON.parse(localStorage[tipoProfiloMapPrefix]);
+            }
+        }
+
+        if (tipoProfiloMap[profiloId]){
+            return tipoProfiloMap[profiloId];
+        }
+
+        return null;
+    }
 
     var getDataURL = function (remote) {
         if (remote) {
@@ -543,6 +583,8 @@ angular.module('rifiuti.services.data', [])
         saveIsDevMode: saveIsDevMode,
         getColorById: getColorById,
         getIconById: getIconById,
+        getProfilesAreaById:getProfilesAreaById,
+        getProfileTypeById:getProfileTypeById,
         updateProfiles: function (newProfiles) {
             profili = newProfiles;
             updateProfileData();
