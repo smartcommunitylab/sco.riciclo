@@ -22,6 +22,9 @@ import it.smartcommunitylab.riciclo.model.OrarioApertura;
 import it.smartcommunitylab.riciclo.storage.AppSetup;
 import it.smartcommunitylab.riciclo.storage.RepositoryManager;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
@@ -41,6 +44,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
+
+import com.google.common.collect.Lists;
 
 
 @Controller
@@ -167,6 +172,42 @@ public class CalendarioRaccoltaController {
 			throw new UnauthorizedException("Unauthorized Exception: token not valid");
 		}
 		storage.updateCalendarioRaccoltaRemoveOrario(ownerId, objectId, position, draft);
+	}
+	
+	@SuppressWarnings("unchecked")
+	@RequestMapping(value="api/calraccolta/{ownerId}/orario/copy", method=RequestMethod.GET)
+	public @ResponseBody List<CalendarioRaccolta> copyOrarioApertura(@PathVariable String ownerId, 
+			HttpServletRequest request,	HttpServletResponse response) throws Exception {
+		boolean draft = Utils.getDraft(request);
+		if(!Utils.validateAPIRequest(request, appSetup, draft, storage)) {
+			throw new UnauthorizedException("Unauthorized Exception: token not valid");
+		}
+		SimpleDateFormat sdfOrari = new SimpleDateFormat("yyyy-MM-dd");
+		Calendar cal = Calendar.getInstance();
+		List<CalendarioRaccolta> calendarioList = (List<CalendarioRaccolta>) storage.findData(CalendarioRaccolta.class, null, ownerId, draft);
+		for(CalendarioRaccolta calendario : calendarioList) {
+			List<OrarioApertura> newOrarioList = Lists.newArrayList();
+			for(OrarioApertura orario : calendario.getOrarioApertura()) {
+				cal.setTime(sdfOrari.parse(orario.getDataDa()));
+				cal.add(Calendar.YEAR, 1);
+				Date dataDa = cal.getTime();
+				cal.setTime(sdfOrari.parse(orario.getDataA()));
+				cal.add(Calendar.YEAR, 1);
+				Date dataA = cal.getTime();
+				OrarioApertura newOrario = new OrarioApertura();
+				newOrario.setDataDa(sdfOrari.format(dataDa));
+				newOrario.setDataA(sdfOrari.format(dataA));
+				newOrario.setIl(orario.getIl());
+				newOrario.setDalle(orario.getDalle());
+				newOrario.setAlle(orario.getAlle());
+				newOrario.setEccezione(orario.getEccezione());
+				newOrario.setNote(orario.getNote());
+				newOrarioList.add(newOrario);
+			}
+			calendario.getOrarioApertura().addAll(newOrarioList);
+			storage.updateCalendarioRaccoltaOrario(ownerId, calendario.getObjectId(), calendario.getOrarioApertura(), draft);
+		}
+		return calendarioList;
 	}
 
 	@ExceptionHandler(Exception.class)

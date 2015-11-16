@@ -399,6 +399,20 @@ public class RepositoryManager {
 		template.updateFirst(query, update, Crm.class);
 	}
 
+	public void updateCRMOrario(String ownerId, String objectId, List<OrarioApertura> orarioApertura,
+			boolean draft) throws EntityNotFoundException {
+		MongoTemplate template = draft ? draftTemplate : finalTemplate;
+		Query query = new Query(new Criteria("ownerId").is(ownerId).and("objectId").is(objectId));
+		Crm crmDB = template.findOne(query, Crm.class);
+		if (crmDB == null) {
+			throw new EntityNotFoundException(String.format("CRM with id %s not found", objectId));
+		}
+		Update update = new Update();
+		update.set("lastUpdate", new Date());
+		update.set("orarioApertura", orarioApertura);
+		template.updateFirst(query, update, Crm.class);
+	}
+	
 	public void updateCRMAddOrario(String ownerId, String objectId, OrarioApertura orario,
 			boolean draft) throws EntityNotFoundException {
 		MongoTemplate template = draft ? draftTemplate : finalTemplate;
@@ -677,6 +691,20 @@ public class RepositoryManager {
 		template.findAndRemove(query, CalendarioRaccolta.class);
 	}
 
+	public void updateCalendarioRaccoltaOrario(String ownerId, String objectId, List<OrarioApertura> orarioApertura,
+			boolean draft) throws EntityNotFoundException {
+		MongoTemplate template = draft ? draftTemplate : finalTemplate;
+		Query query = new Query(new Criteria("ownerId").is(ownerId).and("objectId").is(objectId));
+		CalendarioRaccolta calendarioDB = template.findOne(query, CalendarioRaccolta.class);
+		if (calendarioDB == null) {
+			throw new EntityNotFoundException(String.format("CalendarioRaccolta with id %s not found", objectId));
+		}
+		Update update = new Update();
+		update.set("lastUpdate", new Date());
+		update.set("orarioApertura", orarioApertura);
+		template.updateFirst(query, update, CalendarioRaccolta.class);
+	}
+	
 	public void updateCalendarioRaccoltaAddOrario(String ownerId, String objectId, OrarioApertura orario,
 			boolean draft) throws EntityNotFoundException {
 		MongoTemplate template = draft ? draftTemplate : finalTemplate;

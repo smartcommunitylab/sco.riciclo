@@ -22,8 +22,11 @@ import it.smartcommunitylab.riciclo.model.OrarioApertura;
 import it.smartcommunitylab.riciclo.storage.AppSetup;
 import it.smartcommunitylab.riciclo.storage.RepositoryManager;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
@@ -41,6 +44,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
+
+import com.google.common.collect.Lists;
 
 
 @Controller
@@ -136,4 +141,41 @@ public class CRMController {
 	public Map<String,String> handleError(HttpServletRequest request, Exception exception) {
 		return Utils.handleError(exception);
 	}
+	
+	@SuppressWarnings("unchecked")
+	@RequestMapping(value="api/crm/{ownerId}/orario/copy", method=RequestMethod.GET)
+	public @ResponseBody List<Crm> copyOrarioApertura(@PathVariable String ownerId, 
+			HttpServletRequest request,	HttpServletResponse response) throws Exception {
+		boolean draft = Utils.getDraft(request);
+		if(!Utils.validateAPIRequest(request, appSetup, draft, storage)) {
+			throw new UnauthorizedException("Unauthorized Exception: token not valid");
+		}
+		SimpleDateFormat sdfOrari = new SimpleDateFormat("yyyy-MM-dd");
+		Calendar cal = Calendar.getInstance();
+		List<Crm> crmList = (List<Crm>) storage.findData(Crm.class, null, ownerId, draft);
+		for(Crm crm : crmList) {
+			List<OrarioApertura> newOrarioList = Lists.newArrayList();
+			for(OrarioApertura orario : crm.getOrarioApertura()) {
+				cal.setTime(sdfOrari.parse(orario.getDataDa()));
+				cal.add(Calendar.YEAR, 1);
+				Date dataDa = cal.getTime();
+				cal.setTime(sdfOrari.parse(orario.getDataA()));
+				cal.add(Calendar.YEAR, 1);
+				Date dataA = cal.getTime();
+				OrarioApertura newOrario = new OrarioApertura();
+				newOrario.setDataDa(sdfOrari.format(dataDa));
+				newOrario.setDataA(sdfOrari.format(dataA));
+				newOrario.setIl(orario.getIl());
+				newOrario.setDalle(orario.getDalle());
+				newOrario.setAlle(orario.getAlle());
+				newOrario.setEccezione(orario.getEccezione());
+				newOrario.setNote(orario.getNote());
+				newOrarioList.add(newOrario);
+			}
+			crm.getOrarioApertura().addAll(newOrarioList);
+			storage.updateCRMOrario(ownerId, crm.getObjectId(), crm.getOrarioApertura(), draft);
+		}
+		return crmList;
+	}
+	
 }
