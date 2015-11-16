@@ -18,6 +18,10 @@ import it.smartcommunitylab.riciclo.model.Tipologia;
 import it.smartcommunitylab.riciclo.model.TipologiaProfilo;
 import it.smartcommunitylab.riciclo.model.TipologiaPuntoRaccolta;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedHashSet;
@@ -32,6 +36,7 @@ import com.google.common.collect.Lists;
 
 public class UIConverter {
 	private static final transient Logger logger = LoggerFactory.getLogger(UIConverter.class);
+	private static SimpleDateFormat sdfOrari = new SimpleDateFormat("yyyy-MM-dd");
 
 	public static List<TipologiaProfiloUI> convertTipologiaProfilo(List<TipologiaProfilo> modelData,
 			String lang, String defaultLang) {
@@ -181,18 +186,40 @@ public class UIConverter {
 	}
 
 	public static List<OrarioAperturaUI> convertOrarioApertura(List<OrarioApertura> modelData,
-			String lang, String defaultLang) {
+			String lang, String defaultLang, boolean filterDateBeforeToday) {
+		Calendar cal = Calendar.getInstance();
+		cal.setTime(new Date());
+		cal.set(Calendar.HOUR_OF_DAY, 0);            // set hour to midnight
+		cal.set(Calendar.MINUTE, 0);                 // set minute in hour
+		cal.set(Calendar.SECOND, 0);                 // set second in minute
+		cal.set(Calendar.MILLISECOND, 0);            // set millis in second
+		Date today = cal.getTime();  		
 		List<OrarioAperturaUI> result = Lists.newArrayList();
 		for(OrarioApertura orario : modelData) {
-			OrarioAperturaUI orarioUI = new OrarioAperturaUI();
-			orarioUI.setDataDa(orario.getDataDa());
-			orarioUI.setDataA(orario.getDataA());
-			orarioUI.setIl(orario.getIl());
-			orarioUI.setDalle(orario.getDalle());
-			orarioUI.setAlle(orario.getAlle());
-			orarioUI.setEccezione(orario.getEccezione());
-			orarioUI.setNote(Utils.getString(orario.getNote(), lang, defaultLang));
-			result.add(orarioUI);
+			boolean addDate = true;
+			if(filterDateBeforeToday) {
+				try {
+					Date calDate = sdfOrari.parse(orario.getDataA());
+					if(calDate.before(today)) {
+						addDate = false;
+					}
+				} catch (ParseException e) {
+					if(logger.isWarnEnabled()) {
+						logger.warn(e.getMessage());
+					}
+				}
+			}
+			if(addDate) {
+				OrarioAperturaUI orarioUI = new OrarioAperturaUI();
+				orarioUI.setDataDa(orario.getDataDa());
+				orarioUI.setDataA(orario.getDataA());
+				orarioUI.setIl(orario.getIl());
+				orarioUI.setDalle(orario.getDalle());
+				orarioUI.setAlle(orario.getAlle());
+				orarioUI.setEccezione(orario.getEccezione());
+				orarioUI.setNote(Utils.getString(orario.getNote(), lang, defaultLang));
+				result.add(orarioUI);
+			}
 		}
 		return result;
 	}
@@ -205,7 +232,7 @@ public class UIConverter {
 			PuntoRaccoltaUI newPR = new PuntoRaccoltaUI();
 			newPR.setAppId(calendario.getOwnerId());
 			newPR.setTipologiaPuntiRaccolta(calendario.getTipologiaPuntoRaccolta());
-			newPR.setOrarioApertura(convertOrarioApertura(calendario.getOrarioApertura(), lang, defaultLang));
+			newPR.setOrarioApertura(convertOrarioApertura(calendario.getOrarioApertura(), lang, defaultLang, true));
 			PuntoRaccoltaUI existingPR = containsPR(newPR, result);
 			if(existingPR == null) {
 				result.add(newPR);
@@ -233,7 +260,7 @@ public class UIConverter {
 			newPR.setLocalizzazione(Utils.convertLocalizzazione(crm.getGeocoding()));
 			newPR.setZona(crm.getZona());
 			newPR.setDettagliZona(crm.getDettagliZona());
-			newPR.setOrarioApertura(convertOrarioApertura(crm.getOrarioApertura(), lang, defaultLang));
+			newPR.setOrarioApertura(convertOrarioApertura(crm.getOrarioApertura(), lang, defaultLang, true));
 			newPR.setCaratteristiche(crm.getCaratteristiche());
 			newPR.setNote(Utils.getString(crm.getNote(), lang, defaultLang));
 			PuntoRaccoltaUI existingPR = containsPR(newPR, result);
