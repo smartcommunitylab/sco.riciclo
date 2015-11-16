@@ -16,6 +16,10 @@
 
         <ion-toggle ng-if="isDevMode" toggle-class="toggle-100r" ng-model="globalSettings.draftEnabled" ng-change="saveDraft()">{{'draft_data_mode' | translate}}</ion-toggle>
 
+        <button ng-if="isDevMode" class="button button-full button-positive" ng-click="saveDraft()">
+            {{'reload_data' | translate}}
+        </button>
+
         <ion-toggle ng-if="!isWebView" ng-model="settings.enableNotifications" toggle-class="toggle-100r" ng-change="saveSettings()">{{'notifications' | translate}}</ion-toggle>
         <div class="setting-info">{{'settings_info' | translate}}</div>
 
