@@ -138,25 +138,36 @@ var raccoltaCtrl = raccoltaApp.controller('userCtrl', function($scope, $http, $q
 	
 	$scope.doSearch = function(item) {
 		var q = $scope.search.toLowerCase();
-		var text = $scope.getAreaName(item.area).toLowerCase();
-		if(text.indexOf(q) != -1) {
-			return true;
+		var text;
+		if($scope.getAreaName(item.area)) {
+			text = $scope.getAreaName(item.area).toLowerCase();
+			if(text.indexOf(q) != -1) {
+				return true;
+			}
 		}
-		text = item.tipologiaUtenza.toLowerCase();
-		if(text.indexOf(q) != -1) {
-			return true;
+		if(item.tipologiaUtenza) {
+			text = item.tipologiaUtenza.toLowerCase();
+			if(text.indexOf(q) != -1) {
+				return true;
+			}
 		}
-		text = item.tipologiaRifiuto.toLowerCase();
-		if(text.indexOf(q) != -1) {
-			return true;
+		if(item.tipologiaRifiuto) {
+			text = item.tipologiaRifiuto.toLowerCase();
+			if(text.indexOf(q) != -1) {
+				return true;
+			}
 		}
-		text = item.tipologiaPuntoRaccolta.toLowerCase();
-		if(text.indexOf(q) != -1) {
-			return true;
+		if(item.tipologiaPuntoRaccolta) {
+			text = item.tipologiaPuntoRaccolta.toLowerCase();
+			if(text.indexOf(q) != -1) {
+				return true;
+			}
 		}
-		text = item.tipologiaRaccolta.toLowerCase();
-		if(text.indexOf(q) != -1) {
-			return true;
+		if(item.tipologiaRaccolta) {
+			text = item.tipologiaRaccolta.toLowerCase();
+			if(text.indexOf(q) != -1) {
+				return true;
+			}
 		}
 		return false;
 	};
@@ -299,7 +310,9 @@ var raccoltaCtrl = raccoltaApp.controller('userCtrl', function($scope, $http, $q
 			element.tipologiaPuntoRaccolta = $scope.selectedTipologiaPuntoRaccolta.objectId;
 			element.tipologiaRaccolta = $scope.selectedTipologiaRaccolta.objectId;
 			element.tipologiaRifiuto = $scope.selectedTipologiaRifiuto.objectId;
-			element.colore = $scope.selectedColore.nome;
+			if($scope.selectedColore) {
+				element.colore = $scope.selectedColore.nome;
+			}
 			element.infoRaccolta[$scope.language] = $scope.infoRaccolta;
 
 			var url = "api/raccolta/" + $scope.profile.appInfo.ownerId + "?draft=" + $scope.draft;
@@ -332,7 +345,9 @@ var raccoltaCtrl = raccoltaApp.controller('userCtrl', function($scope, $http, $q
 				element.tipologiaPuntoRaccolta = $scope.selectedTipologiaPuntoRaccolta.objectId;
 				element.tipologiaRaccolta = $scope.selectedTipologiaRaccolta.objectId;
 				element.tipologiaRifiuto = $scope.selectedTipologiaRifiuto.objectId;
-				element.colore = $scope.selectedColore.nome;
+				if($scope.selectedColore) {
+					element.colore = $scope.selectedColore.nome;
+				}
 				element.infoRaccolta[$scope.language] = $scope.infoRaccolta;
 
 				var url = "api/raccolta/" + $scope.profile.appInfo.ownerId + "/" + element.objectId + "?draft=" + $scope.draft;
