@@ -189,6 +189,7 @@ public class RepositoryManager {
 
 		AppState draft = getAppState(ownerId, true);
 		saveAppVersion(ownerId, draft.getVersion(), false);
+		saveAppVersion(ownerId, draft.getVersion() + 1, true);
 	}
 	
 	public void createApp(DataSetInfo appInfo) {
