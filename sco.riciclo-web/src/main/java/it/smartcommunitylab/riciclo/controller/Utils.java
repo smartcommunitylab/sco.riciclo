@@ -113,13 +113,13 @@ public class Utils {
 	public static void findGestori(Map<String, Area> mapArea, String ownerId, boolean draft,
 			Map<String, Gestore> resultMap, RepositoryManager storage) throws ClassNotFoundException {
 		for(Area area : mapArea.values()) {
-			String gestoreId = area.getGestore();
+			String ragioneSociale = area.getGestore();
 			//find Gestore rows for specific area
-			Criteria criteriaId = new Criteria("objectId").is(gestoreId);
-			Gestore gestore = (Gestore) storage.findOneData(Gestore.class, criteriaId, ownerId, draft) ;
+			Criteria criteriaRS = new Criteria("ragioneSociale").is(ragioneSociale);
+			Gestore gestore = (Gestore) storage.findOneData(Gestore.class, criteriaRS, ownerId, draft) ;
 			//add data to result map
 			if(gestore != null) {
-				resultMap.put(gestoreId, gestore);
+				resultMap.put(gestore.getObjectId(), gestore);
 			}
 		}
 	}
