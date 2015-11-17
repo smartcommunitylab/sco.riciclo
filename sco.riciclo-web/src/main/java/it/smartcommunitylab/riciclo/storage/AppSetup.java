@@ -11,8 +11,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.Resource;
 import org.springframework.stereotype.Component;
-import org.yaml.snakeyaml.Yaml;
-import org.yaml.snakeyaml.constructor.Constructor;
 
 @Component
 public class AppSetup {
@@ -25,13 +23,13 @@ public class AppSetup {
 
 	@PostConstruct
 	public void init() throws IOException {
-		Yaml yaml = new Yaml(new Constructor(AppSetup.class));
-		AppSetup data = (AppSetup) yaml.load(resource.getInputStream());
-		this.apps = data.apps;
-		
-		for (DataSetInfo cred: data.getApps()) {
-			storage.createApp(cred);
-		}
+		this.apps = storage.getAppInfoProduction();
+//		Yaml yaml = new Yaml(new Constructor(AppSetup.class));
+//		AppSetup data = (AppSetup) yaml.load(resource.getInputStream());
+//		this.apps = data.apps;
+//		for (DataSetInfo cred: data.getApps()) {
+//			storage.createApp(cred);
+//		}
 	}
 	
 
@@ -60,4 +58,5 @@ public class AppSetup {
 		}
 		return appsMap.get(username);
 	}
+
 }

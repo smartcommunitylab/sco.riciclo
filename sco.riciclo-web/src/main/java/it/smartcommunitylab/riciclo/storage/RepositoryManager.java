@@ -189,15 +189,20 @@ public class RepositoryManager {
 		AppState draft = getAppState(ownerId, true);
 		saveAppVersion(ownerId, draft.getVersion(), false);
 	}
-
+	
 	public void createApp(DataSetInfo appInfo) {
 		saveAppState(appInfo.getOwnerId(), true);
 		saveAppState(appInfo.getOwnerId(), false);
 		saveAppInfo(appInfo, true);
 		saveAppInfo(appInfo, false);
 	}
-
-	private void saveAppInfo(DataSetInfo appInfo, boolean draft) {
+	
+	public List<DataSetInfo> getAppInfoProduction() {
+		List<DataSetInfo> result = finalTemplate.findAll(DataSetInfo.class);
+		return result;
+	}
+	
+	public void saveAppInfo(DataSetInfo appInfo, boolean draft) {
 		MongoTemplate template = draft ? draftTemplate : finalTemplate;
 		Query query = appQuery(appInfo.getOwnerId());
 		DataSetInfo appInfoDB = template.findOne(query, DataSetInfo.class);
@@ -230,13 +235,30 @@ public class RepositoryManager {
 		}
 	}
 
-	private void saveAppVersion(String ownerId, long version, boolean draft) {
+	public void saveAppVersion(String ownerId, long version, boolean draft) {
 		MongoTemplate template = draft ? draftTemplate : finalTemplate;
 		Query query = appQuery(ownerId);
 		Update update = new Update();
 		update.set("version", version);
 		update.set("timestamp", System.currentTimeMillis());
 		template.upsert(query, update, AppState.class);
+	}
+	
+	public void saveAppToken(String name, String token, boolean draft) {
+		MongoTemplate template = draft ? draftTemplate : finalTemplate;
+		Query query = new Query(new Criteria("name").is(name));
+		Token tokenDB = template.findOne(query, Token.class);
+		if(tokenDB == null) {
+			Token newToken = new Token();
+			newToken.setToken(token);
+			newToken.setName(name);
+			newToken.getPaths().add("/api");
+			template.save(newToken);
+		} else {
+			Update update = new Update();
+			update.set("token", token);
+			template.updateFirst(query, update, Token.class);
+		}
 	}
 
 	public List<?> findRifiuti(String className, String ownerId, boolean draft) throws ClassNotFoundException {
@@ -853,12 +875,17 @@ public class RepositoryManager {
 //	}
 
 	public void updateTipologie(String ownerId, Set<Tipologia> data, String tipologia,
-			boolean draft) throws ClassNotFoundException, EntityNotFoundException  {
+			boolean draft) throws ClassNotFoundException {
 		MongoTemplate template = draft ? draftTemplate : finalTemplate;
 		Query query = new Query(new Criteria("ownerId").is(ownerId));
 		Categorie categorieDB = template.findOne(query, Categorie.class);
 		if (categorieDB == null) {
-			throw new EntityNotFoundException(String.format("Categorie with ownerId %s not found", ownerId));
+			Categorie categorie = new Categorie();
+			Date actualDate = new Date();
+			categorie.setCreationDate(actualDate);
+			categorie.setLastUpdate(actualDate);
+			categorie.setOwnerId(ownerId);
+			template.save(categorie);
 		}
 		Update update = new Update();
 		update.set("lastUpdate", new Date());
@@ -1012,5 +1039,5 @@ public class RepositoryManager {
 		}
 		template.findAndRemove(query, Segnalazione.class);
 	}
-
+	
 }

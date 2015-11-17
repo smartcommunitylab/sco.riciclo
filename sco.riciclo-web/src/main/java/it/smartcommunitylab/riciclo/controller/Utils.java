@@ -274,8 +274,15 @@ public class Utils {
 						req.setAttribute("resources",	matchedToken.getResources());
 					}
 					// check ( resources *)
-					if (matchedToken.getPaths().contains("*") || matchedToken.getPaths().contains(uriPath)) {
+					if (matchedToken.getPaths().contains("*")) {
 						result = true;
+					} else {
+						for(String resourcePath : matchedToken.getPaths()) {
+							if(uriPath.contains(resourcePath)) {
+								result = true;
+								break;
+							}
+						}
 					}
 				}
 			}

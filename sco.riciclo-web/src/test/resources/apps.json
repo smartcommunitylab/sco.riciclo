@@ -1,0 +1,51 @@
+{
+	"apps": [
+	{
+		"_class": "it.smartcommunitylab.riciclo.storage.DataSetInfo",
+		"ownerId": "ADMIN",
+		"password": "88td4fMg",
+		"token": "IprdYBHM3CBjmeCr",
+		"modelElements": ["modello"],
+		"comuni": []
+	},
+	{
+		"_class": "it.smartcommunitylab.riciclo.storage.DataSetInfo",
+		"ownerId": "ASIA",
+		"password": "ASIA",
+		"token": "L2MEq8WPbTAIT134",
+		"modelElements": ["modello"],
+		"comuni": ["022003", "022091", "022058"]
+	},
+	{
+		"_class": "it.smartcommunitylab.riciclo.storage.DataSetInfo",
+		"ownerId": "GIUDICARIE",
+		"password": "GIUDICARIE",
+		"token": "a1jgUpPlWjDS4XvS",
+		"modelElements": ["modello", "isole", "crm"],
+		"comuni": ["022017", "022083", "022182", "022183"]
+	},
+	{
+		"_class": "it.smartcommunitylab.riciclo.storage.DataSetInfo",
+		"ownerId": "TRENTO",
+		"password": "TRENTO",
+		"token": "p9UsNTji7TVScy3G",
+		"modelElements": ["modello"],
+		"comuni": ["022205"]
+	},
+	{
+		"_class": "it.smartcommunitylab.riciclo.storage.DataSetInfo",
+		"ownerId": "ROVERETO",
+		"password": "ROVERETO",
+		"token": "bIjHHWrWQBJK1PIK",
+		"modelElements": ["modello"],
+		"comuni": ["022161"]
+	},
+	{
+		"_class": "it.smartcommunitylab.riciclo.storage.DataSetInfo",
+		"ownerId": "RIAPP",
+		"password": "RIAPP",
+		"token": "LvnSc8pA83dfX7mX",
+		"modelElements": ["modello"],
+		"comuni": ["093004"]
+	}]
+}
