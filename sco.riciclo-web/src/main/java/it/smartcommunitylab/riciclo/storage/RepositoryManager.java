@@ -29,6 +29,7 @@ import it.smartcommunitylab.riciclo.model.Istituzione;
 import it.smartcommunitylab.riciclo.model.OrarioApertura;
 import it.smartcommunitylab.riciclo.model.PuntoRaccolta;
 import it.smartcommunitylab.riciclo.model.Raccolta;
+import it.smartcommunitylab.riciclo.model.RiappConf;
 import it.smartcommunitylab.riciclo.model.Riciclabolario;
 import it.smartcommunitylab.riciclo.model.Rifiuto;
 import it.smartcommunitylab.riciclo.model.Segnalazione;
@@ -360,6 +361,26 @@ public class RepositoryManager {
 		} else {
 			return new ArrayList<String>();
 		}
+	}
+	
+	public List<RiappConf> findRiappAree(String ownerId, boolean draft) throws ClassNotFoundException {
+		List<RiappConf> result = Lists.newArrayList();
+		for(DataSetInfo appInfo : appSetup.getApps()) {
+			if(appInfo.getOwnerId().contains(ownerId)) {
+				for(String codiceISTAT : appInfo.getComuni()) {
+					List<Area> areaList = Utils.findAreaByComune(codiceISTAT, appInfo.getOwnerId(), draft, this);
+					if(!areaList.isEmpty()) {
+						Area comuneArea = areaList.get(0);
+						RiappConf riappConf = new RiappConf();
+						riappConf.setOwnerId(appInfo.getOwnerId());
+						riappConf.setCodiceISTAT(codiceISTAT);
+						riappConf.setComune(comuneArea.getNome());
+						result.add(riappConf);
+					}
+				}
+			}
+		}
+		return result;
 	}
 
 	public List<?> findData(Class<?> entityClass, Criteria criteria, String ownerId, boolean draft)

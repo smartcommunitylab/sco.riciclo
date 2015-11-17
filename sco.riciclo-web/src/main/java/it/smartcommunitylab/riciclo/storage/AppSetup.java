@@ -8,15 +8,13 @@ import java.util.Map;
 import javax.annotation.PostConstruct;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.core.io.Resource;
 import org.springframework.stereotype.Component;
 
 @Component
 public class AppSetup {
 
-	@Value("classpath:/apps-info.yml")
-	private Resource resource;
+//	@Value("classpath:/apps-info.yml")
+//	private Resource resource;
 	
 	@Autowired
 	private RepositoryManager storage;	
@@ -24,6 +22,7 @@ public class AppSetup {
 	@PostConstruct
 	public void init() throws IOException {
 		this.apps = storage.getAppInfoProduction();
+		this.appsMap = null;
 //		Yaml yaml = new Yaml(new Constructor(AppSetup.class));
 //		AppSetup data = (AppSetup) yaml.load(resource.getInputStream());
 //		this.apps = data.apps;
