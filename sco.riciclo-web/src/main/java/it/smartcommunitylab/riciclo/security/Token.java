@@ -1,5 +1,6 @@
 package it.smartcommunitylab.riciclo.security;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Token {
@@ -10,9 +11,9 @@ public class Token {
 	/** expiration. **/
 	private long expiration;
 	/** resources. **/
-	private List<String> resources;
+	private List<String> resources = new ArrayList<String>();
 	/** paths. **/
-	private List<String> paths;
+	private List<String> paths = new ArrayList<String>();
 	/** name. **/
 	private String name;
 

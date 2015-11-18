@@ -112,21 +112,30 @@ var riciclabolarioCtrl = riciclabolarioApp.controller('userCtrl', function($scop
 	
 	$scope.doSearch = function(item) {
 		var q = $scope.search.toLowerCase();
-		var text = $scope.getAreaName(item.area).toLowerCase();
-		if(text.indexOf(q) != -1) {
-			return true;
+		var text;
+		if($scope.getAreaName(item.area)) {
+			text = $scope.getAreaName(item.area).toLowerCase();
+			if(text.indexOf(q) != -1) {
+				return true;
+			}
 		}
-		text = item.tipologiaUtenza.toLowerCase();
-		if(text.indexOf(q) != -1) {
-			return true;
+		if(item.tipologiaUtenza) {
+			text = item.tipologiaUtenza.toLowerCase();
+			if(text.indexOf(q) != -1) {
+				return true;
+			}
 		}
-		text = item.tipologiaRifiuto.toLowerCase();
-		if(text.indexOf(q) != -1) {
-			return true;
+		if(item.tipologiaRifiuto) {
+			text = item.tipologiaRifiuto.toLowerCase();
+			if(text.indexOf(q) != -1) {
+				return true;
+			}
 		}
-		text = $scope.getRifiutoName(item.rifiuto).toLowerCase();
-		if(text.indexOf(q) != -1) {
-			return true;
+		if($scope.getRifiutoName(item.rifiuto)) {
+			text = $scope.getRifiutoName(item.rifiuto).toLowerCase();
+			if(text.indexOf(q) != -1) {
+				return true;
+			}
 		}
 		return false;
 	};

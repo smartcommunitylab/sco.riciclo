@@ -16,8 +16,8 @@
 
 package it.smartcommunitylab.riciclo.controller;
 
-import it.smartcommunitylab.riciclo.model.Notification;
 import it.smartcommunitylab.riciclo.model.AppDataRifiuti;
+import it.smartcommunitylab.riciclo.model.RiappConf;
 import it.smartcommunitylab.riciclo.presentation.AppDataRifiutiUI;
 import it.smartcommunitylab.riciclo.presentation.UIConverter;
 import it.smartcommunitylab.riciclo.storage.App;
@@ -40,11 +40,13 @@ import javax.servlet.http.HttpSession;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
@@ -58,6 +60,7 @@ public class AppDataRifiutiController {
 
 	@Autowired
 	private RepositoryManager storage;
+	
 	@Autowired
 	private NotificationManager notificationManager;
 
@@ -104,7 +107,7 @@ public class AppDataRifiutiController {
 //	}
 
 	@RequestMapping(method = RequestMethod.GET, value = "/appDescriptor/{ownerId}")
-	public App appState(HttpServletResponse response, @PathVariable String ownerId) {
+	public @ResponseBody App appState(HttpServletResponse response, @PathVariable String ownerId) {
 		App app = storage.getAppDescriptor(ownerId);
 		app.getAppInfo().setPassword("*****");
 		app.getAppInfo().setToken("*****");
@@ -112,17 +115,25 @@ public class AppDataRifiutiController {
 	}
 
 	@RequestMapping(method = RequestMethod.GET, value = "/comuni/{ownerId}")
-	public List<String> appComuni(HttpServletResponse response, @PathVariable String ownerId) {
+	public @ResponseBody List<String> appComuni(HttpServletResponse response, @PathVariable String ownerId) {
 		return storage.getComuniList(ownerId, false);
 	}
 
 	@RequestMapping(method = RequestMethod.GET, value = "/comuni/{ownerId}/draft")
-	public List<String> appComuniDraft(HttpServletResponse response, @PathVariable String ownerId) {
+	public @ResponseBody List<String> appComuniDraft(HttpServletResponse response, @PathVariable String ownerId) {
 		return storage.getComuniList(ownerId, true);
+	}
+	
+	@RequestMapping(method = RequestMethod.GET, value = "/riapp/{ownerId}")
+	public @ResponseBody List<RiappConf> riappConf(@PathVariable String ownerId,
+			HttpServletRequest request, HttpServletResponse response) throws Exception {
+		boolean draft = Utils.getDraft(request);
+		List<RiappConf> result = storage.findRiappAree(ownerId, draft);
+		return result;
 	}
 
 	@RequestMapping(method = RequestMethod.GET, value = "/appdata/{ownerId}")
-	public AppDataRifiutiUI getDataByComuni(@PathVariable String ownerId, HttpServletRequest request) {
+	public @ResponseBody AppDataRifiutiUI getDataByComuni(@PathVariable String ownerId, HttpServletRequest request) {
 		String lang = request.getParameter("lang");
 		boolean draft = Utils.getDraft(request);
 		List<String> comuni = Lists.newArrayList();
@@ -207,6 +218,13 @@ public class AppDataRifiutiController {
 		result.getCategorie().setTipologiaPuntiRaccolta(UIConverter.convertTipologiaPuntoRaccolta(appData.getTipologiaPuntiRaccolta(),
 				lang, defaultLang));
 		return result;
+	}
+	
+	@ExceptionHandler(Exception.class)
+	@ResponseStatus(value=HttpStatus.INTERNAL_SERVER_ERROR)
+	@ResponseBody
+	public Map<String,String> handleError(HttpServletRequest request, Exception exception) {
+		return Utils.handleError(exception);
 	}
 
 }

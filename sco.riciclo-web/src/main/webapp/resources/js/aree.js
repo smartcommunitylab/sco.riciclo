@@ -116,21 +116,30 @@ var areeCtrl = areeApp.controller('userCtrl', function($scope, $http, $q, DataSe
 	
 	$scope.doSearch = function(item) {
 		var q = $scope.search.toLowerCase();
-		var text = $scope.getAreaName(item.parent).toLowerCase();
-		if(text.indexOf(q) != -1) {
-			return true;
+		var text;
+		if($scope.getAreaName(item.parent)) {
+			text = $scope.getAreaName(item.parent).toLowerCase();
+			if(text.indexOf(q) != -1) {
+				return true;
+			}
 		}
-		text = item.nome.toLowerCase();
-		if(text.indexOf(q) != -1) {
-			return true;
+		if(item.nome) {
+			text = item.nome.toLowerCase();
+			if(text.indexOf(q) != -1) {
+				return true;
+			}
 		}
-		text = item.codiceISTAT.toLowerCase();
-		if(text.indexOf(q) != -1) {
-			return true;
+		if(item.codiceISTAT) {
+			text = item.codiceISTAT.toLowerCase();
+			if(text.indexOf(q) != -1) {
+				return true;
+			}
 		}
-		text = $scope.getAreaEtichetta(item.objectId).toLowerCase();
-		if(text.indexOf(q) != -1) {
-			return true;
+		if($scope.getAreaEtichetta(item.objectId)) {
+			text = $scope.getAreaEtichetta(item.objectId).toLowerCase();
+			if(text.indexOf(q) != -1) {
+				return true;
+			}
 		}
 		return false;
 	};

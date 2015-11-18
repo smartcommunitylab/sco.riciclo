@@ -74,17 +74,24 @@ var segnalazioniCtrl = segnalazioniApp.controller('userCtrl', function($scope, $
 	
 	$scope.doSearch = function(item) {
 		var q = $scope.search.toLowerCase();
-		var text = $scope.getAreaName(item.area).toLowerCase();
-		if(text.indexOf(q) != -1) {
-			return true;
+		var text;
+		if($scope.getAreaName(item.area)) {
+			text = $scope.getAreaName(item.area).toLowerCase();
+			if(text.indexOf(q) != -1) {
+				return true;
+			}
 		}
-		text = item.tipologia[$scope.language].toLowerCase();
-		if(text.indexOf(q) != -1) {
-			return true;
+		if(item.tipologia[$scope.language]) {
+			text = item.tipologia[$scope.language].toLowerCase();
+			if(text.indexOf(q) != -1) {
+				return true;
+			}
 		}
-		text = item.email.toLowerCase();
-		if(text.indexOf(q) != -1) {
-			return true;
+		if(item.email) {
+			text = item.email.toLowerCase();
+			if(text.indexOf(q) != -1) {
+				return true;
+			}
 		}
 		return false;
 	};

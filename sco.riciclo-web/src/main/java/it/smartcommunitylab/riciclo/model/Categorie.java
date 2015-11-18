@@ -16,16 +16,17 @@
 
 package it.smartcommunitylab.riciclo.model;
 
+import java.util.HashSet;
 import java.util.Set;
 
 public class Categorie extends BaseObject {
 
-	private Set<Tipologia> tipologiaUtenza;
+	private Set<Tipologia> tipologiaUtenza = new HashSet<Tipologia>();
 //	private Set<Tipologia> tipologiaIstituzione;
-	private Set<Tipologia> tipologiaRifiuto;
-	private Set<Tipologia> tipologiaRaccolta;
+	private Set<Tipologia> tipologiaRifiuto = new HashSet<Tipologia>();
+	private Set<Tipologia> tipologiaRaccolta = new HashSet<Tipologia>();
 //	private Set<Tipologia> tipologiaPuntiRaccolta;
-	private Set<Tipologia> caratteristicaPuntoRaccolta;
+	private Set<Tipologia> caratteristicaPuntoRaccolta = new HashSet<Tipologia>();
 	
 	public Set<Tipologia> getTipologiaUtenza() {
 		return tipologiaUtenza;

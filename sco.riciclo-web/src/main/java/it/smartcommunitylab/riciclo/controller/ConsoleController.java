@@ -20,9 +20,12 @@ import it.smartcommunitylab.riciclo.app.importer.FileList;
 import it.smartcommunitylab.riciclo.app.importer.ImportConstants;
 import it.smartcommunitylab.riciclo.app.importer.ImportError;
 import it.smartcommunitylab.riciclo.app.importer.ImportManager;
+import it.smartcommunitylab.riciclo.exception.UnauthorizedException;
+import it.smartcommunitylab.riciclo.model.CalendarioRaccolta;
 import it.smartcommunitylab.riciclo.security.AppDetails;
 import it.smartcommunitylab.riciclo.storage.App;
 import it.smartcommunitylab.riciclo.storage.AppSetup;
+import it.smartcommunitylab.riciclo.storage.DataSetInfo;
 import it.smartcommunitylab.riciclo.storage.RepositoryManager;
 
 import java.util.Map;
@@ -37,6 +40,8 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -197,7 +202,7 @@ public class ConsoleController {
 		}
 		return res;
 	}
-	
+		
 	private String getOwnerId() {
 		AppDetails details = (AppDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		String app = details.getUsername();
