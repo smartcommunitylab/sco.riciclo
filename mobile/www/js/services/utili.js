@@ -9,7 +9,7 @@ angular.module('rifiuti.services.utili', [])
     };
 })
 
-.factory('ConnectionErrorService', function($ionicPopup) {
+.factory('ConnectionErrorService', function($ionicPopup,$filter) {
   return {
     show : function() {
         var popup = $ionicPopup.show({
