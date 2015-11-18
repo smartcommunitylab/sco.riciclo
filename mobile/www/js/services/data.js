@@ -612,7 +612,10 @@ angular.module('rifiuti.services.data', [])
             // - check version
         },
         getSync: function (key) {
-            return profileData[key];
+            if(profileData){
+                return profileData[key];
+            }
+            return null;
         }
     };
 });
