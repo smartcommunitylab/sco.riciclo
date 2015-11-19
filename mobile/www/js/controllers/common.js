@@ -127,13 +127,14 @@ angular.module('rifiuti.controllers.common', ['ionic'])
 
 })
 
-.controller('SettingsCtrl', function ($scope, $rootScope, $ionicScrollDelegate, Raccolta, Profili) {
+.controller('SettingsCtrl', function ($scope, $rootScope, $ionicScrollDelegate, $timeout, Raccolta, Profili) {
     /*$scope.mainScrollResize = function () {
         $ionicScrollDelegate.$getByHandle('mainScroll').resize();
     }*/
 
     $scope.papTypes = $rootScope.selectedProfile.PaP;
     $scope.settings = $rootScope.selectedProfile.settings;
+    $scope.timingLoad = true;
 
     $scope.timepickerSlots = {
         format: 24,
@@ -144,10 +145,19 @@ angular.module('rifiuti.controllers.common', ['ionic'])
         Profili.saveAll();
     };
 
+    $scope.$watch('settings.notificationsTime', function(newValue, oldValue) {
+        if(!!newValue && (newValue!=oldValue)){
+            Profili.saveAll();
+        }
+    });
     $rootScope.$watch('selectedProfile', function (a, b) {
         if (b == null || a.id != b.id) {
             $scope.papTypes = a.PaP;
             $scope.settings = a.settings;
+            $scope.timingLoad = false;
+            $timeout(function() {
+              $scope.timingLoad = true;
+            },0);
         }
     });
 })
