@@ -6,23 +6,28 @@ angular.module('rifiuti.services.data', [])
 
     var LOCAL_DATA_URL = 'data/data.zip';
     var VERSION_URL = ENDPOINT_URL + '/appDescriptor/' + APP_ID;
+    var RIAPP_URL = ENDPOINT_URL + '/riapp/RIAPP';
 
     //var LANG = 'IT';
     //var COMUNI_LIST = ['022003','022034'];
+    var RIAPP_ID = "RIAPP";
 
-    var completeDataPrefix = APP_ID+"_completeData";
-    var categorieMapPrefix = APP_ID+"_categorieMap";
-    var areeMapPrefix = APP_ID+"_areeMap";
-    var tipoProfiloMapPrefix = APP_ID+"_tipoProfiloMap";
-    var globalSettingsPrefix = APP_ID+"_globalSettings";
-    var profileDataPrefix = APP_ID+"_profileData";
-    var profilesPrefix = APP_ID+"_profiles";
-    var selectedProfileIdPrefix = APP_ID+"_selectedProfileId";
-    var tutorialPrefix = APP_ID+"_tutorial";
-    var versionPrefix = APP_ID+"_version";
-    var isDevModePrefix = APP_ID+"_isDevMode";
-    var colorCodeMapPrefix = APP_ID+"_colorCodeMap";
+    var completeDataPrefix = RIAPP_ID+"_completeData";
+    var categorieMapPrefix = RIAPP_ID+"_categorieMap";
+    var areeMapPrefix = RIAPP_ID+"_areeMap";
+    var tipoProfiloMapPrefix = RIAPP_ID+"_tipoProfiloMap";
+    var globalSettingsPrefix = RIAPP_ID+"_globalSettings";
+    var profileDataPrefix = RIAPP_ID+"_profileData";
+    var profilesPrefix = RIAPP_ID+"_profiles";
+    var selectedProfileIdPrefix = RIAPP_ID+"_selectedProfileId";
+    var tutorialPrefix = RIAPP_ID+"_tutorial";
+    var versionPrefix = RIAPP_ID+"_version";
+    var isDevModePrefix = RIAPP_ID+"_isDevMode";
+    var colorCodeMapPrefix = RIAPP_ID+"_colorCodeMap";
+    var riappData = "riappData";
+    var riappDataMap = null;
 
+    var riappDataList = null;
     var dataURL = LOCAL_DATA_URL;
 
     var completeData = null;
@@ -290,7 +295,7 @@ angular.module('rifiuti.services.data', [])
             deferred.resolve({
                 data: profileData.categorie.tipologiaPuntiRaccolta
             });
-        } else {
+        }else {
             console.log('USING OLD FILE! ' + url);
             $http.get(url).then(function (results) {
                 deferred.resolve(results);
@@ -299,6 +304,17 @@ angular.module('rifiuti.services.data', [])
 
         return deferred.promise;
     };
+
+    var getRiappData = function(){
+        if(!!riappDataList){
+            return riappDataList;
+        }else if(localStorage[riappData]){
+            return JSON.parse(localStorage[riappData]);
+        }
+
+        return null;
+    }
+
 
     var saveLang = function () {
         var deferred = $q.defer();
@@ -316,6 +332,24 @@ angular.module('rifiuti.services.data', [])
 
         return deferred.promise;
     };
+
+   //var getLocalitaByProfile = function (profileId){
+   //    var deferred = $q.defer();
+
+   //    process(getDataURL(true)).then(function (result) {
+   //        if(result){
+   //            localStorage[globalSettingsPrefix] = JSON.stringify($rootScope.globalSettings);
+   //        }
+
+   //        deferred.resolve(result);
+   //    },
+   //    function (result) {
+   //        deferred.resolve(result);
+   //    });
+
+   //    return deferred.promise;
+
+   //}
 
     var saveDraft = function () {
         var deferred = $q.defer();
@@ -460,14 +494,6 @@ angular.module('rifiuti.services.data', [])
         return returnItem;
     }
 
-    //var saveProfiliByNewLang(){
-    //    var profiles = getProfiles();
-    //    $rootScope.profili.forEach(function (profilo){
-    //
-    //
-    //    })
-    //}
-
     var getProfilesAreaById = function(areaId){
        if (areeMap == null) {
             if (localStorage[areeMapPrefix]) {
@@ -496,14 +522,87 @@ angular.module('rifiuti.services.data', [])
         return null;
     }
 
+    var getRiappById = function(riappId){
+        if(!!riappDataMap && !!riappDataMap[riappId]){
+            return riappDataMap[riappId];
+        }
+
+        return null;
+    }
+
+    var setRiappDataMap = function(data){
+        riappDataMap = {};
+        data.forEach(function (riapp) {
+            riappDataMap[riapp.ownerId] = riapp;
+        });
+    }
+
+    var setRiapp = function(deferred, data){
+        riappDataList = data;
+        setRiappDataMap(data);
+
+        if(localStorage){
+            localStorage[riappData] = JSON.stringify(data);
+        }else{
+            localStorage[riappData] = "[]";
+        }
+
+        deferred.resolve(true);
+    }
+
+    var getRiappUrl = function(){
+        if (getDraftEnabled()) {
+            return RIAPP_URL + '?draft=true';
+        } else {
+            return RIAPP_URL + '?draft=false';
+        }
+    }
+
+    var setAvailableAppAndComuni = function () {
+        var deferred = $q.defer();
+        var riappURL = getRiappUrl();
+        ///TODO
+        $http.get(riappURL)
+                .success(function (data) {
+                    setRiapp(deferred, data);
+                })
+                .error(function (e) {
+                    deferred.resolve(false);
+                });
+        return deferred.promise;
+    }
+
+    var processRiappById = function(){
+        var deferred = $q.defer();
+
+        process(getRiappDataURL()).then(function (result) {
+                deferred.resolve(result);
+            },
+            function (result) {
+                deferred.resolve(result);
+            });
+
+        return deferred.promise;
+    }
+
+    var getRiappDataURL = function(){
+        if (getDraftEnabled()) {
+            //return ENDPOINT_URL + '/draft/' + APP_ID + '/zip';
+            return ENDPOINT_URL + '/zip/' + getRiappID() + '?lang=' + getSelectedLang() + '&draft=true' + getComuneString();
+        } else {
+            //http://localhost:8000/riciclo/zip/TRENTO?lang=it&draft=true&comune[]=022205
+            return ENDPOINT_URL + '/zip/' + getRiappID() + '?lang=' + getSelectedLang() + '&draft=false' + getComuneString();
+        }
+    }
+
     var getDataURL = function (remote) {
         if (remote) {
             if (getDraftEnabled()) {
                 //return ENDPOINT_URL + '/draft/' + APP_ID + '/zip';
-                return ENDPOINT_URL + '/zip/' + APP_ID + '?lang=' + getSelectedLang() + '&draft=true' + getComuniString();
+                return ENDPOINT_URL + '/zip/' + RIAPP_ID + '?lang=' + getSelectedLang() + '&draft=true' + getComuniString();
             } else {
                 //http://localhost:8000/riciclo/zip/TRENTO?lang=it&draft=true&comune[]=022205
-                return ENDPOINT_URL + '/zip/' + APP_ID + '?lang=' + getSelectedLang() + '&draft=false' + getComuniString();
+                return ENDPOINT_URL + '/zip/' + RIAPP_ID + '?lang=' + getSelectedLang() + '&draft=false' + getComuniString();
             }
         } else {
             return LOCAL_DATA_URL;
@@ -524,6 +623,22 @@ angular.module('rifiuti.services.data', [])
         }else{
             return USE_DRAFT;
         }
+    }
+
+    var getComuneString = function(){
+        if($rootScope.selectedRiappData.codiceISTAT){
+            return '&comune[]='+$rootScope.selectedRiappData.codiceISTAT;
+        }
+
+        return "";
+    }
+
+    var getRiappID = function(){
+        if($rootScope.selectedRiappData.ownerId){
+            return $rootScope.selectedRiappData.ownerId;
+        }
+
+        return "";
     }
 
     var getComuniString = function(){
@@ -585,6 +700,14 @@ angular.module('rifiuti.services.data', [])
         getIconById: getIconById,
         getProfilesAreaById:getProfilesAreaById,
         getProfileTypeById:getProfileTypeById,
+        setAvailableAppAndComuni:setAvailableAppAndComuni,
+        getRiappData:getRiappData,
+        setRiapp:setRiapp,
+        setRiappDataMap:setRiappDataMap,
+        getRiappById:getRiappById,
+        processRiappById:processRiappById,
+        getRiappDataURL:getRiappDataURL,
+        getComuneString:getComuneString,
         updateProfiles: function (newProfiles) {
             profili = newProfiles;
             updateProfileData();

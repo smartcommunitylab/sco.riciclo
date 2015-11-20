@@ -197,6 +197,24 @@ angular.module('rifiuti.services.rifiuti', [])
       });
       return deferred.promise;
     },
+    areeForTipoUtenzaUnique: function() {
+      var deferred = $q.defer();
+      DataManager.get('data/db/aree.json').then(function (results) {
+        var data=results.data;
+        var res = [];
+        for (var i =0; i < data.length; i++) {
+            var a = data[i];
+            if (!!a.etichetta) {
+                res.push(a);
+            }
+        }
+        res.sort(function(a,b) {
+            return a.etichetta.localeCompare(b.etichetta);
+        });
+        deferred.resolve(res);
+      });
+      return deferred.promise;
+    },
     areeForTipoUtenza: function(profile) {
       var deferred = $q.defer();
       DataManager.get('data/db/aree.json').then(function (results) {

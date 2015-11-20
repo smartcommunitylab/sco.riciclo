@@ -259,6 +259,10 @@ angular.module('rifiuti.services.profili', [])
         });
     };
 
+    ProfiliFactory.availableRiappData = function () {
+        return DataManager.getRiappData();
+    };
+
     ProfiliFactory.add = function (name, utenza, area) {
         if (!byname(name)) {
             var id = "" + new Date().getTime();

@@ -1,4 +1,5 @@
 ITALIAN_VERSION = {
+        comuni: "Comuni",
         reload_data: "Ricarica i Dati",
         porta_a_porta: "Porta a Porta",
         connection_error: "La connessione con il server non è disponibile",
@@ -129,6 +130,7 @@ ITALIAN_VERSION = {
 };
 
 ENGLISH_VERSION = {
+        comuni: "Municipalities",
         reload_data: "Reload Data",
         porta_a_porta: "Curbside Collection",
         connection_error: "The connection to the server is unavailable",

@@ -22,21 +22,26 @@ angular.module('rifiuti.controllers.common', ['ionic'])
         return Raccolta.hasSegnalazioni();
     };
 
-    var profiles = DataManager.getProfiles();
-    //localStorage.removeItem('profiles');
-    if (!profiles || profiles.length == 0) {
-        $rootScope.promptedToProfile = true;
-        $location.path("app/aggProfilo");
-        DataManager.checkVersion($rootScope.profili).then(function () {
-            $rootScope.loadingHide();
-        });
-    } else {
-        Profili.read();
-        Profili.select(Profili.selectedProfileIndex());
-        DataManager.checkVersion($rootScope.profili).then(function () {
-            $rootScope.loadingHide();
-        });
-        Profili.updateNotifications();
+
+    if($rootScope.isOnline||true){
+        var profiles = DataManager.getProfiles();
+        //localStorage.removeItem('profiles');
+        if (!profiles || profiles.length == 0) {
+            $rootScope.promptedToProfile = true;
+            $location.path("app/aggProfiloUnique");
+            DataManager.setAvailableAppAndComuni().then(function (result) {
+                if(result){
+                    $rootScope.loadingHide();
+                }
+            });
+        } else {
+            Profili.read();
+            Profili.select(Profili.selectedProfileIndex());
+            DataManager.checkVersion($rootScope.profili).then(function () {
+                $rootScope.loadingHide();
+            });
+            Profili.updateNotifications();
+        }
     }
 })
 

@@ -134,7 +134,8 @@ angular.module('rifiuti', [
     $ionicConfigProvider.backButton.text('');
 })
 
-.run(function ($ionicPlatform, $rootScope, $ionicNavBarDelegate, $ionicHistory, $translate, $ionicPopup, $filter, $state, Profili, Utili, GeoLocate, $cordovaSplashscreen, $ionicLoading, $ionicConfig, DataManager) {
+.run(function ($ionicPlatform, $rootScope, $ionicNavBarDelegate, $ionicHistory, $translate, $ionicPopup, $filter, $state, Profili, Utili, GeoLocate, $cordovaSplashscreen, $ionicLoading, $cordovaNetwork, $ionicConfig, DataManager) {
+    console.log('app .run!!!!!!');
     $rootScope.version = VERSION;
 
     $rootScope.isWebView = ionic.Platform.isWebView();
@@ -261,6 +262,17 @@ angular.module('rifiuti', [
     $ionicPlatform.registerBackButtonAction(backCallback, 100);
 
     $ionicPlatform.ready(function () {
+        console.log("ionicPlatform.ready!");
+        if(navigator.connection){
+            $rootScope.network = $cordovaNetwork.getNetwork();
+            console.log("network: "+$rootScope.network);
+            $rootScope.isOnline = $cordovaNetwork.isOnline();
+            console.log("isOnline: "+$rootScope.isOnline);
+        }else{
+            $rootScope.network = null;
+            $rootScope.isOnline = null;
+        }
+
         $rootScope.platform = ionic.Platform;
         $rootScope.backButtonStyle = $ionicConfig.backButton.icon();
 
@@ -578,6 +590,16 @@ angular.module('rifiuti', [
             'menuContent': {
                 templateUrl: "templates/modificaProfilo.html",
                 controller: 'ModificaProfiloCtrl'
+            }
+        }
+    })
+
+    .state('app.aggProfiloUnique', {
+        url: "/aggProfiloUnique",
+        views: {
+            'menuContent': {
+                templateUrl: "templates/modificaProfiloUnique.html",
+                controller: 'ModificaProfiloUniqueCtrl'
             }
         }
     })
