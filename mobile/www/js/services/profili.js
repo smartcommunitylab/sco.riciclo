@@ -2,9 +2,10 @@ angular.module('rifiuti.services.profili', [])
 
 .factory('Profili', function (DataManager, $rootScope, $filter, Raccolta, Calendar, Utili) {
     var ProfiliFactory = {};
-    var profilesPrefix = APP_ID+"_profiles";
-    var selectedProfileIdPrefix = APP_ID+"_selectedProfileId";
-    var notesPrefix = APP_ID+"_notes";
+    var RIAPP_ID = "RIAPP";
+    var profilesPrefix = RIAPP_ID+"_profiles";
+    var selectedProfileIdPrefix = RIAPP_ID+"_selectedProfileId";
+    var notesPrefix = RIAPP_ID+"_notes";
 
     var toMessage = function (typemap) {
         var lines = [];
@@ -106,6 +107,30 @@ angular.module('rifiuti.services.profili', [])
         ProfiliFactory.updateNotifications();
         ProfiliFactory.select(profileIndex);
     };
+
+    var saveUnique = function(){
+        buildAreeUnique($rootScope.profili[0]);
+        buildPaPUnique($rootScope.profili[0]);
+        buildSettings($rootScope.profili[0]);
+
+        return DataManager.get('data/db/tipologiaUtenza.json').then(function (results) {
+            $rootScope.profili[0].utenza = {
+                tipologiaUtenza: results.data[0].id
+            }
+            //$rootScope.profili[0].utenza.tipologiaUtenza = results.data[0].id;
+        });
+
+        localStorage[profilesPrefix] = JSON.stringify($rootScope.profili);
+
+        // update
+        ProfiliFactory.read();
+        var profileIndex = 0;
+
+        DataManager.updateProfiles($rootScope.profili);
+        ProfiliFactory.updateNotifications();
+        ProfiliFactory.select(profileIndex);
+
+    }
 
     var indexof = function (id) {
         for (var pi = 0; pi < $rootScope.profili.length; pi++) {
@@ -217,12 +242,45 @@ angular.module('rifiuti.services.profili', [])
         //p.comuni=myComuni;
     };
 
+    var buildAreeUnique = function (p) {
+        var myAree = [];
+        var myGestori = [];
+        var myIstituzioni = [];
+        var areeList = DataManager.getSync('aree');
+        areeList.forEach(function (area, ai, dbAree) {
+            if (area.id == p.area.id) {
+                myAree.push(area.id);
+                myIstituzioni.push(area.istituzione);
+                myGestori.push(area.gestore);
+
+                treeWalkUp(dbAree, area.parent, 'id', myAree);
+                treeWalkUp(dbAree, area.parent, 'istituzione', myIstituzioni);
+                treeWalkUp(dbAree, area.parent, 'gestore', myGestori);
+            }
+        });
+        p.aree = myAree;
+        p.gestori = myGestori;
+        p.istituzioni = myIstituzioni;
+        //p.comuni=myComuni;
+    };
+
     var buildPaP = function (p) {
         var data = DataManager.getSync('raccolta');
         var res = [];
         for (var i = 0; i < data.length; i++) {
             if (!!data[i].tipologiaPuntoRaccolta && Utili.isPaP(data[i].tipoPuntoRaccolta) &&
                 data[i].tipologiaUtenza == p.utenza.tipologiaUtenza && p.aree.indexOf(data[i].area) >= 0) {
+                if (res.indexOf(data[i].tipologiaPuntoRaccolta) < 0) res.push(data[i].tipologiaPuntoRaccolta);
+            }
+        }
+        p.PaP = res;
+    }
+
+    var buildPaPUnique = function (p) {
+        var data = DataManager.getSync('raccolta');
+        var res = [];
+        for (var i = 0; i < data.length; i++) {
+            if (!!data[i].tipologiaPuntoRaccolta && Utili.isPaP(data[i].tipoPuntoRaccolta) && p.aree.indexOf(data[i].area) >= 0) {
                 if (res.indexOf(data[i].tipologiaPuntoRaccolta) < 0) res.push(data[i].tipologiaPuntoRaccolta);
             }
         }
@@ -279,6 +337,18 @@ angular.module('rifiuti.services.profili', [])
         return null;
     };
 
+    ProfiliFactory.addUnique = function (profiloRiapp, area) {
+        var id = "" + new Date().getTime();
+        var res = {
+            id: id,
+            profiloRiapp: profiloRiapp,
+            area: area
+        };
+        $rootScope.profili.push(res);
+        saveUnique();
+        return res;
+    };
+
     ProfiliFactory.update = function (id, name, utenza, area) {
         var old = byname(name);
         if (!old || old.id == id) {
@@ -290,6 +360,12 @@ angular.module('rifiuti.services.profili', [])
             return old;
         }
         return null;
+    };
+
+    ProfiliFactory.updateUnique = function (profiloRiapp, area) {
+        $rootScope.profili[0].profiloRiapp = profiloRiapp;
+        $rootScope.profili[0].area = area;
+        saveUnique();
     };
 
     ProfiliFactory.saveAll = function () {

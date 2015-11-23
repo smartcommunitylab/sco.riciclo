@@ -1,4 +1,5 @@
 ITALIAN_VERSION = {
+        profilo_save: "Per completare il tuo profilo devi scegliere un comune e una località",
         comuni: "Comuni",
         reload_data: "Ricarica i Dati",
         porta_a_porta: "Porta a Porta",
@@ -130,6 +131,7 @@ ITALIAN_VERSION = {
 };
 
 ENGLISH_VERSION = {
+        profilo_save: "To complete your profile you have to choose a Municipality and an Area",
         comuni: "Municipalities",
         reload_data: "Reload Data",
         porta_a_porta: "Curbside Collection",

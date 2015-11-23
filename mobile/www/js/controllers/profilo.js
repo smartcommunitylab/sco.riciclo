@@ -106,7 +106,7 @@ angular.module('rifiuti.controllers.profilo', [])
                 // not complete
                 $ionicPopup.show({
                     title: '<b class="popup-title">'+$filter("translate")("warning")+'<b/>',
-                    template: 'Per completare il tuo profilo devi scegliere un nome, tipo di utenza, e una località!',
+                    template: $filter("translate")("profilo_save"),
                     scope: $scope,
                     buttons: [
                         {
@@ -254,27 +254,28 @@ angular.module('rifiuti.controllers.profilo', [])
 
     $scope.id = $stateParams.id;
 
-    $scope.profilo = {
+    $scope.profiloRiapp = {
         ownerId: {},
-        utenza: {},
-        area: {}
+        comune: {},
+        codiceISTAT:{}
     };
 
-    $scope.updateLocations = function () {
-        var riappData = DataManager.getRiappById($scope.profilo.ownerId);
-        $rootScope.selectedRiappData = riappData;
-        DataManager.processRiappById().then(function (data) {
-        var utenza = DataManager.getUniqueUtenza();
-        $scope.profilo.utenza = utenza;
-        $scope.profilo.utenza.tipologiaUtenza = utenza;
+    $scope.area = {};
 
+    $scope.updateLocations = function () {
+        var riappData = DataManager.getRiappById($scope.profiloRiapp.ownerId);
+        $rootScope.selectedRiappData = riappData;
+        $scope.profiloRiapp.comune = riappData.comune;
+        $scope.profiloRiapp.codiceIstat = riappData.codiceIstat;
+
+        DataManager.processRiappById().then(function (dataRiapp) {
             Raccolta.areeForTipoUtenzaUnique().then(function (data) {
                 $scope.aree = [];
 
                 for (var i = 0; i < data.length; i++) {
                     $scope.aree.push(data[i]);
-                    if ($scope.profilo.area && data[i].nome == $scope.profilo.area.nome) {
-                        $scope.profilo.area = data[i];
+                    if ($scope.area && data[i].nome == $scope.area.nome) {
+                        $scope.area = data[i];
                     }
                 }
             });
@@ -284,7 +285,7 @@ angular.module('rifiuti.controllers.profilo', [])
 
     $scope.updateProfileType = function() {
         $scope.updateLocations();
-        $scope.profilo.area = {};
+        $scope.area = {};
     };
 
     // popola tipi di utenza e relative locations
@@ -318,15 +319,14 @@ angular.module('rifiuti.controllers.profilo', [])
             }
         } else {
             // save
-            if (!!$scope.profilo.name && !!$scope.profilo.area && !!$scope.profilo.area.nome) {
+            if (!!$scope.area && !!$scope.area.nome) {
                 var newProfile = null;
 
                 if (!!$scope.id) {
-                    // update
-                    newProfile = Profili.update($scope.id, $scope.profilo.name, $scope.profilo.utenza, $scope.profilo.area);
+                    newProfile = Profili.updateUnique($scope.profiloRiapp, $scope.area);
                 } else {
                     // create
-                    newProfile = Profili.add($scope.profilo.name, $scope.profilo.utenza, $scope.profilo.area);
+                    newProfile = Profili.addUnique($scope.profiloRiapp, $scope.area);
                     $scope.back();
                     //return;
                 }
@@ -349,7 +349,7 @@ angular.module('rifiuti.controllers.profilo', [])
                 // not complete
                 $ionicPopup.show({
                     title: '<b class="popup-title">'+$filter("translate")("warning")+'<b/>',
-                    template: 'Per completare il tuo profilo devi scegliere un nome, tipo di utenza, e una località!',
+                    template: $filter("translate")("profilo_save"),
                     scope: $scope,
                     buttons: [
                         {
@@ -447,14 +447,14 @@ angular.module('rifiuti.controllers.profilo', [])
     });
 
     $scope.openLocalitaSelector = function () {
-        if (!$scope.profilo.utenza || !$scope.profilo.utenza.tipologiaUtenza) return;
+        //if (!$scope.profilo.utenza || !$scope.profilo.utenza.tipologiaUtenza) return;
         $scope.modal = modalLocalita;
         $scope.modal.show();
     };
 
     $scope.localitaSelected = function (item) {
         $scope.searchQuery['etichetta'] = '';
-        $scope.profilo.area = item;
+        $scope.area = item;
         $scope.closeModal();
     };
     $scope.closeLocalitaSelector = function() {
