@@ -197,7 +197,9 @@ angular.module('rifiuti', [
 
     // for BlackBerry 10, WP8, iOS
     setTimeout(function () {
-        $cordovaSplashscreen.hide();
+        if(navigator.splashscreen){
+            $cordovaSplashscreen.hide();
+        }
         //navigator.splashscreen.hide();
     }, 3000);
 
