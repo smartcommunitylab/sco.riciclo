@@ -113,24 +113,21 @@ angular.module('rifiuti.services.profili', [])
         buildPaPUnique($rootScope.profili[0]);
         buildSettings($rootScope.profili[0]);
 
-        return DataManager.get('data/db/tipologiaUtenza.json').then(function (results) {
+        DataManager.get('data/db/tipologiaUtenza.json').then(function (results) {
             $rootScope.profili[0].utenza = {
                 tipologiaUtenza: results.data[0].id
             }
-            //$rootScope.profili[0].utenza.tipologiaUtenza = results.data[0].id;
+
+            localStorage[profilesPrefix] = JSON.stringify($rootScope.profili);
+            // update
+            ProfiliFactory.read();
+            var profileIndex = 0;
+
+            DataManager.updateProfiles($rootScope.profili);
+            ProfiliFactory.updateNotifications();
+            ProfiliFactory.select(profileIndex);
         });
-
-        localStorage[profilesPrefix] = JSON.stringify($rootScope.profili);
-
-        // update
-        ProfiliFactory.read();
-        var profileIndex = 0;
-
-        DataManager.updateProfiles($rootScope.profili);
-        ProfiliFactory.updateNotifications();
-        ProfiliFactory.select(profileIndex);
-
-    }
+    };
 
     var indexof = function (id) {
         for (var pi = 0; pi < $rootScope.profili.length; pi++) {
@@ -167,6 +164,18 @@ angular.module('rifiuti.services.profili', [])
 
             profile.area = area;
             profile.utenza = utenza;
+        });
+
+    };
+
+    ProfiliFactory.saveLangUnique = function () {
+
+        $rootScope.profili.forEach(function (profile) {
+            var area = DataManager.getProfilesAreaById(profile.area.id);
+            //var utenza = DataManager.getProfileTypeById(profile.utenza.tipologiaUtenza);
+
+            profile.area = area;
+            //profile.utenza = utenza;
         });
 
     };
@@ -366,6 +375,7 @@ angular.module('rifiuti.services.profili', [])
         $rootScope.profili[0].profiloRiapp = profiloRiapp;
         $rootScope.profili[0].area = area;
         saveUnique();
+        return $rootScope.profili[0];
     };
 
     ProfiliFactory.saveAll = function () {

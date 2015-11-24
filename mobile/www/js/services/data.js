@@ -319,7 +319,7 @@ angular.module('rifiuti.services.data', [])
     var saveLang = function () {
         var deferred = $q.defer();
 
-        process(getDataURL(true)).then(function (result) {
+        process(getRiappDataURL(true)).then(function (result) {
             if(result){
                 localStorage[globalSettingsPrefix] = JSON.stringify($rootScope.globalSettings);
             }
@@ -336,7 +336,7 @@ angular.module('rifiuti.services.data', [])
    //var getLocalitaByProfile = function (profileId){
    //    var deferred = $q.defer();
 
-   //    process(getDataURL(true)).then(function (result) {
+   //    process(getRiappDataURL(true)).then(function (result) {
    //        if(result){
    //            localStorage[globalSettingsPrefix] = JSON.stringify($rootScope.globalSettings);
    //        }
@@ -354,7 +354,7 @@ angular.module('rifiuti.services.data', [])
     var saveDraft = function () {
         var deferred = $q.defer();
 
-        process(getDataURL(true)).then(function (result) {
+        process(getRiappDataURL(true)).then(function (result) {
             if(result){
                 localStorage[globalSettingsPrefix] = JSON.stringify($rootScope.globalSettings);
             }
@@ -525,6 +525,9 @@ angular.module('rifiuti.services.data', [])
     var getRiappById = function(riappId){
         if(!!riappDataMap && !!riappDataMap[riappId]){
             return riappDataMap[riappId];
+        }else if(!!localStorage[riappData]){
+            setRiappDataMap(JSON.parse(localStorage[riappData]));
+            return riappDataMap[riappId];
         }
 
         return null;
@@ -634,7 +637,11 @@ angular.module('rifiuti.services.data', [])
     }
 
     var getRiappID = function(){
-        if($rootScope.selectedRiappData.ownerId){
+        if(!!$rootScope.selectedRiappData && !!$rootScope.selectedRiappData.ownerId){
+            return $rootScope.selectedRiappData.ownerId;
+        }else if (!!localStorage[profilesPrefix]){
+            var profiles = JSON.parse(localStorage[profilesPrefix]);
+            $rootScope.selectedRiappData = profiles[0].profiloRiapp;
             return $rootScope.selectedRiappData.ownerId;
         }
 
@@ -665,7 +672,7 @@ angular.module('rifiuti.services.data', [])
             return;
         };
 
-        process(getDataURL(remote)).then(function (result) {
+        process(getRiappDataURL(remote)).then(function (result) {
             if (result) {
                 localStorage[versionPrefix] = v
             };

@@ -247,11 +247,9 @@ angular.module('rifiuti.controllers.profilo', [])
         // Execute action
     });
 })
-.controller('ModificaProfiloUniqueCtrl', function ($scope, $rootScope, $ionicNavBarDelegate, $filter, DataManager, $stateParams, $ionicPopup, $ionicModal, Profili, Raccolta) {
+.controller('ModificaProfiloUniqueCtrl', function ($scope, $rootScope, $ionicNavBarDelegate, $filter, $location, DataManager, $stateParams, $ionicPopup, $ionicModal, Profili, Raccolta, LoaderService) {
     $scope.searchQuery = {};
-
     $scope.aree = [];
-
     $scope.id = $stateParams.id;
 
     $scope.profiloRiapp = {
@@ -260,13 +258,14 @@ angular.module('rifiuti.controllers.profilo', [])
         codiceISTAT:{}
     };
 
+    //$scope.ownerId = "";
     $scope.area = {};
 
     $scope.updateLocations = function () {
         var riappData = DataManager.getRiappById($scope.profiloRiapp.ownerId);
-        $rootScope.selectedRiappData = riappData;
-        $scope.profiloRiapp.comune = riappData.comune;
-        $scope.profiloRiapp.codiceIstat = riappData.codiceIstat;
+        $rootScope.selectedRiappData = angular.copy(riappData);
+        $scope.profiloRiapp = angular.copy(riappData);
+        //$scope.ownerId = riappData.ownerId;
 
         DataManager.processRiappById().then(function (dataRiapp) {
             Raccolta.areeForTipoUtenzaUnique().then(function (data) {
@@ -280,32 +279,54 @@ angular.module('rifiuti.controllers.profilo', [])
                 }
             });
         });
+    };
 
+    $scope.populateLocations = function () {
+        var riappData = DataManager.getRiappById($scope.profiloRiapp.ownerId);
+        $rootScope.selectedRiappData = angular.copy(riappData);
+        $scope.profiloRiapp = angular.copy(riappData);
+        //$scope.ownerId = riappData.ownerId;
+
+        Raccolta.areeForTipoUtenzaUnique().then(function (data) {
+            $scope.aree = [];
+
+            for (var i = 0; i < data.length; i++) {
+                $scope.aree.push(data[i]);
+                if ($scope.area && data[i].nome == $scope.area.nome) {
+                    $scope.area = data[i];
+                }
+            }
+        });
     };
 
     $scope.updateProfileType = function() {
+        LoaderService.show();
         $scope.updateLocations();
         $scope.area = {};
     };
 
-    // popola tipi di utenza e relative locations
+    //popola le possibili utenze RIAPP
     $scope.appAndComuni = Profili.availableRiappData();
 
-//        if ($scope.id) {
-//            var p = Profili.byId($scope.id);
-//            if (!!p) {
-//                $scope.profilo = angular.copy(p);
-//                $scope.updateLocations();
-//            }
-//        }
-//        if (!!$rootScope.selectedProfile && $rootScope.selectedProfile.name == $scope.profilo.name) {
-//            $scope.isCurrentProfile = true;
-//        } else {
-//            $scope.isCurrentProfile = false;
-//        }
+    if ($scope.id) {
+        var p = Profili.byId($scope.id);
+        if (!!p) {
+            var profilo = angular.copy(p);
+            $scope.area = profilo.area;
+            $scope.profiloRiapp = angular.copy(profilo.profiloRiapp);
+            //$scope.ownerId = profilo.profiloRiapp.ownerId;
 
-//    $scope.isCurrentProfile = true;
-    $scope.editMode = !$scope.id;
+            $scope.populateLocations();
+        }
+    }
+    if (!!$rootScope.selectedProfile && $rootScope.selectedProfile.profiloRiapp.ownerId == $scope.profiloRiapp.ownerId) {
+        $scope.isCurrentProfile = true;
+    } else {
+        $scope.isCurrentProfile = false;
+    }
+
+    $scope.isCurrentProfile = true;
+    $scope.editMode = true;
 
     $scope.edit = function () {
         if (!$scope.editMode) {
@@ -344,6 +365,7 @@ angular.module('rifiuti.controllers.profilo', [])
                     });
                 } else {
                     $scope.editMode = false;
+                    $location.path("app/profili");
                 }
             } else {
                 // not complete

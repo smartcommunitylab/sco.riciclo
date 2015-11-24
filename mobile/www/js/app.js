@@ -574,11 +574,21 @@ angular.module('rifiuti', [
         }
     })
 
+    //.state('app.profili', {
+    //    url: "/profili",
+    //    views: {
+    //        'menuContent': {
+    //            templateUrl: "templates/profili.html",
+    //            controller: 'ProfiliCtrl'
+    //        }
+    //    }
+    //})
+
     .state('app.profili', {
         url: "/profili",
         views: {
             'menuContent': {
-                templateUrl: "templates/profili.html",
+                templateUrl: "templates/profiliUnique.html",
                 controller: 'ProfiliCtrl'
             }
         }
@@ -610,6 +620,16 @@ angular.module('rifiuti', [
             'menuContent': {
                 templateUrl: "templates/modificaProfilo.html",
                 controller: 'ModificaProfiloCtrl'
+            }
+        }
+    })
+
+    .state('app.modificaProfiloUnique', {
+        url: "/modificaProfiloUnique/:id",
+        views: {
+            'menuContent': {
+                templateUrl: "templates/modificaProfiloUnique.html",
+                controller: 'ModificaProfiloUniqueCtrl'
             }
         }
     })

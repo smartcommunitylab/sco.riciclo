@@ -20,16 +20,16 @@
     <ion-content class="profiles" has-bouncing="false">
         <div class="row profile-card" ng-repeat="profilo in profili track by $index">
             <div class="col profile-card-content" style="">
-                <a class="hidden-link" ng-href="#app/modificaProfilo/{{profilo.id}}">
+                <a class="hidden-link" ng-href="#app/modificaProfiloUnique/{{profilo.id}}">
                     <div>
-                        <div class="row profile-name">
+                        <!--div class="row profile-name">
                             <div class="col">
                                 {{profilo.name}}
                             </div>
-                        </div>
+                        </div-->
                         <div class="row profile-info">
                             <div class="col">
-                                {{profilo.utenza.nome|translate}}: {{profilo.area.etichetta}}
+                                {{selectedProfile.profiloRiapp.comune}}: {{profilo.area.etichetta}}
                             </div>
                         </div>
                     </div>
