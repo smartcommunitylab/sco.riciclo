@@ -124,6 +124,10 @@
   overflow-y: auto;
 }
 
+#divTimetable {
+	overflow: scroll;
+}
+
 .typeahead.active {
 	background-color: lightgrey;
 }
@@ -133,6 +137,9 @@
 	width: 2em;
 	height: 1em;
 	vertical-align: middle;
+	border: black;
+	border-style: solid;
+	border-width: 1px;
 }
 
 .modal-header.create {
