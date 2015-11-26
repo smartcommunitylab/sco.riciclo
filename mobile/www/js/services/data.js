@@ -7,6 +7,8 @@ angular.module('rifiuti.services.data', [])
     var LOCAL_DATA_URL = 'data/data.zip';
     var VERSION_URL = ENDPOINT_URL + '/appDescriptor/' + APP_ID;
     var RIAPP_URL = ENDPOINT_URL + '/riapp/RIAPP';
+    var RIAPP_AREE_URL = ENDPOINT_URL + '/comuni';
+
 
     //var LANG = 'IT';
     //var COMUNI_LIST = ['022003','022034'];
@@ -522,9 +524,9 @@ angular.module('rifiuti.services.data', [])
         return null;
     }
 
-    var getRiappById = function(riappId){
-        if(!!riappDataMap && !!riappDataMap[riappId]){
-            return riappDataMap[riappId];
+    var getRiappById = function(riappId,comune){
+        if(!!riappDataMap && !!riappDataMap[riappId] && !! riappDataMap[riappId][comune]){
+            return riappDataMap[riappId][comune];
         }else if(!!localStorage[riappData]){
             setRiappDataMap(JSON.parse(localStorage[riappData]));
             return riappDataMap[riappId];
@@ -536,7 +538,11 @@ angular.module('rifiuti.services.data', [])
     var setRiappDataMap = function(data){
         riappDataMap = {};
         data.forEach(function (riapp) {
-            riappDataMap[riapp.ownerId] = riapp;
+            if(!riappDataMap[riapp.ownerId]){
+                riappDataMap[riapp.ownerId] = {};
+            }
+
+            riappDataMap[riapp.ownerId][riapp.comune] = riapp;
         });
     }
 
@@ -575,10 +581,33 @@ angular.module('rifiuti.services.data', [])
         return deferred.promise;
     }
 
-    var processRiappById = function(){
+    var getRiappAreeForComuniUrl = function(ownerId, codiceISTAT){
+        if (getDraftEnabled()) {
+            return RIAPP_AREE_URL + '/'+ownerId+'/aree/'+codiceISTAT+'?lang='+getSelectedLang()+'&draft=true';
+        } else {
+            return RIAPP_AREE_URL + '/'+ownerId+'/aree/'+codiceISTAT+'?lang='+getSelectedLang()+'&draft=false';
+        }
+    }
+
+    var getAvailableAreeForComuni = function (ownerId, codiceISTAT) {
+        var deferred = $q.defer();
+        var riappAreeForComuenURL = getRiappAreeForComuniUrl(ownerId, codiceISTAT);
+        ///TODO
+        $http.get(riappAreeForComuenURL)
+                .success(function (data) {
+                    deferred.resolve(data);
+                })
+                .error(function (e) {
+                    deferred.resolve(false);
+                });
+
+        return deferred.promise;
+    }
+
+    var processRiappByProfiloRiapp = function(profiloRiapp){
         var deferred = $q.defer();
 
-        process(getRiappDataURL()).then(function (result) {
+        process(getRiappDataURLByPrifoloRiapp(profiloRiapp)).then(function (result) {
                 deferred.resolve(result);
             },
             function (result) {
@@ -586,6 +615,14 @@ angular.module('rifiuti.services.data', [])
             });
 
         return deferred.promise;
+    }
+
+    var getRiappDataURLByPrifoloRiapp = function (profiloRiapp){
+        if (getDraftEnabled()) {
+            return ENDPOINT_URL + '/zip/' + profiloRiapp.ownerId + '?lang=' + getSelectedLang() + '&draft=true' + '&comune[]=' + profiloRiapp.codiceISTAT;
+        } else {
+            return ENDPOINT_URL + '/zip/' + profiloRiapp.ownerId + '?lang=' + getSelectedLang() + '&draft=false' + '&comune[]=' + profiloRiapp.codiceISTAT;
+        }
     }
 
     var getRiappDataURL = function(){
@@ -712,9 +749,11 @@ angular.module('rifiuti.services.data', [])
         setRiapp:setRiapp,
         setRiappDataMap:setRiappDataMap,
         getRiappById:getRiappById,
-        processRiappById:processRiappById,
+        //processRiappById:processRiappById,
         getRiappDataURL:getRiappDataURL,
         getComuneString:getComuneString,
+        getAvailableAreeForComuni:getAvailableAreeForComuni,
+        processRiappByProfiloRiapp:processRiappByProfiloRiapp,
         updateProfiles: function (newProfiles) {
             profili = newProfiles;
             updateProfileData();

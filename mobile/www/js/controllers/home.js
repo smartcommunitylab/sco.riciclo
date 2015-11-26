@@ -348,9 +348,10 @@ angular.module('rifiuti.controllers.home', [])
         if (!$scope.month || $scope.month.name != Utili.monthYear($scope.showDate.getMonth(), $scope.showDate.getFullYear())) {
             $scope.loaded = false;
             Calendar.fillWeeks($scope.showDate, $rootScope.selectedProfile.utenza.tipologiaUtenza, $rootScope.selectedProfile.aree).then(function (data) {
+                $scope.colorLegendMap = data["colorLegendMap"];
                 $scope.month = {
                     name: Utili.monthYear($scope.showDate.getMonth(), $scope.showDate.getFullYear()),
-                    weeks: data
+                    weeks: data["weeks"]
                 };
                 $scope.dayList = Calendar.toListData($scope.month.weeks);
                 $scope.daySubListRunningEnd = null;

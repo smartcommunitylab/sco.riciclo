@@ -252,54 +252,38 @@ angular.module('rifiuti.controllers.profilo', [])
     $scope.aree = [];
     $scope.id = $stateParams.id;
 
-    $scope.profiloRiapp = {
-        ownerId: {},
-        comune: {},
-        codiceISTAT:{}
+    $scope.profilo = {
+        profiloRiapp: null
     };
 
     //$scope.ownerId = "";
     $scope.area = {};
 
     $scope.updateLocations = function () {
-        var riappData = DataManager.getRiappById($scope.profiloRiapp.ownerId);
-        $rootScope.selectedRiappData = angular.copy(riappData);
-        $scope.profiloRiapp = angular.copy(riappData);
-        //$scope.ownerId = riappData.ownerId;
-
-        DataManager.processRiappById().then(function (dataRiapp) {
-            Raccolta.areeForTipoUtenzaUnique().then(function (data) {
-                $scope.aree = [];
-
-                for (var i = 0; i < data.length; i++) {
-                    $scope.aree.push(data[i]);
-                    if ($scope.area && data[i].nome == $scope.area.nome) {
-                        $scope.area = data[i];
-                    }
-                }
-            });
-        });
-    };
-
-    $scope.populateLocations = function () {
-        var riappData = DataManager.getRiappById($scope.profiloRiapp.ownerId);
-        $rootScope.selectedRiappData = angular.copy(riappData);
-        $scope.profiloRiapp = angular.copy(riappData);
-        //$scope.ownerId = riappData.ownerId;
-
-        Raccolta.areeForTipoUtenzaUnique().then(function (data) {
+        DataManager.getAvailableAreeForComuni($scope.profilo.profiloRiapp.ownerId, $scope.profilo.profiloRiapp.codiceISTAT).then(function (riappAree) {
             $scope.aree = [];
 
-            for (var i = 0; i < data.length; i++) {
-                $scope.aree.push(data[i]);
-                if ($scope.area && data[i].nome == $scope.area.nome) {
-                    $scope.area = data[i];
+            for (var i = 0; i < riappAree.length; i++) {
+
+                if(!!riappAree[i].etichetta) {
+                    $scope.aree.push(riappAree[i]);
+                }
+
+                if ($scope.area && riappAree[i].nome == $scope.area.nome) {
+                    $scope.area = riappAree[i];
                 }
             }
+
+            $scope.aree.sort(function(a,b) {
+                return a.etichetta.localeCompare(b.etichetta);
+            });
+
+            LoaderService.hide();
         });
     };
 
-    $scope.updateProfileType = function() {
+
+    $scope.updateAree = function() {
         LoaderService.show();
         $scope.updateLocations();
         $scope.area = {};
@@ -312,14 +296,24 @@ angular.module('rifiuti.controllers.profilo', [])
         var p = Profili.byId($scope.id);
         if (!!p) {
             var profilo = angular.copy(p);
+
+            $scope.appAndComuni.forEach(function(profiloRiapp) {
+                if(profilo.profiloRiapp.ownerId==profiloRiapp.ownerId
+                   && profilo.profiloRiapp.comune == profiloRiapp.comune
+                   && profilo.profiloRiapp.codiceISTAT == profiloRiapp.codiceISTAT){
+
+                   $scope.profilo.profiloRiapp = profiloRiapp;
+                }
+            })
+
             $scope.area = profilo.area;
-            $scope.profiloRiapp = angular.copy(profilo.profiloRiapp);
+            //$scope.profilo.profiloRiapp = angular.copy(profilo.profiloRiapp);
             //$scope.ownerId = profilo.profiloRiapp.ownerId;
 
-            $scope.populateLocations();
+            $scope.updateLocations();
         }
     }
-    if (!!$rootScope.selectedProfile && $rootScope.selectedProfile.profiloRiapp.ownerId == $scope.profiloRiapp.ownerId) {
+    if (!!$rootScope.selectedProfile && $rootScope.selectedProfile.profiloRiapp.ownerId == $scope.profilo.profiloRiapp.ownerId) {
         $scope.isCurrentProfile = true;
     } else {
         $scope.isCurrentProfile = false;
@@ -341,32 +335,36 @@ angular.module('rifiuti.controllers.profilo', [])
         } else {
             // save
             if (!!$scope.area && !!$scope.area.nome) {
-                var newProfile = null;
+                DataManager.processRiappByProfiloRiapp($scope.profilo.profiloRiapp).then(function (result) {
+                    var newProfile = null;
 
-                if (!!$scope.id) {
-                    newProfile = Profili.updateUnique($scope.profiloRiapp, $scope.area);
-                } else {
-                    // create
-                    newProfile = Profili.addUnique($scope.profiloRiapp, $scope.area);
-                    $scope.back();
-                    //return;
-                }
+                    if (!!$scope.id) {
+                        newProfile = Profili.updateUnique($scope.profilo.profiloRiapp, $scope.area);
+                    } else {
+                        // create
+                        newProfile = Profili.addUnique($scope.profilo.profiloRiapp, $scope.area);
+                        $scope.back();
+                        //return;
+                    }
 
-                if (newProfile == null) {
-                    // error: already exists
-                    var popup = $ionicPopup.show({
-                        title: '<b class="popup-title">'+$filter("translate")("warning")+'<b/>',
-                        template: $filter("translate")("profile_name_already_used"),
-                        buttons: [
-                            {
-                                text: 'OK'
-                            }
-                        ]
-                    });
-                } else {
-                    $scope.editMode = false;
-                    $location.path("app/profili");
-                }
+                    if (newProfile == null) {
+                        // error: already exists
+                        var popup = $ionicPopup.show({
+                            title: '<b class="popup-title">'+$filter("translate")("warning")+'<b/>',
+                            template: $filter("translate")("profile_name_already_used"),
+                            buttons: [
+                                {
+                                    text: 'OK'
+                                }
+                            ]
+                        });
+                    } else {
+                        $scope.editMode = false;
+                        $location.path("app/profili");
+                    }
+
+                });
+
             } else {
                 // not complete
                 $ionicPopup.show({

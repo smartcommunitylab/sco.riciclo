@@ -5,8 +5,20 @@ angular.module('rifiuti.services.calendar', [])
         return new Date(year, month + 1, 0).getDate();
     };
 
-    var appendToCalendarCell = function(cell, calItem, puntoDiRaccolta) {
-      if (cell.colors.indexOf(puntoDiRaccolta.colore) < 0) cell.colors.push(puntoDiRaccolta.colore);
+    var appendToCalendarCell = function(cell, calItem, puntoDiRaccolta,colorLegendMap) {
+      if (cell.colors.indexOf(puntoDiRaccolta.colore) < 0) {
+          cell.colors.push(puntoDiRaccolta.colore);
+
+          if(!colorLegendMap[puntoDiRaccolta.colore]){
+            colorLegendMap[puntoDiRaccolta.colore] = [];
+            colorLegendMap[puntoDiRaccolta.colore].push(puntoDiRaccolta.tipologiaPuntiRaccolta);
+          }
+
+          if(!!colorLegendMap[puntoDiRaccolta.colore] &&
+             colorLegendMap[puntoDiRaccolta.colore].indexOf(puntoDiRaccolta.tipologiaPuntiRaccolta)<0){
+             colorLegendMap[puntoDiRaccolta.colore].push(puntoDiRaccolta.tipologiaPuntiRaccolta);
+          }
+      }
       
       var key = null, t = null, descr = null;
       var proto = null;
@@ -60,7 +72,9 @@ angular.module('rifiuti.services.calendar', [])
         fillWeeks: function(date, utenza, aree) {
             var deferred = $q.defer();
             Raccolta.puntiRaccoltaCalendar(utenza, aree).then(function(data){
+              var data = [];
               var weeks = [];
+              var colorLegendMap = {};
               var totalDays = daysInMonth(date.getMonth(),date.getFullYear());
               var weekNumber = 0;
               
@@ -102,14 +116,16 @@ angular.module('rifiuti.services.calendar', [])
                         var cell = weeks[w][idx];
                         // if this is the date of the interval of interest
                         if (cell != null) {
-                          appendToCalendarCell(cell,calItem,d[i]);
+                          appendToCalendarCell(cell,calItem,d[i],colorLegendMap);
                         }
                       }
                     }
                   }
                 }
               }
-              deferred.resolve(weeks);
+              data["weeks"] = weeks;
+              data["colorLegendMap"] = colorLegendMap;
+              deferred.resolve(data);
             });
             return deferred.promise;
         },

@@ -24,13 +24,8 @@
                 <a class="help" ng-click="openUtenzeModal()"><i class="icon riciclo-more_info icon-button"></i>
                 </a>
             </div>
-            <!--<div ng-if="editMode">
-                <div class="profile-type" ng-repeat="item in tipologiaUtenza">
-                    <input type="radio" ng-model="profilo.utenza" ng-change="updateLocations()" ng-value="item"><span>{{item.profilo}}</span>
-                </div>
-            </div>-->
             <div class="list" ng-if="editMode">
-                <ion-radio ng-repeat="item in appAndComuni" ng-value="item.ownerId" ng-model="profiloRiapp.ownerId" ng-change="updateProfileType()">{{item.comune}}</ion-radio>
+                <ion-radio ng-repeat="item in appAndComuni" ng-model="profilo.profiloRiapp" ng-value="item" ng-change="updateAree()">{{item.comune}}</ion-radio>
             </div>
             <p ng-if="!editMode">{{profiloRiapp.comune | translate}}</p>
         </div>
