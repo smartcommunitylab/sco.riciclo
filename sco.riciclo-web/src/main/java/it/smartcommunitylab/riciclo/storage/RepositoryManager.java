@@ -192,6 +192,13 @@ public class RepositoryManager {
 		saveAppVersion(ownerId, draft.getVersion() + 1, true);
 	}
 	
+	public void resetDatasetDraft(String ownerId) {
+		Query query = appQuery(ownerId);
+		for (Class<?> clazz : classes) {
+			draftTemplate.remove(query, clazz);
+		}
+	}
+	
 	public void createApp(DataSetInfo appInfo) {
 		saveAppState(appInfo.getOwnerId(), true);
 		saveAppState(appInfo.getOwnerId(), false);
@@ -270,6 +277,18 @@ public class RepositoryManager {
 		List<?> result = template.find(query, Class.forName(className));
 
 		return result;
+	}
+	
+	public List<Area> findAree(List<String> comuni, String ownerId, boolean draft) {
+		Map<String, Area> resultMapArea  = new HashMap<String, Area>();
+		try {
+			for(String comune : comuni) {
+				Utils.findAree(comune, ownerId, draft, resultMapArea, this);
+			}
+		} catch (Exception e) {
+			logger.error("error in findAree:" + e.getMessage(), e);
+		}
+		return new ArrayList<Area>(resultMapArea.values());
 	}
 
 	public AppDataRifiuti findRifiuti(String ownerId, boolean draft) {

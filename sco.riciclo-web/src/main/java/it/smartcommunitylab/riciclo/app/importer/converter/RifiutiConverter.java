@@ -64,13 +64,21 @@ import com.google.common.collect.Sets;
 public class RifiutiConverter {
 	private static final transient Logger logger = LoggerFactory.getLogger(RifiutiConverter.class);
 
-	private static final String GETTONIERA = "GETTONIERA";
-	private static final String RESIDUO = "RESIDUO";
-	private static final String IMB_CARTA = "IMB_CARTA";
-	private static final String IMB_PL_MET = "IMB_PL_MET";
-	private static final String ORGANICO = "ORGANICO";
-	private static final String IMB_VETRO = "IMB_VETRO";
-	private static final String INDUMENTI = "INDUMENTI";
+	public static final String GETTONIERA = "GETTONIERA";
+	public static final String RESIDUO = "RESIDUO";
+	public static final String IMB_CARTA = "IMB_CARTA";
+	public static final String IMB_PL_MET = "IMB_PL_MET";
+	public static final String ORGANICO = "ORGANICO";
+	public static final String IMB_VETRO = "IMB_VETRO";
+	public static final String INDUMENTI = "INDUMENTI";
+	
+	public static final String LUN = "lunedì";
+	public static final String MAR = "martedì";
+	public static final String MER = "mercoledì";
+	public static final String GIO = "giovedì";
+	public static final String VEN = "venerdì";
+	public static final String SAB = "sabato";
+	public static final String DOM = "domenica";
 
 	private String defaultLang;
 

@@ -17,8 +17,10 @@
 package it.smartcommunitylab.riciclo.controller;
 
 import it.smartcommunitylab.riciclo.model.AppDataRifiuti;
+import it.smartcommunitylab.riciclo.model.Area;
 import it.smartcommunitylab.riciclo.model.RiappConf;
 import it.smartcommunitylab.riciclo.presentation.AppDataRifiutiUI;
+import it.smartcommunitylab.riciclo.presentation.AreaUI;
 import it.smartcommunitylab.riciclo.presentation.UIConverter;
 import it.smartcommunitylab.riciclo.storage.App;
 import it.smartcommunitylab.riciclo.storage.NotificationManager;
@@ -122,6 +124,24 @@ public class AppDataRifiutiController {
 	@RequestMapping(method = RequestMethod.GET, value = "/comuni/{ownerId}/draft")
 	public @ResponseBody List<String> appComuniDraft(HttpServletResponse response, @PathVariable String ownerId) {
 		return storage.getComuniList(ownerId, true);
+	}
+	
+	@RequestMapping(value="/comuni/{ownerId}/aree/{codiceISTAT}", method=RequestMethod.GET)
+	public @ResponseBody List<AreaUI> getAree(@PathVariable String ownerId, @PathVariable String codiceISTAT,
+			HttpServletRequest request, HttpServletResponse response)	throws Exception {
+		String lang = request.getParameter("lang");
+		boolean draft = Utils.getDraft(request);
+		List<String> comuni = Lists.newArrayList();
+		if(!Utils.isNull(codiceISTAT)) {
+			comuni.add(codiceISTAT);
+		}
+		if(logger.isInfoEnabled()) {
+			logger.info(String.format("getAree %s - %s - %s", comuni.toString(), lang, draft));
+		}
+		List<Area> areaList = storage.findAree(comuni, ownerId, draft);
+		String defaultLang = storage.getDefaultLang();
+		List<AreaUI> result = UIConverter.convertArea(areaList, lang, defaultLang);
+		return result;
 	}
 	
 	@RequestMapping(method = RequestMethod.GET, value = "/riapp/{ownerId}")
