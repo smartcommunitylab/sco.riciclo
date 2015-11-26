@@ -18,6 +18,7 @@ package it.smartcommunitylab.riciclo.config;
 
 import it.smartcommunitylab.riciclo.app.importer.converter.RifiutiConverter;
 import it.smartcommunitylab.riciclo.app.importer.converter.RifiutiValidator;
+import it.smartcommunitylab.riciclo.riapp.importer.RiappManager;
 import it.smartcommunitylab.riciclo.storage.NotificationManager;
 import it.smartcommunitylab.riciclo.storage.RepositoryManager;
 
@@ -60,6 +61,10 @@ public class RifiutiConfig extends WebMvcConfigurerAdapter {
 	@Value("${defaultLang}")
 	private String defaultLang;
 
+	@Autowired
+	@Value("${riapp.dir}")
+	private String riappDir;
+	
 	public RifiutiConfig() {
 	}
 
@@ -90,6 +95,11 @@ public class RifiutiConfig extends WebMvcConfigurerAdapter {
 	@Bean
 	RifiutiConverter getRifiutiConverter() {
 		return new RifiutiConverter(defaultLang);
+	}
+	
+	@Bean
+	RiappManager getRiappManager() {
+		return new RiappManager(defaultLang, riappDir);
 	}
 	
 	@Bean
