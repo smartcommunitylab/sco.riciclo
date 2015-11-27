@@ -5,18 +5,21 @@ angular.module('rifiuti.services.calendar', [])
         return new Date(year, month + 1, 0).getDate();
     };
 
-    var appendToCalendarCell = function(cell, calItem, puntoDiRaccolta,colorLegendMap) {
+    var appendToCalendarCell = function(cell, calItem, puntoDiRaccolta,colorLegendMap,colorLegendAshMap) {
       if (cell.colors.indexOf(puntoDiRaccolta.colore) < 0) {
           cell.colors.push(puntoDiRaccolta.colore);
 
-          if(!colorLegendMap[puntoDiRaccolta.colore]){
-            colorLegendMap[puntoDiRaccolta.colore] = [];
-            colorLegendMap[puntoDiRaccolta.colore].push(puntoDiRaccolta.tipologiaPuntiRaccolta);
+          if(!colorLegendAshMap[puntoDiRaccolta.colore]){
+            colorLegendAshMap[puntoDiRaccolta.colore] = [];
+            colorLegendMap[puntoDiRaccolta.colore] = {};
+            colorLegendAshMap[puntoDiRaccolta.colore].push(puntoDiRaccolta.tipologiaPuntiRaccolta);
+            colorLegendMap[puntoDiRaccolta.colore] = ": "+puntoDiRaccolta.tipologiaPuntiRaccolta;
           }
 
-          if(!!colorLegendMap[puntoDiRaccolta.colore] &&
-             colorLegendMap[puntoDiRaccolta.colore].indexOf(puntoDiRaccolta.tipologiaPuntiRaccolta)<0){
-             colorLegendMap[puntoDiRaccolta.colore].push(puntoDiRaccolta.tipologiaPuntiRaccolta);
+          if(!!colorLegendAshMap[puntoDiRaccolta.colore] &&
+             colorLegendAshMap[puntoDiRaccolta.colore].indexOf(puntoDiRaccolta.tipologiaPuntiRaccolta)<0){
+             colorLegendAshMap[puntoDiRaccolta.colore].push(puntoDiRaccolta.tipologiaPuntiRaccolta);
+             colorLegendMap[puntoDiRaccolta.colore] = colorLegendMap[puntoDiRaccolta.colore]+", "+puntoDiRaccolta.tipologiaPuntiRaccolta;
           }
       }
       
@@ -72,9 +75,10 @@ angular.module('rifiuti.services.calendar', [])
         fillWeeks: function(date, utenza, aree) {
             var deferred = $q.defer();
             Raccolta.puntiRaccoltaCalendar(utenza, aree).then(function(data){
-              var data = [];
+              var weeksData = [];
               var weeks = [];
               var colorLegendMap = {};
+              var colorLegendAshMap = {};
               var totalDays = daysInMonth(date.getMonth(),date.getFullYear());
               var weekNumber = 0;
               
@@ -116,16 +120,16 @@ angular.module('rifiuti.services.calendar', [])
                         var cell = weeks[w][idx];
                         // if this is the date of the interval of interest
                         if (cell != null) {
-                          appendToCalendarCell(cell,calItem,d[i],colorLegendMap);
+                          appendToCalendarCell(cell,calItem,d[i],colorLegendMap,colorLegendAshMap);
                         }
                       }
                     }
                   }
                 }
               }
-              data["weeks"] = weeks;
-              data["colorLegendMap"] = colorLegendMap;
-              deferred.resolve(data);
+              weeksData["weeks"] = weeks;
+              weeksData["colorLegendMap"] = colorLegendMap;
+              deferred.resolve(weeksData);
             });
             return deferred.promise;
         },
