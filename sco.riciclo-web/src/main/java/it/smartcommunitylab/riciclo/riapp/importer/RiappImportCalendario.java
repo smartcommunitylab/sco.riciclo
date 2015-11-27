@@ -40,7 +40,9 @@ public class RiappImportCalendario {
 			Map.Entry<String, JsonNode> elt = fields.next();
 			String tipologiaRaccolta = elt.getValue().path("nome").asText();
 			String colore = elt.getValue().path("colore").asText();
-			result.put(tipologiaRaccolta, colore);
+			if(Utils.isNotEmpty(tipologiaRaccolta)) {
+				result.put(tipologiaRaccolta, colore);
+			}
 		}
 		return result;
 	}
@@ -60,7 +62,9 @@ public class RiappImportCalendario {
 			Map.Entry<String, JsonNode> elt = fields.next();
 			String tipologiaRaccolta = elt.getValue().path("nome").asText();
 			String tipologiaPuntoRaccolta = "Porta a porta " + tipologiaRaccolta;
-			result.put(tipologiaRaccolta, tipologiaPuntoRaccolta);
+			if(Utils.isNotEmpty(tipologiaRaccolta)) {
+				result.put(tipologiaRaccolta, tipologiaPuntoRaccolta);
+			}
 		}
 		return result;
 	}
@@ -80,7 +84,9 @@ public class RiappImportCalendario {
 			Map.Entry<String, JsonNode> elt = fields.next();
 			String frazione = elt.getKey();
 			String tipologiaRaccolta = elt.getValue().path("nome").asText();
-			result.put(frazione, tipologiaRaccolta);
+			if(Utils.isNotEmpty(tipologiaRaccolta)) {
+				result.put(frazione, tipologiaRaccolta);
+			}
 		}
 		return result;
 	}

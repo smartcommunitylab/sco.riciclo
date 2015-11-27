@@ -17,6 +17,7 @@ import it.smartcommunitylab.riciclo.model.Segnalazione;
 import it.smartcommunitylab.riciclo.model.Tipologia;
 import it.smartcommunitylab.riciclo.model.TipologiaProfilo;
 import it.smartcommunitylab.riciclo.model.TipologiaPuntoRaccolta;
+import it.smartcommunitylab.riciclo.model.TipologiaRaccolta;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -263,6 +264,7 @@ public class UIConverter {
 			newPR.setOrarioApertura(convertOrarioApertura(crm.getOrarioApertura(), lang, defaultLang, true));
 			newPR.setCaratteristiche(crm.getCaratteristiche());
 			newPR.setNote(Utils.getString(crm.getNote(), lang, defaultLang));
+			newPR.setAccesso(Utils.getString(crm.getAccesso(), lang, defaultLang));
 			PuntoRaccoltaUI existingPR = containsPR(newPR, result);
 			if(existingPR == null) {
 				result.add(newPR);
@@ -341,12 +343,29 @@ public class UIConverter {
 		result.setAppId(categorie.getOwnerId());
 		result.setCaratteristicaPuntoRaccolta(convertTipologia(categorie.getCaratteristicaPuntoRaccolta(), categorie.getOwnerId(),
 				lang, defaultLang));
-		result.setTipologiaRaccolta(convertTipologia(categorie.getTipologiaRaccolta(), categorie.getOwnerId(),
+		result.setTipologiaRaccolta(convertTipologiaRaccolta(categorie.getTipologiaRaccolta(), categorie.getOwnerId(),
 				lang, defaultLang));
 		result.setTipologiaRifiuto(convertTipologia(categorie.getTipologiaRifiuto(), categorie.getOwnerId(),
 				lang, defaultLang));
 		result.setTipologiaUtenza(convertTipologia(categorie.getTipologiaUtenza(), categorie.getOwnerId(),
 				lang, defaultLang));
+		return result;
+	}
+
+	private static Set<TipologiaRaccoltaUI> convertTipologiaRaccolta(Set<TipologiaRaccolta> tipoligie, 
+			String ownerId, String lang, String defaultLang) {
+		Set<TipologiaRaccoltaUI> result = new LinkedHashSet<TipologiaRaccoltaUI>();
+		for(TipologiaRaccolta tipologia : tipoligie) {
+			TipologiaRaccoltaUI tipologiaUI = new TipologiaRaccoltaUI();
+			tipologiaUI.setAppId(ownerId);
+			tipologiaUI.setId(tipologia.getObjectId());
+			tipologiaUI.setNome(Utils.getString(tipologia.getNome(), lang, defaultLang));
+			tipologiaUI.setDescrizione(Utils.getString(tipologia.getDescrizione(), lang, defaultLang));
+			tipologiaUI.setIcona(tipologia.getIcona());
+			tipologiaUI.setComeConferire(Utils.getString(tipologia.getComeConferire(), lang, defaultLang));
+			tipologiaUI.setPrestaAttenzione(Utils.getString(tipologia.getPrestaAttenzione(), lang, defaultLang));
+			result.add(tipologiaUI);
+		}
 		return result;
 	}
 

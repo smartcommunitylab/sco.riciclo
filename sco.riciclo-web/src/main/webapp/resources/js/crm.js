@@ -22,6 +22,7 @@ var crmCtrl = crmApp.controller('userCtrl', function($scope, $window, $http, Dat
 	$scope.fRegion = "";
 	$scope.fRegionDetails = "";
 	$scope.fNote = "";
+	$scope.fAccess = "";
 
 	$scope.fResiduo = false;
 	$scope.fImbCarta = false;
@@ -104,6 +105,7 @@ var crmCtrl = crmApp.controller('userCtrl', function($scope, $window, $http, Dat
 			var element = $scope.findByObjectId($scope.crmList, $scope.fId);
 			if(element != null) {
 				$scope.fNote = element.note[$scope.language];
+				$scope.fAccess = element.accesso[$scope.language];
 			}
 		}
 	};
@@ -147,6 +149,7 @@ var crmCtrl = crmApp.controller('userCtrl', function($scope, $window, $http, Dat
 			$scope.incomplete = false;
 			$scope.fId = id;
 			$scope.fNote = element.note[$scope.language];
+			$scope.fAccess= element.accesso[$scope.language];
 			$scope.fRegion = element.zona;
 			$scope.fRegionDetails = element.dettagliZona;
 			$scope.fLatitude = element.geocoding[1].toString();
@@ -182,6 +185,7 @@ var crmCtrl = crmApp.controller('userCtrl', function($scope, $window, $http, Dat
 	$scope.resetForm = function() {
 		$scope.fId = "";
 		$scope.fNote = "";
+		$scope.fAccess= "";
 		$scope.fRegion = "";
 		$scope.fRegionDetails = "";
 		$scope.fAddress = "";
@@ -231,6 +235,7 @@ var crmCtrl = crmApp.controller('userCtrl', function($scope, $window, $http, Dat
 		if($scope.create) {
 			var element = {
 				note: {},
+				accesso: {},
 				zona: '',
 				dettagliZona: '',
 				geocoding: [],
@@ -238,6 +243,7 @@ var crmCtrl = crmApp.controller('userCtrl', function($scope, $window, $http, Dat
 				orarioApertura: []
 			};
 			element.note[$scope.language] = $scope.fNote;
+			element.accesso[$scope.language] = $scope.fAccess;
 			element.zona = $scope.fRegion;
 			element.dettagliZona = $scope.fRegionDetails;
 			element.geocoding[0] = parseFloat($scope.fLongitude);
@@ -270,6 +276,7 @@ var crmCtrl = crmApp.controller('userCtrl', function($scope, $window, $http, Dat
 			var element = $scope.findByObjectId($scope.crmList, $scope.fId);
 			if(element != null) {
 				element.note[$scope.language] = $scope.fNote;
+				element.accesso[$scope.language] = $scope.fAccess;
 				element.zona = $scope.fRegion;
 				element.dettagliZona = $scope.fRegionDetails;
 				element.geocoding[0] = parseFloat($scope.fLongitude);

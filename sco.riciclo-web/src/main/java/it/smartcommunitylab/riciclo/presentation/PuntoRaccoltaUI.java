@@ -34,6 +34,8 @@ public class PuntoRaccoltaUI extends BaseObjectUI {
 	private Map<String, Boolean> caratteristiche;
 
 	private String note;
+	
+	private String accesso;
 
 	public String getTipologiaPuntiRaccolta() {
 		return tipologiaPuntiRaccolta;
@@ -154,6 +156,14 @@ public class PuntoRaccoltaUI extends BaseObjectUI {
 	@Override
 	public String toString() {
 		return "PuntoRaccolta [" + utenzaArea + "," + tipologiaPuntiRaccolta + "," + zona + "," + dettagliZona + "->" + orarioApertura + "]";
+	}
+
+	public String getAccesso() {
+		return accesso;
+	}
+
+	public void setAccesso(String accesso) {
+		this.accesso = accesso;
 	}
 
 }

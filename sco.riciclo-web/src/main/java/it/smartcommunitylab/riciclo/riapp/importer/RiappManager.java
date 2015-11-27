@@ -13,9 +13,11 @@ import it.smartcommunitylab.riciclo.model.Rifiuto;
 import it.smartcommunitylab.riciclo.model.Tipologia;
 import it.smartcommunitylab.riciclo.model.TipologiaProfilo;
 import it.smartcommunitylab.riciclo.model.TipologiaPuntoRaccolta;
+import it.smartcommunitylab.riciclo.model.TipologiaRaccolta;
 import it.smartcommunitylab.riciclo.riapp.importer.model.RiappArea;
 import it.smartcommunitylab.riciclo.riapp.importer.model.RiappAreaStruct;
 import it.smartcommunitylab.riciclo.riapp.importer.model.RiappCentro;
+import it.smartcommunitylab.riciclo.riapp.importer.model.RiappIstruzioni;
 import it.smartcommunitylab.riciclo.riapp.importer.model.RiappOrario;
 import it.smartcommunitylab.riciclo.riapp.importer.model.RiappRifiuto;
 import it.smartcommunitylab.riciclo.storage.RepositoryManager;
@@ -44,6 +46,7 @@ public class RiappManager {
 	private RiappImportDizionario riappImportRifiuti;
 	private RiappImportCalendario riappImportCalendario;
 	private RiappImportTipologieRifiuto riappImportTipologieRifiuto;
+	private RiappImportIstruzioni riappImportIstruzioni;
 	
 	public RiappManager(String defaultLang, String baseDir) {
 		this.defaultLang = defaultLang;
@@ -53,6 +56,7 @@ public class RiappManager {
 		this.riappImportRifiuti = new RiappImportDizionario(this.baseDir);
 		this.riappImportCalendario = new RiappImportCalendario(this.baseDir);
 		this.riappImportTipologieRifiuto = new RiappImportTipologieRifiuto(this.baseDir);
+		this.riappImportIstruzioni = new RiappImportIstruzioni(this.baseDir);
 	}
 	
 	public void importData(String ownerId) {
@@ -66,19 +70,29 @@ public class RiappManager {
 		Map<String, String> tipologiaRifiutoMap = new HashMap<String, String>();
 		//<frazione, tipologiaRaccolta>
 		Map<String, String> frazioneMap = new HashMap<String, String>();
+		//<tipologiaRaccolta, RiappIstruzioni>
+		Map<String, RiappIstruzioni> istruzioniMap = new HashMap<String, RiappIstruzioni>();
 		try {
-			List<String> fileList = riappImportComuni.readListaValori(ownerId, "cal");
-			for(String file : fileList) {
-				tipologiaRifiutoMap.putAll(riappImportTipologieRifiuto.readListaRifiuti(file));
+			List<String> fileCalendarioList = riappImportComuni.readListaValori(ownerId, "cal");
+			for(String file : fileCalendarioList) {
 				tipologiaRaccoltaMap.putAll(riappImportCalendario.readTipologiaRaccolta(file));
 				tipologiaPuntoRaccoltaMap.putAll(riappImportCalendario.readTipologiaPuntoRaccolta(file));
 				frazioneMap.putAll(riappImportCalendario.readFrazioni(file));
+			}
+			List<String> fileDizionarioList = riappImportComuni.readListaValori(ownerId, "diz");
+			for(String file : fileDizionarioList) {
+				tipologiaRifiutoMap.putAll(riappImportTipologieRifiuto.readListaRifiuti(file));
+			}
+			List<String> fileIstruzioniList = riappImportComuni.readListaValori(ownerId, "ist");
+			for(String file : fileIstruzioniList) {
+				istruzioniMap.putAll(riappImportIstruzioni.readIstruzioni(file));
 			}
 		} catch (Exception e) {
 			logger.error("error", e);
 		}
 		
-		Categorie categorie = importTipologie(ownerId, tipologiaRaccoltaMap, tipologiaPuntoRaccoltaMap, tipologiaRifiutoMap);
+		Categorie categorie = importTipologie(ownerId, tipologiaRaccoltaMap, tipologiaPuntoRaccoltaMap, 
+				tipologiaRifiutoMap, istruzioniMap);
 		List<Colore> listaColori = importColori(ownerId);
 		RiappAreaStruct areaStruct = importAree(ownerId);
 		//<comuneEsteso, Area>
@@ -151,7 +165,8 @@ public class RiappManager {
 	}
 	
 	private Categorie importTipologie(String ownerId, Map<String, String> tipologiaRaccoltaMap, 
-			Map<String, String> tipologiaPuntoRaccoltaMap, Map<String, String> tipologiaRifiutoMap) {
+			Map<String, String> tipologiaPuntoRaccoltaMap, Map<String, String> tipologiaRifiutoMap, 
+			Map<String, RiappIstruzioni> istruzioniMap) {
 		Categorie categorie = new Categorie();
 		categorie.setOwnerId(ownerId);
 		
@@ -179,17 +194,22 @@ public class RiappManager {
 			storage.updateTipologie(ownerId, categorie.getTipologiaRifiuto(), "tipologiaRifiuto", true);
 			
 			//tipologiaRaccolta
-			Tipologia tipologiaContenitoreSpecifico = new Tipologia();
+			TipologiaRaccolta tipologiaContenitoreSpecifico = new TipologiaRaccolta();
 			tipologiaContenitoreSpecifico.setObjectId(Const.TRAC_CS);
 			tipologiaContenitoreSpecifico.getNome().put(defaultLang, Const.TRAC_CS);
 			categorie.getTipologiaRaccolta().add(tipologiaContenitoreSpecifico);
 			for(String tipologiaRaccolta : tipologiaRaccoltaMap.keySet()) {
-				Tipologia tipologia = new Tipologia();
+				TipologiaRaccolta tipologia = new TipologiaRaccolta();
 				tipologia.setObjectId(tipologiaRaccolta);
 				tipologia.getNome().put(defaultLang, tipologiaRaccolta);
+				RiappIstruzioni istruzioni = RiappImportIstruzioni.getIstruzioni(tipologiaRaccolta, istruzioniMap);
+				if(istruzioni != null) {
+					tipologia.getComeConferire().put(defaultLang, istruzioni.getComeConferire());
+					tipologia.getPrestaAttenzione().put(defaultLang, istruzioni.getPrestaAttenzione());
+				}
 				categorie.getTipologiaRaccolta().add(tipologia);
 			}
-			storage.updateTipologie(ownerId, categorie.getTipologiaRaccolta(), "tipologiaRaccolta", true);
+			storage.updateTipologieRaccolta(ownerId, categorie.getTipologiaRaccolta(), "tipologiaRaccolta", true);
 			
 			//tipologiaPuntoRaccolta
 			TipologiaPuntoRaccolta ecocentro = new TipologiaPuntoRaccolta();
@@ -297,6 +317,7 @@ public class RiappManager {
 					crm.setDettagliZona(riappCentro.getIndirizzo());
 					crm.setGeocoding(new double[] { riappCentro.getLongitudine(), riappCentro.getLatitudine() });
 					crm.getNote().put(defaultLang, riappCentro.getInfo());
+					crm.getAccesso().put(defaultLang, riappCentro.getAccesso());
 					//TODO crm.setCaratteristiche();
 					crm.setOrarioApertura(RiappImportCentri.convertOrario(riappCentro));
 					storage.addCRM(crm, true);
@@ -375,8 +396,8 @@ public class RiappManager {
 			Map<String, List<String>> raccoltaMap = new HashMap<String, List<String>>(); 
 			for(RiappRifiuto riappRifiuto : rifiutiMap.values()) {
 				String tipologiaRifiuto = RiappImportDizionario.getTipologiaRifiuto(riappRifiuto, tipologiaRifiutoMap);
-				String tipologiaRaccolta = RiappImportDizionario.getTipologiaRaccolta(riappRifiuto, tipologiaRaccoltaMap);
-				if(Utils.isEmpty(tipologiaRifiuto) || Utils.isEmpty(tipologiaRaccolta)) {
+				List<String> tipologieRaccolta = RiappImportDizionario.getTipologieRaccolta(riappRifiuto, tipologiaRaccoltaMap);
+				if(Utils.isEmpty(tipologiaRifiuto) || (tipologieRaccolta.size() == 0)) {
 					continue;
 				}
 				List<String> tipologiaRaccoltaList = raccoltaMap.get(tipologiaRifiuto);
@@ -384,11 +405,13 @@ public class RiappManager {
 					tipologiaRaccoltaList = Lists.newArrayList();
 					raccoltaMap.put(tipologiaRifiuto, tipologiaRaccoltaList);
 				}
-				if(!tipologiaRaccoltaList.contains(tipologiaRaccolta)) {
-					tipologiaRaccoltaList.add(tipologiaRaccolta);
+				for(String tipologiaRaccolta : tipologieRaccolta) {
+					if(!tipologiaRaccoltaList.contains(tipologiaRaccolta)) {
+						tipologiaRaccoltaList.add(tipologiaRaccolta);
+					}
 				}
 				if(logger.isInfoEnabled()) {
-					logger.info(String.format("importRaccolta - %s;%s;%s", riappRifiuto.getRifiuto(), tipologiaRifiuto, tipologiaRaccolta));
+					logger.info(String.format("importRaccolta - %s;%s;%s", riappRifiuto.getRifiuto(), tipologiaRifiuto, tipologieRaccolta));
 				}
 			}
 			Raccolta raccolta = null;
@@ -486,49 +509,49 @@ public class RiappManager {
 	private void convertOrario(String ownerId, RiappOrario riappOrario, Map<String, CalendarioRaccolta> calendarioMap, 
 			Area area, Map<String, String> frazioneMap, Map<String, String> tipologiaPuntoRaccoltaMap) {
 		List<String> tipologiaPuntoRaccoltaList = Lists.newArrayList();
-		if(riappOrario.getCa().equals("S")) {
+		if(Utils.isNotEmpty(riappOrario.getCa()) && riappOrario.getCa().equals("S")) {
 			String tipologiaPuntoRaccolta = getTipologiaPuntoRaccolta("carta", frazioneMap, tipologiaPuntoRaccoltaMap);
 			if(Utils.isNotEmpty(tipologiaPuntoRaccolta)) {
 				tipologiaPuntoRaccoltaList.add(tipologiaPuntoRaccolta);
 			}
 		} 
-		if(riappOrario.getVe().equals("S")) {
+		if(Utils.isNotEmpty(riappOrario.getVe()) && riappOrario.getVe().equals("S")) {
 			String tipologiaPuntoRaccolta = getTipologiaPuntoRaccolta("vetro", frazioneMap, tipologiaPuntoRaccoltaMap);
 			if(Utils.isNotEmpty(tipologiaPuntoRaccolta)) {
 				tipologiaPuntoRaccoltaList.add(tipologiaPuntoRaccolta);
 			}
 		} 
-		if(riappOrario.getOr().equals("S")) {
+		if(Utils.isNotEmpty(riappOrario.getOr()) && riappOrario.getOr().equals("S")) {
 			String tipologiaPuntoRaccolta = getTipologiaPuntoRaccolta("organico", frazioneMap, tipologiaPuntoRaccoltaMap);
 			if(Utils.isNotEmpty(tipologiaPuntoRaccolta)) {
 				tipologiaPuntoRaccoltaList.add(tipologiaPuntoRaccolta);
 			}
 		} 
-		if(riappOrario.getPl().equals("S")) {
+		if(Utils.isNotEmpty(riappOrario.getPl()) && riappOrario.getPl().equals("S")) {
 			String tipologiaPuntoRaccolta = getTipologiaPuntoRaccolta("plastica", frazioneMap, tipologiaPuntoRaccoltaMap);
 			if(Utils.isNotEmpty(tipologiaPuntoRaccolta)) {
 				tipologiaPuntoRaccoltaList.add(tipologiaPuntoRaccolta);
 			}
 		} 
-		if(riappOrario.getInd().equals("S")) {
+		if(Utils.isNotEmpty(riappOrario.getInd()) && riappOrario.getInd().equals("S")) {
 			String tipologiaPuntoRaccolta = getTipologiaPuntoRaccolta("indiff", frazioneMap, tipologiaPuntoRaccoltaMap);
 			if(Utils.isNotEmpty(tipologiaPuntoRaccolta)) {
 				tipologiaPuntoRaccoltaList.add(tipologiaPuntoRaccolta);
 			}
 		} 
-		if(riappOrario.getAl1().equals("S")) {
+		if(Utils.isNotEmpty(riappOrario.getAl1()) && riappOrario.getAl1().equals("S")) {
 			String tipologiaPuntoRaccolta = getTipologiaPuntoRaccolta("altro1", frazioneMap, tipologiaPuntoRaccoltaMap);
 			if(Utils.isNotEmpty(tipologiaPuntoRaccolta)) {
 				tipologiaPuntoRaccoltaList.add(tipologiaPuntoRaccolta);
 			}
 		} 
-		if(riappOrario.getAl2().equals("S")) {
+		if(Utils.isNotEmpty(riappOrario.getAl2()) && riappOrario.getAl2().equals("S")) {
 			String tipologiaPuntoRaccolta = getTipologiaPuntoRaccolta("altro2", frazioneMap, tipologiaPuntoRaccoltaMap);
 			if(Utils.isNotEmpty(tipologiaPuntoRaccolta)) {
 				tipologiaPuntoRaccoltaList.add(tipologiaPuntoRaccolta);
 			}
 		} 
-		if(riappOrario.getAl3().equals("S")) {
+		if(Utils.isNotEmpty(riappOrario.getAl3()) && riappOrario.getAl3().equals("S")) {
 			String tipologiaPuntoRaccolta = getTipologiaPuntoRaccolta("altro3", frazioneMap, tipologiaPuntoRaccoltaMap);
 			if(Utils.isNotEmpty(tipologiaPuntoRaccolta)) {
 				tipologiaPuntoRaccoltaList.add(tipologiaPuntoRaccolta);

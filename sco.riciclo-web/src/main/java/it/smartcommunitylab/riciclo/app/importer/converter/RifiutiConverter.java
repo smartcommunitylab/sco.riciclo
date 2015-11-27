@@ -102,7 +102,7 @@ public class RifiutiConverter {
 
 //		categorie.setColori(new HashSet<Tipologia>());
 //		categorie.setTipologiaIstituzione(new HashSet<Tipologia>());
-		categorie.setTipologiaRaccolta(new HashSet<Tipologia>());
+		categorie.setTipologiaRaccolta(new HashSet<it.smartcommunitylab.riciclo.model.TipologiaRaccolta>());
 		
 		//TIPOLOGIAPUNTORACCOLTA
 		List<TipologiaPuntoRaccolta> puntiRaccolta = Lists.newArrayList();
@@ -249,7 +249,10 @@ public class RifiutiConverter {
 		//TIPOLOGIARACCOLTA
 		for (TipologiaRaccolta tr : rifiuti.getTipologiaRaccolta()) {
 			String nome = StringUtils.capitalize(tr.getValore().toLowerCase().replace("crm", "CRM").replace("crz", "CRZ")).trim();
-			categorie.getTipologiaRaccolta().add(new Tipologia(nome, nome, null, null, defaultLang));
+			it.smartcommunitylab.riciclo.model.TipologiaRaccolta tipologiaRaccolta = new it.smartcommunitylab.riciclo.model.TipologiaRaccolta();
+			tipologiaRaccolta.setObjectId(nome);
+			tipologiaRaccolta.getNome().put(defaultLang, nome);
+			categorie.getTipologiaRaccolta().add(tipologiaRaccolta);
 		}
 
 		//PUNTIRACCOLTA

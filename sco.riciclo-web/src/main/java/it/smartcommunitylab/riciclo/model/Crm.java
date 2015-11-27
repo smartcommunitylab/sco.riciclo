@@ -12,6 +12,7 @@ public class Crm extends BaseObject {
 	private String dettagliZona;
 	private double[] geocoding;
 	private Map<String, String> note = new HashMap<String, String>();
+	private Map<String, String> accesso = new HashMap<String, String>();
 	private Map<String, Boolean> caratteristiche = new HashMap<String, Boolean>();
 	private List<OrarioApertura> orarioApertura = new ArrayList<OrarioApertura>();
 
@@ -62,5 +63,11 @@ public class Crm extends BaseObject {
 	}
 	public void setDettagliZona(String dettagliZona) {
 		this.dettagliZona = dettagliZona;
+	}
+	public Map<String, String> getAccesso() {
+		return accesso;
+	}
+	public void setAccesso(Map<String, String> accesso) {
+		this.accesso = accesso;
 	}
 }

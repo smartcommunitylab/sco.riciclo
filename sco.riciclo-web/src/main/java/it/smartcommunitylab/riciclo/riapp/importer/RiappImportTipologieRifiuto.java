@@ -26,7 +26,7 @@ public class RiappImportTipologieRifiuto {
 	 * @return <rifiuto, tipologiaRifiuto>
 	 * @throws Exception
 	 */
-	public Map<String, String> readListaRifiuti(String cal) throws Exception {
+	public Map<String, String> readListaRifiuti(String diz) throws Exception {
 		Map<String, String> result = new HashMap<String, String>();
 		Map<String, String> specificMap = new HashMap<String, String>();
 		Map<String, String> defaultMap = new HashMap<String, String>();
@@ -41,7 +41,7 @@ public class RiappImportTipologieRifiuto {
 				rifiutiList.add(rifiuto);
 			}
 			String tipologia = Utils.capitalize(node.path("TIPOLOGIA").asText().toLowerCase());
-			String calendarValue = node.path(cal).asText();
+			String calendarValue = node.path(diz).asText();
 			if(Utils.isEmpty(calendarValue) || calendarValue.equals("0")) {
 				defaultMap.put(rifiuto, tipologia);
 			} else {

@@ -47,5 +47,14 @@
 		"token": "LvnSc8pA83dfX7mX",
 		"modelElements": ["modello"],
 		"comuni": ["093004"]
-	}]
+	},
+	{
+		"_class": "it.smartcommunitylab.riciclo.storage.DataSetInfo",
+		"ownerId": "AVIANO",
+		"password": "AVIANO",
+		"token": "coO2uf2sBzeqPdHx",
+		"modelElements": ["modello"],
+		"comuni": ["093004"]
+	}
+	]
 }

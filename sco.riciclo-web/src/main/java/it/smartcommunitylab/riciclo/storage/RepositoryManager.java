@@ -36,6 +36,7 @@ import it.smartcommunitylab.riciclo.model.Segnalazione;
 import it.smartcommunitylab.riciclo.model.Tipologia;
 import it.smartcommunitylab.riciclo.model.TipologiaProfilo;
 import it.smartcommunitylab.riciclo.model.TipologiaPuntoRaccolta;
+import it.smartcommunitylab.riciclo.model.TipologiaRaccolta;
 import it.smartcommunitylab.riciclo.security.Token;
 
 import java.util.ArrayList;
@@ -458,6 +459,7 @@ public class RepositoryManager {
 		update.set("dettagliZona", crm.getDettagliZona());
 		update.set("geocoding", crm.getGeocoding());
 		update.set("note", crm.getNote());
+		update.set("accesso", crm.getAccesso());
 		update.set("caratteristiche", crm.getCaratteristiche());
 		template.updateFirst(query, update, Crm.class);
 	}
@@ -934,6 +936,25 @@ public class RepositoryManager {
 		template.updateFirst(query, update, Categorie.class);
 	}
 
+	public void updateTipologieRaccolta(String ownerId, Set<TipologiaRaccolta> data, String tipologia,
+			boolean draft) throws ClassNotFoundException {
+		MongoTemplate template = draft ? draftTemplate : finalTemplate;
+		Query query = new Query(new Criteria("ownerId").is(ownerId));
+		Categorie categorieDB = template.findOne(query, Categorie.class);
+		if (categorieDB == null) {
+			Categorie categorie = new Categorie();
+			Date actualDate = new Date();
+			categorie.setCreationDate(actualDate);
+			categorie.setLastUpdate(actualDate);
+			categorie.setOwnerId(ownerId);
+			template.save(categorie);
+		}
+		Update update = new Update();
+		update.set("lastUpdate", new Date());
+		update.set(tipologia, data);
+		template.updateFirst(query, update, Categorie.class);
+	}
+	
 	/**
 	 * Gestione TipologiaPuntoRaccolta
 	 */

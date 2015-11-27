@@ -21,6 +21,7 @@ import it.smartcommunitylab.riciclo.model.Categorie;
 import it.smartcommunitylab.riciclo.model.Tipologia;
 import it.smartcommunitylab.riciclo.model.TipologiaProfilo;
 import it.smartcommunitylab.riciclo.model.TipologiaPuntoRaccolta;
+import it.smartcommunitylab.riciclo.model.TipologiaRaccolta;
 import it.smartcommunitylab.riciclo.storage.AppSetup;
 import it.smartcommunitylab.riciclo.storage.RepositoryManager;
 
@@ -235,14 +236,14 @@ public class TipologieController {
 	}
 
 	@RequestMapping(value="api/tipologia/raccolta/{ownerId}", method=RequestMethod.POST)
-	public @ResponseBody void updateTipologiaRaccolta(@RequestBody List<Tipologia> tipologia,	@PathVariable String ownerId,
+	public @ResponseBody void updateTipologiaRaccolta(@RequestBody List<TipologiaRaccolta> tipologia,	@PathVariable String ownerId,
 		HttpServletRequest request, HttpServletResponse response)	throws Exception {
 		boolean draft = Utils.getDraft(request);
 		if(!Utils.validateAPIRequest(request, appSetup, draft, storage)) {
 			throw new UnauthorizedException("Unauthorized Exception: token not valid");
 		}
-		Set<Tipologia> data = new HashSet<Tipologia>(tipologia);
-		storage.updateTipologie(ownerId, data, "tipologiaRaccolta", draft);
+		Set<TipologiaRaccolta> data = new HashSet<TipologiaRaccolta>(tipologia);
+		storage.updateTipologieRaccolta(ownerId, data, "tipologiaRaccolta", draft);
 	}
 
 	@ExceptionHandler(Exception.class)

@@ -24,7 +24,7 @@ public class Categorie extends BaseObject {
 	private Set<Tipologia> tipologiaUtenza = new HashSet<Tipologia>();
 //	private Set<Tipologia> tipologiaIstituzione;
 	private Set<Tipologia> tipologiaRifiuto = new HashSet<Tipologia>();
-	private Set<Tipologia> tipologiaRaccolta = new HashSet<Tipologia>();
+	private Set<TipologiaRaccolta> tipologiaRaccolta = new HashSet<TipologiaRaccolta>();
 //	private Set<Tipologia> tipologiaPuntiRaccolta;
 	private Set<Tipologia> caratteristicaPuntoRaccolta = new HashSet<Tipologia>();
 	
@@ -46,10 +46,10 @@ public class Categorie extends BaseObject {
 	public void setTipologiaRifiuto(Set<Tipologia> tipologiaRifiuto) {
 		this.tipologiaRifiuto = tipologiaRifiuto;
 	}
-	public Set<Tipologia> getTipologiaRaccolta() {
+	public Set<TipologiaRaccolta> getTipologiaRaccolta() {
 		return tipologiaRaccolta;
 	}
-	public void setTipologiaRaccolta(Set<Tipologia> tipologiaRaccolta) {
+	public void setTipologiaRaccolta(Set<TipologiaRaccolta> tipologiaRaccolta) {
 		this.tipologiaRaccolta = tipologiaRaccolta;
 	}
 //	public Set<Tipologia> getTipologiaPuntiRaccolta() {

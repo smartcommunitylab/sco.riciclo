@@ -19,11 +19,14 @@ angular.module('tipo-raccolta', ['DataService']).controller('userCtrl', function
 	$scope.fId = "";
 	$scope.fNome = "";
 	$scope.fDescrizione = "";
+	$scope.fComeConferire = "";
+	$scope.fPrestaAttenzione = "";
 	$scope.search = "";
 	$scope.actualName = "";
 
 	$scope.edit = false;
 	$scope.create = false;
+	$scope.view = false;
 	$scope.incomplete = true;
 
 	$scope.error = false;
@@ -97,6 +100,8 @@ angular.module('tipo-raccolta', ['DataService']).controller('userCtrl', function
 			if(element != null) {
 				$scope.fNome = element.nome[$scope.language];
 				$scope.fDescrizione = element.descrizione[$scope.language];
+				$scope.fComeConferire = element.comeConferire[$scope.language];
+				$scope.fPrestaAttenzione = element.prestaAttenzione[$scope.language];
 			}
 		}
 	};
@@ -116,6 +121,8 @@ angular.module('tipo-raccolta', ['DataService']).controller('userCtrl', function
 			$scope.fId = id;
 			$scope.fNome = element.nome[$scope.language];
 			$scope.fDescrizione = element.descrizione[$scope.language];
+			$scope.fComeConferire = element.comeConferire[$scope.language];
+			$scope.fPrestaAttenzione = element.prestaAttenzione[$scope.language];
 			$scope.actualName = element.nome[$scope.defaultLang];
 			$scope.incomplete = false;
 		}
@@ -126,9 +133,12 @@ angular.module('tipo-raccolta', ['DataService']).controller('userCtrl', function
 		console.log("newTipo");
 		$scope.edit = false;
 		$scope.create = true;
+		$scope.view = false;
 		$scope.fId = "";
 		$scope.fNome = "";
 		$scope.fDescrizione = "";
+		$scope.fComeConferire = "";
+		$scope.fPrestaAttenzione = "";
 		$scope.actualName = "";
 		$scope.incomplete = true;
 		$scope.itemToDelete = "";
@@ -141,6 +151,8 @@ angular.module('tipo-raccolta', ['DataService']).controller('userCtrl', function
 		$scope.fId = "";
 		$scope.fNome = "";
 		$scope.fDescrizione = "";
+		$scope.fComeConferire = "";
+		$scope.fPrestaAttenzione = "";
 		$scope.search = "";
 		$scope.actualName = "";
 		$scope.incomplete = true;
@@ -153,7 +165,9 @@ angular.module('tipo-raccolta', ['DataService']).controller('userCtrl', function
 			var element = {
 				objectId: '',
 				nome: {},
-				descrizione: {}
+				descrizione: {},
+				comeConferire: {},
+				prestaAttenzione: {}
 			};
 			element.objectId = $scope.fId.trim();
 			if(!$scope.isIdUnique($scope.tipoRaccoltaList, element.objectId)) {
@@ -163,6 +177,8 @@ angular.module('tipo-raccolta', ['DataService']).controller('userCtrl', function
 			}
 			element.nome[$scope.language] = $scope.fNome;
 			element.descrizione[$scope.language] = $scope.fDescrizione;
+			element.comeConferire[$scope.language] = $scope.fComeConferire;
+			element.prestaAttenzione[$scope.language] = $scope.fPrestaAttenzione;
 			var copiedList = $scope.tipoRaccoltaList.slice(0);
 			copiedList.unshift(element);
 			var url = "api/tipologia/raccolta/" + $scope.profile.appInfo.ownerId + "?draft=" + $scope.draft;
@@ -194,6 +210,8 @@ angular.module('tipo-raccolta', ['DataService']).controller('userCtrl', function
 				if(element != null) {
 					element.nome[$scope.language] = $scope.fNome;
 					element.descrizione[$scope.language] = $scope.fDescrizione;
+					element.comeConferire[$scope.language] = $scope.fComeConferire;
+					element.prestaAttenzione[$scope.language] = $scope.fPrestaAttenzione;
 					var url = "api/tipologia/raccolta/" + $scope.profile.appInfo.ownerId + "?draft=" + $scope.draft;
 					$http.post(url, $scope.tipoRaccoltaList, {headers: {'X-ACCESS-TOKEN': $scope.profile.appInfo.token}}).then(
 					function(response) {

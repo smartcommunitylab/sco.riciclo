@@ -23,7 +23,7 @@ public class CategorieUI extends BaseObjectUI {
 	private Set<TipologiaUI> tipologiaUtenza;
 //	private Set<Tipologia> tipologiaIstituzione;
 	private Set<TipologiaUI> tipologiaRifiuto;
-	private Set<TipologiaUI> tipologiaRaccolta;
+	private Set<TipologiaRaccoltaUI> tipologiaRaccolta;
 	private Set<TipologiaUI> tipologiaPuntiRaccolta;
 	private Set<TipologiaUI> caratteristicaPuntoRaccolta;
 
@@ -45,10 +45,10 @@ public class CategorieUI extends BaseObjectUI {
 	public void setTipologiaRifiuto(Set<TipologiaUI> tipologiaRifiuto) {
 		this.tipologiaRifiuto = tipologiaRifiuto;
 	}
-	public Set<TipologiaUI> getTipologiaRaccolta() {
+	public Set<TipologiaRaccoltaUI> getTipologiaRaccolta() {
 		return tipologiaRaccolta;
 	}
-	public void setTipologiaRaccolta(Set<TipologiaUI> tipologiaRaccolta) {
+	public void setTipologiaRaccolta(Set<TipologiaRaccoltaUI> tipologiaRaccolta) {
 		this.tipologiaRaccolta = tipologiaRaccolta;
 	}
 	public Set<TipologiaUI> getTipologiaPuntiRaccolta() {

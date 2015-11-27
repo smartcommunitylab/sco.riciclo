@@ -52,28 +52,35 @@ public class RiappImportDizionario {
 		return tipologiaRifiuto;
 	}
 	
-	public static String getTipologiaRaccolta(RiappRifiuto riappRifiuto, Map<String, String> tipologiaRaccoltaMap) {
+	public static List<String> getTipologieRaccolta(RiappRifiuto riappRifiuto, Map<String, String> tipologiaRaccoltaMap) {
+		String contenitore = riappRifiuto.getContenitore();
 		String dove = riappRifiuto.getDove();
 		String fr = riappRifiuto.getFr();
-		String tipologiaRaccolta = null;
-		if(Utils.isNotEmpty(dove)) {
+		List<String> tipologieRaccolta = Lists.newArrayList();
+		if(Utils.isNotEmpty(contenitore)) {
 			for(String tr : tipologiaRaccoltaMap.keySet()) {
-				if(tr.contains(dove)) {
-					tipologiaRaccolta = tr;
-					break;
+				if(tr.toLowerCase().contains(contenitore.toLowerCase())) {
+					tipologieRaccolta.add(tr);
+				}
+			}
+		}
+		if((tipologieRaccolta.size() == 0) && Utils.isNotEmpty(dove)) {
+			for(String tr : tipologiaRaccoltaMap.keySet()) {
+				if(tr.toLowerCase().contains(dove.toLowerCase())) {
+					tipologieRaccolta.add(tr);
 				}
 			}
 		} 
-		if((tipologiaRaccolta == null) && Utils.isNotEmpty(fr)) {
+		if((tipologieRaccolta.size() == 0) && Utils.isNotEmpty(fr)) {
 			if(fr.equals("cen")) {
-				tipologiaRaccolta = Const.TRAC_CS;
+				tipologieRaccolta.add(Const.TRAC_CS);
 			}
 		}
-		if(Utils.isEmpty(tipologiaRaccolta)) {
+		if(tipologieRaccolta.size() == 0) {
 			if(logger.isWarnEnabled()) {
-				logger.warn("getTipologiaRaccolta - tipologiaRaccolta not found for " + riappRifiuto.getRifiuto());
+				logger.warn("getTipologieRaccolta - tipologiaRaccolta not found for " + riappRifiuto.getRifiuto());
 			}
 		}
-		return tipologiaRaccolta;
+		return tipologieRaccolta;
 	}
 }
