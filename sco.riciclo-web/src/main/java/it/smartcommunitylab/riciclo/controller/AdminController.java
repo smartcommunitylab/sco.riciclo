@@ -26,6 +26,8 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
@@ -42,7 +44,8 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 @Controller
 public class AdminController {
-
+	private static final transient Logger logger = LoggerFactory.getLogger(AdminController.class);
+			
 	@Autowired
 	private RepositoryManager storage;
 
@@ -63,6 +66,19 @@ public class AdminController {
 		storage.saveAppState(dataSetInfo.getOwnerId(), false);
 		appSetup.init();
 		return new ObjectMapper().writeValueAsString(dataSetInfo);
+	}
+	
+	@RequestMapping(value = "/reload/{ownerId}", method = RequestMethod.GET)
+	public @ResponseBody String reload(@PathVariable String ownerId, 
+			HttpServletRequest request, HttpServletResponse response) throws Exception {
+		if(!Utils.validateAPIRequest(request, appSetup, false, storage)) {
+			throw new UnauthorizedException("Unauthorized Exception: token not valid");
+		}
+		appSetup.init();
+		if(logger.isInfoEnabled()) {
+			logger.info("reload dataSet");
+		}
+		return "OK";
 	}
 
 	@ExceptionHandler(Exception.class)
