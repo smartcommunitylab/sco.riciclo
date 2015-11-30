@@ -77,7 +77,7 @@ public class RiappImportCalendario {
 	 */
 	public Map<String, String> readFrazioni(String fileId) throws Exception {
 		Map<String, String> result = new HashMap<String, String>();
-		FileReader fileReader = new FileReader(baseDir + "\\cal\\cal_" + fileId.toLowerCase() + ".json");
+		FileReader fileReader = new FileReader(baseDir + "/cal/cal_" + fileId.toLowerCase() + ".json");
 		JsonNode rootNode = Utils.readJsonFromReader(fileReader);
 		Iterator<Entry<String, JsonNode>> fields = rootNode.path("frazioni").fields();
 		while(fields.hasNext()) {
@@ -93,7 +93,7 @@ public class RiappImportCalendario {
 	
 	public List<RiappOrario> readCalendario(String fileId) throws Exception {
 		List<RiappOrario> result = Lists.newArrayList();
-		FileReader fileReader = new FileReader(baseDir + "\\cal\\cal_" + fileId.toLowerCase() + ".json");
+		FileReader fileReader = new FileReader(baseDir + "/cal/cal_" + fileId.toLowerCase() + ".json");
 		JsonNode rootNode = Utils.readJsonFromReader(fileReader);
 		Iterator<JsonNode> elements = rootNode.path("giornate").elements();
 		int index = 0;

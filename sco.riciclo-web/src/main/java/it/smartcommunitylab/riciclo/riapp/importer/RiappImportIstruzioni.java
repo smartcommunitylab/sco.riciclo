@@ -33,7 +33,7 @@ public class RiappImportIstruzioni {
 		int startIndex = -1;
 		int endIndex = -1;
 		Map<String, RiappIstruzioni> result = new HashMap<String, RiappIstruzioni>();
-		FileReader fileReader = new FileReader(baseDir + "\\ist\\ist_" + fileId.toLowerCase() + ".json");
+		FileReader fileReader = new FileReader(baseDir + "/ist/ist_" + fileId.toLowerCase() + ".json");
 		JsonNode rootNode = Utils.readJsonFromReader(fileReader);
 		Iterator<JsonNode> rootElements = rootNode.elements();
 		while(rootElements.hasNext()) {

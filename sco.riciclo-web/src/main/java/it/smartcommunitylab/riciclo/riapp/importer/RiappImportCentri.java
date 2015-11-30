@@ -25,7 +25,7 @@ public class RiappImportCentri {
 	
 	public List<RiappCentro> readListaCentri(String fileId) throws Exception {
 		List<RiappCentro> result = Lists.newArrayList();
-		FileReader fileReader = new FileReader(baseDir + "\\cen\\cen_" + fileId.toLowerCase() + ".json");
+		FileReader fileReader = new FileReader(baseDir + "/cen/cen_" + fileId.toLowerCase() + ".json");
 		JsonNode rootNode = Utils.readJsonFromReader(fileReader);
 		Iterator<JsonNode> rootElements = rootNode.elements();
 		while(rootElements.hasNext()) {

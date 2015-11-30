@@ -25,7 +25,7 @@ public class RiappImportDizionario {
 	
 	public List<RiappRifiuto> readListaRifiuti(String fileId) throws Exception {
 		List<RiappRifiuto> result = Lists.newArrayList();
-		FileReader fileReader = new FileReader(baseDir + "\\diz\\diz_" + fileId.toLowerCase() + ".json");
+		FileReader fileReader = new FileReader(baseDir + "/diz/diz_" + fileId.toLowerCase() + ".json");
 		JsonNode rootNode = Utils.readJsonFromReader(fileReader);
 		Iterator<JsonNode> rootElements = rootNode.elements();
 		int index = 0;

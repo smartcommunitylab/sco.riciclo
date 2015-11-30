@@ -31,7 +31,7 @@ public class RiappImportTipologieRifiuto {
 		Map<String, String> specificMap = new HashMap<String, String>();
 		Map<String, String> defaultMap = new HashMap<String, String>();
 		List<String> rifiutiList = Lists.newArrayList();
-		FileReader fileReader = new FileReader(baseDir + "\\diz-mod.json");
+		FileReader fileReader = new FileReader(baseDir + "/diz-mod.json");
 		JsonNode rootNode = Utils.readJsonFromReader(fileReader);
 		Iterator<JsonNode> rootElements = rootNode.elements();
 		while(rootElements.hasNext()) {

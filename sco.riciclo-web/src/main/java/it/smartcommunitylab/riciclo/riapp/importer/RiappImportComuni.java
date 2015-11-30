@@ -23,7 +23,7 @@ public class RiappImportComuni {
 	
 	public List<String> readListaComuni(String fileId) throws Exception {
 		List<String> comuneEstesoList = Lists.newArrayList();
-		FileReader fileReader = new FileReader(baseDir + "\\comuni\\listacomuni_" + fileId.toLowerCase() + ".json");
+		FileReader fileReader = new FileReader(baseDir + "/comuni/listacomuni_" + fileId.toLowerCase() + ".json");
 		JsonNode rootNode = Utils.readJsonFromReader(fileReader);
 		Iterator<JsonNode> rootElements = rootNode.elements();
 		while(rootElements.hasNext()) {
@@ -38,7 +38,7 @@ public class RiappImportComuni {
 	
 	public List<String> readListaValori(String fileId, String field) throws Exception {
 		List<String> result = Lists.newArrayList();
-		FileReader fileReader = new FileReader(baseDir + "\\comuni\\listacomuni_" + fileId.toLowerCase() + ".json");
+		FileReader fileReader = new FileReader(baseDir + "/comuni/listacomuni_" + fileId.toLowerCase() + ".json");
 		JsonNode rootNode = Utils.readJsonFromReader(fileReader);
 		Iterator<JsonNode> rootElements = rootNode.elements();
 		while(rootElements.hasNext()) {
@@ -53,7 +53,7 @@ public class RiappImportComuni {
 	
 	public List<RiappArea> readListaAree(String fileId) throws Exception {
 		List<RiappArea> areaList = Lists.newArrayList();
-		FileReader fileReader = new FileReader(baseDir + "\\comuni\\listacomuni_" + fileId.toLowerCase() + ".json");
+		FileReader fileReader = new FileReader(baseDir + "/comuni/listacomuni_" + fileId.toLowerCase() + ".json");
 		JsonNode rootNode = Utils.readJsonFromReader(fileReader);
 		Iterator<JsonNode> rootElements = rootNode.elements();
 		while(rootElements.hasNext()) {
