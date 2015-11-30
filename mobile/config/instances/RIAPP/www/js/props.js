@@ -20,8 +20,6 @@ PORTA_A_PORTA_LABEL = 'porta_a_porta';
 
 USE_DRAFT = true;
 LANG = ['it','en'];
-//COMUNI_LIST = ['022205','022003','022034'];
-COMUNI_LIST = ['022205','022003','022034'];
 
 
 ZOOM = 12;
