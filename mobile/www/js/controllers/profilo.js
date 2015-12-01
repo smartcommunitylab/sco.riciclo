@@ -468,6 +468,20 @@ angular.module('rifiuti.controllers.profilo', [])
 
     $scope.openLocalitaSelector = function () {
         //if (!$scope.profilo.utenza || !$scope.profilo.utenza.tipologiaUtenza) return;
+        if(!$scope.profilo.profiloRiapp){
+            var popup = $ionicPopup.show({
+                title: '<b class="popup-title">'+$filter("translate")("alert")+'<b/>',
+                template: $filter("translate")("alert_select_comune_before_localita"),
+                scope: $scope,
+                buttons: [
+                    {
+                        text: 'OK'
+                    }
+                ]
+            });
+            return;
+        }
+
         $scope.modal = modalLocalita;
         $scope.modal.show();
     };
