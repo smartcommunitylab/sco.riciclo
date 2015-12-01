@@ -1,4 +1,7 @@
 ITALIAN_VERSION = {
+        presta_attenzione: "Presta attenzione",
+        come_conferire: "Come conferire",
+        info: "INFO",
         reload_data: "Ricarica i Dati",
         porta_a_porta: "Porta a Porta",
         connection_error: "La connessione con il server non è disponibile",
@@ -129,6 +132,9 @@ ITALIAN_VERSION = {
 };
 
 ENGLISH_VERSION = {
+        presta_attenzione: "Pay attention to",
+        come_conferire: "How to give",
+        info: "INFO",
         reload_data: "Reload Data",
         porta_a_porta: "Curbside Collection",
         connection_error: "The connection to the server is unavailable",

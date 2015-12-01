@@ -237,6 +237,12 @@ angular.module('rifiuti.controllers.raccolta', [])
     if(!$scope.nome){
         $scope.nome = raccolta[0].tipoRaccolta.nome;
     }
+    if(!$scope.comeConferire){
+        $scope.comeConferire = raccolta[0].tipoRaccolta.comeConferire;
+    }
+    if(!$scope.prestaAttenzione){
+        $scope.prestaAttenzione = raccolta[0].tipoRaccolta.prestaAttenzione;
+    }
 
     var tipirifiuto=[], tipipunto=[];
     raccolta.forEach(function(regola){

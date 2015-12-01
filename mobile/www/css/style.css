@@ -16,6 +16,16 @@ body.platform-browser .scroll-bar-fade-out {
     height: 800px;
 }
 
+.punti-raccolta-info {
+    color: #47772b;
+    font-weight: bold;
+    font-size: larger;
+    padding-bottom: 0;
+}
+
+.punti-raccolta-sub-info {
+    padding-bottom: 0;
+}
 .nav-button-app-logo {
     margin-left: 5px;
     height: 30px;
