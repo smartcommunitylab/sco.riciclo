@@ -53,15 +53,12 @@
                 </div>
             </div>
 
-            <div ng-repeat="(color, value) in colorLegendMap">
-                <div>
-                    <div class="day-slot">
-                        <div style="background-color:{{getColor(color)}};"></div>
-                    </div>
+            <div class="colorLegend" ng-repeat="(color, value) in colorLegendMap">
+                <div class="col">
+                    <div class="color-slot" style="background-color:{{getColor(color)}};"></div>
                     <div>{{value}}</div>
                 </div>
             </div>
-
         </div>
         <div ng-if="calendarView" class="agenda">
             <ion-list id="agendaview" class="day" ng-repeat="day in daySubList" agenda-list>

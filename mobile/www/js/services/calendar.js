@@ -13,7 +13,7 @@ angular.module('rifiuti.services.calendar', [])
             colorLegendAshMap[puntoDiRaccolta.colore] = [];
             colorLegendMap[puntoDiRaccolta.colore] = {};
             colorLegendAshMap[puntoDiRaccolta.colore].push(puntoDiRaccolta.tipologiaPuntiRaccolta);
-            colorLegendMap[puntoDiRaccolta.colore] = ": "+puntoDiRaccolta.tipologiaPuntiRaccolta;
+            colorLegendMap[puntoDiRaccolta.colore] = " "+puntoDiRaccolta.tipologiaPuntiRaccolta;
           }
 
           if(!!colorLegendAshMap[puntoDiRaccolta.colore] &&

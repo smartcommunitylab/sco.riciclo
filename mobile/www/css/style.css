@@ -353,6 +353,26 @@ body.platform-browser .scroll-bar-fade-out {
     width: 5px;
 }
 
+.home-calendar .week-days {
+    text-align: center;
+    font-size: 12px;
+    line-height: 12px;
+    font-weight: bold;
+}
+
+
+.home-calendar .colorLegend {
+    text-align: left;
+    font-size: 12px;
+    line-height: 12px;
+    font-weight: bold;
+}
+
+.home-calendar .colorLegend .col .color-slot {
+    height: 5px;
+    width: 5px;
+}
+
 .home-calendar .agenda .day .day-title {
     background-color: #eeeeee;
     text-align: center;
