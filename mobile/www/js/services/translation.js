@@ -1,4 +1,5 @@
 ITALIAN_VERSION = {
+        access:"ACCESSO",
         presta_attenzione: "Presta attenzione",
         come_conferire: "Come conferire",
         info: "INFO",
@@ -135,6 +136,7 @@ ITALIAN_VERSION = {
 };
 
 ENGLISH_VERSION = {
+        access:"ACCESS",
         presta_attenzione: "Pay attention to",
         come_conferire: "How to give",
         info: "INFO",
