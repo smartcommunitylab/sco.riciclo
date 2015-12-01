@@ -1,4 +1,8 @@
 ITALIAN_VERSION = {
+        presta_attenzione: "Presta attenzione",
+        come_conferire: "Come conferire",
+        info: "INFO",
+        alert_select_comune_before_localita:"Devi selezionare un comune prima di poter scegliere una località",
         profilo_save: "Per completare il tuo profilo devi scegliere un comune e una località",
         comuni: "Comuni",
         reload_data: "Ricarica i Dati",
@@ -131,6 +135,10 @@ ITALIAN_VERSION = {
 };
 
 ENGLISH_VERSION = {
+        presta_attenzione: "Pay attention to",
+        come_conferire: "How to give",
+        info: "INFO",
+        alert_select_comune_before_localita:"Choose a Municipality before an Area",
         profilo_save: "To complete your profile you have to choose a Municipality and an Area",
         comuni: "Municipalities",
         reload_data: "Reload Data",
