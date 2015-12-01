@@ -55,6 +55,14 @@
 		"token": "coO2uf2sBzeqPdHx",
 		"modelElements": ["modello"],
 		"comuni": ["093004"]
+	},
+	{
+		"_class": "it.smartcommunitylab.riciclo.storage.DataSetInfo",
+		"ownerId": "RIAPP-VALSUGANA1",
+		"password": "RIAPP-VALSUGANA1",
+		"token": "uijOLpIegh2OivU0",
+		"modelElements": ["modello"],
+		"comuni": ["022129","022156"]
 	}
 	]
 }
