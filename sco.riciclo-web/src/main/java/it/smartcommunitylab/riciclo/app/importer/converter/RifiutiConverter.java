@@ -128,7 +128,7 @@ public class RifiutiConverter {
 		//TIPOLOGIAUTENZA
 		categorie.setTipologiaUtenza(new HashSet<Tipologia>());
 		for (TipologiaUtenza tr : rifiuti.getTipologiaUtenza()) {
-			String nome = tr.getValore().toLowerCase();
+			String nome = tr.getValore().trim();
 			Tipologia cat = new Tipologia(nome, nome, null, null, defaultLang);
 			categorie.getTipologiaUtenza().add(cat);
 		}
@@ -278,7 +278,7 @@ public class RifiutiConverter {
 				rifiutoDescList.add(rifiuto);
 			}
 
-			String[] split = StringUtils.split(rc.getTipologiaUtenza().trim().toLowerCase(),";");
+			String[] split = StringUtils.split(rc.getTipologiaUtenza(),";");
 			for(String tipologiaUtenza : split) {
 				Riciclabolario ric = new Riciclabolario();
 				ric.setObjectId(UUID.randomUUID().toString());
@@ -430,8 +430,8 @@ public class RifiutiConverter {
 				oa.setDalle(pr.getDalle());
 				oa.setDataA(pr.getDataA());
 				oa.setDataDa(pr.getDataDa());
-				oa.setIl(pr.getIl());
-				oa.setEccezione(pr.getEccezione());
+				oa.setIl(pr.getIl().replaceAll("\\n", ""));
+				oa.setEccezione(pr.getEccezione().replaceAll("\\n", ""));
 				if(!Utils.isNull(pr.getNote())) {
 					oa.getNote().put(defaultLang, pr.getNote());
 				}

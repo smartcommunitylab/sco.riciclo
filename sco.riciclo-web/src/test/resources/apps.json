@@ -14,7 +14,7 @@
 		"password": "ASIA",
 		"token": "L2MEq8WPbTAIT134",
 		"modelElements": ["modello"],
-		"comuni": ["022003", "022091", "022058"]
+		"comuni": ["022080","022126","022160","022167","022225","022116","022117","022103"]
 	},
 	{
 		"_class": "it.smartcommunitylab.riciclo.storage.DataSetInfo",

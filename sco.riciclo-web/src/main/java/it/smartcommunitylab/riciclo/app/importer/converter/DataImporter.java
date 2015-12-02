@@ -105,7 +105,7 @@ public class DataImporter {
 		
 		for (int i = 0; i < wb.getNumberOfSheets(); i++) {
 			Sheet sheet = wb.getSheetAt(i);
-			Thread.sleep(1000);
+			Thread.sleep(500);
 //			System.out.println(sheet.getSheetName());
 //			if (sheet.getRow(0).getLastCellNum() == 1 && !oneColumnAsMany.contains(sheet.getSheetName())) {
 //			} else {

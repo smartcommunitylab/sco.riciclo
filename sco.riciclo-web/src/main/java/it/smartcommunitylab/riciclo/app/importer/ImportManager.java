@@ -11,6 +11,8 @@ import java.io.InputStream;
 import java.util.List;
 
 import org.apache.commons.lang.exception.ExceptionUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -18,7 +20,8 @@ import com.google.common.collect.Lists;
 
 @Service
 public class ImportManager {
-
+	private static final transient Logger logger = LoggerFactory.getLogger(ImportManager.class);
+			
 	@Autowired
 	private DataImporter importer;
 
@@ -62,6 +65,9 @@ public class ImportManager {
 			if (validationResult.isEmpty()) {
 				storage.save(convertedRifiuti, appInfo.getOwnerId());
 			} else {
+				for(String errorMsg : validationResult) {
+					logger.error(errorMsg);
+				}
 				throw new ImportError(validationResult);
 			}
 		} catch (ImportError e) {
