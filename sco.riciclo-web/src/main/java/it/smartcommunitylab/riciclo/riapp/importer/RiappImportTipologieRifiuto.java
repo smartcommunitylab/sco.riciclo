@@ -69,6 +69,8 @@ public class RiappImportTipologieRifiuto {
 	public static String getIconaTipologiaRifiuto(String tipologiaRifiuto) {
 		if(Const.TRIF_ECOCENTRO.equals(tipologiaRifiuto)) {
 			return "Rifiuti particolari";
+		} else if(Const.TRIF_VETRO.equals(tipologiaRifiuto)) {
+			return Const.TRIF_IMB_VETRO;
 		} else {
 			return tipologiaRifiuto;
 		} 

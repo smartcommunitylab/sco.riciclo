@@ -18,7 +18,8 @@ public class Const {
 	public static final String TRIF_PLASTICA = "Imballaggi in plastica e lattine";
 	public static final String TRIF_SECCO = "Secco non riciclabile";
 	public static final String TRIF_CARTA = "Carta e cartone";
-	public static final String TRIF_VETRO = "Imballaggi in vetro";
+	public static final String TRIF_IMB_VETRO = "Imballaggi in vetro";
+	public static final String TRIF_VETRO = "Vetro";
 	public static final String[] TIPOLOGIA_RIFIUTO = new String[] {TRIF_ECOCENTRO, TRIF_UMIDO, TRIF_PLASTICA,
 		TRIF_SECCO, TRIF_CARTA, TRIF_VETRO};
 	
