@@ -28,9 +28,9 @@ angular.module('rifiuti.controllers.common', ['ionic'])
         //localStorage.removeItem('profiles');
         if (!profiles || profiles.length == 0) {
             $rootScope.promptedToProfile = true;
-            $location.path("app/aggProfiloUnique");
             DataManager.setAvailableAppAndComuni().then(function (result) {
                 if(result){
+                    $location.path("app/aggProfiloUnique");
                     $rootScope.loadingHide();
                 }
             });
