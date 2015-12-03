@@ -28,11 +28,13 @@ angular.module('rifiuti.controllers.common', ['ionic'])
         //localStorage.removeItem('profiles');
         if (!profiles || profiles.length == 0) {
             $rootScope.promptedToProfile = true;
-            DataManager.setAvailableAppAndComuni().then(function (result) {
-                if(result){
-                    $location.path("app/aggProfiloUnique");
-                    $rootScope.loadingHide();
-                }
+            DataManager.initGlobalSettings().then(function (result) {
+                DataManager.setAvailableAppAndComuni().then(function (result) {
+                    if(result){
+                        $location.path("app/aggProfiloUnique");
+                        $rootScope.loadingHide();
+                    }
+                });
             });
         } else {
             Profili.read();

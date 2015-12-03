@@ -147,6 +147,14 @@ angular.module('rifiuti', [
         });
     };
 
+
+    var setGlobalSettings = function() {
+
+
+    }
+
+
+    console.log('app check1!!!!!!');
     $rootScope.showAlert = function(link) {
         var alertPopup = $ionicPopup.alert({
             title: $filter('translate')('warning'),
@@ -177,7 +185,6 @@ angular.module('rifiuti', [
     };
 
     $rootScope.loadingShow();
-
 
     $rootScope.profili = [];
     $rootScope.selectedProfile = null;
@@ -276,38 +283,9 @@ angular.module('rifiuti', [
         $rootScope.platform = ionic.Platform;
         $rootScope.backButtonStyle = $ionicConfig.backButton.icon();
 
-        if(DataManager.getGlobalSettings()){
-            $rootScope.globalSettings = DataManager.getGlobalSettings();
-            $rootScope.globalSettings.phoneLanguage = navigator.language;
-        }else{
-            $rootScope.globalSettings = {};
-
-            $rootScope.globalSettings.selectedLang = {};
-            $rootScope.globalSettings.phoneLanguage = navigator.language;
-
-            if (LANG.length > 1){
-                $rootScope.globalSettings.isMoreThanOneLang = true;
-
-                var foundLang = false;
-                for (var i = 0; i < LANG.length; i++) {
-                    if ($rootScope.globalSettings.phoneLanguage == LANG[i]){
-                        $rootScope.globalSettings.selectedLang = LANG[i];
-                        foundLang = true;
-                        break;
-                    }
-                }
-                if(!foundLang){
-                    $rootScope.globalSettings.selectedLang = LANG[0];
-                }
-            }else{
-                $rootScope.globalSettings.selectedLang = LANG[0];
-                $rootScope.globalSettings.isMoreThanOneLang = false;
-            }
-
-            DataManager.saveGlobalSettings();
-        }
-
-        $translate.use($rootScope.globalSettings.selectedLang);
+        DataManager.initGlobalSettings().then(function (result) {
+            $translate.use($rootScope.globalSettings.selectedLang);
+        });
 
         // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
         // for form inputs)

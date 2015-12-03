@@ -335,24 +335,6 @@ angular.module('rifiuti.services.data', [])
         return deferred.promise;
     };
 
-   //var getLocalitaByProfile = function (profileId){
-   //    var deferred = $q.defer();
-
-   //    process(getRiappDataURL(true)).then(function (result) {
-   //        if(result){
-   //            localStorage[globalSettingsPrefix] = JSON.stringify($rootScope.globalSettings);
-   //        }
-
-   //        deferred.resolve(result);
-   //    },
-   //    function (result) {
-   //        deferred.resolve(result);
-   //    });
-
-   //    return deferred.promise;
-
-   //}
-
     var saveDraft = function () {
         var deferred = $q.defer();
 
@@ -389,6 +371,46 @@ angular.module('rifiuti.services.data', [])
 
             return null;
         }
+    }
+
+    var initGlobalSettings = function() {
+        var deferred = $q.defer();
+
+        if(getGlobalSettings()){
+            $rootScope.globalSettings = getGlobalSettings();
+            $rootScope.globalSettings.phoneLanguage = navigator.language;
+
+            deferred.resolve(true);
+        }else{
+            $rootScope.globalSettings = {};
+
+            $rootScope.globalSettings.selectedLang = {};
+            $rootScope.globalSettings.phoneLanguage = navigator.language;
+
+            if (LANG.length > 1){
+                $rootScope.globalSettings.isMoreThanOneLang = true;
+
+                var foundLang = false;
+                for (var i = 0; i < LANG.length; i++) {
+                    if ($rootScope.globalSettings.phoneLanguage == LANG[i]){
+                        $rootScope.globalSettings.selectedLang = LANG[i];
+                        foundLang = true;
+                        break;
+                    }
+                }
+                if(!foundLang){
+                    $rootScope.globalSettings.selectedLang = LANG[0];
+                }
+            }else{
+                $rootScope.globalSettings.selectedLang = LANG[0];
+                $rootScope.globalSettings.isMoreThanOneLang = false;
+            }
+
+            saveGlobalSettings();
+            deferred.resolve(true);
+        }
+
+        return deferred.promise;
     }
 
     var getProfiles = function () {
@@ -754,6 +776,7 @@ angular.module('rifiuti.services.data', [])
         getComuneString:getComuneString,
         getAvailableAreeForComuni:getAvailableAreeForComuni,
         processRiappByProfiloRiapp:processRiappByProfiloRiapp,
+        initGlobalSettings:initGlobalSettings,
         updateProfiles: function (newProfiles) {
             profili = newProfiles;
             updateProfileData();
