@@ -15,7 +15,13 @@
     <div ng-if="mapView">
         <ion-content class="has-header" scroll="false" id="map-container">
             <div id="map1">
-                <ui-gmap-google-map data-tap-disabled="true" pan="map.pan" center="map.center" zoom="map.zoom" options="map.options">
+                <ui-gmap-google-map data-tap-disabled="true"
+                                    pan="map.pan"
+                                    zoom="map.zoom"
+                                    bounds="map.bounds"
+                                    center="map.center"
+                                    options="map.options"
+                                    control="control">
                     <ui-gmap-markers models="markers.models" coords="markers.coords" clasterOptions="markers.clusterOptions" doRebuildAll="false" icon="markers.icon" click="openMarkerClick" fit="markers.fit" doCluster="markers.doCluster">
                     </ui-gmap-markers>
                 </ui-gmap-google-map>

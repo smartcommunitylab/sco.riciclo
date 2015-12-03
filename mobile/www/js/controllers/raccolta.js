@@ -65,7 +65,7 @@ angular.module('rifiuti.controllers.raccolta', [])
   
 })
   
-.controller('PDRCtrl', function ($scope, $rootScope, $timeout, Raccolta, $location, $stateParams, Utili, DataManager) {
+.controller('PDRCtrl', function ($scope, $rootScope, $timeout, Raccolta, $location, $stateParams, Utili, DataManager, uiGmapIsReady) {
 
   $scope.profile = null;
   
@@ -80,11 +80,11 @@ angular.module('rifiuti.controllers.raccolta', [])
   };
 
   $scope.map = {
-    control: {},
     center: CENTER,
     zoom: ZOOM,
     pan: false,
     draggable: 'true',
+    bounds: {},
     options: {
       'streetViewControl': false,
       'zoomControl': true,
@@ -99,33 +99,61 @@ angular.module('rifiuti.controllers.raccolta', [])
     }
   };
 
+  $scope.control = {};
+  uiGmapIsReady.promise().then(function (maps) {
+      var map1 = $scope.control.getGMap();
+      fitBoundsByMap(map1);
+  });
+
+  var fitBoundsByMap = function (map) {
+    //  Make an array of the LatLng's of the markers you want to show
+    //var LatLngList = new Array (new google.maps.LatLng (46.0802019,11.0859357), new google.maps.LatLng (45.4262289,10.9224915));
+    var LatLngList = getLatLngListFromMarkers();
+    //  Create a new viewpoint bound
+    var bounds = new google.maps.LatLngBounds();
+    //  Go through each...
+    for (var i = 0, LtLgLen = LatLngList.length; i < LtLgLen; i++) {
+      //  And increase the bounds to take this point
+      bounds.extend (LatLngList[i]);
+    }
+    //  Fit these bounds to the map
+    map.fitBounds(bounds);
+    var center = bounds.getCenter();
+    map.setCenter(center);
+    $scope.map.center = {
+                latitude: center.lat(),
+                longitude: center.lng()
+    };
+
+    $scope.map.bounds = {
+          northeast: { latitude: bounds.getNorthEast().lat(),
+                       longitude: bounds.getNorthEast().lng() },
+          southwest: { latitude: bounds.getSouthWest().lat(),
+                       longitude: bounds.getSouthWest().lng() }
+        };
+
+    if(map.zoom>=ZOOM){
+        map.setZoom(ZOOM);
+        $scope.map.zoom = ZOOM;
+    }
+  }
+
+
   $scope.click = function () {
     $scope.mapView = !$scope.mapView;
     $scope.updateIMG();
-//    $timeout(function () {
-//      var mapHeight = 800; // or any other calculated value
-//      var mapContainer = document.querySelector('#map-container');
-//      if (mapContainer) {
-//        mapHeight = angular.element(mapContainer)[0].offsetHeight;
-//      } else { 
-//        console.log('cannot get "#map-container"');
-//      }
-//      var ng_mapContainer = document.querySelector('.angular-google-map-container');
-//      if (ng_mapContainer) {
-//        angular.element(ng_mapContainer)[0].style.height = mapHeight + 'px';
-//      } else { 
-//        console.log('cannot get ".angular-google-map-container"');
-//      }
-//    }, 200);
   };
 
-//  $scope.$on('$viewContentLoaded', function () {
-//    $timeout(function () {
-//      var mapHeight = 800; // or any other calculated value
-//      mapHeight = angular.element(document.querySelector('#map-container'))[0].offsetHeight;
-//      angular.element(document.querySelector('.angular-google-map-container'))[0].style.height = mapHeight + 'px';
-//    }, 50);
-//  });
+  var getLatLngListFromMarkers = function(){
+    var latLngList = [];
+    $scope.markers.models.forEach(function(point){
+        var latLng = new google.maps.LatLng (point.latitude,point.longitude);
+        latLngList.push(latLng);
+    });
+
+    return latLngList;
+  }
+
 
   var addToList = function (item, list) {
     for (var i = 0; i < list.length; i++) {
@@ -172,6 +200,7 @@ angular.module('rifiuti.controllers.raccolta', [])
           addToList(punto, list);
         }
       });
+
       $scope.markers = {
         control: {},
         models: points,
@@ -192,7 +221,8 @@ angular.module('rifiuti.controllers.raccolta', [])
     });
 
   };
-  
+
+
   $rootScope.$watch('selectedProfile',function(a,b) {
     if ((b == null || a.id != b.id) && a.id != $scope.profile) {
       $scope.profile = a.id;
