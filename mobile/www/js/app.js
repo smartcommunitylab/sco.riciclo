@@ -666,6 +666,17 @@ angular.module('rifiuti', [
         }
     })
 
+    .state('app.genInfo', {
+        url: "/genInfo",
+        cache: false,
+        views: {
+            'menuContent': {
+                templateUrl: "templates/genInfo.html",
+                controller: 'INFOCtrl'
+            }
+        }
+    })
+
     .state('app.info', {
         url: "/info",
         views: {

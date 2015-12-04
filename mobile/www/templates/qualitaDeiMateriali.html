@@ -1,0 +1,83 @@
+<div>
+    <div class="expandable-list-item">
+        <div class="row row-left expandable-list-item-header" ng-click="quality=!quality">
+            <div class="col col-10">
+                <i ng-class="{'ion-chevron-up':quality, 'ion-chevron-down':!quality}"></i>
+            </div>
+            <div class="col col-80">
+                <div class="row expandable-list-item-title">
+                    <div class="col">
+                        {{"quality_rules" | translate}}
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div ng-show="quality">
+            <ion-list class="">
+                <ion-item class="">
+                    {{"quality_rule_one" | translate}}
+                </ion-item>
+                <ion-item class="">
+                    {{"quality_rule_two" | translate}}
+                </ion-item>
+                <ion-item class="">
+                    {{"quality_rule_three" | translate}}
+                </ion-item>
+                <ion-item class="">
+                    {{"quality_rule_four" | translate}}
+                </ion-item>
+                <ion-item class="">
+                    {{"quality_rule_five" | translate}}
+                </ion-item>
+                <ion-item class="">
+                    {{"quality_rule_six" | translate}}
+                </ion-item>
+            </ion-list>
+        </div>
+    </div>
+    <div class="expandable-list-item">
+        <div class="row row-left expandable-list-item-header" ng-click="error=!error">
+            <div class="col col-10">
+                <i ng-class="{'ion-chevron-up':error, 'ion-chevron-down':!error}"></i>
+            </div>
+            <div class="col col-80">
+                <div class="row expandable-list-item-title">
+                    <div class="col">
+                        {{"error_rules"|translate}}
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div ng-show="error">
+            <ion-list class="">
+                <ion-item class="">
+                    {{"error_rule_one" | translate}}
+                </ion-item>
+                <ion-item class="">
+                    {{"error_rule_two" | translate}}
+                </ion-item>
+                <ion-item class="">
+                    {{"error_rule_three" | translate}}
+                </ion-item>
+                <ion-item class="">
+                    {{"error_rule_four" | translate}}
+                </ion-item>
+                <ion-item class="">
+                    {{"error_rule_five" | translate}}
+                </ion-item>
+                <ion-item class="">
+                    {{"error_rule_six" | translate}}
+                </ion-item>
+                <ion-item class="">
+                    {{"error_rule_seven" | translate}}
+                </ion-item>
+                <ion-item class="">
+                    {{"error_rule_eight" | translate}}
+                </ion-item>
+                <ion-item class="">
+                    {{"error_rule_nine" | translate}}
+                </ion-item>
+            </ion-list>
+        </div>
+    </div>
+</div>

@@ -77,6 +77,47 @@ angular.module('rifiuti.controllers.common', ['ionic'])
     }
 })
 
+.controller('INFOCtrl', function ($scope, $rootScope, DataManager, $ionicPopup, $filter) {
+
+    $scope.enableDevModCounter = 0;
+    var devModeLabel = 'disabilitata';
+
+    $scope.quality = false;
+    $scope.error = false;
+    $scope.cartaCartone = false;
+    $scope.cartonePerBevande = false;
+    $scope.contenitoriAcciaio = false;
+    $scope.contenitoriAlluminio = false;
+    $scope.contenitoriVetro = false;
+    $scope.legno = false;
+    $scope.rifiutoOrganicoVerde = false;
+
+    $scope.enableIsDevMod = function () {
+        $scope.enableDevModCounter++;
+        if($scope.enableDevModCounter>=5){
+            DataManager.saveIsDevMode(!$rootScope.isDevMode);
+
+            if($rootScope.isDevMode){
+                devModeLabel = 'enabled';
+            }else{
+                devModeLabel = 'disabled';
+            }
+
+            var popup = $ionicPopup.show({
+                        title: '<b class="popup-title">' + $filter('translate')('dev_mode') + '</b>',
+                        template: $filter('translate')('dev_mode_txt')+''+$filter('translate')(devModeLabel),
+                        buttons: [
+                            {
+                                text: 'OK'
+                            }
+                        ]
+            });
+
+            $scope.enableDevModCounter = 0;
+        }
+    }
+})
+
 .controller('SegnalaCtrl', function ($scope, $rootScope, $cordovaCamera, Raccolta) {
 
 

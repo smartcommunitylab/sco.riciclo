@@ -1,0 +1,196 @@
+<div>
+    <div class="expandable-list-item">
+        <div class="row row-left expandable-list-item-header" ng-click="cartaCartone=!cartaCartone">
+            <div class="col col-10">
+                <i ng-class="{'ion-chevron-up':cartaCartone, 'ion-chevron-down':!cartaCartone}"></i>
+            </div>
+            <div class="col col-80">
+                <div class="row expandable-list-item-title">
+                    <div class="col">
+                        {{"carta_cartone_title" | translate}}
+                    </div>
+                </div>
+                <!--div class="row tipologiediraccolta-icons">
+                    <div>
+                        <img ng-src="img/rif_ic_cartone.png" src="img/rif_ic_cartone.png">
+                    </div>
+                </div-->
+            </div>
+        </div>
+        <div ng-show="cartaCartone">
+            <div><B>{{"cosa_ottiene_title" | translate}}</B></div>
+            <div>{{"carta_cartone_cosa_content" | translate}}</div>
+        </div>
+    </div>
+
+    <div class="expandable-list-item">
+        <div class="row row-left expandable-list-item-header" ng-click="cartonePerBevande=!cartonePerBevande">
+            <div class="col col-10">
+                <i ng-class="{'ion-chevron-up':cartonePerBevande, 'ion-chevron-down':!cartonePerBevande}"></i>
+            </div>
+            <div class="col col-80">
+                <div class="row expandable-list-item-title">
+                    <div class="col">
+                        {{"cartone_per_bevande_title" | translate}}
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div ng-show="cartonePerBevande">
+            <ion-list class="">
+                <div>{{"cartone_per_bevande_content" | translate}}</div>
+                <ion-item class="">
+                    <B>{{"carta_bevande_one_B" | translate}}</B> {{"carta_bevande_one" | translate}}
+                </ion-item>
+                <ion-item class="">
+                    <B>{{"carta_bevande_two_B" | translate}}</B> {{"carta_bevande_two" | translate}}
+                </ion-item>
+            </ion-list>
+        </div>
+    </div>
+
+    <div class="expandable-list-item">
+        <div class="row row-left expandable-list-item-header" ng-click="contenitoriAcciaio=!contenitoriAcciaio">
+            <div class="col col-10">
+                <i ng-class="{'ion-chevron-up':contenitoriAcciaio, 'ion-chevron-down':!contenitoriAcciaio}"></i>
+            </div>
+            <div class="col col-80">
+                <div class="row expandable-list-item-title">
+                    <div class="col">
+                        {{"contenitori_acciaio_title" | translate}}
+                    </div>
+                </div>
+                <!--div class="row tipologiediraccolta-icons">
+                    <div>
+                        <img ng-src="img/rif_ic_cartone.png" src="img/rif_ic_cartone.png">
+                    </div>
+                </div-->
+            </div>
+        </div>
+        <div ng-show="contenitoriAcciaio">
+            <div><B>{{"cosa_ottiene_title" | translate}}</B></div>
+            <div>{{"contenitori_acciaio_content" | translate}}</div>
+        </div>
+    </div>
+
+    <div class="expandable-list-item">
+        <div class="row row-left expandable-list-item-header" ng-click="contenitoriAlluminio=!contenitoriAlluminio">
+            <div class="col col-10">
+                <i ng-class="{'ion-chevron-up':contenitoriAlluminio, 'ion-chevron-down':!contenitoriAlluminio}"></i>
+            </div>
+            <div class="col col-80">
+                <div class="row expandable-list-item-title">
+                    <div class="col">
+                        {{"contenitori_alluminio_title" | translate}}
+                    </div>
+                </div>
+                <!--div class="row tipologiediraccolta-icons">
+                    <div>
+                        <img ng-src="img/rif_ic_cartone.png" src="img/rif_ic_cartone.png">
+                    </div>
+                </div-->
+            </div>
+        </div>
+        <div ng-show="contenitoriAlluminio">
+            <div><B>{{"cosa_ottiene_title" | translate}}</B></div>
+            <div>{{"contenitori_alluminio_content" | translate}}</div>
+        </div>
+    </div>
+
+    <div class="expandable-list-item">
+        <div class="row row-left expandable-list-item-header" ng-click="contenitoriVetro=!contenitoriVetro">
+            <div class="col col-10">
+                <i ng-class="{'ion-chevron-up':contenitoriVetro, 'ion-chevron-down':!contenitoriVetro}"></i>
+            </div>
+            <div class="col col-80">
+                <div class="row expandable-list-item-title">
+                    <div class="col">
+                        {{"contenitori_vetro_title" | translate}}
+                    </div>
+                </div>
+                <!--div class="row tipologiediraccolta-icons">
+                    <div>
+                        <img ng-src="img/rif_ic_cartone.png" src="img/rif_ic_cartone.png">
+                    </div>
+                </div-->
+            </div>
+        </div>
+        <div ng-show="contenitoriVetro">
+            <div><B>{{"cosa_ottiene_title" | translate}}</B></div>
+            <div>{{"contenitori_vetro_content" | translate}}</div>
+        </div>
+    </div>
+
+    <div class="expandable-list-item">
+        <div class="row row-left expandable-list-item-header" ng-click="imballaggiPlastica=!imballaggiPlastica">
+            <div class="col col-10">
+                <i ng-class="{'ion-chevron-up':imballaggiPlastica, 'ion-chevron-down':!imballaggiPlastica}"></i>
+            </div>
+            <div class="col col-80">
+                <div class="row expandable-list-item-title">
+                    <div class="col">
+                        {{"imballaggi_plastica_title" | translate}}
+                    </div>
+                </div>
+                <!--div class="row tipologiediraccolta-icons">
+                    <div>
+                        <img ng-src="img/rif_ic_cartone.png" src="img/rif_ic_cartone.png">
+                    </div>
+                </div-->
+            </div>
+        </div>
+        <div ng-show="imballaggiPlastica">
+            <div><B>{{"cosa_ottiene_title" | translate}}</B></div>
+            <div>{{"imballaggi_plastica_content" | translate}}</div>
+        </div>
+    </div>
+
+    <div class="expandable-list-item">
+        <div class="row row-left expandable-list-item-header" ng-click="legno=!legno">
+            <div class="col col-10">
+                <i ng-class="{'ion-chevron-up':legno, 'ion-chevron-down':!legno}"></i>
+            </div>
+            <div class="col col-80">
+                <div class="row expandable-list-item-title">
+                    <div class="col">
+                        {{"legno_title" | translate}}
+                    </div>
+                </div>
+                <!--div class="row tipologiediraccolta-icons">
+                    <div>
+                        <img ng-src="img/rif_ic_cartone.png" src="img/rif_ic_cartone.png">
+                    </div>
+                </div-->
+            </div>
+        </div>
+        <div ng-show="legno">
+            <div><B>{{"cosa_ottiene_title" | translate}}</B></div>
+            <div>{{"legno_content" | translate}}</div>
+        </div>
+    </div>
+
+    <div class="expandable-list-item">
+        <div class="row row-left expandable-list-item-header" ng-click="rifiutoOrganicoVerde=!rifiutoOrganicoVerde">
+            <div class="col col-10">
+                <i ng-class="{'ion-chevron-up':rifiutoOrganicoVerde, 'ion-chevron-down':!rifiutoOrganicoVerde}"></i>
+            </div>
+            <div class="col col-80">
+                <div class="row expandable-list-item-title">
+                    <div class="col">
+                        {{"organico_verde_title" | translate}}
+                    </div>
+                </div>
+                <!--div class="row tipologiediraccolta-icons">
+                    <div>
+                        <img ng-src="img/rif_ic_cartone.png" src="img/rif_ic_cartone.png">
+                    </div>
+                </div-->
+            </div>
+        </div>
+        <div ng-show="rifiutoOrganicoVerde">
+            <div><B>{{"cosa_ottiene_title" | translate}}</B></div>
+            <div>{{"organico_verde_content" | translate}}</div>
+        </div>
+    </div>
+
+</div>
