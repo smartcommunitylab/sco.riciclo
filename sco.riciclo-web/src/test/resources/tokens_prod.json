@@ -2,52 +2,52 @@
   "tokens": [
     {
       "_class": "it.smartcommunitylab.riciclo.security.Token",
-      "token": "IprdYBHM3CBjmeCr",
+      "token": "29mujtYxCK0q0W5u1Y",
       "name" : "ADMIN",
       "paths": ["*"],
       "resources": []
     },
     {
       "_class": "it.smartcommunitylab.riciclo.security.Token",
-      "token": "L2MEq8WPbTAIT134",
+      "token": "qDH1Tv0e1Yw3kzVU",
       "name" : "ASIA",
       "paths": ["/api"],
       "resources": []
     },
     {
       "_class": "it.smartcommunitylab.riciclo.security.Token",
-      "token": "a1jgUpPlWjDS4XvS",
+      "token": "5tzcXOH53up8Is7X",
       "name" : "GIUDICARIE",
       "paths": ["/api"],
       "resources": []
     },
     {
       "_class": "it.smartcommunitylab.riciclo.security.Token",
-      "token": "p9UsNTji7TVScy3G",
+      "token": "VVHF1zhme1AyJkrr",
       "name" : "TRENTO",
       "paths": ["/api"],
       "resources": []
     },
     {
       "_class": "it.smartcommunitylab.riciclo.security.Token",
-      "token": "bIjHHWrWQBJK1PIK",
+      "token": "BL2uGQjDunsCknED",
       "name" : "ROVERETO",
-      "paths": ["/api"],
-      "resources": []
-    },
-    {
-      "_class": "it.smartcommunitylab.riciclo.security.Token",
-      "token": "LvnSc8pA83dfX7mX",
-      "name" : "RIAPP",
       "paths": ["/api"],
       "resources": []
     },
 		{
 		    "_class" : "it.smartcommunitylab.riciclo.security.Token",
-		    "token" : "coO2uf2sBzeqPdHx",
+		    "token" : "u2OzatqQtADhNKE6",
+		    "name" : "RIAPP-AVIANO"
 		    "resources" : [],
 		    "paths" : ["/api"],
-		    "name" : "AVIANO"
-		}    
+		},
+		{
+		    "_class" : "it.smartcommunitylab.riciclo.security.Token",
+		    "token" : "6ithwpeidkhqxlGR",
+		    "name" : "RIAPP-VALSUGANA1"
+		    "resources" : [],
+		    "paths" : ["/api"],
+		} 		    
   ]
 }
