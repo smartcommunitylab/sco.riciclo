@@ -1,4 +1,5 @@
 ITALIAN_VERSION = {
+        qualita_title:"Senza qualità non c’è riciclo!",
         general_info:"Informazioni Generali",
         credits:"CREDITS",
         organico_verde_content:"compost di ottima qualità per l’agricoltura e il giardinaggio",
@@ -178,6 +179,7 @@ ITALIAN_VERSION = {
 };
 
 ENGLISH_VERSION = {
+        qualita_title:"Senza qualità non c’è riciclo!",
         general_info:"General Info",
         credits:"CREDITS",
         organico_verde_content:"compost di ottima qualità per l’agricoltura e il giardinaggio",
