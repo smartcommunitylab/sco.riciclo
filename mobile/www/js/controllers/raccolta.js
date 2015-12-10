@@ -451,7 +451,7 @@ angular.module('rifiuti.controllers.raccolta', [])
           $scope.orari.push({
             giorno: orario.il.split(' '),
             ecceto: orario.eccezione? orario.eccezione.split(' ') : [],
-            orari:[ orario.dalle + "-" + orario.alle ],
+            orari: (orario.dalle && orario.alle)? [ orario.dalle + "-" + orario.alle ] : [],
             note: [orario.note]
           });
         } else {
