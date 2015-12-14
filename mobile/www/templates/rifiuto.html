@@ -6,6 +6,12 @@
         </div>
     </ion-nav-title>
 
+<ion-nav-buttons side="left">
+    <button ng-click="$ionicGoBack()" class="button back-button buttons  button-clear header-item"  ng-if="hasCustomBack">
+        <i class="icon" ng-class="backButtonStyle" ></i>
+    </button>
+</ion-nav-buttons>
+
 <!--
     <ion-nav-buttons side="left">
         <button ng-click="back()" class="row button button-icon ion-ios7-arrow-back">

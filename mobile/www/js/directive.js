@@ -95,7 +95,7 @@ angular.module('rifiuti.directives', [])
     return {
       link: function (scope, elem, attrs, ctrl) {
         if (scope.doScroll && scope.$index == scope.daySubList.length-1) {
-            $timeout(scope.doScroll, 0);
+            $timeout(scope.doScroll, 200);
             scope.doScroll = null;
         }
       }

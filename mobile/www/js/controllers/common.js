@@ -156,8 +156,8 @@ angular.module('rifiuti.controllers.common', ['ionic'])
 
 })
 
-.controller('SettingsCtrl', function ($scope, $rootScope, $ionicScrollDelegate, $translate, Raccolta, Profili, DataManager, LoaderService) {
-    /*$scope.mainScrollResize = function () {
+.controller('SettingsCtrl', function ($scope, $rootScope, $ionicScrollDelegate, $translate, $timeout, Raccolta, Profili, DataManager, LoaderService) {    /*$scope.mainScrollResize = function () {
+     /*$scope.mainScrollResize = function () {
         $ionicScrollDelegate.$getByHandle('mainScroll').resize();
     }*/
 
@@ -174,6 +174,7 @@ angular.module('rifiuti.controllers.common', ['ionic'])
 
     $scope.papTypes = $rootScope.selectedProfile.PaP;
     $scope.settings = $rootScope.selectedProfile.settings;
+    $scope.timingLoad = true;
     $scope.globalSettings = $rootScope.globalSettings;
     $scope.supportedLangTypes = $rootScope.globalSettings.supportedLangTypes;
     $scope.globalSettings = $rootScope.globalSettings;
@@ -245,6 +246,10 @@ angular.module('rifiuti.controllers.common', ['ionic'])
         if (b == null || a.id != b.id) {
             $scope.papTypes = a.PaP;
             $scope.settings = a.settings;
+            $scope.timingLoad = false;
+            $timeout(function() {
+                $scope.timingLoad = true;
+            },0);
         }
     });
 
