@@ -19,6 +19,14 @@
         "version": "1.0.0",
         "version_code": "5",
         "app_name": "100% Riciclo - A.S.I.A."
+    },
+    "ASIA-ROT": {
+        "resource_folder": "config/instances/ASIA-ROT",
+        "widget_id" : "it.smartcommunitylab.rifiuti.asia.rot",
+        "version": "1.0.0",
+        "version_code": "1",
+        "app_name": "100% Riciclo - Rotaliana"
     }
+
 
 }
