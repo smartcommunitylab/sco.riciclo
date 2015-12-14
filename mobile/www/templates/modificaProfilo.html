@@ -6,13 +6,18 @@
     </ion-nav-buttons>
 
     <ion-nav-buttons side="right">
-        <div class="nowrap" data-tap-disabled="true">
+        <div class="nowrap" data-tap-disabled="true" ng-if="!editMode">
             <button ng-click="edit()" class="button button-clear btn btn-edit">
-                <i class="icon {{!!editMode ? 'riciclo-save' : 'riciclo-edit'}}"></i>
+                <i class="icon {{'riciclo-edit'}}"></i>
             </button>
-            <button ng-click="click()" class="button button-clear btn btn-variable" ng-if="!editMode">
+            <button ng-click="click()" class="button button-clear btn btn-variable">
                 <i class="icon riciclo-discard"></i>
             </button>
+        </div>
+        <div class="nowrap" data-tap-disabled="true" ng-if="editMode">
+            <div class="col" ng-click="edit()">
+                <B>SALVA</B>
+            </div>
         </div>
     </ion-nav-buttons>
 
@@ -21,7 +26,7 @@
             <div class="profile-title">{{"user_name" | translate}}</div>
             <div class="item item-input-inset" ng-if="editMode">
                 <label class="item-input-wrapper">
-                    <input type="text" ng-model="profilo.name" placeholder="Nome del profilo" />
+                    <input type="text" ng-model="profilo.name" placeholder="{{'user_name_placeholder' | translate}}" />
                 </label>
             </div>
             <p ng-if="!editMode">{{profilo.name}}</p>
