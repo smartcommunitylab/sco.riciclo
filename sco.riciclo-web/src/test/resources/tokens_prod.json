@@ -10,7 +10,7 @@
     {
       "_class": "it.smartcommunitylab.riciclo.security.Token",
       "token": "qDH1Tv0e1Yw3kzVU",
-      "name" : "ASIA",
+      "name" : "ASIA-ROT",
       "paths": ["/api"],
       "resources": []
     },
