@@ -279,6 +279,7 @@ angular.module('rifiuti.controllers.home', [])
         $scope.showDate = i.date;
 
         $scope.doScroll = function() {
+            $ionicScrollDelegate.scrollBottom();
             $location.hash('id' + i.date.getTime());
             $ionicScrollDelegate.anchorScroll(true);
         };
@@ -330,6 +331,7 @@ angular.module('rifiuti.controllers.home', [])
                     time = $scope.dayList[i++].date.getTime();
                 }
                 if (i - 2 >= 0 && i - 2 <= $scope.dayList.length) {
+                    $ionicScrollDelegate.scrollBottom();
                     $location.hash('id' + $scope.dayList[i - 2].date.getTime());
                     $scope.currListItem = $scope.dayList[i - 2];
                     //window._globalscrollid = 'id' + $scope.currListItem.date.getTime();
@@ -348,9 +350,10 @@ angular.module('rifiuti.controllers.home', [])
         if (!$scope.month || $scope.month.name != Utili.monthYear($scope.showDate.getMonth(), $scope.showDate.getFullYear())) {
             $scope.loaded = false;
             Calendar.fillWeeks($scope.showDate, $rootScope.selectedProfile.utenza.tipologiaUtenza, $rootScope.selectedProfile.aree).then(function (data) {
+                $scope.colorLegendMap = data["colorLegendMap"];
                 $scope.month = {
                     name: Utili.monthYear($scope.showDate.getMonth(), $scope.showDate.getFullYear()),
-                    weeks: data
+                    weeks: data["weeks"]
                 };
                 $scope.dayList = Calendar.toListData($scope.month.weeks);
                 $scope.daySubListRunningEnd = null;

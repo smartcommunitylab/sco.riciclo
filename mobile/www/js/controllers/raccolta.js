@@ -316,8 +316,16 @@ angular.module('rifiuti.controllers.raccolta', [])
     $scope.rifiuti=rifiuti;
   });
 })
-.controller('RifiutoCtrl', function ($scope, $rootScope, $stateParams, Raccolta) {
+
+.controller('RifiutoCtrl', function ($scope, $ionicHistory, $rootScope, $stateParams, Raccolta) {
   $scope.nome = $rootScope.id2addr($stateParams.nome);
+
+  var hasCustomBackFn = function() {
+    var hist = $ionicHistory.viewHistory();
+    return hist.backView && hist.backView.stateId == 'app.home.tipidirifiuti';
+  };
+
+  $scope.hasCustomBack = hasCustomBackFn();
 
   Raccolta.rifiuto($scope.nome).then(function(rifiuto){
     if (!rifiuto) return;

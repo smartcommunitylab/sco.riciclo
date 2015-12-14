@@ -39,6 +39,7 @@ angular.module('rifiuti.services.calendar', [])
           colore: puntoDiRaccolta.colore,
           descr : [descr, hour]
         };
+        key = '0'+key;
       } else  {
         key = puntoDiRaccolta.tipoPuntoRaccolta.nome + puntoDiRaccolta.dettagliZona;
         t = puntoDiRaccolta.tipoPuntoRaccolta.nome;
