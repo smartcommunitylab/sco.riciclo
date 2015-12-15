@@ -47,10 +47,10 @@
             </div>
         </div>
 
-        <div class="subpage-title">
+        <div class="subpage-title" ng-if="!!pdr.accesso">
             <h1>{{"access"|translate}}</h1>
         </div>
-        <div class="row row-center dettagli">
+        <div class="row row-center dettagli" ng-if="!!pdr.accesso">
             <div class="col col-67">
                 <div class="row pdr-dettaglio">{{pdr.accesso}}</div>
             </div>
