@@ -21,9 +21,8 @@ USE_DRAFT = false;
 LANG = ['it'];
 COMUNI_LIST = ['022080','022126','022160','022167','022225','022116','022117','022103'];
 
-
-ZOOM = 12;
+ZOOM = 11,5;
 CENTER = {
-      latitude: 46.2056269,
-      longitude: 11.1096869
+      latitude: 46.1555397,
+      longitude: 11.1601932
 };
