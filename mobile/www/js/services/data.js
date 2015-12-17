@@ -511,7 +511,7 @@ angular.module('rifiuti.services.data', [])
     }
 
     var getSelectedLang = function(){
-        if($rootScope.globalSettings.selectedLang){
+        if(!!$rootScope.globalSettings && $rootScope.globalSettings.selectedLang){
             return $rootScope.globalSettings.selectedLang;
         }else{
             return LANG[0];
@@ -519,7 +519,7 @@ angular.module('rifiuti.services.data', [])
     }
 
     var getDraftEnabled = function(){
-        if($rootScope.globalSettings.draftEnabled!=null){
+        if(!!$rootScope.globalSettings && $rootScope.globalSettings.draftEnabled!=null){
             return $rootScope.globalSettings.draftEnabled;
         }else{
             return USE_DRAFT;
