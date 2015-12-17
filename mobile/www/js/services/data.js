@@ -672,18 +672,18 @@ angular.module('rifiuti.services.data', [])
     }
 
     var getSelectedLang = function(){
-        if($rootScope.globalSettings.selectedLang){
-            return $rootScope.globalSettings.selectedLang;
-        }else{
-            return LANG[0];
+        if(!!$rootScope.globalSettings && $rootScope.globalSettings.selectedLang){
+             return $rootScope.globalSettings.selectedLang;
+         }else{
+             return LANG[0];
         }
     }
 
     var getDraftEnabled = function(){
-        if($rootScope.globalSettings.draftEnabled!=null){
-            return $rootScope.globalSettings.draftEnabled;
-        }else{
-            return USE_DRAFT;
+         if(!!$rootScope.globalSettings && $rootScope.globalSettings.draftEnabled!=null){
+             return $rootScope.globalSettings.draftEnabled;
+         }else{
+             return USE_DRAFT;
         }
     }
 

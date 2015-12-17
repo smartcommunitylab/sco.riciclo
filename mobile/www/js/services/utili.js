@@ -50,7 +50,9 @@ angular.module('rifiuti.services.utili', [])
         },
 
         hide : function(){
-            $rootScope.loading.hide();
+            if ($rootScope.loading) {
++                $rootScope.loading.hide();
++            }
         }
     }
 })

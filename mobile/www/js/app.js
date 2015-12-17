@@ -249,16 +249,6 @@ angular.module('rifiuti', [
         }
         switch ($state.current.name) {
         case "app.home.tipidirifiuti":
-            //              case "app.home":
-            //              case "app.home.note":
-            //              case "app.home.calendario":
-            //              case "app.puntiDiRaccolta":
-            //              case "app.tipiDiRaccolta":
-            //              case "app.rifiuti":
-            //              case "app.profili":
-            //              case "app.segnala":
-            //              case "app.contatti":
-            //              case "app.info":
             $rootScope.reallyexitapp();
             break;
         default:
@@ -319,9 +309,11 @@ angular.module('rifiuti', [
 
 
         document.addEventListener("deviceready", function () {
-          //console.log('removing splashscreen...');
-          //giving another couple of seconds to ui to complete css&font elements redraw (on android)
-          setTimeout(function(){ navigator.splashscreen.hide(); },1500);
+           setTimeout(function () {
+                if(navigator.splashscreen){
+                    $cordovaSplashscreen.hide();
+                }
+            }, 1500);
         });
     });
 
@@ -338,27 +330,6 @@ angular.module('rifiuti', [
     $rootScope.clickLink = function (link) {
         window.open(link, "_system");
     };
-
-    //    $rootScope.distance = function (pt1, pt2) {
-    //        var d = false;
-    //        if (pt1 && pt1[0] && pt1[1] && pt2 && pt2[0] && pt2[1]) {
-    //            var lat1 = parseFloat(pt1[0]);
-    //            var lon1 = parseFloat(pt1[1]);
-    //            var lat2 = parseFloat(pt2[0]);
-    //            var lon2 = parseFloat(pt2[1]);
-    //
-    //            var R = 6371; // km
-    //            //var R = 3958.76; // miles
-    //            var deg2rad = Math.PI / 180;
-    //            var dLat = (lat2 - lat1) * deg2rad; // deg2rad below
-    //            var dLon = (lon2 - lon1) * deg2rad;
-    //            var a = 0.5 - Math.cos(dLat) / 2 + Math.cos(lat1 * deg2rad) * Math.cos(lat2 * deg2rad) * (1 - Math.cos(dLon)) / 2;
-    //            d = R * 2 * Math.asin(Math.sqrt(a));
-    //        } else {
-    //            console.log('cannot calculate distance!');
-    //        }
-    //        return d;
-    //    };
 
     $rootScope.reallyexitapp = function () {
         $ionicPopup.show({
