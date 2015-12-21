@@ -62,6 +62,8 @@ public class RiappManager {
 	public void importData(String ownerId) {
 		storage.resetDatasetDraft(ownerId);
 		
+		//<comune, codiceISTAT>
+		Map<String, String> codiceIstatMap = new HashMap<String, String>();
 		//<tipologiaRaccolta, colore>
 		Map<String, String> tipologiaRaccoltaMap = new HashMap<String, String>();
 		//<tipologiaRaccolta, tipologiaPuntoRaccolta>
@@ -73,6 +75,7 @@ public class RiappManager {
 		//<tipologiaRaccolta, RiappIstruzioni>
 		Map<String, RiappIstruzioni> istruzioniMap = new HashMap<String, RiappIstruzioni>();
 		try {
+			codiceIstatMap = riappImportComuni.readCodiciIstat();
 			List<String> fileCalendarioList = riappImportComuni.readListaValori(ownerId, "cal");
 			for(String file : fileCalendarioList) {
 				tipologiaRaccoltaMap.putAll(riappImportCalendario.readTipologiaRaccolta(file));
@@ -94,7 +97,7 @@ public class RiappManager {
 		Categorie categorie = importTipologie(ownerId, tipologiaRaccoltaMap, tipologiaPuntoRaccoltaMap, 
 				tipologiaRifiutoMap, istruzioniMap);
 		List<Colore> listaColori = importColori(ownerId);
-		RiappAreaStruct areaStruct = importAree(ownerId);
+		RiappAreaStruct areaStruct = importAree(ownerId, codiceIstatMap);
 		//<comuneEsteso, Area>
 		Map<String, Area> comuneEstesoMap = areaStruct.getComuneEstesoMap();
 		//<comune, Area>
@@ -246,9 +249,10 @@ public class RiappManager {
 	/**
 	 * 
 	 * @param ownerId
+	 * @param codiceIstatMap 
 	 * @return Map<comuneEsteso, Area> 
 	 */
-	private RiappAreaStruct importAree(String ownerId) {
+	private RiappAreaStruct importAree(String ownerId, Map<String, String> codiceIstatMap) {
 		//<comuneEsteso, Area>
 		Map<String, Area> comuneEstesoMap = new HashMap<String, Area>();
 		//<comune, Area>
@@ -272,6 +276,14 @@ public class RiappManager {
 				area.getUtenza().put(Const.UTENZA_DOMESTICA, true);
 				//TODO area.setIstituzione(istituzione);
 				//TODO area.setGestore(gestore);
+				String codiceISTAT = codiceIstatMap.get(comuneEsteso.toUpperCase());
+				if(codiceISTAT != null) {
+					area.setCodiceISTAT(codiceISTAT);
+				} else {
+					if(logger.isWarnEnabled()) {
+						logger.warn("missing codiceISTAT for " + comuneEsteso);
+					}
+				}
 				storage.addArea(area, true);
 				comuneEstesoMap.put(comuneEsteso, area);
 			}

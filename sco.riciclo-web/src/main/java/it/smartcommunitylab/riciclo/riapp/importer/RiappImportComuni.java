@@ -3,8 +3,10 @@ package it.smartcommunitylab.riciclo.riapp.importer;
 import it.smartcommunitylab.riciclo.riapp.importer.model.RiappArea;
 
 import java.io.FileReader;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -19,6 +21,20 @@ public class RiappImportComuni {
 	
 	public RiappImportComuni(String baseDir) {
 		this.baseDir = baseDir;
+	}
+	
+	public Map<String, String> readCodiciIstat() throws Exception {
+		Map<String, String> codiceIstatMap = new HashMap<String, String>();
+		FileReader fileReader = new FileReader(baseDir + "/riapp_comuni.json");
+		JsonNode rootNode = Utils.readJsonFromReader(fileReader);
+		Iterator<JsonNode> rootElements = rootNode.elements();
+		while(rootElements.hasNext()) {
+			JsonNode node = rootElements.next();
+			String comune = node.path("COMUNE").asText();
+			String codiceIstat = node.path("COD ISTAT").asText();
+			codiceIstatMap.put(comune, codiceIstat);
+		}
+		return codiceIstatMap;
 	}
 	
 	public List<String> readListaComuni(String fileId) throws Exception {
