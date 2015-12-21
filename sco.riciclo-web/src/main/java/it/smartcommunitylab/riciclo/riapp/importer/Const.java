@@ -17,11 +17,26 @@ public class Const {
 	public static final String TRIF_UMIDO = "Umido";
 	public static final String TRIF_PLASTICA = "Imballaggi in plastica e lattine";
 	public static final String TRIF_SECCO = "Secco non riciclabile";
-	public static final String TRIF_CARTA = "Carta e cartone";
+	public static final String TRIF_CARTA = "Carta";
+	public static final String TRIF_CARTONE = "Cartone";
+	public static final String TRIF_CARTA_CARTONE = "Carta e cartone";
+	public static final String TRIF_OLII_ESAUSTI = "Olii esausti";
+	public static final String TRIF_OLIO_VET = "Olio vegetale";
+	public static final String TRIF_OLII_MIN = "Olio minerale";
 	public static final String TRIF_IMB_VETRO = "Imballaggi in vetro";
 	public static final String TRIF_VETRO = "Vetro";
-	public static final String[] TIPOLOGIA_RIFIUTO = new String[] {TRIF_ECOCENTRO, TRIF_UMIDO, TRIF_PLASTICA,
-		TRIF_SECCO, TRIF_CARTA, TRIF_VETRO};
+	public static final String TRIF_PILE_BATT = "Pile e batterie esauste";
+	public static final String TRIF_PILE = "Pile";
+	public static final String TRIF_RESIDUO = "Residuo";
+	public static final String TRIF_INDIFF = "Indifferenziato";
+	public static final String TRIF_ORGANICO = "Organico";
+	public static final String TRIF_SCARTI_AL = "Scarti alimentari e organici";
+	public static final String TRIF_PERICOLOSI = "Pericolosi";
+	public static final String TRIF_RIF_PERICOLOSI = "Rifiuti pericolosi";
+	public static final String TRIF_RIF_PART = "Rifiuti particolari";
+	public static final String TRIF_ALTRI_RIF = "Altri rifiuti";
+	public static final String TRIF_VERDE = "Verde e ramaglie";
+	public static final String TRIF_SFALCI = "Sfalci e ramaglie";
 	
 	public static final String TRAC_CS = "Contenitore specifico";
 	

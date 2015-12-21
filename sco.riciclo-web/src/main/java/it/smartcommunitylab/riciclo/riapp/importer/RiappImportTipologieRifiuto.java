@@ -31,7 +31,7 @@ public class RiappImportTipologieRifiuto {
 		Map<String, String> specificMap = new HashMap<String, String>();
 		Map<String, String> defaultMap = new HashMap<String, String>();
 		List<String> rifiutiList = Lists.newArrayList();
-		FileReader fileReader = new FileReader(baseDir + "/diz-mod.json");
+		FileReader fileReader = new FileReader(baseDir + "/riapp_diz_mod.json");
 		JsonNode rootNode = Utils.readJsonFromReader(fileReader);
 		Iterator<JsonNode> rootElements = rootNode.elements();
 		while(rootElements.hasNext()) {
@@ -71,6 +71,24 @@ public class RiappImportTipologieRifiuto {
 			return "Rifiuti particolari";
 		} else if(Const.TRIF_VETRO.equals(tipologiaRifiuto)) {
 			return Const.TRIF_IMB_VETRO;
+		} else if(Const.TRIF_PILE_BATT.equals(tipologiaRifiuto)) {
+			return Const.TRIF_PILE;
+		} else if(Const.TRIF_INDIFF.equals(tipologiaRifiuto)) {
+			return Const.TRIF_RESIDUO;
+		} else if(Const.TRIF_CARTA_CARTONE.equals(tipologiaRifiuto)) {
+			return Const.TRIF_CARTA;
+		} else if(Const.TRIF_INDIFF.equals(tipologiaRifiuto)) {
+			return Const.TRIF_RESIDUO;
+		} else if(Const.TRIF_OLII_ESAUSTI.equals(tipologiaRifiuto)) {
+			return Const.TRIF_OLII_MIN;
+		} else if(Const.TRIF_SCARTI_AL.equals(tipologiaRifiuto)) {
+			return Const.TRIF_ORGANICO;
+		} else if(Const.TRIF_RIF_PERICOLOSI.equals(tipologiaRifiuto)) {
+			return Const.TRIF_PERICOLOSI;
+		} else if(Const.TRIF_ALTRI_RIF.equals(tipologiaRifiuto)) {
+			return Const.TRIF_RIF_PART;
+		} else if(Const.TRIF_SFALCI.equals(tipologiaRifiuto)) {
+			return Const.TRIF_VERDE;
 		} else {
 			return tipologiaRifiuto;
 		} 
