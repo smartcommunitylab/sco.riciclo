@@ -304,7 +304,11 @@ public class RifiutiConverter {
 		//SEGNALAZIONI
 		List<Segnalazione> segnalazioni = Lists.newArrayList();
 		for (it.smartcommunitylab.riciclo.app.importer.model.Segnalazioni sgn: (List<it.smartcommunitylab.riciclo.app.importer.model.Segnalazioni>)rifiuti.getSegnalazioni()) {
-			Segnalazione sg = mapper.convertValue(sgn, Segnalazione.class);
+			Segnalazione sg = new Segnalazione();
+			sg.setObjectId(UUID.randomUUID().toString());
+			sg.setArea(sgn.getArea().trim());
+			sg.setEmail(sgn.getEmail().trim());
+			sg.getTipologia().put(defaultLang, sgn.getTipologia().trim());
 			segnalazioni.add(sg);
 		}
 		output.setSegnalazioni(segnalazioni);
