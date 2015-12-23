@@ -30,6 +30,9 @@ angular.module('rifiuti.controllers.raccolta', [])
                   var tipologiaId = $scope.rifiuti[i].tipologiaRifiuto;
                   var tipologiaLabel = $scope.tipiDiRifiuti[tipologiaId].nome;
                   var tipologiaIcona = $scope.tipiDiRifiuti[tipologiaId].icona;
+				  if(!tipologiaIcona) {
+					  tipologiaIcona = tipologiaLabel;
+				  }
                   if (!(tipologiaId in tipologieMap)) tipologieMap[tipologiaId] = {link: tipologiaId,label:tipologiaLabel, img:$scope.immagini[tipologiaIcona]};
               }
               var tipologieArray = [];
