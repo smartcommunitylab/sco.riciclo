@@ -215,13 +215,13 @@ public class TipologieController {
 	}
 
 	@RequestMapping(value="api/tipologia/raccolta/{ownerId}", method=RequestMethod.GET)
-	public @ResponseBody List<Tipologia> getTipologiaRaccolta(@PathVariable String ownerId,
+	public @ResponseBody List<TipologiaRaccolta> getTipologiaRaccolta(@PathVariable String ownerId,
 			HttpServletRequest request, HttpServletResponse response) throws Exception {
 		boolean draft = Utils.getDraft(request);
 		if(!Utils.validateAPIRequest(request, appSetup, draft, storage)) {
 			throw new UnauthorizedException("Unauthorized Exception: token not valid");
 		}
-		List<Tipologia> result= Lists.newArrayList();
+		List<TipologiaRaccolta> result= Lists.newArrayList();
 		Categorie categorie = storage.findOneData(Categorie.class, null, ownerId, draft);
 		if(categorie != null) {
 			result.addAll(categorie.getTipologiaRaccolta());
@@ -246,6 +246,70 @@ public class TipologieController {
 		storage.updateTipologieRaccolta(ownerId, data, "tipologiaRaccolta", draft);
 	}
 
+	@RequestMapping(value="api/tipologia/icone/rifiuto/{ownerId}", method=RequestMethod.GET)
+	public @ResponseBody List<Tipologia> getIconeTipologiaRifiuto(@PathVariable String ownerId,
+			HttpServletRequest request, HttpServletResponse response)	throws Exception {
+		boolean draft = Utils.getDraft(request);
+		if(!Utils.validateAPIRequest(request, appSetup, draft, storage)) {
+			throw new UnauthorizedException("Unauthorized Exception: token not valid");
+		}
+		List<Tipologia> result= Lists.newArrayList();
+		Categorie categorie = storage.findOneData(Categorie.class, null, ownerId, draft);
+		if(categorie != null) {
+			result.addAll(categorie.getIconeTipologiaRifiuto());
+			Collections.sort(result,	new Comparator<Tipologia>() {
+				@Override
+				public int compare(Tipologia o1, Tipologia o2) {
+					return o1.getObjectId().compareTo(o2.getObjectId());
+				}
+			});
+		}
+		return result;
+	}
+
+	@RequestMapping(value="api/tipologia/icone/rifiuto/{ownerId}", method=RequestMethod.POST)
+	public @ResponseBody void updateIconeTipologiaRifiuto(@RequestBody List<Tipologia> tipologia,	@PathVariable String ownerId,
+		HttpServletRequest request, HttpServletResponse response)	throws Exception {
+		boolean draft = Utils.getDraft(request);
+		if(!Utils.validateAPIRequest(request, appSetup, draft, storage)) {
+			throw new UnauthorizedException("Unauthorized Exception: token not valid");
+		}
+		Set<Tipologia> data = new HashSet<Tipologia>(tipologia);
+		storage.updateTipologie(ownerId, data, "iconeTipologiaRifiuto", draft);
+	}
+	
+	@RequestMapping(value="api/tipologia/icone/puntoraccolta/{ownerId}", method=RequestMethod.GET)
+	public @ResponseBody List<Tipologia> getIconeTipologiaPuntoRaccolta(@PathVariable String ownerId,
+			HttpServletRequest request, HttpServletResponse response)	throws Exception {
+		boolean draft = Utils.getDraft(request);
+		if(!Utils.validateAPIRequest(request, appSetup, draft, storage)) {
+			throw new UnauthorizedException("Unauthorized Exception: token not valid");
+		}
+		List<Tipologia> result= Lists.newArrayList();
+		Categorie categorie = storage.findOneData(Categorie.class, null, ownerId, draft);
+		if(categorie != null) {
+			result.addAll(categorie.getIconeTipologiaPuntoRaccolta());
+			Collections.sort(result,	new Comparator<Tipologia>() {
+				@Override
+				public int compare(Tipologia o1, Tipologia o2) {
+					return o1.getObjectId().compareTo(o2.getObjectId());
+				}
+			});
+		}
+		return result;
+	}
+
+	@RequestMapping(value="api/tipologia/icone/puntoraccolta/{ownerId}", method=RequestMethod.POST)
+	public @ResponseBody void updateIconeTipologiaPuntoRaccolta(@RequestBody List<Tipologia> tipologia,	@PathVariable String ownerId,
+		HttpServletRequest request, HttpServletResponse response)	throws Exception {
+		boolean draft = Utils.getDraft(request);
+		if(!Utils.validateAPIRequest(request, appSetup, draft, storage)) {
+			throw new UnauthorizedException("Unauthorized Exception: token not valid");
+		}
+		Set<Tipologia> data = new HashSet<Tipologia>(tipologia);
+		storage.updateTipologie(ownerId, data, "iconeTipologiaPuntoRaccolta", draft);
+	}
+	
 	@ExceptionHandler(Exception.class)
 	@ResponseStatus(value=HttpStatus.INTERNAL_SERVER_ERROR)
 	@ResponseBody

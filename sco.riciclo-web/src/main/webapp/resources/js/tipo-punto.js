@@ -39,9 +39,21 @@ var tipoPuntoApp = angular.module('tipo-punto', ['DataService']).controller('use
 	$scope.status = 200;
 
 	$scope.tipoPuntoRaccoltaList = [];
+	$scope.iconeTipoPuntoRaccoltaList = [];
 
 	$scope.initData = function(profile) {
 		$scope.profile = profile;
+
+		var urlIconeTipoPuntoRaccolta = "api/tipologia/icone/puntoraccolta/" + $scope.profile.appInfo.ownerId + "?draft=" + $scope.draft;
+		$http.get(urlIconeTipoPuntoRaccolta, {headers: {'X-ACCESS-TOKEN': $scope.profile.appInfo.token}}).then(
+		function (response) {
+			$scope.iconeTipoPuntoRaccoltaList = response.data;
+		},
+		function(response) {
+			console.log(response.data);
+			$scope.error = true;
+			$scope.errorMsg = response.data.errorMsg;
+		});
 
 		var urlTipologiaPunto = "api/tipologia/puntoraccolta/" + $scope.profile.appInfo.ownerId + "?draft=" + $scope.draft;
 		$http.get(urlTipologiaPunto, {headers: {'X-ACCESS-TOKEN': $scope.profile.appInfo.token}}).then(
@@ -131,6 +143,7 @@ var tipoPuntoApp = angular.module('tipo-punto', ['DataService']).controller('use
 		console.log("newTipo");
 		$scope.edit = false;
 		$scope.create = true;
+		$scope.view = false;
 		$scope.fId = "";
 		$scope.fNome = "";
 		$scope.fInfo = "";

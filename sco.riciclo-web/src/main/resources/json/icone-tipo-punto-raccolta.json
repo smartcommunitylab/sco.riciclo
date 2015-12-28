@@ -1,0 +1,30 @@
+[ 
+		{
+			"objectId" : "Porta a Porta",
+			"icona" : "riciclo-porta_a_porta"
+    }, 
+		{
+			"objectId" : "Isola Ecologica",
+			"icona" : "riciclo-isola_ecologica"
+    }, 
+		{
+			"objectId" : "Centro Raccolta Materiali",
+			"icona" : "riciclo-crm"
+    }, 
+		{
+			"objectId" : "Centro Raccolta di Zona",
+			"icona" : "riciclo-crz"
+    }, 
+		{
+			"objectId" : "Farmacia",
+			"icona" : "riciclo-farmacia"
+    }, 
+		{
+			"objectId" : "Rivenditore",
+			"icona" : "riciclo-rivenditore"
+    }, 
+		{
+			"objectId" : "Furgone",
+			"icona" : "riciclo-furgone"
+    } 
+]

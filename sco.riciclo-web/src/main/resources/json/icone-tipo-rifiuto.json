@@ -1,0 +1,114 @@
+[ 
+		{
+			"objectId" : "Accumulatori",
+			"icona" : "Accumulatori"
+    }, 
+		{
+			"objectId" : "Carta",
+			"icona" : "Carta"
+    }, 
+		{
+			"objectId" : "Cartone",
+			"icona" : "Cartone"
+    }, 
+		{
+			"objectId" : "Cartoni per bevande",
+			"icona" : "Cartoni per bevande"
+    }, 
+		{
+			"objectId" : "Cartucce toner esaurite",
+			"icona" : "Cartucce toner esaurite"
+    }, 
+		{
+			"objectId" : "Imballaggi in metallo",
+			"icona" : "Imballaggi in metallo"
+    }, 
+		{
+			"objectId" : "Imballaggi in plastica",
+			"icona" : "Imballaggi in plastica"
+    }, 
+		{
+			"objectId" : "Imballaggi in vetro",
+			"icona" : "Imballaggi in vetro"
+    }, 
+		{
+			"objectId" : "Indumenti usati",
+			"icona" : "Indumenti usati"
+    }, 
+		{
+			"objectId" : "Inerti",
+			"icona" : "Inerti"
+    }, 
+		{
+			"objectId" : "Ingombranti",
+			"icona" : "Ingombranti"
+    }, 
+		{
+			"objectId" : "Legno",
+			"icona" : "Legno"
+    }, 
+		{
+			"objectId" : "Medicinali scaduti",
+			"icona" : "Medicinali scaduti"
+    }, 
+		{
+			"objectId" : "Oggetti in metallo",
+			"icona" : "Oggetti in metallo"
+    }, 
+		{
+			"objectId" : "Oggetti in plastica",
+			"icona" : "Oggetti in plastica"
+    }, 
+		{
+			"objectId" : "Oggetti in vetro",
+			"icona" : "Oggetti in vetro"
+    }, 
+		{
+			"objectId" : "Olio vegetale",
+			"icona" : "Olio vegetale"
+    }, 
+		{
+			"objectId" : "Olio minerale",
+			"icona" : "Olio minerale"
+    }, 
+		{
+			"objectId" : "Organico",
+			"icona" : "Organico"
+    }, 
+		{
+			"objectId" : "Pericolosi",
+			"icona" : "Pericolosi"
+    }, 
+		{
+			"objectId" : "Pile",
+			"icona" : "Pile"
+    }, 
+		{
+			"objectId" : "Pneumatici",
+			"icona" : "Pneumatici"
+    }, 
+		{
+			"objectId" : "Raee",
+			"icona" : "Raee"
+    }, 
+		{
+			"objectId" : "Residuo",
+			"icona" : "Residuo"
+    }, 
+		{
+			"objectId" : "Verde e ramaglie",
+			"icona" : "Verde e ramaglie"
+    }, 
+		{
+			"objectId" : "Siringhe",
+			"icona" : "Siringhe"
+    }, 
+		{
+			"objectId" : "Rifiuti particolari",
+			"icona" : "Rifiuti particolari"
+    }, 
+		{
+			"objectId" : "Rifiuti speciali",
+			"icona" : "Rifiuti speciali"
+    }
+]

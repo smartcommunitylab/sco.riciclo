@@ -17,15 +17,22 @@
 package it.smartcommunitylab.riciclo.controller;
 
 import it.smartcommunitylab.riciclo.exception.UnauthorizedException;
+import it.smartcommunitylab.riciclo.model.Tipologia;
 import it.smartcommunitylab.riciclo.storage.AppSetup;
 import it.smartcommunitylab.riciclo.storage.DataSetInfo;
 import it.smartcommunitylab.riciclo.storage.RepositoryManager;
 
+import java.io.FileReader;
+import java.io.InputStreamReader;
+import java.util.HashSet;
+import java.util.Iterator;
 import java.util.Map;
+import java.util.Set;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.commons.lang.CharSet;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,6 +46,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
+import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 
@@ -61,6 +69,10 @@ public class AdminController {
 		storage.saveAppToken(dataSetInfo.getOwnerId(), dataSetInfo.getToken(), true);
 		storage.saveAppInfo(dataSetInfo, true);
 		storage.saveAppState(dataSetInfo.getOwnerId(), true);
+		Set<Tipologia> data = getIconeTipologiaPuntoRaccolta();
+		storage.updateTipologie(dataSetInfo.getOwnerId(), data, "iconeTipologiaPuntoRaccolta", true);
+		data = getIconeTipologiaRifiuto();
+		storage.updateTipologie(dataSetInfo.getOwnerId(), data, "iconeTipologiaRifiuto", true);
 		storage.saveAppToken(dataSetInfo.getOwnerId(), dataSetInfo.getToken(), false);
 		storage.saveAppInfo(dataSetInfo, false);
 		storage.saveAppState(dataSetInfo.getOwnerId(), false);
@@ -87,4 +99,41 @@ public class AdminController {
 	public Map<String,String> handleError(HttpServletRequest request, Exception exception) {
 		return Utils.handleError(exception);
 	}
+	
+	private Set<Tipologia> getIconeTipologiaRifiuto() {
+		Set<Tipologia> result = new HashSet<Tipologia>();
+		try {
+			InputStreamReader reader = new InputStreamReader(AdminController.class.getResourceAsStream("/json/icone-tipo-rifiuto.json"), 
+					"utf-8");
+			JsonNode rootNode = it.smartcommunitylab.riciclo.riapp.importer.Utils.readJsonFromReader(reader);
+			Iterator<JsonNode> rootElements = rootNode.elements();
+			while(rootElements.hasNext()) {
+				JsonNode node = rootElements.next();
+				Tipologia tipologia = it.smartcommunitylab.riciclo.riapp.importer.Utils.toObject(node, Tipologia.class);
+				result.add(tipologia);
+			}
+		} catch (Exception e) {
+			logger.error(e.getMessage());
+		}
+		return result;
+	}
+	
+	private Set<Tipologia> getIconeTipologiaPuntoRaccolta() {
+		Set<Tipologia> result = new HashSet<Tipologia>();
+		try {
+			InputStreamReader reader = new InputStreamReader(AdminController.class.getResourceAsStream("/json/icone-tipo-punto-raccolta.json"), 
+					"utf-8");
+			JsonNode rootNode = it.smartcommunitylab.riciclo.riapp.importer.Utils.readJsonFromReader(reader);
+			Iterator<JsonNode> rootElements = rootNode.elements();
+			while(rootElements.hasNext()) {
+				JsonNode node = rootElements.next();
+				Tipologia tipologia = it.smartcommunitylab.riciclo.riapp.importer.Utils.toObject(node, Tipologia.class);
+				result.add(tipologia);
+			}
+		} catch (Exception e) {
+			logger.error(e.getMessage());
+		}
+		return result;
+	}
+	
 }

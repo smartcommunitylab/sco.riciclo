@@ -104,14 +104,8 @@
 							    <label class="col-md-1 control-label">Icona:</label>
 							    <div class="col-md-2">
 							    	<select class="form-control" data-ng-model="fIcona"
-							    	data-ng-disabled="view || (language != defaultLang)">
-							    		<option value="riciclo-porta_a_porta">Porta a Porta</option>
-							    		<option value="riciclo-isola_ecologica">Isola Ecologica</option>
-							    		<option value="riciclo-crm">Centro Raccolta Materiali</option>
-							    		<option value="riciclo-crz">Centro Raccolta di Zona</option>
-							    		<option value="riciclo-farmacia">Farmacia</option>
-							    		<option value="riciclo-rivenditore">Rivenditore</option>
-							    		<option value="riciclo-furgone">Furgone</option>
+							    	data-ng-disabled="view || (language != defaultLang)"
+							    	data-ng-options="item.icona as item.objectId for item in iconeTipoPuntoRaccoltaList">
 		      					</select>
 		      				</div>
 		      				<span class="text-danger glyphicon glyphicon-asterisk"></span>

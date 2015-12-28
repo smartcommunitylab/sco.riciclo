@@ -38,12 +38,24 @@ angular.module('tipo-rifiuto', ['DataService']).controller('userCtrl', function(
 	$scope.status = 200;
 
 	$scope.tipoRifiutoList = [];
+	$scope.iconeTipoRifiutoList = [];
 
 	$scope.initData = function(profile) {
 		$scope.profile = profile;
 
-		var urlTipologiaUtenza = "api/tipologia/rifiuto/" + $scope.profile.appInfo.ownerId + "?draft=" + $scope.draft;
-		$http.get(urlTipologiaUtenza, {headers: {'X-ACCESS-TOKEN': $scope.profile.appInfo.token}}).then(
+		var urlIconeTipologiaRifiuto = "api/tipologia/icone/rifiuto/" + $scope.profile.appInfo.ownerId + "?draft=" + $scope.draft;
+		$http.get(urlIconeTipologiaRifiuto, {headers: {'X-ACCESS-TOKEN': $scope.profile.appInfo.token}}).then(
+		function (response) {
+			$scope.iconeTipoRifiutoList = response.data;
+		},
+		function(response) {
+			console.log(response.data);
+			$scope.error = true;
+			$scope.errorMsg = response.data.errorMsg;
+		});
+		
+		var urlTipologiaRifiuto = "api/tipologia/rifiuto/" + $scope.profile.appInfo.ownerId + "?draft=" + $scope.draft;
+		$http.get(urlTipologiaRifiuto, {headers: {'X-ACCESS-TOKEN': $scope.profile.appInfo.token}}).then(
 		function (response) {
 			$scope.tipoRifiutoList = response.data;
 		},

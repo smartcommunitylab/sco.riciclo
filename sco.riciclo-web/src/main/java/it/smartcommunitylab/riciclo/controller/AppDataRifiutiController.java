@@ -162,7 +162,7 @@ public class AppDataRifiutiController {
 			comuni = Arrays.asList(comuniArray);
 		}
 		if(logger.isInfoEnabled()) {
-			logger.info(String.format("%s - %s - %s", comuni.toString(), lang, draft));
+			logger.info(String.format("%s - %s - %s - %s", ownerId, comuni.toString(), lang, draft));
 		}
 		AppDataRifiutiUI result = getAppDataUI(ownerId, lang, comuni, draft);
 		return result;
@@ -179,7 +179,7 @@ public class AppDataRifiutiController {
 			comuni = Arrays.asList(comuniArray);
 		}
 		if(logger.isInfoEnabled()) {
-			logger.info(String.format("%s - %s - %s", comuni.toString(), lang, draft));
+			logger.info(String.format("%s - %s - %s - %s", ownerId, comuni.toString(), lang, draft));
 		}
 		AppDataRifiutiUI result = getAppDataUI(ownerId, lang, comuni, draft);
 

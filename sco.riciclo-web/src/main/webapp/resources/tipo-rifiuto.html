@@ -86,35 +86,8 @@
 							    <label class="col-md-1 control-label">Icona:</label>
 							    <div class="col-md-2">
 							    	<select class="form-control" data-ng-model="fIcona"
-							    	data-ng-disabled="view || (language != defaultLang)">
-							    		<option value="Accumulatori">Accumulatori</option>
-							    		<option value="Carta">Carta</option>
-							    		<option value="Cartone">Cartone</option>
-							    		<option value="Cartoni per bevande">Cartoni per bevande</option>
-							    		<option value="Cartucce toner esaurite">Cartucce toner esaurite</option>
-							    		<option value="Imballaggi in metallo">Imballaggi in metallo</option>
-							    		<option value="Imballaggi in plastica">Imballaggi in plastica</option>
-							    		<option value="Imballaggi in vetro">Imballaggi in vetro</option>
-							    		<option value="Indumenti usati">Indumenti usati</option>
-							    		<option value="Inerti">Inerti</option>
-							    		<option value="Ingombranti">Ingombranti</option>
-							    		<option value="Legno">Legno</option>
-							    		<option value="Medicinali scaduti">Medicinali scaduti</option>
-							    		<option value="Oggetti in metallo">Oggetti in metallo</option>
-							    		<option value="Oggetti in plastica">Oggetti in plastica</option>
-							    		<option value="Oggetti in vetro">Oggetti in vetro</option>
-							    		<option value="Olio vegetale">Olio vegetale</option>
-							    		<option value="Olio minerale">Olio minerale</option>
-							    		<option value="Organico">Organico</option>
-							    		<option value="Pericolosi">Pericolosi</option>
-							    		<option value="Pile">Pile</option>
-							    		<option value="Pneumatici">Pneumatici</option>
-							    		<option value="Raee">Raee</option>
-							    		<option value="Residuo">Residuo</option>
-							    		<option value="Verde e ramaglie">Verde e ramaglie</option>
-							    		<option value="Siringhe">Siringhe</option>
-							    		<option value="Rifiuti particolari">Rifiuti particolari</option>
-							    		<option value="Rifiuti speciali">Rifiuti speciali</option>
+							    	data-ng-disabled="view || (language != defaultLang)"
+							    	data-ng-options="item.icona as item.objectId for item in iconeTipoRifiutoList">
 		      					</select>
 		      				</div>
 		      				<span class="text-danger glyphicon glyphicon-asterisk"></span>
