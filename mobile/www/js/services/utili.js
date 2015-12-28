@@ -51,7 +51,7 @@ angular.module('rifiuti.services.utili', [])
 
         hide : function(){
             if ($rootScope.loading) {
-                $rootScope.loading.hide();
+                $ionicLoading.hide();
             }
         }
     }
