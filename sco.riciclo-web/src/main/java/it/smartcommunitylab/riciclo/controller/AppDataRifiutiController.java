@@ -136,7 +136,7 @@ public class AppDataRifiutiController {
 			comuni.add(codiceISTAT);
 		}
 		if(logger.isInfoEnabled()) {
-			logger.info(String.format("getAree %s - %s - %s", comuni.toString(), lang, draft));
+			logger.info(String.format("getAree %s - %s - %s - %s", ownerId, comuni.toString(), lang, draft));
 		}
 		List<Area> areaList = storage.findAree(comuni, ownerId, draft);
 		String defaultLang = storage.getDefaultLang();
@@ -162,7 +162,7 @@ public class AppDataRifiutiController {
 			comuni = Arrays.asList(comuniArray);
 		}
 		if(logger.isInfoEnabled()) {
-			logger.info(String.format("%s - %s - %s - %s", ownerId, comuni.toString(), lang, draft));
+			logger.info(String.format("appdata %s - %s - %s - %s", ownerId, comuni.toString(), lang, draft));
 		}
 		AppDataRifiutiUI result = getAppDataUI(ownerId, lang, comuni, draft);
 		return result;
@@ -179,7 +179,7 @@ public class AppDataRifiutiController {
 			comuni = Arrays.asList(comuniArray);
 		}
 		if(logger.isInfoEnabled()) {
-			logger.info(String.format("%s - %s - %s - %s", ownerId, comuni.toString(), lang, draft));
+			logger.info(String.format("zip %s - %s - %s - %s", ownerId, comuni.toString(), lang, draft));
 		}
 		AppDataRifiutiUI result = getAppDataUI(ownerId, lang, comuni, draft);
 
