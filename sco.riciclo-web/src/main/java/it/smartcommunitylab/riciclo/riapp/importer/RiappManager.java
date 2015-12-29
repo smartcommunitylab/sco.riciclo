@@ -20,8 +20,10 @@ import it.smartcommunitylab.riciclo.riapp.importer.model.RiappCentro;
 import it.smartcommunitylab.riciclo.riapp.importer.model.RiappIstruzioni;
 import it.smartcommunitylab.riciclo.riapp.importer.model.RiappOrario;
 import it.smartcommunitylab.riciclo.riapp.importer.model.RiappRifiuto;
+import it.smartcommunitylab.riciclo.storage.App;
 import it.smartcommunitylab.riciclo.storage.RepositoryManager;
 
+import java.io.FileWriter;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -30,6 +32,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.google.common.collect.Lists;
 
 public class RiappManager {
@@ -47,6 +51,7 @@ public class RiappManager {
 	private RiappImportCalendario riappImportCalendario;
 	private RiappImportTipologieRifiuto riappImportTipologieRifiuto;
 	private RiappImportIstruzioni riappImportIstruzioni;
+	private RiappImportStradario riappImportStradario;
 	
 	public RiappManager(String defaultLang, String baseDir) {
 		this.defaultLang = defaultLang;
@@ -57,10 +62,24 @@ public class RiappManager {
 		this.riappImportCalendario = new RiappImportCalendario(this.baseDir);
 		this.riappImportTipologieRifiuto = new RiappImportTipologieRifiuto(this.baseDir);
 		this.riappImportIstruzioni = new RiappImportIstruzioni(this.baseDir);
+		this.riappImportStradario = new RiappImportStradario(this.baseDir);
+	}
+	
+	public void writeStradario(String fileId) {
+		try {
+			List<JsonNode> areaList = riappImportStradario.readStradario(fileId);
+			FileWriter writer = new FileWriter(baseDir + "/comuni/listacomuni_" + fileId.toLowerCase() + ".json");
+			ArrayNode result = Utils.createArryNode();
+			result.addAll(areaList);
+			Utils.writeJson(writer, result);
+		} catch (Exception e) {
+			logger.error("error", e);
+		}
 	}
 	
 	public void importData(String ownerId) {
 		storage.resetDatasetDraft(ownerId);
+		String fileId = ownerId.replace("RIAPP-", "");
 		
 		//<comune, codiceISTAT>
 		Map<String, String> codiceIstatMap = new HashMap<String, String>();
@@ -76,17 +95,17 @@ public class RiappManager {
 		Map<String, RiappIstruzioni> istruzioniMap = new HashMap<String, RiappIstruzioni>();
 		try {
 			codiceIstatMap = riappImportComuni.readCodiciIstat();
-			List<String> fileCalendarioList = riappImportComuni.readListaValori(ownerId, "cal");
+			List<String> fileCalendarioList = riappImportComuni.readListaValori(fileId, "cal");
 			for(String file : fileCalendarioList) {
 				tipologiaRaccoltaMap.putAll(riappImportCalendario.readTipologiaRaccolta(file));
 				tipologiaPuntoRaccoltaMap.putAll(riappImportCalendario.readTipologiaPuntoRaccolta(file));
 				frazioneMap.putAll(riappImportCalendario.readFrazioni(file));
 			}
-			List<String> fileDizionarioList = riappImportComuni.readListaValori(ownerId, "diz");
+			List<String> fileDizionarioList = riappImportComuni.readListaValori(fileId, "diz");
 			for(String file : fileDizionarioList) {
 				tipologiaRifiutoMap.putAll(riappImportTipologieRifiuto.readListaRifiuti(file));
 			}
-			List<String> fileIstruzioniList = riappImportComuni.readListaValori(ownerId, "ist");
+			List<String> fileIstruzioniList = riappImportComuni.readListaValori(fileId, "ist");
 			for(String file : fileIstruzioniList) {
 				istruzioniMap.putAll(riappImportIstruzioni.readIstruzioni(file));
 			}
@@ -97,7 +116,7 @@ public class RiappManager {
 		Categorie categorie = importTipologie(ownerId, tipologiaRaccoltaMap, tipologiaPuntoRaccoltaMap, 
 				tipologiaRifiutoMap, istruzioniMap);
 		List<Colore> listaColori = importColori(ownerId);
-		RiappAreaStruct areaStruct = importAree(ownerId, codiceIstatMap);
+		RiappAreaStruct areaStruct = importAree(ownerId, fileId, codiceIstatMap);
 		//<comuneEsteso, Area>
 		Map<String, Area> comuneEstesoMap = areaStruct.getComuneEstesoMap();
 		//<comune, Area>
@@ -105,11 +124,14 @@ public class RiappManager {
 		//<cal, List<Area>>
 		Map<String, List<Area>> calendarioAreaMap = areaStruct.getCalendarioAreaMap();
 		//<objectId, Crm>
-		Map<String, Crm> centriMap = importCentri(ownerId, comuneEstesoMap);
+		Map<String, Crm> centriMap = importCentri(ownerId, fileId, comuneEstesoMap);
 		//<obecjectId, Rifiuto>
-		Map<String, RiappRifiuto> rifiutiMap = importRifiuti(ownerId, comuneEstesoMap, tipologiaRifiutoMap);
+		Map<String, RiappRifiuto> rifiutiMap = importRifiuti(ownerId, fileId, comuneEstesoMap, tipologiaRifiutoMap);
 		importRaccolta(ownerId, comuneEstesoMap, tipologiaRaccoltaMap, tipologiaPuntoRaccoltaMap, tipologiaRifiutoMap, rifiutiMap);
-		importCalendario(ownerId, calendarioAreaMap, frazioneMap, tipologiaPuntoRaccoltaMap);
+		importCalendario(ownerId, fileId, calendarioAreaMap, frazioneMap, tipologiaPuntoRaccoltaMap);
+		
+		App app = storage.getAppDescriptor(ownerId);
+		storage.saveAppVersion(ownerId, app.getDraftState().getVersion() + 1, true);
 	}
 	
 	private List<Colore> importColori(String ownerId) {
@@ -252,7 +274,7 @@ public class RiappManager {
 	 * @param codiceIstatMap 
 	 * @return Map<comuneEsteso, Area> 
 	 */
-	private RiappAreaStruct importAree(String ownerId, Map<String, String> codiceIstatMap) {
+	private RiappAreaStruct importAree(String ownerId, String fileId, Map<String, String> codiceIstatMap) {
 		//<comuneEsteso, Area>
 		Map<String, Area> comuneEstesoMap = new HashMap<String, Area>();
 		//<comune, Area>
@@ -265,8 +287,8 @@ public class RiappManager {
 		result.setComuneSubAreaMap(comuneSubAreaMap);
 		result.setCalendarioAreaMap(calendarioAreaMap);
 		try {
-			List<String> comuneEstesoList = riappImportComuni.readListaComuni(ownerId);
-			List<RiappArea> areaList = riappImportComuni.readListaAree(ownerId);
+			List<String> comuneEstesoList = riappImportComuni.readListaComuni(fileId);
+			List<RiappArea> areaList = riappImportComuni.readListaAree(fileId);
 			//create first level area
 			for(String comuneEsteso : comuneEstesoList) {
 				Area area = new Area();
@@ -313,10 +335,10 @@ public class RiappManager {
 		return result;
 	}
 	
-	private Map<String, Crm> importCentri(String ownerId, Map<String, Area> comuneEstesoMap) {
+	private Map<String, Crm> importCentri(String ownerId, String fileId, Map<String, Area> comuneEstesoMap) {
 		Map<String, Crm> result = new HashMap<String, Crm>();
 		try {
-			List<String> fileList = riappImportComuni.readListaValori(ownerId, "cen");
+			List<String> fileList = riappImportComuni.readListaValori(fileId, "cen");
 			for(String file : fileList) {
 				List<RiappCentro> riappCentroList = riappImportCentri.readListaCentri(file);
 				for(RiappCentro riappCentro : riappCentroList) {
@@ -360,11 +382,11 @@ public class RiappManager {
 	 * @param tipologiaRifiutoMap 
 	 * @return <rifiuto, RiappRifiuto>
 	 */
-	private Map<String, RiappRifiuto> importRifiuti(String ownerId, Map<String, Area> comuneEstesoMap, 
+	private Map<String, RiappRifiuto> importRifiuti(String ownerId, String fileId, Map<String, Area> comuneEstesoMap, 
 			Map<String, String> tipologiaRifiutoMap) {
 		Map<String, RiappRifiuto> result = new HashMap<String, RiappRifiuto>();
 		try {
-			List<String> fileList = riappImportComuni.readListaValori(ownerId, "diz");
+			List<String> fileList = riappImportComuni.readListaValori(fileId, "diz");
 			for(String file : fileList) {
 				List<RiappRifiuto> riappListaRifiuti = riappImportRifiuti.readListaRifiuti(file);
 				for(RiappRifiuto riappRifiuto : riappListaRifiuti) {
@@ -483,10 +505,10 @@ public class RiappManager {
 		}
 	}
 	
-	private void importCalendario(String ownerId, Map<String, List<Area>> calendarioAreaMap, 
+	private void importCalendario(String ownerId, String fileId, Map<String, List<Area>> calendarioAreaMap, 
 			Map<String, String> frazioneMap, Map<String, String> tipologiaPuntoRaccoltaMap) {
 		try {
-			List<String> fileList = riappImportComuni.readListaValori(ownerId, "cal");
+			List<String> fileList = riappImportComuni.readListaValori(fileId, "cal");
 			for(String file : fileList) {
 				List<RiappOrario> orarioList = riappImportCalendario.readCalendario(file);
 				List<Area> calendarioAreaList = calendarioAreaMap.get(file);

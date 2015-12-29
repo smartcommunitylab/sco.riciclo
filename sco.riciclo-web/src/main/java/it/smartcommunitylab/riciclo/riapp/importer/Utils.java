@@ -3,6 +3,7 @@ package it.smartcommunitylab.riciclo.riapp.importer;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.Reader;
+import java.io.Writer;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
@@ -13,6 +14,8 @@ import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
+import com.fasterxml.jackson.databind.node.ArrayNode;
+import com.fasterxml.jackson.databind.node.ObjectNode;
 
 public class Utils {
 	private static ObjectMapper fullMapper = new ObjectMapper();
@@ -26,6 +29,18 @@ public class Utils {
 	
 	public static JsonNode readJsonFromReader(Reader reader) throws JsonProcessingException, IOException {
 		return Utils.fullMapper.readTree(reader);
+	}
+	
+	public static ObjectNode createObjectNode() {
+		return Utils.fullMapper.createObjectNode();
+	}
+	
+	public static ArrayNode createArryNode() {
+		return Utils.fullMapper.createArrayNode();
+	}
+	
+	public static void writeJson(Writer writer, JsonNode rootNode) throws Exception {
+		Utils.fullMapper.writeValue(writer, rootNode);
 	}
 	
 	/**

@@ -36,11 +36,11 @@ public class RiappImportTipologieRifiuto {
 		Iterator<JsonNode> rootElements = rootNode.elements();
 		while(rootElements.hasNext()) {
 			JsonNode node = rootElements.next();
-			String rifiuto = node.path("RIFIUTO").asText();
+			String rifiuto = node.path("RIFIUTO").asText().trim();
 			if(!rifiutiList.contains(rifiuto)) {
 				rifiutiList.add(rifiuto);
 			}
-			String tipologia = Utils.capitalize(node.path("TIPOLOGIA").asText().toLowerCase());
+			String tipologia = Utils.capitalize(node.path("TIPOLOGIA").asText().toLowerCase().trim());
 			String calendarValue = node.path(diz).asText();
 			if(Utils.isEmpty(calendarValue) || calendarValue.equals("0")) {
 				defaultMap.put(rifiuto, tipologia);

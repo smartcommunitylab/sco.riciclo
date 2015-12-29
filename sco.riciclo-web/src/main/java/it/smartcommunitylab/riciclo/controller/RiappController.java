@@ -50,7 +50,7 @@ public class RiappController {
 	private AppSetup appSetup;
 
 	@RequestMapping(value = "/riapp/{ownerId}/{datasetId}/import", method = RequestMethod.GET)
-	public @ResponseBody String updateDataSetInfo(@PathVariable String ownerId, 
+	public @ResponseBody String importDataSet(@PathVariable String ownerId, 
 			@PathVariable String datasetId, HttpServletRequest request, HttpServletResponse response) throws Exception {
 		if(!Utils.validateAPIRequest(request, appSetup, false, storage)) {
 			throw new UnauthorizedException("Unauthorized Exception: token not valid");
@@ -59,6 +59,16 @@ public class RiappController {
 		return "OK";
 	}
 
+	@RequestMapping(value = "/riapp/{ownerId}/{datasetId}/stradario", method = RequestMethod.GET)
+	public @ResponseBody String writeStradario(@PathVariable String ownerId, 
+			@PathVariable String datasetId, HttpServletRequest request, HttpServletResponse response) throws Exception {
+		if(!Utils.validateAPIRequest(request, appSetup, false, storage)) {
+			throw new UnauthorizedException("Unauthorized Exception: token not valid");
+		}
+		riappManager.writeStradario(datasetId);
+		return "OK";
+	}
+	
 	@ExceptionHandler(Exception.class)
 	@ResponseStatus(value=HttpStatus.INTERNAL_SERVER_ERROR)
 	@ResponseBody
