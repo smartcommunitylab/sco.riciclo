@@ -96,15 +96,15 @@ public class RifiutiValidator {
 				String s = "Empty parent for " + area;
 				parentErrors.add(s);
 			}
-			if (!istituzioni.contains(area.getIstituzione())) {
+			/*if (!istituzioni.contains(area.getIstituzione())) {
 				String s = "Istituzione <" + area.getIstituzione() + "> not found for " + area;
 				problems.add(s);
-			}
+			}*/
 
-			if (!gestori.contains(area.getGestore())) {
+			/*if (!gestori.contains(area.getGestore())) {
 				String s = "Gestore <" + area.getIstituzione() + "> not found for " + area;
 				problems.add(s);
-			}
+			}*/
 		}
 		if (parentErrors.size() > 2) {
 			problems.addAll(parentErrors);

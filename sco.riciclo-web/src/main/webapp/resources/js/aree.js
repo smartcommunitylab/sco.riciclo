@@ -471,14 +471,10 @@ var areeCtrl = areeApp.controller('userCtrl', function($scope, $http, $q, DataSe
 	};
 
 	$scope.$watch('fNome',function() {$scope.test();});
-	$scope.$watch('fIstituzione',function() {$scope.test();});
-	$scope.$watch('fGestore',function() {$scope.test();});
 	$scope.$watch('tipologiaUtenzaSelected',function() {$scope.test();}, true);
 
 	$scope.test = function() {
 		if (($scope.fNome == null) || ($scope.fNome.length < 3) ||
-				($scope.fIstituzione == null) || ($scope.fIstituzione.length < 3) ||
-				($scope.fGestore == null) || ($scope.fGestore.length < 3) ||
 				!$scope.checkTipologiaUtenzaSelected()) {
 	    $scope.incomplete = true;
 	  } else {
