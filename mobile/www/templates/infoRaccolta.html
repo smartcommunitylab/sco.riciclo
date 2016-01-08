@@ -47,7 +47,7 @@
             <h1 class="title">{{"TIPOLOGIE DI RACCOLTA"|translate}}</h1>
         </div>
         <ion-list class="tipologie">
-            <ion-item ng-repeat="rifiuto in rifiuti" href="#/app/raccolta/{{rifiuto.id}}">
+            <ion-item ng-repeat="rifiuto in rifiuti" href="#/app/raccolta/{{addr2id(rifiuto.id)}}">
                 {{rifiuto.nome|translate}}
             </ion-item>
         </ion-list>

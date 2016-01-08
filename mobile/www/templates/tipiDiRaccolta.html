@@ -16,7 +16,7 @@
 
     <ion-content class="tipologiediraccolta" has-bouncing="false">
         <ion-list>
-            <ion-item ng-repeat="(tipo,items) in tipi" ng-href="#/app/raccolta/{{tipo}}">
+            <ion-item ng-repeat="(tipo,items) in tipi" ng-href="#/app/raccolta/{{addr2id(tipo)}}">
                 <div class="row tipologiediraccolta-title">
                     <div class="col">
                         {{items.nome | translate}}
