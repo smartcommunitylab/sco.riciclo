@@ -406,7 +406,7 @@ angular.module('rifiuti', [
         TutorialDue: "Scopri quali rifiuti appartengono ad una determinata categoria e scopri dove devono essere conferiti",
         TutorialTre: "Aggiungi delle note personali o dei promemoria legati alla gestione dei rifiuti (e.g. pagamento della bolletta, oggetti da portare al CRM, etc)",
         TutorialNews: "Tieniti informato delle novità della raccolta nel tuo comune",
-        TutorialQuattro: "Tieni sotto controllo le scadenze della raccolta porta a porta e aggiungi delle note personali.",
+        TutorialQuattro: "Tieni sotto controllo le scadenze della raccolta porta a porta",
         TutorialCinque: "Premi qui per aprire il menù laterale e scoprire ulteriori funzionalità",
         TTUno: "Benvenuto!",
         TTDue: "Tipologie di rifiuto",

@@ -25,7 +25,8 @@
     "org.apache.cordova.camera",
     "de.appplant.cordova.plugin.email-composer",
     "org.apache.cordova.geolocation",
-    "de.appplant.cordova.plugin.local-notification"
+    "de.appplant.cordova.plugin.local-notification",
+    "cordova-plugin-whitelist"
   ],
   "cordovaPlatforms": [
     "android",
