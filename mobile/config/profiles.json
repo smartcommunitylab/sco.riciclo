@@ -24,8 +24,15 @@
         "resource_folder": "config/instances/ASIA-ROT",
         "widget_id" : "it.smartcommunitylab.rifiuti.asia.rot",
         "version": "1.0.0",
-        "version_code": "1",
+        "version_code": "2",
         "app_name": "100% Riciclo - Rotaliana"
+    },
+    "ESACOM": {
+        "resource_folder": "config/instances/ESACOM",
+        "widget_id" : "it.smartcommunitylab.rifiuti.esacom",
+        "version": "1.0.0",
+        "version_code": "2",
+        "app_name": "100% Riciclo"
     }
 
 
