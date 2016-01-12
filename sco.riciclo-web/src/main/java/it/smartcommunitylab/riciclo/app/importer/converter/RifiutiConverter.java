@@ -435,7 +435,9 @@ public class RifiutiConverter {
 				oa.setDataA(pr.getDataA());
 				oa.setDataDa(pr.getDataDa());
 				oa.setIl(pr.getIl().replaceAll("\\n", ""));
-				oa.setEccezione(pr.getEccezione().replaceAll("\\n", ""));
+				if(!Utils.isNull(pr.getEccezione())) {
+					oa.setEccezione(pr.getEccezione().replaceAll("\\n", ""));
+				}
 				if(!Utils.isNull(pr.getNote())) {
 					oa.getNote().put(defaultLang, pr.getNote());
 				}
