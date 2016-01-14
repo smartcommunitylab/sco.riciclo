@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<widget id="it.smartcommunitylab.rifiuti.asia.rot" version="1.0.0" android-versionCode="1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+<widget id="it.smartcommunitylab.rifiuti.asia.rot" version="1.0.2" android-versionCode="4" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
   <name>100% Riciclo - Rotaliana</name>
   <description>100% Riciclo - Rotaliana</description>
   <author email="info@smartcommunitylab.it" href="http://www.smartcommunitylab.it/">Smart Community Lab</author>
@@ -9,6 +9,7 @@
   <access origin="tel:*" launch-external="yes"/>
   <access origin="mailto:*" launch-external="yes"/>
   <access origin="geo:*" launch-external="yes"/>
+  <allow-navigation href="*" />
   <preference name="webviewbounce" value="false"/>
   <preference name="UIWebViewBounce" value="false"/>
   <preference name="DisallowOverscroll" value="true"/>
