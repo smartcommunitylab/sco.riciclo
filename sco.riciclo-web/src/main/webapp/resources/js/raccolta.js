@@ -347,6 +347,8 @@ var raccoltaCtrl = raccoltaApp.controller('userCtrl', function($scope, $http, $q
 				element.tipologiaRifiuto = $scope.selectedTipologiaRifiuto.objectId;
 				if($scope.selectedColore) {
 					element.colore = $scope.selectedColore.nome;
+				} else {
+					element.colore = null;
 				}
 				element.infoRaccolta[$scope.language] = $scope.infoRaccolta;
 
