@@ -96,8 +96,9 @@
 						    	<label class="col-md-1 control-label">Istituzione:</label>
 						    	<div class="col-md-2">
 						    		<select class="form-control" data-ng-model="fIstituzione"
-						    		data-ng-disabled="view || (language != defaultLang)">
-		        					<option data-ng-repeat="item in istituzioneList" value="{{item}}">{{item}}</option>
+						    		data-ng-disabled="view || (language != defaultLang)"
+						    		data-ng-options="item for item in istituzioneList">
+						    			<option value=""></option>
 		      					</select>
 		      				</div>
 						    </div>
@@ -105,8 +106,9 @@
 						    	<label class="col-md-1 control-label">Gestore:</label>
 						    	<div class="col-md-2">
 						    		<select class="form-control" data-ng-model="fGestore"
-						    		data-ng-disabled="view || (language != defaultLang)">
-		        					<option data-ng-repeat="item in gestoreList" value="{{item}}">{{item}}</option>
+						    		data-ng-disabled="view || (language != defaultLang)"
+						    		data-ng-options="item for item in gestoreList">
+						    			<option value=""></option>
 		      					</select>
 		      				</div>
 						    </div>
@@ -123,6 +125,7 @@
 					    			<select class="form-control" data-ng-model="selectedParentArea"
 					    			data-ng-disabled="view || (language != defaultLang)"
 					    			data-ng-options="item.nome for item in areaList">
+					    				<option value=""></option>
       							</select>
 									</div>
 								</div>
