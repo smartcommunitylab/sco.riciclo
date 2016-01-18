@@ -93,7 +93,7 @@ ITALIAN_VERSION = {
         reporting: "Segnalazione",
         collection_locations_upper: "MODALITA' DI RACCOLTA",
         waste_list: "LISTA RIFIUTI",
-        collection_type: "Tipo di raccolta",
+        collection_type: "Sistema di raccolta",
         collection_types: "Sistemi di raccolta",
         collection_locations: "Centri di raccolta",
         collection_location: "Centro di raccolta",
