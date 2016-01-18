@@ -259,9 +259,10 @@ angular.module('rifiuti.controllers.raccolta', [])
 
 })
 
-.controller('RaccoltaCtrl', function ($scope, $stateParams, Raccolta, Utili) {
+.controller('RaccoltaCtrl', function ($scope, $stateParams, $rootScope, Raccolta, Utili) {
+  $scope.id = $rootScope.id2addr($stateParams.id);
 
-  $scope.id = $stateParams.id;
+  //$scope.id = $stateParams.id;
 
   Raccolta.raccolta({ tipo:$scope.id }).then(function(raccolta){
     if(!$scope.nome){
@@ -323,8 +324,9 @@ angular.module('rifiuti.controllers.raccolta', [])
   });
 })
 
-.controller('RifiutiCtrl', function ($scope, $stateParams, $ionicConfig, $ionicHistory, Raccolta) {
-  $scope.tipo = $stateParams.tipo;
+.controller('RifiutiCtrl', function ($scope, $stateParams, $ionicConfig, $ionicHistory, $rootScope, Raccolta) {
+  $scope.tipo = $rootScope.id2addr($stateParams.tipo);
+  //$scope.tipo = $stateParams.tipo;
 
   $scope.backButtonStyle = $ionicConfig.backButton.icon();
 
