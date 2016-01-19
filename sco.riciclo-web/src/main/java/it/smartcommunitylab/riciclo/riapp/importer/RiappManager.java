@@ -277,6 +277,8 @@ public class RiappManager {
 	private RiappAreaStruct importAree(String ownerId, String fileId, Map<String, String> codiceIstatMap) {
 		//<comuneEsteso, Area>
 		Map<String, Area> comuneEstesoMap = new HashMap<String, Area>();
+		//<zona, Area>
+		Map<String, Area> zonaMap = new HashMap<String, Area>();
 		//<comune, Area>
 		Map<String, Area> comuneSubAreaMap = new HashMap<String, Area>();
 		//<cal, List<Area>>
@@ -315,19 +317,51 @@ public class RiappManager {
 				area.setObjectId(riappArea.getComune());
 				area.setOwnerId(ownerId);
 				area.setNome(riappArea.getComune());
-				Area parentArea = comuneEstesoMap.get(riappArea.getComuneEsteso());
-				if(parentArea != null) {
-					area.setParent(parentArea.getObjectId());
-				}
+				area.getUtenza().put(Const.UTENZA_DOMESTICA, true);
 				area.getEtichetta().put(defaultLang, riappArea.getComuneEsteso() + " " + riappArea.getZonaEsteso());
-				storage.addArea(area, true);
-				comuneSubAreaMap.put(riappArea.getComune(), area);
-				List<Area> calendarioAreaList = calendarioAreaMap.get(riappArea.getCal());
-				if(calendarioAreaList== null) {
-					calendarioAreaList = Lists.newArrayList();
-					calendarioAreaMap.put(riappArea.getCal(), calendarioAreaList);
+				String zona = riappArea.getZona();
+				//check zona
+				if(Utils.isNotEmpty(zona)) {
+					Area parentArea = zonaMap.get(zona);
+					if(parentArea == null) {
+						Area zonaArea = new Area();
+						zonaArea.setObjectId(zona);
+						zonaArea.setOwnerId(ownerId);
+						zonaArea.setNome(zona);
+						Area comuneEstesoArea = comuneEstesoMap.get(riappArea.getComuneEsteso());
+						if(comuneEstesoArea != null) {
+							zonaArea.setParent(comuneEstesoArea.getObjectId());
+						}
+						zonaArea.getUtenza().put(Const.UTENZA_DOMESTICA, true);
+						storage.addArea(zonaArea, true);
+						zonaMap.put(zona, zonaArea);
+						parentArea = zonaArea;
+						//add zona to calendarioAreaList
+						List<Area> calendarioAreaList = calendarioAreaMap.get(riappArea.getCal());
+						if(calendarioAreaList== null) {
+							calendarioAreaList = Lists.newArrayList();
+							calendarioAreaMap.put(riappArea.getCal(), calendarioAreaList);
+						}
+						calendarioAreaList.add(zonaArea);
+					}
+					if(parentArea != null) {
+						area.setParent(parentArea.getObjectId());
+					}
+					storage.addArea(area, true);
+				} else {
+					Area parentArea = comuneEstesoMap.get(riappArea.getComuneEsteso());
+					if(parentArea != null) {
+						area.setParent(parentArea.getObjectId());
+					}
+					storage.addArea(area, true);
+					List<Area> calendarioAreaList = calendarioAreaMap.get(riappArea.getCal());
+					if(calendarioAreaList== null) {
+						calendarioAreaList = Lists.newArrayList();
+						calendarioAreaMap.put(riappArea.getCal(), calendarioAreaList);
+					}
+					calendarioAreaList.add(area);
 				}
-				calendarioAreaList.add(area);
+				comuneSubAreaMap.put(riappArea.getComune(), area);
 			}
 		} catch (Exception e) {
 			logger.error("error", e);

@@ -80,12 +80,12 @@ public class RiappImportComuni {
 			riappArea.setArac(nodeArea.path("arac").asText());
 			riappArea.setCal(nodeArea.path("cal").asText());
 			riappArea.setCen(nodeArea.path("cen").asText());
-			//TODO riappArea.setCodiceISTAT());
 			riappArea.setComune(nodeArea.path("comune").asText());
 			riappArea.setDiz(nodeArea.path("diz").asText());
 			riappArea.setIst(nodeArea.path("ist").asText());
 			riappArea.setVarie(nodeArea.path("varie").asText());
 			riappArea.setZonaEsteso(nodeArea.path("zona_esteso").asText());
+			riappArea.setZona(nodeArea.path("zona").asText());
 			areaList.add(riappArea);
 		}
 		return areaList;
