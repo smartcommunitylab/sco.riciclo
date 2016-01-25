@@ -73,6 +73,7 @@ public class RiappImportStradario {
 			areaNode.put("comune_esteso", comuneEsteso);
 			areaNode.put("comune", comuneEsteso + "-" + via);
 			areaNode.put("zona_esteso", via);
+			areaNode.put("zona", zonaNode.path("diz").asText() + "_" + zona);
 			areaNode.put("diz", zonaNode.path("diz").asText());
 			areaNode.put("cal", zonaNode.path("cal").asText());
 			areaNode.put("ist", zonaNode.path("ist").asText());

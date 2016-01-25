@@ -11,6 +11,7 @@ public class RiappArea {
 	private String varie;
 	private String arac;
 	private String codiceISTAT;
+	private String zona;
 	
 	public String getComune() {
 		return comune;
@@ -71,5 +72,11 @@ public class RiappArea {
 	}
 	public void setCodiceISTAT(String codiceISTAT) {
 		this.codiceISTAT = codiceISTAT;
+	}
+	public String getZona() {
+		return zona;
+	}
+	public void setZona(String zona) {
+		this.zona = zona;
 	}
 }

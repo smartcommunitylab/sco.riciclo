@@ -45,7 +45,7 @@ public class RiappImportIstruzioni {
 			if(startIndex != -1) {
 				endIndex = desc1.indexOf(endString);
 				if(endIndex != -1) {
-					String comeConferire = desc1.substring(startIndex + startString.length(), endIndex);
+					String comeConferire = desc1.substring(startIndex, endIndex + endString.length());
 					riappIstruzioni.setComeConferire(comeConferire);
 				}
 			}
@@ -54,7 +54,7 @@ public class RiappImportIstruzioni {
 			if(startIndex != -1) {
 				endIndex = desc2.indexOf(endString);
 				if(endIndex != -1) {
-					String prestaAttenzione = desc2.substring(startIndex + startString.length(), endIndex);
+					String prestaAttenzione = desc2.substring(startIndex, endIndex + endString.length());
 					riappIstruzioni.setPrestaAttenzione(prestaAttenzione);
 				}
 			}
