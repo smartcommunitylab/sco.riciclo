@@ -179,7 +179,7 @@ angular.module('rifiuti.controllers.home', [])
             scope: $scope,
             buttons: [
                 {
-                    text: 'Cancel'
+                    text: $filter('translate')('cancel')
                 },
                 {
                     text: $filter('translate')('confirm'),
