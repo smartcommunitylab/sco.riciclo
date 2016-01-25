@@ -192,7 +192,7 @@ angular.module('rifiuti.controllers.home', [])
     };
     var popupCreate = function () {
         return {
-            template: '<input type="text" ng-model="data.nota">',
+            template: '<textarea class="form-control" rows="5" id="comment" ng-model="data.nota">',
             title: $filter('translate')('what_remember'),
             scope: $scope,
             buttons: [
