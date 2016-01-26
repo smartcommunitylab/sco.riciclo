@@ -1,4 +1,5 @@
 ITALIAN_VERSION = {
+        map_connection_toast:"Mappe non disponibili. Controlla la connessione Internet.",
         access:"ACCESSO",
         presta_attenzione: "Presta attenzione",
         come_conferire: "Come conferire",
@@ -135,6 +136,7 @@ ITALIAN_VERSION = {
 };
 
 ENGLISH_VERSION = {
+        map_connection_toast:"Map not available. Check your Internet connection.",
         access:"ACCESS",
         presta_attenzione: "Pay attention to",
         come_conferire: "How to give",

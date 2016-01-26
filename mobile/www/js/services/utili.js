@@ -25,8 +25,16 @@ angular.module('rifiuti.services.utili', [])
    }
 })
 
-.factory('LoaderService', function($rootScope, $ionicLoading) {
+.factory('LoaderService', function($rootScope, $ionicLoading, $filter) {
   return {
+
+        showToast : function(alertMsg){
+            $ionicLoading.show({
+                template:  $filter("translate")(alertMsg),
+                noBackdrop: true,
+                duration: 3000 });
+        },
+
         show : function() {
 
             $rootScope.loading = $ionicLoading.show({

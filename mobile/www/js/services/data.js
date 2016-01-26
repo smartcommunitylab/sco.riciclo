@@ -460,14 +460,6 @@ angular.module('rifiuti.services.data', [])
         return returnItem;
     }
 
-    //var saveProfiliByNewLang(){
-    //    var profiles = getProfiles();
-    //    $rootScope.profili.forEach(function (profilo){
-    //
-    //
-    //    })
-    //}
-
     var getProfilesAreaById = function(areaId){
        if (areeMap == null) {
             if (localStorage[areeMapPrefix]) {

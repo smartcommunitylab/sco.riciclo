@@ -68,11 +68,17 @@ angular.module('rifiuti.controllers.raccolta', [])
   
 })
   
-.controller('PDRCtrl', function ($scope, $rootScope, $timeout, Raccolta, $location, $stateParams, Utili, DataManager) {
+.controller('PDRCtrl', function ($scope, $rootScope, $timeout, Raccolta, $location, $stateParams, $http, Utili, DataManager, LoaderService) {
+
+  $http.get('https://maps.google.it').success(function (data) {
+            //LoaderService.showToast('accesso!');
+        }).error(function (data, status) {
+            LoaderService.showToast("map_connection_toast");
+        });
 
   $scope.profile = null;
   
-  $rootScope.checkMap();  
+  $rootScope.checkMap();
   
   $scope.updateIMG = function () {
     $scope.variableIMG = $scope.mapView ? "riciclo-lista" : "riciclo-map";
@@ -105,30 +111,7 @@ angular.module('rifiuti.controllers.raccolta', [])
   $scope.click = function () {
     $scope.mapView = !$scope.mapView;
     $scope.updateIMG();
-//    $timeout(function () {
-//      var mapHeight = 800; // or any other calculated value
-//      var mapContainer = document.querySelector('#map-container');
-//      if (mapContainer) {
-//        mapHeight = angular.element(mapContainer)[0].offsetHeight;
-//      } else { 
-//        console.log('cannot get "#map-container"');
-//      }
-//      var ng_mapContainer = document.querySelector('.angular-google-map-container');
-//      if (ng_mapContainer) {
-//        angular.element(ng_mapContainer)[0].style.height = mapHeight + 'px';
-//      } else { 
-//        console.log('cannot get ".angular-google-map-container"');
-//      }
-//    }, 200);
   };
-
-//  $scope.$on('$viewContentLoaded', function () {
-//    $timeout(function () {
-//      var mapHeight = 800; // or any other calculated value
-//      mapHeight = angular.element(document.querySelector('#map-container'))[0].offsetHeight;
-//      angular.element(document.querySelector('.angular-google-map-container'))[0].style.height = mapHeight + 'px';
-//    }, 50);
-//  });
 
   var addToList = function (item, list) {
     for (var i = 0; i < list.length; i++) {
