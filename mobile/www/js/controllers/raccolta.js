@@ -65,7 +65,7 @@ angular.module('rifiuti.controllers.raccolta', [])
   
 })
   
-.controller('PDRCtrl', function ($scope, $rootScope, $timeout, Raccolta, $location, $stateParams, Utili, DataManager, uiGmapIsReady) {
+.controller('PDRCtrl', function ($scope, $rootScope, $timeout, Raccolta, $location, $stateParams, Utili, DataManager, uiGmapIsReady, LoaderService) {
 
 
   var mapCenter = {
@@ -75,9 +75,15 @@ angular.module('rifiuti.controllers.raccolta', [])
 
   var mapZoom = ZOOM;
 
+  $http.get('https://maps.google.it').success(function (data) {
+            //LoaderService.showToast('accesso!');
+        }).error(function (data, status) {
+            LoaderService.showToast("map_connection_toast");
+        });
+
   $scope.profile = null;
   
-  $rootScope.checkMap();  
+  $rootScope.checkMap();
   
   $scope.updateIMG = function () {
     $scope.variableIMG = $scope.mapView ? "riciclo-lista" : "riciclo-map";
@@ -161,7 +167,6 @@ angular.module('rifiuti.controllers.raccolta', [])
 
     return latLngList;
   }
-
 
   var addToList = function (item, list) {
     for (var i = 0; i < list.length; i++) {
