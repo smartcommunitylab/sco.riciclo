@@ -67,6 +67,14 @@ angular.module('rifiuti.controllers.raccolta', [])
   
 .controller('PDRCtrl', function ($scope, $rootScope, $timeout, Raccolta, $location, $stateParams, Utili, DataManager, uiGmapIsReady) {
 
+
+  var mapCenter = {
+      latitude: CENTER.latitude,
+      longitude: CENTER.longitude
+    };
+
+  var mapZoom = ZOOM;
+
   $scope.profile = null;
   
   $rootScope.checkMap();  
@@ -80,8 +88,8 @@ angular.module('rifiuti.controllers.raccolta', [])
   };
 
   $scope.map = {
-    center: CENTER,
-    zoom: ZOOM,
+    center: mapCenter,
+    zoom: mapZoom,
     pan: false,
     draggable: 'true',
     bounds: {},
