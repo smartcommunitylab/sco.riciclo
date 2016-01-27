@@ -70,6 +70,14 @@ angular.module('rifiuti.controllers.raccolta', [])
   
 .controller('PDRCtrl', function ($scope, $rootScope, $timeout, Raccolta, $location, $stateParams, $http, Utili, DataManager, LoaderService) {
 
+
+  var mapCenter = {
+      latitude: CENTER.latitude,
+      longitude: CENTER.longitude
+    };
+
+  var mapZoom = ZOOM;
+
   $http.get('https://maps.google.it').success(function (data) {
             //LoaderService.showToast('accesso!');
         }).error(function (data, status) {
@@ -90,8 +98,8 @@ angular.module('rifiuti.controllers.raccolta', [])
 
   $scope.map = {
     control: {},
-    center: CENTER,
-    zoom: ZOOM,
+    center: mapCenter,
+    zoom: mapZoom,
     pan: false,
     draggable: 'true',
     options: {
