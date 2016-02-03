@@ -1,0 +1,147 @@
+<div>
+    <div class="expandable-list-item">
+        <div class="row expandable-list-item-header">
+            <div class="col col-80">
+                <div class="row expandable-list-item-title">
+                    <div class="col">
+                        {{ "cosa_e_title" | translate }}
+                    </div>
+                </div>
+                <div class="row expandable-list-item-subtitle">
+                    <div class="col">
+                        La pratica del compostaggio domestico è il processo naturale di decomposizione dei rifiuti organici dal quale si ricava il compost, un fertilizzante naturale ricco di elementi nutritivi utilizzabile nell' orto, in giardino e per le piante in vaso.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="expandable-list-item">
+        <div class="row row-left expandable-list-item-header" ng-click="cosa=!cosa">
+            <div class="col col-10">
+                <i ng-class="{'ion-chevron-up':cosa, 'ion-chevron-down':!cosa}"></i>
+            </div>
+            <div class="col col-80">
+                <div class="row expandable-list-item-title">
+                    <div class="col">
+                        {{"cosa_compostare" | translate}}
+                    </div>
+                </div>
+                <div class="row expandable-list-item-subtitle">
+                    <div class="col">
+                        Possono essere compostati due tipi di rifiuti:
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div ng-show="cosa">
+            <ion-list class="">
+                <ion-item class="">
+                    {{"cosa_uno" | translate}}
+                </ion-item>
+                <ion-item class="">
+                    {{"cosa_due" | translate}}
+                </ion-item>
+            </ion-list>
+        </div>
+    </div>
+    <div class="expandable-list-item">
+        <div class="row row-left expandable-list-item-header" ng-click="dove=!dove">
+            <div class="col col-10">
+                <i ng-class="{'ion-chevron-up':dove, 'ion-chevron-down':!dove}"></i>
+            </div>
+            <div class="col col-80">
+                <div class="row expandable-list-item-title">
+                    <div class="col">
+                        {{"dove_compostare" | translate}}
+                    </div>
+                </div>
+                <div class="row expandable-list-item-subtitle">
+                    <div class="col">
+                        Esistono diverse soluzioni ma le più praticate sono le seguenti:
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div ng-show="dove">
+            <ion-list class="">
+                <ion-item class="">
+                    {{"dove_uno" | translate}}
+                </ion-item>
+                <ion-item class="">
+                    {{"dove_due" | translate}}
+                </ion-item>
+            </ion-list>
+        </div>
+    </div>
+    <div class="expandable-list-item">
+        <div class="row row-left expandable-list-item-header" ng-click="regole=!regole">
+            <div class="col col-10">
+                <i ng-class="{'ion-chevron-up':regole, 'ion-chevron-down':!regole}"></i>
+            </div>
+            <div class="col col-80">
+                <div class="row expandable-list-item-title">
+                    <div class="col">
+                        {{"regole_compostaggio" | translate}}
+                    </div>
+                </div>
+                <div class="row expandable-list-item-subtitle">
+                    <div class="col">
+                        Per ottenere una buona riuscita del processo di compostaggio occorre:
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div ng-show="regole">
+            <ion-list class="">
+                <ion-item class="">
+                    {{"regole_uno" | translate}}
+                </ion-item>
+                <ion-item class="">
+                    {{"regole_due" | translate}}
+                </ion-item>
+                <ion-item class="">
+                    {{"regole_tre" | translate}}
+                </ion-item>
+                <ion-item class="">
+                    {{"regole_quattro" | translate}}
+                </ion-item>
+                <ion-item class="">
+                    {{"regole_cinque" | translate}}
+                </ion-item>
+            </ion-list>
+        </div>
+    </div>
+        <div class="expandable-list-item">
+        <div class="row row-left expandable-list-item-header" ng-click="vantaggi=!vantaggi">
+            <div class="col col-10">
+                <i ng-class="{'ion-chevron-up':vantaggi, 'ion-chevron-down':!vantaggi}"></i>
+            </div>
+            <div class="col col-80">
+                <div class="row expandable-list-item-title">
+                    <div class="col">
+                        {{"vantaggi_compostaggio" | translate}}
+                    </div>
+                </div>
+                <div class="row expandable-list-item-subtitle">
+                    <div class="col">
+                        I vantaggi derivanti dal compostaggio domestico sono di natura ambientale ma anche economica:
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div ng-show="vantaggi">
+            <ion-list class="">
+                <ion-item class="">
+                    {{"vantaggi_uno" | translate}}
+                </ion-item>
+                <ion-item class="">
+                    {{"vantaggi_due" | translate}}
+                </ion-item>
+                <ion-item class="">
+                    {{"vantaggi_tre" | translate}}
+                </ion-item>
+            </ion-list>
+        </div>
+    </div>
+</div>
