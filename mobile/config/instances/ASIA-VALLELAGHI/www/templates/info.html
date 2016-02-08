@@ -1,0 +1,32 @@
+<ion-view>
+    <ion-nav-title>
+        <div class="nav-title" ng-click="enableIsDevMod()">
+            <div class="nav-title-single">{{"Credits"|translate}}</div>
+        </div>
+    </ion-nav-title>
+
+    <ion-nav-buttons side="left">
+        <button menu-toggle="left" class="row button button-icon ion-navicon">
+        </button>
+    </ion-nav-buttons>
+
+    <ion-content class="info" has-bouncing="false">
+        <p class="project" ng-bind-html="'Progetto_CREDITS'|translate"></p>
+        <p class="project-desc"><strong>{{'Progetto_DESC_line_1'|translate}}</strong>
+        </p>
+        <p class="project-desc"><strong>{{'Progetto_DESC_line_2'|translate}}</strong>
+        </p>
+        <p class="version"><strong>{{version}}</strong>
+        </p>
+
+        <a ng-click="clickLink('http://www.asia.tn.it/')"><img src="img/asia.png" width="135">
+        </a>
+        <a ng-click="clickLink('http://www.comunita.valledeilaghi.tn.it//')"><img src="img/Comunita-della-Valle-dei-Laghi_logo.jpg" width="104">
+        </a>
+
+        <p class="subtitle">{{'Progetto_di'|translate}}</p>
+        <a ng-click="clickLink('http://www.comunitrentini.it')"><img src="img/consorzio_comuni_trentini.png" width="175" height="63"></a>
+        <br />
+        <a ng-click="clickLink('http://www.smartcommunitylab.it')"> <img src="img/logo_sco_fbk.png" width="301"> </a>
+    </ion-content>
+</ion-view>
