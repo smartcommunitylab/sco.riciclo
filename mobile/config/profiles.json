@@ -33,7 +33,26 @@
         "version": "1.0.0",
         "version_code": "2",
         "app_name": "100% Riciclo"
+    },
+    "ASIA-PAGANELLA": {
+        "resource_folder": "config/instances/ASIA-PAGANELLA",
+        "widget_id" : "it.smartcommunitylab.rifiuti.asia.paganella",
+        "version": "1.0.0",
+        "version_code": "1",
+        "app_name": "100% Riciclo - Comunità della Paganella"
+    },
+    "ASIA-ADIGE": {
+        "resource_folder": "config/instances/ASIA-ADIGE",
+        "widget_id" : "it.smartcommunitylab.rifiuti.asia.adige",
+        "version": "1.0.0",
+        "version_code": "1",
+        "app_name": "100% Riciclo - Valle dell'Adige"
+    },
+    "ASIA-VALLELAGHI": {
+        "resource_folder": "config/instances/ASIA-VALLELAGHI",
+        "widget_id" : "it.smartcommunitylab.rifiuti.asia.vallelaghi",
+        "version": "1.0.0",
+        "version_code": "1",
+        "app_name": "100% Riciclo - Comunità della Valle dei Laghi"
     }
-
-
 }
