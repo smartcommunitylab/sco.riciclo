@@ -13,10 +13,10 @@ FEED_URL = "http://www.asia.tn.it/rss/feed/avvisi/";
 EXT_URL = "http://www.asia.tn.it/";
 IF_HIDDEN_FIELDS = false;
 CUSTOM_PAP = [];
-ENDPOINT_URL = 'https://tn.smartcommunitylab.it/riciclo2';
+ENDPOINT_URL = 'https://dev.smartcommunitylab.it/riciclo2/';
 PORTA_A_PORTA_LABEL = 'porta_a_porta';
 
-USE_DRAFT = false;
+USE_DRAFT = true;
 LANG = ['it'];
 COMUNI_LIST = [];
 
