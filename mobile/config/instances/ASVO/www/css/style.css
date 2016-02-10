@@ -141,6 +141,14 @@ body.platform-browser .scroll-bar-fade-out {
     color: #fff;
 }
 
+.bar-balanced .button {
+    color: #000000;
+}
+
+.bar-balanced .button.button-clear{
+    color: #000000;
+}
+
 .button.button-100r-select {
     text-align: left;
     color: #444;

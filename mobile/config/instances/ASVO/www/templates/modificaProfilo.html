@@ -1,0 +1,67 @@
+<ion-view>
+    <ion-nav-title>
+        <div class="nav-title">
+            <div class="nav-title-main">{{"profiles" | translate}}</div>
+        </div>
+    </ion-nav-title>
+
+    <ion-nav-buttons side="left">
+        <button ng-click="back()" class="button back-button buttons  button-clear header-item" ng-if="!profili || profili.length == 0">
+            <i class="icon" ng-class="backButtonStyle"></i>
+        </button>
+    </ion-nav-buttons>
+
+    <ion-nav-buttons side="right">
+        <div class="nowrap" data-tap-disabled="true" ng-if="!editMode">
+            <button ng-click="edit()" class="button button-clear btn btn-edit">
+                <i class="icon {{'riciclo-edit'}}"></i>
+            </button>
+            <button ng-click="click()" class="button button-clear btn btn-variable">
+                <i class="icon riciclo-discard"></i>
+            </button>
+        </div>
+        <div class="nowrap" data-tap-disabled="true" ng-if="editMode" style='font-color'>
+            <div class="col" ng-click="edit()">
+                <p style="font-weight: bold; color: black">SALVA</p>
+            </div>
+        </div>
+    </ion-nav-buttons>
+
+    <ion-content class="profile" has-bouncing="false">
+        <div class="profile-block profile-name">
+            <div class="profile-title">{{"user_name" | translate}}</div>
+            <div class="item item-input-inset" ng-if="editMode">
+                <label class="item-input-wrapper">
+                    <input type="text" ng-model="profilo.name" placeholder="{{'user_name_placeholder' | translate}}" />
+                </label>
+            </div>
+            <p ng-if="!editMode">{{profilo.name}}</p>
+        </div>
+
+        <div class="profile-block profile-types">
+            <div class="profile-title">{{"user_type" | translate}}
+                <!--ng-click="helpTipi()"-->
+                <a class="help" ng-click="openUtenzeModal()"><i class="icon riciclo-more_info icon-button"></i>
+                </a>
+            </div>
+            <!--<div ng-if="editMode">
+                <div class="profile-type" ng-repeat="item in tipologiaUtenza">
+                    <input type="radio" ng-model="profilo.utenza" ng-change="updateLocations()" ng-value="item"><span>{{item.profilo}}</span>
+                </div>
+            </div>-->
+            <div class="list" ng-if="editMode">
+                <ion-radio ng-repeat="item in tipologiaUtenza" ng-model="profilo.utenza" ng-change="updateProfileType()" ng-value="item">{{item.nome}}</ion-radio>
+            </div>
+            <p ng-if="!editMode">{{profilo.utenza.nome | translate}}</p>
+        </div>
+
+        <div class="profile-block profile-where">
+            <div class="profile-title">{{"location" | translate}}</div>
+            <button class="button button-100r-select button-block icon-right ion-arrow-down-b" ng-click="openLocalitaSelector()" ng-if="editMode">
+                <span ng-if="!!profilo.area">{{profilo.area.etichetta}}</span>
+                <span ng-if="!!!profilo.area.nome">{{"Selezionare" | translate}}</span>
+            </button>
+            <p ng-if="!editMode">{{profilo.area.etichetta}}</p>
+        </div>
+    </ion-content>
+</ion-view>

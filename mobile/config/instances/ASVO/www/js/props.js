@@ -22,6 +22,6 @@ COMUNI_LIST = [];
 
 ZOOM = 11;
 CENTER = {
-      latitude: 45.428414,
-      longitude: 10.986866
+      latitude: 45.8033964,
+      longitude: 12.8713208
 };
