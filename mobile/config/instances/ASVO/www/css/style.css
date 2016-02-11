@@ -42,7 +42,7 @@ body.platform-browser .scroll-bar-fade-out {
 }
 
 .expandable-list-item-header {
-    background-color: #cecece;
+    background-color: #e8e8e8;
 }
 
 .expandable-list-item-title {
@@ -76,6 +76,9 @@ body.platform-browser .scroll-bar-fade-out {
 .navigation-drawer ion-list ion-item {
     background-color: #9cbd2e !important;
     color: white !important;
+    /*text-decoration-line: black !important;*/
+    border-top: black;
+    border-bottom: black;
 }
 
 .navigation-drawer ion-list ion-item a {
@@ -88,8 +91,8 @@ body.platform-browser .scroll-bar-fade-out {
 }
 
 .navigation-drawer ion-list ion-item img {
-    width: 30px;
-    height: 30px;
+    width: 60%;
+    height: 60%;
 }
 
 .navigation-drawer ion-list.profiles-list ion-item {
@@ -102,7 +105,6 @@ body.platform-browser .scroll-bar-fade-out {
 /* Bar and buttons */
 
 .bar-100r {
-    background-color: white !important;
     background-image: url('../img/backgroundActionBar.png') !important;
     background-position: center !important;
     background-repeat: no-repeat !important;
@@ -258,7 +260,7 @@ body.platform-browser .scroll-bar-fade-out {
 }
 
 .home-notes .home-notes-item.home-notes-item-selected {
-    background-color: #8de058;
+    background-color: #9cbd2e;
 }
 /* Home - News */
 
@@ -503,6 +505,9 @@ body.platform-browser .scroll-bar-fade-out {
     border-color: #cecece !important;
 }
 
+.bar.bar-balanced {
+    border-color: #9cbd2e;
+}
 .contatti-item-list ion-item a {
     background-color: #eeeeee !important;
     padding: 0 !important;
