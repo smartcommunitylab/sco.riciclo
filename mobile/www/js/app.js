@@ -135,10 +135,20 @@ angular.module('rifiuti', [
 })
 
 .run(function ($ionicPlatform, $rootScope, $ionicNavBarDelegate, $ionicHistory, $translate, $ionicPopup, $filter, $state, Profili, Utili, GeoLocate, $cordovaSplashscreen, $ionicLoading, $cordovaNetwork, $ionicConfig, DataManager) {
-    console.log('app .run!!!!!!');
     $rootScope.version = VERSION;
 
-    $rootScope.isWebView = ionic.Platform.isWebView();
+    $rootScope.isWebView = function(){
+        if(ionic.Platform.isIPad() ||
+           ionic.Platform.isIOS() ||
+           ionic.Platform.isAndroid() ||
+           ionic.Platform.isEdge()){
+
+            return false;
+        }
+
+        return true;
+    }
+
     $rootScope.isPopUp = !$rootScope.isWebView && !IF_HIDDEN_FIELDS;
     $rootScope.isHiddenFields = IF_HIDDEN_FIELDS;
     $rootScope.loadingShow = function () {
@@ -147,14 +157,6 @@ angular.module('rifiuti', [
         });
     };
 
-
-    var setGlobalSettings = function() {
-
-
-    }
-
-
-    console.log('app check1!!!!!!');
     $rootScope.showAlert = function(link) {
         var alertPopup = $ionicPopup.alert({
             title: $filter('translate')('warning'),

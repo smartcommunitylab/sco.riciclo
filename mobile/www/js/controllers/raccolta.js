@@ -65,7 +65,7 @@ angular.module('rifiuti.controllers.raccolta', [])
   
 })
   
-.controller('PDRCtrl', function ($scope, $rootScope, $timeout, Raccolta, $location, $stateParams, Utili, DataManager, uiGmapIsReady, LoaderService) {
+.controller('PDRCtrl', function ($scope, $rootScope, $timeout, Raccolta, $location, $stateParams, $http, Utili, DataManager, uiGmapIsReady, LoaderService) {
 
 
   var mapCenter = {
@@ -75,11 +75,13 @@ angular.module('rifiuti.controllers.raccolta', [])
 
   var mapZoom = ZOOM;
 
-  $http.get('https://maps.google.it').success(function (data) {
-            //LoaderService.showToast('accesso!');
-        }).error(function (data, status) {
-            LoaderService.showToast("map_connection_toast");
-        });
+  if(!$rootScope.isWebView){
+     $http.get('https://maps.google.it').success(function (data) {
+                //LoaderService.showToast('accesso!');
+            }).error(function (data, status) {
+                LoaderService.showToast("map_connection_toast");
+            });
+  }
 
   $scope.profile = null;
   
