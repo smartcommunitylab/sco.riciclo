@@ -160,7 +160,7 @@ angular.module('rifiuti.services.rifiuti', [])
           if (aree.indexOf(data[i].area)>=0) {
             var copy = null;
             for(var j = 0; j < aree.length; j++) {
-              if (aree[j] in data[i].colore) {
+              if (!!data[i].colore && aree[j] in data[i].colore) {
                 copy = angular.copy(data[i]);
                 copy.colore = data[i].colore[aree[j]];
                 break;
