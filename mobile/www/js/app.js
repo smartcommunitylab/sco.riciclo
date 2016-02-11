@@ -137,7 +137,7 @@ angular.module('rifiuti', [
 .run(function ($ionicPlatform, $rootScope, $ionicNavBarDelegate, $ionicHistory, $translate, $ionicPopup, $filter, $state, Profili, Utili, GeoLocate, $cordovaSplashscreen, $ionicLoading, $ionicConfig, DataManager) {
     $rootScope.version = VERSION;
 
-    $rootScope.isWebView = ionic.Platform.isWebView();
+    //$rootScope.isWebView = !isPhone();
     $rootScope.isPopUp = !$rootScope.isWebView && !IF_HIDDEN_FIELDS;
     $rootScope.isHiddenFields = IF_HIDDEN_FIELDS;
     $rootScope.loadingShow = function () {
@@ -145,6 +145,18 @@ angular.module('rifiuti', [
             template: '<ion-spinner></ion-spinner>'
         });
     };
+
+    $rootScope.isWebView = function(){
+        if(ionic.Platform.isIPad() ||
+           ionic.Platform.isIOS() ||
+           ionic.Platform.isAndroid() ||
+           ionic.Platform.isEdge()){
+
+            return false;
+        }
+
+        return true;
+    }
 
     $rootScope.showAlert = function(link) {
         var alertPopup = $ionicPopup.alert({
