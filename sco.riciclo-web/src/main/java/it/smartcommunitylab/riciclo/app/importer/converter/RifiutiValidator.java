@@ -113,7 +113,7 @@ public class RifiutiValidator {
 		}
 		
 		for (TipologiaProfilo profilo: rifiuti.getTipologiaProfilo()) {
-			if (!tipologiaUtenza.contains(profilo.getTipologiaUtenza())) {
+			if (!tipologiaUtenza.contains(profilo.getTipologiaUtenza().toLowerCase())) {
 				String s = "Tipologia Utenza <" + profilo.getTipologiaUtenza() + "> not found for " + profilo;
 				problems.add(s);				
 			}
@@ -126,7 +126,7 @@ public class RifiutiValidator {
 			}
 			
 			for (UtenzaArea ua : puntoRaccolta.getUtenzaArea()) {
-				if (!tipologiaUtenza.contains(ua.getTipologiaUtenza())) {
+				if (!tipologiaUtenza.contains(ua.getTipologiaUtenza().toLowerCase())) {
 					String s = "Tipologia Utenza <" + ua.getTipologiaUtenza() + "> not found for " + puntoRaccolta;
 					problems.add(s);
 				}
@@ -172,7 +172,7 @@ public class RifiutiValidator {
 				String s = "Tipologia Punto Raccolta <" + raccolta.getTipologiaPuntoRaccolta() + "> not found for " + raccolta;
 				problems.add(s);				
 			}
-			if(!tipologiaUtenza.contains(raccolta.getTipologiaUtenza())) {
+			if(!tipologiaUtenza.contains(raccolta.getTipologiaUtenza().toLowerCase())) {
 				String s = "Tipologia Utenza <" + raccolta.getTipologiaUtenza() + "> not found for " + raccolta;
 				problems.add(s);				
 			}	
@@ -196,7 +196,7 @@ public class RifiutiValidator {
 		}
 		
 		for (Riciclabolario riciclabolario: rifiuti.getRiciclabolario()) {
-			if(!tipologiaUtenza.contains(riciclabolario.getTipologiaUtenza())) {
+			if(!tipologiaUtenza.contains(riciclabolario.getTipologiaUtenza().toLowerCase())) {
 				String s = "Tipologia Utenza <" + riciclabolario.getTipologiaUtenza() + "> not found for " + riciclabolario;
 				problems.add(s);				
 			}		
