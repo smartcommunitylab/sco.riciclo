@@ -561,6 +561,7 @@ angular.module('rifiuti', [
 
     .state('app.aggProfilo', {
         url: "/aggProfilo",
+        cache: false,
         views: {
             'menuContent': {
                 templateUrl: "templates/modificaProfilo.html",
