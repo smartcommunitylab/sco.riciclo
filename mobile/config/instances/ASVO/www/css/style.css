@@ -91,17 +91,26 @@ body.platform-browser .scroll-bar-fade-out {
 }
 
 .navigation-drawer ion-list ion-item img {
-    width: 60%;
-    height: 60%;
+    width: 80%;
+    height: 80%;
+    margin-left: 10px;
 }
 
 .navigation-drawer ion-list.profiles-list ion-item {
     border: 0;
     padding: 0;
 }
+
 .navigation-drawer ion-list.profiles-list ion-item .row {
+    border-bottom: 1px;
+    border-bottom-color: white;
     padding: 0;
 }
+
+.col-name{
+    margin-left: 15px;
+}
+
 /* Bar and buttons */
 
 .bar-100r {
@@ -855,7 +864,7 @@ body.platform-browser .scroll-bar-fade-out {
 }
 
 .icon-menu {
-    font-size: 30px;
+    font-size: 22px;
     color: #ffffff;
 }
 
