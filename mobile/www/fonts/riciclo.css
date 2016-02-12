@@ -35,141 +35,187 @@
 	-moz-osx-font-smoothing: grayscale;
 }
 
-.riciclo-crm-outline:before {
-	content: "\e62c";
+
+.riciclo-bar-outline:before {
+    content: "\e900";
 }
-.riciclo-crz-outline:before {
-	content: "\e62d";
+.riciclo-bar:before {
+    content: "\e901";
 }
-.riciclo-domicilio-outline:before {
-	content: "\e625";
+.riciclo-caritas:before {
+    content: "\e902";
 }
-.riciclo-farmacia-outline:before {
-	content: "\e626";
+.riciclo-caritas-outline:before {
+    content: "\e903";
+}
+.riciclo-centro_autorizzato-02:before {
+    content: "\e904";
+}
+.riciclo-centro_autorizzato-outline:before {
+    content: "\e905";
+}
+.riciclo-ecobox:before {
+    content: "\e906";
+}
+.riciclo-ecobox-outline:before {
+    content: "\e907";
+}
+.riciclo-rup_medicinali:before {
+    content: "\e908";
+}
+.riciclo-rup_medicinali-outline:before {
+    content: "\e909";
+}
+.riciclo-rup_nocivi:before {
+    content: "\e90a";
+}
+.riciclo-rup_nocivi-outline:before {
+    content: "\e90b";
+}
+.riciclo-Rup_pile:before {
+    content: "\e90c";
+}
+.riciclo-Rup_pile-outline:before {
+    content: "\e90d";
+}
+.riciclo-servizio_richiesta:before {
+    content: "\e90e";
 }
 .riciclo-furgone-outline:before {
-	content: "\e627";
-}
-.riciclo-isola_ecologica-outline:before {
-	content: "\e628";
-}
-.riciclo-porta_a_porta-outline:before {
-	content: "\e629";
-}
-.riciclo-rivenditore-outline:before {
-	content: "\e62a";
-}
-.riciclo-stradale-outline:before {
-	content: "\e62b";
-}
-.riciclo-add:before {
-	content: "\e600";
-}
-.riciclo-calendar_list:before {
-	content: "\e601";
-}
-.riciclo-calendar_table:before {
-	content: "\e602";
-}
-.riciclo-camera:before {
-	content: "\e603";
-}
-.riciclo-contatti:before {
-	content: "\e604";
-}
-.riciclo-crm:before {
-	content: "\e605";
-}
-.riciclo-crz:before {
-	content: "\e606";
-}
-.riciclo-discard:before {
-	content: "\e607";
-}
-.riciclo-domicilio:before {
-	content: "\e608";
-}
-.riciclo-edit:before {
-	content: "\e609";
-}
-.riciclo-email:before {
-	content: "\e60a";
-}
-.riciclo-farmacia:before {
-	content: "\e60b";
-}
-.riciclo-fax:before {
-	content: "\e60c";
+    content: "\e90f";
 }
 .riciclo-furgone:before {
-	content: "\e60d";
+    content: "\e910";
+}
+.riciclo-calendar_list:before {
+    content: "\e911";
+}
+.riciclo-add:before {
+    content: "\e912";
+}
+.riciclo-calendar_table:before {
+    content: "\e913";
+}
+.riciclo-camera:before {
+    content: "\e914";
+}
+.riciclo-contatti:before {
+    content: "\e915";
+}
+.riciclo-crm-outline:before {
+    content: "\e916";
+}
+.riciclo-crm:before {
+    content: "\e917";
+}
+.riciclo-crz-outline:before {
+    content: "\e918";
+}
+.riciclo-crz:before {
+    content: "\e919";
+}
+.riciclo-discard:before {
+    content: "\e91a";
+}
+.riciclo-domicilio-outline:before {
+    content: "\e91b";
+}
+.riciclo-domicilio:before {
+    content: "\e91c";
+}
+.riciclo-edit:before {
+    content: "\e91d";
+}
+.riciclo-email:before {
+    content: "\e91e";
+}
+.riciclo-farmacia-outline:before {
+    content: "\e91f";
+}
+.riciclo-farmacia:before {
+    content: "\e920";
+}
+.riciclo-fax:before {
+    content: "\e921";
 }
 .riciclo-gestione_profili:before {
-	content: "\e60e";
+    content: "\e922";
 }
 .riciclo-home:before {
-	content: "\e60f";
+    content: "\e923";
 }
 .riciclo-impostazioni:before {
-	content: "\e610";
+    content: "\e924";
 }
 .riciclo-info:before {
-	content: "\e611";
+    content: "\e925";
+}
+.riciclo-isola_ecologica-outline:before {
+    content: "\e926";
 }
 .riciclo-isola_ecologica:before {
-	content: "\e612";
+    content: "\e927";
 }
 .riciclo-lista:before {
-	content: "\e613";
+    content: "\e928";
 }
 .riciclo-location:before {
-	content: "\e614";
+    content: "\e929";
 }
 .riciclo-map:before {
-	content: "\e615";
+    content: "\e92a";
 }
 .riciclo-more_info:before {
-	content: "\e616";
+    content: "\e92b";
 }
 .riciclo-note:before {
-	content: "\e617";
+    content: "\e92c";
 }
 .riciclo-orari:before {
-	content: "\e618";
+    content: "\e92d";
 }
 .riciclo-pec:before {
-	content: "\e619";
+    content: "\e92e";
+}
+.riciclo-porta_a_porta-outline:before {
+    content: "\e92f";
 }
 .riciclo-porta_a_porta:before {
-	content: "\e61a";
+    content: "\e930";
 }
 .riciclo-punti_di_raccolta:before {
-	content: "\e61b";
+    content: "\e931";
+}
+.riciclo-rivenditore-outline:before {
+    content: "\e932";
 }
 .riciclo-rivenditore:before {
-	content: "\e61c";
+    content: "\e933";
 }
 .riciclo-save:before {
-	content: "\e61d";
+    content: "\e934";
 }
 .riciclo-segnala:before {
-	content: "\e61e";
+    content: "\e935";
+}
+.riciclo-stradale-outline:before {
+    content: "\e936";
 }
 .riciclo-stradale:before {
-	content: "\e61f";
+    content: "\e937";
 }
 .riciclo-telephone:before {
-	content: "\e620";
+    content: "\e938";
 }
 .riciclo-tipi_raccolta:before {
-	content: "\e621";
+    content: "\e939";
 }
 .riciclo-today:before {
-	content: "\e622";
+    content: "\e93a";
 }
 .riciclo-tutorial:before {
-	content: "\e623";
+    content: "\e93b";
 }
 .riciclo-website:before {
-	content: "\e624";
+    content: "\e93c";
 }
