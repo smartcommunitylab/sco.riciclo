@@ -203,7 +203,8 @@ var tipoProfiloApp = angular.module('tipo-profilo', ['DataService']).controller(
 				element.nome[$scope.language] = $scope.fNome;
 				element.descrizione[$scope.language] = $scope.fDescrizione;
 				element.tipologiaUtenza = $scope.selectedTipologiaUtenza.objectId;
-				var url = "api/tipologia/profilo/" + $scope.profile.appInfo.ownerId + "/" + element.objectId + "?draft=" + $scope.draft;
+				var url = "api/tipologia/profilo/" + $scope.profile.appInfo.ownerId + "/" + 
+				encodeURIComponent(element.objectId) + "/?draft=" + $scope.draft;
 				$http.put(url, element, {headers: {'X-ACCESS-TOKEN': $scope.profile.appInfo.token}}).then(
 				function(response) {
 			    // this callback will be called asynchronously
@@ -231,7 +232,8 @@ var tipoProfiloApp = angular.module('tipo-profilo', ['DataService']).controller(
 		if(index >= 0) {
 			var element = $scope.tipoProfiloList[index];
 			if(element != null) {
-				var url = "api/tipologia/profilo/" + $scope.profile.appInfo.ownerId + "/" + element.objectId + "?draft=" + $scope.draft;
+				var url = "api/tipologia/profilo/" + $scope.profile.appInfo.ownerId + "/" + 
+				encodeURIComponent(element.objectId) + "/?draft=" + $scope.draft;
 				$http.delete(url, {headers: {'X-ACCESS-TOKEN': $scope.profile.appInfo.token}}).then(
 				function(response) {
 					// this callback will be called asynchronously

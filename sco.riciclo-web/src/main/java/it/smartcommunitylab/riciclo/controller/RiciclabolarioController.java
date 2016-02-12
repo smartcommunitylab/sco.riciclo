@@ -21,6 +21,7 @@ import it.smartcommunitylab.riciclo.model.Riciclabolario;
 import it.smartcommunitylab.riciclo.storage.AppSetup;
 import it.smartcommunitylab.riciclo.storage.RepositoryManager;
 
+import java.net.URLDecoder;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
@@ -117,7 +118,7 @@ public class RiciclabolarioController {
 		if(!Utils.validateAPIRequest(request, appSetup, draft, storage)) {
 			throw new UnauthorizedException("Unauthorized Exception: token not valid");
 		}
-		storage.removeRiciclabolario(ownerId, objectId, draft);
+		storage.removeRiciclabolario(ownerId, URLDecoder.decode(objectId, "UTF-8"), draft);
 	}
 
 	@RequestMapping(value="api/riciclabolario/{ownerId}", method=RequestMethod.DELETE)

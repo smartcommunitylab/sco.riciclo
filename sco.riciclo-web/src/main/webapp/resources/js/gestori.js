@@ -241,7 +241,8 @@ var gestoriCtrl = gestoriApp.controller('userCtrl', function($scope, $window, $h
 				element.geocoding[0] = parseFloat($scope.fLongitude);
 				element.geocoding[1] = parseFloat($scope.fLatitude);
 
-				var url = "api/gestore/" + $scope.profile.appInfo.ownerId + "/" + element.objectId + "?draft=" + $scope.draft;
+				var url = "api/gestore/" + $scope.profile.appInfo.ownerId + "/" + 
+				encodeURIComponent(element.objectId) + "/?draft=" + $scope.draft;
 				$http.put(url, element, {headers: {'X-ACCESS-TOKEN': $scope.profile.appInfo.token}}).then(
 				function(response) {
 			    // this callback will be called asynchronously
@@ -269,7 +270,8 @@ var gestoriCtrl = gestoriApp.controller('userCtrl', function($scope, $window, $h
 		if(index >= 0) {
 			var element = $scope.gestoreList[index];
 			if(element != null) {
-				var url = "api/gestore/" + $scope.profile.appInfo.ownerId + "/" + element.objectId + "?draft=" + $scope.draft;
+				var url = "api/gestore/" + $scope.profile.appInfo.ownerId + "/" + 
+				encodeURIComponent(element.objectId) + "/?draft=" + $scope.draft;
 				$http.delete(url, {headers: {'X-ACCESS-TOKEN': $scope.profile.appInfo.token}}).then(
 				function(response) {
 					// this callback will be called asynchronously

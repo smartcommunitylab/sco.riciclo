@@ -352,7 +352,8 @@ var raccoltaCtrl = raccoltaApp.controller('userCtrl', function($scope, $http, $q
 				}
 				element.infoRaccolta[$scope.language] = $scope.infoRaccolta;
 
-				var url = "api/raccolta/" + $scope.profile.appInfo.ownerId + "/" + element.objectId + "?draft=" + $scope.draft;
+				var url = "api/raccolta/" + $scope.profile.appInfo.ownerId + "/" + 
+				encodeURIComponent(element.objectId) + "/?draft=" + $scope.draft;
 				$http.put(url, element, {headers: {'X-ACCESS-TOKEN': $scope.profile.appInfo.token}}).then(
 				function(response) {
 					// this callback will be called asynchronously
@@ -380,7 +381,8 @@ var raccoltaCtrl = raccoltaApp.controller('userCtrl', function($scope, $http, $q
 		if(index >= 0) {
 			var element = $scope.raccoltaList[index];
 			if(element != null) {
-				var url = "api/raccolta/" + $scope.profile.appInfo.ownerId + "/" + element.objectId + "?draft=" + $scope.draft;
+				var url = "api/raccolta/" + $scope.profile.appInfo.ownerId + "/" + 
+				encodeURIComponent(element.objectId) + "/?draft=" + $scope.draft;
 				$http.delete(url, {headers: {'X-ACCESS-TOKEN': $scope.profile.appInfo.token}}).then(
 				function(response) {
 					// this callback will be called asynchronously

@@ -248,7 +248,8 @@ var istituzioniCtrl = istituzioniApp.controller('userCtrl', function($scope, $wi
 				element.geocoding[0] = parseFloat($scope.fLongitude);
 				element.geocoding[1] = parseFloat($scope.fLatitude);
 
-				var url = "api/istituzione/" + $scope.profile.appInfo.ownerId + "/" + element.objectId + "?draft=" + $scope.draft;
+				var url = "api/istituzione/" + $scope.profile.appInfo.ownerId + "/" + 
+				encodeURIComponent(element.objectId) + "/?draft=" + $scope.draft;
 				$http.put(url, element, {headers: {'X-ACCESS-TOKEN': $scope.profile.appInfo.token}}).then(
 				function(response) {
 			    // this callback will be called asynchronously
@@ -276,7 +277,8 @@ var istituzioniCtrl = istituzioniApp.controller('userCtrl', function($scope, $wi
 		if(index >= 0) {
 			var element = $scope.istituzioneList[index];
 			if(element != null) {
-				var url = "api/istituzione/" + $scope.profile.appInfo.ownerId + "/" + element.objectId + "?draft=" + $scope.draft;
+				var url = "api/istituzione/" + $scope.profile.appInfo.ownerId + "/" + 
+				encodeURIComponent(element.objectId) + "/?draft=" + $scope.draft;
 				$http.delete(url, {headers: {'X-ACCESS-TOKEN': $scope.profile.appInfo.token}}).then(
 				function(response) {
 					// this callback will be called asynchronously

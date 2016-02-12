@@ -218,8 +218,9 @@ var tipoPuntoApp = angular.module('tipo-punto', ['DataService']).controller('use
 				element.info[$scope.language] = $scope.fInfo;
 				element.icona = $scope.fIcona;
 				element.type = $scope.fType;
-				var url = "api/tipologia/puntoraccolta/" + $scope.profile.appInfo.ownerId + "/" + element.objectId + "?draft=" + $scope.draft;
-				$http.put(url, element, {headers: {'X-ACCESS-TOKEN': $scope.profile.appInfo.token}}).then(
+				var url = "api/tipologia/puntoraccolta/" + $scope.profile.appInfo.ownerId + "/" 
+				+ encodeURIComponent(element.objectId) + "/?draft=" + $scope.draft;
+				$http.put(encodeURI(url), element, {headers: {'X-ACCESS-TOKEN': $scope.profile.appInfo.token}}).then(
 				function(response) {
 			    // this callback will be called asynchronously
 			    // when the response is available
@@ -246,8 +247,9 @@ var tipoPuntoApp = angular.module('tipo-punto', ['DataService']).controller('use
 		if(index >= 0) {
 			var element = $scope.tipoPuntoRaccoltaList[index];
 			if(element != null) {
-				var url = "api/tipologia/puntoraccolta/" + $scope.profile.appInfo.ownerId + "/" + element.objectId + "?draft=" + $scope.draft;
-				$http.delete(url, {headers: {'X-ACCESS-TOKEN': $scope.profile.appInfo.token}}).then(
+				var url = "api/tipologia/puntoraccolta/" + $scope.profile.appInfo.ownerId + "/" 
+				+ encodeURIComponent(element.objectId) + "/?draft=" + $scope.draft;
+				$http.delete(encodeURI(url), {headers: {'X-ACCESS-TOKEN': $scope.profile.appInfo.token}}).then(
 				function(response) {
 					// this callback will be called asynchronously
 					// when the response is available

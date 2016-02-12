@@ -285,7 +285,8 @@ var calendariraccoltaCtrl = calendariraccoltaApp.controller('userCtrl', function
 				element.tipologiaUtenza = $scope.selectedTipologiaUtenza.objectId;
 				element.tipologiaPuntoRaccolta = $scope.selectedTipologiaPuntoRaccolta.objectId;
 
-				var url = "api/calraccolta/" + $scope.profile.appInfo.ownerId + "/" + element.objectId + "?draft=" + $scope.draft;
+				var url = "api/calraccolta/" + $scope.profile.appInfo.ownerId + "/" + 
+				encodeURIComponent(element.objectId) + "/?draft=" + $scope.draft;
 				$http.put(url, element, {headers: {'X-ACCESS-TOKEN': $scope.profile.appInfo.token}}).then(
 				function(response) {
 					// this callback will be called asynchronously
@@ -314,7 +315,8 @@ var calendariraccoltaCtrl = calendariraccoltaApp.controller('userCtrl', function
 		if(index >= 0) {
 			var element = $scope.calendarioRaccoltaList[index];
 			if(element != null) {
-				var url = "api/calraccolta/" + $scope.profile.appInfo.ownerId + "/" + element.objectId + "?draft=" + $scope.draft;
+				var url = "api/calraccolta/" + $scope.profile.appInfo.ownerId + "/" + 
+				encodeURIComponent(element.objectId) + "/?draft=" + $scope.draft;
 				$http.delete(url, {headers: {'X-ACCESS-TOKEN': $scope.profile.appInfo.token}}).then(
 				function(response) {
 					// this callback will be called asynchronously
@@ -344,7 +346,8 @@ var calendariraccoltaCtrl = calendariraccoltaApp.controller('userCtrl', function
 		console.log("deleteTimetable:" + index);
 		var relation = $scope.findByObjectId($scope.calendarioRaccoltaList, $scope.fId);
 		if(relation != null) {
-			var url = "api/calraccolta/" + $scope.profile.appInfo.ownerId + "/" + relation.objectId + "/orario/" + index + "?draft=" + $scope.draft;
+			var url = "api/calraccolta/" + $scope.profile.appInfo.ownerId + "/" + 
+			encodeURIComponent(relation.objectId) + "/orario/" + index + "?draft=" + $scope.draft;
 			$http.delete(url, {headers: {'X-ACCESS-TOKEN': $scope.profile.appInfo.token}}).then(
 			function(response) {
 				$scope.status = response.status;
@@ -394,7 +397,8 @@ var calendariraccoltaCtrl = calendariraccoltaApp.controller('userCtrl', function
 			element.note['it'] = $scope.timetableDateNotes['it'];
 			element.note['en'] = $scope.timetableDateNotes['en'];
 
-			var url = "api/calraccolta/" + $scope.profile.appInfo.ownerId + "/" + relation.objectId + "/orario?draft=" + $scope.draft;
+			var url = "api/calraccolta/" + $scope.profile.appInfo.ownerId + "/" + 
+			encodeURIComponent(relation.objectId) + "/orario?draft=" + $scope.draft;
 			$http.post(url, element, {headers: {'X-ACCESS-TOKEN': $scope.profile.appInfo.token}}).then(
 			function(response) {
 		  	$scope.status = response.status;

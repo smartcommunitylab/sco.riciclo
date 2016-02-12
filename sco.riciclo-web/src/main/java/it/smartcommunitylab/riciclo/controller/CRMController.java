@@ -22,6 +22,7 @@ import it.smartcommunitylab.riciclo.model.OrarioApertura;
 import it.smartcommunitylab.riciclo.storage.AppSetup;
 import it.smartcommunitylab.riciclo.storage.RepositoryManager;
 
+import java.net.URLDecoder;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Collections;
@@ -98,7 +99,7 @@ public class CRMController {
 		if(!Utils.validateAPIRequest(request, appSetup, draft, storage)) {
 			throw new UnauthorizedException("Unauthorized Exception: token not valid");
 		}
-		crm.setObjectId(objectId);
+		crm.setObjectId(URLDecoder.decode(objectId, "UTF-8"));
 		crm.setOwnerId(ownerId);
 		storage.updateCRM(crm, draft);
 	}
@@ -110,7 +111,7 @@ public class CRMController {
 		if(!Utils.validateAPIRequest(request, appSetup, draft, storage)) {
 			throw new UnauthorizedException("Unauthorized Exception: token not valid");
 		}
-		storage.removeCRM(ownerId, objectId, draft);
+		storage.removeCRM(ownerId, URLDecoder.decode(objectId, "UTF-8"), draft);
 	}
 
 	@RequestMapping(value="api/crm/{ownerId}/{objectId}/orario", method=RequestMethod.POST)
@@ -121,7 +122,7 @@ public class CRMController {
 		if(!Utils.validateAPIRequest(request, appSetup, draft, storage)) {
 			throw new UnauthorizedException("Unauthorized Exception: token not valid");
 		}
-		storage.updateCRMAddOrario(ownerId, objectId, orario, draft);
+		storage.updateCRMAddOrario(ownerId, URLDecoder.decode(objectId, "UTF-8"), orario, draft);
 	}
 
 	@RequestMapping(value="api/crm/{ownerId}/{objectId}/orario/{position}", method=RequestMethod.DELETE)
@@ -132,7 +133,7 @@ public class CRMController {
 		if(!Utils.validateAPIRequest(request, appSetup, draft, storage)) {
 			throw new UnauthorizedException("Unauthorized Exception: token not valid");
 		}
-		storage.updateCRMRemoveOrario(ownerId, objectId, position, draft);
+		storage.updateCRMRemoveOrario(ownerId, URLDecoder.decode(objectId, "UTF-8"), position, draft);
 	}
 
 	@ExceptionHandler(Exception.class)

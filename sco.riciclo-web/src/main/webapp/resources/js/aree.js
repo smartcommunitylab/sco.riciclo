@@ -415,7 +415,8 @@ var areeCtrl = areeApp.controller('userCtrl', function($scope, $http, $q, DataSe
 				}
 				element.utenza = $scope.getTipologiaUtenzaSelected();
 
-				var url = "api/area/" + $scope.profile.appInfo.ownerId + "/" + element.objectId + "?draft=" + $scope.draft;
+				var url = "api/area/" + $scope.profile.appInfo.ownerId + "/" + 
+				encodeURIComponent(element.objectId) + "/?draft=" + $scope.draft;
 				$http.put(url, element, {headers: {'X-ACCESS-TOKEN': $scope.profile.appInfo.token}}).then(
 				function(response) {
 			    // this callback will be called asynchronously
@@ -445,7 +446,8 @@ var areeCtrl = areeApp.controller('userCtrl', function($scope, $http, $q, DataSe
 		if(index >= 0) {
 			var element = $scope.areaList[index];
 			if(element != null) {
-				var url = "api/area/" + $scope.profile.appInfo.ownerId + "/" + element.objectId + "?draft=" + $scope.draft;
+				var url = "api/area/" + $scope.profile.appInfo.ownerId + "/" + 
+				encodeURIComponent(element.objectId) + "/?draft=" + $scope.draft;
 				$http.delete(url, {headers: {'X-ACCESS-TOKEN': $scope.profile.appInfo.token}}).then(
 				function(response) {
 					// this callback will be called asynchronously

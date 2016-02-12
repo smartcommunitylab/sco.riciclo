@@ -21,6 +21,7 @@ import it.smartcommunitylab.riciclo.model.Istituzione;
 import it.smartcommunitylab.riciclo.storage.AppSetup;
 import it.smartcommunitylab.riciclo.storage.RepositoryManager;
 
+import java.net.URLDecoder;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
@@ -82,7 +83,7 @@ public class IstituzioneController {
 		if(!Utils.validateAPIRequest(request, appSetup, draft, storage)) {
 			throw new UnauthorizedException("Unauthorized Exception: token not valid");
 		}
-		istituzione.setObjectId(objectId);
+		istituzione.setObjectId(URLDecoder.decode(objectId, "UTF-8"));
 		istituzione.setOwnerId(ownerId);
 		storage.updateIstituzione(istituzione, draft);
 	}
@@ -94,7 +95,7 @@ public class IstituzioneController {
 		if(!Utils.validateAPIRequest(request, appSetup, draft, storage)) {
 			throw new UnauthorizedException("Unauthorized Exception: token not valid");
 		}
-		storage.removeIstituzione(ownerId, objectId, draft);
+		storage.removeIstituzione(ownerId, URLDecoder.decode(objectId, "UTF-8"), draft);
 	}
 
 	@ExceptionHandler(Exception.class)
