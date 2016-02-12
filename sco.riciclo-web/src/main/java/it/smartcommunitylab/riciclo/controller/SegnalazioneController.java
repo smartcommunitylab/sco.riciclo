@@ -21,6 +21,7 @@ import it.smartcommunitylab.riciclo.model.Segnalazione;
 import it.smartcommunitylab.riciclo.storage.AppSetup;
 import it.smartcommunitylab.riciclo.storage.RepositoryManager;
 
+import java.net.URLDecoder;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
@@ -82,7 +83,7 @@ public class SegnalazioneController {
 		if(!Utils.validateAPIRequest(request, appSetup, draft, storage)) {
 			throw new UnauthorizedException("Unauthorized Exception: token not valid");
 		}
-		segnalazione.setObjectId(objectId);
+		segnalazione.setObjectId(URLDecoder.decode(objectId, "UTF-8"));
 		segnalazione.setOwnerId(ownerId);
 		storage.updateSegnalazione(segnalazione, draft);
 	}
@@ -94,7 +95,7 @@ public class SegnalazioneController {
 		if(!Utils.validateAPIRequest(request, appSetup, draft, storage)) {
 			throw new UnauthorizedException("Unauthorized Exception: token not valid");
 		}
-		storage.removeSegnalazione(ownerId, objectId, draft);
+		storage.removeSegnalazione(ownerId, URLDecoder.decode(objectId, "UTF-8"), draft);
 	}
 
 	@ExceptionHandler(Exception.class)

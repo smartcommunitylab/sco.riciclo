@@ -25,6 +25,7 @@ import it.smartcommunitylab.riciclo.model.TipologiaRaccolta;
 import it.smartcommunitylab.riciclo.storage.AppSetup;
 import it.smartcommunitylab.riciclo.storage.RepositoryManager;
 
+import java.net.URLDecoder;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashSet;
@@ -119,7 +120,7 @@ public class TipologieController {
 		if(!Utils.validateAPIRequest(request, appSetup, draft, storage)) {
 			throw new UnauthorizedException("Unauthorized Exception: token not valid");
 		}
-		data.setObjectId(objectId);
+		data.setObjectId(URLDecoder.decode(objectId, "UTF-8"));
 		data.setOwnerId(ownerId);
 		storage.updateTipologiaPuntoRaccolta(data, draft);
 	}
@@ -131,7 +132,7 @@ public class TipologieController {
 		if(!Utils.validateAPIRequest(request, appSetup, draft, storage)) {
 			throw new UnauthorizedException("Unauthorized Exception: token not valid");
 		}
-		storage.removeTipologiaPuntoRaccolta(ownerId, objectId, draft);
+		storage.removeTipologiaPuntoRaccolta(ownerId, URLDecoder.decode(objectId, "UTF-8"), draft);
 	}
 
 	@SuppressWarnings("unchecked")
@@ -167,7 +168,7 @@ public class TipologieController {
 		if(!Utils.validateAPIRequest(request, appSetup, draft, storage)) {
 			throw new UnauthorizedException("Unauthorized Exception: token not valid");
 		}
-		data.setObjectId(objectId);
+		data.setObjectId(URLDecoder.decode(objectId, "UTF-8"));
 		data.setOwnerId(ownerId);
 		storage.updateTipologiaProfilo(data, draft);
 	}
@@ -179,7 +180,7 @@ public class TipologieController {
 		if(!Utils.validateAPIRequest(request, appSetup, draft, storage)) {
 			throw new UnauthorizedException("Unauthorized Exception: token not valid");
 		}
-		storage.removeTipologiaProfilo(ownerId, objectId, draft);
+		storage.removeTipologiaProfilo(ownerId, URLDecoder.decode(objectId, "UTF-8"), draft);
 	}
 
 	@RequestMapping(value="api/tipologia/rifiuto/{ownerId}", method=RequestMethod.GET)

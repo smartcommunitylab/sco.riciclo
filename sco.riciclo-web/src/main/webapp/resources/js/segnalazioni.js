@@ -256,7 +256,8 @@ var segnalazioniCtrl = segnalazioniApp.controller('userCtrl', function($scope, $
 				element.email = $scope.email;
 				element.tipologia[$scope.language] = $scope.tipologia;
 
-				var url = "api/segnalazione/" + $scope.profile.appInfo.ownerId + "/" + element.objectId + "?draft=" + $scope.draft;
+				var url = "api/segnalazione/" + $scope.profile.appInfo.ownerId + "/" + 
+				encodeURIComponent(element.objectId) + "/?draft=" + $scope.draft;
 				$http.put(url, element, {headers: {'X-ACCESS-TOKEN': $scope.profile.appInfo.token}}).then(
 				function(response) {
 					// this callback will be called asynchronously
@@ -284,7 +285,8 @@ var segnalazioniCtrl = segnalazioniApp.controller('userCtrl', function($scope, $
 		if(index >= 0) {
 			var element = $scope.segnalazioneList[index];
 			if(element != null) {
-				var url = "api/segnalazione/" + $scope.profile.appInfo.ownerId + "/" + element.objectId + "?draft=" + $scope.draft;
+				var url = "api/segnalazione/" + $scope.profile.appInfo.ownerId + "/" + 
+				encodeURIComponent(element.objectId) + "/?draft=" + $scope.draft;
 				$http.delete(url, {headers: {'X-ACCESS-TOKEN': $scope.profile.appInfo.token}}).then(
 				function(response) {
 					// this callback will be called asynchronously

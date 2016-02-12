@@ -21,6 +21,7 @@ import it.smartcommunitylab.riciclo.model.Gestore;
 import it.smartcommunitylab.riciclo.storage.AppSetup;
 import it.smartcommunitylab.riciclo.storage.RepositoryManager;
 
+import java.net.URLDecoder;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
@@ -82,7 +83,7 @@ public class GestoreController {
 		if(!Utils.validateAPIRequest(request, appSetup, draft, storage)) {
 			throw new UnauthorizedException("Unauthorized Exception: token not valid");
 		}
-		gestore.setObjectId(objectId);
+		gestore.setObjectId(URLDecoder.decode(objectId, "UTF-8"));
 		gestore.setOwnerId(ownerId);
 		storage.updateGestore(gestore, draft);
 	}
@@ -94,7 +95,7 @@ public class GestoreController {
 		if(!Utils.validateAPIRequest(request, appSetup, draft, storage)) {
 			throw new UnauthorizedException("Unauthorized Exception: token not valid");
 		}
-		storage.removeGestore(ownerId, objectId, draft);
+		storage.removeGestore(ownerId, URLDecoder.decode(objectId, "UTF-8"), draft);
 	}
 
 	@ExceptionHandler(Exception.class)

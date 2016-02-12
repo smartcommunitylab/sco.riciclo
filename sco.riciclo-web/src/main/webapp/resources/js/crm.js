@@ -283,7 +283,8 @@ var crmCtrl = crmApp.controller('userCtrl', function($scope, $window, $http, Dat
 				element.geocoding[1] = parseFloat($scope.fLatitude);
 				element.caratteristiche = $scope.getCaratteristiche();
 
-				var url = "api/crm/" + $scope.profile.appInfo.ownerId + "/" + element.objectId + "?draft=" + $scope.draft;
+				var url = "api/crm/" + $scope.profile.appInfo.ownerId + "/" + 
+				encodeURIComponent(element.objectId) + "/?draft=" + $scope.draft;
 				$http.put(url, element, {headers: {'X-ACCESS-TOKEN': $scope.profile.appInfo.token}}).then(
 				function(response) {
 			    // this callback will be called asynchronously
@@ -315,7 +316,8 @@ var crmCtrl = crmApp.controller('userCtrl', function($scope, $window, $http, Dat
 		if(index >= 0) {
 			var element = $scope.crmList[index];
 			if(element != null) {
-				var url = "api/crm/" + $scope.profile.appInfo.ownerId + "/" + element.objectId + "?draft=" + $scope.draft;
+				var url = "api/crm/" + $scope.profile.appInfo.ownerId + "/" + 
+				encodeURIComponent(element.objectId) + "/?draft=" + $scope.draft;
 				$http.delete(url, {headers: {'X-ACCESS-TOKEN': $scope.profile.appInfo.token}}).then(
 				function(response) {
 					// this callback will be called asynchronously
@@ -345,7 +347,8 @@ var crmCtrl = crmApp.controller('userCtrl', function($scope, $window, $http, Dat
 		console.log("deleteTimetable:" + index);
 		var crm = $scope.findByObjectId($scope.crmList, $scope.fId);
 		if(crm != null) {
-			var url = "api/crm/" + $scope.profile.appInfo.ownerId + "/" + crm.objectId + "/orario/" + index + "?draft=" + $scope.draft;
+			var url = "api/crm/" + $scope.profile.appInfo.ownerId + "/" + 
+			encodeURIComponent(crm.objectId) + "/orario/" + index + "?draft=" + $scope.draft;
 			$http.delete(url, {headers: {'X-ACCESS-TOKEN': $scope.profile.appInfo.token}}).then(
 			function(response) {
 				$scope.status = response.status;
@@ -395,7 +398,8 @@ var crmCtrl = crmApp.controller('userCtrl', function($scope, $window, $http, Dat
 			element.note['it'] = $scope.timetableDateNotes['it'];
 			element.note['en'] = $scope.timetableDateNotes['en'];
 
-			var url = "api/crm/" + $scope.profile.appInfo.ownerId + "/" + crm.objectId + "/orario?draft=" + $scope.draft;
+			var url = "api/crm/" + $scope.profile.appInfo.ownerId + "/" + 
+			encodeURIComponent(crm.objectId) + "/orario?draft=" + $scope.draft;
 			$http.post(url, element, {headers: {'X-ACCESS-TOKEN': $scope.profile.appInfo.token}}).then(
 			function(response) {
 		  	$scope.status = response.status;

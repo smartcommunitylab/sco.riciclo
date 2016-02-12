@@ -171,7 +171,8 @@ var rifiutiApp = angular.module('rifiuti', ['DataService']).controller('userCtrl
 			var element = $scope.findByObjectId($scope.rifiuti, $scope.fId);
 			if(element != null) {
 				element.nome[$scope.language] = $scope.fName;
-				var url = "api/rifiuto/" + $scope.profile.appInfo.ownerId + "/" + element.objectId + "?draft=" + $scope.draft;
+				var url = "api/rifiuto/" + $scope.profile.appInfo.ownerId + "/" + 
+				encodeURIComponent(element.objectId) + "/?draft=" + $scope.draft;
 				$http.put(url, element, {headers: {'X-ACCESS-TOKEN': $scope.profile.appInfo.token}}).then(
 				function(response) {
 			    // this callback will be called asynchronously
@@ -199,7 +200,8 @@ var rifiutiApp = angular.module('rifiuti', ['DataService']).controller('userCtrl
 		if(index >= 0) {
 			var element = $scope.rifiuti[index];
 			if(element != null) {
-				var url = "api/rifiuto/" + $scope.profile.appInfo.ownerId + "/" + element.objectId + "?draft=" + $scope.draft;
+				var url = "api/rifiuto/" + $scope.profile.appInfo.ownerId + "/" + 
+				encodeURIComponent(element.objectId) + "/?draft=" + $scope.draft;
 				$http.delete(url, {headers: {'X-ACCESS-TOKEN': $scope.profile.appInfo.token}}).then(
 				function(response) {
 					// this callback will be called asynchronously

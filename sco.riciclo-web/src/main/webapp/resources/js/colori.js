@@ -171,7 +171,8 @@ var coloriApp = angular.module('colori', ['DataService', 'colorpicker.module']).
 			var element = $scope.findById($scope.coloreList, $scope.fNome);
 			if(element != null) {
 				element.codice = $scope.fCodice;
-				var url = "api/colore/" + $scope.profile.appInfo.ownerId + "/" + element.nome + "?draft=" + $scope.draft;
+				var url = "api/colore/" + $scope.profile.appInfo.ownerId + "/" 
+				+ encodeURIComponent(element.nome) + "/?draft=" + $scope.draft;
 				$http.put(url, element, {headers: {'X-ACCESS-TOKEN': $scope.profile.appInfo.token}}).then(
 				function(response) {
 			    // this callback will be called asynchronously
@@ -199,7 +200,8 @@ var coloriApp = angular.module('colori', ['DataService', 'colorpicker.module']).
 		if(index >= 0) {
 			var element = $scope.coloreList[index];
 			if(element != null) {
-				var url = "api/colore/" + $scope.profile.appInfo.ownerId + "/" + element.nome + "?draft=" + $scope.draft;
+				var url = "api/colore/" + $scope.profile.appInfo.ownerId + "/" 
+				+ encodeURIComponent(element.nome) + "/?draft=" + $scope.draft;
 				$http.delete(url, {headers: {'X-ACCESS-TOKEN': $scope.profile.appInfo.token}}).then(
 				function(response) {
 					// this callback will be called asynchronously

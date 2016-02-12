@@ -21,6 +21,7 @@ import it.smartcommunitylab.riciclo.model.Area;
 import it.smartcommunitylab.riciclo.storage.AppSetup;
 import it.smartcommunitylab.riciclo.storage.RepositoryManager;
 
+import java.net.URLDecoder;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
@@ -90,7 +91,7 @@ public class AreaController {
 		if(!Utils.validateAPIRequest(request, appSetup, draft, storage)) {
 			throw new UnauthorizedException("Unauthorized Exception: token not valid");
 		}
-		area.setObjectId(objectId);
+		area.setObjectId(URLDecoder.decode(objectId, "UTF-8"));
 		area.setOwnerId(ownerId);
 		storage.updateArea(area, draft);
 	}
@@ -102,7 +103,7 @@ public class AreaController {
 		if(!Utils.validateAPIRequest(request, appSetup, draft, storage)) {
 			throw new UnauthorizedException("Unauthorized Exception: token not valid");
 		}
-		storage.removeArea(ownerId, objectId, draft);
+		storage.removeArea(ownerId, URLDecoder.decode(objectId, "UTF-8"), draft);
 	}
 
 	@ExceptionHandler(Exception.class)

@@ -262,7 +262,8 @@ var riciclabolarioCtrl = riciclabolarioApp.controller('userCtrl', function($scop
 		if(index >= 0) {
 			var element = $scope.riciclabolario[index];
 			if(element != null) {
-				var url = "api/riciclabolario/" + $scope.profile.appInfo.ownerId + "/" + element.objectId + "?draft=" + $scope.draft;
+				var url = "api/riciclabolario/" + $scope.profile.appInfo.ownerId + "/" + 
+				encodeURIComponent(element.objectId) + "/?draft=" + $scope.draft;
 				$http.delete(url, {headers: {'X-ACCESS-TOKEN': $scope.profile.appInfo.token}}).then(
 				function(response) {
 					// this callback will be called asynchronously

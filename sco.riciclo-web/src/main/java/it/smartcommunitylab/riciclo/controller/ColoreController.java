@@ -21,6 +21,7 @@ import it.smartcommunitylab.riciclo.model.Colore;
 import it.smartcommunitylab.riciclo.storage.AppSetup;
 import it.smartcommunitylab.riciclo.storage.RepositoryManager;
 
+import java.net.URLDecoder;
 import java.util.List;
 import java.util.Map;
 
@@ -81,7 +82,7 @@ public class ColoreController {
 			throw new UnauthorizedException("Unauthorized Exception: token not valid");
 		}
 		colore.setOwnerId(ownerId);
-		colore.setNome(nome);
+		colore.setNome(URLDecoder.decode(nome, "UTF-8"));
 		storage.updateColore(colore, draft);
 	}
 
@@ -92,7 +93,7 @@ public class ColoreController {
 		if(!Utils.validateAPIRequest(request, appSetup, draft, storage)) {
 			throw new UnauthorizedException("Unauthorized Exception: token not valid");
 		}
-		storage.removeColore(ownerId, nome, draft);
+		storage.removeColore(ownerId, URLDecoder.decode(nome, "UTF-8"), draft);
 	}
 
 	@ExceptionHandler(Exception.class)

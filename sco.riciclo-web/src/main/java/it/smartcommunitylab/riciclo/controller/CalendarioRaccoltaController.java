@@ -22,6 +22,7 @@ import it.smartcommunitylab.riciclo.model.OrarioApertura;
 import it.smartcommunitylab.riciclo.storage.AppSetup;
 import it.smartcommunitylab.riciclo.storage.RepositoryManager;
 
+import java.net.URLDecoder;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
@@ -123,7 +124,7 @@ public class CalendarioRaccoltaController {
 		if(!Utils.validateAPIRequest(request, appSetup, draft, storage)) {
 			throw new UnauthorizedException("Unauthorized Exception: token not valid");
 		}
-		calendario.setObjectId(objectId);
+		calendario.setObjectId(URLDecoder.decode(objectId, "UTF-8"));
 		calendario.setOwnerId(ownerId);
 		storage.updateCalendarioRaccolta(calendario, draft);
 	}
@@ -137,7 +138,7 @@ public class CalendarioRaccoltaController {
 		if(!Utils.validateAPIRequest(request, appSetup, draft, storage)) {
 			throw new UnauthorizedException("Unauthorized Exception: token not valid");
 		}
-		storage.removeCalendarioRaccolta(ownerId, objectId, draft);
+		storage.removeCalendarioRaccolta(ownerId, URLDecoder.decode(objectId, "UTF-8"), draft);
 	}
 
 	@RequestMapping(value="api/calraccolta/{ownerId}", method=RequestMethod.DELETE)
@@ -160,7 +161,7 @@ public class CalendarioRaccoltaController {
 		if(!Utils.validateAPIRequest(request, appSetup, draft, storage)) {
 			throw new UnauthorizedException("Unauthorized Exception: token not valid");
 		}
-		storage.updateCalendarioRaccoltaAddOrario(ownerId, objectId, orario, draft);
+		storage.updateCalendarioRaccoltaAddOrario(ownerId, URLDecoder.decode(objectId, "UTF-8"), orario, draft);
 	}
 
 	@RequestMapping(value="api/calraccolta/{ownerId}/{objectId}/orario/{position}", method=RequestMethod.DELETE)
@@ -171,7 +172,7 @@ public class CalendarioRaccoltaController {
 		if(!Utils.validateAPIRequest(request, appSetup, draft, storage)) {
 			throw new UnauthorizedException("Unauthorized Exception: token not valid");
 		}
-		storage.updateCalendarioRaccoltaRemoveOrario(ownerId, objectId, position, draft);
+		storage.updateCalendarioRaccoltaRemoveOrario(ownerId, URLDecoder.decode(objectId, "UTF-8"), position, draft);
 	}
 	
 	@SuppressWarnings("unchecked")

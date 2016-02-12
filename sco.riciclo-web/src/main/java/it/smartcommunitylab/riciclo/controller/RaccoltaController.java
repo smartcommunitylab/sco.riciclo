@@ -23,6 +23,7 @@ import it.smartcommunitylab.riciclo.storage.AppSetup;
 import it.smartcommunitylab.riciclo.storage.DataSetInfo;
 import it.smartcommunitylab.riciclo.storage.RepositoryManager;
 
+import java.net.URLDecoder;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -120,7 +121,7 @@ public class RaccoltaController {
 		if(!Utils.validateAPIRequest(request, appSetup, draft, storage)) {
 			throw new UnauthorizedException("Unauthorized Exception: token not valid");
 		}
-		raccolta.setObjectId(objectId);
+		raccolta.setObjectId(URLDecoder.decode(objectId, "UTF-8"));
 		raccolta.setOwnerId(ownerId);
 		storage.updateRaccolta(raccolta, draft);
 		return raccolta;
@@ -133,7 +134,7 @@ public class RaccoltaController {
 		if(!Utils.validateAPIRequest(request, appSetup, draft, storage)) {
 			throw new UnauthorizedException("Unauthorized Exception: token not valid");
 		}
-		storage.removeRaccolta(ownerId, objectId, draft);
+		storage.removeRaccolta(ownerId, URLDecoder.decode(objectId, "UTF-8"), draft);
 	}
 
 	@ExceptionHandler(Exception.class)
