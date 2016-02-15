@@ -5,19 +5,19 @@
 },
 {
 	"valore": "Altro",
-	"immagine": "img/altro.png"
+	"immagine": "img/Altro.png"
 },
 {
 	"valore": "Batterie",
-	"immagine": "img/pile.png"
+	"immagine": "img/Pile.png"
 },
 {
 	"valore": "Carta",
-	"immagine": "img/carta.png"
+	"immagine": "img/Carta.png"
 },
 {
 	"valore": "Cartone",
-	"immagine": "img/cartone.png"
+	"immagine": "img/Cartone.png"
 },
 {
 	"valore": "Cartucce stampante - toner",
@@ -29,19 +29,19 @@
 },
 {
 	"valore": "Imballaggi in plastica",
-	"immagine": "img/imballaggi_plastica.png"
+	"immagine": "img/Imballaggi_plastica.png"
 },
 {
 	"valore": "Inerti",
-	"immagine": "img/inerti.png"
+	"immagine": "img/Inerti.png"
 },
 {
 	"valore": "Ingombranti",
-	"immagine": "img/ingombranti.png"
+	"immagine": "img/Ingombranti.png"
 },
 {
 	"valore": "Legno",
-	"immagine": "img/legno.png"
+	"immagine": "img/Legno.png"
 },
 {
 	"valore": "Medicinali",
@@ -49,35 +49,35 @@
 },
 {
 	"valore": "Neon",
-	"immagine": "img/neon.png"
+	"immagine": "img/Neon.png"
 },
 {
 	"valore": "Oggetti in metallo",
-	"immagine": "img/oggetti_metallo.png"
+	"immagine": "img/Oggetti_metallo.png"
 },
 {
 	"valore": "Oggetti in plastica",
-	"immagine": "img/oggetti_plastica.png"
+	"immagine": "img/Oggetti_plastica.png"
 },
 {
 	"valore": "Olio minerale",
-	"immagine": "img/olio_minerale.png"
+	"immagine": "img/Olio_minerale.png"
 },
 {
 	"valore": "Olio vegetale",
-	"immagine": "img/olio_vegetale.png"
+	"immagine": "img/Olio_vegetale.png"
 },
 {
 	"valore": "Pannolini - pannoloni",
-	"immagine": "img/pannolini_pannoloni.png"
+	"immagine": "img/Pannolini_pannoloni.png"
 },
 {
 	"valore": "Pile",
-	"immagine": "img/pile.png"
+	"immagine": "img/Pile.png"
 },
 {
 	"valore": "Pneumatici",
-	"immagine": "img/pneumatici.png"
+	"immagine": "img/Pneumatici.png"
 },
 {
 	"valore": "Raee",
@@ -89,7 +89,7 @@
 },
 {
 	"valore": "Tappi in sughero",
-	"immagine": "img/tappi_sughero.png"
+	"immagine": "img/Tappi_sughero.png"
 },
 {
 	"valore": "Tetrapak - carta poliaccoppiata",
@@ -97,19 +97,19 @@
 },
 {
 	"valore": "Tossici nocivi bonificati metallo",
-	"immagine": "img/tossici_nocivi_bonificati_metallo.png"
+	"immagine": "img/Tossici_nocivi_bonificati_metallo.png"
 },
 {
 	"valore": "Tossici nocivi bonificati plastica",
-	"immagine": "img/tossici_nocivi_bonificati_plastica.png"
+	"immagine": "img/Tossici_nocivi_bonificati_plastica.png"
 },
 {
 	"valore": "Tossici nocivi bonificati vetro",
-	"immagine": "img/tossici_nocivi_bonificati_vetro.png"
+	"immagine": "img/Tossici_nocivi_bonificati_vetro.png"
 },
 {
 	"valore": "Tossici nocivi non bonificati",
-	"immagine": "img/tossici_nocivi_non_bonificati.png"
+	"immagine": "img/Tossici_nocivi_non_bonificati.png"
 },
 {
 	"valore": "Umido",
@@ -117,7 +117,7 @@
 },
 {
 	"valore": "Verde - ramaglie",
-	"immagine": "img/verde_ramaglie.png"
+	"immagine": "img/Verde_ramaglie.png"
 },
 {
 	"valore": "Vetro",
