@@ -1,125 +1,126 @@
 [
-        {
-            "valore": "Abiti usati",
-            "immagine": "img/Abiti_usati.png"
-        },
-		{
-            "valore": "Altro",
-            "immagine": "img/Altro.png"
-        },
-		{
-            "valore": "Batterie",
-            "immagine": "img/Batterie.png"
-        },
-	    {
-            "valore": "Carta",
-            "immagine": "img/Carta.png"
-        },
-        {
-            "valore": "Cartone",
-            "immagine": "img/Cartone.png"
-        },
-        {
-            "valore": "Cartucce stampante - toner",
-            "immagine": "img/Cartucce_stampante_toner.png"
-        },
-        {
-            "valore": "Imballaggi in metallo o ferro",
-            "immagine": "img/Imballaggi_metallo_ferro.png"
-        },
-        {
-            "valore": "Imballaggi in plastica",
-            "immagine": "img/Imballaggi_plastica.png"
-        },
-        {
-            "valore": "Inerti",
-            "immagine": "img/Inerti.png"
-        },
-        {
-            "valore": "Ingombranti",
-            "immagine": "img/Ingombranti.png"
-        },
-        {
-            "valore": "Legno",
-            "immagine": "img/Legno.png"
-        },
-        {
-            "valore": "Medicinali",
-            "immagine": "img/Medicinali.png"
-        },
-		{
-            "valore": "Neon",
-            "immagine": "img/Neon.png"
-        },
-        {
-            "valore": "Oggetti in metallo",
-            "immagine": "img/Oggetti_metallo.png"
-        },
-        {
-            "valore": "Oggetti in plastica",
-            "immagine": "img/Oggetti_plastica.png"
-        },
-        {
-            "valore": "Olio minerale",
-            "immagine": "img/Olio_minerale.png"
-        },        {
-            "valore": "Olio vegetale",
-            "immagine": "img/Olio_vegetale.png"
-        },
-		{
-            "valore": "Pannolini - pannoloni",
-            "immagine": "img/Pannolini_pannoloni.png"
-        },
-        {
-            "valore": "Pile",
-            "immagine": "img/Pile.png"
-        },
-        {
-            "valore": "Pneumatici",
-            "immagine": "img/Pneumatici.png"
-        },
-        {
-            "valore": "Raee",
-            "immagine": "img/RAEE.png"
-        },
-		{
-            "valore": "Secco",
-            "immagine": "img/Secco.png"
-        },
-        {
-            "valore": "Tappi in sughero",
-            "immagine": "img/Tappi_sughero.png"
-        },
-        {
-            "valore": "Tetrapak - carta poliaccoppiata",
-            "immagine": "img/Tetrapak_carta_poliaccoppiata.png"
-        },
-        {
-            "valore": "Tossici nocivi bonificati metallo",
-            "immagine": "img/Tossici_nocivi_bonificati_metallo.png"
-        },
-        {
-            "valore": "Tossici nocivi bonificati plastica",
-            "immagine": "img/Tossici_nocivi_bonificati_plastica.png"
-        },
-        {
-            "valore": "Tossici nocivi bonificati vetro",
-            "immagine": "img/Tossici_nocivi_bonificati_vetro.png"
-        },
-		{
-            "valore": "Tossici nocivi non bonificati",
-            "immagine": "img/Tossici_nocivi_non_bonificati.png"
-        },
-		{
-            "valore": "Umido",
-            "immagine": "img/Umido.png"
-        },
-		{
-            "valore": "Verde e ramaglie",
-            "immagine": "img/Verde_ramaglie.png"
-        },
-		{
-            "valore": "Vetro",
-            "immagine": "img/Vetro.png"
-        }
-    ]
+{
+	"valore": "Abiti usati",
+	"immagine": "img/indumenti_usati.png"
+},
+{
+	"valore": "Altro",
+	"immagine": "img/altro.png"
+},
+{
+	"valore": "Batterie",
+	"immagine": "img/pile.png"
+},
+{
+	"valore": "Carta",
+	"immagine": "img/carta.png"
+},
+{
+	"valore": "Cartone",
+	"immagine": "img/cartone.png"
+},
+{
+	"valore": "Cartucce stampante - toner",
+	"immagine": "img/cartucce_toner_esaurite.png"
+},
+{
+	"valore": "Imballaggi in metallo o ferro",
+	"immagine": "img/imballaggi_metallo.png"
+},
+{
+	"valore": "Imballaggi in plastica",
+	"immagine": "img/imballaggi_plastica.png"
+},
+{
+	"valore": "Inerti",
+	"immagine": "img/inerti.png"
+},
+{
+	"valore": "Ingombranti",
+	"immagine": "img/ingombranti.png"
+},
+{
+	"valore": "Legno",
+	"immagine": "img/legno.png"
+},
+{
+	"valore": "Medicinali",
+	"immagine": "img/medicinali_scaduti.png"
+},
+{
+	"valore": "Neon",
+	"immagine": "img/neon.png"
+},
+{
+	"valore": "Oggetti in metallo",
+	"immagine": "img/oggetti_metallo.png"
+},
+{
+	"valore": "Oggetti in plastica",
+	"immagine": "img/oggetti_plastica.png"
+},
+{
+	"valore": "Olio minerale",
+	"immagine": "img/olio_minerale.png"
+},
+{
+	"valore": "Olio vegetale",
+	"immagine": "img/olio_vegetale.png"
+},
+{
+	"valore": "Pannolini - pannoloni",
+	"immagine": "img/pannolini_pannoloni.png"
+},
+{
+	"valore": "Pile",
+	"immagine": "img/pile.png"
+},
+{
+	"valore": "Pneumatici",
+	"immagine": "img/pneumatici.png"
+},
+{
+	"valore": "Raee",
+	"immagine": "img/RAEE.png"
+},
+{
+	"valore": "Secco",
+	"immagine": "img/residuo.png"
+},
+{
+	"valore": "Tappi in sughero",
+	"immagine": "img/tappi_sughero.png"
+},
+{
+	"valore": "Tetrapak - carta poliaccoppiata",
+	"immagine": "img/cartoni_per_bevande.png"
+},
+{
+	"valore": "Tossici nocivi bonificati metallo",
+	"immagine": "img/tossici_nocivi_bonificati_metallo.png"
+},
+{
+	"valore": "Tossici nocivi bonificati plastica",
+	"immagine": "img/tossici_nocivi_bonificati_plastica.png"
+},
+{
+	"valore": "Tossici nocivi bonificati vetro",
+	"immagine": "img/tossici_nocivi_bonificati_vetro.png"
+},
+{
+	"valore": "Tossici nocivi non bonificati",
+	"immagine": "img/tossici_nocivi_non_bonificati.png"
+},
+{
+	"valore": "Umido",
+	"immagine": "img/organico.png"
+},
+{
+	"valore": "Verde - ramaglie",
+	"immagine": "img/verde_ramaglie.png"
+},
+{
+	"valore": "Vetro",
+	"immagine": "img/imballaggi_vetro.png"
+}
+]

@@ -1,10 +1,10 @@
 @font-face {
     font-family: 'riciclo';
-    src:    url('riciclo.eot?jduf5m');
-    src:    url('riciclo.eot?jduf5m#iefix') format('embedded-opentype'),
-        url('riciclo.ttf?jduf5m') format('truetype'),
-        url('riciclo.woff?jduf5m') format('woff'),
-        url('riciclo.svg?jduf5m#riciclo') format('svg');
+    src:    url('riciclo.eot?2df8li');
+    src:    url('riciclo.eot?2df8li#iefix') format('embedded-opentype'),
+        url('riciclo.ttf?2df8li') format('truetype'),
+        url('riciclo.woff?2df8li') format('woff'),
+        url('riciclo.svg?2df8li#riciclo') format('svg');
     font-weight: normal;
     font-style: normal;
 }
@@ -24,6 +24,65 @@
     -moz-osx-font-smoothing: grayscale;
 }
 
+.riciclo-asvo-erba_ramaglie_prenotazione:before {
+    content: "\e901";
+}
+.riciclo-asvo-erba_ramaglie:before {
+    content: "\e902";
+}
+.riciclo-asvo-ingombranti_prenotazione:before {
+    content: "\e910";
+}
+.riciclo-asvo-pp_pannolini:before {
+    content: "\e911";
+}
+.riciclo-asvo-caritas_humana:before {
+    content: "\e912";
+}
+.riciclo-asvo-centro_ecologico_mobile:before {
+    content: "\e913";
+}
+.riciclo-asvo-distribuzione_sacchi:before {
+    content: "\e914";
+}
+.riciclo-asvo-ecocentro:before {
+    content: "\e915";
+}
+.riciclo-asvo-impianto:before {
+    content: "\e916";
+}
+.riciclo-asvo-pericolosi_centro_ecologico:before {
+    content: "\e917";
+}
+.riciclo-asvo-punto_raccolta_territorio:before {
+    content: "\e918";
+}
+.riciclo-asvo-pp_carta_cartone:before {
+    content: "\e919";
+}
+.riciclo-asvo-porta_porta:before {
+    content: "\e91a";
+}
+.riciclo-asvo-bidone .path1:before {
+    content: "\e91b";
+    color: rgb(255, 255, 255);
+}
+.riciclo-asvo-bidone .path2:before {
+    content: "\e91c";
+    margin-left: -1em;
+    color: rgb(0, 0, 0);
+}
+.riciclo-asvo-bidone .path3:before {
+    content: "\e91d";
+    margin-left: -1em;
+    color: rgb(0, 0, 0);
+}
+.riciclo-asvo-acquisto_sacchi:before {
+    content: "\e91e";
+}
+.riciclo-servizio_richiesta:before {
+    content: "\e91f";
+}
 .riciclo-calendar_list:before {
     content: "\e90f";
 }
