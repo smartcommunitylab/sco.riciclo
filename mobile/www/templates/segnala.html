@@ -6,7 +6,7 @@
         </div>
     </ion-nav-title>
 
-    <ion-content class="segnala padding">
+    <ion-content class="segnala padding has-footer">
         <div class="segnala-desc">
             {{'submit' | translate}}
         </div>
@@ -31,8 +31,8 @@
             </button>
             <div class="col">{{'take_picture' | translate}}</div>
         </div>
-        <div ng-if="(!isPopUp && !isHiddenFields)" ng-show="imgURI !== undefined" class="row segnala-image">
-            <img ng-show="imgURI !== undefined" ng-src="{{imgURI}}">
+        <div ng-if="(!isPopUp && !isHiddenFields) && imgURI !== undefined" class="row segnala-image">
+            <img ng-if="imgURI !== undefined" ng-src="{{imgURI}}">
         </div>
 
         <div ng-if="isPopUp" class="row segnala-photo" ng-click="showAlert()">
@@ -41,8 +41,8 @@
             </button>
             <div class="col">{{'take_picture' | translate}}</div>
         </div>
-        <div ng-if="isPopUp" ng-show="imgURI !== undefined" class="row segnala-image">
-            <img ng-show="imgURI !== undefined" ng-src="{{imgURI}}">
+        <div ng-if="isPopUp && imgURI !== undefined" class="row segnala-image">
+            <img ng-if="imgURI !== undefined" ng-src="{{imgURI}}">
         </div>
 
         <ion-checkbox class="checkbox-100r segnala-position" ng-model="attachPosition">

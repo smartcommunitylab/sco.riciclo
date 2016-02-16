@@ -174,7 +174,7 @@ angular.module('rifiuti.controllers.home', [])
 
     var popupDelete = function () {
         return {
-            template: $filter('translate')('delete_confirmation'),
+            template: $scope.multipleNoteSelected ? $filter('translate')('delete_confirmation_multi') : $filter('translate')('delete_confirmation'),
             title: $filter('translate')('alert'),
             scope: $scope,
             buttons: [

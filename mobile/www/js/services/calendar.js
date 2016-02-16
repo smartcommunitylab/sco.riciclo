@@ -112,19 +112,23 @@ angular.module('rifiuti.services.calendar', [])
                 if (d[i].orarioApertura) {
                   for (var j = 0; j < d[i].orarioApertura.length; j++) {
                     calItem = d[i].orarioApertura[j];
-                    for (var k = 0; k < calItem.dates.length; k++) {
-                      var currDate = new Date(Date.parse( calItem.dates[k]));
-                      currDate.setHours(0);
-                      if (currDate.getTime() >= firstDate.getTime() && currDate.getTime() <= lastDate.getTime()) {
-                        var w = Math.floor((currDate.getDate()+firstDay) / 7);
-                        var idx = Utili.jsDOWToDOW(currDate.getDay());
-                        if (w == 0) idx = idx - firstDay;
-                        var cell = weeks[w][idx];
-                        // if this is the date of the interval of interest
-                        if (cell != null) {
-                          appendToCalendarCell(cell,calItem,d[i],colorLegendMap,colorLegendAshMap);
+                    if (calItem.dates) {
+                      for (var k = 0; k < calItem.dates.length; k++) {
+                        var currDate = new Date(Date.parse( calItem.dates[k]));
+                        currDate.setHours(0);
+                        if (currDate.getTime() >= firstDate.getTime() && currDate.getTime() <= lastDate.getTime()) {
+                          var w = Math.floor((currDate.getDate()+firstDay) / 7);
+                          var idx = Utili.jsDOWToDOW(currDate.getDay());
+                          if (w == 0) idx = idx - firstDay;
+                          var cell = weeks[w][idx];
+                          // if this is the date of the interval of interest
+                          if (cell != null) {
+                            appendToCalendarCell(cell,calItem,d[i],colorLegendMap,colorLegendAshMap);
+                          }
                         }
                       }
+                    } else {
+                      console.log('no dates for calItem: '+JSON.stringify(calItem));
                     }
                   }
                 }
