@@ -138,7 +138,6 @@ angular.module('rifiuti', [
     $rootScope.version = VERSION;
 
     //$rootScope.isWebView = !isPhone();
-    $rootScope.isPopUp = !$rootScope.isWebView && !IF_HIDDEN_FIELDS;
     $rootScope.isHiddenFields = IF_HIDDEN_FIELDS;
     $rootScope.loadingShow = function () {
         $ionicLoading.show({
@@ -146,14 +145,15 @@ angular.module('rifiuti', [
         });
     };
 
-    $rootScope.isWebView = function(){
-        if(ionic.Platform.isWebView()){
-
-            return false;
-        }
-
-        return true;
-    }
+//    $rootScope.isWebView = function(){
+//        if(ionic.Platform.isWebView()){
+//
+//            return false;
+//        }
+//
+//        return true;
+//    }
+    $rootScope.isPopUp = !ionic.Platform.isWebView() && !IF_HIDDEN_FIELDS;
 
     $rootScope.showAlert = function(link) {
         var alertPopup = $ionicPopup.alert({
