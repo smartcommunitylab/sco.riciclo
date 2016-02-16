@@ -78,7 +78,7 @@ angular.module('rifiuti.controllers.raccolta', [])
 
   var mapZoom = ZOOM;
 
-  if(!$rootScope.isWebView){
+  if(ionic.Platform.isWebView()){
      $http.get('https://maps.google.it').success(function (data) {
                 //LoaderService.showToast('accesso!');
             }).error(function (data, status) {
