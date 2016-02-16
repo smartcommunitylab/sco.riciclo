@@ -1,10 +1,10 @@
 @font-face {
     font-family: 'riciclo';
-    src:    url('riciclo.eot?2df8li');
-    src:    url('riciclo.eot?2df8li#iefix') format('embedded-opentype'),
-        url('riciclo.ttf?2df8li') format('truetype'),
-        url('riciclo.woff?2df8li') format('woff'),
-        url('riciclo.svg?2df8li#riciclo') format('svg');
+    src:    url('fonts/riciclo.eot?ngtom6');
+    src:    url('fonts/riciclo.eot?ngtom6#iefix') format('embedded-opentype'),
+        url('fonts/riciclo.ttf?ngtom6') format('truetype'),
+        url('fonts/riciclo.woff?ngtom6') format('woff'),
+        url('fonts/riciclo.svg?ngtom6#riciclo') format('svg');
     font-weight: normal;
     font-style: normal;
 }
@@ -24,6 +24,12 @@
     -moz-osx-font-smoothing: grayscale;
 }
 
+.riciclo-asvo-pp_altri_imballaggi:before {
+    content: "\e920";
+}
+.riciclo-asvo-pp_cartone:before {
+    content: "\e921";
+}
 .riciclo-asvo-erba_ramaglie_prenotazione:before {
     content: "\e901";
 }
