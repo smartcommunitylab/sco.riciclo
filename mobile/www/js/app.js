@@ -147,10 +147,7 @@ angular.module('rifiuti', [
     };
 
     $rootScope.isWebView = function(){
-        if(ionic.Platform.isIPad() ||
-           ionic.Platform.isIOS() ||
-           ionic.Platform.isAndroid() ||
-           ionic.Platform.isEdge()){
+        if(ionic.Platform.isWebView()){
 
             return false;
         }
