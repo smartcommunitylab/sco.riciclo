@@ -91,8 +91,8 @@ body.platform-browser .scroll-bar-fade-out {
 }
 
 .navigation-drawer ion-list ion-item img {
-    width: 80%;
-    height: 80%;
+    width: 20px;
+    height: 20px;
     margin-left: 10px;
 }
 
