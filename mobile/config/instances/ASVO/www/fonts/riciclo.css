@@ -1,10 +1,10 @@
 @font-face {
     font-family: 'riciclo';
-    src:    url('riciclo.eot?ngtom6');
-    src:    url('riciclo.eot?ngtom6#iefix') format('embedded-opentype'),
-        url('riciclo.ttf?ngtom6') format('truetype'),
-        url('riciclo.woff?ngtom6') format('woff'),
-        url('riciclo.svg?ngtom6#riciclo') format('svg');
+    src:    url('riciclo.eot?pidxnr');
+    src:    url('riciclo.eot?pidxnr#iefix') format('embedded-opentype'),
+        url('riciclo.ttf?pidxnr') format('truetype'),
+        url('riciclo.woff?pidxnr') format('woff'),
+        url('riciclo.svg?pidxnr#riciclo') format('svg');
     font-weight: normal;
     font-style: normal;
 }
@@ -24,6 +24,9 @@
     -moz-osx-font-smoothing: grayscale;
 }
 
+.riciclo-asvo-bidone:before {
+    content: "\e91b";
+}
 .riciclo-asvo-pp_altri_imballaggi:before {
     content: "\e920";
 }
@@ -68,20 +71,6 @@
 }
 .riciclo-asvo-porta_porta:before {
     content: "\e91a";
-}
-.riciclo-asvo-bidone .path1:before {
-    content: "\e91b";
-    color: rgb(255, 255, 255);
-}
-.riciclo-asvo-bidone .path2:before {
-    content: "\e91c";
-    margin-left: -1em;
-    color: rgb(0, 0, 0);
-}
-.riciclo-asvo-bidone .path3:before {
-    content: "\e91d";
-    margin-left: -1em;
-    color: rgb(0, 0, 0);
 }
 .riciclo-asvo-acquisto_sacchi:before {
     content: "\e91e";
