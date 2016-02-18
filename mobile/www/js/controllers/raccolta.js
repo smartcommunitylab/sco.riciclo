@@ -497,7 +497,7 @@ angular.module('rifiuti.controllers.raccolta', [])
 
     return false;
   }
-  
+
   $scope.clickNav = function() {
     if ($scope.pdr.localizzazione) window.open("http://maps.google.com?daddr="+$scope.pdr.localizzazione,"_system");
     else window.open("http://maps.google.com?daddr="+$scope.pdr.dettagliZona,"_system");
@@ -507,6 +507,7 @@ angular.module('rifiuti.controllers.raccolta', [])
     $scope.pdr = punti[0];
     punti.forEach(function(punto){
       punto.orarioApertura.forEach(function(orario) {
+
         if(isInDateInRange(orario)){
             var j = $scope.checkGiorni(orario.il);
 
@@ -526,6 +527,7 @@ angular.module('rifiuti.controllers.raccolta', [])
                 hour = orario.dalle +'-'+orario.alle;
               }
             }
+
             if (j == -1) {
               $scope.orari.push({
                 giorno: orario.il.split(' '),
