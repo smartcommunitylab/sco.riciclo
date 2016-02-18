@@ -349,13 +349,88 @@ angular.module('rifiuti.controllers.raccolta', [])
   $scope.orari = [];
   //[{giorno:"lunedì",orari:["12.00-14.00","15.30-17.30"...]}...]
 
+  var today = new Date();
+
   $scope.checkGiorni = function (item) {
     for (var j = 0; j < $scope.orari.length; j++) {
       if ($scope.orari[j].giorno == item) return j;
     }
     return -1;
   };
-  
+
+  var dayInWeek = ["lunedì","martedì","mercoledì","giovedì","venerdì","sabato","domenica"];
+
+  var orderOrari = function(){
+    var fixedDays = [];
+    var ashDayOrari = {};
+    var orderedOrari = [];
+
+    $scope.orari.forEach(function(orario){
+        if(dayInWeek.indexOf(orario.giorno[0])>-1){
+            if(ashDayOrari[orario.giorno]==null){
+                ashDayOrari[orario.giorno] = [];
+            }
+
+            ashDayOrari[orario.giorno].push(orario);
+        }else{
+            fixedDays.push(orario);
+        }
+    })
+
+    dayInWeek.forEach(function(day){
+        if(!!ashDayOrari[day]){
+            ashDayOrari[day].forEach(function(dayAr){
+                var orario = dayAr;
+                orderedOrari.push(orario);
+            });
+        }
+    })
+
+    fixedDays.forEach(function(orario){
+        orderedOrari.push(orario);
+    })
+
+    $scope.orari = orderedOrari;
+  }
+
+  var getDateBySlpittedDate = function (splittedeDate){
+    var year = null;
+    var month = null;
+    var day = null;
+    var date = null;
+
+    try{
+        year = parseInt(splittedeDate[0]);
+        month = parseInt(splittedeDate[1]);
+        day = parseInt(splittedeDate[2]);
+
+        date = new Date(year, month-1, day);
+    }catch(err){
+        console.log("invalid date: "+splittedeDate);
+        return null;
+    }
+
+    return date;
+  }
+
+  var isInDateInRange = function (orario){
+    if(!!orario){
+        var orarioDataDa = orario.dataDa.split("-");
+        var orarioDataA = orario.dataA.split("-");
+        if((!!orarioDataDa && orarioDataDa.length==3)&&
+           (!!orarioDataA && orarioDataA.length==3)){
+            var dataDa = getDateBySlpittedDate(orarioDataDa);
+            var dataA = getDateBySlpittedDate(orarioDataA);
+
+            if(dataDa<=today && dataA>=today){
+                return true;
+            }
+        }
+    }
+
+    return false;
+  }
+
   $scope.clickNav = function() {
     if ($scope.pdr.localizzazione) window.open("http://maps.google.com?daddr="+$scope.pdr.localizzazione,"_system");
     else window.open("http://maps.google.com?daddr="+$scope.pdr.dettagliZona,"_system");
@@ -365,20 +440,26 @@ angular.module('rifiuti.controllers.raccolta', [])
     $scope.pdr = punti[0];
     punti.forEach(function(punto){
       punto.orarioApertura.forEach(function(orario) {
-        var j = $scope.checkGiorni(orario.il);
-        if (j == -1) {
-          $scope.orari.push({
-            giorno: orario.il.split(' '),
-            ecceto: orario.eccezione? orario.eccezione.split(' ') : [],
-            orari:[ orario.dalle + "-" + orario.alle ]
-          });
-        } else {
-          if ($scope.orari[j].orari.indexOf(orario.dalle + "-" + orario.alle) == -1) {
-            $scope.orari[j].orari.push(orario.dalle + "-" + orario.alle);
-          }
+
+        if(isInDateInRange(orario)){
+            var j = $scope.checkGiorni(orario.il);
+            if (j == -1) {
+              $scope.orari.push({
+                giorno: orario.il.split(' '),
+                ecceto: orario.eccezione? orario.eccezione.split(' ') : [],
+                orari:[ orario.dalle + "-" + orario.alle ]
+              });
+            } else {
+              if ($scope.orari[j].orari.indexOf(orario.dalle + "-" + orario.alle) == -1) {
+                $scope.orari[j].orari.push(orario.dalle + "-" + orario.alle);
+              }
+            }
         }
       });
     });
+
+    orderOrari();
+
     Raccolta.raccolta({ tipopunto:$scope.pdr.tipologiaPuntiRaccolta }).then(function(raccolta){
       var myRifiuti=[];
       var myRifiutiId=[];
