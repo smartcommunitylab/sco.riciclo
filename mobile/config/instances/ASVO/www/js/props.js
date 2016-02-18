@@ -8,13 +8,13 @@ APP_NAME_CREDITS = "100% Riciclo<br/>ASVO s.p.a.";
 APP_LOCATION_CREDITS = "ASVO";
 ICON_COLOR_MAP = {'ARANCIONE': 'orange', 'AZZURRO': 'lightblue', 'BLU': 'blue', 'GIALLO': 'yellow', 'MARRONE': 'brown', 'ROSSO': 'red', 'VERDE CHIARO': 'lightgreen', 'VERDE': 'green', 'VERDE SCURO': 'darkgreen', 'VIOLA':'purple','coloreUno':'purple'};
 ICON_POINT_MAP = {'Acquisto sacchi':'riciclo-asvo-acquisto_sacchi', 
-'Campana Caritas - Humana':'riciclo-asvo-caritas_humana', 
-'Centro Ecologico Mobile':'riciclo-asvo-centro_ecologico_mobile',
+'Campana humana - caritas':'riciclo-asvo-caritas_humana', 
+'Centro ecologico mobile':'riciclo-asvo-centro_ecologico_mobile',
 'Distribuzione sacchi':'riciclo-asvo-distribuzione_sacchi',
 'Ecocentro':'riciclo-asvo-ecocentro',
 'Erba e ramaglie (punto raccolta territorio)':'riciclo-asvo-erba_ramaglie',
 'Erba e ramaglie (su prenotazione)':'riciclo-asvo-erba_ramaglie_prenotazione',
-'Impianto ASVO':'riciclo-asvo-impianto',
+'Impianto asvo':'riciclo-asvo-impianto',
 'Ingombranti (su prenotazione)':'riciclo-asvo-ingombranti_prenotazione',
 'Porta a porta carta e cartone':'riciclo-asvo-pp_carta_cartone',
 'Porta a porta erba e ramaglie':'riciclo-asvo-erba_ramaglie',
