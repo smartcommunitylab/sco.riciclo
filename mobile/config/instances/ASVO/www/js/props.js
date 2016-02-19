@@ -1,5 +1,5 @@
 APP_ID = "ASVO";
-DATA_VERSION = 7;
+DATA_VERSION = 13;
 API_KEY = "AIzaSyBmKVWmFzh2JHT7q1MLmQRQ7jC4AhkRBDs";
 //SEGNALA_EMAIL = "segnalazioni.rifiuti@comunitadellegiudicarie.it";
 VERSION = "0.1.0";
