@@ -826,6 +826,10 @@ body.platform-browser .scroll-bar-fade-out {
     color: black;
 }
 
+.bar-100r .title {
+    color: black !important;
+}
+
 .nav-title .nav-title-single {}
 
 .nav-title .nav-title-main {}
