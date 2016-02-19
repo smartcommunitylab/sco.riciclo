@@ -424,6 +424,10 @@ body.platform-browser .scroll-bar-fade-out {
 }
 /* Tipi di rifiuto */
 
+.content-event .event-desc {
+    white-space: normal !important;
+}
+
 .tipidirifiuto,
 .tipidirifiuto ion-list,
 .tipidirifiuto ion-list ion-item,
