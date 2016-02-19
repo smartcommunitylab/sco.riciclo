@@ -182,7 +182,8 @@ angular.module('rifiuti.controllers.home', [])
                     text: $filter('translate')('cancel')
                 },
                 {
-                    text: $filter('translate')('confirm'),
+                    text: '<b>' + $filter('translate')('confirm') + '</b>',
+                    type: 'button-100r',
                     onTap: function (e) {
                         return true;
                     }
