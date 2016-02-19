@@ -1,4 +1,4 @@
-APP_ID = "ASIA-CEMBR";
+APP_ID = "ASIA-CEMBRA";
 DATA_VERSION = 1;
 API_KEY = "AIzaSyBmKVWmFzh2JHT7q1MLmQRQ7jC4AhkRBDs";
 //SEGNALA_EMAIL = "segnalazioni.rifiuti@comunitadellegiudicarie.it";
@@ -20,8 +20,8 @@ USE_DRAFT = true;
 LANG = ['it'];
 COMUNI_LIST = [];
 
-ZOOM = 14;
+ZOOM = 11;
 CENTER = {
-      latitude: 46.167142,
-      longitude: 11.250006
+      latitude: 46.1078328,
+      longitude: 11.2690813
 };

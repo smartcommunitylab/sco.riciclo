@@ -55,6 +55,13 @@
         "version_code": "1",
         "app_name": "100% Riciclo - Comunità della Valle dei Laghi"
     },
+    "ASIA-CEMBRA": {
+        "resource_folder": "config/instances/ASIA-CEMBRA",
+        "widget_id" : "it.smartcommunitylab.rifiuti.asia.cembra",
+        "version": "1.0.0",
+        "version_code": "1",
+        "app_name": "100% Riciclo - Comunità della Valle di Cembra"
+    },
     "ASVO": {
         "resource_folder": "config/instances/ASVO",
         "widget_id" : "it.smartcommunitylab.rifiuti.asvo",
