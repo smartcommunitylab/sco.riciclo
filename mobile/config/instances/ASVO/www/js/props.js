@@ -8,7 +8,7 @@ APP_NAME_CREDITS = "100% Riciclo<br/>ASVO s.p.a.";
 APP_LOCATION_CREDITS = "ASVO";
 ICON_COLOR_MAP = {'ARANCIONE': 'orange', 'AZZURRO': 'lightblue', 'BLU': 'blue', 'GIALLO': 'yellow', 'MARRONE': 'brown', 'ROSSO': 'red', 'VERDE CHIARO': 'lightgreen', 'VERDE': 'green', 'VERDE SCURO': 'darkgreen', 'VIOLA':'purple','coloreUno':'purple'};
 ICON_POINT_MAP = {'Acquisto sacchi':'riciclo-asvo-acquisto_sacchi', 
-'Campana humana - caritas':'riciclo-asvo-caritas_humana', 
+'Campana caritas':'riciclo-asvo-caritas_humana', 
 'Centro ecologico mobile':'riciclo-asvo-centro_ecologico_mobile',
 'Distribuzione sacchi':'riciclo-asvo-distribuzione_sacchi',
 'Ecocentro':'riciclo-asvo-ecocentro',
