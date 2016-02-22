@@ -65,8 +65,8 @@
     "ASVO": {
         "resource_folder": "config/instances/ASVO",
         "widget_id" : "it.smartcommunitylab.rifiuti.asvo",
-        "version": "0.1.0",
-        "version_code": "2",
+        "version": "0.2.0",
+        "version_code": "3",
         "app_name": "100% Riciclo - ASVO s.p.a."
     }
 }
