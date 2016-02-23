@@ -1,5 +1,5 @@
 APP_ID = "ASIA-ADIGE";
-DATA_VERSION = 1;
+DATA_VERSION = 2;
 API_KEY = "AIzaSyBmKVWmFzh2JHT7q1MLmQRQ7jC4AhkRBDs";
 //SEGNALA_EMAIL = "segnalazioni.rifiuti@comunitadellegiudicarie.it";
 VERSION = "1.0.0";
@@ -34,10 +34,10 @@ FEED_URL = "http://www.asia.tn.it/rss/feed/avvisi/";
 EXT_URL = "http://www.asia.tn.it/";
 IF_HIDDEN_FIELDS = false;
 CUSTOM_PAP = [];
-ENDPOINT_URL = 'https://dev.smartcommunitylab.it/riciclo2/';
+ENDPOINT_URL = 'https://tn.smartcommunitylab.it/riciclo2';
 PORTA_A_PORTA_LABEL = 'porta_a_porta';
 
-USE_DRAFT = true;
+USE_DRAFT = false;
 LANG = ['it'];
 COMUNI_LIST = [];
 

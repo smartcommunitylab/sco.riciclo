@@ -233,7 +233,7 @@ public class UIConverter {
 			PuntoRaccoltaUI newPR = new PuntoRaccoltaUI();
 			newPR.setAppId(calendario.getOwnerId());
 			newPR.setTipologiaPuntiRaccolta(calendario.getTipologiaPuntoRaccolta());
-			newPR.setOrarioApertura(convertOrarioApertura(calendario.getOrarioApertura(), lang, defaultLang, true));
+			newPR.setOrarioApertura(convertOrarioApertura(calendario.getOrarioApertura(), lang, defaultLang, false));
 			PuntoRaccoltaUI existingPR = containsPR(newPR, result);
 			if(existingPR == null) {
 				result.add(newPR);
