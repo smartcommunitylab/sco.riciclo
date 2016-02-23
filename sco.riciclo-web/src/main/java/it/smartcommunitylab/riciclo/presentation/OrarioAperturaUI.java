@@ -120,6 +120,11 @@ public class OrarioAperturaUI {
 				return false;
 		} else if (!il.equals(other.il))
 			return false;
+		if (note == null) {
+			if (other.note != null)
+				return false;
+		} else if(!note.equals(other.note))
+			return false;
 		return true;
 	}
 	public String getNote() {
