@@ -41,8 +41,8 @@ USE_DRAFT = false;
 LANG = ['it'];
 COMUNI_LIST = [];
 
-ZOOM = 14;
+ZOOM = 13;
 CENTER = {
       latitude: 45.9671788,
-      longitude: 11.0969367
+      longitude: 11.0769367
 };
