@@ -209,6 +209,11 @@ body.platform-browser .scroll-bar-fade-out {
 .platform-ios:not(.fullscreen) .home-tabs .has-tabs-top {
     top: 93px !important;
 }
+
+.tab-item.tab-item-active {
+    font-weight: bold !important;
+}
+
 /*
 .home-tabs.tabs-striped .tab-item-active,
 .home-tabs.tabs-striped .tab-item.active,
