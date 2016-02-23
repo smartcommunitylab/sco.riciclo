@@ -414,7 +414,8 @@ body.platform-browser .scroll-bar-fade-out {
 .home-calendar .agenda .day .day-content {}
 
 .home-calendar .agenda .day .day-content-active {
-    background-color: #8de058 !important;
+    background-color: #9cbd2e !important;
+    color: white !important;
 }
 
 .home-calendar .agenda .day .day-content .content-title {
