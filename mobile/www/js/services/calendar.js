@@ -12,14 +12,14 @@ angular.module('rifiuti.services.calendar', [])
           if(!colorLegendAshMap[puntoDiRaccolta.colore]){
             colorLegendAshMap[puntoDiRaccolta.colore] = [];
             colorLegendMap[puntoDiRaccolta.colore] = {};
-            colorLegendAshMap[puntoDiRaccolta.colore].push(puntoDiRaccolta.tipologiaPuntiRaccolta);
-            colorLegendMap[puntoDiRaccolta.colore] = " "+puntoDiRaccolta.tipologiaPuntiRaccolta;
+            colorLegendAshMap[puntoDiRaccolta.colore].push(puntoDiRaccolta.tipoPuntoRaccolta.id);
+            colorLegendMap[puntoDiRaccolta.colore] = " "+puntoDiRaccolta.tipoPuntoRaccolta.id;
           }
 
           if(!!colorLegendAshMap[puntoDiRaccolta.colore] &&
-             colorLegendAshMap[puntoDiRaccolta.colore].indexOf(puntoDiRaccolta.tipologiaPuntiRaccolta)<0){
-             colorLegendAshMap[puntoDiRaccolta.colore].push(puntoDiRaccolta.tipologiaPuntiRaccolta);
-             colorLegendMap[puntoDiRaccolta.colore] = colorLegendMap[puntoDiRaccolta.colore]+", "+puntoDiRaccolta.tipologiaPuntiRaccolta;
+             colorLegendAshMap[puntoDiRaccolta.colore].indexOf(puntoDiRaccolta.tipoPuntoRaccolta.id)<0){
+             colorLegendAshMap[puntoDiRaccolta.colore].push(puntoDiRaccolta.tipoPuntoRaccolta.id);
+             colorLegendMap[puntoDiRaccolta.colore] = colorLegendMap[puntoDiRaccolta.colore]+", "+puntoDiRaccolta.tipoPuntoRaccolta.id;
           }
       }
       
@@ -35,7 +35,7 @@ angular.module('rifiuti.services.calendar', [])
         var descr = puntoDiRaccolta.tipoPuntoRaccolta.nome;
         if (descr.indexOf(key) == 0) descr = descr.substr(key.length+1);
         proto = {
-          tipologiaPuntiRaccolta: puntoDiRaccolta.tipoPuntoRaccolta.nome,
+          tipologiaPuntiRaccolta: puntoDiRaccolta.tipoPuntoRaccolta.id,
           colore: puntoDiRaccolta.colore,
           descr : [descr, hour]
         };
@@ -49,7 +49,7 @@ angular.module('rifiuti.services.calendar', [])
           cell.events[key].events = [];
         } else {
           proto = {
-            tipologiaPuntiRaccolta: puntoDiRaccolta.tipoPuntoRaccolta.nome,
+            tipologiaPuntiRaccolta: puntoDiRaccolta.tipoPuntoRaccolta.id,
             colore: puntoDiRaccolta.colore,
             descr : [puntoDiRaccolta.dettagliZona, calItem.dalle +'-'+calItem.alle]
           };
