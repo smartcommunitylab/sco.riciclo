@@ -137,7 +137,7 @@ angular.module('rifiuti.controllers.common', ['ionic'])
             body += $scope.attachPosition ? GPScoordsTmp : '';
             window.plugin.email.open({
                 to: [$scope.signal.selectedTipoSegnalazione.email],
-                subject: 'segnalazione dalla app \'' + APP_NAME + '\'', // subject of the email
+                subject: 'Segnalazione dalla app \'' + APP_NAME + '\' - ' + $scope.signal.selectedTipoSegnalazione.tipologia, // subject of the email
                 body: [body],
                 isHtml: false,
                 attachments: $scope.imgURI
