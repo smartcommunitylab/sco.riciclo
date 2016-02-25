@@ -44,10 +44,10 @@ angular.module('rifiuti.controllers.home', [])
         localStorage.clear();
     };
 
-    $rootScope.showTutorial = false;
+    //$rootScope.showTutorial = false;
     var stringTutorial = DataManager.getTutorial();
 
-    if (stringTutorial == "false" || !!$rootScope.promptedToProfile) {
+    if ((!!stringTutorial && stringTutorial == "false") || !!$rootScope.promptedToProfile) {
         $rootScope.showTutorial = false;
     } else {
         $rootScope.showTutorial = true;

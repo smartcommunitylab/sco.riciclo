@@ -427,7 +427,7 @@ angular.module('rifiuti.services.data', [])
     }
 
     var saveTutorial = function (saveData){
-        localStorage.setItem(tutorialPrefix, "false");
+        localStorage.setItem(tutorialPrefix, saveData);
     }
 
     var getCategoriaById = function (categoria, id) {

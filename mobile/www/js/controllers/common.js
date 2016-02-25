@@ -25,6 +25,7 @@ angular.module('rifiuti.controllers.common', ['ionic'])
     var profiles = DataManager.getProfiles();
     //localStorage.removeItem('profiles');
     if (!profiles || profiles.length == 0) {
+        DataManager.saveTutorial("true");
         $rootScope.promptedToProfile = true;
         $location.path("app/aggProfilo");
         DataManager.checkVersion($rootScope.profili).then(function () {
