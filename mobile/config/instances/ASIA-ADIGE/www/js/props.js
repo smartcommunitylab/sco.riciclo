@@ -6,7 +6,17 @@ VERSION = "1.0.0";
 APP_NAME="100% Riciclo - Aldeno-Cimone-Garniga";
 APP_NAME_CREDITS = "100% Riciclo<br/>ALDENO-CIMONE-GARNIGA";
 APP_LOCATION_CREDITS = "ALDENO-CIMONE-GARNIGA";
-ICON_COLOR_MAP = {'ARANCIONE': 'orange', 'AZZURRO': 'lightblue', 'BLU': 'blue', 'GIALLO': 'yellow', 'MARRONE': 'brown', 'ROSSO': 'red', 'VERDE CHIARO': 'lightgreen', 'VERDE': 'green', 'VERDE SCURO': 'darkgreen', 'VIOLA':'purple'};
+ICON_COLOR_MAP = {'ARANCIONE': '#e69500', 
+'AZZURRO': '#00FFFF', 
+'BLU': '#0000FF', 
+'GIALLO': '#FFFF00', 
+'MARRONE': '#800000', 
+'ROSSO': '#FF0000', 
+'VERDE CHIARO': '#008000', 
+'VERDE': '#008000', 
+'VERDE SCURO': '#808000', 
+'VIOLA':'#800080',
+'GRIGIO':'#808080'};
 ICON_POINT_MAP = {'Isola ecologica': 'riciclo-isola_ecologica',
 'Campane indumenti': 'riciclo-isola_ecologica', 
 'CRM': 'riciclo-crm', 
