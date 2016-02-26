@@ -1,4 +1,6 @@
 ITALIAN_VERSION = {
+        en:"Inglese",
+        it:"Italiano",
         map_connection_toast:"Mappe non disponibili. Controlla la connessione Internet.",
         access:"ACCESSO",
         presta_attenzione: "Presta attenzione",
@@ -40,7 +42,7 @@ ITALIAN_VERSION = {
         notifications_categories: "Categorie di notifiche",
         notifications: "Notifiche",
         draft_data_mode: "Modalità Dati Draft",
-        language_choice: "Scelta Lingua",
+        language_choice: "Lingua",
         submit_report: "Segnala!",
         attach_your_position: "Allega la tua posizione",
         take_picture: "Scatta una foto",
@@ -137,6 +139,8 @@ ITALIAN_VERSION = {
 };
 
 ENGLISH_VERSION = {
+        en:"English",
+        it:"Italian",
         map_connection_toast:"Map not available. Check your Internet connection.",
         access:"ACCESS",
         presta_attenzione: "Pay attention to",
@@ -178,7 +182,7 @@ ENGLISH_VERSION = {
         notifications_categories: "Notifications Categories",
         notifications: "Notifications",
         draft_data_mode: "Draft Data Mode",
-        language_choice: "Language Choice",
+        language_choice: "Language",
         submit_report: "Submit Report!",
         attach_your_position: "Attach your position",
         take_picture: "Take a picture",

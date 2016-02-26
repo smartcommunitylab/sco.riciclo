@@ -11,7 +11,7 @@
         <div class="padding-top" ng-if="globalSettings.isMoreThanOneLang">
             <label class="item item-input">{{ "language_choice" | translate }}</label>
 
-            <ion-radio ng-repeat="lang in supportedLangTypes" ng-model="globalSettings.selectedLang" ng-change="saveLang()"  ng-value="lang" on-swipe-down="saveAll()">{{ lang }}</ion-radio>
+            <ion-radio ng-repeat="lang in supportedLangTypes" ng-model="globalSettings.selectedLang" ng-change="saveLang()"  ng-value="lang" on-swipe-down="saveAll()">{{ lang | translate }}</ion-radio>
         </div>
 
         <ion-toggle ng-if="isDevMode" toggle-class="toggle-100r" ng-model="globalSettings.draftEnabled" ng-change="saveDraft()">{{'draft_data_mode' | translate}}</ion-toggle>
