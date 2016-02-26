@@ -45,14 +45,14 @@
             <img ng-if="imgURI !== undefined" ng-src="{{imgURI}}">
         </div>
 
-        <ion-checkbox class="checkbox-100r segnala-position" ng-model="attachPosition">
+        <!--ion-checkbox class="checkbox-100r segnala-position" ng-model="attachPosition" ng-disabled="GPSPositions==null" ng-change="toggleAttachPosition()">
             {{'attach_your_position' | translate}}
-        </ion-checkbox>
+        </ion-checkbox-->
 
     </ion-content>
 
     <div class="bar bar-footer">
-        <button class="button button-balanced button-block segnala-send" ng-click="sendEmail()">
+        <button class="button button-balanced button-block segnala-send" ng-click="sendEmail()" data-tap-disabled="true">
             <a>{{'submit_report' | translate }}</a>
         </button>
     </div>

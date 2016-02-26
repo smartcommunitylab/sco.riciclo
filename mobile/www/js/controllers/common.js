@@ -74,21 +74,20 @@ angular.module('rifiuti.controllers.common', ['ionic'])
 .controller('SegnalaCtrl', function ($scope, $rootScope, $cordovaCamera, Raccolta) {
 
 
-    //    $scope.GPScoords = null;
-    //    var GPScoordsTmp = null;
-    //
-    //    var posizioneG = function () {
-    //        //navigator.geolocation.getCurrentPosition(success);
-    //        //if (navigator.geolocation) {
+    //$scope.GPScoords = null;
+    //var GPScoordsTmp = null;
+    // var posizioneG = function () {
+    //    //navigator.geolocation.getCurrentPosition(success);
+    //    if (navigator.geolocation) {
     //        navigator.geolocation.getCurrentPosition(function (position) {
-    //            //alert("your position is: " + position.coords.latitude + ", " + position.coords.longitude);
+    //            alert("your position is: " + position.coords.latitude + ", " + position.coords.longitude);
     //            GPScoordsTmp = "[ " + position.coords.latitude + ", " + position.coords.longitude + " ]";
     //            $scope.GPScoords = GPScoordsTmp;
     //        });
-    //        // } else {
-    //        //  showError("Your browser does not support Geolocation!");
-    //        // }
-    //    };
+    //    } else {
+    //        showError("Your browser does not support Geolocation!");
+    //    }
+    //};
 
     $scope.attachPosition = false;
 
@@ -106,6 +105,10 @@ angular.module('rifiuti.controllers.common', ['ionic'])
         $scope.tipiSegnalazioni = data;
         if (data.length >= 1) $scope.signal.selectedTipoSegnalazione = data[0];
     });
+
+    $scope.toggleAttachPosition = function (){
+        $scope.attachPosition = !$scope.attachPosition;
+    }
 
     $scope.takePicture = function () {
         var options = {
