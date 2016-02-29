@@ -159,6 +159,7 @@ angular.module('rifiuti.controllers.common', ['ionic'])
 
     if ($rootScope.myPosition) {
         $scope.GPScoords = '[ ' + $rootScope.myPosition.join(', ') + ' ]';
+        $scope.GPSPositions = $scope.GPScoords;
     }else{
         LoaderService.showToastByTime("gps_permission_toast", 7000);
     }
