@@ -55,8 +55,10 @@
 
             <div class="colorLegend" ng-repeat="(color, value) in colorLegendMap">
                 <div class="col">
-                    <div class="color-slot" style="background-color:{{getColor(color)}};"></div>
-                    <div>{{value}}</div>
+                    <div class="legend-slot">
+                        <div class="color-slot" style="background-color:{{getColor(color)}};"></div>
+                        <div class="item-slot">{{value}}</div>
+                    </div>
                 </div>
             </div>
         </div>
