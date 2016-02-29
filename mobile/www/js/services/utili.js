@@ -28,6 +28,13 @@ angular.module('rifiuti.services.utili', [])
 .factory('LoaderService', function($rootScope, $ionicLoading, $filter) {
   return {
 
+        showToastByTime : function(alertMsg, time){
+            $ionicLoading.show({
+                template:  $filter("translate")(alertMsg),
+                noBackdrop: true,
+                duration: time });
+        },
+
         showToast : function(alertMsg){
             $ionicLoading.show({
                 template:  $filter("translate")(alertMsg),

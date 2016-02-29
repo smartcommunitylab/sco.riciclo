@@ -71,23 +71,25 @@ angular.module('rifiuti.controllers.common', ['ionic'])
     }
 })
 
-.controller('SegnalaCtrl', function ($scope, $rootScope, $cordovaCamera, Raccolta) {
+.controller('SegnalaCtrl', function ($scope, $rootScope, $cordovaCamera, Raccolta, LoaderService) {
 
 
-    //$scope.GPScoords = null;
-    //var GPScoordsTmp = null;
-    // var posizioneG = function () {
-    //    //navigator.geolocation.getCurrentPosition(success);
-    //    if (navigator.geolocation) {
-    //        navigator.geolocation.getCurrentPosition(function (position) {
-    //            alert("your position is: " + position.coords.latitude + ", " + position.coords.longitude);
-    //            GPScoordsTmp = "[ " + position.coords.latitude + ", " + position.coords.longitude + " ]";
-    //            $scope.GPScoords = GPScoordsTmp;
-    //        });
-    //    } else {
-    //        showError("Your browser does not support Geolocation!");
-    //    }
-    //};
+    $scope.GPSPositions = null;
+    $scope.GPScoords = null;
+    var GPScoordsTmp = null;
+     var posizioneG = function () {
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(function (position) {
+                    //alert("your position is: " + position.coords.latitude + ", " + position.coords.longitude);
+                    GPScoordsTmp = "[ " + position.coords.latitude + ", " + position.coords.longitude + " ]";
+                    $scope.GPScoords = GPScoordsTmp;
+                    $scope.GPSPositions = GPScoordsTmp;
+                });
+            } else {
+                LoaderService.showToastByTime("gps_permission_toast", 7000);
+                showError("Your browser does not support Geolocation!");
+            }
+    };
 
     $scope.attachPosition = false;
 
@@ -126,7 +128,9 @@ angular.module('rifiuti.controllers.common', ['ionic'])
         $cordovaCamera.getPicture(options).then(function (imageData) {
             $scope.imgURI = imageData; //"data:image/jpeg;base64," + imageData;
         }, function (err) {
-            // An error occured. Show a message to the user
+            if(err.indexOf("Camera cancel")<0){
+                LoaderService.showToastByTime("camera_permission_toast", 7000);
+            }
         });
     }
 
@@ -155,8 +159,11 @@ angular.module('rifiuti.controllers.common', ['ionic'])
 
     if ($rootScope.myPosition) {
         $scope.GPScoords = '[ ' + $rootScope.myPosition.join(', ') + ' ]';
+    }else{
+        LoaderService.showToastByTime("gps_permission_toast", 7000);
     }
-    //    posizioneG();
+
+    posizioneG();
 
 })
 

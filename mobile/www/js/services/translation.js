@@ -1,4 +1,6 @@
 ITALIAN_VERSION = {
+        gps_permission_toast:"Per allegare le coordinate, si prega di verificare che la app disponga del permesso di localizzazione e di attivare il servizio di localizzazione sul dispositivo. Potrebbe essere necessario riavviare la app.",
+        camera_permission_toast:"La app non dispone del permesso di archiviazione. Si prega di attivarlo nelle impostazioni del dispositivo per questa app.",
         en:"Inglese",
         it:"Italiano",
         map_connection_toast:"Mappe non disponibili. Controlla la connessione Internet.",
@@ -139,6 +141,8 @@ ITALIAN_VERSION = {
 };
 
 ENGLISH_VERSION = {
+        gps_permission_toast:"To attach the coordinates, please verify that the app has 'localization' permission and turn on location services on your device. You may have to restart the app.",
+        camera_permission_toast:"The app does not have 'storage' permission. Please activate it within the device settings for this app.",
         en:"English",
         it:"Italian",
         map_connection_toast:"Map not available. Check your Internet connection.",
