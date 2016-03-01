@@ -375,7 +375,7 @@ body.platform-browser .scroll-bar-fade-out {
 .home-calendar .colorLegend .col .legend-slot .color-slot {
     height: 5px;
     width: 5px;
-    padding-top: 5px;
+    margin-top: 9px !important;
 }
 
 .home-calendar .colorLegend .col .legend-slot .item-slot {
