@@ -876,3 +876,19 @@ body.platform-browser .scroll-bar-fade-out {
 .icon-tipo {
     font-size: 35px;
 }
+
+.timePickerColon {
+  width: 10%;
+  display: block;
+}
+
+.timePickerArrows {
+    padding-left: 0px;
+    padding-right: 0px;
+    width: 100%;
+}
+
+.timePickerSpan {
+  width: 25%;
+  display: block;
+}
