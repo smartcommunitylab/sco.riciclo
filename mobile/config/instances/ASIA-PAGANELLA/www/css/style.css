@@ -369,13 +369,14 @@ body.platform-browser .scroll-bar-fade-out {
 .home-calendar .colorLegend .col .legend-slot {
     height: 100%;
     width: 100%;
-    display: inline-flex;
 }
 
 .home-calendar .colorLegend .col .legend-slot .color-slot {
     height: 5px;
     width: 5px;
-    margin-top: 9px !important;
+    padding-top: 5px;
+    vertical-align: middle;
+    display: inline-block;
 }
 
 .home-calendar .colorLegend .col .legend-slot .item-slot {
