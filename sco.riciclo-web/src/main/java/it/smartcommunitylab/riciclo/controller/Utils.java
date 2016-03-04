@@ -48,6 +48,9 @@ public class Utils {
 		//input:"45.893170,11.036281"
 		//output:[11.036281,45.893170]
 		String[] values = localizzazione.split(",");
+		if(values.length != 2) {
+			throw new NumberFormatException("string format not valid");
+		}
 		double[] result = new double[2];
 		result[0] = Double.valueOf(values[1].trim());
 		result[1] = Double.valueOf(values[0].trim());
