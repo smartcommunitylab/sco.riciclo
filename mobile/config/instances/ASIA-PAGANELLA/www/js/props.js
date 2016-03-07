@@ -3,8 +3,8 @@ DATA_VERSION = 2;
 API_KEY = "AIzaSyBmKVWmFzh2JHT7q1MLmQRQ7jC4AhkRBDs";
 //SEGNALA_EMAIL = "segnalazioni.rifiuti@comunitadellegiudicarie.it";
 VERSION = "1.0.1";
-APP_NAME="100% Riciclo - Comunità della Paganella";
-APP_NAME_CREDITS = "100% Riciclo<br/>Comunità della Paganella";
+APP_NAME="100% Riciclo - Paganella";
+APP_NAME_CREDITS = "100% Riciclo<br/>Paganella";
 APP_LOCATION_CREDITS = "Comunità della Paganella";
 ICON_COLOR_MAP = {'ARANCIONE': '#e69500', 
 'AZZURRO': '#00FFFF', 
