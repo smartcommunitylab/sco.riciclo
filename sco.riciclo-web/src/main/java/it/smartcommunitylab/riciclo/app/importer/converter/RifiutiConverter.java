@@ -89,6 +89,7 @@ public class RifiutiConverter {
 	@SuppressWarnings("unchecked")
 	public AppDataRifiuti convert(Object input, String ownerId) throws Exception {
 		it.smartcommunitylab.riciclo.app.importer.model.Rifiuti rifiuti = (it.smartcommunitylab.riciclo.app.importer.model.Rifiuti) input;
+		int count = 0;
 		
 		ObjectMapper mapper = new ObjectMapper();
 		mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
@@ -151,6 +152,9 @@ public class RifiutiConverter {
 		//AREE
 		List<Area> aree = Lists.newArrayList();
 		for (Aree ar : rifiuti.getAree()) {
+			if(logger.isInfoEnabled()) {
+				logger.info("convert Area:" + ar.getNome());
+			}
 			//Area area = mapper.convertValue(ar, Area.class);
 			Area area = new Area();
 			area.setObjectId(ar.getNome());
@@ -188,6 +192,9 @@ public class RifiutiConverter {
 		//GESTORI
 		List<Gestore> gestori = Lists.newArrayList();
 		for (Gestori gs : rifiuti.getGestori()) {
+			if(logger.isInfoEnabled()) {
+				logger.info("convert Gestore:" + gs.getRagioneSociale() + " - " + gs.getUfficio());
+			}
 			Gestore gestore = new Gestore();
 			gestore.setOwnerId(ownerId);
 			gestore.setObjectId(gs.getRagioneSociale() + " - " + gs.getUfficio());
@@ -209,6 +216,9 @@ public class RifiutiConverter {
 		//ISTITUZIONI
 		List<Istituzione> istituzioni = Lists.newArrayList();
 		for (Istituzioni is : rifiuti.getIstituzioni()) {
+			if(logger.isInfoEnabled()) {
+				logger.info("convert Istituzione:" + is.getNome() + " - " + is.getUfficio());
+			}
 			Istituzione istituzione = new Istituzione();
 			istituzione.setOwnerId(ownerId);
 			istituzione.setObjectId(is.getNome() + " - " + is.getUfficio());
@@ -230,7 +240,11 @@ public class RifiutiConverter {
 
 		//RACCOLTE
 		List<Raccolta> raccolte = Lists.newArrayList();
+		count = 0;
 		for (it.smartcommunitylab.riciclo.app.importer.model.Raccolte rc : (List<it.smartcommunitylab.riciclo.app.importer.model.Raccolte>) rifiuti.getRaccolte()) {
+			if(logger.isInfoEnabled()) {
+				logger.info("convert Raccolta:" + count);
+			}
 			Raccolta raccolta = new Raccolta();
 			raccolta.setOwnerId(ownerId);
 			raccolta.setObjectId(UUID.randomUUID().toString());
@@ -243,6 +257,7 @@ public class RifiutiConverter {
 			raccolta.getInfoRaccolta().put(defaultLang, rc.getInfoRaccolta());
 			raccolte.add(raccolta);
 			//categorie.getColori().add(new Tipologia(raccolta.getColore(), null, null));
+			count++;
 		}
 		output.setRaccolte(raccolte);
 
