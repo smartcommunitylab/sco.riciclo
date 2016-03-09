@@ -138,6 +138,7 @@ angular.module('rifiuti.services.utili', [])
     var eccDates = calToDates(da, a, ecc, null);
     for (var i = 0; i < arr.length; i++) {
       var elem = arr[i];
+      if (elem == "") continue;
       var idx = giorniC.indexOf(elem);          
       // DOW case
       if (idx >= 0) {
