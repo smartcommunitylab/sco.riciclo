@@ -8,20 +8,21 @@ angular.module('rifiuti.services.calendar', [])
     var appendToCalendarCell = function(cell, calItem, puntoDiRaccolta,colorLegendMap,colorLegendAshMap) {
       if (cell.colors.indexOf(puntoDiRaccolta.colore) < 0) {
           cell.colors.push(puntoDiRaccolta.colore);
-
-          if(!colorLegendAshMap[puntoDiRaccolta.colore]){
-            colorLegendAshMap[puntoDiRaccolta.colore] = [];
-            colorLegendMap[puntoDiRaccolta.colore] = {};
-            colorLegendAshMap[puntoDiRaccolta.colore].push(puntoDiRaccolta.tipoPuntoRaccolta.id);
-            colorLegendMap[puntoDiRaccolta.colore] = " "+puntoDiRaccolta.tipoPuntoRaccolta.id;
-          }
-
-          if(!!colorLegendAshMap[puntoDiRaccolta.colore] &&
-             colorLegendAshMap[puntoDiRaccolta.colore].indexOf(puntoDiRaccolta.tipoPuntoRaccolta.id)<0){
-             colorLegendAshMap[puntoDiRaccolta.colore].push(puntoDiRaccolta.tipoPuntoRaccolta.id);
-             colorLegendMap[puntoDiRaccolta.colore] = colorLegendMap[puntoDiRaccolta.colore]+", "+puntoDiRaccolta.tipoPuntoRaccolta.id;
-          }
       }
+
+      if(!colorLegendAshMap[puntoDiRaccolta.colore]){
+        colorLegendAshMap[puntoDiRaccolta.colore] = [];
+        colorLegendMap[puntoDiRaccolta.colore] = {};
+        colorLegendAshMap[puntoDiRaccolta.colore].push(puntoDiRaccolta.tipoPuntoRaccolta.id);
+        colorLegendMap[puntoDiRaccolta.colore] = " "+puntoDiRaccolta.tipoPuntoRaccolta.id;
+      }
+
+      if(!!colorLegendAshMap[puntoDiRaccolta.colore] &&
+         colorLegendAshMap[puntoDiRaccolta.colore].indexOf(puntoDiRaccolta.tipoPuntoRaccolta.id)<0){
+         colorLegendAshMap[puntoDiRaccolta.colore].push(puntoDiRaccolta.tipoPuntoRaccolta.id);
+         colorLegendMap[puntoDiRaccolta.colore] = colorLegendMap[puntoDiRaccolta.colore]+", "+puntoDiRaccolta.tipoPuntoRaccolta.id;
+      }
+      //}
       
       var key = null, t = null, descr = null;
       var proto = null;
