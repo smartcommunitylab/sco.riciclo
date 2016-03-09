@@ -115,8 +115,8 @@ angular.module('rifiuti.services.utili', [])
       var res = [];
       var currFrom = new Date(da.getTime());
       currFrom.setDate(currFrom.getDate()-dayIndex(giorni[currFrom.getDay()])+dow);
-      while (currFrom.getTime() < a.getTime()) {
-        if (currFrom.getTime() > da.getTime()) {
+      while (currFrom.getTime() <= a.getTime()) {
+        if (currFrom.getTime() >= da.getTime()) {
           var dStr = format(currFrom);
           if (!ecc || ecc.indexOf(dStr) < 0) res.push(dStr);
         }
