@@ -37,36 +37,36 @@
     "ASIA-PAGANELLA": {
         "resource_folder": "config/instances/ASIA-PAGANELLA",
         "widget_id" : "it.smartcommunitylab.rifiuti.asia.paganella",
-        "version": "1.0.2",
-        "version_code": "3",
+        "version": "1.0.3",
+        "version_code": "4",
         "app_name": "100% Riciclo - Paganella"
     },
     "ASIA-ADIGE": {
         "resource_folder": "config/instances/ASIA-ADIGE",
         "widget_id" : "it.smartcommunitylab.rifiuti.asia.adige",
-        "version": "1.0.1",
-        "version_code": "2",
+        "version": "1.0.2",
+        "version_code": "3",
         "app_name": "100%RicicloAldenoCimoneGarniga"
     },
     "ASIA-VALLELAGHI": {
         "resource_folder": "config/instances/ASIA-VALLELAGHI",
         "widget_id" : "it.smartcommunitylab.rifiuti.asia.vallelaghi",
-        "version": "1.0.2",
-        "version_code": "3",
+        "version": "1.0.3",
+        "version_code": "4",
         "app_name": "100% Riciclo - Valle dei Laghi"
     },
     "ASIA-CEMBRA": {
         "resource_folder": "config/instances/ASIA-CEMBRA",
         "widget_id" : "it.smartcommunitylab.rifiuti.asia.cembra",
-        "version": "1.0.2",
-        "version_code": "3",
+        "version": "1.0.3",
+        "version_code": "4",
         "app_name": "100% Riciclo - Valle di Cembra"
     },
     "ASVO": {
         "resource_folder": "config/instances/ASVO",
         "widget_id" : "it.smartcommunitylab.rifiuti.asvo",
-        "version": "1.0.0",
-        "version_code": "4",
+        "version": "1.0.1",
+        "version_code": "5",
         "app_name": "100% Riciclo - ASVO s.p.a."
     }
 }
