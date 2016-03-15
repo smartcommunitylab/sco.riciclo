@@ -44,8 +44,8 @@
     "ASIA-ADIGE": {
         "resource_folder": "config/instances/ASIA-ADIGE",
         "widget_id" : "it.smartcommunitylab.rifiuti.asia.adige",
-        "version": "1.0.2",
-        "version_code": "3",
+        "version": "1.0.3",
+        "version_code": "4",
         "app_name": "100%RicicloAldenoCimoneGarniga"
     },
     "ASIA-VALLELAGHI": {
