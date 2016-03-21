@@ -32,7 +32,7 @@
         "widget_id" : "it.smartcommunitylab.rifiuti.esacom",
         "version": "0.0.1",
         "version_code": "1",
-        "app_name": "100% Riciclo - ESACOM"
+        "app_name": "100% Riciclo - ESA-Com"
     },
     "ASIA-PAGANELLA": {
         "resource_folder": "config/instances/ASIA-PAGANELLA",
