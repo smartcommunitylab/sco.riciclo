@@ -1,7 +1,7 @@
 [
 {
 	"valore": "Abiti usati",
-	"immagine": "img/abiti_usati.png"
+	"immagine": "img/Abiti_usati.png"
 },
 {
 	"valore": "Alluminio ferro metallo",
@@ -9,59 +9,59 @@
 },
 {
 	"valore": "Altro",
-	"immagine": "img/altro.png"
+	"immagine": "img/Altro.png"
 },
 {
 	"valore": "Batterie",
-	"immagine": "img/batterie.png"
+	"immagine": "img/Batterie.png"
 },
 {
 	"valore": "Carta",
-	"immagine": "img/carta.png"
+	"immagine": "img/Carta.png"
 },
 {
 	"valore": "Cartone",
-	"immagine": "img/cartone.png"
+	"immagine": "img/Cartone.png"
 },
 {
 	"valore": "Cartucce stampante - toner",
-	"immagine": "img/cartucce_stampante_toner.png"
+	"immagine": "img/Cartucce_stampante_toner.png"
 },
 {
 	"valore": "Inerti",
-	"immagine": "img/inerti.png"
+	"immagine": "img/Inerti.png"
 },
 {
 	"valore": "Ingombranti",
-	"immagine": "img/ingombranti.png"
+	"immagine": "img/Ingombranti.png"
 },
 {
 	"valore": "Legno",
-	"immagine": "img/legno.png"
+	"immagine": "img/Legno.png"
 },
 {
 	"valore": "Medicinali",
-	"immagine": "img/medicinali.png"
+	"immagine": "img/Medicinali.png"
 },
 {
 	"valore": "Neon",
-	"immagine": "img/neon.png"
+	"immagine": "img/Neon.png"
 },
 {
 	"valore": "Olio minerale",
-	"immagine": "img/olio_minerale.png"
+	"immagine": "img/Olio_minerale.png"
 },
 {
 	"valore": "Olio vegetale",
-	"immagine": "img/olio_vegetale.png"
+	"immagine": "img/Olio_vegetale.png"
 },
 {
 	"valore": "Pannolini / pannoloni",
-	"immagine": "img/pannolini_pannoloni.png"
+	"immagine": "img/Pannolini_pannoloni.png"
 },
 {
 	"valore": "Pile",
-	"immagine": "img/pile.png"
+	"immagine": "img/Pile.png"
 },
 {
 	"valore": "Plastica",
@@ -73,22 +73,22 @@
 },
 {
 	"valore": "Secco",
-	"immagine": "img/secco.png"
+	"immagine": "img/Secco.png"
 },
 {
 	"valore": "Tossici nocivi non bonificati",
-	"immagine": "img/tossici_nocivi_non_bonificati.png"
+	"immagine": "img/Tossici_nocivi_non_bonificati.png"
 },
 {
 	"valore": "Umido",
-	"immagine": "img/umido.png"
+	"immagine": "img/Umido.png"
 },
 {
 	"valore": "Verde ramaglie",
-	"immagine": "img/verde_ramaglie.png"
+	"immagine": "img/Verde_ramaglie.png"
 },
 {
 	"valore": "Vetro",
-	"immagine": "img/vetro.png"
+	"immagine": "img/Vetro.png"
 }
 ]
