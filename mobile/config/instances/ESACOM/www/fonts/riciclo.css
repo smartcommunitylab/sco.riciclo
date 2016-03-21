@@ -1,10 +1,10 @@
 @font-face {
     font-family: 'riciclo';
-    src:    url('riciclo.eot?jduf5m');
-    src:    url('riciclo.eot?jduf5m#iefix') format('embedded-opentype'),
-        url('riciclo.ttf?jduf5m') format('truetype'),
-        url('riciclo.woff?jduf5m') format('woff'),
-        url('riciclo.svg?jduf5m#riciclo') format('svg');
+    src:    url('riciclo.eot?a0qyb');
+    src:    url('riciclo.eot?a0qyb#iefix') format('embedded-opentype'),
+        url('riciclo.ttf?a0qyb') format('truetype'),
+        url('riciclo.woff?a0qyb') format('woff'),
+        url('riciclo.svg?a0qyb#riciclo') format('svg');
     font-weight: normal;
     font-style: normal;
 }
@@ -24,74 +24,44 @@
     -moz-osx-font-smoothing: grayscale;
 }
 
+.riciclo-esacom-ecobox:before {
+    content: "\e91c";
+}
+.riciclo-esacom-pp_ingombranti_gratuito:before {
+    content: "\e91d";
+}
+.riciclo-esacom-pp_ingombranti_pagamento:before {
+    content: "\e922";
+}
+.riciclo-esacom-pp_vetro:before {
+    content: "\e91b";
+}
+.riciclo-esacom-pp_cartone:before {
+    content: "\e921";
+}
+.riciclo-esacom-erba_ramaglie:before {
+    content: "\e902";
+}
+.riciclo-esacon-humana_caritas:before {
+    content: "\e912";
+}
+.riciclo-esacom-n_verde:before {
+    content: "\e915";
+}
+.riciclo-esacom-isola_ecologica:before {
+    content: "\e916";
+}
+.riciclo-esacom-punto_raccolta_rup:before {
+    content: "\e918";
+}
+.riciclo-esacom-pp_umido:before {
+    content: "\e919";
+}
+.riciclo-esacom-porta_porta:before {
+    content: "\e91a";
+}
 .riciclo-calendar_list:before {
     content: "\e90f";
-}
-.riciclo-bar-outline:before {
-    content: "\e903";
-}
-.riciclo-bar:before {
-    content: "\e90e";
-}
-.riciclo-ecobox:before {
-    content: "\e900";
-}
-.riciclo-rup_medicinali-outline:before {
-    content: "\1f322";
-}
-.riciclo-rup_nocivi-outline:before {
-    content: "\e904";
-}
-.riciclo-rup_pile-outline:before {
-    content: "\e905";
-}
-.riciclo-ecobox-outline:before {
-    content: "\e906";
-}
-.riciclo-rup_medicinali:before {
-    content: "\e907";
-}
-.riciclo-rup_nocivi:before {
-    content: "\e908";
-}
-.riciclo-rup_pile:before {
-    content: "\e909";
-}
-.riciclo-ditta_specializzata:before {
-    content: "\e90a";
-}
-.riciclo-ditta_specializzata-outline:before {
-    content: "\e90b";
-}
-.riciclo-caritas:before {
-    content: "\e90c";
-}
-.riciclo-caritas-outline:before {
-    content: "\e90d";
-}
-.riciclo-crm-outline:before {
-    content: "\e62c";
-}
-.riciclo-crz-outline:before {
-    content: "\e62d";
-}
-.riciclo-domicilio-outline:before {
-    content: "\e625";
-}
-.riciclo-farmacia-outline:before {
-    content: "\e626";
-}
-.riciclo-isola_ecologica-outline:before {
-    content: "\e628";
-}
-.riciclo-porta_a_porta-outline:before {
-    content: "\e629";
-}
-.riciclo-rivenditore-outline:before {
-    content: "\e62a";
-}
-.riciclo-stradale-outline:before {
-    content: "\e62b";
 }
 .riciclo-add:before {
     content: "\e600";
@@ -104,12 +74,6 @@
 }
 .riciclo-contatti:before {
     content: "\e604";
-}
-.riciclo-crm:before {
-    content: "\e605";
-}
-.riciclo-crz:before {
-    content: "\e606";
 }
 .riciclo-discard:before {
     content: "\e607";
@@ -141,9 +105,6 @@
 .riciclo-info:before {
     content: "\e611";
 }
-.riciclo-isola_ecologica:before {
-    content: "\e612";
-}
 .riciclo-lista:before {
     content: "\e613";
 }
@@ -165,23 +126,14 @@
 .riciclo-pec:before {
     content: "\e619";
 }
-.riciclo-porta_a_porta:before {
-    content: "\e61a";
-}
 .riciclo-punti_di_raccolta:before {
     content: "\e61b";
-}
-.riciclo-rivenditore:before {
-    content: "\e61c";
 }
 .riciclo-save:before {
     content: "\e61d";
 }
 .riciclo-segnala:before {
     content: "\e61e";
-}
-.riciclo-stradale:before {
-    content: "\e61f";
 }
 .riciclo-telephone:before {
     content: "\e620";
