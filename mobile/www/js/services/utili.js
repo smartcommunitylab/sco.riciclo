@@ -25,7 +25,7 @@ angular.module('rifiuti.services.utili', [])
    }
 })
 
-.factory('LoaderService', function($rootScope, $ionicLoading, $filter) {
+.factory('LoaderService', function($rootScope, $ionicLoading, $ionicPopup, $filter) {
   return {
 
         showToastByTime : function(alertMsg, time){
@@ -68,10 +68,28 @@ angular.module('rifiuti.services.utili', [])
             if ($rootScope.loading) {
                 $ionicLoading.hide();
             }
+        },
+
+        showPopUp : function(msg, title) {
+            var popUpTitle = 'warning';
+
+            if(!!title){
+                popUpTitle = title;
+            }
+
+            $ionicPopup.show({
+                title: '<b class="popup-title">'+$filter("translate")(popUpTitle)+'<b/>',
+                template: $filter("translate")(msg),
+                buttons: [
+                    {
+                        text: 'OK'
+                    }
+                ]
+            });
         }
+
     }
 })
-
 .factory('Utili', function () {
   var mesi = ["Gennaio", "Febbraio", "Marzo", "Aprile", "Maggio", "Giugno", "Luglio", "Agosto", "Settembre", "Ottobre", "Novembre", "Dicembre"];
   var giorni = ["DOM", "LUN", "MAR", "MER", "GIO", "VEN", "SAB"];

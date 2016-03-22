@@ -86,7 +86,7 @@ angular.module('rifiuti.controllers.common', ['ionic'])
                     $scope.GPSPositions = GPScoordsTmp;
                 });
             } else {
-                LoaderService.showToastByTime("gps_permission_toast", 7000);
+                LoaderService.showPopUp("gps_permission_toast");
                 showError("Your browser does not support Geolocation!");
             }
     };
@@ -129,7 +129,7 @@ angular.module('rifiuti.controllers.common', ['ionic'])
             $scope.imgURI = imageData; //"data:image/jpeg;base64," + imageData;
         }, function (err) {
             if(err.indexOf("Camera cancel")<0){
-                LoaderService.showToastByTime("camera_permission_toast", 7000);
+                LoaderService.showPopUp("camera_permission_toast");
             }
         });
     }
@@ -161,7 +161,7 @@ angular.module('rifiuti.controllers.common', ['ionic'])
         $scope.GPScoords = '[ ' + $rootScope.myPosition.join(', ') + ' ]';
         $scope.GPSPositions = $scope.GPScoords;
     }else{
-        LoaderService.showToastByTime("gps_permission_toast", 7000);
+        LoaderService.showPopUp("gps_permission_toast");
     }
 
     posizioneG();
