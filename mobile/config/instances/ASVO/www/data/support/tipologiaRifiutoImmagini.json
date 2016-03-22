@@ -9,7 +9,7 @@
 },
 {
 	"valore": "Calcinacci",
-	"immagine": "img/???"
+	"immagine": "img/Inerti.png"
 },
 {
 	"valore": "Carta",
@@ -29,19 +29,19 @@
 },
 {
 	"valore": "Contenitore bonificato in metallo",
-	"immagine": "img/???"
+	"immagine": "img/Tossici_nocivi_bonificati_metallo.png"
 },
 {
 	"valore": "Contenitore bonificato in plastica",
-	"immagine": "img/???"
+	"immagine": "img/Tossici_nocivi_bonificati_plastica.png"
 },
 {
 	"valore": "Contenitore bonificato in vetro",
-	"immagine": "img/???"
+	"immagine": "img/Tossici_nocivi_bonificati_vetro.png"
 },
 {
 	"valore": "Contenitore con residuo pericoloso",
-	"immagine": "img/???"
+	"immagine": "img/Tossici_nocivi_non_bonificati.png"
 },
 {
 	"valore": "Erba e ramaglie",
@@ -102,10 +102,6 @@
 {
 	"valore": "Raee",
 	"immagine": "img/RAEE.png"
-},
-{
-	"valore": "Sacchi",
-	"immagine": "img/???"
 },
 {
 	"valore": "Secco",
