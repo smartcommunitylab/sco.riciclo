@@ -4,12 +4,12 @@
 	"immagine": "img/indumenti_usati.png"
 },
 {
-	"valore": "Altro",
-	"immagine": "img/Altro.png"
-},
-{
 	"valore": "Batterie",
 	"immagine": "img/Pile.png"
+},
+{
+	"valore": "Calcinacci",
+	"immagine": "img/???"
 },
 {
 	"valore": "Carta",
@@ -20,20 +20,40 @@
 	"immagine": "img/Cartone.png"
 },
 {
-	"valore": "Cartucce stampante - toner",
+	"valore": "Cartucce stampante",
 	"immagine": "img/cartucce_toner_esaurite.png"
 },
 {
-	"valore": "Imballaggi in metallo o ferro",
+	"valore": "Contattare numero verde",
+	"immagine": "img/numero_verde.png"
+},
+{
+	"valore": "Contenitore bonificato in metallo",
+	"immagine": "img/???"
+},
+{
+	"valore": "Contenitore bonificato in plastica",
+	"immagine": "img/???"
+},
+{
+	"valore": "Contenitore bonificato in vetro",
+	"immagine": "img/???"
+},
+{
+	"valore": "Contenitore con residuo pericoloso",
+	"immagine": "img/???"
+},
+{
+	"valore": "Erba e ramaglie",
+	"immagine": "img/Verde_ramaglie.png"
+},
+{
+	"valore": "Imballaggi in metallo",
 	"immagine": "img/imballaggi_metallo.png"
 },
 {
 	"valore": "Imballaggi in plastica",
 	"immagine": "img/Imballaggi_plastica.png"
-},
-{
-	"valore": "Inerti",
-	"immagine": "img/Inerti.png"
 },
 {
 	"valore": "Ingombranti",
@@ -84,6 +104,10 @@
 	"immagine": "img/RAEE.png"
 },
 {
+	"valore": "Sacchi",
+	"immagine": "img/???"
+},
+{
 	"valore": "Secco",
 	"immagine": "img/residuo.png"
 },
@@ -96,28 +120,12 @@
 	"immagine": "img/cartoni_per_bevande.png"
 },
 {
-	"valore": "Tossici nocivi bonificati metallo",
-	"immagine": "img/Tossici_nocivi_bonificati_metallo.png"
-},
-{
-	"valore": "Tossici nocivi bonificati plastica",
-	"immagine": "img/Tossici_nocivi_bonificati_plastica.png"
-},
-{
-	"valore": "Tossici nocivi bonificati vetro",
-	"immagine": "img/Tossici_nocivi_bonificati_vetro.png"
-},
-{
-	"valore": "Tossici nocivi non bonificati",
-	"immagine": "img/Tossici_nocivi_non_bonificati.png"
-},
-{
 	"valore": "Umido",
 	"immagine": "img/organico.png"
 },
 {
-	"valore": "Verde - ramaglie",
-	"immagine": "img/Verde_ramaglie.png"
+	"valore": "Vernici e colori",
+	"immagine": "img/vernice_colori.png"
 },
 {
 	"valore": "Vetro",
