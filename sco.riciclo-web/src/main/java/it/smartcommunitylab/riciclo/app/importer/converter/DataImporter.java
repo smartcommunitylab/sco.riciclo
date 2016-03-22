@@ -209,9 +209,15 @@ public class DataImporter {
 		ObjectMapper mapper = new ObjectMapper();
 		List<Object> fields = new ArrayList<Object>();
 
+		int count = 0;
 		for (Map<String, String> map : data) {
+			System.out.println("convert line " + count);
+			if(map.containsKey("")) {
+				map.remove("");
+			}
 			Object o = mapper.convertValue(map, clazz);
 			fields.add(o);
+			count++;
 		}
 
 		Method method2 = Rifiuti.class.getMethod("set" + WordUtils.capitalize(field), List.class);
