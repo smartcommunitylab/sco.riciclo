@@ -443,15 +443,33 @@ angular.module('rifiuti.controllers.raccolta', [])
 
         if(isInDateInRange(orario)){
             var j = $scope.checkGiorni(orario.il);
+
+            var hour = calItem.dalle;
+            if(orario.dalle == null || orario.alle == null){
+              if(orario.dalle != null){
+                   hour = orario.dalle;
+              }
+              if(orario.alle != null){
+                  hour = orario.alle;
+              }
+              if(orario.alle == null && orario.dalle == null){
+                  hour = '';
+              }
+            }else{
+              if(orario.dalle != orario.alle){
+                hour = orario.dalle +'-'+orario.alle;
+              }
+            }
+
             if (j == -1) {
               $scope.orari.push({
                 giorno: orario.il.split(' '),
                 ecceto: orario.eccezione? orario.eccezione.split(' ') : [],
-                orari:[ orario.dalle + "-" + orario.alle ]
+                orari:[ hour ]
               });
             } else {
-              if ($scope.orari[j].orari.indexOf(orario.dalle + "-" + orario.alle) == -1) {
-                $scope.orari[j].orari.push(orario.dalle + "-" + orario.alle);
+              if ($scope.orari[j].orari.indexOf(hour) == -1) {
+                $scope.orari[j].orari.push(hour);
               }
             }
         }
@@ -496,17 +514,35 @@ angular.module('rifiuti.controllers.raccolta', [])
     $scope.pdr = punti[0];
     punti.forEach(function(punto){
       punto.orarioApertura.forEach(function(orario) {
-      var j = $scope.checkGiorni(orario.il);
+        var j = $scope.checkGiorni(orario.il);
+
+        var hour = calItem.dalle;
+        if(orario.dalle == null || orario.alle == null){
+          if(orario.dalle != null){
+               hour = orario.dalle;
+          }
+          if(orario.alle != null){
+              hour = orario.alle;
+          }
+          if(orario.alle == null && orario.dalle == null){
+              hour = '';
+          }
+        }else{
+          if(orario.dalle != orario.alle){
+            hour = orario.dalle +'-'+orario.alle;
+          }
+        }
+
         if (j == -1) {
           $scope.orari.push({
             giorno: orario.il.split(' '),
             ecceto: orario.eccezione? orario.eccezione.split(' ') : [],
-            orari:[ orario.dalle + "-" + orario.alle ],
+            orari:[ hour ],
             note: [orario.note]
           });
         } else {
-          if ($scope.orari[j].orari.indexOf(orario.dalle + "-" + orario.alle) == -1) {
-            $scope.orari[j].orari.push(orario.dalle + "-" + orario.alle);
+          if ($scope.orari[j].orari.indexOf(hour) == -1) {
+            $scope.orari[j].orari.push(hour);
             $scope.orari[j].note.push(orario.note);
           }
         }
