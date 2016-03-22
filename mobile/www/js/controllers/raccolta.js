@@ -30,6 +30,9 @@ angular.module('rifiuti.controllers.raccolta', [])
                   var tipologiaId = $scope.rifiuti[i].tipologiaRifiuto.trim();
                   var tipologiaLabel = $scope.tipiDiRifiuti[tipologiaId].nome;
                   var tipologiaIcona = $scope.tipiDiRifiuti[tipologiaId].icona;
+				  if(!tipologiaIcona) {
+					  tipologiaIcona = tipologiaLabel;
+				  }
                   if (!(tipologiaId in tipologieMap)) tipologieMap[tipologiaId] = {link: tipologiaId,label:tipologiaLabel, img:$scope.immagini[tipologiaIcona]};
               }
               var tipologieArray = [];
@@ -405,12 +408,87 @@ angular.module('rifiuti.controllers.raccolta', [])
   $scope.orari = [];
   //[{giorno:"lunedì",orari:["12.00-14.00","15.30-17.30"...]}...]
 
+  var today = new Date();
+
   $scope.checkGiorni = function (item) {
     for (var j = 0; j < $scope.orari.length; j++) {
       if ($scope.orari[j].giorno == item) return j;
     }
     return -1;
   };
+
+  var dayInWeek = ["lunedì","martedì","mercoledì","giovedì","venerdì","sabato","domenica"];
+
+  var orderOrari = function(){
+    var fixedDays = [];
+    var ashDayOrari = {};
+    var orderedOrari = [];
+
+    $scope.orari.forEach(function(orario){
+        if(dayInWeek.indexOf(orario.giorno[0])>-1){
+            if(ashDayOrari[orario.giorno]==null){
+                ashDayOrari[orario.giorno] = [];
+            }
+
+            ashDayOrari[orario.giorno].push(orario);
+        }else{
+            fixedDays.push(orario);
+        }
+    })
+
+    dayInWeek.forEach(function(day){
+        if(!!ashDayOrari[day]){
+            ashDayOrari[day].forEach(function(dayAr){
+                var orario = dayAr;
+                orderedOrari.push(orario);
+            });
+        }
+    })
+
+    fixedDays.forEach(function(orario){
+        orderedOrari.push(orario);
+    })
+
+    $scope.orari = orderedOrari;
+  }
+
+  var getDateBySlpittedDate = function (splittedeDate){
+    var year = null;
+    var month = null;
+    var day = null;
+    var date = null;
+
+    try{
+        year = parseInt(splittedeDate[0]);
+        month = parseInt(splittedeDate[1]);
+        day = parseInt(splittedeDate[2]);
+
+        date = new Date(year, month-1, day);
+    }catch(err){
+        console.log("invalid date: "+splittedeDate);
+        return null;
+    }
+
+    return date;
+  }
+
+  var isInDateInRange = function (orario){
+    if(!!orario){
+        var orarioDataDa = orario.dataDa.split("-");
+        var orarioDataA = orario.dataA.split("-");
+        if((!!orarioDataDa && orarioDataDa.length==3)&&
+           (!!orarioDataA && orarioDataA.length==3)){
+            var dataDa = getDateBySlpittedDate(orarioDataDa);
+            var dataA = getDateBySlpittedDate(orarioDataA);
+
+            if(dataDa<=today && dataA>=today){
+                return true;
+            }
+        }
+    }
+
+    return false;
+  }
   
   $scope.clickNav = function() {
     if ($scope.pdr.localizzazione) window.open("http://maps.google.com?daddr="+$scope.pdr.localizzazione,"_system");
@@ -421,20 +499,42 @@ angular.module('rifiuti.controllers.raccolta', [])
     $scope.pdr = punti[0];
     punti.forEach(function(punto){
       punto.orarioApertura.forEach(function(orario) {
-        var j = $scope.checkGiorni(orario.il);
-        if (j == -1) {
-          $scope.orari.push({
-            giorno: orario.il.split(' '),
-            ecceto: orario.eccezione? orario.eccezione.split(' ') : [],
-            orari:[ orario.dalle + "-" + orario.alle ]
-          });
-        } else {
-          if ($scope.orari[j].orari.indexOf(orario.dalle + "-" + orario.alle) == -1) {
-            $scope.orari[j].orari.push(orario.dalle + "-" + orario.alle);
-          }
+        if(isInDateInRange(orario)){
+            var j = $scope.checkGiorni(orario.il);
+
+            var hour = orario.dalle;
+            if(orario.dalle == null || orario.alle == null){
+              if(orario.dalle != null){
+                   hour = orario.dalle;
+              }
+              if(orario.alle != null){
+                  hour = orario.alle;
+              }
+              if(orario.alle == null && orario.dalle == null){
+                  hour = '';
+              }
+            }else{
+              if(orario.dalle != orario.alle){
+                hour = orario.dalle +'-'+orario.alle;
+              }
+            }
+            if (j == -1) {
+              $scope.orari.push({
+                giorno: orario.il.split(' '),
+                ecceto: orario.eccezione? orario.eccezione.split(' ') : [],
+                orari:[ hour ]
+              });
+            } else {
+              if ($scope.orari[j].orari.indexOf(hour) == -1) {
+                $scope.orari[j].orari.push(hour);
+              }
+            }
         }
       });
     });
+
+    orderOrari();
+
     Raccolta.raccolta({ tipopunto:$scope.pdr.tipologiaPuntiRaccolta }).then(function(raccolta){
       var myRifiuti=[];
       var myRifiutiId=[];
@@ -471,17 +571,36 @@ angular.module('rifiuti.controllers.raccolta', [])
     $scope.pdr = punti[0];
     punti.forEach(function(punto){
       punto.orarioApertura.forEach(function(orario) {
-      var j = $scope.checkGiorni(orario.il);
+        var j = $scope.checkGiorni(orario.il);
+
+        var hour = calItem.dalle;
+        if(orario.dalle == null || orario.alle == null){
+          if(orario.dalle != null){
+               hour = orario.dalle;
+          }
+          if(orario.alle != null){
+              hour = orario.alle;
+          }
+          if(orario.alle == null && orario.dalle == null){
+              hour = '';
+          }
+        }else{
+          if(orario.dalle != orario.alle){
+            hour = orario.dalle +'-'+orario.alle;
+          }
+        }
+
         if (j == -1) {
           $scope.orari.push({
             giorno: orario.il.split(' '),
             ecceto: orario.eccezione? orario.eccezione.split(' ') : [],
-            orari: (orario.dalle && orario.alle)? [ orario.dalle + "-" + orario.alle ] : [],
+            orari:[ hour ],
+
             note: [orario.note]
           });
         } else {
-          if ($scope.orari[j].orari.indexOf(orario.dalle + "-" + orario.alle) == -1) {
-            $scope.orari[j].orari.push(orario.dalle + "-" + orario.alle);
+          if ($scope.orari[j].orari.indexOf(hour) == -1) {
+            $scope.orari[j].orari.push(hour);
             $scope.orari[j].note.push(orario.note);
           }
         }
@@ -490,6 +609,7 @@ angular.module('rifiuti.controllers.raccolta', [])
         }
       });
     });
+
     Raccolta.raccolta({ tipopunto:$scope.pdr.tipologiaPuntiRaccolta }).then(function(raccolta){
       var myRifiuti=[];
       var myRifiutiUniqueCounter=[];

@@ -26,8 +26,21 @@ angular.module('rifiuti.services.calendar', [])
       var key = null, t = null, descr = null;
       var proto = null;
       var hour = calItem.dalle;
-      if(calItem.dalle != calItem.alle){
-        hour = calItem.dalle +'-'+calItem.alle;
+
+      if(calItem.dalle == null || calItem.alle == null){
+        if(calItem.dalle != null){
+             hour = calItem.dalle;
+        }
+        if(calItem.alle != null){
+            hour = calItem.alle;
+        }
+        if(calItem.alle == null && calItem.dalle == null){
+            hour = '';
+        }
+      }else{
+          if(calItem.dalle != calItem.alle){
+            hour = calItem.dalle +'-'+calItem.alle;
+          }
       }
 
       if (Utili.isPaP(puntoDiRaccolta.tipoPuntoRaccolta)) {
@@ -48,10 +61,11 @@ angular.module('rifiuti.services.calendar', [])
           proto.descr[proto.descr.length-1] += ', ' + hour;
           cell.events[key].events = [];
         } else {
+
           proto = {
             tipologiaPuntiRaccolta: puntoDiRaccolta.tipoPuntoRaccolta.nome,
             colore: puntoDiRaccolta.colore,
-            descr : [puntoDiRaccolta.dettagliZona, calItem.dalle +'-'+calItem.alle]
+            descr : [puntoDiRaccolta.dettagliZona, hour]
           };
         }
       }
