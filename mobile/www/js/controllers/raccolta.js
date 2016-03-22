@@ -444,7 +444,7 @@ angular.module('rifiuti.controllers.raccolta', [])
         if(isInDateInRange(orario)){
             var j = $scope.checkGiorni(orario.il);
 
-            var hour = calItem.dalle;
+            var hour = orario.dalle;
             if(orario.dalle == null || orario.alle == null){
               if(orario.dalle != null){
                    hour = orario.dalle;
