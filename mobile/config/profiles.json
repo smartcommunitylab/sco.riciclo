@@ -30,8 +30,8 @@
     "ESACOM": {
         "resource_folder": "config/instances/ESACOM",
         "widget_id" : "it.smartcommunitylab.rifiuti.esacom",
-        "version": "0.0.1",
-        "version_code": "1",
+        "version": "0.0.2",
+        "version_code": "2",
         "app_name": "100% Riciclo - ESA-Com"
     },
     "ASIA-PAGANELLA": {
@@ -65,8 +65,8 @@
     "ASVO": {
         "resource_folder": "config/instances/ASVO",
         "widget_id" : "it.smartcommunitylab.rifiuti.asvo",
-        "version": "1.0.1",
-        "version_code": "5",
+        "version": "1.0.2",
+        "version_code": "6",
         "app_name": "100% Riciclo - ASVO s.p.a."
     }
 }
