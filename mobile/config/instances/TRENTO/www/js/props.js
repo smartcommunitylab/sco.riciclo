@@ -1,8 +1,8 @@
 APP_ID = "TRENTO";
-DATA_VERSION = 1;
+DATA_VERSION = 30;
 API_KEY = "AIzaSyBmKVWmFzh2JHT7q1MLmQRQ7jC4AhkRBDs";
 //SEGNALA_EMAIL = "segnalazioni.rifiuti@comunitadellegiudicarie.it";
-VERSION = "1.0.3";
+VERSION = "1.0.9";
 APP_NAME="100% Riciclo - Trento";
 APP_NAME_CREDITS = "100% Riciclo<br/>TRENTO";
 APP_LOCATION_CREDITS = "a Trento";
@@ -36,7 +36,7 @@ PORTA_A_PORTA_LABEL = 'porta_a_porta';
 
 USE_DRAFT = true;
 LANG = ['it'];
-COMUNI_LIST = ['022205'];
+COMUNI_LIST = [];
 
 
 ZOOM = 11;
