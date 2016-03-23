@@ -25,8 +25,15 @@ angular.module('rifiuti.services.utili', [])
    }
 })
 
-.factory('LoaderService', function($rootScope, $ionicLoading, $filter) {
+.factory('LoaderService', function($rootScope, $ionicLoading, $ionicPopup, $filter) {
   return {
+
+        showToastByTime : function(alertMsg, time){
+            $ionicLoading.show({
+                template:  $filter("translate")(alertMsg),
+                noBackdrop: true,
+                duration: time });
+        },
 
         showToast : function(alertMsg){
             $ionicLoading.show({
@@ -61,7 +68,26 @@ angular.module('rifiuti.services.utili', [])
             if ($rootScope.loading) {
                 $rootScope.loading.hide();
             }
+        },
+
+        showPopUp : function(msg, title) {
+            var popUpTitle = 'warning';
+
+            if(!!title){
+                popUpTitle = title;
+            }
+
+            $ionicPopup.show({
+                title: '<b class="popup-title">'+$filter("translate")(popUpTitle)+'<b/>',
+                template: $filter("translate")(msg),
+                buttons: [
+                    {
+                        text: 'OK'
+                    }
+                ]
+            });
         }
+
     }
 })
 
