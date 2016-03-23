@@ -22,7 +22,7 @@
             </div>
         </ion-content>
     </div>
-    <div ng-if="!mapView">
+    <div ng-if="!mapView && hasSomePoints">
         <ion-content class="has-header puntidiraccolta expandable-list-items" has-bouncing="false">
             <div class="expandable-list-item" ng-repeat="item in list">
                 <div class="row row-center expandable-list-item-header" ng-click="item.aperto=!item.aperto">
@@ -52,6 +52,11 @@
                     </div>
                 </div>
             </div>
+        </ion-content>
+    </div>
+    <div ng-if="!mapView && !hasSomePoints">
+        <ion-content class="puntodiraccolta" has-bouncing="false">
+            <div class="dettagli">{{"zero_points_msg" | translate}}</div>
         </ion-content>
     </div>
 </ion-view>

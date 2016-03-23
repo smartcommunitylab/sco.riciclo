@@ -1,4 +1,5 @@
 ITALIAN_VERSION = {
+        zero_points_msg:"Non ci sono punti di raccolta da visualizzare",
         gps_permission_toast:"Per allegare le coordinate, si prega di verificare che la app disponga del permesso di localizzazione e di attivare il servizio di localizzazione sul dispositivo. Potrebbe essere necessario riavviare la app.",
         camera_permission_toast:"La app non dispone del permesso di archiviazione. Si prega di attivarlo nelle impostazioni del dispositivo per questa app.",
         en:"Inglese",
@@ -141,6 +142,7 @@ ITALIAN_VERSION = {
 };
 
 ENGLISH_VERSION = {
+        zero_points_msg:"There are no points to be displayed",
         gps_permission_toast:"To attach the coordinates, please verify that the app has 'localization' permission and turn on location services on your device. You may have to restart the app.",
         camera_permission_toast:"The app does not have 'storage' permission. Please activate it within the device settings for this app.",
         en:"English",

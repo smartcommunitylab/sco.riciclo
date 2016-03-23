@@ -152,6 +152,7 @@ angular.module('rifiuti.controllers.raccolta', [])
     Raccolta.puntiraccolta().then(function(punti){
       var points = [];
       var list = [];
+
       punti.forEach(function(punto){
         if (!!punto.dettagliZona && ($scope.id == null || punto.dettagliZona == $scope.id)) {
         var icona = DataManager.getIconById(punto.tipologiaPuntiRaccolta);
@@ -168,6 +169,14 @@ angular.module('rifiuti.controllers.raccolta', [])
           addToList(punto, list);
         }
       });
+
+      $scope.hasSomePoints = true;
+
+      if(points.length==0){
+        LoaderService.showToastByTime("zero_points_msg",4000);
+        $scope.hasSomePoints = false;
+      }
+
       $scope.markers = {
         control: {},
         models: points,
