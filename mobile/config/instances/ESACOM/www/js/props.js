@@ -1,5 +1,5 @@
 APP_ID = "ESACOM";
-DATA_VERSION = 3;
+DATA_VERSION = 12;
 API_KEY = "AIzaSyBmKVWmFzh2JHT7q1MLmQRQ7jC4AhkRBDs";
 //SEGNALA_EMAIL = "segnalazioni.rifiuti@comunitadellegiudicarie.it";
 VERSION = "0.0.2";
