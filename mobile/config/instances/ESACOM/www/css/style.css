@@ -37,6 +37,18 @@ body.platform-browser .scroll-bar-fade-out {
     background-color: #eeeeee;
 }
 
+.credits{
+    padding-top: 50px;
+    font-weight: bold;
+    font-size: larger;
+    color: #63ac3d;
+    text-decoration: underline;
+}
+
+.credits a{
+    cursor:pointer;
+}
+
 .expandable-list-item:not(:first-child) {
     padding-top: 1px;
 }

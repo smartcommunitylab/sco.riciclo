@@ -1,7 +1,7 @@
 <ion-view>
     <ion-nav-title>
         <div ng-click="enableIsDevMod()"  class="nav-title">
-            <div class="nav-title-main">{{"Credits"|translate}}</div>
+            <div class="nav-title-single">{{"Info"|translate}}</div>
         </div>
     </ion-nav-title>
 
@@ -27,9 +27,8 @@
         </a>
         </p>
 
-        <p class="subtitle">{{'Progetto_di'|translate}}</p>
-        <a ng-click="clickLink('http://www.comunitrentini.it')"><img src="img/consorzio_comuni_trentini.png" width="175" height="63"></a>
-        <br />
-        <a ng-click="clickLink('http://www.smartcommunitylab.it')"> <img src="img/logo_sco_fbk.png" width="301"> </a>
+        <p class="credits">
+            <a ng-click="clickLink('http://achabgroup.it/creditsapp/01/')">{{"CREDITS"|translate}}</a>
+        </p>
     </ion-content>
 </ion-view>
