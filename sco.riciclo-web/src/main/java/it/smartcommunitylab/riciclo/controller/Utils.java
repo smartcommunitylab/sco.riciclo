@@ -22,6 +22,7 @@ import java.util.Map;
 import javax.servlet.ServletRequest;
 import javax.servlet.http.HttpServletRequest;
 
+import org.apache.commons.lang.StringUtils;
 import org.springframework.data.mongodb.core.query.Criteria;
 
 public class Utils {
@@ -42,6 +43,10 @@ public class Utils {
 			result = data.get(defaultLang);
 		}
 		return result;
+	}
+	
+	public static String getId(String label) {
+		return StringUtils.capitalize(label.toLowerCase().trim());
 	}
 
 	public static double[] convertLocalizzazione(String localizzazione) throws NumberFormatException {
