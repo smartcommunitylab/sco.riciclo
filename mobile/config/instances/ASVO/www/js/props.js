@@ -1,8 +1,8 @@
 APP_ID = "ASVO";
-DATA_VERSION = 33;
+DATA_VERSION = 34;
 API_KEY = "AIzaSyBmKVWmFzh2JHT7q1MLmQRQ7jC4AhkRBDs";
 //SEGNALA_EMAIL = "segnalazioni.rifiuti@comunitadellegiudicarie.it";
-VERSION = "1.0.2";
+VERSION = "1.0.3";
 APP_NAME="100% Riciclo - ASVO";
 APP_NAME_CREDITS = "100% Riciclo<br/>ASVO s.p.a.";
 APP_LOCATION_CREDITS = "ASVO";
