@@ -1,24 +1,23 @@
 {
-    "TRENTO": {
-        "resource_folder": "config/instances/TRENTO",
-        "widget_id" : "it.smartcommunitylab.rifiuti.trento",
-        "version": "1.0.9",
-        "version_code": "12",
-        "app_name": "100% Riciclo - Trento"
-    },
-    "ROVERETO": {
-        "resource_folder": "config/instances/ROVERETO",
-        "widget_id" : "it.smartcommunitylab.rifiuti.rovereto",
-        "version": "1.0.9",
-        "version_code": "12",
-        "app_name": "100% Riciclo - Rovereto"
-    },
-    "ASIA": {
-        "resource_folder": "config/instances/ASIA",
-        "widget_id" : "it.smartcommunitylab.rifiuti.asia",
-        "version": "1.0.0",
-        "version_code": "5",
-        "app_name": "100% Riciclo - A.S.I.A."
-    }
-
+  "TRENTO": {
+    "resource_folder": "config/instances/TRENTO",
+    "widget_id": "it.smartcommunitylab.rifiuti.trento",
+    "version": "1.0.8",
+    "version_code": "11",
+    "app_name": "100% Riciclo - Trento"
+  },
+  "ROVERETO": {
+    "resource_folder": "config/instances/ROVERETO",
+    "widget_id": "it.smartcommunitylab.rifiuti.rovereto",
+    "version": "1.0.8",
+    "version_code": "11",
+    "app_name": "100% Riciclo - Rovereto"
+  },
+  "ASIA": {
+    "resource_folder": "config/instances/ASIA",
+    "widget_id": "it.smartcommunitylab.rifiuti.asia",
+    "version": "1.0.0",
+    "version_code": "5",
+    "app_name": "100% Riciclo - A.S.I.A."
+  }
 }
