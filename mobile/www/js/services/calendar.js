@@ -130,8 +130,17 @@ angular.module('rifiuti.services.calendar', [])
                       currDate.setHours(0);
                       if (currDate.getTime() >= firstDate.getTime() && currDate.getTime() <= lastDate.getTime()) {
                         var w = Math.floor((currDate.getDate()+firstDay) / 7);
+                        var rest = ((currDate.getDate()+firstDay) % 7);
                         var idx = Utili.jsDOWToDOW(currDate.getDay());
-                        if (w == 0) idx = idx - firstDay;
+
+                        if(rest == 0){
+                            w = w - 1;
+                        }
+
+                        if (w == 0){
+                            idx = idx - firstDay;
+                        }
+
                         var cell = weeks[w][idx];
                         // if this is the date of the interval of interest
                         if (cell != null) {
