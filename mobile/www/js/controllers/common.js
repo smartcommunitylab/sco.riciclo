@@ -22,11 +22,11 @@ angular.module('rifiuti.controllers.common', ['ionic'])
         return Raccolta.hasSegnalazioni();
     };
 
-
     if($rootScope.isOnline||true){
         var profiles = DataManager.getProfiles();
         //localStorage.removeItem('profiles');
         if (!profiles || profiles.length == 0) {
+            DataManager.saveTutorial("true");
             $rootScope.promptedToProfile = true;
             DataManager.initGlobalSettings().then(function (result) {
                 DataManager.setAvailableAppAndComuni().then(function (result) {
