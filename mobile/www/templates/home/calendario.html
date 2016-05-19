@@ -65,10 +65,10 @@
                 <!--id="{{day.dateString}}"-->
                 <!--id="{{'pippo' + $index}}"-->
                 <!--id="{{'id' + day.date.getTime()}}"-->
-                <ion-item id="{{'id' + day.date.getTime()}}" class="day-title" ng-if="day.colors.length > 0">
+                <ion-item id="{{'id' + day.date.getTime()}}" class="day-title" ng-if="day.colors.length > 0" ng-class="{'day-content-active':day.dateString==currListItem.dateString}">
                     {{fullDate(day.date)}}
                 </ion-item>
-                <ion-item ng-if="day.colors.length > 0" class="day-content" ng-class="{'day-content-active':day.dateString==currListItem.dateString}">
+                <ion-item ng-if="day.colors.length > 0" class="day-content">
                     <div ng-repeat="(key, block) in day.events">
                         <span class="content-title">{{block.type | translate}}</span>
                         <div ng-repeat="elem in block.events" class="row content-event">
