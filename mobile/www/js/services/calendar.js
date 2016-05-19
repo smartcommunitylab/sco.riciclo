@@ -8,19 +8,21 @@ angular.module('rifiuti.services.calendar', [])
     var appendToCalendarCell = function(cell, calItem, puntoDiRaccolta,colorLegendMap,colorLegendAshMap) {
       if (cell.colors.indexOf(puntoDiRaccolta.colore) < 0) {
           cell.colors.push(puntoDiRaccolta.colore);
+      }
 
-          if(!colorLegendAshMap[puntoDiRaccolta.colore]){
-            colorLegendAshMap[puntoDiRaccolta.colore] = [];
-            colorLegendMap[puntoDiRaccolta.colore] = {};
-            colorLegendAshMap[puntoDiRaccolta.colore].push(puntoDiRaccolta.tipologiaPuntiRaccolta);
-            colorLegendMap[puntoDiRaccolta.colore] = " "+puntoDiRaccolta.tipologiaPuntiRaccolta;
-          }
+      if(!colorLegendAshMap[puntoDiRaccolta.colore]){
+        colorLegendAshMap[puntoDiRaccolta.colore] = [];
+        colorLegendMap[puntoDiRaccolta.colore] = {};
+        colorLegendAshMap[puntoDiRaccolta.colore].push(puntoDiRaccolta.tipoPuntoRaccolta.id);
+        colorLegendMap[puntoDiRaccolta.colore] = " "+puntoDiRaccolta.tipoPuntoRaccolta.id;
+      }
 
-          if(!!colorLegendAshMap[puntoDiRaccolta.colore] &&
-             colorLegendAshMap[puntoDiRaccolta.colore].indexOf(puntoDiRaccolta.tipologiaPuntiRaccolta)<0){
-             colorLegendAshMap[puntoDiRaccolta.colore].push(puntoDiRaccolta.tipologiaPuntiRaccolta);
-             colorLegendMap[puntoDiRaccolta.colore] = colorLegendMap[puntoDiRaccolta.colore]+", "+puntoDiRaccolta.tipologiaPuntiRaccolta;
-          }
+
+      if(!!colorLegendAshMap[puntoDiRaccolta.colore] &&
+         colorLegendAshMap[puntoDiRaccolta.colore].indexOf(puntoDiRaccolta.tipoPuntoRaccolta.id)<0){
+         colorLegendAshMap[puntoDiRaccolta.colore].push(puntoDiRaccolta.tipoPuntoRaccolta.id);
+         colorLegendMap[puntoDiRaccolta.colore] = colorLegendMap[puntoDiRaccolta.colore]+", "+puntoDiRaccolta.tipoPuntoRaccolta.id;
+
       }
       
       var key = null, t = null, descr = null;
@@ -48,7 +50,7 @@ angular.module('rifiuti.services.calendar', [])
         var descr = puntoDiRaccolta.tipoPuntoRaccolta.nome;
         if (descr.indexOf(key) == 0) descr = descr.substr(key.length+1);
         proto = {
-          tipologiaPuntiRaccolta: puntoDiRaccolta.tipoPuntoRaccolta.nome,
+          tipologiaPuntiRaccolta: puntoDiRaccolta.tipoPuntoRaccolta.id,
           colore: puntoDiRaccolta.colore,
           descr : [descr, hour]
         };
@@ -63,7 +65,7 @@ angular.module('rifiuti.services.calendar', [])
         } else {
 
           proto = {
-            tipologiaPuntiRaccolta: puntoDiRaccolta.tipoPuntoRaccolta.nome,
+            tipologiaPuntiRaccolta: puntoDiRaccolta.tipoPuntoRaccolta.id,
             colore: puntoDiRaccolta.colore,
             descr : [puntoDiRaccolta.dettagliZona, hour]
           };
@@ -125,28 +127,30 @@ angular.module('rifiuti.services.calendar', [])
                 if (d[i].orarioApertura) {
                   for (var j = 0; j < d[i].orarioApertura.length; j++) {
                     calItem = d[i].orarioApertura[j];
-                    for (var k = 0; k < calItem.dates.length; k++) {
-                      var currDate = new Date(Date.parse( calItem.dates[k]));
-                      currDate.setHours(0);
-                      if (currDate.getTime() >= firstDate.getTime() && currDate.getTime() <= lastDate.getTime()) {
-                        var w = Math.floor((currDate.getDate()+firstDay) / 7);
-                        var rest = ((currDate.getDate()+firstDay) % 7);
-                        var idx = Utili.jsDOWToDOW(currDate.getDay());
+                    if (calItem.dates) {
+                        for (var k = 0; k < calItem.dates.length; k++) {
+                          var currDate = new Date(Date.parse( calItem.dates[k]));
+                          currDate.setHours(0);
+                          if (currDate.getTime() >= firstDate.getTime() && currDate.getTime() <= lastDate.getTime()) {
+                            var w = Math.floor((currDate.getDate()+firstDay) / 7);
+                            var rest = ((currDate.getDate()+firstDay) % 7);
+                            var idx = Utili.jsDOWToDOW(currDate.getDay());
 
-                        if(rest == 0){
-                            w = w - 1;
-                        }
+                            if(rest == 0){
+                                w = w - 1;
+                            }
 
-                        if (w == 0){
-                            idx = idx - firstDay;
-                        }
+                            if (w == 0){
+                                idx = idx - firstDay;
+                            }
 
-                        var cell = weeks[w][idx];
-                        // if this is the date of the interval of interest
-                        if (cell != null) {
-                          appendToCalendarCell(cell,calItem,d[i],colorLegendMap,colorLegendAshMap);
+                            var cell = weeks[w][idx];
+                            // if this is the date of the interval of interest
+                            if (cell != null) {
+                              appendToCalendarCell(cell,calItem,d[i],colorLegendMap,colorLegendAshMap);
+                            }
+                          }
                         }
-                      }
                     }
                   }
                 }
