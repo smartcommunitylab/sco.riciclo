@@ -474,8 +474,16 @@ angular.module('rifiuti.controllers.raccolta', [])
 
   var isInDateInRange = function (orario){
     if(!!orario){
-        var orarioDataDa = orario.dataDa.split("-");
-        var orarioDataA = orario.dataA.split("-");
+        var orarioDataDa = null;
+        if(!!orario.dataDa){
+            orarioDataDa = orario.dataDa.split("-");
+        }
+
+        var orarioDataA = null;
+        if(!!orario.dataA){
+            orarioDataA = orario.dataA.split("-");
+        }
+
         if((!!orarioDataDa && orarioDataDa.length==3)&&
            (!!orarioDataA && orarioDataA.length==3)){
             var dataDa = getDateBySlpittedDate(orarioDataDa);
@@ -573,7 +581,7 @@ angular.module('rifiuti.controllers.raccolta', [])
       punto.orarioApertura.forEach(function(orario) {
         var j = $scope.checkGiorni(orario.il);
 
-        var hour = calItem.dalle;
+        var hour = orario.dalle;
         if(orario.dalle == null || orario.alle == null){
           if(orario.dalle != null){
                hour = orario.dalle;
