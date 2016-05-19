@@ -774,21 +774,19 @@ body.platform-browser .scroll-bar-fade-out {
 /* Nav title */
 
 .nav-bar-title {
+    display: table;
     height: 100%;
 }
 
 .nav-title {
+    display: table-cell;
     vertical-align: middle;
     line-height: 1.2;
 }
 
 .nav-title .nav-title-single {}
 
-.nav-title .nav-title-main {
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-}
+.nav-title .nav-title-main {}
 
 .nav-title .nav-title-sub {
     font-size: smaller;
@@ -878,5 +876,7 @@ body.platform-browser .scroll-bar-fade-out {
 
 .timePickerSpan {
   width: 25%;
+  display: block;
+}
   display: block;
 }
