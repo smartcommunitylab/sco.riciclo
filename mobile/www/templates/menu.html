@@ -42,6 +42,14 @@
                         <div class="col">Home</div>
                     </div>
                 </ion-item>
+                <ion-item nav-clear menu-close ng-click="checkSettings()" href="#/app/settings" ng-if="!isHiddenFields && ((!!selectedProfile.PaP && selectedProfile.PaP.length > 0) || isDevMode || (LANG.length > 0))">
+                    <div class="row row-center">
+                        <div class="col col-15 ">
+                            <i class="icon riciclo-impostazioni icon-menu"></i>
+                        </div>
+                        <div class="col">{{"NOTIFICHE" | translate}}</div>
+                    </div>
+                </ion-item>
                 <ion-item nav-clear menu-close href="#/app/puntiDiRaccolta/!">
                     <div class="row row-center">
                         <div class="col col-15">
@@ -74,14 +82,6 @@
                         <div class="col">{{"report" | translate}}</div>
                     </div>
                 </ion-item>
-                <ion-item nav-clear menu-close ng-click="checkSettings()" href="#/app/settings" ng-if="!isHiddenFields && ((!!selectedProfile.PaP && selectedProfile.PaP.length > 0) || isDevMode || (LANG.length > 0))">
-                    <div class="row row-center">
-                        <div class="col col-15 ">
-                            <i class="icon riciclo-impostazioni icon-menu"></i>
-                        </div>
-                        <div class="col">{{"Impostazioni" | translate}}</div>
-                    </div>
-                </ion-item>
                 <ion-item nav-clear menu-close href="#/app/contatti">
                     <div class="row row-center">
                         <div class="col col-15 ">
@@ -104,6 +104,14 @@
                             <i class="icon riciclo-info icon-menu"></i>
                         </div>
                         <div class="col">{{"Informazioni Generali" | translate}}</div>
+                    </div>
+                </ion-item>
+                <ion-item nav-clear menu-close href="#/app/credits">
+                    <div class="row row-center">
+                        <div class="col col-15 ">
+                            <i class="icon riciclo-info icon-menu"></i>
+                        </div>
+                        <div class="col">{{"Credits" | translate}}</div>
                     </div>
                 </ion-item>
                 <ion-item nav-clear menu-close href="#/app/profili">

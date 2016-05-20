@@ -647,12 +647,23 @@ angular.module('rifiuti', [
         }
     })
 
+    .state('app.credits', {
+        url: "/credits",
+        cache: false,
+        views: {
+            'menuContent': {
+                templateUrl: "templates/info.html",
+                controller: 'INFOCtrl'
+            }
+        }
+    })
+
     .state('app.info', {
         url: "/info",
         views: {
             'menuContent': {
                 templateUrl: "templates/info.html",
-                controller: 'InfoCtrl'
+                controller: 'CREDITSCtrl'
             }
         }
     });
