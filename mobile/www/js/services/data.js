@@ -695,6 +695,22 @@ angular.module('rifiuti.services.data', [])
         return "";
     }
 
+    var getRiappComuneLogo = function(){
+        var codiceIstat = '';
+
+        if(!!$rootScope.selectedRiappData && !!$rootScope.selectedRiappData.ownerId){
+            codiceIstat = $rootScope.selectedRiappData.codiceISTAT;
+        }else if (!!localStorage[profilesPrefix]){
+            var profiles = JSON.parse(localStorage[profilesPrefix]);
+            $rootScope.selectedRiappData = profiles[0].profiloRiapp;
+            codiceIstat = $rootScope.selectedRiappData.codiceISTAT;
+        }
+
+        var logo = COMUNE_MAP[codiceIstat];
+
+        return logo;
+    }
+
     var getRiappID = function(){
         if(!!$rootScope.selectedRiappData && !!$rootScope.selectedRiappData.ownerId){
             return $rootScope.selectedRiappData.ownerId;
@@ -777,6 +793,7 @@ angular.module('rifiuti.services.data', [])
         getAvailableAreeForComuni:getAvailableAreeForComuni,
         processRiappByProfiloRiapp:processRiappByProfiloRiapp,
         initGlobalSettings:initGlobalSettings,
+        getRiappComuneLogo:getRiappComuneLogo,
         updateProfiles: function (newProfiles) {
             profili = newProfiles;
             updateProfileData();

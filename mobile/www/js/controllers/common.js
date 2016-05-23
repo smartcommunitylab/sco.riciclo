@@ -118,6 +118,10 @@ angular.module('rifiuti.controllers.common', ['ionic'])
     }
 })
 
+.controller('CREDITSCtrl', function ($scope, $rootScope, DataManager, $ionicPopup, $filter) {
+    var logoComune = DataManager.getRiappComuneLogo();
+})
+
 .controller('SegnalaCtrl', function ($scope, $rootScope, $cordovaCamera, Raccolta) {
 
 
