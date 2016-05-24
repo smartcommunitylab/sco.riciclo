@@ -134,7 +134,7 @@ angular.module('rifiuti', [
     $ionicConfigProvider.backButton.text('');
 })
 
-.run(function ($ionicPlatform, $rootScope, $ionicNavBarDelegate, $ionicHistory, $translate, $ionicPopup, $filter, $state, Profili, Utili, GeoLocate, $cordovaSplashscreen, $ionicLoading, $cordovaNetwork, $ionicConfig, DataManager) {
+.run(function ($ionicPlatform, $rootScope, $location, $ionicNavBarDelegate, $ionicHistory, $translate, $ionicPopup, $filter, $state, Profili, Utili, GeoLocate, $cordovaSplashscreen, $ionicLoading, $cordovaNetwork, $ionicConfig, DataManager) {
     $rootScope.version = VERSION;
 
     $rootScope.isWebView = function(){
@@ -190,6 +190,16 @@ angular.module('rifiuti', [
 
     $rootScope.selectProfile = function (index) {
         Profili.select(index);
+    };
+
+
+    $rootScope.backLandigPage = function () {
+        if ($rootScope.profili == null || $rootScope.profili.length == 0) {
+            ionic.Platform.exitApp();
+            return;
+        }
+        //$ionicNavBarDelegate.$getByHandle('navBar').back();
+        $location.path("/app/landingPage");
     };
 
 
@@ -574,6 +584,7 @@ angular.module('rifiuti', [
 
     .state('app.modificaProfiloUnique', {
         url: "/modificaProfiloUnique/:id",
+        cache: false,
         views: {
             'menuContent': {
                 templateUrl: "templates/modificaProfiloUnique.html",
@@ -666,7 +677,28 @@ angular.module('rifiuti', [
                 controller: 'CREDITSCtrl'
             }
         }
+    })
+
+    .state('landingPagehome', {
+        url: "/landingPagehome",
+        abstract: true,
+        cache: false,
+        templateUrl: "templates/landingPagehome.html",
+        controller: 'CREDITSCtrl'
+    })
+
+    .state('landingPagehome.landingPage', {
+        url: "/landingPage",
+        cache: false,
+        views: {
+            'landingPage': {
+                templateUrl: "templates/landingPage.html",
+                controller: 'CREDITSCtrl'
+            }
+        }
     });
 
+
+    //$urlRouterProvider.otherwise('/app/landingPagehome/landingPage');
     $urlRouterProvider.otherwise('/app/home/tipidirifiuti');
 });

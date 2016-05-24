@@ -118,7 +118,12 @@ angular.module('rifiuti.controllers.common', ['ionic'])
     }
 })
 
-.controller('CREDITSCtrl', function ($scope, $rootScope, DataManager, $ionicPopup, $filter) {
+.controller('CREDITSCtrl', function ($scope, $location, $rootScope, DataManager, $ionicPopup, $filter) {
+
+    $scope.goToHome = function () {
+        $location.path('/app/home/tipidirifiuti');
+    }
+
     var logoComune = DataManager.getRiappComuneLogo();
 })
 

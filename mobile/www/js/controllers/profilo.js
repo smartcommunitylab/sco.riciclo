@@ -337,13 +337,15 @@ angular.module('rifiuti.controllers.profilo', [])
             if (!!$scope.area && !!$scope.area.nome) {
                 DataManager.processRiappByProfiloRiapp($scope.profilo.profiloRiapp).then(function (result) {
                     var newProfile = null;
+                    var firstProfile = null;
 
                     if (!!$scope.id) {
                         newProfile = Profili.updateUnique($scope.profilo.profiloRiapp, $scope.area);
                     } else {
                         // create
                         newProfile = Profili.addUnique($scope.profilo.profiloRiapp, $scope.area);
-                        $scope.back();
+                        firstProfile = true
+                        //$scope.back();
                         //return;
                     }
 
@@ -359,8 +361,12 @@ angular.module('rifiuti.controllers.profilo', [])
                             ]
                         });
                     } else {
-                        $scope.editMode = false;
-                        $location.path("app/profili");
+                        if(firstProfile){
+                            $location.path("landingPagehome/landingPage");
+                        }else{
+                            $scope.editMode = false;
+                            $location.path("app/profili");
+                        }
                     }
 
                 });
