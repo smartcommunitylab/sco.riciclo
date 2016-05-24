@@ -1,3 +1,20 @@
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 <ion-view>
     <ion-nav-title>
         <div class="nav-title">
@@ -55,8 +72,11 @@
 
             <div class="colorLegend" ng-repeat="(color, value) in colorLegendMap">
                 <div class="col">
-                    <div class="color-slot" style="background-color:{{getColor(color)}};"></div>
-                    <div>{{value}}</div>
+                    <div class="legend-slot">
+                        <div class="color-slot" style="background-color:{{getColor(color)}};"></div>
+
+                        <span class="item-slot ng-binding">{{value}}</span>
+                    </div>
                 </div>
             </div>
         </div>
