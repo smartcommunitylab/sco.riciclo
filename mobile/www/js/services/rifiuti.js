@@ -247,6 +247,10 @@ angular.module('rifiuti.services.rifiuti', [])
             if (item.tipologiaUtenza == utenza && aree.indexOf(item.area)>=0 && !!item.tipologiaRaccolta) {
                 var tipoRaccolta = DataManager.getCategoriaById('tipologiaRaccolta', item.tipologiaRaccolta)
 
+                if(item.colore==null){
+                    item.colore = "";
+                }
+
                 var list = res[tipoRaccolta.id];
                 if (!list) {
                   list = {};
