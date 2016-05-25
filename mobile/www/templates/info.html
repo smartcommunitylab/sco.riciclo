@@ -10,20 +10,26 @@
     </ion-nav-buttons>
 
     <ion-content class="info" has-bouncing="false">
-        <p class="project" ng-bind-html="'Progetto_CREDITS'|translate"></p>
-        <p class="project-desc"><strong>{{'Progetto_DESC'|translate}}</strong>
+        <p class="project">
+            <img src="img/riapp-credits.png" width="150">
         </p>
-        <p class="version"><strong>{{version}}</strong>
+        <p class="project-desc">Guida alla raccolta differenziata
+        </p>
+        <p class="project-desc_due">nel tuo comune
+        </p>
+        <p class="version">{{version}}
         </p>
 
-        <a ng-click="clickLink('http://www.dolomitiambiente.it/')"><img src="img/da_logo.png" width="200">
+        <p class="realized">realizzato da
+        </p>
+
+        <a ng-click="clickLink('http://achabgroup.it/')"><img src="img/achab-credits.png" width="300">
         </a>
         <br/>
-        <a ng-click="clickLink('http://www.comune.trento.it/')"><img src="img/logo_comune_tn.png" width="200">
-        </a>
+        <a ng-click="clickLink('http://www.smartcommunitylab.it')"> <img src="img/logo_sco_fbk.png" width="300"> </a>
 
-        <p class="subtitle">{{'Progetto_di'|translate}}</p>
-        <a ng-click="clickLink('http://www.comunitrentini.it')"><img src="img/consorzio_comuni_trentini.png" width="175" height="63"></a>
-        <br />
-        <a ng-click="clickLink('http://www.smartcommunitylab.it')"> <img src="img/logo_sco_fbk.png" width="301"> </a>
+        <p class="subtitle">per</p>
+
+        <a ng-click="clickLink('http://www.smartcommunitylab.it')"> <img src="img/{{logoComune}}" width="150"> </a>
+
     </ion-content>
