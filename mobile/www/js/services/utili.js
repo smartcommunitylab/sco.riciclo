@@ -94,6 +94,7 @@ angular.module('rifiuti.services.utili', [])
 .factory('Utili', function () {
   var mesi = ["Gennaio", "Febbraio", "Marzo", "Aprile", "Maggio", "Giugno", "Luglio", "Agosto", "Settembre", "Ottobre", "Novembre", "Dicembre"];
   var giorni = ["DOM", "LUN", "MAR", "MER", "GIO", "VEN", "SAB"];
+  var giorniColor = ["#dddddd","#ffffff","#ffffff","#ffffff","#ffffff","#ffffff","#ffffff"]
   var giorniC = ["domenica", "lunedì", "martedì", "mercoledì", "giovedì", "venerdì", "sabato"];
   var giorniShort = ["dom", "lun", "mar", "mer", "gio", "ven", "sab"];
 
@@ -170,6 +171,9 @@ angular.module('rifiuti.services.utili', [])
   return {
     jsDOWToShortText: function(dow) {
       return giorni[dow];
+    },
+    jsDOWToColor: function(dow) {
+      return giorniColor[dow];
     },
     jsDOWToDOW: function(dow) {
       return DOW[giorni[dow]];

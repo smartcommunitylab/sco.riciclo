@@ -1,8 +1,8 @@
 <ion-view>
     <ion-nav-title>
         <div class="nav-title">
-            <div class="nav-title-main">{{titleText()}}</div>
-            <div class="nav-title-sub">{{subTitleText()}}</div>
+            <!--div class="nav-title-main">{{titleText()}}</div>
+            <div class="nav-title-sub">{{subTitleText()}}</div-->
         </div>
     </ion-nav-title>
 
@@ -19,35 +19,38 @@
 
     <ion-content has-bouncing="false" class="home-calendar">
         <div ng-if="!calendarView" class="calendar">
-            <div class="row month-bar">
-                <div ng-click="lastMonth()" class="col col-10 btn-prev"><i class="icon icon-left ion-chevron-left"></i>
-                </div>
-                <div class="col month-name">{{month.name.split(" ")[0] |translate}} {{month.name.split(" ")[1] |translate}}</div>
-                <!--da aggiungere lo stile-->
-                <div ng-click="nextMonth()" class="col col-10 btn-next"><i class="icon icon-right ion-chevron-right"></i>
-                </div>
-            </div>
-            <div class="row week-days">
-                <div class="col">{{ "LUN" | translate}}</div>
-                <div class="col">{{ "MAR" | translate}}</div>
-                <div class="col">{{ "MER" | translate}}</div>
-                <div class="col">{{ "GIO" | translate}}</div>
-                <div class="col">{{ "VEN" | translate}}</div>
-                <div class="col">{{ "SAB" | translate}}</div>
-                <div class="col">{{ "DOM" | translate}}</div>
-            </div>
-            <div class="row week" ng-repeat="week in month.weeks">
-                <div class="col noday" ng-repeat="item in getEmptyArrayByLength(firstDayIndex(week))"></div>
-                <div ng-click="selectDay(day)" class="col day" ng-class="{'today' : day.dateString == currDate.toLocaleDateString()}" ng-repeat="day in week">
-                    <div ng-if="day.date!=null" class="day-date">
-                        {{day.date.getDate()}}
+
+                <div class="row month-bar">
+                    <div ng-click="lastMonth()" class="col col-10 btn-prev"><i class="icon icon-left ion-chevron-left"></i>
                     </div>
-                    <div class="row day-slots">
-                        <div class="day-slot" ng-repeat="colore in day.colors">
-                            <div style="background-color:{{getColor(colore)}};"></div>
+                    <div class="col month-name">{{month.name.split(" ")[0] |translate}} {{month.name.split(" ")[1] |translate}}</div>
+                    <!--da aggiungere lo stile-->
+                    <div ng-click="nextMonth()" class="col col-10 btn-next"><i class="icon icon-right ion-chevron-right"></i>
+                    </div>
+                </div>
+            <div class="cal-container">
+                <div class="row week-days">
+                    <div class="col-day">{{ "LUN" | translate}}</div>
+                    <div class="col-day">{{ "MAR" | translate}}</div>
+                    <div class="col-day">{{ "MER" | translate}}</div>
+                    <div class="col-day">{{ "GIO" | translate}}</div>
+                    <div class="col-day">{{ "VEN" | translate}}</div>
+                    <div class="col-day">{{ "SAB" | translate}}</div>
+                    <div class="col-day">{{ "DOM" | translate}}</div>
+                </div>
+                <div class="row week" ng-repeat="week in month.weeks">
+                    <div class="col noday" ng-repeat="item in getEmptyArrayByLength(firstDayIndex(week))"></div>
+                    <div ng-click="selectDay(day)" class="col day" ng-class="{'today' : day.dateString == currDate.toLocaleDateString()}" ng-repeat="day in week" style="background-color:{{day.bgColor}};">
+                        <div ng-if="day.date!=null" class="day-date">
+                            {{day.date.getDate()}}
                         </div>
-                        <div class="day-slot" ng-if="day.events.length == 0">
-                            <div></div>
+                        <div class="row day-slots">
+                            <div class="day-slot" ng-repeat="colore in day.colors">
+                                <div style="background-color:{{getColor(colore)}};"></div>
+                            </div>
+                            <div class="day-slot" ng-if="day.events.length == 0">
+                                <div></div>
+                            </div>
                         </div>
                     </div>
                 </div>

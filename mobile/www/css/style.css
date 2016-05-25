@@ -102,7 +102,14 @@ body.platform-browser .scroll-bar-fade-out {
 /* Bar and buttons */
 
 .bar-100r {
-    background-color: #63ac3d !important;
+    background-image: url('../img/RiappBanner.png') !important;
+    background-position: center !important;
+    background-repeat: no-repeat !important;
+    background-color: #ffde3c !important;
+}
+
+.bar-100r-inside {
+    background-color: #ffde3c !important;
 }
 
 .bar-100r .btn {
@@ -133,6 +140,10 @@ body.platform-browser .scroll-bar-fade-out {
     color: #fff;
 }
 
+.bar-balanced .button.button-clear {
+    color: #33398d;
+}
+
 .button.button-100r-select {
     text-align: left;
     color: #444;
@@ -161,8 +172,8 @@ body.platform-browser .scroll-bar-fade-out {
 /* Tabs */
 
 .tabs-100r .tabs {
-    background-color: #47772b;
-    border-color: #47772b;
+    background-color: #33398d;
+    border-color: #33398d;
 }
 
 .home-tabs .tabs {
@@ -276,7 +287,7 @@ body.platform-browser .scroll-bar-fade-out {
 /* Home - Calendar */
 
 .home-calendar {
-    background-color: #eeeeee;
+    background-color: white;
 }
 
 .home-calendar .month-bar {
@@ -286,26 +297,54 @@ body.platform-browser .scroll-bar-fade-out {
 
 .home-calendar .month-bar .month-name {
     text-align: center;
-    color: #63ac3d;
+    color: #33398d;
     font-size: 16px;
     line-height: 16px;
     font-weight: bold;
 }
 
 .home-calendar .month-bar .btn-next {
+    text-align: left;
+    color: #33398d;
+}
+
+.home-calendar .month-bar .btn-prev {
     text-align: right;
+    color: #33398d;
 }
 
 .home-calendar .week-days {
+    padding-right: 0 !important;
+    margin-bottom: 0 !important;
+    padding-top: 0 !important;
+    margin-top: 0px !important;
+    padding-bottom: 0px !important;
     text-align: center;
     font-size: 12px;
-    line-height: 12px;
-    font-weight: bold;
+}
+
+.home-calendar .week-days .col-day{
+    background-color: #3c9636;
+    color: white;
+    -webkit-box-flex: 0;
+    -webkit-flex: 0 0 13%;
+    -moz-box-flex: 0;
+    -moz-flex: 0 0 13%;
+    -ms-flex: 0 0 13%;
+    flex: 0 0 13%;
+    max-width: 13%;
+    border: 1px solid;
+    border-color: white;
+
 }
 
 .home-calendar .week {
-    padding-right: 0;
-    margin-bottom: 5px;
+    padding-right: 0 !important;
+    margin-bottom: 0 !important;
+    padding-top: 0 !important;
+    margin-top: 0px !important;
+    padding-bottom: 0px !important;
+    margin-top: -1px !important;
 }
 
 .home-calendar .week .day {
@@ -316,9 +355,14 @@ body.platform-browser .scroll-bar-fade-out {
     -ms-flex: 0 0 13%;
     flex: 0 0 13%;
     max-width: 13%;
-    margin-right: 1.2%;
     background-color: white;
     color: black;
+    border: 1px solid;
+    border-color: #3c9636;
+}
+
+.home-calendar .week .day .sunday{
+    background-color: gray;
 }
 
 .home-calendar .week .noday {
@@ -329,15 +373,15 @@ body.platform-browser .scroll-bar-fade-out {
     -ms-flex: 0 0 13%;
     flex: 0 0 13%;
     max-width: 13%;
-    margin-right: 1.2%;
+    border: 1.5px solid;
+    border-color: #3c9636;
 }
 
 .home-calendar .week .day.today {
     padding: 0px;
-    margin-right: 1.2%;
     border-style: solid;
     border-width: 3px;
-    border-color: #47772b;
+    border-color: #3c9636;
 }
 
 .home-calendar .week .day .day-date {
@@ -359,13 +403,7 @@ body.platform-browser .scroll-bar-fade-out {
 .home-calendar .week .day .day-slots .day-slot > div {
     height: 7px;
     width: 7px;
-}
-
-.home-calendar .week-days {
-    text-align: center;
-    font-size: 12px;
-    line-height: 12px;
-    font-weight: bold;
+    border-radius: 7px;
 }
 
 .home-calendar .colorLegend .col .legend-slot {
@@ -377,6 +415,7 @@ body.platform-browser .scroll-bar-fade-out {
     height: 7px;
     width: 7px;
     padding-top: 5px;
+    border-radius: 7px;
     vertical-align: middle;
     display: inline-block;
 }

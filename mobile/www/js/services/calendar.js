@@ -107,10 +107,12 @@ angular.module('rifiuti.services.calendar', [])
                   var runningDate = new Date(date.getFullYear(), date.getMonth(), i, 0, 0, 0, 0);
                   if (runningDate.getDay() == 0) weekNumber++;
                   var day = Utili.jsDOWToShortText(runningDate.getDay());
+                  var bgColor = Utili.jsDOWToColor(runningDate.getDay());
                   week.push({
                       date: runningDate,
                       dateString: runningDate.toLocaleDateString(),
                       day: day,
+                      bgColor: bgColor,
                       events:{},
                       colors:[]
                   });
