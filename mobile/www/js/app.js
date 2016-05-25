@@ -146,6 +146,8 @@ angular.module('rifiuti', [
         return true;
     }
 
+    $rootScope.bGImage = "../img/riapp-blu-testata.png";
+
     $rootScope.isPopUp = !$rootScope.isWebView && !IF_HIDDEN_FIELDS;
     $rootScope.isHiddenFields = IF_HIDDEN_FIELDS;
     $rootScope.loadingShow = function () {
