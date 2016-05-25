@@ -37,33 +37,33 @@
                 <ion-item nav-clear menu-close href="#/app/home/tipidirifiuti">
                     <div class="row row-center">
                         <div class="col col-15">
-                            <i class="icon riciclo-home icon-menu"></i>
+                            <span class="riapp-home"/>
                         </div>
-                        <div class="col">Home</div>
+                        <div class="mls">Home</div>
                     </div>
                 </ion-item>
                 <ion-item nav-clear menu-close ng-click="checkSettings()" href="#/app/settings" ng-if="!isHiddenFields && ((!!selectedProfile.PaP && selectedProfile.PaP.length > 0) || isDevMode || (LANG.length > 0))">
                     <div class="row row-center">
                         <div class="col col-15 ">
-                            <i class="icon riciclo-impostazioni icon-menu"></i>
+                            <span class="riapp-impostazioni"/>
                         </div>
-                        <div class="col">{{"NOTIFICHE" | translate}}</div>
+                        <div class="mls">{{"NOTIFICHE" | translate}}</div>
                     </div>
                 </ion-item>
                 <ion-item nav-clear menu-close href="#/app/puntiDiRaccolta/!">
                     <div class="row row-center">
                         <div class="col col-15">
-                            <i class="icon riciclo-punti_di_raccolta icon-menu"></i>
+                            <span class="riapp-centro-raccolta2"/>
                         </div>
-                        <div class="col">{{"collection_locations" | translate}}</div>
+                        <div class="mls">{{"collection_locations" | translate}}</div>
                     </div>
                 </ion-item>
                 <ion-item nav-clear menu-close href="#/app/tipiDiRaccolta">
                     <div class="row row-center">
                         <div class="col col-15">
-                            <i class="icon riciclo-tipi_raccolta icon-menu"></i>
+                            <span class="riapp-sistemi-raccolta"/>
                         </div>
-                        <div class="col">{{"collection_types" | translate}}</div>
+                        <div class="mls">{{"collection_types" | translate}}</div>
                     </div>
                 </ion-item>
                 <ion-item nav-clear menu-close href="#/app/menunote" ng-if="showNews()">
@@ -74,52 +74,52 @@
                         <div class="col">{{"Le mie note" | translate}}</div>
                     </div>
                 </ion-item>
-                <ion-item nav-clear menu-close href="#/app/segnala" ng-if="showReport()">
+                <!--ion-item nav-clear menu-close href="#/app/segnala" ng-if="showReport()">
                     <div class="row row-center">
                         <div class="col col-15 ">
                             <i class="icon riciclo-segnala icon-menu"></i>
                         </div>
                         <div class="col">{{"report" | translate}}</div>
                     </div>
-                </ion-item>
+                </ion-item-->
                 <ion-item nav-clear menu-close href="#/app/contatti">
                     <div class="row row-center">
                         <div class="col col-15 ">
-                            <i class="icon riciclo-contatti icon-menu"></i>
+                            <span class="riapp-contatti"/>
                         </div>
-                        <div class="col">{{"contacts" | translate}}</div>
+                        <div class="mls">{{"contacts" | translate}}</div>
                     </div>
                 </ion-item>
                 <ion-item nav-clear menu-close href="#/app/home/tipidirifiuti" ng-click="showTutorial()">
                     <div class="row row-center">
                         <div class="col col-15 ">
-                            <i class="icon riciclo-tutorial icon-menu"></i>
+                            <span class="riapp-tutorial"/>
                         </div>
-                        <div class="col">{{"tutorial" | translate}}</div>
+                        <div class="mls">{{"tutorial" | translate}}</div>
                     </div>
                 </ion-item>
                 <ion-item nav-clear menu-close href="#/app/genInfo">
                     <div class="row row-center">
                         <div class="col col-15 ">
-                            <i class="icon riciclo-info icon-menu"></i>
+                            <span class="riapp-contenuti"/>
                         </div>
-                        <div class="col">{{"Informazioni Generali" | translate}}</div>
+                        <div class="mls">{{"Informazioni Generali" | translate}}</div>
                     </div>
                 </ion-item>
                 <ion-item nav-clear menu-close href="#/app/credits">
                     <div class="row row-center">
                         <div class="col col-15 ">
-                            <i class="icon riciclo-info icon-menu"></i>
+                            <span class="riapp-credits"/>
                         </div>
-                        <div class="col">{{"Credits" | translate}}</div>
+                        <div class="mls">{{"Credits" | translate}}</div>
                     </div>
                 </ion-item>
                 <ion-item nav-clear menu-close href="#/app/profili">
                     <div class="row row-center">
                         <div class="col col-15 ">
-                            <i class="icon riciclo-gestione_profili icon-menu"></i>
+                            <span class="riapp-profilo"/>
                         </div>
-                        <div class="col">{{"profiles_management" | translate}}</div>
+                        <div class="mls">{{"profiles_management" | translate}}</div>
                     </div>
                 </ion-item>
             </ion-list>
