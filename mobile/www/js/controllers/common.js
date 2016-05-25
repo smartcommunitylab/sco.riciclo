@@ -79,6 +79,8 @@ angular.module('rifiuti.controllers.common', ['ionic'])
 
 .controller('INFOCtrl', function ($scope, $rootScope, DataManager, $ionicPopup, $filter) {
 
+    $scope.logoComune = DataManager.getRiappComuneLogo();
+
     $scope.enableDevModCounter = 0;
     var devModeLabel = 'disabilitata';
 
@@ -124,7 +126,7 @@ angular.module('rifiuti.controllers.common', ['ionic'])
         $location.path('/app/home/tipidirifiuti');
     }
 
-    var logoComune = DataManager.getRiappComuneLogo();
+    $scope.logoComune = DataManager.getRiappComuneLogo();
 })
 
 .controller('SegnalaCtrl', function ($scope, $rootScope, $cordovaCamera, Raccolta) {
