@@ -101,10 +101,19 @@ body.platform-browser .scroll-bar-fade-out {
 }
 /* Bar and buttons */
 
-.bar-100r {
+.bar-100r-plain {
+    background-color: #ffde3c !important;
+}
+
+.bar-100r-home {
     background-image: url('../img/RiappBanner.png') !important;
     background-position: center !important;
     background-repeat: no-repeat !important;
+    width:143px;
+    height:43px;
+}
+
+.bar-100r {
     background-color: #ffde3c !important;
 }
 
@@ -169,7 +178,7 @@ body.platform-browser .scroll-bar-fade-out {
     background: #47772b;
     border-color: #47772b;
 }
-/* Tabs */
+/* Tabs box-shadow*/
 
 .tabs-100r .tabs {
     background-color: #33398d;
@@ -427,8 +436,9 @@ body.platform-browser .scroll-bar-fade-out {
 }
 
 .home-calendar .agenda .day .day-title {
-    background-color: #eeeeee;
-    text-align: center;
+    background-color: #ffffff;
+    text-align: left;
+    color: #33398d;
 }
 
 .home-calendar .agenda .day .day-content {}
@@ -783,26 +793,42 @@ body.platform-browser .scroll-bar-fade-out {
 
 
 .info .project {
-    color: #63ac3d;
-    font-size: 36px;
-    margin-top: 30px;
-    line-height: 36px;
+    margin-top: 100px;
 }
 
 .info .project-desc {
     padding-left: 30px;
     padding-right: 30px;
+    color: #33398d;
     font-size: 16px !important;
     line-height: 16px !important;
 }
 
+.info .project-desc_due {
+    padding-left: 30px;
+    padding-right: 30px;
+    color: #33398d;
+    font-size: 16px !important;
+    line-height: 16px !important;
+    margin-top: 0px;
+}
+
 .info .version {
-    color: #cecece;
+    color: #3c3c3b;
     margin-top: 10px;
 }
 
+.info .realized {
+    padding-left: 30px;
+    padding-right: 30px;
+    color: #33398d;
+    font-size: 16px !important;
+    line-height: 16px !important;
+    margin-top: 50px;
+}
+
 .info .subtitle {
-    color: #63ac3d;
+    color: #33398d;
     margin-top: 20px;
     font-size: 16px;
 }
@@ -830,9 +856,21 @@ body.platform-browser .scroll-bar-fade-out {
 .nav-bar-title {
     display: table;
     height: 100%;
+    width: 100%;
 }
 
 .nav-title {
+    display: table-cell;
+    vertical-align: middle;
+    line-height: 1.2;
+}
+
+.nav-title-home {
+    background-image: url('../img/RiappBanner.png') !important;
+    background-position: center !important;
+    background-repeat: no-repeat !important;
+    width:143px;
+    height:43px;
     display: table-cell;
     vertical-align: middle;
     line-height: 1.2;
@@ -931,4 +969,156 @@ body.platform-browser .scroll-bar-fade-out {
 .timePickerSpan {
   width: 25%;
   display: block;
+}
+
+/*RIAPP*/
+
+@font-face {
+    font-family: 'riapp';
+    src:    url('../fonts/riapp.eot?eg5z59');
+    src:    url('../fonts/riapp.eot?eg5z59#iefix') format('embedded-opentype'),
+        url('../fonts/riapp.ttf?eg5z59') format('truetype'),
+        url('../fonts/riapp.woff?eg5z59') format('woff'),
+        url('../fonts/riapp.svg?eg5z59#riapp') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+[class^="riapp-"], [class*=" riapp-"] {
+    /* use !important to prevent issues with browser extensions that change fonts */
+    font-family: 'riapp' !important;
+    speak: none;
+    font-style: normal;
+    font-weight: normal;
+    font-variant: normal;
+    text-transform: none;
+    line-height: 1;
+
+    /* Better Font Rendering =========== */
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+.riapp-camion:before {
+    content: "\e900";
+}
+.riapp-centro-raccolta:before {
+    content: "\e901";
+}
+.riapp-cornetta:before {
+    content: "\e902";
+}
+.riapp-porta-porta:before {
+    content: "\e903";
+}
+.riapp-stradale:before {
+    content: "\e904";
+}
+.riapp-altri-rifiuti:before {
+    content: "\e905";
+}
+.riapp-carta:before {
+    content: "\e906";
+}
+.riapp-cartone-bevande:before {
+    content: "\e907";
+}
+.riapp-farmaci:before {
+    content: "\e908";
+}
+.riapp-imballaggi-metallo:before {
+    content: "\e909";
+}
+.riapp-imballaggi-plastica:before {
+    content: "\e90a";
+}
+.riapp-indifferenziato:before {
+    content: "\e90b";
+}
+.riapp-indumenti:before {
+    content: "\e90c";
+}
+.riapp-inerti:before {
+    content: "\e90d";
+}
+.riapp-ingombranti:before {
+    content: "\e90e";
+}
+.riapp-legno:before {
+    content: "\e90f";
+}
+.riapp-oggetti-metallo:before {
+    content: "\e910";
+}
+.riapp-oggetti-plastica:before {
+    content: "\e911";
+}
+.riapp-oggetti-vetro:before {
+    content: "\e912";
+}
+.riapp-oli:before {
+    content: "\e913";
+}
+.riapp-organico:before {
+    content: "\e914";
+}
+.riapp-pannolini:before {
+    content: "\e915";
+}
+.riapp-pericolosi:before {
+    content: "\e916";
+}
+.riapp-pile:before {
+    content: "\e917";
+}
+.riapp-pneumatici:before {
+    content: "\e918";
+}
+.riapp-raee:before {
+    content: "\e919";
+}
+.riapp-sfalci:before {
+    content: "\e91a";
+}
+.riapp-toner:before {
+    content: "\e91b";
+}
+.riapp-vetro:before {
+    content: "\e91c";
+}
+.riapp-centro-raccolta2:before {
+    content: "\e91d";
+}
+.riapp-contatti:before {
+    content: "\e91e";
+}
+.riapp-contenuti:before {
+    content: "\e91f";
+}
+.riapp-credits:before {
+    content: "\e920";
+}
+.riapp-home:before {
+    content: "\e921";
+}
+.riapp-impostazioni:before {
+    content: "\e922";
+}
+.riapp-profilo:before {
+    content: "\e923";
+}
+.riapp-sistemi-raccolta:before {
+    content: "\e924";
+}
+.riapp-tutorial:before {
+    content: "\e925";
+}
+.riapp-calendario-griglia:before {
+    content: "\e926";
+}
+.riapp-calendario-righe:before {
+    content: "\e927";
+}
+.riapp-freccia:before {
+    content: "\e928";
 }
