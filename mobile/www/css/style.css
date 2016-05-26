@@ -153,8 +153,8 @@ body.platform-browser .scroll-bar-fade-out {
 /* Input */
 
 .button.button-100r {
-    border-color: #47772b;
-    background-color: #47772b;
+    border-color: #33398d;
+    background-color: #33398d;
     color: #fff;
 }
 
@@ -333,7 +333,7 @@ body.platform-browser .scroll-bar-fade-out {
 }
 
 .home-notes .home-notes-item.home-notes-item-selected {
-    background-color: #8de058;
+    background-color: #ffde3c;
 }
 /* Home - News */
 
@@ -1035,7 +1035,7 @@ body.platform-browser .scroll-bar-fade-out {
 
 .icon-button {
     font-size: 35px;
-    color: #47772b;
+    color: #33398d;
 }
 
 .icon-large {

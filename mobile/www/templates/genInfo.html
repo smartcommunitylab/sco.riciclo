@@ -1,17 +1,16 @@
 <ion-view>
     <ion-nav-title>
-        <div class="nav-title" ng-click="enableIsDevMod()">
-            <div class="nav-title-single">{{"general_info"|translate}}</div>
+        <div class="nav-title">
+            <div class="nav-title-main">{{"general_info"|translate}}</div>
         </div>
     </ion-nav-title>
 
     <ion-nav-buttons side="left">
         <button menu-toggle="left" class="row button button-icon ion-navicon">
-            <img ng-if="!noteSelected" class="nav-button-app-logo" src="img/ic_launcher.png">
         </button>
     </ion-nav-buttons>
 
-    <ion-tabs class="tabs-top tabs-balanced tabs-100r">
+    <ion-tabs class="tabs-top tabs-balanced tabs-100r home-tabs">
         <ion-tab title="{{'qualita_dei_materiali'| translate}}">
             <ion-view>
                 <ion-content class="expandable-list-items" has-bouncing="false">
