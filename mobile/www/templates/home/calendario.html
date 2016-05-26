@@ -1,14 +1,13 @@
 <ion-view>
-    <ion-nav-title>
-        <div class="nav-title-home">
-        </div>
+    <ion-nav-title class="text-center">
+        <img src="img/riapp-blu-testata.png" class="riapp-blu-testata">
     </ion-nav-title>
 
     <ion-nav-buttons side="right">
         <div class="nowrap" data-tap-disabled="true">
-            <button ng-click="goToToday()" class="button button-icon btn btn-edit">
+            <!--button ng-click="goToToday()" class="button button-icon btn btn-edit">
                 <i class="icon riciclo-today"></i>
-            </button>
+            </button-->
             <button ng-click="switchView()" class="button button-icon btn btn-variable">
                 <i class="icon {{variableIMG2}}"></i>
             </button>
@@ -28,13 +27,13 @@
                 </div>
             <div class="cal-container">
                 <div class="row week-days">
-                    <div class="col-day">{{ "LUN" | translate}}</div>
-                    <div class="col-day">{{ "MAR" | translate}}</div>
-                    <div class="col-day">{{ "MER" | translate}}</div>
-                    <div class="col-day">{{ "GIO" | translate}}</div>
-                    <div class="col-day">{{ "VEN" | translate}}</div>
-                    <div class="col-day">{{ "SAB" | translate}}</div>
-                    <div class="col-day">{{ "DOM" | translate}}</div>
+                    <div class="col col-day">{{ "LUN" | translate}}</div>
+                    <div class="col col-day">{{ "MAR" | translate}}</div>
+                    <div class="col col-day">{{ "MER" | translate}}</div>
+                    <div class="col col-day">{{ "GIO" | translate}}</div>
+                    <div class="col col-day">{{ "VEN" | translate}}</div>
+                    <div class="col col-day">{{ "SAB" | translate}}</div>
+                    <div class="col col-day">{{ "DOM" | translate}}</div>
                 </div>
                 <div class="row week" ng-repeat="week in month.weeks">
                     <div class="col noday" ng-repeat="item in getEmptyArrayByLength(firstDayIndex(week))"></div>
@@ -51,6 +50,7 @@
                             </div>
                         </div>
                     </div>
+                    <div class="col noday-bottom" ng-repeat="item in getEmptyArrayByStart(lastDayIndex(week))"></div>
                 </div>
             </div>
 
@@ -74,7 +74,7 @@
                 </ion-item>
                 <ion-item ng-if="day.colors.length > 0" class="day-content">
                     <div ng-repeat="(key, block) in day.events">
-                        <span class="content-title">{{block.type | translate}}</span>
+                        <!--span class="content-title">{{block.type | translate}}</span-->
                         <div ng-repeat="elem in block.events" class="row content-event">
                             <div class="col-10 col-center">
                                 <i class="icon icon-large {{getIcon(elem)}}" style="color:{{getColor(elem.colore)}}"></i>

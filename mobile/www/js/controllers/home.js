@@ -297,10 +297,10 @@ angular.module('rifiuti.controllers.home', [])
         $scope.updateIMG2();
     }
 
-    $scope.variableIMG2 = "riciclo-calendar_list";
+    $scope.variableIMG2 = "riapp-calendario-griglia";
 
     $scope.updateIMG2 = function () {
-        $scope.variableIMG2 = $scope.calendarView ? "riciclo-calendar_table" : "riciclo-calendar_list";
+        $scope.variableIMG2 = $scope.calendarView ? "riapp-calendario-griglia" : "riapp-calendario-righe";
     };
 
     $scope.firstDayIndex = function (week) {
@@ -316,6 +316,14 @@ angular.module('rifiuti.controllers.home', [])
         if (length > 100) length = 100;
         for (var i = 0; i < length; i++) {
             array.push(i - 1);
+        }
+        return array;
+    };
+
+    $scope.getEmptyArrayByStart = function (start) {
+        var array = [];
+        for (var i = start+1; i < 7; i++) {
+            array.push(i);
         }
         return array;
     };
