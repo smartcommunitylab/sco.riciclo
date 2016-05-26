@@ -129,8 +129,8 @@ angular.module('rifiuti', [
 /* NEW in beta14*/
 .config(function ($ionicConfigProvider) {
     $ionicConfigProvider.tabs.position('top');
-    //$ionicConfigProvider.tabs.style('striped');
-    $ionicConfigProvider.tabs.style('standard');
+    $ionicConfigProvider.tabs.style('striped');
+    //$ionicConfigProvider.tabs.style('standard');
     $ionicConfigProvider.backButton.text('');
 })
 
