@@ -1,8 +1,7 @@
 <ion-view>
     <ion-nav-title>
         <div class="nav-title">
-            <div class="nav-title-main">{{"Tipo di rifiuto"|translate}}</div>
-            <div class="nav-title-sub">{{tipo|translate}}</div>
+            <div class="nav-title-main">{{tipo|translate}}</div>
         </div>
     </ion-nav-title>
 
@@ -12,7 +11,13 @@
         </button>
     </ion-nav-buttons>
 
-    <ion-tabs class="tabs-balanced tabs-100r">
+    <ion-nav-buttons side="right">
+        <button class="button back-button buttons  button-clear header-item">
+            <i class="icon" ng-class="backButtonStyle" ></i>
+        </button>
+    </ion-nav-buttons>
+
+    <ion-tabs class="tabs-top tabs-balanced tabs-100r home-tabs">
         <ion-tab title="{{'collection_locations_upper'|translate}}">
             <ion-view>
                 <ion-content class="expandable-list-items tipodirifiuto">
