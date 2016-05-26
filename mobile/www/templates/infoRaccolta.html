@@ -1,29 +1,27 @@
 <ion-view>
     <ion-nav-title>
         <div class="nav-title">
-            <div class="nav-title-main">{{"Info raccolta"|translate}}</div>
-            <div class="nav-title-sub">{{pdr.tipoPuntoRaccolta.nome}} {{pdr.zona}}</div>
+            <div class="nav-title-main">{{"INFO RACCOLTA"|translate}}</div>
+            <!-- div class="nav-title-sub">{{pdr.tipoPuntoRaccolta.nome}} {{pdr.zona}}</div-->
         </div>
     </ion-nav-title>
 
-
     <ion-content class="puntodiraccolta" has-bouncing="false">
-        <!-- DETTAGLI -->
-        <div class="subpage-title">
-            <h1>{{"DETTAGLI"|translate}}</h1>
+        <div class="single-item-div-tablike">
+            {{pdr.tipoPuntoRaccolta.nome}} {{pdr.zona}}
         </div>
+        <!-- DETTAGLI -->
         <div class="row row-center dettagli">
             <div class="col col-67">
+                <div class="row pdr-dettaglio-title">{{"DETTAGLI"|translate}}</div>
                 <div class="row pdr-dettaglio">{{pdr.tipoPuntoRaccolta.nome}}</div>
                 <!--per ora niente...-->
             </div>
         </div>
         <div ng-show="!!pdr.orarioApertura && pdr.orarioApertura.length > 0">
-            <div class="subpage-title">
-                <h1 class="title">{{"ORARIO" | translate}}</h1>
-            </div>
             <div class="row row-center dettagli">
                 <div class="col">
+                    <div class="row pdr-dettaglio-title">{{"ORARIO" | translate}}</div>
                     <div class="pdr-dettaglio">
                         <table>
                             <tr ng-repeat="item in orari">
@@ -43,11 +41,9 @@
             </div>
         </div>
         <!-- TIPOLOGIE DI RACCOLTA -->
-        <div class="subpage-title">
-            <h1 class="title">{{"TIPOLOGIE DI RACCOLTA"|translate}}</h1>
-        </div>
         <ion-list class="tipologie">
-            <ion-item ng-repeat="rifiuto in rifiuti" href="#/app/raccolta/{{addr2id(rifiuto.id)}}">
+            <div class="row pdr-dettaglio-title-tipologie">{{"TIPOLOGIE DI RACCOLTA"|translate}}</div>
+            <ion-item ng-repeat="rifiuto in rifiuti" href="#/app/raccolta/{{addr2id(rifiuto.id)}}" class="pdr-dettaglio">
                 {{rifiuto.nome|translate}}
             </ion-item>
         </ion-list>
