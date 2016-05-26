@@ -42,14 +42,23 @@ body.platform-browser .scroll-bar-fade-out {
 }
 
 .expandable-list-item-header {
-    background-color: #cecece;
+    background-color: #f5f5f5;
+    color: #3c3c3b;
 }
 
 .expandable-list-item-title {
-    color: #47772b;
+    color: #3c3c3b;
     font-weight: bold;
     font-size: larger;
     padding-bottom: 0;
+}
+
+.ion-chevron-up:before {
+    color: #ffde3c;
+}
+
+.ion-chevron-down:before {
+    color: #ffde3c;
 }
 
 .expandable-list-item-subtitle {
@@ -70,16 +79,16 @@ body.platform-browser .scroll-bar-fade-out {
 /* Navigation drawer and menus */
 
 .navigation-drawer {
-    background-color: #3c3c3b;
+    background-color: #33398d;
 }
 
 .navigation-drawer ion-list ion-item {
-    background-color: #3c3c3b !important;
-    color: white !important;
+    background-color: #33398d !important;
+    color: #ffde3c !important;
 }
 
 .navigation-drawer ion-list ion-item a {
-    background-color: #3c3c3b !important;
+    background-color: #33398d !important;
     padding: 0 !important;
 }
 
@@ -106,7 +115,7 @@ body.platform-browser .scroll-bar-fade-out {
 }
 
 .bar-100r-home {
-    background-image: url('../img/RiappBanner.png') !important;
+    background-image: url('../img/riapp-blu-testata.png') !important;
     background-position: center !important;
     background-repeat: no-repeat !important;
     width:143px;
@@ -118,7 +127,7 @@ body.platform-browser .scroll-bar-fade-out {
 }
 
 .bar-100r-inside {
-    background-color: #ffde3c !important;
+    background-color: #33398d !important;
 }
 
 .bar-100r .btn {
@@ -147,6 +156,14 @@ body.platform-browser .scroll-bar-fade-out {
     border-color: #47772b;
     background-color: #47772b;
     color: #fff;
+}
+
+.bar-balanced .button {
+    color: #33398d !important;
+}
+
+.button.button-balanced.button-clear {
+    color: #33398d;
 }
 
 .bar-balanced .button.button-clear {
@@ -178,16 +195,26 @@ body.platform-browser .scroll-bar-fade-out {
     background: #47772b;
     border-color: #47772b;
 }
-/* Tabs box-shadow*/
+/* Tabs */
 
 .tabs-100r .tabs {
     background-color: #33398d;
     border-color: #33398d;
+    /*height: 25px !important;*/
+}
+
+.tabs-100r .single {
+}
+
+.tabs-balanced > .tabs, .tabs.tabs-balanced {
+    background-image: linear-gradient(0deg, #33398d, #33398d 50%, transparent 50%);
+    color: #fff;
 }
 
 .home-tabs .tabs {
     height: 30px;
     line-height: 30px;
+    background-color: #33398d !important;
 }
 
 .home-tabs .tab-item {
@@ -214,25 +241,61 @@ body.platform-browser .scroll-bar-fade-out {
 */
 /* Home - Tipi di rifiuti */
 
+.single-item-div-tablike {
+    height: 30px;
+    line-height: 30px;
+    background-color: #33398d !important;
+    color: white;
+    padding-left: 20px;
+}
+
 .tab-item {
   max-width: 180px;
 }
 
 .tab-item.tab-item-active {
     font-weight: bold !important;
+    border-color: #ffde3c !important;
 }
 
 .home-tipidirifiuti {
-    background-color: #eeeeee;
+    background-color: #fff;
+}
+
+.tipidirifiuti-label {
+    color: #3c9636;
 }
 
 .home-searchbar {
     margin-top: 10px;
     margin-bottom: 10px;
+    padding-left: 30px;
+    padding-right: 30px;
 }
 
 .home-searchbar button {
     font-size: 20px;
+}
+
+.riapp-blu-testata {
+    height: 90%;
+    width: auto;
+    padding-top: 10px;
+}
+
+.item-input-inset{
+    width: 100% !important;
+    height: 30px !important;
+    border-radius: 30px !important;
+    border-color: #33398d !important;
+}
+
+.item-input-wrapper input {
+    width: 95%;
+}
+
+.item-input-wrapper {
+    background: #fff !important;
 }
 
 .home-grid {
@@ -335,6 +398,7 @@ body.platform-browser .scroll-bar-fade-out {
 .home-calendar .week-days .col-day{
     background-color: #3c9636;
     color: white;
+/*
     -webkit-box-flex: 0;
     -webkit-flex: 0 0 13%;
     -moz-box-flex: 0;
@@ -342,9 +406,19 @@ body.platform-browser .scroll-bar-fade-out {
     -ms-flex: 0 0 13%;
     flex: 0 0 13%;
     max-width: 13%;
-    border: 1px solid;
+*/
+    border-right: 2px solid;
     border-color: white;
 
+}
+
+.cal-container .row{
+    padding: 5px 0;
+    margin-top: 0;
+}
+
+.cal-container .row div:last-child {
+     border-right: 0;
 }
 
 .home-calendar .week {
@@ -353,44 +427,53 @@ body.platform-browser .scroll-bar-fade-out {
     padding-top: 0 !important;
     margin-top: 0px !important;
     padding-bottom: 0px !important;
-    margin-top: -1px !important;
 }
 
 .home-calendar .week .day {
-    -webkit-box-flex: 0;
+/*    -webkit-box-flex: 0;
     -webkit-flex: 0 0 13%;
     -moz-box-flex: 0;
     -moz-flex: 0 0 13%;
     -ms-flex: 0 0 13%;
     flex: 0 0 13%;
-    max-width: 13%;
+    max-width: 13%;*/
     background-color: white;
     color: black;
-    border: 1px solid;
+    border-right: 2px solid;
+       border-bottom: 2px solid;
     border-color: #3c9636;
 }
 
 .home-calendar .week .day .sunday{
     background-color: gray;
+    border-color: #fff !important;
 }
 
 .home-calendar .week .noday {
-    -webkit-box-flex: 0;
+/*    -webkit-box-flex: 0;
     -webkit-flex: 0 0 13%;
     -moz-box-flex: 0;
     -moz-flex: 0 0 13%;
     -ms-flex: 0 0 13%;
     flex: 0 0 13%;
-    max-width: 13%;
-    border: 1.5px solid;
-    border-color: #3c9636;
+    max-width: 13%;*/
+    border-right: 2px solid #fff;
+    border-bottom: 2px solid #3c9636;
+}
+
+.home-calendar .week .noday-bottom {
+/*    -webkit-box-flex: 0;
+    -webkit-flex: 0 0 13%;
+    -moz-box-flex: 0;
+    -moz-flex: 0 0 13%;
+    -ms-flex: 0 0 13%;
+    flex: 0 0 13%;
+    max-width: 13%;*/
+    border-right: 2px solid #fff;
+    border-bottom: 2px solid #fff;
 }
 
 .home-calendar .week .day.today {
-    padding: 0px;
-    border-style: solid;
-    border-width: 3px;
-    border-color: #3c9636;
 }
 
 .home-calendar .week .day .day-date {
@@ -444,8 +527,6 @@ body.platform-browser .scroll-bar-fade-out {
 .home-calendar .agenda .day .day-content {}
 
 .home-calendar .agenda .day .day-content-active {
-    background-color: #47772b !important;
-    color: white !important;
 }
 
 .home-calendar .agenda .day .day-content .content-title {
@@ -468,9 +549,11 @@ body.platform-browser .scroll-bar-fade-out {
 .tipidirifiuto ion-list,
 .tipidirifiuto ion-list ion-item,
 .tipidirifiuto ion-list ion-item a {
-    background-color: #eeeeee !important;
+    background-color: #33398d !important;
 }
+
 .tipidirifiuto ion-list ion-item a, .tipodiraccolta ion-list ion-item a, .home-tipidirifiuti ion-item a {
+    background-color: #fff !important;
     white-space: normal;
 }
 /* Tipo di rifiuto */
@@ -484,20 +567,38 @@ body.platform-browser .scroll-bar-fade-out {
 .puntidiraccolta {}
 
 .puntodiraccolta {
-    background-color: #eeeeee;
+    background-color: #fff;
 }
 
 .puntodiraccolta .dettagli {
     padding: 5px;
+    border-bottom: 2px;
+    border-color: #d9d9d9;
+    border-style: solid;
 }
 
-.puntodiraccolta .dettagli .pdr-dettaglio {
+.puntodiraccolta .pdr-dettaglio-title {
     padding-left: 0;
-    text-decoration: bold;
-/*    white-space: nowrap;*/
+    font-size: 14px;
+    font-weight: bold;
+    color: #3c3c3b;
 }
 
-.puntodiraccolta .dettagli .pdr-specifica {
+.puntodiraccolta .pdr-dettaglio-title-tipologie {
+    padding-left: 5px;
+    font-size: 14px;
+    font-weight: bold;
+    color: #3c3c3b;
+}
+
+.puntodiraccolta .pdr-dettaglio {
+    padding-left: 0;
+    font-size: 12px;
+    font-weight: normal;
+    color: #3c3c3b;
+}
+
+.puntodiraccolta .pdr-specifica {
     padding-left: 0;
     font-size: 12px;
     line-height: 11px;
@@ -866,19 +967,18 @@ body.platform-browser .scroll-bar-fade-out {
 }
 
 .nav-title-home {
-    background-image: url('../img/RiappBanner.png') !important;
+    background-image: url('../img/riapp-blu-testata.png') !important;
     background-position: center !important;
     background-repeat: no-repeat !important;
-    width:143px;
-    height:43px;
-    display: table-cell;
-    vertical-align: middle;
-    line-height: 1.2;
+    display: table-cell !important;
+    vertical-align: middle !important;
+    line-height: 1.2 !important;
+    background-size: contain;
 }
 
-.nav-title .nav-title-single {}
-
-.nav-title .nav-title-main {}
+.nav-title .nav-title-main {
+    color: #33398d !important;
+}
 
 .nav-title .nav-title-sub {
     font-size: smaller;
