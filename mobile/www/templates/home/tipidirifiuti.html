@@ -1,22 +1,23 @@
 <ion-view>
-    <ion-nav-title>
-        <div class="nav-title-home">
-        </div>
+    <ion-nav-title class="text-center">
+        <img src="img/riapp-blu-testata.png" class="riapp-blu-testata">
     </ion-nav-title>
 
-    <!--<ion-nav-buttons side="left">
-        <button id="menuId" ng-click="leftClick()" class="row button button-icon" ng-class="{'ion-navicon': !noteSelected, 'ion-checkmark': !!noteSelected}">
-            <img ng-if="!noteSelected" class="nav-button-app-logo" src="img/ic_launcher.png">
-        </button>
-    </ion-nav-buttons>-->
+    <ion-nav-buttons side="right">
+        <div class="nowrap" data-tap-disabled="true">
+            <button ng-click="switchView()" class="button button-icon btn btn-variable">
+                <i class="icon riapp-calendario-griglia" style="visibility: hidden;"></i>
+            </button>
+        </div>
+    </ion-nav-buttons>
 
     <ion-content class="home-tipidirifiuti" has-bouncing="false">
         <div class="list list-inset home-searchbar">
             <div class="item item-input-inset">
+                <button id="searchButton" class="button button-small button-clear" ng-class="{'ion-search button-balanced': searchQuery.length == 0, 'ion-close button-stable': searchQuery.length > 0}" ng-click="searchQuery = ''"></button>
                 <label class="item-input-wrapper">
                     <input type="search" ng-init="searchQuery = ''" ng-model="searchQuery" placeholder="{{'what_to_throw' | translate}}">
                 </label>
-                <button id="searchButton" class="button button-small button-clear" ng-class="{'ion-search button-balanced': searchQuery.length == 0, 'ion-close button-stable': searchQuery.length > 0}" ng-click="searchQuery = ''"></button>
             </div>
             <ion-item ng-repeat="item in rifiuti | filter:match(searchQuery)" ng-href="#/app/rifiuto/{{addr2id(item.nome)}}">
                 {{item.nome | translate}}
@@ -25,7 +26,7 @@
         <div class="row" ng-repeat="row in tipologie">
             <div class="col home-grid" ng-repeat="item in row">
                 <a class="hidden-link" ng-href="#/app/rifiuti/{{addr2id(item.link)}}">
-                    <div>
+                    <div class="tipidirifiuti-label">
                         <img id=rifiutoId ng-src="{{item.img}}" />{{item.label | translate}}
                     </div>
                 </a>
