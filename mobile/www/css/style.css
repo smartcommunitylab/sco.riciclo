@@ -158,6 +158,10 @@ body.platform-browser .scroll-bar-fade-out {
     color: #fff;
 }
 
+.rifiuto-right-icon {
+    font-size: 30px !important;
+}
+
 .bar-balanced .button {
     color: #33398d !important;
 }
@@ -1159,7 +1163,7 @@ body.platform-browser .scroll-bar-fade-out {
 .riapp-oli:before {
     content: "\e913";
 }
-.riapp-organico:before {
+.riapp-umido:before {
     content: "\e914";
 }
 .riapp-pannolini:before {
