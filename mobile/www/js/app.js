@@ -132,6 +132,7 @@ angular.module('rifiuti', [
     $ionicConfigProvider.tabs.style('striped');
     //$ionicConfigProvider.tabs.style('standard');
     $ionicConfigProvider.backButton.text('');
+    $ionicConfigProvider.backButton.text('').icon('riapp-freccia');
 })
 
 .run(function ($ionicPlatform, $rootScope, $location, $ionicNavBarDelegate, $ionicHistory, $translate, $ionicPopup, $filter, $state, Profili, Utili, GeoLocate, $cordovaSplashscreen, $ionicLoading, $cordovaNetwork, $ionicConfig, DataManager) {
