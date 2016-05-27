@@ -1,13 +1,17 @@
 <ion-view>
   <ion-nav-title>
     <div class="nav-title">
-      <div class="nav-title-main" ng-if="contatto.ufficio && contatto.ragioneSociale">{{contatto.ufficio}} - {{contatto.ragioneSociale}}</div>
-      <div class="nav-title-main" ng-if="contatto.ufficio && contatto.nome">{{contatto.ufficio}} - {{contatto.nome}}</div>
-      <div class="nav-title-sub">{{selectedProfile.name}}</div>
+        <div class="nav-title-main">{{contatto.ufficio}}</div>
     </div>
   </ion-nav-title>
 
   <ion-content class="contatto" has-bouncing="false" delegate-handle="mainScroll" on-scroll-complete="mainScrollResize()">
+    <div class="single-item-div-tablike" ng-if="contatto.ufficio && contatto.ragioneSociale">
+        {{contatto.ragioneSociale}}
+    </div>
+    <div class="single-item-div-tablike" ng-if="contatto.ufficio && contatto.nome">
+        {{contatto.nome}}
+    </div>
     <div class="row">
       <div class="col">
         {{contatto.descrizione}}
