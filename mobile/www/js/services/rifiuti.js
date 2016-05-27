@@ -298,6 +298,31 @@ angular.module('rifiuti.services.rifiuti', [])
         return imgs;
       });
     },
+    immaginiById: function(iconaId) {
+      return DataManager.get('data/support/tipologiaRifiutoImmagini.json').then(function (results) {
+        var imgs=null;
+
+        results.data.forEach(function(immagine,ii,dbImmagini){
+          if(immagine.valore==iconaId){
+            imgs = immagine.immagine;
+          }
+        });
+
+        return imgs;
+      });
+    },
+    tipiDiRifiutiById: function(tipoRifiutoId) {
+      return DataManager.get('data/db/tipologiaRifiuto.json').then(function (results) {
+        var tipoRifiutoResult=null;
+        results.data.forEach(function(tipoRifiuto,ii,dbRifiuto){
+          if(tipoRifiuto.id==tipoRifiutoId){
+            tipoRifiutoResult = tipoRifiuto;
+          }
+        });
+
+        return tipoRifiutoResult;
+      });
+    },
     tipiDiRifiuti: function() {
       return DataManager.get('data/db/tipologiaRifiuto.json').then(function (results) {
         var tipiRifiutiArr={};

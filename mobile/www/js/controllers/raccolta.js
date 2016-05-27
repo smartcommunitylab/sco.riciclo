@@ -350,11 +350,21 @@ angular.module('rifiuti.controllers.raccolta', [])
   });
 })
 
-.controller('RifiutiCtrl', function ($scope, $stateParams, $ionicConfig, $ionicHistory, $rootScope, Raccolta) {
+.controller('RifiutiCtrl', function ($scope, $stateParams, $ionicConfig, $ionicHistory, $rootScope, Raccolta, Utili) {
   $scope.tipo = $rootScope.id2addr($stateParams.tipo);
   //$scope.tipo = $stateParams.tipo;
 
   $scope.backButtonStyle = $ionicConfig.backButton.icon();
+
+  $scope.tipoRifiutoIcona = null;
+
+  Raccolta.tipiDiRifiutiById($stateParams.tipo).then(function(tipoRifiuto){
+    if(!!tipoRifiuto.icona){
+        Raccolta.immaginiById(tipoRifiuto.icona).then(function(tipoRifiuto){
+            $scope.tipoRifiutoIcona = Utili.getTipoRifiutoIcon(tipoRifiuto);
+        });
+    }
+  });
 
   Raccolta.raccolta({ tiporifiuto:$scope.tipo }).then(function(raccolta){
     raccolta.forEach(function(item){
@@ -369,6 +379,10 @@ angular.module('rifiuti.controllers.raccolta', [])
     }
     $scope.raccolta=raccolta;
   });
+
+  $scope.getTipoRifiutoIcona = function() {
+    return $scope.tipoRifiutoIcona;
+  };
 
   Raccolta.rifiuti({ tipo:$scope.tipo }).then(function(rifiuti){
     $scope.rifiuti=rifiuti;

@@ -108,6 +108,13 @@ angular.module('rifiuti.services.utili', [])
           return DOW[day];
   };
 
+  var getTipoRifiutoIcon = function(immagine){
+      var index = immagine.indexOf(".png");
+      var simpleImage = immagine.substring(4, index);
+      var image = "riapp-"+simpleImage;
+      return image;
+  };
+
   var format = function(date) {
     return date.getFullYear()+'-'+(date.getMonth() < 9 ? '0'+(date.getMonth()+1):(date.getMonth()+1))+'-'+(date.getDate() < 10 ? '0'+date.getDate():date.getDate());
   };
@@ -181,6 +188,7 @@ angular.module('rifiuti.services.utili', [])
     DOWTextToDOW: function(dow) {
       return DOW[dow];
     },
+    getTipoRifiutoIcon: getTipoRifiutoIcon,
     dayIndex: dayIndex,
     textToDOW: function(txt) {
       return DOW[giorni[giorniC.indexOf(txt)]];
