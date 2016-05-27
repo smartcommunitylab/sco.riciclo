@@ -2,31 +2,19 @@
     <ion-nav-title>
         <div class="nav-title">
             <div class="nav-title-main">{{"Rifiuto"|translate}}</div>
-            <div class="nav-title-sub">{{nome|translate}}</div>
         </div>
     </ion-nav-title>
 
-<ion-nav-buttons side="left">
-    <button ng-click="$ionicGoBack()" class="button back-button buttons  button-clear header-item"  ng-if="hasCustomBack">
-        <i class="icon" ng-class="backButtonStyle" ></i>
-    </button>
-</ion-nav-buttons>
-
-<!--
     <ion-nav-buttons side="left">
-        <button ng-click="back()" class="row button button-icon ion-ios7-arrow-back">
-            <img ng-if="!noteSelected" class="nav-button-app-logo" src="img/ic_launcher.png">
+        <button ng-click="$ionicGoBack()" class="button back-button buttons  button-clear header-item"  ng-if="hasCustomBack">
+            <i class="icon" ng-class="backButtonStyle" ></i>
         </button>
     </ion-nav-buttons>
--->
 
-    <ion-tabs class="tabs-top tabs-balanced tabs-100r home-tabs">
-        <ion-tab title="{{'collection_locations_upper'|translate}}">
-            <ion-view>
-                <ion-content class="expandable-list-items"  has-bouncing="false">
-                    <div ng-include src="'templates/groupedPuntiList.html'"></div>
-                </ion-content>
-            </ion-view>
-        </ion-tab>
-    </ion-tabs>
+    <ion-content class="expandable-list-items"  has-bouncing="false">
+        <div class="single-item-div-tablike">
+            {{nome|translate}}
+        </div>
+        <div ng-include src="'templates/groupedPuntiList.html'"></div>
+    </ion-content>
 </ion-view>
