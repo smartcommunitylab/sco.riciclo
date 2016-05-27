@@ -1,18 +1,18 @@
 <ion-view>
     <ion-nav-title>
         <div class="nav-title">
-            <div class="nav-title-main">{{"collection_location"|translate}}</div>
-            <div class="nav-title-sub">{{pdr.tipoPuntoRaccolta.nome}} {{pdr.dettagliZona}}</div>
+            <div class="nav-title-main">{{"INFO CENTRO RACCOLTA"|translate}}</div>
         </div>
     </ion-nav-title>
 
     <ion-content class="puntodiraccolta" has-bouncing="false">
-        <!-- DETTAGLI -->
-        <div class="subpage-title">
-            <h1>{{"details"|translate}}</h1>
+        <div class="single-item-div-tablike">
+            {{pdr.tipoPuntoRaccolta.nome}} {{pdr.dettagliZona}}
         </div>
+        <!-- DETTAGLI -->
         <div class="row row-center dettagli">
             <div class="col col-67">
+                <div class="row pdr-dettaglio-title">{{"details"|translate}}</div>
                 <div class="row pdr-dettaglio">{{pdr.dettagliZona || pdr.zona}}</div>
                 <!--<div class="row pdr-specifica"<{{pdr.note}}</div>-->
                 <div class="row pdr-specifica" ng-bind-html="pdr.note"></div>
@@ -27,12 +27,12 @@
                 </a>
             </div>
         </div>
+
+
         <div ng-show="!!pdr.orarioApertura && pdr.orarioApertura.length > 0">
-            <div class="subpage-title">
-                <h1 class="title">{{"schedule"|translate}}</h1>
-            </div>
             <div class="row row-center dettagli">
                 <div class="col">
+                    <div class="row pdr-dettaglio-title">{{"schedule" | translate}}</div>
                     <div class="pdr-dettaglio">
                         <table>
                             <tr ng-repeat="item in orari">
@@ -48,22 +48,17 @@
             </div>
         </div>
 
-        <div class="subpage-title">
-            <h1>{{"access"|translate}}</h1>
-        </div>
         <div class="row row-center dettagli">
             <div class="col col-67">
-                <!--<div class="row pdr-dettaglio">{{pdr.accesso}}</div>-->
+                <div class="row pdr-dettaglio-title">{{"access"|translate}}</div>
                 <div class="row pdr-dettaglio" ng-bind-html="pdr.accesso"></div>
             </div>
         </div>
 
         <!-- TIPOLOGIE DI RACCOLTA -->
-        <div class="subpage-title">
-            <h1 class="title">{{"collection_typology"|translate}}</h1>
-        </div>
         <ion-list class="tipologie">
-            <ion-item ng-repeat="rifiuto in rifiuti" href="#/app/raccolta/{{rifiuto.id}}">
+            <div class="row pdr-dettaglio-title-tipologie">{{"collection_typology"|translate}}</div>
+            <ion-item ng-repeat="rifiuto in rifiuti" href="#/app/raccolta/{{rifiuto.id}}" class="pdr-dettaglio">
                 {{rifiuto.nome|translate}}
             </ion-item>
         </ion-list>
