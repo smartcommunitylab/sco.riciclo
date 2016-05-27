@@ -1,27 +1,26 @@
-<ion-view>
-    <ion-nav-title>
-        <div class="nav-title">
-            <div class="nav-title-main">{{titleText()}}</div>
-            <div class="nav-title-sub">{{subTitleText()}}</div>
-        </div>
-    </ion-nav-title>
+    <ion-view>
+        <ion-content class="info" has-bouncing="false">
+            <p class="project">
+                    <div class="row row-center" ng-click="#/app/home/tipidirifiuti">
+                        <div class="col col-15">
+                            <span class="riapp-home"/>
+                        </div>
+                        <div class="mls"><a ng-click="goToHome()">Home</a></div>
+                    </div>
+            </p>
+            <p class="project-desc">
+                <a ng-click="clickLink('http://www.smartcommunitylab.it')"> <img src="img/{{logoComune}}" width="200"> </a>
 
-    <ion-content class="info" has-bouncing="false">
-        <p class="project" ng-bind-html="'Progetto_CREDITS'|translate"></p>
-        <p class="project-desc"><strong>{{'Progetto_DESC'|translate}}</strong>
-        </p>
-        <p class="version"><strong>{{version}}</strong>
-        </p>
+            <a ng-click="clickLink('http://achabgroup.it/')"><img src="img/riapp-completo.png" width="300">
+            </a>
+            <br/>
+            </p>
+            <p class="project-desc">Tutto quello che devi sapere
+            </p>
+            <p class="project-desc_due">sulla raccolta differenziata
+            </p>
+            <p class="project-desc_due">nel tuo comune
+            </p>
+        </ion-content>
 
-        <a ng-click="clickLink('http://www.dolomitiambiente.it/')"><img src="img/da_logo.png" width="200">
-        </a>
-        <br/>
-        <a ng-click="clickLink('http://www.comune.trento.it/')"><img src="img/{{logo_comune}}" width="200">
-        </a>
-
-        <p class="subtitle">{{'Progetto_di'|translate}}</p>
-        <a ng-click="clickLink('http://www.comunitrentini.it')"><img src="img/consorzio_comuni_trentini.png" width="175" height="63"></a>
-        <br />
-        <a ng-click="clickLink('http://www.smartcommunitylab.it')"> <img src="img/logo_sco_fbk.png" width="301"> </a>
-    </ion-content>
-</ion-view>
+    </ion-view>
