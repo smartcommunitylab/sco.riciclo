@@ -124,6 +124,7 @@ angular.module('rifiuti.services.profili', [])
             }
 
             localStorage[profilesPrefix] = JSON.stringify($rootScope.profili);
+            $rootScope.selectedRiappData = $rootScope.profili;
             // update
             ProfiliFactory.read();
             var profileIndex = 0;
@@ -385,6 +386,7 @@ angular.module('rifiuti.services.profili', [])
 
     ProfiliFactory.saveAll = function () {
         localStorage[profilesPrefix] = JSON.stringify($rootScope.profili);
+        $rootScope.selectedRiappData = $rootScope.profili;
         ProfiliFactory.updateNotifications();
     };
 
