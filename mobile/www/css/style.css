@@ -191,13 +191,13 @@ body.platform-browser .scroll-bar-fade-out {
 }
 
 .toggle-small .toggle.toggle-100r input:checked + .track .handle {
-    background: #63ac3d;
+    background: #33398d;
 }
 
 .checkbox-100r input:checked:before,
 .checkbox-100r input:checked + .checkbox-icon:before {
-    background: #47772b;
-    border-color: #47772b;
+    background: #33398d;
+    border-color: #33398d;
 }
 /* Tabs */
 
