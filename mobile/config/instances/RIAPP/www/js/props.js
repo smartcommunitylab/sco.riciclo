@@ -7,7 +7,36 @@ VERSION = "1.0.0";
 APP_NAME="100% Riciclo";
 APP_NAME_CREDITS = "100% Riciclo<br/>";
 ICON_COLOR_MAP = {'BIANCO':'#dddddd','GRIGIO': '#3c3c3b','BLU': '#007cc5','GIALLO': '#ffde3c','MARRONE': '#96561f','VERDE': '#3c9636'};
-ICON_POINT_MAP = {'Isola ecologica': 'riciclo-isola_ecologica', 'CRM': 'riciclo-crm', 'CRZ': 'riciclo-crz', 'Farmacia': 'riciclo-farmacia', 'Rivenditore': 'riciclo-rivenditore', 'Porta a porta carta':'riciclo-porta_a_porta', 'Porta a porta organico':'riciclo-porta_a_porta', 'Porta a porta residuo':'riciclo-porta_a_porta', 'Porta a porta cartone':'riciclo-porta_a_porta', 'Porta a porta plastica e metallo':'riciclo-porta_a_porta', 'Porta a porta carta e cartone':'riciclo-porta_a_porta', 'Porta a porta imballaggi leggeri':'riciclo-porta_a_porta', 'Porta a porta vetro':'riciclo-porta_a_porta', 'Porta a porta sfalci e potatura':'riciclo-porta_a_porta', 'Ditta specializzata':'riciclo-furgone', 'Esercenti convenzionati':'riciclo-farmacia'};
+ICON_POINT_MAP = {
+'Campana Abiti usati':'riapp-stradale', 
+'Ecocentro':'riapp-centro-raccolta'.
+'Centro Raccolta Materiali':'riapp-centro-raccolta',
+'Isola Ecologica':'riapp-centro-raccolta',
+'Raccolta rifiuti pericolosi':'riapp-stradale',
+'Raccolta su chiamata':'riapp-camion',
+'Porta a porta carta e cartone':'riapp-porta-porta',
+'Porta a porta erba e ramaglie':'riapp-porta-porta',
+'Porta a porta imballaggi in plastica, lattine':'riapp-porta-porta',
+'Porta a porta vetro':'riapp-porta-porta',
+'Porta a porta lattine':'riapp-porta-porta',
+'Porta a porta imballaggi in plastica':'riapp-porta-porta',
+'Porta a porta pannolini e pannoloni':'riapp-porta-porta',
+'Porta a porta secco non riciclabile':'riapp-porta-porta',
+'Porta a porta umido':'riapp-porta-porta',
+'Porta a porta vetro, imballaggi in plastica, lattine':'riapp-porta-porta',
+'Porta a porta vetro, lattine':'riapp-porta-porta',
+'Punti raccolta sul territorio':'riapp-porta-porta',
+'Stradale carta e cartone':'riapp-stradale',
+'Stradale secco non riciclabile':'riapp-stradale',
+'Stradale umido':'riapp-stradale',
+'Stradale vetro':'riapp-stradale',
+'Stradale vetro, plastica, lattine':'riapp-stradale',
+'Stradale plastica, lattine':'riapp-stradale',
+'Stradale plastica':'riapp-stradale',
+'Stradale lattine':'riapp-stradale',
+'Stradale Pannolini e pannoloni':'riapp-stradale',
+'Informazioni al numero verde':'riapp-cornetta'
+};
 COMUNE_MAP ={'093004':'aviano_logo.png','058061':'LOGO_COMUNE_MONTEFLAVIO.jpg'}
 SHOW_NEWS = false;
 FEED_URL = "http://www.asvo.it/feed/";

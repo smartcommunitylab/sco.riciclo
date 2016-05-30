@@ -1,115 +1,94 @@
 [
-        {
-            "valore": "Accumulatori",
-            "immagine": "img/rif_ic_accumulatori.png"
-        },
-        {
-            "valore": "Carta",
-            "immagine": "img/carta.png"
-        },
-        {
-            "valore": "Cartone",
-            "immagine": "img/rif_ic_cartone.png"
-        },
-        {
-            "valore": "Cartoni per bevande",
-            "immagine": "img/cartone-bevande.png"
-        },
-        {
-            "valore": "Cartucce toner esaurite",
-            "immagine": "img/toner.png"
-        },
-        {
-            "valore": "Imballaggi in metallo",
-            "immagine": "img/imballaggi-metallo.png"
-        },
-        {
-            "valore": "Imballaggi in plastica",
-            "immagine": "img/imballaggi-plastica.png"
-        },
-        {
-            "valore": "Imballaggi in vetro",
-            "immagine": "img/vetro.png"
-        },
-        {
-            "valore": "Indumenti usati",
-            "immagine": "img/indumenti.png"
-        },
-        {
-            "valore": "Inerti",
-            "immagine": "img/inerti.png"
-        },
-        {
-            "valore": "Ingombranti",
-            "immagine": "img/ingombranti.png"
-        },
-        {
-            "valore": "Legno",
-            "immagine": "img/legno.png"
-        },
-        {
-            "valore": "Farmaci scaduti",
-            "immagine": "img/farmaci.png"
-        },
-        {
-            "valore": "Oggetti in metallo",
-            "immagine": "img/oggetti-metallo.png"
-        },
-        {
-            "valore": "Oggetti in plastica",
-            "immagine": "img/oggetti-plastica.png"
-        },
-        {
-            "valore": "Oggetti in vetro",
-            "immagine": "img/oggetti-vetro.png"
-        },
-        {
-            "valore": "Olio vegetale",
-            "immagine": "img/oli.png"
-        },
-        {
-            "valore": "Olio minerale",
-            "immagine": "img/oli.png"
-        },
-        {
-            "valore": "Organico",
-            "immagine": "img/umido.png"
-        },
-        {
-            "valore": "Pericolosi",
-            "immagine": "img/pericolosi.png"
-        },
-        {
-            "valore": "Pile",
-            "immagine": "img/pile.png"
-        },
-        {
-            "valore": "Pneumatici",
-            "immagine": "img/pneumatici.png"
-        },
-        {
-            "valore": "Raee",
-            "immagine": "img/raee.png"
-        },
-        {
-            "valore": "Residuo",
-            "immagine": "img/altri-rifiuti.png"
-        },
-        {
-            "valore": "Verde e ramaglie",
-            "immagine": "img/sfalci.png"
-        },
-        {
-            "valore": "Siringhe",
-            "immagine": "img/rif_ic_siringa.png"
-        },
-        {
-            "valore": "Rifiuti particolari",
-            "immagine": "img/altri-rifiuti.png"
-        },
-        {
-            "valore": "Rifiuti speciali",
-            "immagine": "img/rif_ic_rifiuti_speciali.png"
-        }
-
-    ]
+{
+	"valore": "Abiti usati",
+	"immagine": "img/indumenti.png"
+},
+{
+	"valore": "Carta - Cartone",
+	"immagine": "img/carta.png"
+},
+{
+	"valore": "Cartone per bevande",
+	"immagine": "img/cartone bevande.png"
+},
+{
+	"valore": "Rifiuti pericolosi",
+	"immagine": "img/pericolosi.png"
+},
+{
+	"valore": "Sfalci e ramaglie",
+	"immagine": "img/sfalci.png"
+},
+{
+	"valore": "Farmaci",
+	"immagine": "img/farmaci.png"
+},
+{
+	"valore": "Imballaggi in metallo",
+	"immagine": "img/imballaggi-plastica.png"
+},
+{
+	"valore": "Inerti",
+	"immagine": "img/inerti.png"
+},
+{
+	"valore": "Ingombranti",
+	"immagine": "img/ingombranti.png"
+},
+{
+	"valore": "Legno",
+	"immagine": "img/legno.png"
+},
+{
+	"valore": "Oggetti in metallo",
+	"immagine": "img/oggetti-metallo.png"
+},
+{
+	"valore": "Oggetti in plastica",
+	"immagine": "img/oggetti-plastica.png"
+},
+{
+	"valore": "Olio vegetale alimentare",
+	"immagine": "img/oli.png"
+},
+{
+	"valore": "Pile - Batterie",
+	"immagine": "img/pile.png"
+},
+{
+	"valore": "Pneumatici",
+	"immagine": "img/pneumatici.png"
+},
+{
+	"valore": "Raee",
+	"immagine": "img/raee.png"
+},
+{
+	"valore": "Secco - Indifferenziato",
+	"immagine": "img/indifferenziato"
+},
+{
+	"valore": "Toner",
+	"immagine": "img/toner.png"
+},
+{
+	"valore": "Umido - Organico",
+	"immagine": "img/umido.png"
+},
+{
+	"valore": "Imballaggi in vetro",
+	"immagine": "img/vetro.png"
+},
+{
+	"valore": "Pannolini e pannoloni",
+	"immagine": "img/pannolini.png"
+},
+{
+	"valore": "Oggetti in vetro",
+	"immagine": "img/oggetti-vetro.png"
+},
+{
+	"valore": "Altri rifiuti",
+	"immagine": "img/altri-rifiuti.png"
+}
+]
