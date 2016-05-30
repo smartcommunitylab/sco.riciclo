@@ -523,6 +523,8 @@ body.platform-browser .scroll-bar-fade-out {
 }
 
 .home-calendar .agenda .day .day-title {
+    text-transform: uppercase;
+    font-weight: bold;
     background-color: #ffffff;
     text-align: left;
     color: #33398d;
@@ -981,6 +983,7 @@ body.platform-browser .scroll-bar-fade-out {
 }
 
 .nav-title .nav-title-main {
+    text-transform: uppercase;
     color: #33398d !important;
 }
 
@@ -1073,156 +1076,4 @@ body.platform-browser .scroll-bar-fade-out {
 .timePickerSpan {
   width: 25%;
   display: block;
-}
-
-/*RIAPP*/
-
-@font-face {
-    font-family: 'riapp';
-    src:    url('../fonts/riapp.eot?eg5z59');
-    src:    url('../fonts/riapp.eot?eg5z59#iefix') format('embedded-opentype'),
-        url('../fonts/riapp.ttf?eg5z59') format('truetype'),
-        url('../fonts/riapp.woff?eg5z59') format('woff'),
-        url('../fonts/riapp.svg?eg5z59#riapp') format('svg');
-    font-weight: normal;
-    font-style: normal;
-}
-
-[class^="riapp-"], [class*=" riapp-"] {
-    /* use !important to prevent issues with browser extensions that change fonts */
-    font-family: 'riapp' !important;
-    speak: none;
-    font-style: normal;
-    font-weight: normal;
-    font-variant: normal;
-    text-transform: none;
-    line-height: 1;
-
-    /* Better Font Rendering =========== */
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-}
-
-.riapp-camion:before {
-    content: "\e900";
-}
-.riapp-centro-raccolta:before {
-    content: "\e901";
-}
-.riapp-cornetta:before {
-    content: "\e902";
-}
-.riapp-porta-porta:before {
-    content: "\e903";
-}
-.riapp-stradale:before {
-    content: "\e904";
-}
-.riapp-altri-rifiuti:before {
-    content: "\e905";
-}
-.riapp-carta:before {
-    content: "\e906";
-}
-.riapp-cartone-bevande:before {
-    content: "\e907";
-}
-.riapp-farmaci:before {
-    content: "\e908";
-}
-.riapp-imballaggi-metallo:before {
-    content: "\e909";
-}
-.riapp-imballaggi-plastica:before {
-    content: "\e90a";
-}
-.riapp-indifferenziato:before {
-    content: "\e90b";
-}
-.riapp-indumenti:before {
-    content: "\e90c";
-}
-.riapp-inerti:before {
-    content: "\e90d";
-}
-.riapp-ingombranti:before {
-    content: "\e90e";
-}
-.riapp-legno:before {
-    content: "\e90f";
-}
-.riapp-oggetti-metallo:before {
-    content: "\e910";
-}
-.riapp-oggetti-plastica:before {
-    content: "\e911";
-}
-.riapp-oggetti-vetro:before {
-    content: "\e912";
-}
-.riapp-oli:before {
-    content: "\e913";
-}
-.riapp-umido:before {
-    content: "\e914";
-}
-.riapp-pannolini:before {
-    content: "\e915";
-}
-.riapp-pericolosi:before {
-    content: "\e916";
-}
-.riapp-pile:before {
-    content: "\e917";
-}
-.riapp-pneumatici:before {
-    content: "\e918";
-}
-.riapp-raee:before {
-    content: "\e919";
-}
-.riapp-sfalci:before {
-    content: "\e91a";
-}
-.riapp-toner:before {
-    content: "\e91b";
-}
-.riapp-vetro:before {
-    content: "\e91c";
-}
-.riapp-centro-raccolta2:before {
-    content: "\e91d";
-}
-.riapp-contatti:before {
-    content: "\e91e";
-}
-.riapp-contenuti:before {
-    content: "\e91f";
-}
-.riapp-credits:before {
-    content: "\e920";
-}
-.riapp-home:before {
-    content: "\e921";
-}
-.riapp-impostazioni:before {
-    content: "\e922";
-}
-.riapp-profilo:before {
-    content: "\e923";
-}
-.riapp-sistemi-raccolta:before {
-    content: "\e924";
-}
-.riapp-tutorial:before {
-    content: "\e925";
-}
-.riapp-calendario-griglia:before {
-    content: "\e926";
-}
-.riapp-calendario-righe:before {
-    content: "\e927";
-}
-.riapp-freccia:before {
-    content: "\e928";
 }
