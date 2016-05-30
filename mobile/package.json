@@ -28,7 +28,6 @@
     "de.appplant.cordova.plugin.local-notification",
     "https://github.com/apache/cordova-plugin-network-information",
     "org.apache.cordova.network-information",
-    "https://github.com/apache/cordova-plugin-whitelist.git",
     "cordova-plugin-whitelist"
   ],
   "cordovaPlatforms": [

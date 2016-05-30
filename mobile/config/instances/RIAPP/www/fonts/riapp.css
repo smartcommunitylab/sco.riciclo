@@ -1,10 +1,10 @@
 @font-face {
     font-family: 'riapp';
-    src:    url('fonts/riapp.eot?eg5z59');
-    src:    url('fonts/riapp.eot?eg5z59#iefix') format('embedded-opentype'),
-        url('fonts/riapp.ttf?eg5z59') format('truetype'),
-        url('fonts/riapp.woff?eg5z59') format('woff'),
-        url('fonts/riapp.svg?eg5z59#riapp') format('svg');
+    src:    url('./riapp.eot?eg5z59');
+    src:    url('./riapp.eot?eg5z59#iefix') format('embedded-opentype'),
+        url('./riapp.ttf?eg5z59') format('truetype'),
+        url('./riapp.woff?eg5z59') format('woff'),
+        url('./riapp.svg?eg5z59#riapp') format('svg');
     font-weight: normal;
     font-style: normal;
 }
