@@ -144,6 +144,7 @@
 .riapp-calendario-righe:before {
     content: "\e927";
 }
-.riapp-freccia:before {
+.riapp-freccia:after {
     content: "\e928";
+    font-size: 25px;
 }
