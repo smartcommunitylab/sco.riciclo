@@ -22,9 +22,9 @@
     },
     "RIAPP": {
         "resource_folder": "config/instances/RIAPP",
-        "widget_id" : "it.smartcommunitylab.rifiuti.asia",
-        "version": "1.0.0",
-        "version_code": "5",
+        "widget_id" : "it.smartcommunitylab.rifiuti.riapp",
+        "version": "0.0.1",
+        "version_code": "1",
         "app_name": "100% Riciclo - RIAPP"
     }
 }
