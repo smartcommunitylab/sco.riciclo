@@ -9,7 +9,7 @@
 },
 {
 	"valore": "Cartone per bevande",
-	"immagine": "img/cartone bevande.png"
+	"immagine": "img/cartone-bevande.png"
 },
 {
 	"valore": "Rifiuti pericolosi",
@@ -25,6 +25,10 @@
 },
 {
 	"valore": "Imballaggi in metallo",
+	"immagine": "img/imballaggi-metallo.png"
+},
+{
+	"valore": "Imballaggi in plastica",
 	"immagine": "img/imballaggi-plastica.png"
 },
 {
