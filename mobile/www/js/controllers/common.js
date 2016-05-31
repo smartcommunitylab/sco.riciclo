@@ -120,13 +120,17 @@ angular.module('rifiuti.controllers.common', ['ionic'])
     }
 })
 
-.controller('CREDITSCtrl', function ($scope, $location, $rootScope, DataManager, $ionicPopup, $filter) {
+.controller('CREDITSCtrl', function ($scope, $location, $rootScope, DataManager, $ionicPopup, $filter, $timeout) {
 
-    $scope.goToHome = function () {
-        $location.path('/app/home/tipidirifiuti');
+    var goToHome = function () {
+        $timeout(function(){
+            $location.path('/app/home/tipidirifiuti');
+        }, LANDING_PAGE_TIMEOUT);
     }
 
     $scope.logoComune = DataManager.getRiappComuneLogo();
+
+    goToHome();
 })
 
 .controller('SegnalaCtrl', function ($scope, $rootScope, $cordovaCamera, Raccolta) {

@@ -16,6 +16,10 @@ body.platform-browser .scroll-bar-fade-out {
     height: 100vh;
 }
 
+.bar{
+    border-bottom: 0px;
+}
+
 .punti-raccolta-info {
     color: #47772b;
     font-weight: bold;
