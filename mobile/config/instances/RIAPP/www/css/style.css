@@ -16,6 +16,10 @@ body.platform-browser .scroll-bar-fade-out {
     height: 100vh;
 }
 
+.bar{
+    border-bottom: 0px;
+}
+
 .punti-raccolta-info {
     color: #47772b;
     font-weight: bold;
@@ -55,10 +59,12 @@ body.platform-browser .scroll-bar-fade-out {
 
 .ion-chevron-up:before {
     color: #ffde3c;
+    font-size: 25px;
 }
 
 .ion-chevron-down:before {
     color: #ffde3c;
+    font-size: 25px;
 }
 
 .expandable-list-item-subtitle {
