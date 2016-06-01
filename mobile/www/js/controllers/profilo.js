@@ -361,12 +361,7 @@ angular.module('rifiuti.controllers.profilo', [])
                             ]
                         });
                     } else {
-                        if(firstProfile){
-                            $location.path("landingPagehome/landingPage");
-                        }else{
-                            $scope.editMode = false;
-                            $location.path("app/profili");
-                        }
+                        $location.path("landingPagehome/landingPage");
                     }
 
                 });
