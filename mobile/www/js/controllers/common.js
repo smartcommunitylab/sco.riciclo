@@ -80,6 +80,7 @@ angular.module('rifiuti.controllers.common', ['ionic'])
 .controller('INFOCtrl', function ($scope, $rootScope, DataManager, $ionicPopup, $filter) {
 
     $scope.logoComune = DataManager.getRiappComuneLogo();
+	$scope.logoCliente = DataManager.getRiappClienteLogo();
 
     $scope.enableDevModCounter = 0;
     var devModeLabel = 'disabilitata';

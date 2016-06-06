@@ -37,7 +37,10 @@ ICON_POINT_MAP = {
 'Stradale Pannolini e pannoloni':'riapp-stradale',
 'Informazioni al numero verde':'riapp-cornetta'
 };
-COMUNE_MAP ={'093004':'aviano_logo.png','058061':'LOGO_COMUNE_MONTEFLAVIO.jpg'}
+COMUNE_MAP ={
+	'093004':{comune:'comune_log.png', cliente:'cliente_log.png'},
+	'058061':{comune:'comune_log.png', cliente:'cliente_log.png'}
+}
 SHOW_NEWS = false;
 FEED_URL = "";
 EXT_URL = "";

@@ -695,18 +695,34 @@ angular.module('rifiuti.services.data', [])
         return "";
     }
 
-    var getRiappComuneLogo = function(){
+    var getRiappComuneLogo = function() {
         var codiceIstat = '';
 
         if(!!$rootScope.selectedRiappData && !!$rootScope.selectedRiappData.ownerId){
             codiceIstat = $rootScope.selectedRiappData.codiceISTAT;
-        }else if (!!localStorage[profilesPrefix]){
+        } else if (!!localStorage[profilesPrefix]){
             var profiles = JSON.parse(localStorage[profilesPrefix]);
             $rootScope.selectedRiappData = profiles[0].profiloRiapp;
             codiceIstat = $rootScope.selectedRiappData.codiceISTAT;
         }
 
-        var logo = COMUNE_MAP[codiceIstat];
+        var logo = COMUNE_MAP[codiceIstat]['comune'];
+
+        return logo;
+    }
+
+    var getRiappClienteLogo = function() {
+        var codiceIstat = '';
+
+        if(!!$rootScope.selectedRiappData && !!$rootScope.selectedRiappData.ownerId){
+            codiceIstat = $rootScope.selectedRiappData.codiceISTAT;
+        } else if (!!localStorage[profilesPrefix]){
+            var profiles = JSON.parse(localStorage[profilesPrefix]);
+            $rootScope.selectedRiappData = profiles[0].profiloRiapp;
+            codiceIstat = $rootScope.selectedRiappData.codiceISTAT;
+        }
+
+        var logo = COMUNE_MAP[codiceIstat]['cliente'];
 
         return logo;
     }
@@ -794,6 +810,7 @@ angular.module('rifiuti.services.data', [])
         processRiappByProfiloRiapp:processRiappByProfiloRiapp,
         initGlobalSettings:initGlobalSettings,
         getRiappComuneLogo:getRiappComuneLogo,
+		getRiappClienteLogo:getRiappClienteLogo,
         updateProfiles: function (newProfiles) {
             profili = newProfiles;
             updateProfileData();
