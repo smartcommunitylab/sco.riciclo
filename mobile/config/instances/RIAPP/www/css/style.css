@@ -979,7 +979,7 @@ body.platform-browser .scroll-bar-fade-out {
 /* Nav title */
 
 .nav-bar-title {
-    display: table;
+    /*display: table;*/
     height: 100%;
     width: 100%;
 }
