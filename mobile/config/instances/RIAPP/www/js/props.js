@@ -38,8 +38,10 @@ ICON_POINT_MAP = {
 'Informazioni al numero verde':'riapp-cornetta'
 };
 COMUNE_MAP ={
-	'093004':{comune:'comune_log.png', cliente:'cliente_log.png'},
-	'058061':{comune:'comune_log.png', cliente:'cliente_log.png'}
+	'058061':{comune:'058061.jpg', cliente:'AVR-Logo.jpg'},
+	'058066':{comune:'058066.jpg', cliente:'AVR-Logo.jpg'},
+	'058067':{comune:'058067.jpg', cliente:'AVR-Logo.jpg'},
+	'058071':{comune:'058071.jpg', cliente:'AVR-Logo.jpg'}
 }
 SHOW_NEWS = false;
 FEED_URL = "";
