@@ -76,7 +76,7 @@
                     <div ng-repeat="(key, block) in day.events">
                         <!--span class="content-title">{{block.type | translate}}</span-->
                         <div ng-repeat="elem in block.events" class="row content-event">
-                            <div class="col-10 col-center">
+                            <div class="col-center">
                                 <i class="icon icon-large {{getIcon(elem)}}" style="color:{{getColor(elem.colore)}}"></i>
                             </div>
                             <div class="col col-center event-desc">

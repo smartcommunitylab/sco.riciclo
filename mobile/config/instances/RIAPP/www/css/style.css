@@ -1,4 +1,19 @@
 /* Empty. Add your own CSS if you like */
+@font-face {
+    font-family: 'TitilliumWeb';
+    font-weight: normal;
+		src: url(../fonts/TitilliumWeb-Regular.ttf);
+}
+
+@font-face {
+    font-family: 'TitilliumWeb';
+    font-weight: bold;
+    src: url(../fonts/TitilliumWeb-Bold.ttf);
+}
+
+body * {
+	font-family: 'TitilliumWeb' !important;
+}
 
 body.platform-browser .ng-animate .scroll-bar {
     visibility: visible !important;
@@ -328,7 +343,7 @@ body.platform-browser .scroll-bar-fade-out {
 }
 
 .home-grid img {
-    height: 40px;
+    height: 50px;
     margin: 0 auto;
     display: block;
 }
@@ -561,7 +576,7 @@ body.platform-browser .scroll-bar-fade-out {
 
 .home-calendar .agenda .day .day-content .content-event,
 .home-calendar .agenda .day .day-content .content-event .event-desc {
-    padding: 0 !important;
+    padding: 3px !important;
 }
 /* Tipi di rifiuto */
 
@@ -674,7 +689,18 @@ body.platform-browser .scroll-bar-fade-out {
     padding: 0 5px;
 }
 
-.tipologiediraccolta .tipologiediraccolta-icons div {}
+.tipologiediraccolta .tipologiediraccolta-icons .col-ico {
+    -webkit-box-flex: 0;
+    -webkit-flex: 0 0 10%;
+    -moz-box-flex: 0;
+    -moz-flex: 0 0 10%;
+    -ms-flex: 0 0 10%;
+    flex: 0 0 10%;
+}
+
+.tipologiediraccolta-title {
+		white-space: initial;
+}
 
 .contatti-item-list ion-item {
     border-color: #cecece !important;
@@ -921,12 +947,19 @@ body.platform-browser .scroll-bar-fade-out {
     margin-top: 100px;
 }
 
+.info .project-desc img {
+	width: 90%;
+	max-width: 300px;
+}
+
 .info .project-desc {
     padding-left: 30px;
     padding-right: 30px;
     color: #33398d;
     font-size: 16px !important;
     line-height: 16px !important;
+	margin-top: 0px;
+	margin-bottom: 5px;
 }
 
 .info .project-desc_due {
@@ -936,6 +969,7 @@ body.platform-browser .scroll-bar-fade-out {
     font-size: 16px !important;
     line-height: 16px !important;
     margin-top: 0px;
+	margin-bottom: 5px;
 }
 
 .info .version {
@@ -985,9 +1019,7 @@ body.platform-browser .scroll-bar-fade-out {
 }
 
 .nav-title {
-    display: table-cell;
-    vertical-align: middle;
-    line-height: 1.2;
+	height: 100%;
 }
 
 .nav-title-home {
@@ -1002,7 +1034,12 @@ body.platform-browser .scroll-bar-fade-out {
 
 .nav-title .nav-title-main {
     text-transform: uppercase;
-    color: #33398d !important;
+	color: #33398d !important;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 100%;
+	line-height: 43px;
 }
 
 .nav-title .nav-title-sub {
