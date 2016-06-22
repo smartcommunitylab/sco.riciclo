@@ -18,9 +18,14 @@ angular.module('rifiuti.controllers.common', ['ionic'])
     $scope.showNews = function () {
         return Conf.showNews();
     };
+
     $scope.showReport = function () {
         return Raccolta.hasSegnalazioni();
     };
+
+	$scope.isWebView = function() {
+		return ionic.Platform.isWebView();
+	};
 
     if($rootScope.isOnline||true){
         var profiles = DataManager.getProfiles();

@@ -37,15 +37,15 @@
                 <ion-item nav-clear menu-close href="#/app/home/tipidirifiuti">
                     <div class="row row-center">
                         <div class="col col-15">
-                            <span class="riapp-home"/>
+                            <span class="riapp-home icon-large"/>
                         </div>
                         <div class="mls">Home</div>
                     </div>
                 </ion-item>
-                <ion-item nav-clear menu-close ng-click="checkSettings()" href="#/app/settings" ng-if="!isHiddenFields && ((!!selectedProfile.PaP && selectedProfile.PaP.length > 0) || isDevMode || (LANG.length > 0))">
+                <ion-item nav-clear menu-close ng-click="checkSettings()" href="#/app/settings" ng-if="isWebView()">
                     <div class="row row-center">
                         <div class="col col-15 ">
-                            <span class="riapp-impostazioni"/>
+                            <span class="riapp-impostazioni icon-large"/>
                         </div>
                         <div class="mls">{{"notifications" | translate}}</div>
                     </div>
@@ -53,7 +53,7 @@
                 <ion-item nav-clear menu-close href="#/app/tipiDiRaccolta">
                     <div class="row row-center">
                         <div class="col col-15">
-                            <span class="riapp-sistemi-raccolta"/>
+                            <span class="riapp-sistemi-raccolta icon-large"/>
                         </div>
                         <div class="mls">{{"collection_types" | translate}}</div>
                     </div>
@@ -61,7 +61,7 @@
                 <ion-item nav-clear menu-close href="#/app/puntiDiRaccolta/!">
                     <div class="row row-center">
                         <div class="col col-15">
-                            <span class="riapp-centro-raccolta2"/>
+                            <span class="riapp-centro-raccolta2 icon-large"/>
                         </div>
                         <div class="mls">{{"collection_locations" | translate}}</div>
                     </div>
@@ -69,7 +69,7 @@
                 <ion-item nav-clear menu-close href="#/app/menunote" ng-if="showNews()">
                     <div class="row row-center">
                         <div class="col col-15 ">
-                            <i class="icon riciclo-note icon-menu"></i>
+                            <span class="riciclo-note icon-large"></span>
                         </div>
                         <div class="col">{{"Le mie note" | translate}}</div>
                     </div>
@@ -85,7 +85,7 @@
                 <ion-item nav-clear menu-close href="#/app/contatti">
                     <div class="row row-center">
                         <div class="col col-15 ">
-                            <span class="riapp-contatti"/>
+                            <span class="riapp-contatti icon-large"/>
                         </div>
                         <div class="mls">{{"contacts" | translate}}</div>
                     </div>
@@ -93,7 +93,7 @@
                 <ion-item nav-clear menu-close href="#/app/genInfo">
                     <div class="row row-center">
                         <div class="col col-15 ">
-                            <span class="riapp-contenuti"/>
+                            <span class="riapp-contenuti icon-large"/>
                         </div>
                         <div class="mls">{{"Informazioni Generali" | translate}}</div>
                     </div>
@@ -101,7 +101,7 @@
                 <ion-item nav-clear menu-close href="#/app/profili">
                     <div class="row row-center">
                         <div class="col col-15 ">
-                            <span class="riapp-profilo"/>
+                            <span class="riapp-profilo icon-large"/>
                         </div>
                         <div class="mls">{{"profiles_management" | translate}}</div>
                     </div>
@@ -109,7 +109,7 @@
                 <ion-item nav-clear menu-close href="#/app/home/tipidirifiuti" ng-click="showTutorial()">
                     <div class="row row-center">
                         <div class="col col-15 ">
-                            <span class="riapp-tutorial"/>
+                            <span class="riapp-tutorial icon-large"/>
                         </div>
                         <div class="mls">{{"tutorial" | translate}}</div>
                     </div>
@@ -117,7 +117,7 @@
                 <ion-item nav-clear menu-close href="#/app/credits">
                     <div class="row row-center">
                         <div class="col col-15 ">
-                            <span class="riapp-credits"/>
+                            <span class="riapp-credits icon-large"/>
                         </div>
                         <div class="mls">{{"Credits" | translate}}</div>
                     </div>
