@@ -16,7 +16,7 @@ ITALIAN_VERSION = {
         cosa_due: "Rifiuti secchi come ramaglie, paglia, foglie secche, truciolo e fazzoletti di carta usati",
         cosa_compostare:"Cosa Compostare",
         cosa_e_title: "COSA E'",
-        compostaggio_domestico:"COMPOSTAGGIO DOMESTICO",
+        compostaggio_domestico:"COMPOSTAGGIO",
         qualita_title:"Senza qualità non c’è riciclo!",
         general_info:"Informazioni Generali",
         credits:"CREDITS",
