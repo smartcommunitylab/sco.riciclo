@@ -70,6 +70,7 @@ ITALIAN_VERSION = {
         presta_attenzione: "Presta attenzione",
         come_conferire: "Come conferire",
         info: "INFORMAZIONI GENERALI",
+		info_min: "INFO",
         alert_select_comune_before_localita:"Devi selezionare un comune prima di poter scegliere una località",
         profilo_save: "Per completare il tuo profilo devi scegliere un comune e una località",
         comuni: "Comuni",
