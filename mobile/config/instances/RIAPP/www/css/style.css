@@ -199,6 +199,11 @@ body.platform-browser .scroll-bar-fade-out {
     color: #33398d !important;
 }
 
+.bar.bar-balanced .title {
+	color: #33398d;
+	text-align: left;
+}
+
 .button.button-balanced.button-clear {
     color: #33398d;
 }
@@ -320,15 +325,17 @@ body.platform-browser .scroll-bar-fade-out {
     padding-top: 10px;
 }
 
-.item-input-inset{
+.item-input-inset {
     width: 100% !important;
     height: 30px !important;
     border-radius: 30px !important;
     border-color: #33398d !important;
+	padding: 0 10px;
 }
 
 .item-input-wrapper input {
     width: 95%;
+	padding-top: 0;
 }
 
 .item-input-wrapper {
@@ -349,7 +356,7 @@ body.platform-browser .scroll-bar-fade-out {
 }
 
 .home-grid:hover {
-    background-color: #8de058;
+    background-color: #f0f5f5;
 }
 /* Home - Notes */
 
@@ -690,12 +697,7 @@ body.platform-browser .scroll-bar-fade-out {
 }
 
 .tipologiediraccolta .tipologiediraccolta-icons .col-ico {
-    -webkit-box-flex: 0;
-    -webkit-flex: 0 0 10%;
-    -moz-box-flex: 0;
-    -moz-flex: 0 0 10%;
-    -ms-flex: 0 0 10%;
-    flex: 0 0 10%;
+	padding: 0 8px 4px 0;
 }
 
 .tipologiediraccolta-title {
