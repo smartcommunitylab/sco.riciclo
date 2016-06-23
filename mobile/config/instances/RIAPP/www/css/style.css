@@ -35,6 +35,11 @@ body.platform-browser .scroll-bar-fade-out {
   cursor:pointer;
 }
 
+.home-title {
+  display: block;
+  text-align: center;
+}
+
 .scroll-content > #map1 {
     height: 100%;
 }
