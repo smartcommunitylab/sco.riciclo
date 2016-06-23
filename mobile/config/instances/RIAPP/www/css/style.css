@@ -44,8 +44,12 @@ body.platform-browser .scroll-bar-fade-out {
     height: 100%;
 }
 
+.angular-google-map {
+    height: 100%;
+}
+
 .angular-google-map-container {
-    height: 100vh;
+    height: 100%;
 }
 
 .bar{
