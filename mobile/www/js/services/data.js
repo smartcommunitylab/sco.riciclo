@@ -474,13 +474,20 @@ angular.module('rifiuti.services.data', [])
     var saveIsDevMode = function(isDevMode){
         $rootScope.isDevMode = isDevMode;
         localStorage[isDevModePrefix] = JSON.stringify(isDevMode);
+        if (!!$rootScope.globalSettings) {
+			if(isDevMode) {
+				$rootScope.globalSettings.draftEnabled = true;
+			} else {
+				$rootScope.globalSettings.draftEnabled = USE_DRAFT;
+			}
+        	saveGlobalSettings();
+        }
     }
 
     var getTutorial = function () {
         if (localStorage[tutorialPrefix]){
             return localStorage.getItem(tutorialPrefix);
         }
-
         return null;
     }
 
@@ -682,8 +689,13 @@ angular.module('rifiuti.services.data', [])
     var getDraftEnabled = function(){
          if(!!$rootScope.globalSettings && $rootScope.globalSettings.draftEnabled!=null){
              return $rootScope.globalSettings.draftEnabled;
-         }else{
-             return USE_DRAFT;
+         } else {
+			 if (!!$rootScope.globalSettings) {
+				$rootScope.globalSettings.draftEnabled = USE_DRAFT;
+				saveGlobalSettings();
+			 } else {
+				return USE_DRAFT;
+			 }
         }
     }
 
