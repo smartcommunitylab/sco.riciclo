@@ -24,8 +24,12 @@ body.platform-browser .scroll-bar-fade-out {
     height: 100%;
 }
 
+.angular-google-map {
+    height: 100%;
+}
+
 .angular-google-map-container {
-    height: 800px;
+    height: 100%;
 }
 
 .punti-raccolta-info {
