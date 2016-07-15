@@ -19,7 +19,7 @@ if (profile == null) {
 } else {
     console.log('check 2');
 
-    fs.copy("../mobile", "../../RUNNING/", function (err) {
+    fs.copy("../mobile", "../../RUNNING/"+profile, function (err) {
         console.log('check 3');
 
         if (err) {
@@ -27,7 +27,7 @@ if (profile == null) {
         } else {
             console.log('copy app done!');
 
-            ncp("config/instances/"+profile+"/www", "../../RUNNING/www", function (err) {
+            ncp("config/instances/"+profile+"/www", "../../RUNNING/"+profile+"/www", function (err) {
                  console.log('check 3.1');
 
                  if (err) {
