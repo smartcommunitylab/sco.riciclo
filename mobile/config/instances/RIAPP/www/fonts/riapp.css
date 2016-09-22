@@ -48,20 +48,6 @@
 .riapp-cassonetto:before {
   content: "\e901";
 }
-.riapp-pericolosi .path1:before {
-  content: "\e902";
-  color: rgb(0, 0, 0);
-}
-.riapp-pericolosi .path2:before {
-  content: "\e903";
-  margin-left: -1em;
-  color: rgb(255, 255, 255);
-}
-.riapp-pericolosi .path3:before {
-  content: "\e904";
-  margin-left: -1em;
-  color: rgb(0, 0, 0);
-}
 .riapp-sacco:before {
   content: "\e905";
 }
@@ -113,7 +99,7 @@
 .riapp-pannolini:before {
   content: "\e915";
 }
-.riapp-pericolosi-b:before {
+.riapp-pericolosi:before {
   content: "\e916";
 }
 .riapp-pile:before {
