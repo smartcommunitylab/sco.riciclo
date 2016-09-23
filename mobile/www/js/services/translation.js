@@ -116,7 +116,7 @@ ITALIAN_VERSION = {
         submit: "Invia una email per segnalare un problema direttamente all'ente che si occupa della gestione dei rifiuti. Puoi allegare una foto e le coordinate GPS della tua posizione.",
         category_choice: "Scegli una categoria:",
         reporting: "Segnalazione",
-        collection_locations_upper: "MODALITA' DI RACCOLTA",
+        collection_locations_upper: "MODALITÀ DI RACCOLTA",
 		raccolta: "RACCOLTA",
         waste_list: "LISTA RIFIUTI",
         collection_type: "Sistema di raccolta",

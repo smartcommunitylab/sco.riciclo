@@ -1,10 +1,10 @@
 @font-face {
   font-family: 'riapp';
-  src:  url('riapp.eot?gxkmvk');
-  src:  url('riapp.eot?gxkmvk#iefix') format('embedded-opentype'),
-    url('riapp.ttf?gxkmvk') format('truetype'),
-    url('riapp.woff?gxkmvk') format('woff'),
-    url('riapp.svg?gxkmvk#riapp') format('svg');
+  src:  url('riapp.eot?74jc3e');
+  src:  url('riapp.eot?74jc3e#iefix') format('embedded-opentype'),
+    url('riapp.ttf?74jc3e') format('truetype'),
+    url('riapp.woff?74jc3e') format('woff'),
+    url('riapp.svg?74jc3e#riapp') format('svg');
   font-weight: normal;
   font-style: normal;
 }
@@ -24,55 +24,58 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
-.riapp-camion:before {
-  content: "\e92b";
-}
-.riapp-centro-raccolta:before {
-  content: "\e92c";
-}
-.riapp-cornetta:before {
-  content: "\e92d";
-}
-.riapp-porta-porta:before {
-  content: "\e92e";
-}
-.riapp-inerti:before {
-  content: "\e929";
-}
-.riapp-indifferenziato:before {
-  content: "\e92a";
-}
-.riapp-carrellato:before {
-  content: "\e900";
-}
-.riapp-cassonetto:before {
-  content: "\e901";
+.riapp-pericolosi:before {
+  content: "\e916";
 }
 .riapp-sacco:before {
-  content: "\e905";
+  content: "\e929";
+}
+.riapp-cassonetto:before {
+  content: "\e92d";
+}
+.riapp-carrellato:before {
+  content: "\e92e";
+}
+.riapp-camion:before {
+  content: "\e900";
+}
+.riapp-centro-raccolta:before {
+  content: "\e901";
+}
+.riapp-cornetta:before {
+  content: "\e902";
+}
+.riapp-porta-porta:before {
+  content: "\e903";
 }
 .riapp-stradale:before {
-  content: "\e906";
+  content: "\e904";
 }
 .riapp-altri-rifiuti:before {
-  content: "\e907";
+  content: "\e905";
 }
 .riapp-carta:before {
-  content: "\e908";
+  content: "\e906";
 }
 .riapp-cartone-bevande:before {
-  content: "\e909";
+  content: "\e907";
 }
 .riapp-farmaci:before {
-  content: "\e90a";
+  content: "\e908";
 }
 .riapp-imballaggi-metallo:before {
-  content: "\e90b";
+  content: "\e909";
 }
 .riapp-imballaggi-plastica:before {
-  content: "\e90c";
+  content: "\e90a";
+}
+.riapp-indifferenziato:before {
+  content: "\e90b";
 }
 .riapp-indumenti:before {
+  content: "\e90c";
+}
+.riapp-inerti:before {
   content: "\e90d";
 }
 .riapp-ingombranti:before {
@@ -98,9 +101,6 @@
 }
 .riapp-pannolini:before {
   content: "\e915";
-}
-.riapp-pericolosi:before {
-  content: "\e916";
 }
 .riapp-pile:before {
   content: "\e917";

@@ -236,7 +236,8 @@ angular.module('rifiuti.services.utili', [])
     },
     poiIcon: function(icona, colore) {
       //var icona = iconType(tipologia);
-      return (!!icona?'img/ic_poi_'+icona+'.png':null);
+      //return (!!icona?'img/ic_poi_'+icona+'.png':null);
+	  return 'img/ic_poi_riapp-centro-raccolta.png';
     },
     belongsTo: function(pr, area, profile) {
       return profile.aree.indexOf(area) != -1

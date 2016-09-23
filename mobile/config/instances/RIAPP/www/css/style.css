@@ -211,6 +211,7 @@ body.platform-browser .scroll-bar-fade-out {
 .bar.bar-balanced .title {
 	color: #33398d;
 	text-align: left;
+	left: 42px !important;
 }
 
 .button.button-balanced.button-clear {
@@ -219,6 +220,10 @@ body.platform-browser .scroll-bar-fade-out {
 
 .bar-balanced .button.button-clear {
     color: #33398d;
+}
+
+.bar .back-button .riapp-freccia.icon:before {
+	font-size: 24px;
 }
 
 .button.button-100r-select {
