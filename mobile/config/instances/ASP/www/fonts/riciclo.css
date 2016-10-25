@@ -1,0 +1,174 @@
+@font-face {
+    font-family: 'riciclo';
+    src:    url('riciclo.eot?iewcf1');
+    src:    url('riciclo.eot?iewcf1#iefix') format('embedded-opentype'),
+        url('riciclo.ttf?iewcf1') format('truetype'),
+        url('riciclo.woff?iewcf1') format('woff'),
+        url('riciclo.svg?iewcf1#riciclo') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+[class^="riciclo-"], [class*=" riciclo-"] {
+    /* use !important to prevent issues with browser extensions that change fonts */
+    font-family: 'riciclo' !important;
+    speak: none;
+    font-style: normal;
+    font-weight: normal;
+    font-variant: normal;
+    text-transform: none;
+    line-height: 1;
+
+    /* Better Font Rendering =========== */
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+.riciclo-asvo-n_verde-59:before {
+    content: "\e900";
+}
+.riciclo-asvo-bidone:before {
+    content: "\e91b";
+}
+.riciclo-asvo-pp_altri_imballaggi:before {
+    content: "\e920";
+}
+.riciclo-asvo-pp_cartone:before {
+    content: "\e921";
+}
+.riciclo-asvo-erba_ramaglie_prenotazione:before {
+    content: "\e901";
+}
+.riciclo-asvo-erba_ramaglie:before {
+    content: "\e902";
+}
+.riciclo-asvo-ingombranti_prenotazione:before {
+    content: "\e910";
+}
+.riciclo-asvo-pp_pannolini:before {
+    content: "\e911";
+}
+.riciclo-asvo-caritas_humana:before {
+    content: "\e912";
+}
+.riciclo-asvo-centro_ecologico_mobile:before {
+    content: "\e913";
+}
+.riciclo-asvo-distribuzione_sacchi:before {
+    content: "\e914";
+}
+.riciclo-asvo-ecocentro:before {
+    content: "\e915";
+}
+.riciclo-asvo-impianto:before {
+    content: "\e916";
+}
+.riciclo-asvo-raccolta_pericolosi:before {
+    content: "\e917";
+}
+.riciclo-asvo-punto_raccolta_territorio:before {
+    content: "\e918";
+}
+.riciclo-asvo-pp_carta_cartone:before {
+    content: "\e919";
+}
+.riciclo-asvo-porta_porta:before {
+    content: "\e91a";
+}
+.riciclo-asvo-acquisto_sacchi:before {
+    content: "\e91e";
+}
+.riciclo-servizio_richiesta:before {
+    content: "\e91f";
+}
+.riciclo-calendar_list:before {
+    content: "\e90f";
+}
+.riciclo-add:before {
+    content: "\e600";
+}
+.riciclo-calendar_table:before {
+    content: "\e602";
+}
+.riciclo-camera:before {
+    content: "\e603";
+}
+.riciclo-contatti:before {
+    content: "\e604";
+}
+.riciclo-discard:before {
+    content: "\e607";
+}
+.riciclo-domicilio:before {
+    content: "\e608";
+}
+.riciclo-edit:before {
+    content: "\e609";
+}
+.riciclo-email:before {
+    content: "\e60a";
+}
+.riciclo-farmacia:before {
+    content: "\e60b";
+}
+.riciclo-fax:before {
+    content: "\e60c";
+}
+.riciclo-gestione_profili:before {
+    content: "\e60e";
+}
+.riciclo-home:before {
+    content: "\e60f";
+}
+.riciclo-impostazioni:before {
+    content: "\e610";
+}
+.riciclo-info:before {
+    content: "\e611";
+}
+.riciclo-lista:before {
+    content: "\e613";
+}
+.riciclo-location:before {
+    content: "\e614";
+}
+.riciclo-map:before {
+    content: "\e615";
+}
+.riciclo-more_info:before {
+    content: "\e616";
+}
+.riciclo-note:before {
+    content: "\e617";
+}
+.riciclo-orari:before {
+    content: "\e618";
+}
+.riciclo-pec:before {
+    content: "\e619";
+}
+.riciclo-punti_di_raccolta:before {
+    content: "\e61b";
+}
+.riciclo-save:before {
+    content: "\e61d";
+}
+.riciclo-segnala:before {
+    content: "\e61e";
+}
+.riciclo-telephone:before {
+    content: "\e620";
+}
+.riciclo-tipi_raccolta:before {
+    content: "\e621";
+}
+.riciclo-today:before {
+    content: "\e622";
+}
+.riciclo-tutorial:before {
+    content: "\e623";
+}
+.riciclo-website:before {
+    content: "\e624";
+}
+

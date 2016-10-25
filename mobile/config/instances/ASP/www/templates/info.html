@@ -1,0 +1,34 @@
+<ion-view>
+    <ion-nav-title>
+        <div ng-click="enableIsDevMod()"  class="nav-title">
+            <div class="nav-title-single">{{"Info"|translate}}</div>
+        </div>
+    </ion-nav-title>
+
+    <ion-nav-buttons side="left">
+        <button menu-toggle="left" class="row button button-icon button-dark ion-navicon">
+        </button>
+    </ion-nav-buttons>
+
+    <ion-content class="info" has-bouncing="false">
+        <p class="project" ng-bind-html="'Progetto_CREDITS'|translate"></p>
+        <p class="project-desc"><strong>{{'Progetto_DESC_line_1'|translate}}</strong>
+        </p>
+        <p class="project-desc"><strong>{{'Progetto_DESC_line_2'|translate}}</strong>
+        </p>
+        <p class="version"><strong>{{version}}</strong>
+        </p>
+        <p>
+           <a ng-click="clickLink('http://www.asp.asti.it/')"><img src="img/ASP-LOGO-vettoriale-01.png" width="154">
+        </a>
+        </p>
+        <p>
+            <a ng-click="clickLink('http://achabgroup.it/')"><img src="img/achab.png" width="154">
+        </a>
+        </p>
+
+        <p class="credits">
+            <a ng-click="clickLink('http://achabgroup.it/creditsapp/01/')">{{"CREDITS"|translate}}</a>
+        </p>
+    </ion-content>
+</ion-view>

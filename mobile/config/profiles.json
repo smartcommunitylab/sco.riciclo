@@ -68,5 +68,13 @@
         "version": "1.0.3",
         "version_code": "7",
         "app_name": "100% Riciclo - ASVO s.p.a."
+    },
+    "ASP": {
+        "resource_folder": "config/instances/ASP",
+        "widget_id" : "it.smartcommunitylab.rifiuti.asp",
+        "version": "1.0.0",
+        "version_code": "1",
+        "app_name": "100% Riciclo - ASP S.p.A."
     }
+
 }

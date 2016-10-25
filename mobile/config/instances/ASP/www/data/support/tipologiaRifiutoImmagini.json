@@ -1,0 +1,130 @@
+[
+{
+	"valore": "Abiti usati",
+	"immagine": "img/indumenti_usati.png"
+},
+{
+	"valore": "Batterie",
+	"immagine": "img/Pile.png"
+},
+{
+	"valore": "Calcinacci",
+	"immagine": "img/Inerti.png"
+},
+{
+	"valore": "Carta",
+	"immagine": "img/Carta.png"
+},
+{
+	"valore": "Cartone",
+	"immagine": "img/Cartone.png"
+},
+{
+	"valore": "Cartucce stampante",
+	"immagine": "img/cartucce_toner_esaurite.png"
+},
+{
+	"valore": "Contattare numero verde",
+	"immagine": "img/numero_verde.png"
+},
+{
+	"valore": "Contenitore bonificato in metallo",
+	"immagine": "img/Tossici_nocivi_bonificati_metallo.png"
+},
+{
+	"valore": "Contenitore bonificato in plastica",
+	"immagine": "img/Tossici_nocivi_bonificati_plastica.png"
+},
+{
+	"valore": "Contenitore bonificato in vetro",
+	"immagine": "img/Tossici_nocivi_bonificati_vetro.png"
+},
+{
+	"valore": "Contenitore con residuo pericoloso",
+	"immagine": "img/Tossici_nocivi_non_bonificati.png"
+},
+{
+	"valore": "Erba e ramaglie",
+	"immagine": "img/Verde_ramaglie.png"
+},
+{
+	"valore": "Imballaggi in metallo",
+	"immagine": "img/imballaggi_metallo.png"
+},
+{
+	"valore": "Imballaggi in plastica",
+	"immagine": "img/Imballaggi_plastica.png"
+},
+{
+	"valore": "Ingombranti",
+	"immagine": "img/Ingombranti.png"
+},
+{
+	"valore": "Legno",
+	"immagine": "img/Legno.png"
+},
+{
+	"valore": "Medicinali",
+	"immagine": "img/medicinali_scaduti.png"
+},
+{
+	"valore": "Neon",
+	"immagine": "img/Neon.png"
+},
+{
+	"valore": "Oggetti in metallo",
+	"immagine": "img/Oggetti_metallo.png"
+},
+{
+	"valore": "Oggetti in plastica",
+	"immagine": "img/Oggetti_plastica.png"
+},
+{
+	"valore": "Olio minerale",
+	"immagine": "img/Olio_minerale.png"
+},
+{
+	"valore": "Olio vegetale",
+	"immagine": "img/Olio_vegetale.png"
+},
+{
+	"valore": "Pannolini - pannoloni",
+	"immagine": "img/Pannolini_pannoloni.png"
+},
+{
+	"valore": "Pile",
+	"immagine": "img/Pile.png"
+},
+{
+	"valore": "Pneumatici",
+	"immagine": "img/Pneumatici.png"
+},
+{
+	"valore": "Raee",
+	"immagine": "img/RAEE.png"
+},
+{
+	"valore": "Secco",
+	"immagine": "img/residuo.png"
+},
+{
+	"valore": "Tappi in sughero",
+	"immagine": "img/Tappi_sughero.png"
+},
+{
+	"valore": "Tetrapak - carta poliaccoppiata",
+	"immagine": "img/cartoni_per_bevande.png"
+},
+{
+	"valore": "Umido",
+	"immagine": "img/organico.png"
+},
+{
+	"valore": "Vernici e colori",
+	"immagine": "img/vernice_colori.png"
+},
+{
+	"valore": "Vetro",
+	"immagine": "img/imballaggi_vetro.png"
+}
+]
