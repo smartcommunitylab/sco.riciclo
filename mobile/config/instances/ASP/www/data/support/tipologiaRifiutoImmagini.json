@@ -1,130 +1,110 @@
 [
 {
 	"valore": "Abiti usati",
-	"immagine": "img/indumenti_usati.png"
+	"immagine": "img/abiti.png"
 },
 {
-	"valore": "Batterie",
-	"immagine": "img/Pile.png"
+	"valore": "Accumulatori al piombo",
+	"immagine": "img/batterie_auto.png"
 },
 {
-	"valore": "Calcinacci",
-	"immagine": "img/Inerti.png"
+	"valore": "Bombole",
+	"immagine": "img/bombola_gas.png"
 },
 {
-	"valore": "Carta",
-	"immagine": "img/Carta.png"
+	"valore": "Carta e Cartone",
+	"immagine": "img/carta.png"
 },
 {
-	"valore": "Cartone",
-	"immagine": "img/Cartone.png"
-},
-{
-	"valore": "Cartucce stampante",
-	"immagine": "img/cartucce_toner_esaurite.png"
-},
-{
-	"valore": "Contattare numero verde",
-	"immagine": "img/numero_verde.png"
-},
-{
-	"valore": "Contenitore bonificato in metallo",
-	"immagine": "img/Tossici_nocivi_bonificati_metallo.png"
-},
-{
-	"valore": "Contenitore bonificato in plastica",
-	"immagine": "img/Tossici_nocivi_bonificati_plastica.png"
-},
-{
-	"valore": "Contenitore bonificato in vetro",
-	"immagine": "img/Tossici_nocivi_bonificati_vetro.png"
+	"valore": "Contattare uffici comunali",
+	"immagine": "img/cornetta.png"
 },
 {
 	"valore": "Contenitore con residuo pericoloso",
-	"immagine": "img/Tossici_nocivi_non_bonificati.png"
+	"immagine": "img/tossico_metallo_nonbonif.png"
 },
 {
-	"valore": "Erba e ramaglie",
-	"immagine": "img/Verde_ramaglie.png"
-},
-{
-	"valore": "Imballaggi in metallo",
+	"valore": "Contenitore pulito in metallo",
 	"immagine": "img/imballaggi_metallo.png"
 },
 {
-	"valore": "Imballaggi in plastica",
-	"immagine": "img/Imballaggi_plastica.png"
+	"valore": "Contenitore pulito in plastica",
+	"immagine": "img/plastica.png"
+},
+{
+	"valore": "Contenitore pulito in vetro",
+	"immagine": "img/vetro.png"
+},
+{
+	"valore": "Indifferenziato",
+	"immagine": "img/secco.png"
+},
+{
+	"valore": "Inerti",
+	"immagine": "img/inerti.png"
 },
 {
 	"valore": "Ingombranti",
-	"immagine": "img/Ingombranti.png"
+	"immagine": "img/ingombranti.png"
 },
 {
 	"valore": "Legno",
-	"immagine": "img/Legno.png"
+	"immagine": "img/legno.png"
 },
 {
 	"valore": "Medicinali",
-	"immagine": "img/medicinali_scaduti.png"
+	"immagine": "img/farmaci.png"
 },
 {
 	"valore": "Neon",
-	"immagine": "img/Neon.png"
+	"immagine": "img/neon.png"
 },
 {
-	"valore": "Oggetti in metallo",
-	"immagine": "img/Oggetti_metallo.png"
+	"valore": "Oggetto in vetro",
+	"immagine": "img/caraffa_vetro.png"
 },
 {
-	"valore": "Oggetti in plastica",
-	"immagine": "img/Oggetti_plastica.png"
+	"valore": "Oggetto in metallo",
+	"immagine": "img/metallo.png"
+},
+{
+	"valore": "Oggetto in plastica",
+	"immagine": "img/oggetto_plastica.png"
 },
 {
 	"valore": "Olio minerale",
-	"immagine": "img/Olio_minerale.png"
+	"immagine": "img/olio_minerale.png"
 },
 {
 	"valore": "Olio vegetale",
-	"immagine": "img/Olio_vegetale.png"
+	"immagine": "img/olio_vegetale.png"
 },
 {
-	"valore": "Pannolini - pannoloni",
-	"immagine": "img/Pannolini_pannoloni.png"
+	"valore": "Organico",
+	"immagine": "img/umido.png"
 },
 {
 	"valore": "Pile",
-	"immagine": "img/Pile.png"
+	"immagine": "img/pila.png"
 },
 {
 	"valore": "Pneumatici",
-	"immagine": "img/Pneumatici.png"
+	"immagine": "img/pneumatico.png"
 },
 {
-	"valore": "Raee",
-	"immagine": "img/RAEE.png"
+	"valore": "RAEE",
+	"immagine": "img/raee.png"
 },
 {
-	"valore": "Secco",
-	"immagine": "img/residuo.png"
+	"valore": "Toner",
+	"immagine": "img/toner.png"
 },
 {
-	"valore": "Tappi in sughero",
-	"immagine": "img/Tappi_sughero.png"
-},
-{
-	"valore": "Tetrapak - carta poliaccoppiata",
-	"immagine": "img/cartoni_per_bevande.png"
-},
-{
-	"valore": "Umido",
-	"immagine": "img/organico.png"
+	"valore": "Verde e ramaglie",
+	"immagine": "img/foglia_porta_a_porta.png"
 },
 {
 	"valore": "Vernici e colori",
-	"immagine": "img/vernice_colori.png"
-},
-{
-	"valore": "Vetro",
-	"immagine": "img/imballaggi_vetro.png"
+	"immagine": "img/perocolosi_centro_ecologico.png"
 }
 ]
