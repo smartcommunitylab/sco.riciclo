@@ -49,6 +49,7 @@ angular.module('rifiuti.services.calendar', [])
         if (descr.indexOf(key) == 0) descr = descr.substr(key.length+1);
         proto = {
           tipologiaPuntiRaccolta: puntoDiRaccolta.tipoPuntoRaccolta.id,
+          isPaP: true,
           colore: puntoDiRaccolta.colore,
           descr : [descr, hour]
         };
@@ -64,6 +65,8 @@ angular.module('rifiuti.services.calendar', [])
 
           proto = {
             tipologiaPuntiRaccolta: puntoDiRaccolta.tipoPuntoRaccolta.id,
+            dettaglioPuntoDiRaccolta:puntoDiRaccolta.dettagliZona,
+            isPaP: false,
             colore: puntoDiRaccolta.colore,
             descr : [puntoDiRaccolta.dettagliZona, hour]
           };
