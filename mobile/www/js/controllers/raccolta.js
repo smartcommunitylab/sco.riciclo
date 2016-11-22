@@ -353,6 +353,10 @@ angular.module('rifiuti.controllers.raccolta', [])
 
 .controller('PuntoDiRaccoltaCtrl', function ($scope, $rootScope, $stateParams, $ionicNavBarDelegate, Raccolta, Utili, DataManager) {
 
+  $scope.$on('$ionicView.beforeEnter', function (event, viewData) {
+    viewData.enableBack = true;
+  });
+
   $scope.id = !!$stateParams.id && $stateParams.id != 'undefined' && $stateParams.id != 'null'? $rootScope.id2addr($stateParams.id) : null;
   $scope.pdr = {};
   $scope.orari = [];
@@ -506,6 +510,10 @@ angular.module('rifiuti.controllers.raccolta', [])
 
 .controller('InfoRaccoltaCtrl', function ($scope, $rootScope, $stateParams, $ionicNavBarDelegate, Raccolta) {
 
+  $scope.$on('$ionicView.beforeEnter', function (event, viewData) {
+    viewData.enableBack = true;
+  });
+
   $scope.id = $stateParams.id;
   $scope.pdr = {};
   $scope.orari = [];
@@ -525,7 +533,7 @@ angular.module('rifiuti.controllers.raccolta', [])
       punto.orarioApertura.forEach(function(orario) {
         var j = $scope.checkGiorni(orario.il);
 
-        var hour = calItem.dalle;
+        var hour = orario.dalle;
         if(orario.dalle == null || orario.alle == null){
           if(orario.dalle != null){
                hour = orario.dalle;
