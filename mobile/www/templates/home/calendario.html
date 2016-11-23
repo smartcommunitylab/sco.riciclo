@@ -75,19 +75,19 @@
                         <span class="content-title">{{block.type | translate}}</span>
                         <div ng-repeat="elem in block.events" class="row content-event">
                             <div class="col-10 col-center">
-                                <a ng-if="!elem.isPaP" href="#/app/puntoDiRaccolta/{{elem.dettaglioPuntoDiRaccolta}}" class="hidden-link expandable-list-item-content">
+                                <a ng-if="!elem.isPaP" href="#/app/puntoDiRaccolta/{{addr2id(elem.dettaglioPuntoDiRaccolta)}}" class="hidden-link expandable-list-item-content">
                                     <i class="icon icon-large {{getIcon(elem)}}" style="color:{{getColor(elem.colore)}}"></i>
                                 </a>
-                                <a ng-if="elem.isPaP" href="#/app/infoRaccolta/{{elem.tipologiaPuntiRaccolta}}" class="hidden-link expandable-list-item-content">
+                                <a ng-if="elem.isPaP" href="#/app/infoRaccolta/{{addr2id(elem.tipologiaPuntiRaccolta)}}" class="hidden-link expandable-list-item-content">
                                     <i class="icon icon-large {{getIcon(elem)}}" style="color:{{getColor(elem.colore)}}"></i>
                                 </a>
                             </div>
                             <div class="col col-center event-desc">
                                 <span class="row" ng-repeat="d in elem.descr">
-                                    <a ng-if="!elem.isPaP" href="#/app/puntoDiRaccolta/{{elem.dettaglioPuntoDiRaccolta}}" class="hidden-link expandable-list-item-content">
+                                    <a ng-if="!elem.isPaP" href="#/app/puntoDiRaccolta/{{addr2id(elem.dettaglioPuntoDiRaccolta)}}" class="hidden-link expandable-list-item-content">
                                         {{d}}
                                     </a>
-                                    <a ng-if="elem.isPaP" href="#/app/infoRaccolta/{{elem.tipologiaPuntiRaccolta}}" class="hidden-link expandable-list-item-content">
+                                    <a ng-if="elem.isPaP" href="#/app/infoRaccolta/{{addr2id(elem.tipologiaPuntiRaccolta)}}" class="hidden-link expandable-list-item-content">
                                         {{d}}
                                     </a>
                                 </span>
