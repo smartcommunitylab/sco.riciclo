@@ -2,10 +2,13 @@ angular.module('rifiuti.controllers.profilo', [])
 
 .controller('ProfiliCtrl', function ($scope, $rootScope) {})
 
-.controller('ModificaProfiloCtrl', function ($scope, $rootScope, $ionicNavBarDelegate, $filter, DataManager, $stateParams, $ionicPopup, $ionicModal, Profili, Raccolta) {
-    $scope.searchQuery = {};
+.controller('ModificaProfiloCtrl', function ($scope, $rootScope, $ionicNavBarDelegate, $filter, DataManager, $stateParams, $ionicPopup, $ionicModal, Profili, Raccolta, Utili) {
+
+    $scope.search = {};
 
     $scope.aree = [];
+
+    $scope.toponimi = {};
 
     $scope.id = $stateParams.id;
 
@@ -27,6 +30,43 @@ angular.module('rifiuti.controllers.profilo', [])
             }
         });
     };
+
+    $scope.doSearchQuery = function(item) {
+        if(!$scope.search.value){
+            return item;
+        }
+
+        var searchString = $scope.search.value.toLowerCase();
+        var n = searchString.length;
+
+        if(n<3){
+            return true;
+        }
+
+        $scope.checkToponimi(item.etichetta, searchString, item.descrizione.toLowerCase());
+
+        var text = item.etichetta.toLowerCase();
+        if(text.indexOf(searchString) != -1 || $scope.toponimi[item.etichetta].length > 0) {
+            return item;
+        }
+    };
+
+    $scope.checkToponimi = function (etichetta, searchString, descrizione){
+        var descrizioneList = Utili.getListFromString("<p>", descrizione);
+        $scope.toponimi[etichetta] = [];
+
+        for (var i = 0; i < descrizioneList.length; i++) {
+            var text = descrizioneList[i].toLowerCase();
+            if(text.indexOf(searchString) != -1) {
+                $scope.toponimi[etichetta].push(descrizioneList[i]);
+            }
+        }
+    }
+
+    $scope.resetValues = function(){
+        $scope.search.value = '';
+        $scope.toponimi = {};
+    }
 
     $scope.updateProfileType = function() {
         $scope.updateLocations();

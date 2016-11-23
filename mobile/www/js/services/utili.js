@@ -106,6 +106,12 @@ angular.module('rifiuti.services.utili', [])
           return DOW[day];
   };
 
+  var getListFromString = function(separator, stringList){
+    var list = stringList.split(separator);
+
+    return list;
+  }
+
   var format = function(date) {
     return date.getFullYear()+'-'+(date.getMonth() < 9 ? '0'+(date.getMonth()+1):(date.getMonth()+1))+'-'+(date.getDate() < 10 ? '0'+date.getDate():date.getDate());
   };
@@ -167,6 +173,7 @@ angular.module('rifiuti.services.utili', [])
   }
 
   return {
+    getListFromString: getListFromString,
     jsDOWToShortText: function(dow) {
       return giorni[dow];
     },
