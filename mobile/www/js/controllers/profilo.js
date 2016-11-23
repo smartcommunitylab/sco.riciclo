@@ -40,24 +40,31 @@ angular.module('rifiuti.controllers.profilo', [])
         var n = searchString.length;
 
         if(n<3){
+            $scope.toponimi = {};
             return true;
         }
 
-        $scope.checkToponimi(item.etichetta, searchString, item.descrizione.toLowerCase());
+        if(item.descrizione && item.etichetta && (typeof TOPONIMO_SEPARATOR != 'undefined')){
+            $scope.checkToponimi(item.etichetta, searchString, item.descrizione);
+        }
+
+        if(!item.etichetta){
+            return true;
+        }
 
         var text = item.etichetta.toLowerCase();
-        if(text.indexOf(searchString) != -1 || $scope.toponimi[item.etichetta].length > 0) {
+        if(text.indexOf(searchString) != -1 || ($scope.toponimi[item.etichetta] && $scope.toponimi[item.etichetta].length > 0)) {
             return item;
         }
     };
 
     $scope.checkToponimi = function (etichetta, searchString, descrizione){
-        var descrizioneList = Utili.getListFromString("<p>", descrizione);
+        var descrizioneList = Utili.getListFromString(TOPONIMO_SEPARATOR, descrizione);
         $scope.toponimi[etichetta] = [];
 
         for (var i = 0; i < descrizioneList.length; i++) {
-            var text = descrizioneList[i].toLowerCase();
-            if(text.indexOf(searchString) != -1) {
+            var text = descrizioneList[i];
+            if(text.toLowerCase().indexOf(searchString) != -1) {
                 $scope.toponimi[etichetta].push(descrizioneList[i]);
             }
         }
@@ -250,7 +257,6 @@ angular.module('rifiuti.controllers.profilo', [])
     };
 
     $scope.localitaSelected = function (item) {
-        $scope.searchQuery['etichetta'] = '';
         $scope.profilo.area = item;
         $scope.closeModal();
     };
