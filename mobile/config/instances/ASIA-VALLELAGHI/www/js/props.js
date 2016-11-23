@@ -46,6 +46,7 @@ IF_HIDDEN_FIELDS = false;
 CUSTOM_PAP = [];
 ENDPOINT_URL = 'https://tn.smartcommunitylab.it/riciclo2';
 PORTA_A_PORTA_LABEL = 'porta_a_porta';
+TOPONIMO_SEPARATOR = "<p>";
 
 USE_DRAFT = false;
 LANG = ['it'];

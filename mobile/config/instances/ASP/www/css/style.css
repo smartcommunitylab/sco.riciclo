@@ -658,6 +658,13 @@ body.platform-browser .scroll-bar-fade-out {
   right: 0 !important;
 }
 
+.localita-animate-repeat-sub {
+    border-width: 0px !important;
+    padding: 2px !important;
+    font-size: 13px !important;
+    padding-left: 15px !important;
+}
+
 /* SEGNALA */
 
 .segnala,
