@@ -250,6 +250,7 @@ angular.module('rifiuti.controllers.home', [])
 })
 
 .controller('calendarioCtrl', function ($scope, $rootScope, $ionicScrollDelegate, $location, Calendar, Utili, $timeout, $filter, $document, DataManager) {
+
     $scope.calendarView = false;
 
 	$location.hash = function(val) {
@@ -373,6 +374,58 @@ angular.module('rifiuti.controllers.home', [])
         }
     };
 
+    $scope.setRollBackVar = function (){
+        $rootScope.backButtonCalendarView = !$scope.calendarView;
+        $rootScope.backButtonCurrListItem = $scope.currListItem;
+        $rootScope.backButtonDayList = $scope.dayList;
+        $rootScope.backButtonShowDate = $scope.showDate;
+        $rootScope.backButtonDaySubListRunningEnd = $scope.daySubListRunningEnd;
+
+        $rootScope.backButtonMonth = $scope.month;
+        $rootScope.backButtonLoaded = $scope.loaded;
+        $rootScope.backButtonCurrDate = $scope.currDate;
+        $rootScope.backButtonDaySubList = $scope.daySubList;
+        $rootScope.backButtonShowDate = $scope.showDate;
+    }
+
+    var rollBackData = function () {
+        if($rootScope.backButtonCalendarView){
+            $scope.calendarView = $rootScope.backButtonCalendarView;
+            $rootScope.backButtonCalendarView = null;
+        }
+
+        if($rootScope.backButtonCurrListItem){
+            $scope.currListItem = $rootScope.backButtonCurrListItem;
+            $scope.dayList = $rootScope.backButtonDayList;
+            $scope.showDate = $rootScope.backButtonShowDate;
+            $scope.daySubListRunningEnd = $rootScope.backButtonDaySubListRunningEnd;
+            $scope.month = $rootScope.backButtonMonth;
+            $scope.loaded = $rootScope.backButtonLoaded;
+            $scope.currDate = $rootScope.backButtonCurrDate;
+            $scope.daySubList = $rootScope.backButtonDaySubList;
+            $scope.showDate = $rootScope.backButtonShowDate;
+
+            //buildMonthData();
+
+            $scope.selectDay($scope.currListItem);
+
+            $rootScope.backButtonCurrListItem = null;
+            $rootScope.backButtonDayList = null;
+            $rootScope.backButtonShowDate = null;
+            $rootScope.backButtonDaySubListRunningEnd = null;
+
+            $rootScope.backButtonMonth = null;
+            $rootScope.backButtonLoaded = null;
+            $rootScope.backButtonCurrDate = null;
+            $rootScope.backButtonDaySubList = null;
+            $rootScope.backButtonShowDate = null;
+
+            return true;
+        }
+
+        return false;
+    }
+
     var init = function () {
         $scope.month = {};
         $scope.calendarView = false;
@@ -383,7 +436,9 @@ angular.module('rifiuti.controllers.home', [])
         $scope.dayList = []; //$scope.getEmptyArrayByLength(Calendar.dayArrayHorizon($scope.currDate.getFullYear(),$scope.currDate.getMonth(), $scope.currDate.getDate()));
         $scope.showDate = new Date();
         $scope.daySubListRunningEnd = null;
-        buildMonthData();
+        if(!rollBackData()){
+            buildMonthData();
+        }
     }
 
     init();
