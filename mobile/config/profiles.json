@@ -72,9 +72,9 @@
     "ASP": {
         "resource_folder": "config/instances/ASP",
         "widget_id" : "it.smartcommunitylab.rifiuti.asp",
-        "version": "1.0.0",
-        "version_code": "1",
-        "app_name": "100% Riciclo - ASP S.p.A."
+        "version": "1.0.1",
+        "version_code": "2",
+        "app_name": "DIFFERENZIASTI"
     }
 
 }
