@@ -4,20 +4,16 @@
 	"immagine": "img/indumenti.png"
 },
 {
-	"valore": "Carta - Cartone",
+	"valore": "Altri rifiuti",
+	"immagine": "img/altri-rifiuti.png"
+},
+{
+	"valore": "Carta - cartone",
 	"immagine": "img/carta.png"
 },
 {
 	"valore": "Cartone per bevande",
 	"immagine": "img/cartone-bevande.png"
-},
-{
-	"valore": "Rifiuti pericolosi",
-	"immagine": "img/pericolosi.png"
-},
-{
-	"valore": "Sfalci e ramaglie",
-	"immagine": "img/sfalci.png"
 },
 {
 	"valore": "Farmaci",
@@ -30,6 +26,10 @@
 {
 	"valore": "Imballaggi in plastica",
 	"immagine": "img/imballaggi-plastica.png"
+},
+{
+	"valore": "Imballaggi in vetro",
+	"immagine": "img/vetro.png"
 },
 {
 	"valore": "Inerti",
@@ -52,11 +52,19 @@
 	"immagine": "img/oggetti-plastica.png"
 },
 {
+	"valore": "Oggetti in vetro",
+	"immagine": "img/oggetti-vetro.png"
+},
+{
 	"valore": "Olio vegetale alimentare",
 	"immagine": "img/oli.png"
 },
 {
-	"valore": "Pile - Batterie",
+	"valore": "Pannolini e pannoloni",
+	"immagine": "img/pannolini.png"
+},
+{
+	"valore": "Pile - batterie",
 	"immagine": "img/pile.png"
 },
 {
@@ -68,31 +76,23 @@
 	"immagine": "img/raee.png"
 },
 {
-	"valore": "Secco - Indifferenziato",
+	"valore": "Rifiuti pericolosi",
+	"immagine": "img/pericolosi.png"
+},
+{
+	"valore": "Secco - indifferenziato",
 	"immagine": "img/indifferenziato.png"
+},
+{
+	"valore": "Sfalci e ramaglie",
+	"immagine": "img/sfalci.png"
 },
 {
 	"valore": "Toner",
 	"immagine": "img/toner.png"
 },
 {
-	"valore": "Umido - Organico",
+	"valore": "Umido - organico",
 	"immagine": "img/umido.png"
-},
-{
-	"valore": "Imballaggi in vetro",
-	"immagine": "img/vetro.png"
-},
-{
-	"valore": "Pannolini e pannoloni",
-	"immagine": "img/pannolini.png"
-},
-{
-	"valore": "Oggetti in vetro",
-	"immagine": "img/oggetti-vetro.png"
-},
-{
-	"valore": "Altri rifiuti",
-	"immagine": "img/altri-rifiuti.png"
 }
 ]
