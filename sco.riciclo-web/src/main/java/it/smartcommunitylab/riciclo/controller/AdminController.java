@@ -17,12 +17,12 @@
 package it.smartcommunitylab.riciclo.controller;
 
 import it.smartcommunitylab.riciclo.exception.UnauthorizedException;
+import it.smartcommunitylab.riciclo.model.AppDataRifiuti;
 import it.smartcommunitylab.riciclo.model.Tipologia;
 import it.smartcommunitylab.riciclo.storage.AppSetup;
 import it.smartcommunitylab.riciclo.storage.DataSetInfo;
 import it.smartcommunitylab.riciclo.storage.RepositoryManager;
 
-import java.io.FileReader;
 import java.io.InputStreamReader;
 import java.util.HashSet;
 import java.util.Iterator;
@@ -32,7 +32,6 @@ import java.util.Set;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.commons.lang.CharSet;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,6 +42,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
@@ -92,7 +92,35 @@ public class AdminController {
 		}
 		return "OK";
 	}
+	
+	@RequestMapping(value = "/data/{ownerId}/{datasetId}", method = RequestMethod.GET)
+	public @ResponseBody AppDataRifiuti exportData(@PathVariable String ownerId, 
+			@PathVariable String datasetId, @RequestParam Boolean draft,
+			HttpServletRequest request, HttpServletResponse response) throws Exception {
+		if(!Utils.validateAPIRequest(request, appSetup, false, storage)) {
+			throw new UnauthorizedException("Unauthorized Exception: token not valid");
+		}
+		AppDataRifiuti appDataRifiuti = storage.exportData(datasetId, draft);
+		if(logger.isInfoEnabled()) {
+			logger.info(String.format("exportData[%s]: %s", ownerId, datasetId));
+		}
+		return appDataRifiuti;
+	}
 
+	@RequestMapping(value = "/data/{ownerId}/{datasetId}", method = RequestMethod.POST)
+	public @ResponseBody void importData(@PathVariable String ownerId, 
+			@PathVariable String datasetId, @RequestParam Boolean draft,
+			@RequestBody AppDataRifiuti appDataRifiuti,
+			HttpServletRequest request, HttpServletResponse response) throws Exception {
+		if(!Utils.validateAPIRequest(request, appSetup, false, storage)) {
+			throw new UnauthorizedException("Unauthorized Exception: token not valid");
+		}
+		storage.importData(datasetId, draft, appDataRifiuti);
+		if(logger.isInfoEnabled()) {
+			logger.info(String.format("importData[%s]: %s", ownerId, datasetId));
+		}
+	}
+	
 	@ExceptionHandler(Exception.class)
 	@ResponseStatus(value=HttpStatus.INTERNAL_SERVER_ERROR)
 	@ResponseBody

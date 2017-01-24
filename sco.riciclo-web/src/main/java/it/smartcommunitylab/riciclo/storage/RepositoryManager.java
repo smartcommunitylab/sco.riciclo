@@ -82,6 +82,16 @@ public class RepositoryManager {
 
 	public void save(AppDataRifiuti appDataRifiuti, String ownerId) {
 		AppState oldDraft = getAppState(ownerId, true);
+		
+		//prendo le categorie esistenti
+		try {
+			Categorie categorie = findOneData(Categorie.class, null, ownerId, true);
+			appDataRifiuti.getCategorie().getIconeTipologiaPuntoRaccolta().addAll(categorie.getIconeTipologiaPuntoRaccolta());
+			appDataRifiuti.getCategorie().getIconeTipologiaRifiuto().addAll(categorie.getIconeTipologiaRifiuto());
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		}
+		
 		cleanByOwnerId(ownerId, true);
 		Date actualDate = new Date();
 
@@ -191,6 +201,133 @@ public class RepositoryManager {
 		AppState draft = getAppState(ownerId, true);
 		saveAppVersion(ownerId, draft.getVersion(), false);
 		saveAppVersion(ownerId, draft.getVersion() + 1, true);
+	}
+	
+	@SuppressWarnings("unchecked")
+	public AppDataRifiuti exportData(String ownerId, boolean draft) {
+		AppDataRifiuti result = new AppDataRifiuti();
+		try {
+			List<TipologiaProfilo> tipologiaProfili = (List<TipologiaProfilo>) findData(TipologiaProfilo.class, null, ownerId, draft);
+			List<Area> aree = (List<Area>) findData(Area.class, null, ownerId, draft);
+			List<Gestore> gestori = (List<Gestore>) findData(Gestore.class, null, ownerId, draft);
+			List<Istituzione> istituzioni = (List<Istituzione>) findData(Istituzione.class, null, ownerId, draft);
+			List<Riciclabolario> riciclabolario = (List<Riciclabolario>) findData(Riciclabolario.class, null, ownerId, draft);
+			List<Rifiuto> rifiuti = (List<Rifiuto>) findData(Rifiuto.class, null, ownerId, draft);
+			List<Raccolta> raccolte = (List<Raccolta>) findData(Raccolta.class, null, ownerId, draft);
+			List<PuntoRaccolta> puntiRaccolta = (List<PuntoRaccolta>) findData(PuntoRaccolta.class, null, ownerId, draft);
+			List<CalendarioRaccolta> calendariRaccolta = (List<CalendarioRaccolta>) findData(CalendarioRaccolta.class, null, ownerId, draft);
+			List<Colore> colore = (List<Colore>) findData(Colore.class, null, ownerId, draft);
+			List<Segnalazione> segnalazioni = (List<Segnalazione>) findData(Segnalazione.class, null, ownerId, draft);
+			List<Crm> crm = (List<Crm>) findData(Crm.class, null, ownerId, draft);
+			List<TipologiaPuntoRaccolta> tipologiaPuntiRaccolta = (List<TipologiaPuntoRaccolta>) findData(TipologiaPuntoRaccolta.class, null, ownerId, draft);
+			Categorie categorie = findOneData(Categorie.class, null, ownerId, draft);
+			
+			result.setTipologiaProfili(tipologiaProfili);
+			result.setAree(aree);
+			result.setGestori(gestori);
+			result.setIstituzioni(istituzioni);
+			result.setRiciclabolario(riciclabolario);
+			result.setRifiuti(rifiuti);
+			result.setRaccolte(raccolte);
+			result.setPuntiRaccolta(puntiRaccolta);
+			result.setCalendariRaccolta(calendariRaccolta);
+			result.setColore(colore);
+			result.setSegnalazioni(segnalazioni);
+			result.setCrm(crm);
+			result.setTipologiaPuntiRaccolta(tipologiaPuntiRaccolta);
+			result.setCategorie(categorie);
+		} catch (ClassNotFoundException e) {
+			logger.error("error in findRifiuti:" + e.getMessage(), e);
+		}
+		return result;
+	}
+	
+	public void importData(String ownerId, boolean draft, AppDataRifiuti appDataRifiuti) {
+		cleanByOwnerId(ownerId, draft);
+		Date actualDate = new Date();
+		MongoTemplate template = draft ? draftTemplate : finalTemplate;
+
+		appDataRifiuti.getCategorie().setOwnerId(ownerId);
+		template.save(appDataRifiuti.getCategorie());
+
+		for (Area area : appDataRifiuti.getAree()) {
+			area.setOwnerId(ownerId);
+			area.setCreationDate(actualDate);
+			area.setLastUpdate(actualDate);
+			template.save(area);
+		}
+		for (TipologiaProfilo profilo : appDataRifiuti.getTipologiaProfili()) {
+			profilo.setOwnerId(ownerId);
+			profilo.setCreationDate(actualDate);
+			profilo.setLastUpdate(actualDate);
+			template.save(profilo);
+		}
+		for (Gestore gestore : appDataRifiuti.getGestori()) {
+			gestore.setOwnerId(ownerId);
+			gestore.setCreationDate(actualDate);
+			gestore.setLastUpdate(actualDate);
+			template.save(gestore);
+		}
+		for (Istituzione istituzione : appDataRifiuti.getIstituzioni()) {
+			istituzione.setOwnerId(ownerId);
+			istituzione.setCreationDate(actualDate);
+			istituzione.setLastUpdate(actualDate);
+			template.save(istituzione);
+		}
+		for (PuntoRaccolta puntoRaccolta : appDataRifiuti.getPuntiRaccolta()) {
+			puntoRaccolta.setOwnerId(ownerId);
+			puntoRaccolta.setCreationDate(actualDate);
+			puntoRaccolta.setLastUpdate(actualDate);
+			template.save(puntoRaccolta);
+		}
+		for(TipologiaPuntoRaccolta tipologiaPuntoRaccolta : appDataRifiuti.getTipologiaPuntiRaccolta()) {
+			tipologiaPuntoRaccolta.setOwnerId(ownerId);
+			tipologiaPuntoRaccolta.setCreationDate(actualDate);
+			tipologiaPuntoRaccolta.setLastUpdate(actualDate);
+			template.save(tipologiaPuntoRaccolta);
+		}
+		for (Raccolta raccolta : appDataRifiuti.getRaccolte()) {
+			raccolta.setOwnerId(ownerId);
+			raccolta.setCreationDate(actualDate);
+			raccolta.setLastUpdate(actualDate);
+			template.save(raccolta);
+		}
+		for (Riciclabolario riciclabolario : appDataRifiuti.getRiciclabolario()) {
+			riciclabolario.setOwnerId(ownerId);
+			riciclabolario.setCreationDate(actualDate);
+			riciclabolario.setLastUpdate(actualDate);
+			template.save(riciclabolario);
+		}
+		for (Colore colore : appDataRifiuti.getColore()) {
+			colore.setOwnerId(ownerId);
+			colore.setCreationDate(actualDate);
+			colore.setLastUpdate(actualDate);
+			template.save(colore);
+		}
+		for (Segnalazione segnalazione : appDataRifiuti.getSegnalazioni()) {
+			segnalazione.setOwnerId(ownerId);
+			segnalazione.setCreationDate(actualDate);
+			segnalazione.setLastUpdate(actualDate);
+			template.save(segnalazione);
+		}
+		for (Rifiuto rifiuto : appDataRifiuti.getRifiuti()) {
+			rifiuto.setOwnerId(ownerId);
+			rifiuto.setCreationDate(actualDate);
+			rifiuto.setLastUpdate(actualDate);
+			template.save(rifiuto);
+		}
+		for (Crm crm : appDataRifiuti.getCrm()) {
+			crm.setOwnerId(ownerId);
+			crm.setCreationDate(actualDate);
+			crm.setLastUpdate(actualDate);
+			template.save(crm);
+		}
+		for (CalendarioRaccolta calendarioRaccolta : appDataRifiuti.getCalendariRaccolta()) {
+			calendarioRaccolta.setOwnerId(ownerId);
+			calendarioRaccolta.setCreationDate(actualDate);
+			calendarioRaccolta.setLastUpdate(actualDate);
+			template.save(calendarioRaccolta);
+		}
 	}
 	
 	public void resetDatasetDraft(String ownerId) {
