@@ -363,6 +363,7 @@ angular.module('rifiuti.controllers.raccolta', [])
   //[{giorno:"lunedì",orari:["12.00-14.00","15.30-17.30"...]}...]
 
   var today = new Date();
+	today.setHours(0, 0, 0, 0);
 
   $scope.checkGiorni = function (item) {
     for (var j = 0; j < $scope.orari.length; j++) {
