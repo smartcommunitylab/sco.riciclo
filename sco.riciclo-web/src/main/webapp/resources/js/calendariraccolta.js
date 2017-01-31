@@ -384,7 +384,7 @@ var calendariraccoltaCtrl = calendariraccoltaApp.controller('userCtrl', function
 			element.dalle = $scope.fHourFrom;
 			element.alle = $scope.fHourTo;
 			if($scope.fDateDayOfWeek) {
-				element.il = $scope.fDateDayOfWeek + " ";
+				element.il = $scope.fDateDayOfWeek;
 			}
 			for(var d = 0, len = $scope.fDateWorkingDayList.length; d < len; d += 1) {
 				element.il = element.il.concat($scope.fDateWorkingDayList[d]);

@@ -420,12 +420,12 @@ public class RifiutiConverter {
 					continue;
 				}
 				OrarioApertura oa = new OrarioApertura();
-				oa.setAlle(pr.getAlle());
-				oa.setDalle(pr.getDalle());
-				oa.setDataA(pr.getDataA());
-				oa.setDataDa(pr.getDataDa());
-				oa.setIl(pr.getIl());
-				oa.setEccezione(pr.getEccezione());
+				oa.setAlle(pr.getAlle().trim());
+				oa.setDalle(pr.getDalle().trim());
+				oa.setDataA(pr.getDataA().trim());
+				oa.setDataDa(pr.getDataDa().trim());
+				oa.setIl(pr.getIl().trim());
+				oa.setEccezione(pr.getEccezione().trim());
 				orari.add(oa);
 			}
 			crm.setOrarioApertura(orari);
@@ -459,11 +459,11 @@ public class RifiutiConverter {
 					continue;
 				}
 				OrarioApertura oa = new OrarioApertura();
-				oa.setAlle(pr.getAlle());
-				oa.setDalle(pr.getDalle());
-				oa.setDataA(pr.getDataA());
-				oa.setDataDa(pr.getDataDa());
-				oa.setIl(pr.getIl().replaceAll("\\n", ""));
+				oa.setAlle(pr.getAlle().trim());
+				oa.setDalle(pr.getDalle().trim());
+				oa.setDataA(pr.getDataA().trim());
+				oa.setDataDa(pr.getDataDa().trim());
+				oa.setIl(pr.getIl().trim().replaceAll("\\n", ""));
 				if(!Utils.isNull(pr.getEccezione())) {
 					oa.setEccezione(pr.getEccezione().replaceAll("\\n", ""));
 				}
