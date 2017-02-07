@@ -13,9 +13,9 @@ angular.module('rifiuti.services.feed', [])
                 deferred.resolve(cache = JSON.parse(localStorage['entries_'+feedKey]));
             }
         } else {
-            $http.jsonp('https://ajax.googleapis.com/ajax/services/feed/load?v=1.0&num=50&callback=JSON_CALLBACK&q=' + encodeURIComponent(url))
+            $http.get('https://api.rss2json.com/v1/api.json?rss_url=' + encodeURIComponent(url))
             .success(function(data) {
-                var res = data.responseData.feed.entries;
+                var res = data.items;
                 localStorage['entries_'+feedKey] = JSON.stringify(res);
                 localStorage['timestamp_'+feedKey] = new Date().getTime();
                 cache = res;

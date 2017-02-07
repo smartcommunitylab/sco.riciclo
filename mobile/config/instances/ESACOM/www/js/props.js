@@ -21,8 +21,8 @@ ICON_POINT_MAP = {'Ecobox':'riciclo-esacom-ecobox',
 'Porta a porta umido' : 'riciclo-esacom-pp_umido',
 'Porta a porta pannolini' : 'riciclo-esacom-porta_porta',
 'Contenitori humana/caritas' : 'riciclo-esacon-humana_caritas'};
-SHOW_NEWS = false;
-FEED_URL = "http://www.asia.tn.it/rss/feed/avvisi/";
+SHOW_NEWS = true;
+FEED_URL = "http://www.esacom.it/feed-news";
 EXT_URL = "http://www.esacom.it/";
 IF_HIDDEN_FIELDS = false;
 CUSTOM_PAP = [];
