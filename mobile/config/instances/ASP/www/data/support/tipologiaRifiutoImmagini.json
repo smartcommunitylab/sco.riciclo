@@ -96,6 +96,10 @@
 	"immagine": "img/raee.png"
 },
 {
+	"valore": "Rifiuti speciali / particolari",
+	"immagine": "img/rifiuti_speciali.png"
+},
+{
 	"valore": "Toner",
 	"immagine": "img/toner.png"
 },

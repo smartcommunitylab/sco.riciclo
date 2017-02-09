@@ -1,10 +1,10 @@
 @font-face {
   font-family: 'riciclo';
-  src:  url('riciclo.eot?6qc1qe');
-  src:  url('riciclo.eot?6qc1qe#iefix') format('embedded-opentype'),
-    url('riciclo.ttf?6qc1qe') format('truetype'),
-    url('riciclo.woff?6qc1qe') format('woff'),
-    url('riciclo.svg?6qc1qe#riciclo') format('svg');
+  src:  url('riciclo.eot?l90t56');
+  src:  url('riciclo.eot?l90t56#iefix') format('embedded-opentype'),
+    url('riciclo.ttf?l90t56') format('truetype'),
+    url('riciclo.woff?l90t56') format('woff'),
+    url('riciclo.svg?l90t56#riciclo') format('svg');
   font-weight: normal;
   font-style: normal;
 }
@@ -25,31 +25,31 @@
 }
 
 .riciclo-asp-pericolosi:before {
-  content: "\e913";
-}
-.riciclo-asp-sacco:before {
-  content: "\e902";
-}
-.riciclo-asp-carrellato:before {
-  content: "\e916";
+  content: "\e912";
 }
 .riciclo-asp-camion:before {
-  content: "\e917";
+  content: "\e901";
+}
+.riciclo-asp-carrellato:before {
+  content: "\e902";
 }
 .riciclo-asp-cassonetto:before {
   content: "\e90f";
 }
 .riciclo-asp-centro-raccolta:before {
-  content: "\e901";
-}
-.riciclo-asp-cornetta:before {
   content: "\e910";
 }
-.riciclo-asp-porta-porta:before {
+.riciclo-asp-cornetta:before {
   content: "\e911";
 }
+.riciclo-asp-porta-porta:before {
+  content: "\e916";
+}
+.riciclo-asp-sacco:before {
+  content: "\e917";
+}
 .riciclo-asp-stradale:before {
-  content: "\e912";
+  content: "\e919";
 }
 .riciclo-esacom-ecobox:before {
   content: "\e91c";
