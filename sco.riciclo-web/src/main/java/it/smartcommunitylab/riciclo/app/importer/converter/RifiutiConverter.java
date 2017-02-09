@@ -420,8 +420,12 @@ public class RifiutiConverter {
 					continue;
 				}
 				OrarioApertura oa = new OrarioApertura();
-				oa.setAlle(pr.getAlle().trim());
-				oa.setDalle(pr.getDalle().trim());
+				if(!Utils.isNull(pr.getAlle())) {
+					oa.setAlle(pr.getAlle().trim());
+				}
+				if(!Utils.isNull(pr.getDalle())) {
+					oa.setDalle(pr.getDalle().trim());
+				}
 				oa.setDataA(pr.getDataA().trim());
 				oa.setDataDa(pr.getDataDa().trim());
 				oa.setIl(pr.getIl().trim());
@@ -459,8 +463,12 @@ public class RifiutiConverter {
 					continue;
 				}
 				OrarioApertura oa = new OrarioApertura();
-				oa.setAlle(pr.getAlle().trim());
-				oa.setDalle(pr.getDalle().trim());
+				if(!Utils.isNull(pr.getAlle())) {
+					oa.setAlle(pr.getAlle().trim());
+				}
+				if(!Utils.isNull(pr.getDalle())) {
+					oa.setDalle(pr.getDalle().trim());
+				}
 				oa.setDataA(pr.getDataA().trim());
 				oa.setDataDa(pr.getDataDa().trim());
 				oa.setIl(pr.getIl().trim().replaceAll("\\n", ""));
