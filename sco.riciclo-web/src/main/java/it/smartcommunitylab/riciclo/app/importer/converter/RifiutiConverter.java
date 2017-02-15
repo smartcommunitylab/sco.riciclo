@@ -108,10 +108,9 @@ public class RifiutiConverter {
 		//TIPOLOGIAPUNTORACCOLTA
 		List<TipologiaPuntoRaccolta> puntiRaccolta = Lists.newArrayList();
 		for (it.smartcommunitylab.riciclo.app.importer.model.TipologiaPuntoRaccolta tpr : rifiuti.getTipologiaPuntoRaccolta()) {
-			//String nome = StringUtils.capitalize(tpr.getNome().toLowerCase()).replace("Crm", "CRM").replace("Crz", "CRZ");
-			String nome = tpr.getNome();
+			String nome = StringUtils.capitalize(tpr.getNome().toLowerCase()).replace("Crm", "CRM").replace("Crz", "CRZ");
 			TipologiaPuntoRaccolta tipologiaPuntoRaccolta = new TipologiaPuntoRaccolta();
-			tipologiaPuntoRaccolta.setObjectId(Utils.getId(nome));
+			tipologiaPuntoRaccolta.setObjectId(nome);
 			tipologiaPuntoRaccolta.getNome().put(defaultLang, nome);
 			tipologiaPuntoRaccolta.getInfo().put(defaultLang, tpr.getInfoPuntiRaccolta());
 			tipologiaPuntoRaccolta.setType(tpr.getTipo());
@@ -122,9 +121,8 @@ public class RifiutiConverter {
 		//TIPOLOGIARIFIUTO
 		categorie.setTipologiaRifiuto(new HashSet<Tipologia>());
 		for (TipologiaRifiuto tr : rifiuti.getTipologiaRifiuto()) {
-			//String nome = StringUtils.capitalize(tr.getValore().toLowerCase());
-			String nome = tr.getValore();
-			Tipologia cat = new Tipologia(Utils.getId(nome), nome, null, null, defaultLang);
+			String nome = StringUtils.capitalize(tr.getValore().toLowerCase());
+			Tipologia cat = new Tipologia(nome, nome, null, null, defaultLang);
 			categorie.getTipologiaRifiuto().add(cat);
 		}
 		
@@ -132,7 +130,7 @@ public class RifiutiConverter {
 		categorie.setTipologiaUtenza(new HashSet<Tipologia>());
 		for (TipologiaUtenza tr : rifiuti.getTipologiaUtenza()) {
 			String nome = tr.getValore().trim();
-			Tipologia cat = new Tipologia(Utils.getId(nome), nome, null, null, defaultLang);
+			Tipologia cat = new Tipologia(nome, nome, null, null, defaultLang);
 			categorie.getTipologiaUtenza().add(cat);
 		}
 
@@ -141,11 +139,10 @@ public class RifiutiConverter {
 		//TIPOLOGIAPROFILO
 		List<TipologiaProfilo> profili = Lists.newArrayList();
 		for (it.smartcommunitylab.riciclo.app.importer.model.TipologiaProfilo pr : rifiuti.getTipologiaProfilo()) {
-			String nome = pr.getNome();
 			TipologiaProfilo profilo = new TipologiaProfilo();
 			profilo.setOwnerId(ownerId);
-			profilo.setObjectId(Utils.getId(nome));
-			profilo.setTipologiaUtenza(Utils.getId(pr.getTipologiaUtenza()));
+			profilo.setObjectId(pr.getNome());
+			profilo.setTipologiaUtenza(pr.getTipologiaUtenza());
 			profilo.getNome().put(defaultLang, pr.getNome());
 			profilo.getDescrizione().put(defaultLang, pr.getDescrizione());
 			profili.add(profilo);
@@ -158,10 +155,9 @@ public class RifiutiConverter {
 			if(logger.isInfoEnabled()) {
 				logger.info("convert Area:" + ar.getNome());
 			}
-			String nome = ar.getNome();
 			//Area area = mapper.convertValue(ar, Area.class);
 			Area area = new Area();
-			area.setObjectId(Utils.getId(nome));
+			area.setObjectId(ar.getNome());
 			area.setOwnerId(ownerId);
 			area.setIstituzione(ar.getIstituzione());
 			area.setNome(ar.getNome());
@@ -199,10 +195,9 @@ public class RifiutiConverter {
 			if(logger.isInfoEnabled()) {
 				logger.info("convert Gestore:" + gs.getRagioneSociale() + " - " + gs.getUfficio());
 			}
-			String nome = gs.getRagioneSociale() + " - " + gs.getUfficio();
 			Gestore gestore = new Gestore();
 			gestore.setOwnerId(ownerId);
-			gestore.setObjectId(Utils.getId(nome));
+			gestore.setObjectId(gs.getRagioneSociale() + " - " + gs.getUfficio());
 			gestore.setRagioneSociale(gs.getRagioneSociale());
 			gestore.getDescrizione().put(defaultLang, gs.getDescrizione());
 			gestore.setUfficio(gs.getUfficio());
@@ -224,10 +219,9 @@ public class RifiutiConverter {
 			if(logger.isInfoEnabled()) {
 				logger.info("convert Istituzione:" + is.getNome() + " - " + is.getUfficio());
 			}
-			String nome = is.getNome() + " - " + is.getUfficio();
 			Istituzione istituzione = new Istituzione();
 			istituzione.setOwnerId(ownerId);
-			istituzione.setObjectId(Utils.getId(nome));
+			istituzione.setObjectId(is.getNome() + " - " + is.getUfficio());
 			istituzione.setNome(is.getNome());
 			istituzione.getDescrizione().put(defaultLang, is.getDescrizione());
 			istituzione.setUfficio(is.getUfficio());
@@ -254,14 +248,11 @@ public class RifiutiConverter {
 			Raccolta raccolta = new Raccolta();
 			raccolta.setOwnerId(ownerId);
 			raccolta.setObjectId(UUID.randomUUID().toString());
-			//raccolta.setTipologiaPuntoRaccolta(StringUtils.capitalize(rc.getTipologiaPuntoRaccolta().toLowerCase()).replace("Crm", "CRM").replace("Crz", "CRZ").trim());
-			//raccolta.setTipologiaRifiuto(StringUtils.capitalize(rc.getTipologiaRifiuto().toLowerCase()).trim());
-			//raccolta.setTipologiaRaccolta(StringUtils.capitalize(rc.getTipologiaRaccolta().toLowerCase().replace("crm", "CRM").replace("crz", "CRZ")).trim());
-			raccolta.setTipologiaPuntoRaccolta(Utils.getId(rc.getTipologiaPuntoRaccolta()));
-			raccolta.setTipologiaRifiuto(Utils.getId(rc.getTipologiaRifiuto()));
-			raccolta.setTipologiaRaccolta(Utils.getId(rc.getTipologiaRaccolta()));
-			raccolta.setTipologiaUtenza(Utils.getId(rc.getTipologiaUtenza()));
-			raccolta.setArea(Utils.getId(rc.getArea()));
+			raccolta.setTipologiaPuntoRaccolta(StringUtils.capitalize(rc.getTipologiaPuntoRaccolta().toLowerCase()).replace("Crm", "CRM").replace("Crz", "CRZ").trim());
+			raccolta.setTipologiaRifiuto(StringUtils.capitalize(rc.getTipologiaRifiuto().toLowerCase()).trim());
+			raccolta.setTipologiaRaccolta(StringUtils.capitalize(rc.getTipologiaRaccolta().toLowerCase().replace("crm", "CRM").replace("crz", "CRZ")).trim());
+			raccolta.setTipologiaUtenza(rc.getTipologiaUtenza());
+			raccolta.setArea(rc.getArea());
 			raccolta.setColore(rc.getColore());
 			raccolta.getInfoRaccolta().put(defaultLang, rc.getInfoRaccolta());
 			raccolte.add(raccolta);
@@ -272,10 +263,9 @@ public class RifiutiConverter {
 
 		//TIPOLOGIARACCOLTA
 		for (TipologiaRaccolta tr : rifiuti.getTipologiaRaccolta()) {
-			//String nome = StringUtils.capitalize(tr.getValore().toLowerCase().replace("crm", "CRM").replace("crz", "CRZ")).trim();
-			String nome = tr.getValore();
+			String nome = StringUtils.capitalize(tr.getValore().toLowerCase().replace("crm", "CRM").replace("crz", "CRZ")).trim();
 			it.smartcommunitylab.riciclo.model.TipologiaRaccolta tipologiaRaccolta = new it.smartcommunitylab.riciclo.model.TipologiaRaccolta();
-			tipologiaRaccolta.setObjectId(Utils.getId(nome));
+			tipologiaRaccolta.setObjectId(nome);
 			tipologiaRaccolta.getNome().put(defaultLang, nome);
 			categorie.getTipologiaRaccolta().add(tipologiaRaccolta);
 		}
@@ -297,8 +287,8 @@ public class RifiutiConverter {
 			if(rifiuto == null) {
 				rifiuto = new Rifiuto();
 				rifiuto.setOwnerId(ownerId);
-				rifiuto.setObjectId(Utils.getId(nome));
-				rifiuto.getNome().put(defaultLang, nome);
+				rifiuto.setObjectId(rc.getNome());
+				rifiuto.getNome().put(defaultLang, rc.getNome());
 				rifiutoDescMap.put(nome, rifiuto);
 				rifiutoDescList.add(rifiuto);
 			}
@@ -308,9 +298,9 @@ public class RifiutiConverter {
 				Riciclabolario ric = new Riciclabolario();
 				ric.setObjectId(UUID.randomUUID().toString());
 				ric.setOwnerId(ownerId);
-				ric.setTipologiaRifiuto(Utils.getId(rc.getTipologiaRifiuto()));
-				ric.setTipologiaUtenza(Utils.getId(tipologiaUtenza));
-				ric.setArea(Utils.getId(rc.getArea()));
+				ric.setTipologiaRifiuto(StringUtils.capitalize(rc.getTipologiaRifiuto().trim().toLowerCase()));
+				ric.setTipologiaUtenza(tipologiaUtenza.trim());
+				ric.setArea(rc.getArea().trim());
 				ric.setRifiuto(rifiuto.getObjectId());
 				riciclabolario.add(ric);
 			}
@@ -331,7 +321,7 @@ public class RifiutiConverter {
 		for (it.smartcommunitylab.riciclo.app.importer.model.Segnalazioni sgn: (List<it.smartcommunitylab.riciclo.app.importer.model.Segnalazioni>)rifiuti.getSegnalazioni()) {
 			Segnalazione sg = new Segnalazione();
 			sg.setObjectId(UUID.randomUUID().toString());
-			sg.setArea(Utils.getId(sgn.getArea()));
+			sg.setArea(sgn.getArea().trim());
 			sg.setEmail(sgn.getEmail().trim());
 			sg.getTipologia().put(defaultLang, sgn.getTipologia().trim());
 			segnalazioni.add(sg);
@@ -357,12 +347,11 @@ public class RifiutiConverter {
 		Multimap<String, PuntiRaccolta> puntiRaccoltaPPMap = ArrayListMultimap.create();
 		for (PuntiRaccolta p : puntiRaccolta) {
 			if(!Utils.isNull(p.getDettagliZona())) {
-				String key = Utils.getId(p.getArea()) + "_" + Utils.getId(p.getTipologiaPuntiRaccolta()) + "_" 
-				+ Utils.getId(p.getTipologiaUtenza()) + "_" + Utils.getId(p.getZona()) + "_" + Utils.getId(p.getDettagliZona());
+				String key = p.getArea() + "_" + p.getTipologiaPuntiRaccolta() + "_" 
+				+ p.getTipologiaUtenza() + "_" + p.getZona() + "_" + p.getDettagliZona();
 				puntiRaccoltaCRMMap.put(key, p);
 			} else {
-				String key = Utils.getId(p.getArea()) + "_" + Utils.getId(p.getTipologiaPuntiRaccolta()) + "_" 
-				+ Utils.getId(p.getTipologiaUtenza());
+				String key = p.getArea() + "_" + p.getTipologiaPuntiRaccolta() + "_" + p.getTipologiaUtenza();
 				puntiRaccoltaPPMap.put(key, p);
 			}
 		}
@@ -379,10 +368,9 @@ public class RifiutiConverter {
 			String tipologiaUtenza = null;
 			String area = null;
 			for (PuntiRaccolta pr : puntiRaccoltaCRMMap.get(key)) {
-				area = Utils.getId(pr.getArea());
-				tipologiaUtenza = Utils.getId(pr.getTipologiaUtenza());
-				//tipologiaPuntoRaccolta = StringUtils.capitalize(pr.getTipologiaPuntiRaccolta().toLowerCase()).replace("Crm", "CRM").replace("Crz", "CRZ");
-				tipologiaPuntoRaccolta = Utils.getId(pr.getTipologiaPuntiRaccolta());
+				area = pr.getArea();
+				tipologiaUtenza = pr.getTipologiaUtenza();
+				tipologiaPuntoRaccolta = StringUtils.capitalize(pr.getTipologiaPuntiRaccolta().toLowerCase()).replace("Crm", "CRM").replace("Crz", "CRZ");
 				String crmKey = pr.getZona() + "_" + pr.getDettagliZona();
 				crm = crmMap.get(crmKey);
 				if(crm == null) {
@@ -429,7 +417,9 @@ public class RifiutiConverter {
 				oa.setDataA(pr.getDataA().trim());
 				oa.setDataDa(pr.getDataDa().trim());
 				oa.setIl(pr.getIl().trim());
-				oa.setEccezione(pr.getEccezione().trim());
+				if(!Utils.isNull(pr.getEccezione())) {
+					oa.setEccezione(pr.getEccezione().trim());
+				}
 				orari.add(oa);
 			}
 			crm.setOrarioApertura(orari);
@@ -454,10 +444,9 @@ public class RifiutiConverter {
 			String tipologiaUtenza = null;
 			String area = null;
 			for (PuntiRaccolta pr : puntiRaccoltaPPMap.get(key)) {
-				area = Utils.getId(pr.getArea());
-				tipologiaUtenza = Utils.getId(pr.getTipologiaUtenza());
-				//tipologiaPuntoRaccolta = StringUtils.capitalize(pr.getTipologiaPuntiRaccolta().toLowerCase()).replace("Crm", "CRM").replace("Crz", "CRZ");
-				tipologiaPuntoRaccolta = Utils.getId(pr.getTipologiaPuntiRaccolta());
+				area = pr.getArea();
+				tipologiaUtenza = pr.getTipologiaUtenza();
+				tipologiaPuntoRaccolta = StringUtils.capitalize(pr.getTipologiaPuntiRaccolta().toLowerCase()).replace("Crm", "CRM").replace("Crz", "CRZ");
 				if (pr.getDataDa() ==  null || pr.getDataDa().isEmpty() || pr.getDataA() ==  null || pr.getDataA().isEmpty()
 						|| pr.getIl() ==  null || pr.getIl().isEmpty()) {
 					continue;
