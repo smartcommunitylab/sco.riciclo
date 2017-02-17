@@ -70,8 +70,57 @@ angular.module('rifiuti.services.data', [])
                 racc.tipoPuntoRaccolta = tipologiePuntiRaccolta[racc.tipologiaPuntoRaccolta];
             });
             return data;
-        }
+        };
         // limit the data to the necessary one only
+    var treeWalkUp = function (tree, parentName, key, results) {
+        if (!parentName || parentName == "") return;
+        tree.forEach(function (node) {
+            if (node['id'] == parentName && results.indexOf(node[key]) < 0) {
+                //var utenzaOK = node.utenza[$rootScope.selectedProfile.utenza.tipologiaUtenza];
+                //if (utenzaOK) {
+                results.push(node[key]);
+                //}
+                treeWalkUp(tree, node.parent, key, results);
+            }
+        });
+    };
+		
+		var buildAree = function (p) {
+        var myAree = [];
+        var myGestori = [];
+        var myIstituzioni = [];
+        var areeList = getSync('aree');
+        areeList.forEach(function (area, ai, dbAree) {
+            if (area.id == p.area.id) {
+                var utenzaOK = area.utenza[p.utenza.tipologiaUtenza];
+                if (utenzaOK) {
+                    myAree.push(area.id);
+                    myIstituzioni.push(area.istituzione);
+                    myGestori.push(area.gestore);
+                }
+                treeWalkUp(dbAree, area.parent, 'id', myAree);
+                treeWalkUp(dbAree, area.parent, 'istituzione', myIstituzioni);
+                treeWalkUp(dbAree, area.parent, 'gestore', myGestori);
+            }
+        });
+        p.aree = myAree;
+        p.gestori = myGestori;
+        p.istituzioni = myIstituzioni;
+        //p.comuni=myComuni;
+    };
+
+    var buildPaP = function (p) {
+        var data = getSync('raccolta');
+        var res = [];
+        for (var i = 0; i < data.length; i++) {
+            if (!!data[i].tipologiaPuntoRaccolta && Utili.isPaP(data[i].tipoPuntoRaccolta) &&
+                data[i].tipologiaUtenza == p.utenza.tipologiaUtenza && p.aree.indexOf(data[i].area) >= 0) {
+                if (res.indexOf(data[i].tipologiaPuntoRaccolta) < 0) res.push(data[i].tipologiaPuntoRaccolta);
+            }
+        }
+        p.PaP = res;
+    };
+		
     var updateProfileData = function () {
         profileData = {};
         if (completeData == null) {
@@ -143,7 +192,19 @@ angular.module('rifiuti.services.data', [])
         }
 
         localStorage[categorieMapPrefix] = JSON.stringify(categorieMap);
-
+				
+				var profili = getProfiles();
+				if(profili) {
+					profili.forEach(function (p) {
+						buildAree(p);
+						buildPaP(p);
+						if(p.id == localStorage[selectedProfileIdPrefix]) {
+							$rootScope.selectedProfile = p;
+						}
+					});
+					saveProfiles(profili);
+				}
+				
         if (profili) {
             var map = {};
             profili.forEach(function (p) {
@@ -178,9 +239,9 @@ angular.module('rifiuti.services.data', [])
                 });
             });
         }
-
-
+				
         localStorage[profileDataPrefix] = JSON.stringify(profileData);
+				
     };
 
     var process = function (url) {
@@ -557,6 +618,13 @@ angular.module('rifiuti.services.data', [])
         if (USE_DRAFT) return obj.draftState ? obj.draftState.version : null;
         return obj.publishState ? obj.publishState.version : null;
     };
+		
+		var getSync = function(key) {
+			if(profileData) {
+				return profileData[key];
+      }
+      return null;
+		};
 
     return {
         get: get,
@@ -603,11 +671,6 @@ angular.module('rifiuti.services.data', [])
             // - clean profileData, objectData, version
             // - check version
         },
-        getSync: function (key) {
-            if(profileData){
-                return profileData[key];
-            }
-            return null;
-        }
+        getSync: getSync
     };
 });
