@@ -24,8 +24,8 @@ ICON_POINT_MAP = {
 'Cassonetto stradale carta':'centro-raccolta',
 'Contatto telefonico':'centro-raccolta'
 };
-SHOW_NEWS = false;
-FEED_URL = "";
+SHOW_NEWS = true;
+FEED_URL = "http://www.asp.asti.it/feed/feeddifferenziasti.xml";
 EXT_URL = "http://www.asp.asti.it/";
 IF_HIDDEN_FIELDS = false;
 CUSTOM_PAP = [];
