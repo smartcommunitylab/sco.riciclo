@@ -8,21 +8,16 @@ APP_NAME_CREDITS = "DIFFERENZIASTI";
 APP_LOCATION_CREDITS = "ASP";
 ICON_COLOR_MAP = {'ARANCIONE': 'orange', 'AZZURRO': 'lightblue', 'BLU': 'blue', 'GIALLO': 'yellow', 'MARRONE': 'brown', 'ROSSO': 'red', 'VERDE CHIARO': 'lightgreen', 'VERDE': 'green', 'VERDE SCURO': 'darkgreen', 'VIOLA':'purple','coloreUno':'purple'};
 ICON_POINT_MAP = {
-'Porta a porta organico':'centro-raccolta',
-'Porta a porta indifferenziato':'centro-raccolta',
-'Porta a porta verde e ramaglie':'centro-raccolta',
-'Porta a porta carta e cartone':'centro-raccolta',
-'Porta a porta plastica e lattine':'centro-raccolta',
-'Vetro':'centro-raccolta',
-'Pile':'centro-raccolta',
-'Farmaci':'centro-raccolta',
-'Abiti usati':'centro-raccolta',
+'Campana vetro':'centro-raccolta',
+'Contenitori abiti usati':'centro-raccolta',
+'Contenitori raccolta pile usate':'centro-raccolta',
+'Farmacia':'centro-raccolta',
 'Ecocentro':'centro-raccolta',
 'Ecostazione':'centro-raccolta',
 'Cassonetto stradale organico':'centro-raccolta',
 'Cassonetto stradale plastica e lattine':'centro-raccolta',
 'Cassonetto stradale carta':'centro-raccolta',
-'Contatto telefonico':'centro-raccolta'
+'Contatta il tuo comune':'centro-raccolta'
 };
 SHOW_NEWS = true;
 FEED_URL = "http://www.asp.asti.it/feed/feeddifferenziasti.xml";
