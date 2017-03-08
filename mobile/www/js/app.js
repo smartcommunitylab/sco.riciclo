@@ -100,7 +100,8 @@ angular.module('rifiuti', [
     'uiGmapgoogle-maps',
     //'google-maps',
     'angular.filter',
-    'ionic-timepicker'
+    'ionic-timepicker',
+    'angularMoment'
 ])
 
 .config(function (uiGmapGoogleMapApiProvider) {

@@ -76,12 +76,13 @@ angular.module('rifiuti.controllers.home', [])
     });
 })
 
-.controller('newsCtrl', function ($scope, $rootScope, FeedService) {
+.controller('newsCtrl', function ($scope, $rootScope, FeedService, moment) {
 
     $rootScope.loadingShow();
     FeedService.load(FEED_URL,APP_ID).then(function(entries) {
         entries.forEach(function(entry) {
-            entry.dateTime = new Date(entry.pubDate);
+            //entry.dateTime = new Date(entry.pubDate);
+            entry.dateTime = moment(entry.pubDate).format('YYYY-MM-DD HH:mm');
         });
         $scope.entries = entries;
         $rootScope.loadingHide();
