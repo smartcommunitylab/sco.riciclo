@@ -81,7 +81,6 @@ angular.module('rifiuti.controllers.home', [])
     $rootScope.loadingShow();
     FeedService.load(FEED_URL,APP_ID).then(function(entries) {
         entries.forEach(function(entry) {
-            //entry.dateTime = new Date(entry.pubDate);
             entry.dateTime = moment(entry.pubDate).format('YYYY-MM-DD HH:mm');
         });
         $scope.entries = entries;
@@ -91,7 +90,7 @@ angular.module('rifiuti.controllers.home', [])
     $scope.doRefresh = function() {
         FeedService.load(FEED_URL,APP_ID, true).then(function(entries) {
             entries.forEach(function(entry) {
-                entry.dateTime = new Date(entry.pubDate);
+                entry.dateTime = moment(entry.pubDate).format('YYYY-MM-DD HH:mm');
             });
             $scope.entries = entries;
             $scope.$broadcast('scroll.refreshComplete');
@@ -107,7 +106,7 @@ angular.module('rifiuti.controllers.home', [])
     $scope.idx = $stateParams.id;
     FeedService.getByIdx($scope.idx, FEED_URL,APP_ID).then(function(data){
         $scope.newsItem = data;
-        $scope.newsItem.dateTime = new Date($scope.newsItem.pubDate);
+        $scope.newsItem.dateTime = moment($scope.newsItem.pubDate).format('YYYY-MM-DD HH:mm');
     });
 })
 
