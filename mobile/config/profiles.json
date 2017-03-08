@@ -72,8 +72,8 @@
     "ASP": {
         "resource_folder": "config/instances/ASP",
         "widget_id" : "it.smartcommunitylab.rifiuti.asp",
-        "version": "1.0.2",
-        "version_code": "3",
+        "version": "1.0.3",
+        "version_code": "4",
         "app_name": "DIFFERENZIASTI"
     }
 
