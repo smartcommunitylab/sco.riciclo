@@ -23,11 +23,12 @@
     "org.apache.cordova.statusbar",
     "org.apache.cordova.splashscreen",
     "org.apache.cordova.camera",
-    "de.appplant.cordova.plugin.email-composer",
     "org.apache.cordova.geolocation",
     "cordova-plugin-whitelist",
     "https://github.com/katzer/cordova-plugin-local-notifications#ios10",
-    "https://github.com/driftyco/ionic-plugin-keyboard.git"
+    "https://github.com/driftyco/ionic-plugin-keyboard.git",
+    "cordova-plugin-camera",
+    "de.appplant.cordova.plugin.email-composer"
   ],
   "cordovaPlatforms": []
 }
