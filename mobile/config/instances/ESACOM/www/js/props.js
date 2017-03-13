@@ -1,8 +1,8 @@
 APP_ID = "ESACOM";
-DATA_VERSION = 16;
+DATA_VERSION = 36;
 API_KEY = "AIzaSyBmKVWmFzh2JHT7q1MLmQRQ7jC4AhkRBDs";
 //SEGNALA_EMAIL = "segnalazioni.rifiuti@comunitadellegiudicarie.it";
-VERSION = "1.0.4";
+VERSION = "1.0.5";
 APP_NAME="100% Riciclo - ESA-Com";
 APP_NAME_CREDITS = "100% Riciclo<br/>ESA-Com";
 APP_LOCATION_CREDITS = "ESACOM";
