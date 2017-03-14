@@ -1,8 +1,8 @@
 APP_ID = "ASIA-VALLELAGHI";
-DATA_VERSION = 2;
+DATA_VERSION = 6;
 API_KEY = "AIzaSyBmKVWmFzh2JHT7q1MLmQRQ7jC4AhkRBDs";
 //SEGNALA_EMAIL = "segnalazioni.rifiuti@comunitadellegiudicarie.it";
-VERSION = "1.0.5";
+VERSION = "1.0.6";
 APP_NAME="100% Riciclo - Valle dei Laghi";
 APP_NAME_CREDITS = "100% Riciclo<br/>Valle dei Laghi";
 APP_LOCATION_CREDITS = "Valle dei Laghi";
