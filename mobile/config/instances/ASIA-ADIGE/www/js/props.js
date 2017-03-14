@@ -1,8 +1,8 @@
 APP_ID = "ASIA-ADIGE";
-DATA_VERSION = 2;
+DATA_VERSION = 5;
 API_KEY = "AIzaSyBmKVWmFzh2JHT7q1MLmQRQ7jC4AhkRBDs";
 //SEGNALA_EMAIL = "segnalazioni.rifiuti@comunitadellegiudicarie.it";
-VERSION = "1.0.4";
+VERSION = "1.0.5";
 APP_NAME="100%RicicloAldenoCimoneGarniga";
 APP_NAME_CREDITS = "100% Riciclo<br/>ALDENO-CIMONE-GARNIGA";
 APP_LOCATION_CREDITS = "ALDENO-CIMONE-GARNIGA";
