@@ -41,7 +41,8 @@ COMUNE_MAP ={
 	'058061':{comune:'058061.jpg', cliente:'AVR-Logo.jpg'},
 	'058066':{comune:'058066.jpg', cliente:'AVR-Logo.jpg'},
 	'058067':{comune:'058067.jpg', cliente:'AVR-Logo.jpg'},
-	'058071':{comune:'058071.jpg', cliente:'AVR-Logo.jpg'}
+	'058071':{comune:'058071.jpg', cliente:'AVR-Logo.jpg'},
+	'092108':{comune:'092108.jpg', cliente:'formula_ambiente_logo.jpg'}
 }
 SHOW_NEWS = false;
 FEED_URL = "";
