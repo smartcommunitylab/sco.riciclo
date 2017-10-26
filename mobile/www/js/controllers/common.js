@@ -119,8 +119,8 @@ angular.module('rifiuti.controllers.common', ['ionic'])
             sourceType: Camera.PictureSourceType.CAMERA,
             allowEdit: false,
             encodingType: Camera.EncodingType.JPEG,
-            targetWidth: 150,
-            targetHeight: 150,
+            targetWidth: 640,
+            targetHeight: 480,
             popoverOptions: CameraPopoverOptions,
             saveToPhotoAlbum: false
         };

@@ -27,13 +27,6 @@
         "version_code": "7",
         "app_name": "100% Riciclo - Rotaliana"
     },
-    "ESACOM": {
-        "resource_folder": "config/instances/ESACOM",
-        "widget_id" : "it.smartcommunitylab.rifiuti.esacom",
-        "version": "1.0.5",
-        "version_code": "8",
-        "app_name": "100% Riciclo - ESA-Com"
-    },
     "ASIA-PAGANELLA": {
         "resource_folder": "config/instances/ASIA-PAGANELLA",
         "widget_id" : "it.smartcommunitylab.rifiuti.asia.paganella",
@@ -62,18 +55,25 @@
         "version_code": "7",
         "app_name": "100% Riciclo - Valle di Cembra"
     },
+    "ESACOM": {
+        "resource_folder": "config/instances/ESACOM",
+        "widget_id" : "it.smartcommunitylab.rifiuti.esacom",
+        "version": "1.0.6",
+        "version_code": "9",
+        "app_name": "100% Riciclo - ESA-Com"
+    },
     "ASVO": {
         "resource_folder": "config/instances/ASVO",
         "widget_id" : "it.smartcommunitylab.rifiuti.asvo",
-        "version": "1.0.6",
-        "version_code": "10",
+        "version": "1.0.7",
+        "version_code": "11",
         "app_name": "100% Riciclo - ASVO s.p.a."
     },
     "ASP": {
         "resource_folder": "config/instances/ASP",
         "widget_id" : "it.smartcommunitylab.rifiuti.asp",
-        "version": "1.0.3",
-        "version_code": "4",
+        "version": "1.0.4",
+        "version_code": "5",
         "app_name": "DIFFERENZIASTI"
     }
 
