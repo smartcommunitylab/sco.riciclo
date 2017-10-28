@@ -137,20 +137,22 @@ angular.module('rifiuti.controllers.common', ['ionic'])
     $scope.sendEmail = function () {
         var emailPlugin = null;
         if (ionic.Platform.isWebView()) {
-            if (window.plugin.email) emailPlugin = window.plugin.email;
-            else if (cordova.plugins.email) emailPlugin = cordova.plugins.email;
+            if (window.plugins.socialsharing) emailPlugin = window.plugins.socialsharing;
+            else if (cordova.plugins.socialsharing) emailPlugin = cordova.plugins.socialsharing;
         }
         if (emailPlugin) {
             var body = $scope.msg.text ? ($scope.msg.text + ' ') : '';
             body += $scope.attachPosition ? GPScoordsTmp : '';
-            window.plugin.email.open({
-                to: [$scope.signal.selectedTipoSegnalazione.email],
-                subject: 'Segnalazione dalla app \'' + APP_NAME + '\' - ' + $scope.signal.selectedTipoSegnalazione.tipologia, // subject of the email
-                body: [body],
-                isHtml: false,
-                attachments: $scope.imgURI
-                    //        attachment: $scope.imgURI ? "base64:icon.png//" + $scope.imgURI.substring(26) : null
-            });
+            window.plugins.socialsharing.shareViaEmail(
+								body,
+								'Segnalazione dalla app \'' + APP_NAME + '\' - ' + $scope.signal.selectedTipoSegnalazione.tipologia,
+								[$scope.signal.selectedTipoSegnalazione.email],
+								null,
+								null,
+								[$scope.imgURI],
+								null,
+								null
+            );
         } else {
             //console.log('using "mailto:" schema in location...');
             window.open('mailto:' + $scope.signal.selectedTipoSegnalazione.email, '_system');
