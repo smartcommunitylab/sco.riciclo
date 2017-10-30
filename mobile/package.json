@@ -32,7 +32,6 @@
     "cordova-plugin-compat@1.1.0",
     "cordova-plugin-console@1.0.6",
     "cordova-plugin-device@1.1.5",
-    "cordova-plugin-email-composer@0.8.3",
     "cordova-plugin-file@4.3.2",
     "cordova-plugin-geolocation@2.4.2",
     "cordova-plugin-inappbrowser@1.7.0",
