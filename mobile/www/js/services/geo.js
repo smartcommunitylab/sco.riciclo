@@ -48,10 +48,16 @@ angular.module('rifiuti.services.geo', [])
       localization=undefined;
     },
     locate: function () {
+			if (typeof localization=='undefined') {
+				localization = $q.defer();
+			}
       //console.log('geolocalizing...');
-      return initLocalization(localization).then(function (firstGeoLocation) {
-        return $rootScope.myPosition;
-      });
+			navigator.geolocation.getCurrentPosition(function(position) {
+				r = [position.coords.latitude, position.coords.longitude];
+				localization.resolve(r);
+			}, function(error) {
+				localization.reject('cannot geolocate (web)');
+			});
     },
     distance: function (pt1, pt2) {
       var d = false;
@@ -77,6 +83,9 @@ angular.module('rifiuti.services.geo', [])
       return d;
     },
     distanceTo: function (gotoPosition) {
+			if (typeof localization=='undefined') {
+				localization = $q.defer();
+			}
       var GL = this;
       return localization.promise.then(function (myPosition) {
         //console.log('myPosition: ' + JSON.stringify(myPosition));

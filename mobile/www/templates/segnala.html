@@ -45,7 +45,7 @@
             <img ng-if="imgURI !== undefined" ng-src="{{imgURI}}">
         </div>
 
-        <ion-checkbox class="checkbox-100r segnala-position" ng-model="attachPosition" ng-disabled="GPSPositions==null" ng-change="toggleAttachPosition()">
+        <ion-checkbox class="checkbox-100r segnala-position" ng-model="attachPosition" ng-hide="!GPSPositions" ng-change="toggleAttachPosition()">
             {{'attach_your_position' | translate}}
         </ion-checkbox>
 

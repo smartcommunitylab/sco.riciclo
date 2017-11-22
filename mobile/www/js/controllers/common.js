@@ -84,6 +84,7 @@ angular.module('rifiuti.controllers.common', ['ionic'])
                     GPScoordsTmp = "[ " + position.coords.latitude + ", " + position.coords.longitude + " ]";
                     $scope.GPScoords = GPScoordsTmp;
                     $scope.GPSPositions = GPScoordsTmp;
+										$rootScope.myPosition = GPScoordsTmp;
                 });
             } else {
                 LoaderService.showPopUp("gps_permission_toast");
@@ -141,6 +142,7 @@ angular.module('rifiuti.controllers.common', ['ionic'])
             else if (cordova.plugins.socialsharing) emailPlugin = cordova.plugins.socialsharing;
         }
         if (emailPlugin) {
+						var imageUrls = $scope.imgURI ? [$scope.imgURI] : null;
             var body = $scope.msg.text ? ($scope.msg.text + ' ') : '';
             body += $scope.attachPosition ? GPScoordsTmp : '';
             window.plugins.socialsharing.shareViaEmail(
@@ -149,7 +151,7 @@ angular.module('rifiuti.controllers.common', ['ionic'])
 								[$scope.signal.selectedTipoSegnalazione.email],
 								null,
 								null,
-								[$scope.imgURI],
+								imageUrls,
 								null,
 								null
             );
@@ -160,11 +162,11 @@ angular.module('rifiuti.controllers.common', ['ionic'])
     };
 
     if ($rootScope.myPosition) {
-        $scope.GPScoords = '[ ' + $rootScope.myPosition.join(', ') + ' ]';
+        $scope.GPScoords = $rootScope.myPosition;
         $scope.GPSPositions = $scope.GPScoords;
-    }else{
-        LoaderService.showPopUp("gps_permission_toast");
-    }
+    }	else {
+			LoaderService.showPopUp("gps_permission_toast");
+		}	
 
     posizioneG();
 

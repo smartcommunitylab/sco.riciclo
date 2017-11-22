@@ -223,25 +223,18 @@ angular.module('rifiuti', [
 
     document.addEventListener("pause", function () {
         console.log('app paused');
-        if (typeof $rootScope.locationWatchID != 'undefined') {
+        /*if (typeof $rootScope.locationWatchID != 'undefined') {
             navigator.geolocation.clearWatch($rootScope.locationWatchID);
             $rootScope.locationWatchID = undefined;
             GeoLocate.reset();
             console.log('geolocation reset');
-        }
+        }*/
     }, false);
 
     document.addEventListener("resume", function () {
         console.log('app resumed');
-        GeoLocate.locate();
+        //GeoLocate.locate();
     }, false);
-
-    GeoLocate.locate().then(function (position) {
-        $rootScope.myPosition = position;
-        //console.log('first geolocation: ' + position);
-    }, function () {
-        console.log('CANNOT LOCATE!');
-    });
 
     var backCallback = function (event) {
         console.log('going back in ' + $state.current.name);
@@ -335,6 +328,11 @@ angular.module('rifiuti', [
                     $cordovaSplashscreen.hide();
                 }
             }, 1500);
+						if (navigator.geolocation) {
+							navigator.geolocation.getCurrentPosition(function (position) {
+                    $rootScope.myPosition = "[ " + position.coords.latitude + ", " + position.coords.longitude + " ]";
+                });
+						}
         });
 
         console.log("platform ready end!");
