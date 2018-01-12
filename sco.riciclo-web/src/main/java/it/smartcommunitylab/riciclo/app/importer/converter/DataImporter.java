@@ -315,7 +315,7 @@ public class DataImporter {
 	}
 
 	private boolean isCrmLike(String tipologia) {
-		return "crm".equals(tipologia.toLowerCase()) || "crz".equals(tipologia.toLowerCase());
+		return "crm".equals(tipologia.toLowerCase()) || "crz".equals(tipologia.toLowerCase()) || "ci".equals(tipologia.toLowerCase());
 	}
 
 

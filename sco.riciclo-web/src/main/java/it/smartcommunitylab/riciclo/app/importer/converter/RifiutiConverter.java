@@ -84,7 +84,7 @@ public class RifiutiConverter {
 		
 		categorie.setTipologiaPuntiRaccolta(new HashSet<Tipologia>());
 		for (TipologiaPuntoRaccolta tpr : rifiuti.getTipologiaPuntoRaccolta()) {
-			Tipologia cat = new Tipologia(StringUtils.capitalize(tpr.getNome().toLowerCase()).replace("Crm", "CRM").replace("Crz", "CRZ"), tpr.getInfoPuntiRaccolta(), null);
+			Tipologia cat = new Tipologia(StringUtils.capitalize(tpr.getNome().toLowerCase()).replace("Crm", "CRM").replace("Crz", "CRZ").replace("Ci", "CI"), tpr.getInfoPuntiRaccolta(), null);
 			categorie.getTipologiaPuntiRaccolta().add(cat);
 		}
 
@@ -157,9 +157,9 @@ public class RifiutiConverter {
 		List<Raccolta> raccolte = Lists.newArrayList();
 		for (it.smartcommunitylab.riciclo.app.importer.model.Raccolte rc : (List<it.smartcommunitylab.riciclo.app.importer.model.Raccolte>) rifiuti.getRaccolte()) {
 			Raccolta raccolta = mapper.convertValue(rc, Raccolta.class);
-			raccolta.setTipologiaPuntoRaccolta(StringUtils.capitalize(raccolta.getTipologiaPuntoRaccolta().toLowerCase()).replace("Crm", "CRM").replace("Crz", "CRZ").trim());
+			raccolta.setTipologiaPuntoRaccolta(StringUtils.capitalize(raccolta.getTipologiaPuntoRaccolta().toLowerCase()).replace("Crm", "CRM").replace("Crz", "CRZ").replace("Ci", "CI").trim());
 			raccolta.setTipologiaRifiuto(StringUtils.capitalize(raccolta.getTipologiaRifiuto().toLowerCase()).trim());
-			raccolta.setTipologiaRaccolta(StringUtils.capitalize(raccolta.getTipologiaRaccolta().toLowerCase().replace("crm", "CRM").replace("crz", "CRZ")).trim());
+			raccolta.setTipologiaRaccolta(StringUtils.capitalize(raccolta.getTipologiaRaccolta().toLowerCase().replace("crm", "CRM").replace("crz", "CRZ").replace("Ci", "CI")).trim());
 			raccolta.setAppId(appId);
 			raccolte.add(raccolta);
 //			categorie.getColori().add(new Tipologia(raccolta.getColore(), null, null));
@@ -167,7 +167,7 @@ public class RifiutiConverter {
 		output.setRaccolta(raccolte);
 
 		for (TipologiaRaccolta tr : rifiuti.getTipologiaRaccolta()) {
-			categorie.getTipologiaRaccolta().add(new Tipologia(StringUtils.capitalize(tr.getValore().toLowerCase().replace("crm", "CRM").replace("crz", "CRZ")).trim(), null, null));
+			categorie.getTipologiaRaccolta().add(new Tipologia(StringUtils.capitalize(tr.getValore().toLowerCase().replace("crm", "CRM").replace("crz", "CRZ").replace("Ci", "CI")).trim(), null, null));
 		}
 
 		output.setPuntiRaccolta(compactPuntiRaccolta(rifiuti.getPuntiRaccolta(), appId));
@@ -251,8 +251,8 @@ public class RifiutiConverter {
 				oa.setDalle(pr.getDalle());
 				oa.setDataA(pr.getDataA());
 				oa.setDataDa(pr.getDataDa());
-				oa.setIl(pr.getIl());
-				oa.setEccezione(pr.getEccezione());
+				oa.setIl(normalizeDates(pr.getIl()));
+				oa.setEccezione(normalizeDates(pr.getEccezione()));
 				oa.setNote(pr.getNote());
 				orari.add(oa);
 			}
@@ -265,7 +265,7 @@ public class RifiutiConverter {
 		}
 
 		for (PuntoRaccolta pr: firstResult) {
-			pr.setTipologiaPuntiRaccolta(StringUtils.capitalize(pr.getTipologiaPuntiRaccolta().toLowerCase()).replace("Crm", "CRM").replace("Crz", "CRZ"));
+			pr.setTipologiaPuntiRaccolta(StringUtils.capitalize(pr.getTipologiaPuntiRaccolta().toLowerCase()).replace("Crm", "CRM").replace("Crz", "CRZ").replace("Ci", "CI"));
 		}
 		
 		Multimap<PuntoRaccolta, PuntoRaccolta> puntoRaccoltaMap = ArrayListMultimap.create();
@@ -286,6 +286,24 @@ public class RifiutiConverter {
 		}
 		
 		return secondResult;
+	}
+
+	/**
+	 * @param eccezione
+	 * @return
+	 */
+	private String normalizeDates(String string) {
+		if (StringUtils.isEmpty(string)) return null;
+		String[] arr = string.replaceAll("\\s+", " ").split(" "); 
+		for (int i = 0; i < arr.length; i++) {
+			if (arr[i].matches("\\d{1,2}/\\d{1,2}")) {
+				String[] parts = arr[i].split("/");
+				if (parts[0].length() == 1) parts[0] = "0"+ parts[0];
+				if (parts[1].length() == 1) parts[1] = "0"+ parts[1];
+				arr[i] = parts[0]+"/"+parts[1];
+			}
+		}
+		return StringUtils.join(arr, ' ');
 	}
 
 	private static Set<Tipologia> buildTipologieSet(String[] cat) {
