@@ -16,18 +16,18 @@
     "shelljs": "^0.3.0"
   },
   "cordovaPlugins": [
-    "org.apache.cordova.inappbrowser",
-    "org.apache.cordova.file",
-    "org.apache.cordova.device",
-    "org.apache.cordova.console",
-    "com.ionic.keyboard",
     "org.apache.cordova.statusbar",
-    "org.apache.cordova.splashscreen",
-    "org.apache.cordova.camera",
-    "de.appplant.cordova.plugin.email-composer",
     "org.apache.cordova.geolocation",
     "de.appplant.cordova.plugin.local-notification",
-    "cordova-plugin-whitelist"
+    "cordova-plugin-whitelist",
+    "ionic-plugin-keyboard",
+    "cordova-plugin-geolocation",
+    "cordova-plugin-statusbar",
+    "cordova-plugin-console",
+    "cordova-plugin-splashscreen",
+    "cordova-plugin-inappbrowser",
+    "cordova-plugin-file",
+    "cordova-plugin-device"
   ],
   "cordovaPlatforms": [
     "android",

@@ -110,6 +110,14 @@
         {
             "valore": "Rifiuti speciali",
             "immagine": "img/rif_ic_rifiuti_speciali.png"
+        },
+        {
+            "valore": "Rifiuti speciali crz",
+            "immagine": "img/rif_ic_rifiuti_speciali.png"
+        },
+        {
+            "valore": "Rifiuti speciali ci",
+            "immagine": "img/rif_ic_rifiuti_speciali.png"
         }
 
     ]
