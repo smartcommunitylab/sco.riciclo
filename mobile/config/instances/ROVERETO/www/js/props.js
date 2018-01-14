@@ -1,8 +1,8 @@
 APP_ID = "ROVERETO";
-DATA_VERSION = 13;
+DATA_VERSION = 16;
 API_KEY = "AIzaSyBmKVWmFzh2JHT7q1MLmQRQ7jC4AhkRBDs";
 //SEGNALA_EMAIL = "segnalazioni.rifiuti@comunitadellegiudicarie.it";
-VERSION = "1.0.9";
+VERSION = "1.0.10";
 APP_NAME="100% Riciclo - Rovereto";
 APP_NAME_CREDITS = "100% Riciclo<br/>ROVERETO";
 

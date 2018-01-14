@@ -9,8 +9,8 @@
     "ROVERETO": {
         "resource_folder": "config/instances/ROVERETO",
         "widget_id" : "it.smartcommunitylab.rifiuti.rovereto",
-        "version": "1.0.9",
-        "version_code": "12",
+        "version": "1.0.10",
+        "version_code": "13",
         "app_name": "100% Riciclo - Rovereto"
     },
     "ASIA": {
