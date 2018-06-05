@@ -75,6 +75,13 @@
         "version": "1.0.6",
         "version_code": "7",
         "app_name": "DIFFERENZIASTI"
+    },
+    "GIUDICARIE": {
+        "resource_folder": "config/instances/GIUDICARIE",
+        "widget_id" : "it.smartcommunitylab.rifiuti.giudicarie",
+        "version": "1.0.1",
+        "version_code": "1",
+        "app_name": "100% Riciclo - Giudicarie"
     }
 
 }
