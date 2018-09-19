@@ -2,7 +2,7 @@ APP_ID = "ASIA-VALLELAGHI";
 DATA_VERSION = 6;
 API_KEY = "AIzaSyBmKVWmFzh2JHT7q1MLmQRQ7jC4AhkRBDs";
 //SEGNALA_EMAIL = "segnalazioni.rifiuti@comunitadellegiudicarie.it";
-VERSION = "1.0.6";
+VERSION = "1.0.7";
 APP_NAME="100% Riciclo - Valle dei Laghi";
 APP_NAME_CREDITS = "100% Riciclo<br/>Valle dei Laghi";
 APP_LOCATION_CREDITS = "Valle dei Laghi";
@@ -18,9 +18,10 @@ ICON_COLOR_MAP = {'ARANCIONE': '#e69500',
 'VIOLA':'#800080',
 'GRIGIO':'#808080'};
 ICON_POINT_MAP = {'Isola ecologica': 'riciclo-isola_ecologica',
+'Isola Ecologica Futuro' : 'riciclo-isola_ecologica_futuro',
 'Campane indumenti': 'riciclo-isola_ecologica', 
 'CRM': 'riciclo-crm', 
-'Cam': 'riciclo-furgone', 
+'Cam': 'riciclo-ditta_specializzata', 
 'Porta a porta residuo':'riciclo-porta_a_porta', 
 'Porta a porta organico':'riciclo-porta_a_porta', 
 'Porta a porta cartone':'riciclo-porta_a_porta', 
@@ -30,12 +31,13 @@ ICON_POINT_MAP = {'Isola ecologica': 'riciclo-isola_ecologica',
 'Porta a porta imballaggi leggeri':'riciclo-porta_a_porta', 
 'Porta a porta vetro':'riciclo-porta_a_porta', 
 'Porta a porta sfalci e potatura':'riciclo-porta_a_porta', 
-'Servizio a domicilio sfalci e potature': 'riciclo-furgone',
-'Servizio a domicilio ingombranti': 'riciclo-furgone',
-'Servizio conto terzi': 'riciclo-furgone',
+'Servizio a domicilio sfalci e potature': 'riciclo-ditta_specializzata',
+'Servizio a domicilio ingombranti': 'riciclo-ditta_specializzata',
+'Servizio a domicilio': 'riciclo-ditta_specializzata ',
+'Servizio conto terzi': 'riciclo-ditta_specializzata',
 'Farmacia': 'riciclo-farmacia', 
 'Rivenditore': 'riciclo-rivenditore', 
-'Ditta specializzata':'riciclo-furgone', 
+'Ditta specializzata':'riciclo-ditta_specializzata', 
 'Esercenti convenzionati medicinali':'riciclo-farmacia',
 'Esercenti convenzionati pile': 'riciclo-rivenditore',
 'Esercenti convenzionati': 'riciclo-rivenditore'};
