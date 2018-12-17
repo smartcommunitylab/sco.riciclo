@@ -17,7 +17,7 @@ ICON_COLOR_MAP = {'ARANCIONE': '#e69500',
 'VERDE SCURO': '#808000', 
 'VIOLA':'#800080',
 'GRIGIO':'#808080'};
-ICON_POINT_MAP = {'Isola ecologica': 'riciclo-isola_ecologica',
+ICON_POINT_MAP = {'Isola ecologica': 'riciclo-isola_ecologica_futuro',
 'Isola Ecologica Futuro' : 'riciclo-isola_ecologica_futuro',
 'Campane indumenti': 'riciclo-isola_ecologica', 
 'CRM': 'riciclo-crm', 
