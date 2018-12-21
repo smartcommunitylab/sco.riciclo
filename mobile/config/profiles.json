@@ -58,8 +58,8 @@
     "ESACOM": {
         "resource_folder": "config/instances/ESACOM",
         "widget_id" : "it.smartcommunitylab.rifiuti.esacom",
-        "version": "1.0.8",
-        "version_code": "11",
+        "version": "1.0.9",
+        "version_code": "12",
         "app_name": "100% Riciclo - ESA-Com"
     },
     "ASVO": {
