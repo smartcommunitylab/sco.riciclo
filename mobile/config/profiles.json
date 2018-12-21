@@ -79,8 +79,8 @@
     "GIUDICARIE": {
         "resource_folder": "config/instances/GIUDICARIE",
         "widget_id" : "it.smartcampuslab.riciclo",
-        "version": "2.0.0",
-        "version_code": "8",
+        "version": "2.0.1",
+        "version_code": "9",
         "app_name": "100% Riciclo - Giudicarie"
     }
 
