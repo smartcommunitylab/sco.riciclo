@@ -276,7 +276,7 @@ angular.module('rifiuti.services.data', [])
             // - check version
         },
         getSync: function (key) {
-            return profileData[key];
+            return (profileData || {})[key];
         }
     };
 });

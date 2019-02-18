@@ -1,6 +1,5 @@
 {
-  "name": "rifiuti",
-  "app_id": "",
+  "name": "100-riciclo",
   "integrations": {
     "cordova": {}
   },

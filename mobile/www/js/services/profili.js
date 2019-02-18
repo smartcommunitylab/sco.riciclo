@@ -25,7 +25,23 @@ angular.module('rifiuti.services.profili', [])
     ProfiliFactory.updateNotifications = function () {
         if (window.plugin && cordova && cordova.plugins && cordova.plugins.notification) {
             console.log('initializing notifications...');
-            window.plugin.notification.local.cancelAll();
+            cordova.plugins.notification.local.cancelAll();
+            // var date = new Date(new Date().getTime() + 1000);
+
+            // document.addEventListener("deviceready", function () {
+            //     //console.log('removing splashscreen...');
+            //     //giving another couple of seconds to ui to complete css&font elements redraw (on android)
+            //     console.log('scheduling at ' + date);
+            //     if (cordova && cordova.plugins && cordova.plugins.notification.local) {
+                
+            //     cordova.plugins.notification.local.schedule([{
+            //         id: Math.floor(date.getTime() / 1000),
+            //         title: 'Domani a trento',
+            //         text: 'asdasdadasdsa',
+            //         firstAt: date,
+            //         smallIcon: 'res://drawable-hdpi/notification.png',
+            //     }]);}
+            //       });
             $rootScope.profili.forEach(function (p) {
                 if (!!p.settings && !p.settings.enableNotifications) return;
 
@@ -55,7 +71,8 @@ angular.module('rifiuti.services.profili', [])
                                                     text: {},
                                                     // smallIcon: 'res://icon.png',
                                                     // autoCancel: true,
-                                                    firstAt: targetDate
+                                                    firstAt: targetDate,
+                                                    smallIcon: 'res://drawable-hdpi/notification.png',
                                                 };
                                             }
                                             daymap[dStr].text[n.tipologiaPuntiRaccolta] = 1;
