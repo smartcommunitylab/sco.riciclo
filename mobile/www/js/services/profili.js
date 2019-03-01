@@ -28,7 +28,7 @@ angular.module('rifiuti.services.profili', [])
     ProfiliFactory.updateNotifications = function () {
         if (window.plugin && cordova && cordova.plugins && cordova.plugins.notification) {
             console.log('initializing notifications...');
-            window.plugin.notification.local.cancelAll();
+            cordova.plugins.notification.local.cancelAll();
             $rootScope.profili.forEach(function (p) {
                 if (!!p.settings && !p.settings.enableNotifications) return;
 
@@ -36,10 +36,14 @@ angular.module('rifiuti.services.profili', [])
                     // TODO: group by date?
                     if (data) {
                         var daymap = {};
-                        // notifications for 1 month range
+                        // notifications for 12 month range
                         var dFrom = new Date();
                         var dTo = new Date();
-                        dTo.setMonth(dTo.getMonth() + 1);
+                        dTo.setMonth(dTo.getMonth() + 12);
+                        if (dTo.getFullYear() > dFrom.getFullYear()) {
+                            dTo.setMonth(1);
+                            dTo.setDate(1);
+                        }
 
                         data.forEach(function (n) {
                             n.orarioApertura.forEach(function (cal) {
@@ -56,7 +60,7 @@ angular.module('rifiuti.services.profili', [])
                                                     id: Math.floor(targetDate.getTime() / 1000),
                                                     title: $filter("translate")("tomorrow_at") + n.comune,
                                                     text: {},
-                                                    // smallIcon: 'res://icon.png',
+                                                    smallIcon: 'res://drawable-hdpi/notification.png',
                                                     // autoCancel: true,
                                                     firstAt: targetDate
                                                 };

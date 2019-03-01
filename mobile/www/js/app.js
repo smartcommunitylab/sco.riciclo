@@ -297,7 +297,7 @@ angular.module('rifiuti', [
         }
         if (window.StatusBar) {
             // org.apache.cordova.statusbar required
-            StatusBar.styleDefault();
+            // StatusBar.styleDefault();
         }
 
         if (typeof navigator.globalization !== "undefined") {

@@ -129,7 +129,7 @@ angular.module('rifiuti.controllers.common', ['ionic'])
         $cordovaCamera.getPicture(options).then(function (imageData) {
             $scope.imgURI = imageData; //"data:image/jpeg;base64," + imageData;
         }, function (err) {
-            if(err.indexOf("Camera cancel")<0){
+            if(err.indexOf("Camera cancel")<0 && err.indexOf("No Image Selected") < 0){
                 LoaderService.showPopUp("camera_permission_toast");
             }
         });
