@@ -2,15 +2,15 @@
     "TRENTO": {
         "resource_folder": "config/instances/TRENTO",
         "widget_id" : "it.smartcommunitylab.rifiuti.trento",
-        "version": "1.0.9",
-        "version_code": "12",
+        "version": "1.0.10",
+        "version_code": "13",
         "app_name": "100% Riciclo - Trento"
     },
     "ROVERETO": {
         "resource_folder": "config/instances/ROVERETO",
         "widget_id" : "it.smartcommunitylab.rifiuti.rovereto",
-        "version": "1.0.2",
-        "version_code": "5",
+        "version": "1.0.3",
+        "version_code": "6",
         "app_name": "100% Riciclo - Rovereto"
     },
     "ASIA": {
@@ -23,64 +23,64 @@
     "ASIA-ROT": {
         "resource_folder": "config/instances/ASIA-ROT",
         "widget_id" : "it.smartcommunitylab.rifiuti.asia.rot",
-        "version": "1.0.7",
-        "version_code": "9",
+        "version": "1.0.8",
+        "version_code": "10",
         "app_name": "100% Riciclo - Rotaliana"
     },
     "ASIA-PAGANELLA": {
         "resource_folder": "config/instances/ASIA-PAGANELLA",
         "widget_id" : "it.smartcommunitylab.rifiuti.asia.paganella",
-        "version": "1.0.8",
-        "version_code": "9",
+        "version": "1.0.9",
+        "version_code": "10",
         "app_name": "100% Riciclo - Paganella"
     },
     "ASIA-ADIGE": {
         "resource_folder": "config/instances/ASIA-ADIGE",
         "widget_id" : "it.smartcommunitylab.rifiuti.asia.adige",
-        "version": "1.0.7",
-        "version_code": "8",
+        "version": "1.0.8",
+        "version_code": "9",
         "app_name": "100%RicicloAldenoCimoneGarniga"
     },
     "ASIA-VALLELAGHI": {
         "resource_folder": "config/instances/ASIA-VALLELAGHI",
         "widget_id" : "it.smartcommunitylab.rifiuti.asia.vallelaghi",
-        "version": "1.0.9",
-        "version_code": "10",
+        "version": "1.0.10",
+        "version_code": "11",
         "app_name": "100% Riciclo - Valle dei Laghi"
     },
     "ASIA-CEMBRA": {
         "resource_folder": "config/instances/ASIA-CEMBRA",
         "widget_id" : "it.smartcommunitylab.rifiuti.asia.cembra",
-        "version": "1.0.8",
-        "version_code": "9",
+        "version": "1.0.9",
+        "version_code": "10",
         "app_name": "100% Riciclo - Valle di Cembra"
     },
     "ESACOM": {
         "resource_folder": "config/instances/ESACOM",
         "widget_id" : "it.smartcommunitylab.rifiuti.esacom",
-        "version": "1.0.10",
-        "version_code": "13",
+        "version": "1.0.11",
+        "version_code": "14",
         "app_name": "100% Riciclo - ESA-Com"
     },
     "ASVO": {
         "resource_folder": "config/instances/ASVO",
         "widget_id" : "it.smartcommunitylab.rifiuti.asvo",
-        "version": "1.0.12",
-        "version_code": "16",
+        "version": "1.0.13",
+        "version_code": "17",
         "app_name": "100% Riciclo - ASVO s.p.a."
     },
     "ASP": {
         "resource_folder": "config/instances/ASP",
         "widget_id" : "it.smartcommunitylab.rifiuti.asp",
-        "version": "1.0.8",
-        "version_code": "9",
+        "version": "1.0.9",
+        "version_code": "10",
         "app_name": "DIFFERENZIASTI"
     },
     "GIUDICARIE": {
         "resource_folder": "config/instances/GIUDICARIE",
         "widget_id" : "it.smartcampuslab.riciclo",
-        "version": "2.0.2",
-        "version_code": "10",
+        "version": "2.0.3",
+        "version_code": "11",
         "app_name": "100% Riciclo - Giudicarie"
     }
 
