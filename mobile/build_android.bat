@@ -11,9 +11,13 @@ if exist ".\build\%profile%-release.apk" (
 cd "..\..\riciclo_running\%profile%"
 set rootDir=%CD%
 echo "Android build %profile%"
+echo|set /p="%profile%">current_profile.txt
+move current_profile.txt config
+echo "prepare config"
+node hooks\before_prepare\005_move_proto_config_file.js "%rootDir%"
+echo "replace config text"
+node hooks\before_prepare\010_replace_text.js "%rootDir%"
 call npm i -D -E @ionic/v1-toolkit
-node .\hooks\before_prepare\005_move_proto_config_file.js "%rootDir%"
-node .\hooks\before_prepare\010_replace_text.js "%rootDir%"
 call ionic cordova platform rm android
 call ionic cordova platform add android@7.0.0
 call ionic cordova build android --release
