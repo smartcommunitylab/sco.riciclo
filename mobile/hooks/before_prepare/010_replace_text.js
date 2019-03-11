@@ -20,7 +20,7 @@ function replace_string_in_file(filename, to_replace, replace_with) {
 
 //current profile indicates the profile you want to get
 var currentProfileFile = path.join(rootdir, "config", "current_profile.txt");
-var target = fs.readFileSync(currentProfileFile,'utf8')
+var target = fs.readFileSync(currentProfileFile,'utf8').trim()
 console.log("il target è "+target);
 
 if (process.env.TARGET) {
