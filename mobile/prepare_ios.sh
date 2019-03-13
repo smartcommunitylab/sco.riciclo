@@ -1,7 +1,7 @@
 #!/bin/sh
 
-# for profile in "ASIA" "ASIA-ROT" "ASIA-PAGANELLA" "ASIA-ADIGE" "ASIA-VALLELAGHI" "ASIA-CEMBRA" "ESACOM" "ASVO" "ASP" "GIUDICARIE"; do
-for profile in  "ESACOM" "ASVO" "ASP" "GIUDICARIE"; do
+for profile in "ASIA-ROT" "ASIA-PAGANELLA" "ASIA-ADIGE" "ASIA-VALLELAGHI" "ASIA-CEMBRA" "ESACOM" "ASVO" "ASP" "GIUDICARIE"; do
+# for profile in  "ESACOM" "ASVO" "ASP" "GIUDICARIE"; do
 rm -R ../../riciclo_running/$profile
 cp -R ../mobile ../../riciclo_running/$profile
 cp -R config/instances/$profile/www/* ../../riciclo_running/$profile/www
