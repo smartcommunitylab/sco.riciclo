@@ -48,8 +48,8 @@
     "ASIA-VALLELAGHI": {
         "resource_folder": "config/instances/ASIA-VALLELAGHI",
         "widget_id" : "it.smartcommunitylab.rifiuti.asia.vallelaghi",
-        "version": "1.0.11",
-        "version_code": "111",
+        "version": "1.0.12",
+        "version_code": "112",
         "app_name": "100% Riciclo - Valle dei Laghi",
         "display_name": "100% Riciclo - Valle dei Laghi"
     },
