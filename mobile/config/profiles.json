@@ -56,8 +56,8 @@
     "ASIA-CEMBRA": {
         "resource_folder": "config/instances/ASIA-CEMBRA",
         "widget_id" : "it.smartcommunitylab.rifiuti.asia.cembra",
-        "version": "1.0.10",
-        "version_code": "101",
+        "version": "1.0.11",
+        "version_code": "102",
         "app_name": "100% Riciclo - Valle di Cembra",
         "display_name": "100% Riciclo - Valle di Cembra"
     },
