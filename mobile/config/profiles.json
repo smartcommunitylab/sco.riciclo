@@ -2,16 +2,16 @@
     "TRENTO": {
         "resource_folder": "config/instances/TRENTO",
         "widget_id" : "it.smartcommunitylab.rifiuti.trento",
-        "version": "1.0.11",
-        "version_code": "130",
+        "version": "1.0.12",
+        "version_code": "140",
         "app_name": "100% Riciclo - Trento"
     },
     "ROVERETO": {
         "resource_folder": "config/instances/ROVERETO",
         "widget_id" : "it.smartcommunitylab.rifiuti.rovereto",
-        "version": "1.0.11",
-        "version_code": "14",
-        "app_name": "100% Riciclo - Rovereto"
+        "version": "1.0.12",
+        "version_code": "15",
+        "app_name": "100 Riciclo - Rovereto"
     },
     "ASIA": {
         "resource_folder": "config/instances/ASIA",

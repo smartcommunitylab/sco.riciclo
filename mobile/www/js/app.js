@@ -419,7 +419,11 @@ angular.module('rifiuti', [
         "NEWS": "NEWS",
         "News": "News",
         pick_time: 'Scegli l\'orario',
-        settings_info: "Scegliendo le frazioni sotto indicate verrà inviato un avviso di notifica nelle giornate antecedenti a quelle di raccolta."
+        settings_info: "Scegliendo le frazioni sotto indicate verrà inviato un avviso di notifica nelle giornate antecedenti a quelle di raccolta.",
+        tomorrow_at: "Domani a ",
+        notif_warning: "Aggiornamento delle notifiche",
+        notif_warning_text: "Per continuare a ricevere le notifiche aggiornate è necessario accedere periodicamente alla app. Clicca ora su questa notifica per essere sicuro di ricevere le prossime notifiche.",
+
     });
     $translateProvider.preferredLanguage(current_lang);
 

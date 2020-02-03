@@ -1,6 +1,6 @@
 angular.module('rifiuti.services.profili', [])
 
-.factory('Profili', function (DataManager, $rootScope, Raccolta, Calendar, Utili) {
+.factory('Profili', function (DataManager, $rootScope, $filter, Raccolta, Calendar, Utili, $q) {
     var ProfiliFactory = {};
 
     var toMessage = function (typemap) {
@@ -23,36 +23,29 @@ angular.module('rifiuti.services.profili', [])
     };
 
     ProfiliFactory.updateNotifications = function () {
-        if (window.plugin && cordova && cordova.plugins && cordova.plugins.notification) {
+        if (cordova && cordova.plugins && cordova.plugins.notification) {
             console.log('initializing notifications...');
             cordova.plugins.notification.local.cancelAll();
-            // var date = new Date(new Date().getTime() + 1000);
 
-            // document.addEventListener("deviceready", function () {
-            //     //console.log('removing splashscreen...');
-            //     //giving another couple of seconds to ui to complete css&font elements redraw (on android)
-            //     console.log('scheduling at ' + date);
-            //     if (cordova && cordova.plugins && cordova.plugins.notification.local) {
-                
-            //     cordova.plugins.notification.local.schedule([{
-            //         id: Math.floor(date.getTime() / 1000),
-            //         title: 'Domani a trento',
-            //         text: 'asdasdadasdsa',
-            //         firstAt: date,
-            //         smallIcon: 'res://drawable-hdpi/notification.png',
-            //     }]);}
-            //       });
+            var id = 0;
+            var notifArray = [];
+            var promises = [];
             $rootScope.profili.forEach(function (p) {
                 if (!!p.settings && !p.settings.enableNotifications) return;
-
-                Raccolta.notificationCalendar(p).then(function (data) {
-                    // TODO: group by date?
+                promises.push(Raccolta.notificationCalendar(p));
+            });
+            $q.all(promises).then(function(datas) {
+                datas.forEach(function(data) {
                     if (data) {
                         var daymap = {};
-                        // notifications for 1 month range
+                        // notifications for 12 month range
                         var dFrom = new Date();
                         var dTo = new Date();
-                        dTo.setMonth(dTo.getMonth() + 1);
+                        dTo.setMonth(dTo.getMonth() + 12);
+                        if (dTo.getFullYear() > dFrom.getFullYear()) {
+                            dTo.setMonth(1);
+                            dTo.setDate(1);
+                        }
 
                         data.forEach(function (n) {
                             n.orarioApertura.forEach(function (cal) {
@@ -66,13 +59,13 @@ angular.module('rifiuti.services.profili', [])
                                         if (targetDate.getTime() > dFrom.getTime()) {
                                             if (!(dStr in daymap)) {
                                                 daymap[dStr] = {
-                                                    id: Math.floor(targetDate.getTime() / 1000),
-                                                    title: 'Domani a ' + n.comune,
+                                                    id: id++,
+                                                    title: $filter("translate")("tomorrow_at") + n.comune,
                                                     text: {},
-                                                    // smallIcon: 'res://icon.png',
-                                                    // autoCancel: true,
-                                                    firstAt: targetDate,
                                                     smallIcon: 'res://drawable-hdpi/notification.png',
+                                                    prio: 'high',
+                                                    // autoCancel: true,
+                                                    firstAt: targetDate
                                                 };
                                             }
                                             daymap[dStr].text[n.tipologiaPuntiRaccolta] = 1;
@@ -81,19 +74,40 @@ angular.module('rifiuti.services.profili', [])
                                 }
                             });
                         });
-                        var notifArray = [];
                         for (var d in daymap) {
                             var n = daymap[d];
                             n.text = toMessage(n.text);
                             if (n.text) {
-                                console.log('scheduling ' + n.id + ' at ' + n.firstAt);
+                                //console.log('scheduling ' + n.id + ' at ' + n.firstAt);
                                 notifArray.push(n);
                                 //break;
                             }
                         }
-                        if (cordova && cordova.plugins && cordova.plugins.notification && notifArray) cordova.plugins.notification.local.schedule(notifArray);
                     }
                 });
+                console.log('Scheduled ' + notifArray.length);
+                if (notifArray.length > 0) {
+                    notifArray.sort(function(a,b) {
+                        return a.firstAt.getTime() - b.firstAt.getTime();
+                    });
+                    if (ionic.Platform.isIOS() && notifArray.length > 64) {
+                        notifArray = notifArray.slice(0, 63);
+                    }
+                    // notifArray = [notifArray[0]];
+                    console.log('Starting from ' + notifArray[0].firstAt);
+                    notifArray.push(
+                        {
+                            id: id,
+                            title: $filter("translate")("notif_warning"),
+                            text: $filter("translate")("notif_warning_text"),
+                            smallIcon: 'res://drawable-hdpi/notification.png',
+                            prio: 'high',
+                            // autoCancel: true,
+                            firstAt: notifArray[notifArray.length - 1].firstAt.getTime() + 60*1000
+                        }
+                    );
+                    if (cordova && cordova.plugins && cordova.plugins.notification) cordova.plugins.notification.local.schedule(notifArray);
+                }
             });
         }
     };
