@@ -16,7 +16,7 @@
   },
   "dependencies": {
     "cordova-android": "7.1.1",
-    "cordova-ios": "4.5.5",
+    "cordova-ios": "5.1.1",
     "cordova-plugin-app-name": "1.0.7",
     "cordova-plugin-badge": "0.8.8",
     "cordova-plugin-compat": "^1.2.0",
@@ -38,20 +38,20 @@
       "cordova-plugin-ionic-keyboard": {},
       "cordova-plugin-local-notification": {},
       "cordova-plugin-badge": {},
-      "cordova-plugin-app-name": {
-        "APP_NAME": "100% Riciclo - Trento"
-      },
       "cordova-plugin-camera": {},
       "cordova-plugin-file": {},
       "cordova-plugin-geolocation": {},
       "cordova-plugin-inappbrowser": {},
       "cordova-plugin-x-socialsharing": {
         "ANDROID_SUPPORT_V4_VERSION": "24.1.1+"
+      },
+      "cordova-plugin-app-name": {
+        "APP_NAME": "100% Riciclo - Rovereto"
       }
     },
     "platforms": [
-      "ios",
-      "android"
+      "android",
+      "ios"
     ]
   }
 }

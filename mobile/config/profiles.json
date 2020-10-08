@@ -4,7 +4,7 @@
         "widget_id" : "it.smartcommunitylab.rifiuti.trento",
         "version": "1.0.12",
         "version_code": "140",
-        "app_name": "100% Riciclo - Trento"
+        "app_name": "100 Riciclo - Trento"
     },
     "ROVERETO": {
         "resource_folder": "config/instances/ROVERETO",
